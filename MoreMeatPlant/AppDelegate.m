@@ -7,7 +7,11 @@
 //
 
 #import "AppDelegate.h"
-
+#import "RMHomeViewController.h"
+#import "RMDaqoViewController.h"
+#import "RMAccountViewController.h"
+#import "RMTalkMoreViewController.h"
+#import "RMCustomNavController.h"
 
 @interface AppDelegate ()
 

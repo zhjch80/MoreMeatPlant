@@ -12,6 +12,17 @@
 		1D9336FF1A8E3DFA00BA4FA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D9336FE1A8E3DFA00BA4FA7 /* Images.xcassets */; };
 		1D9337021A8E3DFA00BA4FA7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9337001A8E3DFA00BA4FA7 /* LaunchScreen.xib */; };
 		1D93370E1A8E3DFA00BA4FA7 /* MoreMeatPlantTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D93370D1A8E3DFA00BA4FA7 /* MoreMeatPlantTests.m */; };
+		1D9337221A8E4BA700BA4FA7 /* RMHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9337201A8E4BA700BA4FA7 /* RMHomeViewController.m */; };
+		1D9337231A8E4BA700BA4FA7 /* RMHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9337211A8E4BA700BA4FA7 /* RMHomeViewController.xib */; };
+		1D9337281A8E4C0500BA4FA7 /* RMBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9337261A8E4C0500BA4FA7 /* RMBaseViewController.m */; };
+		1D9337291A8E4C0500BA4FA7 /* RMBaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9337271A8E4C0500BA4FA7 /* RMBaseViewController.xib */; };
+		1D93372D1A8E4C8E00BA4FA7 /* RMDaqoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D93372B1A8E4C8E00BA4FA7 /* RMDaqoViewController.m */; };
+		1D93372E1A8E4C8E00BA4FA7 /* RMDaqoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D93372C1A8E4C8E00BA4FA7 /* RMDaqoViewController.xib */; };
+		1D9337321A8E4CB700BA4FA7 /* RMAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9337301A8E4CB700BA4FA7 /* RMAccountViewController.m */; };
+		1D9337331A8E4CB700BA4FA7 /* RMAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9337311A8E4CB700BA4FA7 /* RMAccountViewController.xib */; };
+		1D9337371A8E4CE300BA4FA7 /* RMTalkMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9337351A8E4CE300BA4FA7 /* RMTalkMoreViewController.m */; };
+		1D9337381A8E4CE300BA4FA7 /* RMTalkMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9337361A8E4CE300BA4FA7 /* RMTalkMoreViewController.xib */; };
+		1D93373B1A8E4D6600BA4FA7 /* RMCustomNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D93373A1A8E4D6600BA4FA7 /* RMCustomNavController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +46,23 @@
 		1D9337071A8E3DFA00BA4FA7 /* MoreMeatPlantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoreMeatPlantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D93370C1A8E3DFA00BA4FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D93370D1A8E3DFA00BA4FA7 /* MoreMeatPlantTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreMeatPlantTests.m; sourceTree = "<group>"; };
+		1D93371F1A8E4BA700BA4FA7 /* RMHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMHomeViewController.h; sourceTree = "<group>"; };
+		1D9337201A8E4BA700BA4FA7 /* RMHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMHomeViewController.m; sourceTree = "<group>"; };
+		1D9337211A8E4BA700BA4FA7 /* RMHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMHomeViewController.xib; sourceTree = "<group>"; };
+		1D9337251A8E4C0500BA4FA7 /* RMBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMBaseViewController.h; sourceTree = "<group>"; };
+		1D9337261A8E4C0500BA4FA7 /* RMBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMBaseViewController.m; sourceTree = "<group>"; };
+		1D9337271A8E4C0500BA4FA7 /* RMBaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMBaseViewController.xib; sourceTree = "<group>"; };
+		1D93372A1A8E4C8E00BA4FA7 /* RMDaqoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDaqoViewController.h; sourceTree = "<group>"; };
+		1D93372B1A8E4C8E00BA4FA7 /* RMDaqoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDaqoViewController.m; sourceTree = "<group>"; };
+		1D93372C1A8E4C8E00BA4FA7 /* RMDaqoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaqoViewController.xib; sourceTree = "<group>"; };
+		1D93372F1A8E4CB700BA4FA7 /* RMAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountViewController.h; sourceTree = "<group>"; };
+		1D9337301A8E4CB700BA4FA7 /* RMAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountViewController.m; sourceTree = "<group>"; };
+		1D9337311A8E4CB700BA4FA7 /* RMAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMAccountViewController.xib; sourceTree = "<group>"; };
+		1D9337341A8E4CE300BA4FA7 /* RMTalkMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMTalkMoreViewController.h; sourceTree = "<group>"; };
+		1D9337351A8E4CE300BA4FA7 /* RMTalkMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMTalkMoreViewController.m; sourceTree = "<group>"; };
+		1D9337361A8E4CE300BA4FA7 /* RMTalkMoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMTalkMoreViewController.xib; sourceTree = "<group>"; };
+		1D9337391A8E4D6600BA4FA7 /* RMCustomNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCustomNavController.h; sourceTree = "<group>"; };
+		1D93373A1A8E4D6600BA4FA7 /* RMCustomNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCustomNavController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +86,8 @@
 		1D9336E21A8E3DFA00BA4FA7 = {
 			isa = PBXGroup;
 			children = (
+				1D9337241A8E4BF100BA4FA7 /* BaseViewControllers */,
+				1D9337171A8E44B900BA4FA7 /* ViewControllers */,
 				1D9336ED1A8E3DFA00BA4FA7 /* MoreMeatPlant */,
 				1D93370A1A8E3DFA00BA4FA7 /* MoreMeatPlantTests */,
 				1D9336EC1A8E3DFA00BA4FA7 /* Products */,
@@ -109,6 +139,109 @@
 				1D93370C1A8E3DFA00BA4FA7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1D9337171A8E44B900BA4FA7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1D93371B1A8E44B900BA4FA7 /* 首页 */,
+				1D9337191A8E44B900BA4FA7 /* 大全 */,
+				1D93371A1A8E44B900BA4FA7 /* 账户 */,
+				1D9337181A8E44B900BA4FA7 /* 多聊 */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1D9337181A8E44B900BA4FA7 /* 多聊 */ = {
+			isa = PBXGroup;
+			children = (
+				1D9337341A8E4CE300BA4FA7 /* RMTalkMoreViewController.h */,
+				1D9337351A8E4CE300BA4FA7 /* RMTalkMoreViewController.m */,
+				1D9337361A8E4CE300BA4FA7 /* RMTalkMoreViewController.xib */,
+			);
+			path = "多聊";
+			sourceTree = "<group>";
+		};
+		1D9337191A8E44B900BA4FA7 /* 大全 */ = {
+			isa = PBXGroup;
+			children = (
+				1D93372A1A8E4C8E00BA4FA7 /* RMDaqoViewController.h */,
+				1D93372B1A8E4C8E00BA4FA7 /* RMDaqoViewController.m */,
+				1D93372C1A8E4C8E00BA4FA7 /* RMDaqoViewController.xib */,
+			);
+			path = "大全";
+			sourceTree = "<group>";
+		};
+		1D93371A1A8E44B900BA4FA7 /* 账户 */ = {
+			isa = PBXGroup;
+			children = (
+				1D93373C1A8E4DE200BA4FA7 /* 商家账户 */,
+				1D93373D1A8E4DE200BA4FA7 /* 用户账户 */,
+				1D93372F1A8E4CB700BA4FA7 /* RMAccountViewController.h */,
+				1D9337301A8E4CB700BA4FA7 /* RMAccountViewController.m */,
+				1D9337311A8E4CB700BA4FA7 /* RMAccountViewController.xib */,
+			);
+			path = "账户";
+			sourceTree = "<group>";
+		};
+		1D93371B1A8E44B900BA4FA7 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				1D93371C1A8E4B6400BA4FA7 /* 副版块 */,
+				1D93371D1A8E4B6400BA4FA7 /* 商家 */,
+				1D93371E1A8E4B6400BA4FA7 /* 主版块 */,
+				1D93371F1A8E4BA700BA4FA7 /* RMHomeViewController.h */,
+				1D9337201A8E4BA700BA4FA7 /* RMHomeViewController.m */,
+				1D9337211A8E4BA700BA4FA7 /* RMHomeViewController.xib */,
+			);
+			path = "首页";
+			sourceTree = "<group>";
+		};
+		1D93371C1A8E4B6400BA4FA7 /* 副版块 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "副版块";
+			sourceTree = "<group>";
+		};
+		1D93371D1A8E4B6400BA4FA7 /* 商家 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "商家";
+			sourceTree = "<group>";
+		};
+		1D93371E1A8E4B6400BA4FA7 /* 主版块 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "主版块";
+			sourceTree = "<group>";
+		};
+		1D9337241A8E4BF100BA4FA7 /* BaseViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1D9337251A8E4C0500BA4FA7 /* RMBaseViewController.h */,
+				1D9337261A8E4C0500BA4FA7 /* RMBaseViewController.m */,
+				1D9337271A8E4C0500BA4FA7 /* RMBaseViewController.xib */,
+				1D9337391A8E4D6600BA4FA7 /* RMCustomNavController.h */,
+				1D93373A1A8E4D6600BA4FA7 /* RMCustomNavController.m */,
+			);
+			path = BaseViewControllers;
+			sourceTree = "<group>";
+		};
+		1D93373C1A8E4DE200BA4FA7 /* 商家账户 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "商家账户";
+			sourceTree = "<group>";
+		};
+		1D93373D1A8E4DE200BA4FA7 /* 用户账户 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "用户账户";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,8 +324,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D9337231A8E4BA700BA4FA7 /* RMHomeViewController.xib in Resources */,
 				1D9337021A8E3DFA00BA4FA7 /* LaunchScreen.xib in Resources */,
+				1D9337381A8E4CE300BA4FA7 /* RMTalkMoreViewController.xib in Resources */,
+				1D9337291A8E4C0500BA4FA7 /* RMBaseViewController.xib in Resources */,
+				1D9337331A8E4CB700BA4FA7 /* RMAccountViewController.xib in Resources */,
 				1D9336FF1A8E3DFA00BA4FA7 /* Images.xcassets in Resources */,
+				1D93372E1A8E4C8E00BA4FA7 /* RMDaqoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +349,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D9336F41A8E3DFA00BA4FA7 /* AppDelegate.m in Sources */,
+				1D9337321A8E4CB700BA4FA7 /* RMAccountViewController.m in Sources */,
 				1D9336F11A8E3DFA00BA4FA7 /* main.m in Sources */,
+				1D93372D1A8E4C8E00BA4FA7 /* RMDaqoViewController.m in Sources */,
+				1D9337371A8E4CE300BA4FA7 /* RMTalkMoreViewController.m in Sources */,
+				1D93373B1A8E4D6600BA4FA7 /* RMCustomNavController.m in Sources */,
+				1D9337281A8E4C0500BA4FA7 /* RMBaseViewController.m in Sources */,
+				1D9337221A8E4BA700BA4FA7 /* RMHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +470,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -336,6 +481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -394,6 +540,7 @@
 				1D9337131A8E3DFA00BA4FA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1D9337141A8E3DFA00BA4FA7 /* Build configuration list for PBXNativeTarget "MoreMeatPlantTests" */ = {
 			isa = XCConfigurationList;
@@ -402,6 +549,7 @@
 				1D9337161A8E3DFA00BA4FA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
