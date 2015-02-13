@@ -25,6 +25,7 @@
     
     [self.window makeKeyAndVisible];
     
+//    demoker
     return YES;
 }
 
