@@ -155,10 +155,6 @@
     return 180.0;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-}
-
 #pragma mark - 添加喜欢 赞 评论
 
 - (void)addLikeWithImage:(RMImageView *)image {
