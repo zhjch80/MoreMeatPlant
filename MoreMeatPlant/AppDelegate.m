@@ -11,26 +11,67 @@
 #import "RMDaqoViewController.h"
 #import "RMAccountViewController.h"
 #import "RMTalkMoreViewController.h"
-#import "RMCustomNavController.h"
+#import "RMCustomTabBarController.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-
+@synthesize cusNav;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
     self.window.backgroundColor = [UIColor whiteColor];
-    
     [self.window makeKeyAndVisible];
+
+    [self loadMainViewControllers];
     
-//    demoker
     return YES;
+}
+
+- (void)loadMainViewControllers {
+    RMHomeViewController * homeCtl = [[RMHomeViewController alloc] init];
+    RMDaqoViewController * daqoCtl = [[RMDaqoViewController alloc] init];
+    RMAccountViewController * accountCtl = [[RMAccountViewController alloc] init];
+    RMTalkMoreViewController * talkMoreCtl = [[RMTalkMoreViewController alloc] init];
+    
+    NSArray * controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, talkMoreCtl, nil];
+
+    RMCustomTabBarController * customTabBarCtl = [[RMCustomTabBarController alloc] init];
+    ((RMCustomTabBarController *)customTabBarCtl).tabbarHeight = 49;
+    ((RMCustomTabBarController *)customTabBarCtl).TabarItemWidth = kScreenWidth/4.0f;
+    ((RMCustomTabBarController *)customTabBarCtl).isInDeck = YES;
+    ((UITabBarController *)customTabBarCtl).viewControllers = controllers;
+    UIButton *button0 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:0];
+    UIButton *button1 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:1];
+    UIButton *button2 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:2];
+    UIButton *button3 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:3];
+    
+    NSArray * imageName;
+    if (IS_IPHONE_6_SCREEN){
+        imageName = [NSArray arrayWithObjects:@"home_selected_6", @"ranking_unselected_6", @"myChannel_unselected_6", @"setUp_unselected_6", nil];
+    }else if (IS_IPHONE_6p_SCREEN){
+        imageName = [NSArray arrayWithObjects:@"home_selected_6p", @"ranking_unselected6_6p", @"myChannel_unselected_6p", @"setUp_unselected_6p", nil];
+    }else{
+        imageName = [NSArray arrayWithObjects:@"home_selected", @"ranking_unselected", @"myChannel_unselected", @"setUp_unselected", nil];
+    }
+
+    [button0 setBackgroundImage:LOADIMAGE([imageName objectAtIndex:0], kImageTypePNG) forState:UIControlStateNormal];
+    button0.backgroundColor = [UIColor redColor];
+    [button1 setBackgroundImage:LOADIMAGE([imageName objectAtIndex:1], kImageTypePNG) forState:UIControlStateNormal];
+    button1.backgroundColor = [UIColor orangeColor];
+    [button2 setBackgroundImage:LOADIMAGE([imageName objectAtIndex:2], kImageTypePNG)  forState:UIControlStateNormal];
+    button2.backgroundColor = [UIColor yellowColor];
+    [button3 setBackgroundImage:LOADIMAGE([imageName objectAtIndex:3], kImageTypePNG) forState:UIControlStateNormal];
+    button3.backgroundColor = [UIColor blueColor];
+    
+    [((RMCustomTabBarController *)customTabBarCtl) clickButtonWithIndex:0];
+    self.cusNav = [[RMCustomNavController alloc] initWithRootViewController:customTabBarCtl];
+    self.cusNav.navigationBar.hidden = YES;
+    [self.window setRootViewController:self.cusNav];
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
