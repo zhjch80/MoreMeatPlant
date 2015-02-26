@@ -70,6 +70,7 @@
 		1DD854881A9454E9003B12A5 /* RMReleasePoisonCell_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DD854851A9454E9003B12A5 /* RMReleasePoisonCell_3.xib */; };
 		1DD8548B1A94591D003B12A5 /* RMReleasePoisonBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8548A1A94591D003B12A5 /* RMReleasePoisonBottomView.m */; };
 		1DD8548E1A9459FC003B12A5 /* RMPostMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8548D1A9459FC003B12A5 /* RMPostMessageView.m */; };
+		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,8 @@
 		1DD8548A1A94591D003B12A5 /* RMReleasePoisonBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMReleasePoisonBottomView.m; sourceTree = "<group>"; };
 		1DD8548C1A9459FC003B12A5 /* RMPostMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPostMessageView.h; sourceTree = "<group>"; };
 		1DD8548D1A9459FC003B12A5 /* RMPostMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPostMessageView.m; sourceTree = "<group>"; };
+		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
+		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,6 +390,8 @@
 				1D64F4EA1A904E180073EB98 /* RMAccountViewController.xib */,
 				1D64F4EB1A904E180073EB98 /* 商家账户 */,
 				1D64F4EC1A904E180073EB98 /* 用户账户 */,
+				51E267DE1A9F5A3500252DEF /* RMAccountView.h */,
+				51E267DF1A9F5A3500252DEF /* RMAccountView.m */,
 			);
 			path = "账户";
 			sourceTree = "<group>";
@@ -690,6 +695,7 @@
 				1D4DA3251A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.m in Sources */,
 				1DCD99461A95A41500F0DEB6 /* RMPlantWithSaleCell.m in Sources */,
 				1D64F51E1A91B0B90073EB98 /* RMPopularizeView.m in Sources */,
+				51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */,
 				1D4DA3121A920F21006A9EBA /* RMHomeCell.m in Sources */,
 				1D4DA32A1A921744006A9EBA /* RMPlantExchangeViewController.m in Sources */,
 				1D4DA3471A93090D006A9EBA /* RMDaqoCell.m in Sources */,
