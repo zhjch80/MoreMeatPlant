@@ -34,7 +34,7 @@
 - (void)loadMainViewControllers {
     RMHomeViewController * homeCtl = [[RMHomeViewController alloc] init];
     RMDaqoViewController * daqoCtl = [[RMDaqoViewController alloc] init];
-    RMAccountViewController * accountCtl = [[RMAccountViewController alloc] init];
+    RMAccountViewController * accountCtl = [[RMAccountViewController alloc] initWithNibName:@"RMAccountViewController" bundle:nil];
     RMTalkMoreViewController * talkMoreCtl = [[RMTalkMoreViewController alloc] init];
     
     NSArray * controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, talkMoreCtl, nil];

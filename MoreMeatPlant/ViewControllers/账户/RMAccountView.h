@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class RMAccountView;
+typedef void (^AccountViewCallBack)(RMAccountView * view);
 
 @interface RMAccountView : UIView
 
+@property (retain, nonatomic) UIImageView * imgV;
+@property (retain, nonatomic) UILabel * titleL;
+@property (assign, nonatomic) NSInteger tag;
+@property (copy  , nonatomic) AccountViewCallBack call_back;
 @end
