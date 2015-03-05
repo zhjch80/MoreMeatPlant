@@ -31,6 +31,7 @@
 
 - (void)layoutViews
 {
+    self.layer.cornerRadius = 5;
     _imgV = [[UIImageView alloc]initWithFrame:CGRectMake(distance, distance, self.frame.size.height-distance*2, self.frame.size.height-distance*2)];
     _imgV.backgroundColor = [UIColor redColor];
     self.backgroundColor = [UIColor blackColor];
@@ -38,8 +39,9 @@
     
     _titleL = [[UILabel alloc]initWithFrame:CGRectMake(_imgV.frame.origin.x+_imgV.frame.size.width+distance, distance, self.frame.size.width-(_imgV.frame.origin.x+_imgV.frame.size.width+distance), self.frame.size.height-distance*2)];
     _titleL.numberOfLines = 2;
-    _titleL.text = @"等待开放";
+    _titleL.text = @"等待\n开放";
     _titleL.font = [UIFont boldSystemFontOfSize:14];
+    _titleL.adjustsFontSizeToFitWidth = YES;
     _titleL.textColor = [UIColor whiteColor];
     
     [self addSubview:_imgV];

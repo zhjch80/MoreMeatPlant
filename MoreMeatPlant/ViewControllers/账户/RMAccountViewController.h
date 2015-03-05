@@ -8,6 +8,15 @@
 
 #import "RMBaseViewController.h"
 
-@interface RMAccountViewController : RMBaseViewController
+@interface RMAccountViewController : RMBaseViewController{
+    NSMutableArray * functitleArray;
+}
+@property (weak, nonatomic) IBOutlet UIImageView *headerImgV;
+@property (weak, nonatomic) IBOutlet UILabel *userNameL;
+@property (weak, nonatomic) IBOutlet UILabel *userDescL;
+@property (weak, nonatomic) IBOutlet UILabel *regionL;
+@property (weak, nonatomic) IBOutlet UILabel *yu_eL;//余额
+@property (weak, nonatomic) IBOutlet UILabel *hua_biL;//花币
+
 
 @end

@@ -7,7 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RMAccountViewController">
             <connections>
+                <outlet property="headerImgV" destination="Vmx-kb-uIz" id="6xx-Sr-VGk"/>
+                <outlet property="hua_biL" destination="a7e-oX-CtK" id="IFG-Fo-DN8"/>
+                <outlet property="regionL" destination="fBC-Zu-kd9" id="hpu-0J-IIC"/>
+                <outlet property="userDescL" destination="oOq-aN-1Jo" id="NPO-jN-iED"/>
+                <outlet property="userNameL" destination="a4l-zE-t5o" id="23X-xW-Qtp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yu_eL" destination="I0Y-OV-twF" id="vFl-pW-OUN"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -18,12 +24,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vnu-Gk-Fhe">
                     <rect key="frame" x="0.0" y="84" width="320" height="100"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vmx-kb-uIz">
-                            <rect key="frame" x="20" y="0.0" width="100" height="100"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="100" id="BJg-zx-3aX"/>
-                            </constraints>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="花儿与少年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-zE-t5o">
                             <rect key="frame" x="128" y="10" width="85" height="20.5"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -73,8 +73,14 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" translatesAutoresizingMaskIntoConstraints="NO" id="Vmx-kb-uIz">
+                            <rect key="frame" x="20" y="0.0" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="BJg-zx-3aX"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.37653962639999999" blue="0.16784965330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="a7e-oX-CtK" firstAttribute="top" secondItem="uUd-B3-lqB" secondAttribute="bottom" constant="6" id="3g5-Rn-Mmk"/>
                         <constraint firstItem="a7e-oX-CtK" firstAttribute="leading" secondItem="I0Y-OV-twF" secondAttribute="trailing" constant="6" id="6H6-Rj-xBP"/>
@@ -122,7 +128,10 @@
                 <constraint firstItem="Vnu-Gk-Fhe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="84" id="V1q-HS-CBb"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="280" y="266"/>
+            <point key="canvasLocation" x="333" y="257"/>
         </view>
     </objects>
+    <resources>
+        <image name="photo" width="750" height="562"/>
+    </resources>
 </document>

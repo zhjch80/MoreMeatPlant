@@ -71,6 +71,18 @@
 		1DD8548B1A94591D003B12A5 /* RMReleasePoisonBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8548A1A94591D003B12A5 /* RMReleasePoisonBottomView.m */; };
 		1DD8548E1A9459FC003B12A5 /* RMPostMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8548D1A9459FC003B12A5 /* RMPostMessageView.m */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
+		51E267E51AA7462000252DEF /* RMNearFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267E31AA7462000252DEF /* RMNearFriendViewController.m */; };
+		51E267E61AA7462000252DEF /* RMNearFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E267E41AA7462000252DEF /* RMNearFriendViewController.xib */; };
+		51E267EA1AA7465C00252DEF /* RMNearFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267E81AA7465C00252DEF /* RMNearFriendTableViewCell.m */; };
+		51E267EB1AA7465C00252DEF /* RMNearFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E267E91AA7465C00252DEF /* RMNearFriendTableViewCell.xib */; };
+		51E267F01AA74BDB00252DEF /* RMMyFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267EE1AA74BDB00252DEF /* RMMyFriendViewController.m */; };
+		51E267F11AA74BDB00252DEF /* RMMyFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E267EF1AA74BDB00252DEF /* RMMyFriendViewController.xib */; };
+		51E267F61AA74C5F00252DEF /* RMMyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267F41AA74C5F00252DEF /* RMMyCollectionViewController.m */; };
+		51E267F71AA74C5F00252DEF /* RMMyCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E267F51AA74C5F00252DEF /* RMMyCollectionViewController.xib */; };
+		51E267FC1AA74CA800252DEF /* RMSysMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267FA1AA74CA800252DEF /* RMSysMessageViewController.m */; };
+		51E267FD1AA74CA800252DEF /* RMSysMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E267FB1AA74CA800252DEF /* RMSysMessageViewController.xib */; };
+		51E268011AA74E0C00252DEF /* RMSysMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267FF1AA74E0C00252DEF /* RMSysMessageTableViewCell.m */; };
+		51E268021AA74E0C00252DEF /* RMSysMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E268001AA74E0C00252DEF /* RMSysMessageTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +198,24 @@
 		1DD8548D1A9459FC003B12A5 /* RMPostMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPostMessageView.m; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
+		51E267E21AA7462000252DEF /* RMNearFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMNearFriendViewController.h; sourceTree = "<group>"; };
+		51E267E31AA7462000252DEF /* RMNearFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMNearFriendViewController.m; sourceTree = "<group>"; };
+		51E267E41AA7462000252DEF /* RMNearFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMNearFriendViewController.xib; sourceTree = "<group>"; };
+		51E267E71AA7465C00252DEF /* RMNearFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMNearFriendTableViewCell.h; sourceTree = "<group>"; };
+		51E267E81AA7465C00252DEF /* RMNearFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMNearFriendTableViewCell.m; sourceTree = "<group>"; };
+		51E267E91AA7465C00252DEF /* RMNearFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMNearFriendTableViewCell.xib; sourceTree = "<group>"; };
+		51E267ED1AA74BDB00252DEF /* RMMyFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyFriendViewController.h; sourceTree = "<group>"; };
+		51E267EE1AA74BDB00252DEF /* RMMyFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMyFriendViewController.m; sourceTree = "<group>"; };
+		51E267EF1AA74BDB00252DEF /* RMMyFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMyFriendViewController.xib; sourceTree = "<group>"; };
+		51E267F31AA74C5F00252DEF /* RMMyCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyCollectionViewController.h; sourceTree = "<group>"; };
+		51E267F41AA74C5F00252DEF /* RMMyCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMyCollectionViewController.m; sourceTree = "<group>"; };
+		51E267F51AA74C5F00252DEF /* RMMyCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMyCollectionViewController.xib; sourceTree = "<group>"; };
+		51E267F91AA74CA800252DEF /* RMSysMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSysMessageViewController.h; sourceTree = "<group>"; };
+		51E267FA1AA74CA800252DEF /* RMSysMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSysMessageViewController.m; sourceTree = "<group>"; };
+		51E267FB1AA74CA800252DEF /* RMSysMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSysMessageViewController.xib; sourceTree = "<group>"; };
+		51E267FE1AA74E0C00252DEF /* RMSysMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSysMessageTableViewCell.h; sourceTree = "<group>"; };
+		51E267FF1AA74E0C00252DEF /* RMSysMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSysMessageTableViewCell.m; sourceTree = "<group>"; };
+		51E268001AA74E0C00252DEF /* RMSysMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSysMessageTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,6 +415,10 @@
 		1D64F4E71A904E180073EB98 /* 账户 */ = {
 			isa = PBXGroup;
 			children = (
+				51E267F81AA74C7800252DEF /* 系统消息 */,
+				51E267F21AA74C2B00252DEF /* 我的收藏 */,
+				51E267EC1AA74B7C00252DEF /* 我的肉友 */,
+				51E267E11AA745AD00252DEF /* 附近肉友 */,
 				1D64F4E81A904E180073EB98 /* RMAccountViewController.h */,
 				1D64F4E91A904E180073EB98 /* RMAccountViewController.m */,
 				1D64F4EA1A904E180073EB98 /* RMAccountViewController.xib */,
@@ -554,6 +588,52 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		51E267E11AA745AD00252DEF /* 附近肉友 */ = {
+			isa = PBXGroup;
+			children = (
+				51E267E21AA7462000252DEF /* RMNearFriendViewController.h */,
+				51E267E31AA7462000252DEF /* RMNearFriendViewController.m */,
+				51E267E41AA7462000252DEF /* RMNearFriendViewController.xib */,
+				51E267E71AA7465C00252DEF /* RMNearFriendTableViewCell.h */,
+				51E267E81AA7465C00252DEF /* RMNearFriendTableViewCell.m */,
+				51E267E91AA7465C00252DEF /* RMNearFriendTableViewCell.xib */,
+			);
+			name = "附近肉友";
+			sourceTree = "<group>";
+		};
+		51E267EC1AA74B7C00252DEF /* 我的肉友 */ = {
+			isa = PBXGroup;
+			children = (
+				51E267ED1AA74BDB00252DEF /* RMMyFriendViewController.h */,
+				51E267EE1AA74BDB00252DEF /* RMMyFriendViewController.m */,
+				51E267EF1AA74BDB00252DEF /* RMMyFriendViewController.xib */,
+			);
+			name = "我的肉友";
+			sourceTree = "<group>";
+		};
+		51E267F21AA74C2B00252DEF /* 我的收藏 */ = {
+			isa = PBXGroup;
+			children = (
+				51E267F31AA74C5F00252DEF /* RMMyCollectionViewController.h */,
+				51E267F41AA74C5F00252DEF /* RMMyCollectionViewController.m */,
+				51E267F51AA74C5F00252DEF /* RMMyCollectionViewController.xib */,
+			);
+			name = "我的收藏";
+			sourceTree = "<group>";
+		};
+		51E267F81AA74C7800252DEF /* 系统消息 */ = {
+			isa = PBXGroup;
+			children = (
+				51E267F91AA74CA800252DEF /* RMSysMessageViewController.h */,
+				51E267FA1AA74CA800252DEF /* RMSysMessageViewController.m */,
+				51E267FB1AA74CA800252DEF /* RMSysMessageViewController.xib */,
+				51E267FE1AA74E0C00252DEF /* RMSysMessageTableViewCell.h */,
+				51E267FF1AA74E0C00252DEF /* RMSysMessageTableViewCell.m */,
+				51E268001AA74E0C00252DEF /* RMSysMessageTableViewCell.xib */,
+			);
+			name = "系统消息";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -603,6 +683,7 @@
 				TargetAttributes = {
 					1D9336EA1A8E3DFA00BA4FA7 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = WWD46XW8M3;
 					};
 					1D9337061A8E3DFA00BA4FA7 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -635,6 +716,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D64F4FD1A904E180073EB98 /* RMAccountViewController.xib in Resources */,
+				51E267FD1AA74CA800252DEF /* RMSysMessageViewController.xib in Resources */,
 				1D64F4F51A904E180073EB98 /* Default@2x.png in Resources */,
 				1DD854861A9454E9003B12A5 /* RMReleasePoisonCell_1.xib in Resources */,
 				1D4DA3211A9216BA006A9EBA /* RMReleasePoisonViewController.xib in Resources */,
@@ -643,6 +725,7 @@
 				1D4DA33F1A92181E006A9EBA /* RMFreshManCourseOfStudyViewController.xib in Resources */,
 				1D4DA3351A921799006A9EBA /* RMPlantWithSaleViewController.xib in Resources */,
 				1DD854881A9454E9003B12A5 /* RMReleasePoisonCell_3.xib in Resources */,
+				51E267F11AA74BDB00252DEF /* RMMyFriendViewController.xib in Resources */,
 				1D4EE43E1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.xib in Resources */,
 				1D64F5071A904E290073EB98 /* RMBaseViewController.xib in Resources */,
 				1D64F4F91A904E180073EB98 /* RMTalkMoreViewController.xib in Resources */,
@@ -652,9 +735,13 @@
 				1DCD99471A95A41500F0DEB6 /* RMPlantWithSaleCell.xib in Resources */,
 				1D4DA3481A93090D006A9EBA /* RMDaqoCell.xib in Resources */,
 				1D4DA3131A920F21006A9EBA /* RMHomeCell.xib in Resources */,
+				51E267EB1AA7465C00252DEF /* RMNearFriendTableViewCell.xib in Resources */,
 				1D4DA35B1A93A458006A9EBA /* RMStickDetailsViewController.xib in Resources */,
+				51E268021AA74E0C00252DEF /* RMSysMessageTableViewCell.xib in Resources */,
 				1D64F4FB1A904E180073EB98 /* RMDaqoViewController.xib in Resources */,
+				51E267F71AA74C5F00252DEF /* RMMyCollectionViewController.xib in Resources */,
 				1D64F4F71A904E180073EB98 /* Default_6p.png in Resources */,
+				51E267E61AA7462000252DEF /* RMNearFriendViewController.xib in Resources */,
 				1D64F4F61A904E180073EB98 /* Default_6.png in Resources */,
 				1D4DA32B1A921744006A9EBA /* RMPlantExchangeViewController.xib in Resources */,
 				1D4DA3301A921779006A9EBA /* RMFreshPlantMarketViewController.xib in Resources */,
@@ -682,12 +769,17 @@
 			files = (
 				1DD8548E1A9459FC003B12A5 /* RMPostMessageView.m in Sources */,
 				1D4DA3561A939F4A006A9EBA /* RMStickView.m in Sources */,
+				51E267EA1AA7465C00252DEF /* RMNearFriendTableViewCell.m in Sources */,
 				1D64F4FA1A904E180073EB98 /* RMDaqoViewController.m in Sources */,
 				1D4DA34D1A9393ED006A9EBA /* RMDaqoDetailsViewController.m in Sources */,
 				1D4DA35A1A93A458006A9EBA /* RMStickDetailsViewController.m in Sources */,
 				1D55762A1A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.m in Sources */,
+				51E267FC1AA74CA800252DEF /* RMSysMessageViewController.m in Sources */,
+				51E267E51AA7462000252DEF /* RMNearFriendViewController.m in Sources */,
 				1D4DA3201A9216BA006A9EBA /* RMReleasePoisonViewController.m in Sources */,
+				51E267F01AA74BDB00252DEF /* RMMyFriendViewController.m in Sources */,
 				1D4EE43D1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.m in Sources */,
+				51E268011AA74E0C00252DEF /* RMSysMessageTableViewCell.m in Sources */,
 				1D9336F41A8E3DFA00BA4FA7 /* AppDelegate.m in Sources */,
 				1D4DA33E1A92181E006A9EBA /* RMFreshManCourseOfStudyViewController.m in Sources */,
 				1D55762E1A9600A60072C8C5 /* RMPlantWithSaleBottomView.m in Sources */,
@@ -706,6 +798,7 @@
 				1D9336F11A8E3DFA00BA4FA7 /* main.m in Sources */,
 				1DD8548B1A94591D003B12A5 /* RMReleasePoisonBottomView.m in Sources */,
 				1D4DA3521A939CA8006A9EBA /* RMReleasePoisonCell.m in Sources */,
+				51E267F61AA74C5F00252DEF /* RMMyCollectionViewController.m in Sources */,
 				1D64F4FC1A904E180073EB98 /* RMAccountViewController.m in Sources */,
 				1D64F5081A904E290073EB98 /* RMCustomNavController.m in Sources */,
 				1D64F5101A91A9C00073EB98 /* UIButton+EnlargeEdge.m in Sources */,
@@ -817,10 +910,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "90507bcb-5a14-4d40-af2b-e65f391edf3e";
 			};
 			name = Debug;
 		};
@@ -829,10 +924,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "90507bcb-5a14-4d40-af2b-e65f391edf3e";
 			};
 			name = Release;
 		};
