@@ -8,6 +8,7 @@
 
 #import "RMSysMessageViewController.h"
 #import "RMSysMessageTableViewCell.h"
+
 @interface RMSysMessageViewController ()
 
 @end
@@ -60,6 +61,24 @@
     }
     else{
         return 10.f;
+    }
+}
+
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
+    switch (sender.tag) {
+        case 1:{
+            if(self.callback){
+                _callback(self);
+            }
+            break;
+        }
+        case 2:{
+            
+            break;
+        }
+            
+        default:
+            break;
     }
 }
 

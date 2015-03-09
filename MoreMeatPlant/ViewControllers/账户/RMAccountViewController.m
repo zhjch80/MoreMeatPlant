@@ -12,6 +12,9 @@
 
 #import "RMNearFriendViewController.h"
 #import "RMSysMessageViewController.h"
+#import "RMShopCarViewController.h"
+
+#import "UIViewController+ENPopUp.h"
 @interface RMAccountViewController ()
 
 @end
@@ -79,15 +82,23 @@
                     }
                         break;
                     case 6:{
+//                        RMSysMessageViewController * message = [[RMSysMessageViewController alloc]initWithNibName:@"RMSysMessageViewController" bundle:nil];
+//                        [self.navigationController pushViewController:message animated:YES];
                         RMSysMessageViewController * message = [[RMSysMessageViewController alloc]initWithNibName:@"RMSysMessageViewController" bundle:nil];
-                        [self.navigationController pushViewController:message animated:YES];
+                        message.callback = ^(RMSysMessageViewController * controller){
+                            [self dismissPopUpViewControllerWithcompletion:nil];
+                        };
+                        message.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-49);
+                        [self presentPopUpViewController:message];
                     }
                         break;
                     case 7:{
                         
                     }
                         break;
-                    case 8:{
+                    case 8:{//购物车
+                        RMShopCarViewController * shopcar = [[RMShopCarViewController alloc]initWithNibName:@"RMShopCarViewController" bundle:nil];
+                        [self.navigationController pushViewController:shopcar animated:YES];
                         
                     }
                         break;

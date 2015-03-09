@@ -83,6 +83,23 @@
 		51E267FD1AA74CA800252DEF /* RMSysMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E267FB1AA74CA800252DEF /* RMSysMessageViewController.xib */; };
 		51E268011AA74E0C00252DEF /* RMSysMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267FF1AA74E0C00252DEF /* RMSysMessageTableViewCell.m */; };
 		51E268021AA74E0C00252DEF /* RMSysMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E268001AA74E0C00252DEF /* RMSysMessageTableViewCell.xib */; };
+		51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */; };
+		51E268091AADDFFE00252DEF /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268071AADDFFE00252DEF /* JWBlurView.m */; };
+		51E268101AADE19F00252DEF /* RMShopCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E2680E1AADE19F00252DEF /* RMShopCarViewController.m */; };
+		51E268111AADE19F00252DEF /* RMShopCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E2680F1AADE19F00252DEF /* RMShopCarViewController.xib */; };
+		51E268151AADE25B00252DEF /* RMShopCarGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268131AADE25B00252DEF /* RMShopCarGoodsTableViewCell.m */; };
+		51E268161AADE25B00252DEF /* RMShopCarGoodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E268141AADE25B00252DEF /* RMShopCarGoodsTableViewCell.xib */; };
+		51E2681A1AADE77700252DEF /* RMSopCarHeadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268181AADE77700252DEF /* RMSopCarHeadTableViewCell.m */; };
+		51E2681B1AADE77700252DEF /* RMSopCarHeadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E268191AADE77700252DEF /* RMSopCarHeadTableViewCell.xib */; };
+		51E2681F1AADE92300252DEF /* RMShopLeaveMsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E2681D1AADE92300252DEF /* RMShopLeaveMsTableViewCell.m */; };
+		51E268201AADE92300252DEF /* RMShopLeaveMsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E2681E1AADE92300252DEF /* RMShopLeaveMsTableViewCell.xib */; };
+		51E268251AADFCDD00252DEF /* UIViewController+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268241AADFCDD00252DEF /* UIViewController+Common.m */; };
+		51E268351AAE003000252DEF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 51E268271AAE003000252DEF /* InfoPlist.strings */; };
+		51E268361AAE003000252DEF /* STDb.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E2682B1AAE003000252DEF /* STDb.m */; };
+		51E268371AAE003000252DEF /* STDbHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E2682D1AAE003000252DEF /* STDbHandle.m */; };
+		51E268381AAE003000252DEF /* STDbObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268301AAE003000252DEF /* STDbObject.m */; };
+		51E268391AAE003000252DEF /* STDbKit-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51E268321AAE003000252DEF /* STDbKit-Info.plist */; };
+		51E2683B1AAE004E00252DEF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 51E2683A1AAE004E00252DEF /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,6 +233,37 @@
 		51E267FE1AA74E0C00252DEF /* RMSysMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSysMessageTableViewCell.h; sourceTree = "<group>"; };
 		51E267FF1AA74E0C00252DEF /* RMSysMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSysMessageTableViewCell.m; sourceTree = "<group>"; };
 		51E268001AA74E0C00252DEF /* RMSysMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSysMessageTableViewCell.xib; sourceTree = "<group>"; };
+		51E268041AADDFFE00252DEF /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
+		51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ENPopUp.m"; sourceTree = "<group>"; };
+		51E268061AADDFFE00252DEF /* JWBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWBlurView.h; sourceTree = "<group>"; };
+		51E268071AADDFFE00252DEF /* JWBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWBlurView.m; sourceTree = "<group>"; };
+		51E2680D1AADE19F00252DEF /* RMShopCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMShopCarViewController.h; sourceTree = "<group>"; };
+		51E2680E1AADE19F00252DEF /* RMShopCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMShopCarViewController.m; sourceTree = "<group>"; };
+		51E2680F1AADE19F00252DEF /* RMShopCarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMShopCarViewController.xib; sourceTree = "<group>"; };
+		51E268121AADE25B00252DEF /* RMShopCarGoodsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMShopCarGoodsTableViewCell.h; sourceTree = "<group>"; };
+		51E268131AADE25B00252DEF /* RMShopCarGoodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMShopCarGoodsTableViewCell.m; sourceTree = "<group>"; };
+		51E268141AADE25B00252DEF /* RMShopCarGoodsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMShopCarGoodsTableViewCell.xib; sourceTree = "<group>"; };
+		51E268171AADE77700252DEF /* RMSopCarHeadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSopCarHeadTableViewCell.h; sourceTree = "<group>"; };
+		51E268181AADE77700252DEF /* RMSopCarHeadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSopCarHeadTableViewCell.m; sourceTree = "<group>"; };
+		51E268191AADE77700252DEF /* RMSopCarHeadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSopCarHeadTableViewCell.xib; sourceTree = "<group>"; };
+		51E2681C1AADE92300252DEF /* RMShopLeaveMsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMShopLeaveMsTableViewCell.h; sourceTree = "<group>"; };
+		51E2681D1AADE92300252DEF /* RMShopLeaveMsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMShopLeaveMsTableViewCell.m; sourceTree = "<group>"; };
+		51E2681E1AADE92300252DEF /* RMShopLeaveMsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMShopLeaveMsTableViewCell.xib; sourceTree = "<group>"; };
+		51E268231AADFCDD00252DEF /* UIViewController+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Common.h"; sourceTree = "<group>"; };
+		51E268241AADFCDD00252DEF /* UIViewController+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Common.m"; sourceTree = "<group>"; };
+		51E268281AAE003000252DEF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		51E2682A1AAE003000252DEF /* STDb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDb.h; sourceTree = "<group>"; };
+		51E2682B1AAE003000252DEF /* STDb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDb.m; sourceTree = "<group>"; };
+		51E2682C1AAE003000252DEF /* STDbHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDbHandle.h; sourceTree = "<group>"; };
+		51E2682D1AAE003000252DEF /* STDbHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDbHandle.m; sourceTree = "<group>"; };
+		51E2682E1AAE003000252DEF /* STDbKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDbKit.h; sourceTree = "<group>"; };
+		51E2682F1AAE003000252DEF /* STDbObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDbObject.h; sourceTree = "<group>"; };
+		51E268301AAE003000252DEF /* STDbObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDbObject.m; sourceTree = "<group>"; };
+		51E268311AAE003000252DEF /* STDbVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDbVersion.h; sourceTree = "<group>"; };
+		51E268321AAE003000252DEF /* STDbKit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "STDbKit-Info.plist"; sourceTree = "<group>"; };
+		51E268331AAE003000252DEF /* STDbKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STDbKit-Prefix.pch"; sourceTree = "<group>"; };
+		51E268341AAE003000252DEF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		51E2683A1AAE004E00252DEF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +271,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51E2683B1AAE004E00252DEF /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +464,7 @@
 		1D64F4E71A904E180073EB98 /* 账户 */ = {
 			isa = PBXGroup;
 			children = (
+				51E2680C1AADE17100252DEF /* 购物车 */,
 				51E267F81AA74C7800252DEF /* 系统消息 */,
 				51E267F21AA74C2B00252DEF /* 我的收藏 */,
 				51E267EC1AA74B7C00252DEF /* 我的肉友 */,
@@ -504,6 +554,8 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				51E268261AAE003000252DEF /* STDbKit */,
+				51E268031AADDFEC00252DEF /* popupController */,
 				1D64F50D1A90CD150073EB98 /* CONST.h */,
 			);
 			path = Vendors;
@@ -531,6 +583,7 @@
 		1D9336E21A8E3DFA00BA4FA7 = {
 			isa = PBXGroup;
 			children = (
+				51E2683A1AAE004E00252DEF /* libsqlite3.dylib */,
 				1D9336ED1A8E3DFA00BA4FA7 /* MoreMeatPlant */,
 				1D93370A1A8E3DFA00BA4FA7 /* MoreMeatPlantTests */,
 				1D9336EC1A8E3DFA00BA4FA7 /* Products */,
@@ -634,6 +687,64 @@
 			name = "系统消息";
 			sourceTree = "<group>";
 		};
+		51E268031AADDFEC00252DEF /* popupController */ = {
+			isa = PBXGroup;
+			children = (
+				51E268041AADDFFE00252DEF /* UIViewController+ENPopUp.h */,
+				51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */,
+				51E268061AADDFFE00252DEF /* JWBlurView.h */,
+				51E268071AADDFFE00252DEF /* JWBlurView.m */,
+			);
+			path = popupController;
+			sourceTree = "<group>";
+		};
+		51E2680C1AADE17100252DEF /* 购物车 */ = {
+			isa = PBXGroup;
+			children = (
+				51E2680D1AADE19F00252DEF /* RMShopCarViewController.h */,
+				51E2680E1AADE19F00252DEF /* RMShopCarViewController.m */,
+				51E2680F1AADE19F00252DEF /* RMShopCarViewController.xib */,
+				51E268121AADE25B00252DEF /* RMShopCarGoodsTableViewCell.h */,
+				51E268131AADE25B00252DEF /* RMShopCarGoodsTableViewCell.m */,
+				51E268141AADE25B00252DEF /* RMShopCarGoodsTableViewCell.xib */,
+				51E268171AADE77700252DEF /* RMSopCarHeadTableViewCell.h */,
+				51E268181AADE77700252DEF /* RMSopCarHeadTableViewCell.m */,
+				51E268191AADE77700252DEF /* RMSopCarHeadTableViewCell.xib */,
+				51E2681C1AADE92300252DEF /* RMShopLeaveMsTableViewCell.h */,
+				51E2681D1AADE92300252DEF /* RMShopLeaveMsTableViewCell.m */,
+				51E2681E1AADE92300252DEF /* RMShopLeaveMsTableViewCell.xib */,
+				51E268231AADFCDD00252DEF /* UIViewController+Common.h */,
+				51E268241AADFCDD00252DEF /* UIViewController+Common.m */,
+			);
+			path = "购物车";
+			sourceTree = "<group>";
+		};
+		51E268261AAE003000252DEF /* STDbKit */ = {
+			isa = PBXGroup;
+			children = (
+				51E268271AAE003000252DEF /* InfoPlist.strings */,
+				51E268291AAE003000252DEF /* STDb */,
+				51E268321AAE003000252DEF /* STDbKit-Info.plist */,
+				51E268331AAE003000252DEF /* STDbKit-Prefix.pch */,
+			);
+			path = STDbKit;
+			sourceTree = "<group>";
+		};
+		51E268291AAE003000252DEF /* STDb */ = {
+			isa = PBXGroup;
+			children = (
+				51E2682A1AAE003000252DEF /* STDb.h */,
+				51E2682B1AAE003000252DEF /* STDb.m */,
+				51E2682C1AAE003000252DEF /* STDbHandle.h */,
+				51E2682D1AAE003000252DEF /* STDbHandle.m */,
+				51E2682E1AAE003000252DEF /* STDbKit.h */,
+				51E2682F1AAE003000252DEF /* STDbObject.h */,
+				51E268301AAE003000252DEF /* STDbObject.m */,
+				51E268311AAE003000252DEF /* STDbVersion.h */,
+			);
+			path = STDb;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -698,6 +809,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 1D9336E21A8E3DFA00BA4FA7;
 			productRefGroup = 1D9336EC1A8E3DFA00BA4FA7 /* Products */;
@@ -719,12 +831,16 @@
 				51E267FD1AA74CA800252DEF /* RMSysMessageViewController.xib in Resources */,
 				1D64F4F51A904E180073EB98 /* Default@2x.png in Resources */,
 				1DD854861A9454E9003B12A5 /* RMReleasePoisonCell_1.xib in Resources */,
+				51E268201AADE92300252DEF /* RMShopLeaveMsTableViewCell.xib in Resources */,
+				51E2681B1AADE77700252DEF /* RMSopCarHeadTableViewCell.xib in Resources */,
 				1D4DA3211A9216BA006A9EBA /* RMReleasePoisonViewController.xib in Resources */,
 				1DD854871A9454E9003B12A5 /* RMReleasePoisonCell_2.xib in Resources */,
 				1D4DA33A1A9217D4006A9EBA /* RMUpgradeSuggestViewController.xib in Resources */,
+				51E268351AAE003000252DEF /* InfoPlist.strings in Resources */,
 				1D4DA33F1A92181E006A9EBA /* RMFreshManCourseOfStudyViewController.xib in Resources */,
 				1D4DA3351A921799006A9EBA /* RMPlantWithSaleViewController.xib in Resources */,
 				1DD854881A9454E9003B12A5 /* RMReleasePoisonCell_3.xib in Resources */,
+				51E268111AADE19F00252DEF /* RMShopCarViewController.xib in Resources */,
 				51E267F11AA74BDB00252DEF /* RMMyFriendViewController.xib in Resources */,
 				1D4EE43E1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.xib in Resources */,
 				1D64F5071A904E290073EB98 /* RMBaseViewController.xib in Resources */,
@@ -745,10 +861,12 @@
 				1D64F4F61A904E180073EB98 /* Default_6.png in Resources */,
 				1D4DA32B1A921744006A9EBA /* RMPlantExchangeViewController.xib in Resources */,
 				1D4DA3301A921779006A9EBA /* RMFreshPlantMarketViewController.xib in Resources */,
+				51E268161AADE25B00252DEF /* RMShopCarGoodsTableViewCell.xib in Resources */,
 				1D4DA3261A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.xib in Resources */,
 				1D64F4FF1A904E180073EB98 /* RMHomeViewController.xib in Resources */,
 				1D64F4F41A904E180073EB98 /* Default-568h@2x.png in Resources */,
 				1D4DA34E1A9393ED006A9EBA /* RMDaqoDetailsViewController.xib in Resources */,
+				51E268391AAE003000252DEF /* STDbKit-Info.plist in Resources */,
 				1D55762B1A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -767,27 +885,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51E268091AADDFFE00252DEF /* JWBlurView.m in Sources */,
 				1DD8548E1A9459FC003B12A5 /* RMPostMessageView.m in Sources */,
 				1D4DA3561A939F4A006A9EBA /* RMStickView.m in Sources */,
 				51E267EA1AA7465C00252DEF /* RMNearFriendTableViewCell.m in Sources */,
 				1D64F4FA1A904E180073EB98 /* RMDaqoViewController.m in Sources */,
 				1D4DA34D1A9393ED006A9EBA /* RMDaqoDetailsViewController.m in Sources */,
 				1D4DA35A1A93A458006A9EBA /* RMStickDetailsViewController.m in Sources */,
+				51E268381AAE003000252DEF /* STDbObject.m in Sources */,
 				1D55762A1A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.m in Sources */,
 				51E267FC1AA74CA800252DEF /* RMSysMessageViewController.m in Sources */,
 				51E267E51AA7462000252DEF /* RMNearFriendViewController.m in Sources */,
 				1D4DA3201A9216BA006A9EBA /* RMReleasePoisonViewController.m in Sources */,
+				51E268371AAE003000252DEF /* STDbHandle.m in Sources */,
 				51E267F01AA74BDB00252DEF /* RMMyFriendViewController.m in Sources */,
+				51E268101AADE19F00252DEF /* RMShopCarViewController.m in Sources */,
 				1D4EE43D1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.m in Sources */,
+				51E268361AAE003000252DEF /* STDb.m in Sources */,
+				51E268151AADE25B00252DEF /* RMShopCarGoodsTableViewCell.m in Sources */,
 				51E268011AA74E0C00252DEF /* RMSysMessageTableViewCell.m in Sources */,
 				1D9336F41A8E3DFA00BA4FA7 /* AppDelegate.m in Sources */,
 				1D4DA33E1A92181E006A9EBA /* RMFreshManCourseOfStudyViewController.m in Sources */,
 				1D55762E1A9600A60072C8C5 /* RMPlantWithSaleBottomView.m in Sources */,
 				1D4DA3391A9217D4006A9EBA /* RMUpgradeSuggestViewController.m in Sources */,
 				1D4DA3251A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.m in Sources */,
+				51E2681A1AADE77700252DEF /* RMSopCarHeadTableViewCell.m in Sources */,
 				1DCD99461A95A41500F0DEB6 /* RMPlantWithSaleCell.m in Sources */,
 				1D64F51E1A91B0B90073EB98 /* RMPopularizeView.m in Sources */,
 				51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */,
+				51E268251AADFCDD00252DEF /* UIViewController+Common.m in Sources */,
 				1D4DA3121A920F21006A9EBA /* RMHomeCell.m in Sources */,
 				1D4DA32A1A921744006A9EBA /* RMPlantExchangeViewController.m in Sources */,
 				1D4DA3471A93090D006A9EBA /* RMDaqoCell.m in Sources */,
@@ -795,8 +921,10 @@
 				1D4DA32F1A921779006A9EBA /* RMFreshPlantMarketViewController.m in Sources */,
 				1D64F50C1A90CC2E0073EB98 /* RMCustomTabBarController.m in Sources */,
 				1D64F4FE1A904E180073EB98 /* RMHomeViewController.m in Sources */,
+				51E2681F1AADE92300252DEF /* RMShopLeaveMsTableViewCell.m in Sources */,
 				1D9336F11A8E3DFA00BA4FA7 /* main.m in Sources */,
 				1DD8548B1A94591D003B12A5 /* RMReleasePoisonBottomView.m in Sources */,
+				51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */,
 				1D4DA3521A939CA8006A9EBA /* RMReleasePoisonCell.m in Sources */,
 				51E267F61AA74C5F00252DEF /* RMMyCollectionViewController.m in Sources */,
 				1D64F4FC1A904E180073EB98 /* RMAccountViewController.m in Sources */,
@@ -827,6 +955,18 @@
 			targetProxy = 1D9337081A8E3DFA00BA4FA7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		51E268271AAE003000252DEF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				51E268281AAE003000252DEF /* en */,
+				51E268341AAE003000252DEF /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D93370F1A8E3DFA00BA4FA7 /* Debug */ = {

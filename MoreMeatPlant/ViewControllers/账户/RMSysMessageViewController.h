@@ -7,10 +7,12 @@
 //
 
 #import "RMBaseViewController.h"
+@class RMSysMessageViewController;
+typedef void (^RMSysMessageCallBack) (RMSysMessageViewController * controller);
 
 @interface RMSysMessageViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource>{
     NSMutableArray * messageArray;
 }
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
-
+@property (copy, nonatomic) RMSysMessageCallBack callback;
 @end
