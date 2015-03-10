@@ -37,11 +37,12 @@ typedef enum{
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
+@property (nonatomic, strong) NSMutableArray * dataImgArr;
 
 @end
 
 @implementation RMHomeViewController
-@synthesize mTableView, dataArr;
+@synthesize mTableView, dataArr, dataImgArr;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,13 +60,32 @@ typedef enum{
                @"升级建议",
                nil];
     
+    dataImgArr = [[NSMutableArray alloc] initWithObjects:
+                  @"",
+                  @"img_06",
+                  @"img_10",
+                  @"img_14",
+                  @"img_22",
+                  @"img_26",
+                  @"",
+                  @"img_29",
+                  @"img_31",
+                  nil];
+    
     RMImageView * rmImage = [[RMImageView alloc] init];
     rmImage.frame = CGRectMake(0, 20, kScreenWidth, 45);
     rmImage.backgroundColor = [UIColor greenColor];
+    rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
     [rmImage addTarget:self WithSelector:@selector(jumpHomeNearbyMerchant)];
     [self.view addSubview:rmImage];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, rmImage.frame.size.height + 20, kScreenWidth, kScreenHeight - rmImage.frame.size.height - 49 - 20) style:UITableViewStylePlain];
+    RMImageView * popularizeView = [[RMImageView alloc] init];
+    popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + 20, kScreenWidth, 40);
+    popularizeView.image = LOADIMAGE(@"img_03", kImageTypePNG);
+    [popularizeView addTarget:self WithSelector:@selector(jumpPopularize:)];
+    [self.view addSubview:popularizeView];
+    
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, rmImage.frame.size.height + popularizeView.frame.size.height + 20, kScreenWidth, kScreenHeight - rmImage.frame.size.height - popularizeView.frame.size.height - 49 - 20) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -94,7 +114,14 @@ typedef enum{
             cell.backgroundColor = [UIColor clearColor];
         }
         cell.bgImg.backgroundColor = (indexPath.row%2 == 0 ? [UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1] : [UIColor clearColor]);
-        cell.titleName.text = [dataArr objectAtIndex:indexPath.row];
+        cell.headImg.image = LOADIMAGE([dataImgArr objectAtIndex:indexPath.row], kImageTypePNG);
+        if (indexPath.row == [dataArr count]-1){
+            NSString *sample_text = [NSString stringWithFormat:@"<font face='HelveticaNeue-CondensedBold' size=19 color='#2C2C2C'>%@</font>",[dataArr objectAtIndex:indexPath.row]];
+            [cell.titleName setText:sample_text];
+        }else{
+            NSString *sample_text = [NSString stringWithFormat:@"<font face='HelveticaNeue-CondensedBold' size=19 color='#2C2C2C'>%@</font> <font face='' size=24 color='#4F4F4F'>(80新帖)</font>",[dataArr objectAtIndex:indexPath.row]];
+            [cell.titleName setText:sample_text];
+        }
     }
     return cell;
 }
@@ -157,6 +184,12 @@ typedef enum{
 - (void)jumpHomeNearbyMerchant {
     RMNearbyMerchantViewController * nearbyMerchantCtl = [[RMNearbyMerchantViewController alloc] init];
     [self.navigationController pushViewController:nearbyMerchantCtl animated:YES];
+}
+
+#pragma mark - 跳转广告位置
+
+- (void)jumpPopularize:(RMImageView *)image {
+    NSLog(@"广告位");
 }
 
 - (void)didReceiveMemoryWarning {

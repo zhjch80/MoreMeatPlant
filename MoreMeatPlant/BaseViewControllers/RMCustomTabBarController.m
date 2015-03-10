@@ -56,12 +56,18 @@
         else
             height = kScreenHeight - tabbarHeight;
     
+    UIImageView * bgTabImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, tabbarHeight)];
+    bgTabImg.image = LOADIMAGE(@"bottom", kImageTypePNG);
+    bgTabImg.userInteractionEnabled = YES;
+    bgTabImg.multipleTouchEnabled = YES;
+    [self.view addSubview:bgTabImg];
+    
     CGRect frame = CGRectMake(0, height, self.view.frame.size.width, tabbarHeight);
     _myTabbarView = [[UIScrollView alloc] initWithFrame:frame];
     _myTabbarView.showsHorizontalScrollIndicator = NO;
     _myTabbarView.showsVerticalScrollIndicator = NO;
     _myTabbarView.bounces = NO;
-    _myTabbarView.backgroundColor = [UIColor colorWithRed:0.86 green:0.06 blue:0.03 alpha:1];
+    _myTabbarView.backgroundColor = [UIColor clearColor];
     _myTabbarView.pagingEnabled = YES;
     _myTabbarView.contentSize = CGSizeMake(viewControllerCount*self.TabarItemWidth, tabbarHeight);
     
@@ -131,17 +137,17 @@
     NSArray * unselectedImageArr;
     NSArray * selectedImageArr;
     
-    if (IS_IPHONE_6_SCREEN){
-        unselectedImageArr = [NSArray arrayWithObjects:@"home_unselected_6", @"ranking_unselected_6", @"myChannel_unselected_6", @"setUp_unselected_6", nil];
-        selectedImageArr = [NSArray arrayWithObjects:@"home_selected_6", @"ranking_selected_6", @"myChannel_selected_6", @"setUp_selected_6", nil];
-        
-    }else if (IS_IPHONE_6p_SCREEN){
-        unselectedImageArr = [NSArray arrayWithObjects:@"home_unselected_6p", @"ranking_unselected_6p", @"myChannel_unselected_6p", @"setUp_unselected_6p", nil];
-        selectedImageArr = [NSArray arrayWithObjects:@"home_selected_6p", @"ranking_selected_6p", @"myChannel_selected_6p", @"setUp_selected_6p", nil];
-    }else{
-        unselectedImageArr = [NSArray arrayWithObjects:@"home_unselected", @"ranking_unselected", @"myChannel_unselected", @"setUp_unselected", nil];
-        selectedImageArr = [NSArray arrayWithObjects:@"home_selected", @"ranking_selected", @"myChannel_selected", @"setUp_selected", nil];
-    }
+//    if (IS_IPHONE_6_SCREEN){
+//        unselectedImageArr = [NSArray arrayWithObjects:@"home_unselected_6", @"ranking_unselected_6", @"myChannel_unselected_6", @"setUp_unselected_6", nil];
+//        selectedImageArr = [NSArray arrayWithObjects:@"home_selected_6", @"ranking_selected_6", @"myChannel_selected_6", @"setUp_selected_6", nil];
+//        
+//    }else if (IS_IPHONE_6p_SCREEN){
+//        unselectedImageArr = [NSArray arrayWithObjects:@"home_unselected_6p", @"ranking_unselected_6p", @"myChannel_unselected_6p", @"setUp_unselected_6p", nil];
+//        selectedImageArr = [NSArray arrayWithObjects:@"home_selected_6p", @"ranking_selected_6p", @"myChannel_selected_6p", @"setUp_selected_6p", nil];
+//    }else{
+        unselectedImageArr = [NSArray arrayWithObjects:@"img_34", @"img_36", @"imgg_36", @"img_40", nil];
+        selectedImageArr = [NSArray arrayWithObjects:@"imgg_38", @"imgd_38", @"img_38", @"imgd_40", nil];
+//    }
     
     UIButton *selectedButton = (UIButton *)sender;
     [selectedButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",[selectedImageArr objectAtIndex:selectedButton.tag]]] forState:UIControlStateNormal];

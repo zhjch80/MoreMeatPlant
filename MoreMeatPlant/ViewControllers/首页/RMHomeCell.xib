@@ -19,27 +19,24 @@
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Urd-SM-jZI">
                         <rect key="frame" x="14" y="7" width="45" height="45"/>
-                        <color key="backgroundColor" red="0.66115212079304031" green="0.86029047254667124" blue="0.97387161896008412" alpha="1" colorSpace="calibratedRGB"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtP-h8-CTA">
-                        <rect key="frame" x="72" y="14" width="234" height="33"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M8q-TY-MQh">
                         <rect key="frame" x="0.0" y="59" width="320" height="1"/>
                         <color key="backgroundColor" red="0.87376767113095233" green="0.87376767113095233" blue="0.87376767113095233" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PLN-9b-ZX0" customClass="RTLabel">
+                        <rect key="frame" x="67" y="21" width="245" height="29"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bgImg" destination="hrj-Wl-z5G" id="4U6-Fd-ViC"/>
                 <outlet property="headImg" destination="Urd-SM-jZI" id="xv1-kl-uA3"/>
-                <outlet property="titleName" destination="vtP-h8-CTA" id="gnK-vY-EiJ"/>
+                <outlet property="titleName" destination="PLN-9b-ZX0" id="3TU-j4-1Jf"/>
             </connections>
-            <point key="canvasLocation" x="55" y="145"/>
+            <point key="canvasLocation" x="55" y="143"/>
         </tableViewCell>
     </objects>
 </document>

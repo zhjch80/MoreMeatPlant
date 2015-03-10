@@ -72,7 +72,7 @@
  * Note about setBlurAlpha: You can't change the alpha if the background doesn't have a color set to it
  */
 - (void) setBlurAlpha:(CGFloat)alphaValue{
-    int numComponents = CGColorGetNumberOfComponents([[self backgroundColor] CGColor]);
+    NSInteger numComponents = CGColorGetNumberOfComponents([[self backgroundColor] CGColor]);
     if (numComponents == 4){
         const CGFloat *components = CGColorGetComponents([[self backgroundColor] CGColor]);
         CGFloat red = components[0];

@@ -50,22 +50,18 @@
     UIButton *button3 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:3];
     
     NSArray * imageName;
-    if (IS_IPHONE_6_SCREEN){
-        imageName = [NSArray arrayWithObjects:@"home_selected_6", @"ranking_unselected_6", @"myChannel_unselected_6", @"setUp_unselected_6", nil];
-    }else if (IS_IPHONE_6p_SCREEN){
-        imageName = [NSArray arrayWithObjects:@"home_selected_6p", @"ranking_unselected6_6p", @"myChannel_unselected_6p", @"setUp_unselected_6p", nil];
-    }else{
-        imageName = [NSArray arrayWithObjects:@"home_selected", @"ranking_unselected", @"myChannel_unselected", @"setUp_unselected", nil];
-    }
+//    if (IS_IPHONE_6_SCREEN){
+//        imageName = [NSArray arrayWithObjects:@"home_selected_6", @"ranking_unselected_6", @"myChannel_unselected_6", @"setUp_unselected_6", nil];
+//    }else if (IS_IPHONE_6p_SCREEN){
+//        imageName = [NSArray arrayWithObjects:@"home_selected_6p", @"ranking_unselected6_6p", @"myChannel_unselected_6p", @"setUp_unselected_6p", nil];
+//    }else{
+        imageName = [NSArray arrayWithObjects:@"img_34", @"img_36", @"imgg_36", @"img_40", nil];
+//    }
 
     [button0 setBackgroundImage:LOADIMAGE([imageName objectAtIndex:0], kImageTypePNG) forState:UIControlStateNormal];
-    button0.backgroundColor = [UIColor redColor];
     [button1 setBackgroundImage:LOADIMAGE([imageName objectAtIndex:1], kImageTypePNG) forState:UIControlStateNormal];
-    button1.backgroundColor = [UIColor orangeColor];
     [button2 setBackgroundImage:LOADIMAGE([imageName objectAtIndex:2], kImageTypePNG)  forState:UIControlStateNormal];
-    button2.backgroundColor = [UIColor yellowColor];
     [button3 setBackgroundImage:LOADIMAGE([imageName objectAtIndex:3], kImageTypePNG) forState:UIControlStateNormal];
-    button3.backgroundColor = [UIColor blueColor];
     
     [((RMCustomTabBarController *)customTabBarCtl) clickButtonWithIndex:0];
     self.cusNav = [[RMCustomNavController alloc] initWithRootViewController:customTabBarCtl];
