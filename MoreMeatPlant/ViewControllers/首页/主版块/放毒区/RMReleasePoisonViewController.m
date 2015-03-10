@@ -17,7 +17,7 @@
 #import "RMPostMessageView.h"
 #import "RMReleasePoisonDetailsViewController.h"
 
-@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate>{
+@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,ReleasePoisonBottomDelegate>{
     
 }
 @property (nonatomic, strong) UITableView * mTableView;
@@ -37,11 +37,17 @@
     
     RMImageView * rmImage = [[RMImageView alloc] init];
     rmImage.frame = CGRectMake(0, 64, kScreenWidth, 45);
-    rmImage.backgroundColor = [UIColor greenColor];
+    rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
     [rmImage addTarget:self WithSelector:@selector(jumpPoisonNearbyMerchant)];
     [self.view addSubview:rmImage];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + rmImage.frame.size.height, kScreenWidth, kScreenHeight - rmImage.frame.size.height - 64 - 40) style:UITableViewStylePlain];
+    RMImageView * popularizeView = [[RMImageView alloc] init];
+    popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + 64, kScreenWidth, 40);
+    popularizeView.image = LOADIMAGE(@"img_03", kImageTypePNG);
+    [popularizeView addTarget:self WithSelector:@selector(jumpPopularize:)];
+    [self.view addSubview:popularizeView];
+    
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + rmImage.frame.size.height + popularizeView.frame.size.height, kScreenWidth, kScreenHeight - rmImage.frame.size.height - popularizeView.frame.size.height - 64 - 40) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.backgroundColor = [UIColor clearColor];
@@ -57,8 +63,9 @@
 
 - (void)loadBottomView {
     RMReleasePoisonBottomView * releasePoisonBottomView = [[RMReleasePoisonBottomView alloc] init];
+    releasePoisonBottomView.delegate = self;
     releasePoisonBottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    releasePoisonBottomView.backgroundColor = [UIColor yellowColor];
+    [releasePoisonBottomView loadReleasePoisonBottom];
     [self.view addSubview:releasePoisonBottomView];
 }
 
@@ -109,6 +116,15 @@
         }
         
         cell.plantTitle.text = @"未读 家有鲜肉 刚入的罗密欧，美不？";
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:@"未读 家有鲜肉 刚入的罗密欧，美不？"];
+        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
+        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
+        cell.plantTitle.attributedText = oneAttributeStr;
+        
+        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
+        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        
         cell.userName.text = @"Lucy 10分钟前";
         cell.likeTitle.text = @"99+";
         cell.chatTitle.text = @"99+";
@@ -125,7 +141,16 @@
             cell.delegate = self;
         }
         
-        cell.plantTitle.text = @"未读 家有鲜肉 刚入的罗密欧，美不？";
+        cell.plantTitle.text = @"已读 家有鲜肉 刚入的罗密欧，美不？";
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:@"已读 家有鲜肉 刚入的罗密欧，美不？"];
+        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.59 green:0.59 blue:0.59 alpha:1] range:NSMakeRange(0, 2)];
+        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
+        cell.plantTitle.attributedText = oneAttributeStr;
+        
+        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
+        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        
         cell.userName.text = @"Lucy 10分钟前";
         cell.likeTitle.text = @"99+";
         cell.chatTitle.text = @"99+";
@@ -143,6 +168,15 @@
         }
         
         cell.plantTitle.text = @"未读 家有鲜肉 刚入的罗密欧，美不？";
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:@"未读 家有鲜肉 刚入的罗密欧，美不？"];
+        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
+        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
+        cell.plantTitle.attributedText = oneAttributeStr;
+        
+        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
+        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        
         cell.userName.text = @"Lucy 10分钟前";
         cell.likeTitle.text = @"99+";
         cell.chatTitle.text = @"99+";
@@ -205,10 +239,17 @@
     [self.navigationController pushViewController:nearbyMerchantCtl animated:YES];
 }
 
+#pragma mark - 跳转到广告
+
+- (void)jumpPopularize:(RMImageView *)image {
+    NSLog(@"广告位置");
+}
+
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
-            [self.navigationController popViewControllerAnimated:YES];
+            NSLog(@"选取其他类别");
+            
             break;
         }
         case 2:{
@@ -226,6 +267,32 @@
             break;
     }
 }
+
+#pragma mark - 底部栏回调方法
+
+- (void)releasePoisonBottomMethodWithTag:(NSInteger)tag {
+    switch (tag) {
+        case 0:{
+            //返回
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
+        }
+        case 1:{
+            //滚到置顶
+            [mTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:-1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+            break;
+        }
+        case 2:{
+            //多聊
+            
+            break;
+        }
+
+        default:
+            break;
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

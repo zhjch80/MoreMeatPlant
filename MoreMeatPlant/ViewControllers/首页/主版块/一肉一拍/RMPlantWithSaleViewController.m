@@ -17,7 +17,7 @@
 #import "RMPlantWithSaleBottomView.h"
 #import "RMPostMessageView.h"
 
-@interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,PostMessageSelectedPlantDelegate>
+@interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,PostMessageSelectedPlantDelegate,PlantWithSaleBottomDelegate>
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @property (nonatomic, strong) RMPostMessageView *action;
@@ -37,7 +37,7 @@
     
     RMImageView * rmImage = [[RMImageView alloc] init];
     rmImage.frame = CGRectMake(0, 64, kScreenWidth, 45);
-    rmImage.backgroundColor = [UIColor greenColor];
+    rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
     [rmImage addTarget:self WithSelector:@selector(jumpPlantWithSaleNearbyMerchant)];
     [self.view addSubview:rmImage];
     
@@ -58,7 +58,8 @@
 - (void)loadBottomView {
     RMPlantWithSaleBottomView * plantWithSaleBottomView = [[RMPlantWithSaleBottomView alloc] init];
     plantWithSaleBottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    plantWithSaleBottomView.backgroundColor = [UIColor yellowColor];
+    [plantWithSaleBottomView loadPlantWithSaleBottomView];
+    plantWithSaleBottomView.delegate = self;
     [self.view addSubview:plantWithSaleBottomView];
 }
 
@@ -154,7 +155,7 @@
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
-            [self.navigationController popViewControllerAnimated:YES];
+
             break;
         }
         case 2:{
@@ -168,6 +169,31 @@
             break;
         }
             
+        default:
+            break;
+    }
+}
+
+#pragma mark - 底部栏回调方法
+
+- (void)plantWithSaleBottomMethodWithTag:(NSInteger)tag {
+    switch (tag) {
+        case 0:{
+            //返回
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
+        }
+        case 1:{
+            //滚到顶部
+            [mTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:-1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+            break;
+        }
+        case 2:{
+            //多聊
+            
+            break;
+        }
+
         default:
             break;
     }

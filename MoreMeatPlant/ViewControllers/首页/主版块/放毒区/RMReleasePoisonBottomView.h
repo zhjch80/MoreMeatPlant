@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ReleasePoisonBottomDelegate <NSObject>
+
+- (void)releasePoisonBottomMethodWithTag:(NSInteger)tag;
+
+@end
+
 @interface RMReleasePoisonBottomView : UIView
+@property (nonatomic, assign) id<ReleasePoisonBottomDelegate>delegate;
 
 - (void)loadReleasePoisonBottom;
 

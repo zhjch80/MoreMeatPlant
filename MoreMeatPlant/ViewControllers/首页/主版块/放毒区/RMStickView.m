@@ -16,11 +16,18 @@
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     
+    NSString * str = [NSString stringWithFormat:@"  置顶  %@",title];
+    
     UILabel * sTitle = [[UILabel alloc] init];
     sTitle.frame = CGRectMake(0, 0, width, self.frame.size.height-1);
     sTitle.font = [UIFont systemFontOfSize:14.0];
-    sTitle.text = [NSString stringWithFormat:@"  置顶  %@",title];
+    sTitle.text = str;
     [self addSubview:sTitle];
+    
+    NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:str];
+    [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(2, 2)];
+    [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(2, 2)];
+    sTitle.attributedText = oneAttributeStr;
     
     UIView * line = [[UIView alloc] init];
     line.backgroundColor = [UIColor colorWithRed:0.87 green:0.87 blue:0.87 alpha:1];

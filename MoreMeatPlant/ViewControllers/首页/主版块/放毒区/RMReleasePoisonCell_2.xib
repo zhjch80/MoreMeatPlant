@@ -35,15 +35,15 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ej-Z2-e9E" customClass="RMImageView">
                                 <rect key="frame" x="147" y="148" width="20" height="20"/>
-                                <color key="backgroundColor" red="0.61388235830000004" green="1" blue="0.3815315729" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gDg-BJ-fYh" customClass="RMImageView">
                                 <rect key="frame" x="200" y="148" width="20" height="20"/>
-                                <color key="backgroundColor" red="0.61388235830000004" green="1" blue="0.3815315729" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nOz-ok-U4P" customClass="RMImageView">
                                 <rect key="frame" x="254" y="148" width="20" height="20"/>
-                                <color key="backgroundColor" red="0.61388235830000004" green="1" blue="0.3815315729" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRm-nG-bZy">
                                 <rect key="frame" x="168" y="148" width="30" height="21"/>

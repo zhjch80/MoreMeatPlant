@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PlantWithSaleBottomDelegate <NSObject>
+
+- (void)plantWithSaleBottomMethodWithTag:(NSInteger)tag;
+
+@end
+
 @interface RMPlantWithSaleBottomView : UIView
+@property (nonatomic, assign) id<PlantWithSaleBottomDelegate>delegate;
 
 - (void)loadPlantWithSaleBottomView;
 
