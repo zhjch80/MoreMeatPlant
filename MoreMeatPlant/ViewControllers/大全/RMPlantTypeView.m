@@ -26,22 +26,22 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     
     plantTypeSelectedArr = [[NSMutableArray alloc] initWithObjects:
-                            @"img2_01",
-                            @"img2_01",
-                            @"img3_03",
-                            @"img3_05",
-                            @"img3_07",
-                            @"img3_09",
-                            @"img3_09", nil];
+                            @"img_tzed_7",
+                            @"img_tzed_8",
+                            @"img_tzed_9",
+                            @"img_tzed_10",
+                            @"img_tzed_11",
+                            @"img_tzed_12",
+                            @"img_tzed_12", nil];
     
     plantTypeUnselectedArr = [[NSMutableArray alloc] initWithObjects:
-                              @"img2_01_2",
-                              @"img2_01_2",
-                              @"img2_03",
-                              @"img2_05",
-                              @"img2_06",
-                              @"img2_07",
-                              @"img2_08", nil];
+                              @"img_tz_7",
+                              @"img_tz_8",
+                              @"img_tz_9",
+                              @"img_tz_10",
+                              @"img_tz_11",
+                              @"img_tz_12",
+                              @"img_tz_12", nil];
     
     for (NSInteger i=0; i<7; i++) {
         RMImageView * rmImg = [[RMImageView alloc] init];

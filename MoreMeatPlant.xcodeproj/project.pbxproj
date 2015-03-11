@@ -183,6 +183,10 @@
 		51E268661AAF4D8100252DEF /* RMAddressEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268641AAF4D8100252DEF /* RMAddressEditViewController.m */; };
 		51E268671AAF4D8100252DEF /* RMAddressEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E268651AAF4D8100252DEF /* RMAddressEditViewController.xib */; };
 		9538F3CB1AB078BE00608FAD /* RMReleasePoisonDetailsCell_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9538F3CA1AB078BE00608FAD /* RMReleasePoisonDetailsCell_0.xib */; };
+		9538F3CD1AB09AFD00608FAD /* img_pointLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 9538F3CC1AB09AFD00608FAD /* img_pointLine.png */; };
+		9538F3CF1AB09BAA00608FAD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9538F3CE1AB09BAA00608FAD /* QuartzCore.framework */; };
+		9538F3D21AB0A5BF00608FAD /* RMTableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538F3D11AB0A5BF00608FAD /* RMTableHeadView.m */; };
+		9538F3D41AB0A5DF00608FAD /* RMTableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9538F3D31AB0A5DF00608FAD /* RMTableHeadView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -450,6 +454,11 @@
 		51E268641AAF4D8100252DEF /* RMAddressEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAddressEditViewController.m; sourceTree = "<group>"; };
 		51E268651AAF4D8100252DEF /* RMAddressEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMAddressEditViewController.xib; sourceTree = "<group>"; };
 		9538F3CA1AB078BE00608FAD /* RMReleasePoisonDetailsCell_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMReleasePoisonDetailsCell_0.xib; sourceTree = "<group>"; };
+		9538F3CC1AB09AFD00608FAD /* img_pointLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_pointLine.png; sourceTree = "<group>"; };
+		9538F3CE1AB09BAA00608FAD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9538F3D01AB0A5BF00608FAD /* RMTableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMTableHeadView.h; sourceTree = "<group>"; };
+		9538F3D11AB0A5BF00608FAD /* RMTableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMTableHeadView.m; sourceTree = "<group>"; };
+		9538F3D31AB0A5DF00608FAD /* RMTableHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMTableHeadView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -457,6 +466,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9538F3CF1AB09BAA00608FAD /* QuartzCore.framework in Frameworks */,
 				1D93AB551AB008120034574C /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -589,6 +599,9 @@
 				1D4EE43A1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.h */,
 				1D4EE43B1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.m */,
 				1D4EE43C1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.xib */,
+				9538F3D01AB0A5BF00608FAD /* RMTableHeadView.h */,
+				9538F3D11AB0A5BF00608FAD /* RMTableHeadView.m */,
+				9538F3D31AB0A5DF00608FAD /* RMTableHeadView.xib */,
 				1D93AB721AB0291C0034574C /* RMReleasePoisonDetailsCell.h */,
 				1D93AB731AB0291C0034574C /* RMReleasePoisonDetailsCell.m */,
 				9538F3CA1AB078BE00608FAD /* RMReleasePoisonDetailsCell_0.xib */,
@@ -660,6 +673,7 @@
 				1D9CB18B1AAEC49800BD5A7D /* img_tzed_11.png */,
 				1D93AB7D1AB034F20034574C /* img_fdqdetl_zan.png */,
 				1D93AB7F1AB04F3D0034574C /* img_fdqdetl_loc.png */,
+				9538F3CC1AB09AFD00608FAD /* img_pointLine.png */,
 				1D64F4DA1A904E180073EB98 /* Default-568h@2x.png */,
 				1D64F4DB1A904E180073EB98 /* Default@2x.png */,
 				1D64F4DC1A904E180073EB98 /* Default_6.png */,
@@ -831,6 +845,7 @@
 		1D9336E21A8E3DFA00BA4FA7 = {
 			isa = PBXGroup;
 			children = (
+				9538F3CE1AB09BAA00608FAD /* QuartzCore.framework */,
 				1D93AB541AB008120034574C /* libsqlite3.dylib */,
 				1D9336ED1A8E3DFA00BA4FA7 /* MoreMeatPlant */,
 				1D93370A1A8E3DFA00BA4FA7 /* MoreMeatPlantTests */,
@@ -1222,7 +1237,9 @@
 				51E268571AAF413300252DEF /* RMPayTypeTableViewCell.xib in Resources */,
 				1DD854871A9454E9003B12A5 /* RMReleasePoisonCell_2.xib in Resources */,
 				51E2684A1AAF35FE00252DEF /* 方正正黑简体.TTF in Resources */,
+				9538F3CD1AB09AFD00608FAD /* img_pointLine.png in Resources */,
 				1D4DA33A1A9217D4006A9EBA /* RMUpgradeSuggestViewController.xib in Resources */,
+				9538F3D41AB0A5DF00608FAD /* RMTableHeadView.xib in Resources */,
 				1D9CB1331AAE85F800BD5A7D /* img_10.png in Resources */,
 				1D9CB1361AAE85F800BD5A7D /* img_26.png in Resources */,
 				51E2684D1AAF35FE00252DEF /* 方正正准黑简体.TTF in Resources */,
@@ -1372,6 +1389,7 @@
 				1D64F4FE1A904E180073EB98 /* RMHomeViewController.m in Sources */,
 				51E268661AAF4D8100252DEF /* RMAddressEditViewController.m in Sources */,
 				51E2681F1AADE92300252DEF /* RMShopLeaveMsTableViewCell.m in Sources */,
+				9538F3D21AB0A5BF00608FAD /* RMTableHeadView.m in Sources */,
 				1D9336F11A8E3DFA00BA4FA7 /* main.m in Sources */,
 				1DD8548B1A94591D003B12A5 /* RMReleasePoisonBottomView.m in Sources */,
 				51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */,

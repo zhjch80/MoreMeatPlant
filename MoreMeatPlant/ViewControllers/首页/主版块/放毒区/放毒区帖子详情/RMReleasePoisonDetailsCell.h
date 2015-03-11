@@ -13,6 +13,8 @@
 
 @optional
 
+- (void)reportMethod:(UIButton *)button;
+
 - (void)jumpPromoteMethod:(RMImageView *)image;
 
 - (void)addPraiseMethod:(RMImageView *)image;
@@ -25,8 +27,14 @@
 @property (nonatomic, assign) id <ReleasePoisonDetailsDelegate>delegate;
 
 //情况零
+@property (strong, nonatomic) IBOutlet UILabel *detailsTitle;
+@property (strong, nonatomic) IBOutlet UILabel *detailsTime;
+@property (strong, nonatomic) IBOutlet UIImageView *detailsUserHead;
+@property (strong, nonatomic) IBOutlet UILabel *detailsUserNameTime;
+@property (strong, nonatomic) IBOutlet UILabel *detailsLocation;
 @property (weak, nonatomic) IBOutlet UIWebView *mWebView;
-@property (weak, nonatomic) IBOutlet UILabel *ReportImg;
+@property (weak, nonatomic) IBOutlet UIButton *reportBtn;
+
 
 //情况一
 @property (weak, nonatomic) IBOutlet UILabel *praiseCount;

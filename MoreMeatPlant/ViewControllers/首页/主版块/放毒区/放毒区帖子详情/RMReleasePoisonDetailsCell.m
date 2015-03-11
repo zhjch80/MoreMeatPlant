@@ -17,15 +17,22 @@
     [self.addPraiseImg addTarget:self WithSelector:@selector(addPraiseClick:)];
     [self.userHead addTarget:self WithSelector:@selector(userHeadClick:)];
     
-    [self.ReportImg.layer setCornerRadius:8.0];
+    [self.detailsUserHead.layer setCornerRadius:20.0f];
+    [self.reportBtn.layer setCornerRadius:8.0];
     [self.userHead.layer setCornerRadius:20.0];
     
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
+}
+
+- (IBAction)reportClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(reportMethod:)]){
+        [self.delegate reportMethod:sender];
+    }
 }
 
 - (void)jumpPromoteClick:(RMImageView *)image {

@@ -136,7 +136,8 @@
         [cell.mWebView loadHTMLString:html baseURL:baseURL];
  
 #else
-        
+//        NSURL *url = [NSURL URLWithString:@"http://www.baidu.com"];
+//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
         [cell.mWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://news.baidu.com"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
     
 #endif
@@ -203,6 +204,12 @@
 
 - (void)userHeadMethod:(RMImageView *)image {
     NSLog(@"点击头像事件");
+}
+
+#pragma mark - 举报此帖
+
+- (void)reportMethod:(UIButton *)button {
+    NSLog(@"举报此帖");
 }
 
 - (void)didReceiveMemoryWarning {
