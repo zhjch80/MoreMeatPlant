@@ -17,6 +17,8 @@
 
 - (void)addPraiseMethod:(RMImageView *)image;
 
+- (void)userHeadMethod:(RMImageView *)image;
+
 @end
 
 @interface RMReleasePoisonDetailsCell : UITableViewCell
@@ -32,6 +34,10 @@
 //情况三
 @property (nonatomic, assign) CGRect cellFrame;
 
-@property (weak, nonatomic) IBOutlet UIImageView *userHead;
+@property (weak, nonatomic) IBOutlet RMImageView *userHead;
+@property (strong, nonatomic) IBOutlet UILabel *userName;
+@property (strong, nonatomic) IBOutlet UILabel *userLocatiom;
+@property (strong, nonatomic) IBOutlet UILabel *userPostTime;
+@property (strong, nonatomic) IBOutlet UILabel *userPostName;
 
 @end

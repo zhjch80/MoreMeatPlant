@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="方正正纤黑简体.TTF">
+            <string>FZZXHJW--GB1-0</string>
             <string>FZZXHJW--GB1-0</string>
             <string>FZZXHJW--GB1-0</string>
             <string>FZZXHJW--GB1-0</string>
@@ -21,7 +22,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ffe-EN-6kR">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ffe-EN-6kR" customClass="RMImageView">
                         <rect key="frame" x="8" y="8" width="40" height="40"/>
                         <color key="backgroundColor" red="0.40012649022426311" green="0.48121789150688937" blue="0.83137254901960789" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
@@ -46,10 +47,20 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="柳岩有时间多培养一下，今天又过去了！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXl-e5-Ico">
+                        <rect key="frame" x="56" y="51" width="256" height="29"/>
+                        <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="11"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="userHead" destination="ffe-EN-6kR" id="Bxn-mL-CqX"/>
+                <outlet property="userLocatiom" destination="3HU-zO-ufo" id="3ql-Ub-vgl"/>
+                <outlet property="userName" destination="QJF-t4-BUd" id="7po-ix-A0h"/>
+                <outlet property="userPostName" destination="sXl-e5-Ico" id="es0-Ls-kCH"/>
+                <outlet property="userPostTime" destination="TCX-t3-23b" id="CvP-5Y-UK0"/>
             </connections>
             <point key="canvasLocation" x="271" y="223"/>
         </tableViewCell>

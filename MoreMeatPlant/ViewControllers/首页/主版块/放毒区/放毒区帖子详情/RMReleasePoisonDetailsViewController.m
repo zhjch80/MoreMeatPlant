@@ -109,6 +109,7 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"------Fail-----");
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -154,6 +155,7 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_3" owner:self options:nil] lastObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
+            cell.delegate = self;
         }
 //        [cell setFrame:cell.cellFrame];
         return cell;
@@ -179,6 +181,12 @@
 
 - (void)addPraiseMethod:(RMImageView *)image {
     NSLog(@"点赞👍");
+}
+
+#pragma mark - 点击评论人的头像
+
+- (void)userHeadMethod:(RMImageView *)image {
+    NSLog(@"点击头像事件");
 }
 
 - (void)didReceiveMemoryWarning {

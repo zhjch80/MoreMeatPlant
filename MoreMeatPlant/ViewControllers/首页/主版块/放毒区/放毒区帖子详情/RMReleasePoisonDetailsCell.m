@@ -15,6 +15,7 @@
     // Initialization code
     [self.toPromoteImg addTarget:self WithSelector:@selector(jumpPromoteClick:)];
     [self.addPraiseImg addTarget:self WithSelector:@selector(addPraiseClick:)];
+    [self.userHead addTarget:self WithSelector:@selector(userHeadClick:)];
     
     [self.userHead.layer setCornerRadius:20.0];
 }
@@ -34,6 +35,12 @@
 - (void)addPraiseClick:(RMImageView *)image {
     if ([self.delegate respondsToSelector:@selector(addPraiseMethod:)]){
         [self.delegate addPraiseMethod:image];
+    }
+}
+
+- (void)userHeadClick:(RMImageView *)image {
+    if ([self.delegate respondsToSelector:@selector(userHeadMethod:)]){
+        [self.delegate userHeadMethod:image];
     }
 }
 
