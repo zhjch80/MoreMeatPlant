@@ -22,6 +22,15 @@
 	<string>1.0.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>方正正粗黑简体.TTF</string>
+		<string>方正正大黑简体.TTF</string>
+		<string>方正正黑简体.TTF</string>
+		<string>方正正纤黑简体.TTF</string>
+		<string>方正正中黑简体.TTF</string>
+		<string>方正正准黑简体.TTF</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string></string>
 	<key>UIMainStoryboardFile</key>

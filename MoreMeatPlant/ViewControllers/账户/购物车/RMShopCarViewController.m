@@ -10,6 +10,8 @@
 #import "RMShopCarGoodsTableViewCell.h"
 #import "RMSopCarHeadTableViewCell.h"
 #import "RMShopLeaveMsTableViewCell.h"
+
+#import "RMSettlementViewController.h"
 @interface RMShopCarViewController ()
 
 @end
@@ -19,6 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self initPlat];
+}
+
+- (void)initPlat{
+    [_settleBtn addTarget:self action:@selector(settlementAction:) forControlEvents:UIControlEventTouchDown];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,6 +71,11 @@
     }else{
         return 77;
     }
+}
+
+- (void)settlementAction:(UIButton *)sender{
+    RMSettlementViewController * settle = [[RMSettlementViewController alloc]initWithNibName:@"RMSettlementViewController" bundle:nil];
+    [self.navigationController pushViewController:settle animated:YES];
 }
 
 /*

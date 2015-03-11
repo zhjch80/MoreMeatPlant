@@ -89,7 +89,7 @@
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
                         message.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-49);
-                        [self presentPopUpViewController:message];
+                        [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
                     }
                         break;
                     case 7:{

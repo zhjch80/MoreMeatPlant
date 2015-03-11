@@ -17,6 +17,12 @@
 #define IS_IPHONE_6p_SCREEN ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO) //1242, 2208   1080, 1920
 
 #define FONT(_size) [UIFont fontWithName:@"Heiti TC" size:(_size)]  //HelveticaNeue-CondensedBlack
+//FZZZHUNHJW--GB1-0 方正正准黑简体 2
+//FZZDHJW--GB1-0    方正正大黑简体 5
+//FZZXHJW--GB1-0    方正正纤黑简体 0
+//FZZCHJW--GB1-0    方正正粗黑简体 4
+//FZZZHONGJW--GB1-0 方正正中黑简体 3
+//FZZHJW--GB1-0     方正正黑简体   1   0-5  表示越来越粗
 
 #define kImageTypePNG @"png"
 //#define LOADIMAGE(file)   [UIImage imageNamed:[NSString stringWithFormat:@"%@",file]]

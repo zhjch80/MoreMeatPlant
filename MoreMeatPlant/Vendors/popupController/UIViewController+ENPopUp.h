@@ -11,8 +11,8 @@
 @interface UIViewController (ENPopUp)
 
 @property (nonatomic, retain) UIViewController *en_popupViewController;
-- (void)presentPopUpViewController:(UIViewController *)popupViewController;
-- (void)presentPopUpViewController:(UIViewController *)popupViewController completion:(void (^)(void))completionBlock;
+- (void)presentPopUpViewController:(UIViewController *)popupViewController overlaybounds:(CGRect)bounds;
+- (void)presentPopUpViewController:(UIViewController *)popupViewController overlaybounds:(CGRect)bounds completion:(void (^)(void))completionBlock;
 - (void)dismissPopUpViewController;
 - (void)dismissPopUpViewControllerWithcompletion:(void (^)(void))completionBlock;
 

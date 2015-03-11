@@ -1,5 +1,5 @@
 //
-//  UIViewController+Common.h
+//  RMSettlementTableViewCell.h
 //  MoreMeatPlant
 //
 //  Created by 马东凯 on 15/3/10.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController (Common)
-- (void)popupDismiss;
+@interface RMSettlementTableViewCell : UITableViewCell
+
 @end

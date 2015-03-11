@@ -22,15 +22,15 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 @implementation UIViewController (ENPopUp)
 
 #pragma mark - Public Methods
-- (void)presentPopUpViewController:(UIViewController *)popupViewController
+- (void)presentPopUpViewController:(UIViewController *)popupViewController overlaybounds:(CGRect)bounds
 {
-	[self presentPopUpViewController:popupViewController completion:nil];
+	[self presentPopUpViewController:popupViewController overlaybounds:bounds completion:nil];
 }
 
-- (void)presentPopUpViewController:(UIViewController *)popupViewController completion:(void (^)(void))completionBlock
+- (void)presentPopUpViewController:(UIViewController *)popupViewController overlaybounds:(CGRect)bounds completion:(void (^)(void))completionBlock
 {
     self.en_popupViewController = popupViewController;
-    [self presentPopUpView:popupViewController.view completion:completionBlock];
+    [self presentPopUpView:popupViewController.view overlaybounds:bounds completion:completionBlock];
 }
 
 - (void)dismissPopUpViewController
@@ -60,14 +60,14 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 }
 
 #pragma mark - View Handling
-- (void)presentPopUpView:(UIView *)popUpView completion:(void (^)(void))completionBlock
+- (void)presentPopUpView:(UIView *)popUpView overlaybounds:(CGRect)bounds completion:(void (^)(void))completionBlock
 {
     UIView *sourceView = [self topView];
     // Check if source view controller is not in destination
     if ([sourceView.subviews containsObject:popUpView]) return;
     
     // Add overlay
-    UIView *overlayView = [[UIView alloc] initWithFrame:sourceView.bounds];
+    UIView *overlayView = [[UIView alloc] initWithFrame:bounds];
     overlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     overlayView.tag = kENPopUpOverlayViewTag;
     overlayView.backgroundColor = [UIColor clearColor];
@@ -177,9 +177,9 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 
 - (UIView*)topView {
     UIViewController *recentView = self;
-    while (recentView.parentViewController != nil) {
-        recentView = recentView.parentViewController;
-    }
+//    while (recentView.parentViewController != nil) {
+//        recentView = recentView.parentViewController;
+//    }
     return recentView.view;
 }
 

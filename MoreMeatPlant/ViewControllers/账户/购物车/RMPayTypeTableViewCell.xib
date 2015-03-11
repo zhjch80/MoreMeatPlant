@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RMPayTypeTableViewCell" id="KGk-i7-Jjw" customClass="RMPayTypeTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFj-lU-OJh">
+                        <rect key="frame" x="8" y="14" width="15" height="15"/>
+                        <color key="backgroundColor" red="0.87843137250000003" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="3Ek-tG-4fD"/>
+                            <constraint firstAttribute="width" constant="15" id="YKa-XR-2gg"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="15" id="aBg-mh-n1g"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="pVw-1A-ceQ"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="aBg-mh-n1g"/>
+                                <exclude reference="pVw-1A-ceQ"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="余额：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chf-ct-Twa">
+                        <rect key="frame" x="28" y="13" width="42" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1200" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzv-SB-2Cn">
+                        <rect key="frame" x="71" y="13" width="32" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付宝支付" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Et3-ul-dJg">
+                        <rect key="frame" x="153" y="13" width="70" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57w-P9-h0w">
+                        <rect key="frame" x="133" y="14" width="15" height="15"/>
+                        <color key="backgroundColor" red="0.87843137250000003" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="llc-n9-4vw"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="15" id="lqb-aU-Lu5"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="pQq-xW-PPw"/>
+                            <constraint firstAttribute="width" constant="15" id="rev-zS-E7e"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="lqb-aU-Lu5"/>
+                                <exclude reference="pQq-xW-PPw"/>
+                            </mask>
+                        </variation>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="sFj-lU-OJh" firstAttribute="centerY" secondItem="Chf-ct-Twa" secondAttribute="centerY" id="AdT-Gg-HW6"/>
+                    <constraint firstItem="rzv-SB-2Cn" firstAttribute="leading" secondItem="Chf-ct-Twa" secondAttribute="trailing" constant="1" id="Fse-hX-hjA"/>
+                    <constraint firstItem="57w-P9-h0w" firstAttribute="centerY" secondItem="Et3-ul-dJg" secondAttribute="centerY" id="HNt-cg-TZB"/>
+                    <constraint firstItem="57w-P9-h0w" firstAttribute="leading" secondItem="rzv-SB-2Cn" secondAttribute="trailing" constant="30" id="LLI-SV-vQi"/>
+                    <constraint firstItem="57w-P9-h0w" firstAttribute="baseline" secondItem="sFj-lU-OJh" secondAttribute="baseline" id="REb-HJ-iBK"/>
+                    <constraint firstItem="Et3-ul-dJg" firstAttribute="leading" secondItem="57w-P9-h0w" secondAttribute="trailing" constant="5" id="RJB-Oo-hhO"/>
+                    <constraint firstItem="sFj-lU-OJh" firstAttribute="centerY" secondItem="57w-P9-h0w" secondAttribute="centerY" id="UbN-lh-6X0"/>
+                    <constraint firstAttribute="centerY" secondItem="sFj-lU-OJh" secondAttribute="centerY" id="cke-d2-eKj"/>
+                    <constraint firstItem="sFj-lU-OJh" firstAttribute="centerY" secondItem="rzv-SB-2Cn" secondAttribute="centerY" id="e8D-vh-Z6h"/>
+                    <constraint firstItem="Et3-ul-dJg" firstAttribute="centerY" secondItem="57w-P9-h0w" secondAttribute="centerY" id="ed5-5U-0HM"/>
+                    <constraint firstItem="sFj-lU-OJh" firstAttribute="centerY" secondItem="Et3-ul-dJg" secondAttribute="centerY" id="gXx-tv-ToU"/>
+                    <constraint firstItem="sFj-lU-OJh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="nzp-lD-c5Q"/>
+                    <constraint firstItem="Chf-ct-Twa" firstAttribute="leading" secondItem="sFj-lU-OJh" secondAttribute="trailing" constant="5" id="oAj-HZ-wCq"/>
+                    <constraint firstItem="Chf-ct-Twa" firstAttribute="centerY" secondItem="sFj-lU-OJh" secondAttribute="centerY" id="vTc-rO-4EU"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="HNt-cg-TZB"/>
+                        <exclude reference="ed5-5U-0HM"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="253" y="190"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -24,10 +24,10 @@
 }
 
 - (void)initPlat{
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = [UIColor clearColor];
     messageArray = [[NSMutableArray alloc]init];
     _mainTableView.opaque = NO;
-    _mainTableView.backgroundColor = [_mainTableView.backgroundColor colorWithAlphaComponent:0.6];
+    _mainTableView.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - UITableViewDelegate

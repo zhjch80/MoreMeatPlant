@@ -11,7 +11,6 @@
 #import "UIButton+EnlargeEdge.h"
 
 #import "UIViewController+ENPopUp.h"
-#import "UIViewController+Common.h"
 @interface RMBaseViewController : UIViewController{
     UIButton *leftBarButton;
     UIButton *rightBarButton;

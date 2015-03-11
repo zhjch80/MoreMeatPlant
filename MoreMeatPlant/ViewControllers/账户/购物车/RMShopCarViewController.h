@@ -9,5 +9,7 @@
 #import "RMBaseViewController.h"
 
 @interface RMShopCarViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *all_total_moneyL;
+@property (weak, nonatomic) IBOutlet UIButton *settleBtn;
 
 @end
