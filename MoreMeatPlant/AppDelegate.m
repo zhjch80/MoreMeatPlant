@@ -29,21 +29,21 @@
 
     [self loadMainViewControllers];
     
-    NSArray *familyNames = [UIFont familyNames];
-    
-    for( NSString *familyName in familyNames ){
-        
-        printf( "Family: %s \n", [familyName UTF8String] );
-        
-        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];
-        
-        for( NSString *fontName in fontNames ){
-            
-            printf( "\tFont: %s \n", [fontName UTF8String] );
-            
-        }
-        
-    }
+//    NSArray *familyNames = [UIFont familyNames];
+//    
+//    for( NSString *familyName in familyNames ){
+//        
+//        printf( "Family: %s \n", [familyName UTF8String] );
+//        
+//        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];
+//        
+//        for( NSString *fontName in fontNames ){
+//            
+//            printf( "\tFont: %s \n", [fontName UTF8String] );
+//            
+//        }
+//        
+//    }
     
     return YES;
 }

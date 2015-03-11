@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CONST.h"
 #import "UIButton+EnlargeEdge.h"
-
+#import <QuartzCore/QuartzCore.h>
 #import "UIViewController+ENPopUp.h"
+
 @interface RMBaseViewController : UIViewController{
     UIButton *leftBarButton;
     UIButton *rightBarButton;

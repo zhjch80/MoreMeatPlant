@@ -10,13 +10,30 @@
 
 @protocol ReleasePoisonBottomDelegate <NSObject>
 
+@optional
+/**
+ *  @method 放毒区首页底部栏回调方法
+ */
 - (void)releasePoisonBottomMethodWithTag:(NSInteger)tag;
+
+/**
+ *  @method 放毒区详情底部栏回调方法
+ */
+- (void)releasePoisonDetailsBottomMethodWithTag:(NSInteger)tag;
 
 @end
 
 @interface RMReleasePoisonBottomView : UIView
 @property (nonatomic, assign) id<ReleasePoisonBottomDelegate>delegate;
 
+/**
+ *  @name 放毒区首页底部栏
+ */
 - (void)loadReleasePoisonBottom;
+
+/**
+ *  @name 放毒区详情底部栏
+ */
+- (void)loadReleasePoisonDetailsBottom;
 
 @end
