@@ -16,11 +16,12 @@
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @property (nonatomic, strong) UIWebView * mWebView;
+@property (nonatomic, strong) UIView * tableHeadView;
 
 @end
 
 @implementation RMReleasePoisonDetailsViewController
-@synthesize mTableView, dataArr, mWebView;
+@synthesize mTableView, dataArr, mWebView, tableHeadView;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -48,8 +49,6 @@
     [self.view addSubview:mTableView];
     
     [self loadBottomView];
-    
-    [self loadTableHeadView];
 }
 
 #pragma mark - 加载底部View
@@ -86,26 +85,16 @@
     }
 }
 
-#pragma mark - tableView headView
-
-- (void)loadTableHeadView {
-    mWebView = [[UIWebView alloc] init];
-    mWebView.frame = CGRectMake(0, 0, kScreenWidth, 80);
-    mWebView.userInteractionEnabled = YES;
-    mWebView.scrollView.bounces = YES;
-    mWebView.delegate = self;
-    [mWebView setBackgroundColor:[UIColor clearColor]];
-    [mWebView setOpaque:NO];
-    [mWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
-}
-
 - (void)webViewDidStartLoad:(UIWebView *)webView{
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
-    mWebView.frame = CGRectMake(0, 0, kScreenWidth, height);
-    mTableView.tableHeaderView = mWebView;
+    mWebView.frame = CGRectMake(0, 80, kScreenWidth, height);
+    NSIndexPath * indexPath = [NSIndexPath indexPathWithIndex:0];
+    UITableViewCell *cell = [self tableView:mTableView cellForRowAtIndexPath:indexPath];
+    [cell setFrame:CGRectMake(0, 80, kScreenWidth, height + 80)];\
+    [mTableView reloadData];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -128,6 +117,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0){
+        static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_0";
+        RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+        if (!cell){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_0" owner:self options:nil] lastObject];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
+        }
+        return cell;
+    }else if (indexPath.row == 1){
         static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_1";
         RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         if (!cell){
@@ -136,8 +134,7 @@
             cell.delegate = self;
         }
         return cell;
-
-    }else if (indexPath.row == 1){
+    }else if (indexPath.row == 2){
         static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_2";
         RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         if (!cell){
@@ -147,7 +144,6 @@
             cell.delegate = self;
         }
         return cell;
-
     }else {
         static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_3";
         RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
@@ -163,7 +159,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0 | indexPath.row == 1){
+    if (indexPath.row == 0){
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.frame.size.height;
+    }else if (indexPath.row == 1 | indexPath.row == 2){
         return 50.0;
     }else{
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];

@@ -182,6 +182,7 @@
 		51E268611AAF448E00252DEF /* RMSettlementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E2685F1AAF448E00252DEF /* RMSettlementTableViewCell.xib */; };
 		51E268661AAF4D8100252DEF /* RMAddressEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268641AAF4D8100252DEF /* RMAddressEditViewController.m */; };
 		51E268671AAF4D8100252DEF /* RMAddressEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E268651AAF4D8100252DEF /* RMAddressEditViewController.xib */; };
+		9538F3CB1AB078BE00608FAD /* RMReleasePoisonDetailsCell_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9538F3CA1AB078BE00608FAD /* RMReleasePoisonDetailsCell_0.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -448,6 +449,7 @@
 		51E268631AAF4D8100252DEF /* RMAddressEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAddressEditViewController.h; sourceTree = "<group>"; };
 		51E268641AAF4D8100252DEF /* RMAddressEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAddressEditViewController.m; sourceTree = "<group>"; };
 		51E268651AAF4D8100252DEF /* RMAddressEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMAddressEditViewController.xib; sourceTree = "<group>"; };
+		9538F3CA1AB078BE00608FAD /* RMReleasePoisonDetailsCell_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMReleasePoisonDetailsCell_0.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -589,6 +591,7 @@
 				1D4EE43C1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.xib */,
 				1D93AB721AB0291C0034574C /* RMReleasePoisonDetailsCell.h */,
 				1D93AB731AB0291C0034574C /* RMReleasePoisonDetailsCell.m */,
+				9538F3CA1AB078BE00608FAD /* RMReleasePoisonDetailsCell_0.xib */,
 				1D93AB771AB029ED0034574C /* RMReleasePoisonDetailsCell_1.xib */,
 				1D93AB781AB029ED0034574C /* RMReleasePoisonDetailsCell_2.xib */,
 				1D93AB791AB029ED0034574C /* RMReleasePoisonDetailsCell_3.xib */,
@@ -1244,6 +1247,7 @@
 				1D9CB19B1AAED5FC00BD5A7D /* img_chat.png in Resources */,
 				1D64F5071A904E290073EB98 /* RMBaseViewController.xib in Resources */,
 				1D64F4F91A904E180073EB98 /* RMTalkMoreViewController.xib in Resources */,
+				9538F3CB1AB078BE00608FAD /* RMReleasePoisonDetailsCell_0.xib in Resources */,
 				1D4DA3151A920F93006A9EBA /* RMHomeCell_sub.xib in Resources */,
 				1D93AB661AB01E9C0034574C /* img_tz_1.png in Resources */,
 				1D64F5271A91B72C0073EB98 /* RMNearbyMerchantViewController.xib in Resources */,
@@ -1435,7 +1439,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shali wang (ZW24N86QLV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shali wang (ZW24N86QLV)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1455,6 +1460,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "0548a8f8-688e-4efa-8d59-b8736d2b7081";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1476,7 +1482,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shali wang (ZW24N86QLV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shali wang (ZW24N86QLV)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1489,6 +1496,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "0548a8f8-688e-4efa-8d59-b8736d2b7081";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1499,12 +1507,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shali wang (ZW24N86QLV)";
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "90507bcb-5a14-4d40-af2b-e65f391edf3e";
+				PROVISIONING_PROFILE = "0548a8f8-688e-4efa-8d59-b8736d2b7081";
 			};
 			name = Debug;
 		};
@@ -1513,12 +1521,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shali wang (ZW24N86QLV)";
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "90507bcb-5a14-4d40-af2b-e65f391edf3e";
+				PROVISIONING_PROFILE = "0548a8f8-688e-4efa-8d59-b8736d2b7081";
 			};
 			name = Release;
 		};
