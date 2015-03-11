@@ -1168,6 +1168,7 @@
 					};
 					1D9337061A8E3DFA00BA4FA7 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = WWD46XW8M3;
 						TestTargetID = 1D9336EA1A8E3DFA00BA4FA7;
 					};
 				};
@@ -1439,8 +1440,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: shali wang (ZW24N86QLV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shali wang (ZW24N86QLV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 东凯 马 (QASNBP4646)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 东凯 马 (QASNBP4646)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1460,7 +1461,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "0548a8f8-688e-4efa-8d59-b8736d2b7081";
+				PROVISIONING_PROFILE = "8b2b6a3c-8936-4634-b482-c13613c7d50f";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1482,8 +1483,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: shali wang (ZW24N86QLV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shali wang (ZW24N86QLV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 东凯 马 (QASNBP4646)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 东凯 马 (QASNBP4646)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1496,7 +1497,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "0548a8f8-688e-4efa-8d59-b8736d2b7081";
+				PROVISIONING_PROFILE = "8b2b6a3c-8936-4634-b482-c13613c7d50f";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1507,12 +1508,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: shali wang (ZW24N86QLV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0548a8f8-688e-4efa-8d59-b8736d2b7081";
+				PROVISIONING_PROFILE = "8b2b6a3c-8936-4634-b482-c13613c7d50f";
 			};
 			name = Debug;
 		};
@@ -1521,12 +1522,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: shali wang (ZW24N86QLV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0548a8f8-688e-4efa-8d59-b8736d2b7081";
+				PROVISIONING_PROFILE = "8b2b6a3c-8936-4634-b482-c13613c7d50f";
 			};
 			name = Release;
 		};
@@ -1534,6 +1535,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1545,6 +1548,7 @@
 				INFOPLIST_FILE = MoreMeatPlantTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoreMeatPlant.app/MoreMeatPlant";
 			};
 			name = Debug;
@@ -1553,6 +1557,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1560,6 +1566,7 @@
 				INFOPLIST_FILE = MoreMeatPlantTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoreMeatPlant.app/MoreMeatPlant";
 			};
 			name = Release;

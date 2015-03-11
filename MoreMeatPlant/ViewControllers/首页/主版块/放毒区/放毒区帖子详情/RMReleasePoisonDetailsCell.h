@@ -24,6 +24,10 @@
 @interface RMReleasePoisonDetailsCell : UITableViewCell
 @property (nonatomic, assign) id <ReleasePoisonDetailsDelegate>delegate;
 
+//情况零
+@property (weak, nonatomic) IBOutlet UIWebView *mWebView;
+@property (weak, nonatomic) IBOutlet UILabel *ReportImg;
+
 //情况一
 @property (weak, nonatomic) IBOutlet UILabel *praiseCount;
 @property (weak, nonatomic) IBOutlet RMImageView *addPraiseImg;

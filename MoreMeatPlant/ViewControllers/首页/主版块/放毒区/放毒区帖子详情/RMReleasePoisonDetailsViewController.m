@@ -15,13 +15,12 @@
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
-@property (nonatomic, strong) UIWebView * mWebView;
 @property (nonatomic, strong) UIView * tableHeadView;
 
 @end
 
 @implementation RMReleasePoisonDetailsViewController
-@synthesize mTableView, dataArr, mWebView, tableHeadView;
+@synthesize mTableView, dataArr, tableHeadView;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -41,6 +40,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self hideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
     
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 40) style:UITableViewStylePlain];
@@ -86,14 +86,15 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
+    NSLog(@"-----start----");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
-    mWebView.frame = CGRectMake(0, 80, kScreenWidth, height);
+    webView.frame = CGRectMake(0, 80, kScreenWidth, height);
     NSIndexPath * indexPath = [NSIndexPath indexPathWithIndex:0];
     UITableViewCell *cell = [self tableView:mTableView cellForRowAtIndexPath:indexPath];
-    [cell setFrame:CGRectMake(0, 80, kScreenWidth, height + 80)];\
+    [cell setFrame:CGRectMake(0, 80, kScreenWidth, height + 80)];
     [mTableView reloadData];
 }
 
@@ -105,7 +106,7 @@
     if (!isCanLoadWeb){
         isCanLoadWeb = !isCanLoadWeb;
         return isCanLoadWeb;
-    }else
+    }
     return NO;
 }
 
@@ -124,6 +125,22 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
         }
+        cell.frame = CGRectMake(0, 0, kScreenWidth, 300);
+        cell.mWebView.backgroundColor = [UIColor blackColor];
+        cell.mWebView.frame = CGRectMake(0, 100, 320, 100);
+        
+#if 0
+        NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
+        NSString *html = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+        [cell.mWebView loadHTMLString:html baseURL:baseURL];
+ 
+#else
+        
+        [cell.mWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://news.baidu.com"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
+    
+#endif
+        
         return cell;
     }else if (indexPath.row == 1){
         static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_1";
