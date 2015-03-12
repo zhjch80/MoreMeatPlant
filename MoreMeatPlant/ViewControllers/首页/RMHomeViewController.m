@@ -10,6 +10,7 @@
 #import "RMImageView.h"
 #import "RMNearbyMerchantViewController.h"
 #import "RMHomeCell.h"
+#import "RMBaseWebViewController.h"
 
 //主版块
 #import "RMReleasePoisonViewController.h"
@@ -85,7 +86,7 @@ typedef enum{
     [popularizeView addTarget:self WithSelector:@selector(jumpPopularize:)];
     [self.view addSubview:popularizeView];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, rmImage.frame.size.height + popularizeView.frame.size.height + 20, kScreenWidth, kScreenHeight - rmImage.frame.size.height - popularizeView.frame.size.height - 49 - 20) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, rmImage.frame.size.height + popularizeView.frame.size.height + 20, kScreenWidth, kScreenHeight - rmImage.frame.size.height - popularizeView.frame.size.height - 44 - 20) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -189,7 +190,9 @@ typedef enum{
 #pragma mark - 跳转广告位置
 
 - (void)jumpPopularize:(RMImageView *)image {
-    NSLog(@"广告位");
+    RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
+    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
+    [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

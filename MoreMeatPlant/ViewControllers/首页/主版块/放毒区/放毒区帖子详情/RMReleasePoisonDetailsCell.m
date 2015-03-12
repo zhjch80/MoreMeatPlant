@@ -15,24 +15,20 @@
     // Initialization code
     [self.toPromoteImg addTarget:self WithSelector:@selector(jumpPromoteClick:)];
     [self.addPraiseImg addTarget:self WithSelector:@selector(addPraiseClick:)];
-    [self.userHead addTarget:self WithSelector:@selector(userHeadClick:)];
     
-    [self.detailsUserHead.layer setCornerRadius:20.0f];
-    [self.reportBtn.layer setCornerRadius:8.0];
-    [self.userHead.layer setCornerRadius:20.0];
+    [self.userHead_1 addTarget:self WithSelector:@selector(userHeadClick:)];
+    [self.userHead_1.layer setCornerRadius:20.0];
     
+    [self.userHead_2 addTarget:self WithSelector:@selector(userHeadClick:)];
+    [self.userHead_2.layer setCornerRadius:20.0];
+    
+    [self.comments_2_1_bgView.layer setCornerRadius:6.0f];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
     // Configure the view for the selected state
-}
-
-- (IBAction)reportClick:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(reportMethod:)]){
-        [self.delegate reportMethod:sender];
-    }
 }
 
 - (void)jumpPromoteClick:(RMImageView *)image {
@@ -50,6 +46,12 @@
 - (void)userHeadClick:(RMImageView *)image {
     if ([self.delegate respondsToSelector:@selector(userHeadMethod:)]){
         [self.delegate userHeadMethod:image];
+    }
+}
+
+- (IBAction)replyClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(replyMethod:)]){
+        [self.delegate replyMethod:sender];
     }
 }
 

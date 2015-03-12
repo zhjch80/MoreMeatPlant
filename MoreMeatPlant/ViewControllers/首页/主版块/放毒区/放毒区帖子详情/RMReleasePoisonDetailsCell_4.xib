@@ -13,13 +13,14 @@
             <string>FZZXHJW--GB1-0</string>
             <string>FZZXHJW--GB1-0</string>
             <string>FZZXHJW--GB1-0</string>
+            <string>FZZXHJW--GB1-0</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="RMReleasePoisonDetailsCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -29,7 +30,7 @@
                         <rect key="frame" x="8" y="8" width="40" height="40"/>
                         <color key="backgroundColor" red="0.40012649022426311" green="0.48121789150688937" blue="0.83137254901960789" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kucyoung贝贝" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJF-t4-BUd">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lucy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJF-t4-BUd">
                         <rect key="frame" x="56" y="9" width="256" height="17"/>
                         <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="12"/>
                         <color key="textColor" red="0.84313725490196079" green="0.0" blue="0.29019607843137257" alpha="1" colorSpace="calibratedRGB"/>
@@ -53,9 +54,14 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_pointLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="si7-AX-0Eb">
                         <rect key="frame" x="55" y="45" width="260" height="1"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="在哪里买的呀，给个链接呗！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXl-e5-Ico">
-                        <rect key="frame" x="56" y="51" width="219" height="21"/>
-                        <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="15"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qfW-oH-eeX">
+                        <rect key="frame" x="56" y="51" width="223" height="42"/>
+                        <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kucyoung贝贝 在哪里买的呀，给个链接呗！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXl-e5-Ico">
+                        <rect key="frame" x="63" y="51" width="213" height="42"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -67,24 +73,32 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
-                            <action selector="replyClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="X3H-Tj-MwE"/>
+                            <action selector="replyClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="y8n-5z-oh9"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ux1-om-fBx">
-                        <rect key="frame" x="0.0" y="99" width="320" height="1"/>
-                        <color key="backgroundColor" red="0.76990327380952384" green="0.76990327380952384" blue="0.76990327380952384" alpha="1" colorSpace="calibratedRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="在肉肉传递者家买的" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ffy-sv-8DT">
+                        <rect key="frame" x="56" y="101" width="223" height="21"/>
+                        <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7nO-Ne-2WK">
+                        <rect key="frame" x="0.0" y="139" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.85507347470238093" green="0.85507347470238093" blue="0.85507347470238093" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="comments_1" destination="sXl-e5-Ico" id="VJb-K5-02K"/>
-                <outlet property="line_1" destination="Ux1-om-fBx" id="PVK-58-nTn"/>
-                <outlet property="pointLine_1" destination="si7-AX-0Eb" id="4E6-b1-9kP"/>
-                <outlet property="replyBtn_1" destination="cdd-OV-VvI" id="U54-KV-BDU"/>
-                <outlet property="userHead_1" destination="ffe-EN-6kR" id="ixe-tb-apc"/>
-                <outlet property="userLocatiom_1" destination="3HU-zO-ufo" id="txd-71-CBg"/>
-                <outlet property="userName_1" destination="QJF-t4-BUd" id="YKj-wm-P7Y"/>
-                <outlet property="userPostTime_1" destination="TCX-t3-23b" id="Gqz-br-Uyu"/>
+                <outlet property="comments_2_1" destination="sXl-e5-Ico" id="5iv-6Z-3Zu"/>
+                <outlet property="comments_2_1_bgView" destination="qfW-oH-eeX" id="fwZ-zy-ln6"/>
+                <outlet property="comments_2_2" destination="Ffy-sv-8DT" id="rKe-H9-BRd"/>
+                <outlet property="line_2" destination="7nO-Ne-2WK" id="cBW-cn-E63"/>
+                <outlet property="pointLine_2" destination="si7-AX-0Eb" id="kM4-uy-rFo"/>
+                <outlet property="replyBtn_2" destination="cdd-OV-VvI" id="U7s-oB-i5t"/>
+                <outlet property="userHead_2" destination="ffe-EN-6kR" id="xJe-uX-3eK"/>
+                <outlet property="userLocatiom_2" destination="3HU-zO-ufo" id="Ae9-x0-rqd"/>
+                <outlet property="userName_2" destination="QJF-t4-BUd" id="SYj-U4-9Fb"/>
+                <outlet property="userPostTime_2" destination="TCX-t3-23b" id="bgj-o7-xZn"/>
             </connections>
             <point key="canvasLocation" x="271" y="222"/>
         </tableViewCell>

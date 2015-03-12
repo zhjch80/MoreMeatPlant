@@ -18,4 +18,10 @@
 }
 */
 
+- (IBAction)reportClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(reportMethod:)]){
+        [self.delegate reportMethod:sender];
+    }
+}
+
 @end

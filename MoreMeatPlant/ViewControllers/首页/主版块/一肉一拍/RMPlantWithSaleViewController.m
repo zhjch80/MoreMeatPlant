@@ -12,10 +12,10 @@
 #import "RMPlantWithSaleCell.h"
 #import "RMPlantTypeView.h"
 #import "RMStickView.h"
-#import "RMStickDetailsViewController.h"
 #import "RMPlantWithSaleDetailsViewController.h"
 #import "RMPlantWithSaleBottomView.h"
 #import "RMPostMessageView.h"
+#import "RMBaseWebViewController.h"
 
 @interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,PostMessageSelectedPlantDelegate,PlantWithSaleBottomDelegate>
 @property (nonatomic, strong) UITableView * mTableView;
@@ -134,8 +134,8 @@
 
 - (void)stickJumpDetailsWithOrder:(NSInteger)order {
     NSLog(@"order:%ld",(long)order);
-    RMStickDetailsViewController * stickDetailsCtl = [[RMStickDetailsViewController alloc] init];
-    [self.navigationController pushViewController:stickDetailsCtl animated:YES];
+    RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
+    [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
 #pragma mark - 跳转到附近商家

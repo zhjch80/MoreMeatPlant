@@ -9,13 +9,14 @@
 #import "RMReleasePoisonDetailsViewController.h"
 #import "RMReleasePoisonBottomView.h"
 #import "RMReleasePoisonDetailsCell.h"
+#import "RMTableHeadView.h"
 
-@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,ReleasePoisonBottomDelegate,ReleasePoisonDetailsDelegate>{
+@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,ReleasePoisonBottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate>{
     BOOL isCanLoadWeb;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
-@property (nonatomic, strong) UIView * tableHeadView;
+@property (nonatomic, strong) RMTableHeadView * tableHeadView;
 
 @end
 
@@ -46,9 +47,12 @@
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 40) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
+    mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
     
     [self loadBottomView];
+    
+    [self loadTableHeadView];
 }
 
 #pragma mark - 加载底部View
@@ -85,21 +89,34 @@
     }
 }
 
+- (void)loadTableHeadView {
+    tableHeadView = [[[NSBundle mainBundle] loadNibNamed:@"RMTableHeadView" owner:nil options:nil] objectAtIndex:0];
+    tableHeadView.detailsWebView.scrollView.bounces = NO;
+    tableHeadView.detailsWebView.scrollView.showsVerticalScrollIndicator = NO;
+    tableHeadView.detailsWebView.scrollView.showsHorizontalScrollIndicator = NO;
+    tableHeadView.detailsWebView.scrollView.scrollEnabled = NO;
+    [tableHeadView.detailsReportBtn.layer setCornerRadius:8.0f];
+    [tableHeadView.detailsUserHead.layer setCornerRadius:20.0f];
+    [tableHeadView.detailsUserHead addTarget:self WithSelector:@selector(userHeaderClick:)];
+    tableHeadView.delegate = self;
+    tableHeadView.detailsWebView.delegate = self;
+    mTableView.tableHeaderView = tableHeadView;
+
+    [tableHeadView.detailsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
+}
+
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    NSLog(@"-----start----");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
-    webView.frame = CGRectMake(0, 80, kScreenWidth, height);
-    NSIndexPath * indexPath = [NSIndexPath indexPathWithIndex:0];
-    UITableViewCell *cell = [self tableView:mTableView cellForRowAtIndexPath:indexPath];
-    [cell setFrame:CGRectMake(0, 80, kScreenWidth, height + 80)];
-    [mTableView reloadData];
+    tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, 120 + height+50);
+    tableHeadView.detailsWebView.frame = CGRectMake(0, 120, kScreenWidth, height+50);
+    mTableView.tableHeaderView = tableHeadView;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"------Fail-----");
+    NSLog(@"失败 error:%@",error);
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -118,32 +135,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0){
-        static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_0";
-        RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
-        if (!cell){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_0" owner:self options:nil] lastObject];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.delegate = self;
-        }
-        cell.frame = CGRectMake(0, 0, kScreenWidth, 300);
-        cell.mWebView.backgroundColor = [UIColor blackColor];
-        cell.mWebView.frame = CGRectMake(0, 100, 320, 100);
-        
-#if 0
-        NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
-        NSString *html = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-        [cell.mWebView loadHTMLString:html baseURL:baseURL];
- 
-#else
-//        NSURL *url = [NSURL URLWithString:@"http://www.baidu.com"];
-//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-        [cell.mWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://news.baidu.com"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
-    
-#endif
-        
-        return cell;
-    }else if (indexPath.row == 1){
         static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_1";
         RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         if (!cell){
@@ -152,7 +143,7 @@
             cell.delegate = self;
         }
         return cell;
-    }else if (indexPath.row == 2){
+    }else if (indexPath.row == 1){
         static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_2";
         RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         if (!cell){
@@ -162,7 +153,7 @@
             cell.delegate = self;
         }
         return cell;
-    }else {
+    }else if (indexPath.row < 6){
         static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_3";
         RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         if (!cell){
@@ -173,18 +164,33 @@
         }
 //        [cell setFrame:cell.cellFrame];
         return cell;
+    }else{
+        static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_4";
+        RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+        if (!cell){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_4" owner:self options:nil] lastObject];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor clearColor];
+            cell.delegate = self;
+        }
+        cell.comments_2_1.text = @"Kucyoung贝贝\n在哪里买的呀，给个链接呗！";
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:@"Kucyoung贝贝\n在哪里买的呀，给个链接呗！"];
+        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:1 green:0.18 blue:0.45 alpha:1] range:NSMakeRange(0, 10)];
+        cell.comments_2_1.attributedText = oneAttributeStr;
+        
+        //        [cell setFrame:cell.cellFrame];
+        return cell;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0){
-        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.frame.size.height;
-    }else if (indexPath.row == 1 | indexPath.row == 2){
+    if (indexPath.row == 0 | indexPath.row == 1){
         return 50.0;
-    }else{
+    }else if (indexPath.row < 6){
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return 100.0;//cell.frame.size.height;
+    }else{
+        return 140.0;
     }
 }
 
@@ -210,6 +216,18 @@
 
 - (void)reportMethod:(UIButton *)button {
     NSLog(@"举报此帖");
+}
+
+#pragma mark - 回复帖子
+
+- (void)replyMethod:(UIButton *)button {
+    NSLog(@"回复帖子");
+}
+
+#pragma mark - 帖主头像
+
+- (void)userHeaderClick:(RMImageView *)image {
+    NSLog(@"帖主 👦");
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,11 +11,11 @@
 #import "RMNearbyMerchantViewController.h"
 #import "RMReleasePoisonCell.h"
 #import "RMStickView.h"
-#import "RMStickDetailsViewController.h"
 #import "RMPlantTypeView.h"
 #import "RMReleasePoisonBottomView.h"
 #import "RMPostMessageView.h"
 #import "RMReleasePoisonDetailsViewController.h"
+#import "RMBaseWebViewController.h"
 
 @interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,ReleasePoisonBottomDelegate>{
     
@@ -206,7 +206,6 @@
 #pragma mark - 帖子详情
 
 - (void)jumpPostDetailsWithImage:(RMImageView *)image {
-    NSLog(@"帖子详情");
     RMReleasePoisonDetailsViewController * releasePoisonDetailsCtl = [[RMReleasePoisonDetailsViewController alloc] init];
     [self.navigationController pushViewController:releasePoisonDetailsCtl animated:YES];
 }
@@ -227,9 +226,9 @@
 #pragma mark - 跳转到置顶详情界面
 
 - (void)stickJumpDetailsWithOrder:(NSInteger)order {
-    NSLog(@"order:%ld",(long)order);
-    RMStickDetailsViewController * stickDetailsCtl = [[RMStickDetailsViewController alloc] init];
-    [self.navigationController pushViewController:stickDetailsCtl animated:YES];
+    RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
+    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"置顶 新手必读"];
+    [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
 #pragma mark - 跳转到附近商家
@@ -242,7 +241,9 @@
 #pragma mark - 跳转到广告
 
 - (void)jumpPopularize:(RMImageView *)image {
-    NSLog(@"广告位置");
+    RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
+    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
+    [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
