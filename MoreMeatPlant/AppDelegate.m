@@ -42,7 +42,6 @@
 //            printf( "\tFont: %s \n", [fontName UTF8String] );
 //            
 //        }
-//        
 //    }
     
     return YES;
