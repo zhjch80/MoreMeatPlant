@@ -13,6 +13,10 @@
 #import "RMNearFriendViewController.h"
 #import "RMSysMessageViewController.h"
 #import "RMShopCarViewController.h"
+#import "RMUserInfoViewController.h"
+#import "RMUserInfoEditViewController.h"
+#import "RMMyWalletViewController.h"
+
 
 #import "UIViewController+ENPopUp.h"
 @interface RMAccountViewController ()
@@ -56,32 +60,37 @@
         acountView.call_back = ^(RMAccountView * view){
             if(/* DISABLES CODE */ (1)){//普通会员
                 switch (view.tag-100) {
-                    case 0:{
-                        RMNearFriendViewController * near = [[RMNearFriendViewController alloc]initWithNibName:@"RMNearFriendViewController" bundle:nil];
-                        [self.navigationController pushViewController:near animated:YES];
+                    case 0:{//我的肉友
+                       
                     }
                         break;
-                    case 1:{
+                    case 1:{//我的钱包
+                        RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
+                        mywallet.view.frame = CGRectMake(20, 84, kScreenWidth-20*2, kScreenHeight-150);
+                        [self presentPopUpViewController:mywallet overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
+                        
+                        UIView * v = [[UIView alloc]initWithFrame:CGRectMake(100, -15, 30, 30)];
+                        v.backgroundColor = [UIColor redColor];
+                        [mywallet.view addSubview:v];
+                    }
+                        break;
+                    case 2:{//我的收藏
                         
                     }
                         break;
-                    case 2:{
+                    case 3:{//申请开店
                         
                     }
                         break;
-                    case 3:{
+                    case 4:{//我的订单
                         
                     }
                         break;
-                    case 4:{
+                    case 5:{//我的帖子
                         
                     }
                         break;
-                    case 5:{
-                        
-                    }
-                        break;
-                    case 6:{
+                    case 6:{//系统消息
 //                        RMSysMessageViewController * message = [[RMSysMessageViewController alloc]initWithNibName:@"RMSysMessageViewController" bundle:nil];
 //                        [self.navigationController pushViewController:message animated:YES];
                         RMSysMessageViewController * message = [[RMSysMessageViewController alloc]initWithNibName:@"RMSysMessageViewController" bundle:nil];
@@ -92,7 +101,7 @@
                         [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
                     }
                         break;
-                    case 7:{
+                    case 7:{//等待升级
                         
                     }
                         break;
@@ -102,12 +111,26 @@
                         
                     }
                         break;
-                    case 9:{
-                        
+                    case 9:{//附近肉友
+                        RMNearFriendViewController * near = [[RMNearFriendViewController alloc]initWithNibName:@"RMNearFriendViewController" bundle:nil];
+                        [self.navigationController pushViewController:near animated:YES];
                     }
                         break;
                     case 10:{
+                        RMUserInfoViewController * userinfo = [[RMUserInfoViewController alloc]initWithNibName:@"RMUserInfoViewController" bundle:nil];
                         
+                        userinfo.close_action = ^(RMUserInfoViewController * controller){
+                            [self dismissPopUpViewControllerWithcompletion:nil];
+                        };
+                        
+                        userinfo.callback = ^(RMUserInfoViewController * controller){
+                            
+                            RMUserInfoEditViewController * edit = [[RMUserInfoEditViewController alloc]initWithNibName:@"RMUserInfoEditViewController" bundle:nil];
+                            [self.navigationController pushViewController:edit animated:YES];
+                            
+                        };
+                        userinfo.view.frame = CGRectMake(20, 84, kScreenWidth-20*2, kScreenHeight/2);
+                        [self presentPopUpViewController:userinfo overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
                     }
                         break;
                     default:
@@ -157,7 +180,12 @@
                     }
                         break;
                     case 10:{
-                        
+                        RMUserInfoViewController * userinfo = [[RMUserInfoViewController alloc]initWithNibName:@"RMUserInfoViewController" bundle:nil];
+//                        userinfo.callback = ^(RMSysMessageViewController * controller){
+//                            [self dismissPopUpViewControllerWithcompletion:nil];
+//                        };
+                        userinfo.view.frame = CGRectMake(0, 84, kScreenWidth-20*2, kScreenHeight/2);
+                        [self presentPopUpViewController:userinfo overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
                     }
                         break;
                     case 11:{

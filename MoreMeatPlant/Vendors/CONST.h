@@ -24,6 +24,8 @@
 //FZZZHONGJW--GB1-0 方正正中黑简体 3
 //FZZHJW--GB1-0     方正正黑简体   1   0-5  表示越来越粗
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 #define kImageTypePNG @"png"
 //#define LOADIMAGE(file)   [UIImage imageNamed:[NSString stringWithFormat:@"%@",file]]
 #define LOADIMAGE(file,ext)   [UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:file ofType:ext]]
