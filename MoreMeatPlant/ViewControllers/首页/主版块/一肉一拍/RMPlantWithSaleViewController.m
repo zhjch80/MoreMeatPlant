@@ -133,8 +133,8 @@
 #pragma mark - 跳转到置顶详情界面
 
 - (void)stickJumpDetailsWithOrder:(NSInteger)order {
-    NSLog(@"order:%ld",(long)order);
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
+    [baseWebCtl loadRequestWithUrl:@"" withTitle:@"置顶 新手教程"];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 

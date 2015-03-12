@@ -10,13 +10,31 @@
 
 @protocol PlantWithSaleBottomDelegate <NSObject>
 
+@optional
+
+/**
+ *  @method 一肉一拍底部栏回调方法
+ */
 - (void)plantWithSaleBottomMethodWithTag:(NSInteger)tag;
+
+/**
+ *  @method 一肉一拍详情底部栏回调方法
+ */
+- (void)plantWithSaleDetailsBottomMethodWithTag:(NSInteger)tag;
 
 @end
 
 @interface RMPlantWithSaleBottomView : UIView
 @property (nonatomic, assign) id<PlantWithSaleBottomDelegate>delegate;
 
+/**
+ *  @method 一肉一拍底部栏回调方法
+ */
 - (void)loadPlantWithSaleBottomView;
+
+/**
+ *  @method 一肉一拍底详情部栏回调方法
+ */
+- (void)loadPlantWithSaleDetailsBottomView;
 
 @end
