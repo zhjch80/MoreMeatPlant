@@ -197,6 +197,7 @@
 		9538F3CF1AB09BAA00608FAD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9538F3CE1AB09BAA00608FAD /* QuartzCore.framework */; };
 		9538F3D21AB0A5BF00608FAD /* RMTableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538F3D11AB0A5BF00608FAD /* RMTableHeadView.m */; };
 		9538F3D41AB0A5DF00608FAD /* RMTableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9538F3D31AB0A5DF00608FAD /* RMTableHeadView.xib */; };
+		9538F3DC1AB1C83F00608FAD /* RMCommentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538F3DB1AB1C83F00608FAD /* RMCommentsView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -481,6 +482,8 @@
 		9538F3D01AB0A5BF00608FAD /* RMTableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMTableHeadView.h; sourceTree = "<group>"; };
 		9538F3D11AB0A5BF00608FAD /* RMTableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMTableHeadView.m; sourceTree = "<group>"; };
 		9538F3D31AB0A5DF00608FAD /* RMTableHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMTableHeadView.xib; sourceTree = "<group>"; };
+		9538F3DA1AB1C83F00608FAD /* RMCommentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCommentsView.h; sourceTree = "<group>"; };
+		9538F3DB1AB1C83F00608FAD /* RMCommentsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCommentsView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -630,6 +633,8 @@
 				1D93AB781AB029ED0034574C /* RMReleasePoisonDetailsCell_2.xib */,
 				1D93AB791AB029ED0034574C /* RMReleasePoisonDetailsCell_3.xib */,
 				1D93AB881AB13A290034574C /* RMReleasePoisonDetailsCell_4.xib */,
+				9538F3DA1AB1C83F00608FAD /* RMCommentsView.h */,
+				9538F3DB1AB1C83F00608FAD /* RMCommentsView.m */,
 			);
 			path = "放毒区帖子详情";
 			sourceTree = "<group>";
@@ -1430,6 +1435,7 @@
 				1D4DA32F1A921779006A9EBA /* RMFreshPlantMarketViewController.m in Sources */,
 				1D9CB1771AAE9EE500BD5A7D /* AFHTTPSessionManager.m in Sources */,
 				1D64F50C1A90CC2E0073EB98 /* RMCustomTabBarController.m in Sources */,
+				9538F3DC1AB1C83F00608FAD /* RMCommentsView.m in Sources */,
 				1D64F4FE1A904E180073EB98 /* RMHomeViewController.m in Sources */,
 				51E268661AAF4D8100252DEF /* RMAddressEditViewController.m in Sources */,
 				51E2681F1AADE92300252DEF /* RMShopLeaveMsTableViewCell.m in Sources */,

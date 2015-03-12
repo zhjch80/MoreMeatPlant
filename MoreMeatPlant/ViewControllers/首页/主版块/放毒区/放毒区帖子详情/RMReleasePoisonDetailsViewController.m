@@ -10,18 +10,21 @@
 #import "RMReleasePoisonBottomView.h"
 #import "RMReleasePoisonDetailsCell.h"
 #import "RMTableHeadView.h"
+#import "RMBaseWebViewController.h"
+#import "RMCommentsView.h"
 
-@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,ReleasePoisonBottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate>{
+@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,ReleasePoisonBottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate,CommentsViewDelegate>{
     BOOL isCanLoadWeb;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @property (nonatomic, strong) RMTableHeadView * tableHeadView;
+@property (nonatomic, strong) RMCommentsView * commentsView;
 
 @end
 
 @implementation RMReleasePoisonDetailsViewController
-@synthesize mTableView, dataArr, tableHeadView;
+@synthesize mTableView, dataArr, tableHeadView, commentsView;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -76,7 +79,12 @@
             break;
         }
         case 2:{
-            
+            commentsView = [[RMCommentsView alloc] init];
+            commentsView.delegate = self;
+            commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            [commentsView loadCommentsView];
+            [self.view addSubview:commentsView];
+            [commentsView showCommentsView];
             break;
         }
         case 3:{
@@ -197,7 +205,9 @@
 #pragma mark - 跳转到广告位置
 
 - (void)jumpPromoteMethod:(RMImageView *)image {
-    NSLog(@"跳到广告位置");
+    RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
+    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
+    [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
 #pragma mark - 给此帖点赞
