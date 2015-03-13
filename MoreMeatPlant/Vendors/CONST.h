@@ -16,13 +16,19 @@
 #define IS_IPHONE_6_SCREEN ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
 #define IS_IPHONE_6p_SCREEN ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO) //1242, 2208   1080, 1920
 
-#define FONT(_size) [UIFont fontWithName:@"Heiti TC" size:(_size)]  //HelveticaNeue-CondensedBlack
-//FZZZHUNHJW--GB1-0 方正正准黑简体 2
-//FZZDHJW--GB1-0    方正正大黑简体 5
+#define FONT_0(_size) [UIFont fontWithName:@"FZZXHJW--GB1-0" size:(_size)]
+#define FONT_1(_size) [UIFont fontWithName:@"FZZHJW--GB1-0" size:(_size)]
+#define FONT_2(_size) [UIFont fontWithName:@"FZZZHUNHJW--GB1-0" size:(_size)]
+#define FONT_3(_size) [UIFont fontWithName:@"FZZZHONGJW--GB1-0" size:(_size)]
+#define FONT_4(_size) [UIFont fontWithName:@"FZZCHJW--GB1-0" size:(_size)]
+#define FONT_5(_size) [UIFont fontWithName:@"FZZDHJW--GB1-0" size:(_size)]
+
 //FZZXHJW--GB1-0    方正正纤黑简体 0
-//FZZCHJW--GB1-0    方正正粗黑简体 4
+//FZZHJW--GB1-0     方正正黑简体   1
+//FZZZHUNHJW--GB1-0 方正正准黑简体 2
 //FZZZHONGJW--GB1-0 方正正中黑简体 3
-//FZZHJW--GB1-0     方正正黑简体   1   0-5  表示越来越粗
+//FZZCHJW--GB1-0    方正正粗黑简体 4
+//FZZDHJW--GB1-0    方正正大黑简体 5   0-5  表示越来越粗
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 

@@ -114,7 +114,22 @@ typedef enum{
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
         }
-        cell.bgImg.backgroundColor = (indexPath.row%2 == 0 ? [UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1] : [UIColor clearColor]);
+        if (indexPath.row%2 == 0){
+            CAGradientLayer *gradient = [CAGradientLayer layer];
+            gradient.frame = CGRectMake(0, 0, cell.bgImg.frame.size.width, cell.bgImg.frame.size.height);
+            gradient.colors = [NSArray arrayWithObjects:
+                               (id)[UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1].CGColor,
+                               (id)[UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor,
+                               nil];
+            CGPoint startPoint = CGPointMake(1, 1);
+            CGPoint endPoint = CGPointMake(0, 1);
+            gradient.startPoint = startPoint;
+            gradient.endPoint = endPoint;
+            [cell.bgImg.layer insertSublayer:gradient atIndex:0];
+        }else{
+            cell.bgImg.backgroundColor = [UIColor clearColor];
+        }
+        
         cell.headImg.image = LOADIMAGE([dataImgArr objectAtIndex:indexPath.row], kImageTypePNG);
         if (indexPath.row == [dataArr count]-1){
             NSString *sample_text = [NSString stringWithFormat:@"<font face='HelveticaNeue-CondensedBold' size=19 color='#2C2C2C'>%@</font>",[dataArr objectAtIndex:indexPath.row]];

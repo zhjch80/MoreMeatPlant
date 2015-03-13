@@ -75,20 +75,20 @@
             break;
         }
         case 1:{
-            
+            NSLog(@"收藏");
             break;
         }
         case 2:{
             commentsView = [[RMCommentsView alloc] init];
             commentsView.delegate = self;
+            commentsView.backgroundColor = [UIColor clearColor];
             commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
             [commentsView loadCommentsView];
             [self.view addSubview:commentsView];
-            [commentsView showCommentsView];
             break;
         }
         case 3:{
-            
+            NSLog(@"分享");
             break;
         }
             

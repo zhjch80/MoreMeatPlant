@@ -46,7 +46,7 @@
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, screenWidth - 80, 44)];
     titleLabel.userInteractionEnabled = YES;
     titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = FONT(20.0);
+    titleLabel.font = FONT_1(20.0);
     titleLabel.textColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
 //    titleLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.2];
     titleLabel.textAlignment = NSTextAlignmentCenter;

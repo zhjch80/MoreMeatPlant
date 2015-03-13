@@ -63,17 +63,20 @@
                              nil];
 
     subView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -height, width, subHeight)];
+    subView.userInteractionEnabled = YES;
+    subView.multipleTouchEnabled = YES;
     [self addSubview:self.subView];
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = CGRectMake(0, 0, subView.frame.size.width, subView.frame.size.height);
-    gradient.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1].CGColor,
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[UIColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1].CGColor,
                        (id)[UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor,
                        nil];
-//    CGPoint startPoint = CGPointMake(0, 0);
-//    CGPoint endPoint = CGPointMake(subView.frame.size.width, subView.frame.size.height);
-//    gradient.startPoint = startPoint;
-//    gradient.endPoint = endPoint;
+    CGPoint startPoint = CGPointMake(0, 0);
+    CGPoint endPoint = CGPointMake(0, 1);
+    gradient.startPoint = startPoint;
+    gradient.endPoint = endPoint;
     [subView.layer insertSublayer:gradient atIndex:0];
 
     UILabel * title = [[UILabel alloc] init];

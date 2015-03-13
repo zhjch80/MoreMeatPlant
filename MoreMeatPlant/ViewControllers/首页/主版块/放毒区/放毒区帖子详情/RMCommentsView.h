@@ -17,10 +17,6 @@
 @interface RMCommentsView : UIView
 @property (nonatomic, assign) id <CommentsViewDelegate>delegate;
 
-- (void)showCommentsView;
-
-- (void)dismiss;
-
 - (void)loadCommentsView;
 
 @end

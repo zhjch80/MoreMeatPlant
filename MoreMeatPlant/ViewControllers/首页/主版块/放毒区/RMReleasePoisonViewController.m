@@ -16,6 +16,8 @@
 #import "RMPostMessageView.h"
 #import "RMReleasePoisonDetailsViewController.h"
 #import "RMBaseWebViewController.h"
+#import "RMStartPostingViewController.h"
+#import "ZFModalTransitionAnimator.h"
 
 @interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,ReleasePoisonBottomDelegate>{
     
@@ -24,10 +26,12 @@
 @property (nonatomic, strong) NSMutableArray * dataArr;
 
 @property (nonatomic, strong) RMPostMessageView *action;
+@property (nonatomic, strong) ZFModalTransitionAnimator *animator;
+
 @end
 
 @implementation RMReleasePoisonViewController
-@synthesize mTableView, dataArr, action;
+@synthesize mTableView, dataArr, action, animator;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -213,8 +217,21 @@
 #pragma mark - 选择类型 开始发帖
 
 - (void)selectedPostMessageWithPlantType:(NSString *)type {
-    NSLog(@"开始发帖 plant type:%@",type);
     [action dismiss];
+    NSLog(@"开始发帖 plant type:%@",type);
+
+    RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
+    startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
+
+    animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:startPostingCtl];
+    animator.dragable = NO;
+    animator.bounces = NO;
+    animator.behindViewAlpha = 0.5f;
+    animator.behindViewScale = 0.5f;
+    animator.transitionDuration = 0.7f;
+    animator.direction = ZFModalTransitonDirectionBottom;
+    startPostingCtl.transitioningDelegate = animator;
+    [self presentViewController:startPostingCtl animated:YES completion:nil];
 }
 
 #pragma mark - 选择肉肉类型
@@ -285,7 +302,7 @@
         }
         case 2:{
             //多聊
-            
+            NSLog(@"多聊");
             break;
         }
 
