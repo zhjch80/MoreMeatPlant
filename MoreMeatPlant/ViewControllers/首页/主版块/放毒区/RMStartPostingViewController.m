@@ -16,11 +16,12 @@
     BOOL isShow;
 }
 @property (nonatomic, strong) RMStartPostingHeaderView * headerView;
+@property (nonatomic, strong) UIButton * dragBtn;
 
 @end
 
 @implementation RMStartPostingViewController
-@synthesize headerView;
+@synthesize headerView, dragBtn;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -29,13 +30,17 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(KeyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(KeyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+
     [self.mTextField becomeFirstResponder];
 }
 
@@ -54,17 +59,7 @@
 
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
     [self.mScrollView addGestureRecognizer:gesture];
-    
-    UISwipeGestureRecognizer * recognizer;
-    
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [self.mScrollView addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-    [self.mScrollView addGestureRecognizer:recognizer];
-    
+
 }
 
 - (void)loadHeaderView {
@@ -103,15 +98,20 @@
     }
 }
 
-- (void)KeyboardWillShow:(NSNotification *)noti {
+- (void)keyboardWillShow:(NSNotification *)noti {
     CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     self.mTextView.frame = CGRectMake(0, 37, kScreenWidth, kScreenHeight - 37 - 64 - size.height);
-
 }
 
-- (void)KeyboardWillHide:(NSNotification *)noti {
-    self.mTextView.frame = CGRectMake(0, 37, kScreenWidth, kScreenHeight - 37 - 64);
+- (void)keyboardDidShow:(NSNotification *)noti {
+    CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+}
 
+- (void)keyboardWillHide:(NSNotification *)noti {
+    self.mTextView.frame = CGRectMake(0, 37, kScreenWidth, kScreenHeight - 37 - 64);
+}
+
+- (void)keyboardDidHide:(NSNotification *)noti {
 }
 
 - (void)resignResponder{
@@ -119,12 +119,9 @@
     [self.mTextView resignFirstResponder];
 }
 
-- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionRight) {
-        NSLog(@"right 释放");
-    }else{
-        NSLog(@"left 收回");
-    }
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.mTextField resignFirstResponder];
+    [self.mTextView resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

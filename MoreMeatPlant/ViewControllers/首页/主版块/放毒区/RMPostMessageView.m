@@ -120,7 +120,8 @@
 
 - (void)selectedPostPlantType {
     if (!isSelectedPostType){
-        NSLog(@"还没有选择发帖类型");
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"您还没有选择发帖类型" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+        [alert show];
         return;
     }
     if ([self.delegate respondsToSelector:@selector(selectedPostMessageWithPlantType:)]){

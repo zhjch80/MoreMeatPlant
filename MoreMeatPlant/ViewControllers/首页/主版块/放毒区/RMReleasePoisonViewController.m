@@ -218,8 +218,6 @@
 
 - (void)selectedPostMessageWithPlantType:(NSString *)type {
     [action dismiss];
-    NSLog(@"开始发帖 plant type:%@",type);
-
     RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
     startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
 
