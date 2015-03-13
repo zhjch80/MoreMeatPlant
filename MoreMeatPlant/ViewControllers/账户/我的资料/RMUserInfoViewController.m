@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view from its nib.
     [self hideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
-    self.view.backgroundColor = UIColorFromRGB(0xc9c9ca);
+    self.view.backgroundColor = [UIColor clearColor];
     
     [_editBtn addTarget:self action:@selector(operation:) forControlEvents:UIControlEventTouchDown];
     [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];

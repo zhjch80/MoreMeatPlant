@@ -66,12 +66,9 @@
                         break;
                     case 1:{//我的钱包
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
-                        mywallet.view.frame = CGRectMake(20, 84, kScreenWidth-20*2, kScreenHeight-150);
-                        [self presentPopUpViewController:mywallet overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
+                        mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
+                        [self presentPopUpViewController:mywallet overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-108)];
                         
-                        UIView * v = [[UIView alloc]initWithFrame:CGRectMake(100, -15, 30, 30)];
-                        v.backgroundColor = [UIColor redColor];
-                        [mywallet.view addSubview:v];
                     }
                         break;
                     case 2:{//我的收藏
@@ -129,8 +126,8 @@
                             [self.navigationController pushViewController:edit animated:YES];
                             
                         };
-                        userinfo.view.frame = CGRectMake(20, 84, kScreenWidth-20*2, kScreenHeight/2);
-                        [self presentPopUpViewController:userinfo overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
+                        userinfo.view.frame = CGRectMake(20, 0, kScreenWidth-20*2, kScreenHeight/3*2);
+                        [self presentPopUpViewController:userinfo overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-44-64)];
                     }
                         break;
                     default:
