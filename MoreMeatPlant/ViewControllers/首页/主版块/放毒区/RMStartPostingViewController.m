@@ -15,7 +15,7 @@
 
 #define kMaxLength 18
 
-@interface RMStartPostingViewController ()<UITextFieldDelegate,StartPostingHeaderDelegate,DoImagePickerControllerDelegate>{
+@interface RMStartPostingViewController ()<UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,StartPostingHeaderDelegate,DoImagePickerControllerDelegate>{
     BOOL isLoadUpLoadImg;
     NSInteger uploadImageCount;
 }
@@ -152,7 +152,48 @@
 }
 
 - (void)addUpLoadImg:(RMImageView *)image {
-    NSLog(@"image.tag:%ld   state:%@",(long)image.tag,image.identifierString);
+    UIActionSheet *sheet = nil;
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        sheet  = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+    }else{
+        sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+    }
+    [sheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSUInteger sourceType = 0;
+    // 判断是否支持相机
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        switch (buttonIndex) {
+            case 0:{
+                // 相机
+                sourceType = UIImagePickerControllerSourceTypeCamera;
+                break;
+            }
+            case 1:{
+                // 相册
+                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                break;
+            }
+            case 2:{
+                // 取消
+                return;
+            }
+        }
+    } else {
+        if (buttonIndex == 1) {
+            return;
+        } else {
+            sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        }
+    }
+    // 跳转到相机或相册页面
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = YES;
+    imagePickerController.sourceType = sourceType;
+    [self presentViewController:imagePickerController animated:YES completion:^{}];
 }
 
 - (void)deleteUpLoadImg:(RMImageView *)image {
@@ -211,7 +252,6 @@
             picker.sourceType = sourceType;
             [self presentViewController:picker animated:YES completion:^{
             }];
-
             break;
         }
         case 3:{
@@ -232,6 +272,75 @@
         default:
             break;
     }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:^{
+    }];
+    UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    RMImageView * img = (RMImageView *)[self.mScrollView viewWithTag:101];
+    img.image = image;
+    
+    
+    /*
+    [self saveImage:image withName:@"image.png"];
+    NSString *fullPath = [[FileUtil getCachePathFor:@"imagecache"] stringByAppendingPathComponent:@"image.png"];
+    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+    
+    UIImage * scaleImage = [self scaleFromImage:savedImage scaledToSize:CGSizeMake(100, 150)];
+    
+//    UIButton * photoBtn = (UIButton *)[self.view viewWithTag:PHOTO_TAG];
+//    [photoBtn setBackgroundImage:scaleImage forState:UIControlStateNormal];
+//    
+
+         NSData * data = nil;
+         
+//         if (UIImagePNGRepresentation(scaleImage) == nil) {
+//             //将图片转换为JPG格式的二进制数据
+         data = UIImageJPEGRepresentation(scaleImage, 0.1);
+//         } else {
+//             //将图片转换为PNG格式的二进制数据
+//             data = UIImagePNGRepresentation(scaleImage);
+//         }
+         
+//         NSData *imageData = [NSData dataWithContentsOfFile: fullPath];
+         
+         [DSUtilPlist setData:kImageBinary pramaValue:[DSBaseSwitch base64Encode:data] pramaKey:kImageBlinarykey];
+         */
+
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
+- (UIImage*)scaleFromImage:(UIImage*)image scaledToSize:(CGSize)newSize {
+    CGSize imageSize = image.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    
+    if (width <= newSize.width && height <= newSize.height){
+        return image;
+    }
+    
+    if (width == 0 || height == 0){
+        return image;
+    }
+    
+    CGFloat widthFactor = newSize.width / width;
+    CGFloat heightFactor = newSize.height / height;
+    CGFloat scaleFactor = (widthFactor<heightFactor?widthFactor:heightFactor);
+    
+    CGFloat scaledWidth = width * scaleFactor;
+    CGFloat scaledHeight = height * scaleFactor;
+    CGSize targetSize = CGSizeMake(scaledWidth,scaledHeight);
+    
+    UIGraphicsBeginImageContext(targetSize);
+    [image drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 #pragma mark - DoImagePickerControllerDelegate

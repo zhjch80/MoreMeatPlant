@@ -10,7 +10,7 @@
 
 @protocol CommentsViewDelegate <NSObject>
 
-- (void)method;
+//- (void)method;
 
 @end
 
