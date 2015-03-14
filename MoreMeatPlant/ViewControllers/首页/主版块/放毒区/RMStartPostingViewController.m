@@ -243,6 +243,21 @@
         }
         case 2:{
             //拍照
+            uploadImageCount = 0;
+            for (NSInteger i=0; i<8; i++){
+                RMImageView * image = (RMImageView *)[self.mScrollView viewWithTag:101+i];
+                if ([image.identifierString isEqualToString:@"empty"]){
+                    uploadImageCount ++;
+                }else{
+                }
+            }
+            
+            if (uploadImageCount <= 0){
+                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"待上传的照片已满" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+                [alert show];
+                return;
+            }
+            
             UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
             if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
                 sourceType = UIImagePickerControllerSourceTypePhotoLibrary;

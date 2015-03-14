@@ -9,26 +9,35 @@
 #import "RMPlantWithSaleDetailsViewController.h"
 #import "RMPlantWithSaleHeaderView.h"
 #import "RMPlantWithSaleBottomView.h"
+#import "RMPlantWithSaleDetailsCell.h"
 
-@interface RMPlantWithSaleDetailsViewController ()<PlantWithSaleBottomDelegate,PlantWithSaleHeaderViewDelegate>{
+@interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,PlantWithSaleBottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate>{
     
 }
 @property (nonatomic, strong) RMPlantWithSaleHeaderView * headerView;;
+@property (nonatomic, strong) UITableView * mTableView;
+@property (nonatomic, strong) NSMutableArray * dataArr;
 
 @end
 
 @implementation RMPlantWithSaleDetailsViewController
-@synthesize headerView;
+@synthesize headerView, mTableView, dataArr;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    dataArr = [[NSMutableArray alloc] init];
     
     [self hideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
     [self loadHeaderView];
     
     [self loadBottomView];
+    
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 40) style:UITableViewStylePlain];
+    mTableView.delegate = self;
+    mTableView.dataSource = self;
+    [self.view addSubview:mTableView];
     
     
 }
@@ -74,6 +83,22 @@
         default:
             break;
     }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [dataArr count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString * identifierStr = @"plantWithSaleDetailsIdentifier";
+    RMPlantWithSaleDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+    if (!cell){
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleDetailsCell" owner:self options:nil] lastObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.delegate = self;
+    }
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning {
