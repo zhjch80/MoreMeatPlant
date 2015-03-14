@@ -11,8 +11,13 @@
 #import "RMBaseTextView.h"
 
 @interface RMStartPostingViewController : RMBaseViewController
-@property (weak, nonatomic) IBOutlet UIScrollView *mScrollView;
+
 @property (weak, nonatomic) IBOutlet RMBaseTextField *mTextField;
 @property (weak, nonatomic) IBOutlet RMBaseTextView *mTextView;
+@property (weak, nonatomic) IBOutlet UIView *mView;
+@property (weak, nonatomic) IBOutlet UIButton *photoBtn;
+@property (weak, nonatomic) IBOutlet UIButton *takingPicturesBtn;
+@property (weak, nonatomic) IBOutlet UIButton *keyboardBtn;
+@property (weak, nonatomic) IBOutlet UIScrollView *mScrollView;
 
 @end
