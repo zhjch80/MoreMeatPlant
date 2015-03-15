@@ -1,18 +1,18 @@
 //
-//  RMMyCollectionViewController.m
+//  RMCorpCollectionViewController.m
 //  MoreMeatPlant
 //
-//  Created by 马东凯 on 15/3/4.
+//  Created by 马东凯 on 15/3/15.
 //  Copyright (c) 2015年 runmobile. All rights reserved.
 //
 
-#import "RMMyCollectionViewController.h"
+#import "RMCorpCollectionViewController.h"
 
-@interface RMMyCollectionViewController ()
+@interface RMCorpCollectionViewController ()
 
 @end
 
-@implementation RMMyCollectionViewController
+@implementation RMCorpCollectionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

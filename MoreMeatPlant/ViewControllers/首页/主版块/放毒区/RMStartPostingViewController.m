@@ -16,7 +16,6 @@
 #define kMaxLength 18
 
 @interface RMStartPostingViewController ()<UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,StartPostingHeaderDelegate,DoImagePickerControllerDelegate>{
-    BOOL isLoadUpLoadImg;
     NSInteger uploadImageCount;
 }
 @property (nonatomic, strong) RMStartPostingHeaderView * headerView;
@@ -108,41 +107,37 @@
 }
 
 - (void)keyboardDidShow:(NSNotification *)noti {
-    if (!isLoadUpLoadImg){
-        CGFloat contentY = 0;
+    CGFloat contentY = 0;
+    
+    for (NSInteger i=0; i<8; i++) {
+        RMImageView * imageView = [[RMImageView alloc] init];
+        imageView.frame = CGRectMake(0, 0, 100, 150);
+        imageView.center = CGPointMake(20 + 50 + i * imageView.frame.size.width + i * 20, self.mScrollView.frame.size.height/2);
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.image = LOADIMAGE(@"btn_add_photo_s", kImageTypePNG);
+        [imageView addTarget:self WithSelector:@selector(addUpLoadImg:)];
+        imageView.tag = 101 + i;
+        imageView.identifierString = @"empty";
+        [self.mScrollView addSubview:imageView];
         
-        for (NSInteger i=0; i<8; i++) {
-            RMImageView * imageView = [[RMImageView alloc] init];
-            imageView.frame = CGRectMake(0, 0, 100, 150);
-            imageView.center = CGPointMake(20 + 50 + i * imageView.frame.size.width + i * 20, self.mScrollView.frame.size.height/2);
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            imageView.image = LOADIMAGE(@"btn_add_photo_s", kImageTypePNG);
-            [imageView addTarget:self WithSelector:@selector(addUpLoadImg:)];
-            imageView.tag = 101 + i;
-            imageView.identifierString = @"empty";
-            [self.mScrollView addSubview:imageView];
-            
-            RMImageView * deleteImg = [[RMImageView alloc] init];
-            deleteImg.tag = 201 + i;
-            deleteImg.identifierString = @"empty";
-            deleteImg.frame = CGRectMake(imageView.frame.origin.x + imageView.frame.size.width - 12, imageView.frame.origin.y - 5, 20, 20);
-            [deleteImg addTarget:self WithSelector:@selector(deleteUpLoadImg:)];
-            deleteImg.image = LOADIMAGE(@"deletecircular", kImageTypePNG);
-            [self.mScrollView addSubview:deleteImg];
-            
-            [uploadImageArr addObject:imageView];
-        }
+        RMImageView * deleteImg = [[RMImageView alloc] init];
+        deleteImg.tag = 201 + i;
+        deleteImg.identifierString = @"empty";
+        deleteImg.frame = CGRectMake(imageView.frame.origin.x + imageView.frame.size.width - 12, imageView.frame.origin.y - 5, 20, 20);
+        [deleteImg addTarget:self WithSelector:@selector(deleteUpLoadImg:)];
+        deleteImg.image = LOADIMAGE(@"deletecircular", kImageTypePNG);
+        [self.mScrollView addSubview:deleteImg];
         
-        if (self.mScrollView.frame.size.height < 150){
-            contentY = 150;
-        }else{
-            contentY = self.mScrollView.frame.size.height;
-        }
-        
-        self.mScrollView.contentSize = CGSizeMake(120*8+20, contentY);
-        
-        isLoadUpLoadImg = YES;
+        [uploadImageArr addObject:imageView];
     }
+    
+    if (self.mScrollView.frame.size.height < 150){
+        contentY = 150;
+    }else{
+        contentY = self.mScrollView.frame.size.height;
+    }
+    
+    self.mScrollView.contentSize = CGSizeMake(120*8+20, contentY);
 }
 
 - (void)keyboardWillHide:(NSNotification *)noti {

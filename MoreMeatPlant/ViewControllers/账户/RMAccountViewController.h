@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *regionL;
 @property (weak, nonatomic) IBOutlet UILabel *yu_eL;//余额
 @property (weak, nonatomic) IBOutlet UILabel *hua_biL;//花币
+@property (weak, nonatomic) IBOutlet UIButton *member_right;
+@property (weak, nonatomic) IBOutlet UIButton *member_level;
 
 
 @end

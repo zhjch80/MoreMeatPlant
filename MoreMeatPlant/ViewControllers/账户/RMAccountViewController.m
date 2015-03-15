@@ -17,6 +17,7 @@
 #import "RMUserInfoEditViewController.h"
 #import "RMMyWalletViewController.h"
 
+#import "RMMyCorpViewController.h"
 
 #import "UIViewController+ENPopUp.h"
 @interface RMAccountViewController ()
@@ -76,7 +77,9 @@
                     }
                         break;
                     case 3:{//申请开店
-                        
+                        //我的店铺
+                        RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
+                        [self.navigationController pushViewController:corp animated:YES];
                     }
                         break;
                     case 4:{//我的订单
