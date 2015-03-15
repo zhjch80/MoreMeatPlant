@@ -13,10 +13,70 @@
 @end
 
 @implementation RMCorpCollectionViewController
-
+@synthesize dataArr;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if ([dataArr count]%3 == 0){
+        return [dataArr count] / 3;
+    }else if ([dataArr count]%3 == 1){
+        return ([dataArr count] + 2) / 3;
+    }else {
+        return ([dataArr count] + 1) / 3;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString * identifierStr = @"DaqoidentifierStr";
+    RMDaqoCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+    if (!cell){
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell" owner:self options:nil] lastObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.delegate = self;
+    }
+    cell.leftTitle.text = @"雪莲";
+    cell.leftImg.identifierString = cell.leftTitle.text;
+    
+    cell.centerTitle.text = @"桃美人";
+    cell.centerImg.identifierString = cell.centerTitle.text;
+    
+    cell.rightTitle.text = @"绿熊";
+    cell.rightImg.identifierString = cell.rightTitle.text;
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 132.0;
+}
+
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
+    switch (sender.tag) {
+        case 1:{
+            
+            break;
+        }
+        case 2:{
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+
+
+- (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
+   
 }
 
 - (void)didReceiveMemoryWarning {

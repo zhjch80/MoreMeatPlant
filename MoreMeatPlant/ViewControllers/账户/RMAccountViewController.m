@@ -16,6 +16,8 @@
 #import "RMUserInfoViewController.h"
 #import "RMUserInfoEditViewController.h"
 #import "RMMyWalletViewController.h"
+#import "RMMyCollectionViewController.h"
+#import "RMMyHomeViewController.h"
 
 #import "RMMyCorpViewController.h"
 
@@ -73,7 +75,8 @@
                     }
                         break;
                     case 2:{//我的收藏
-                        
+                        RMMyCollectionViewController * collection = [[RMMyCollectionViewController alloc]initWithNibName:@"RMMyCollectionViewController" bundle:nil];
+                        [self.navigationController pushViewController:collection animated:YES];
                     }
                         break;
                     case 3:{//申请开店
@@ -87,7 +90,8 @@
                     }
                         break;
                     case 5:{//我的帖子
-                        
+                        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+                        [self.navigationController pushViewController:home animated:YES];
                     }
                         break;
                     case 6:{//系统消息
