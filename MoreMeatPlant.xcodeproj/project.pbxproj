@@ -1648,7 +1648,7 @@
 					};
 					1D9337061A8E3DFA00BA4FA7 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = PTY98AP2WF;
+						DevelopmentTeam = WWD46XW8M3;
 						TestTargetID = 1D9336EA1A8E3DFA00BA4FA7;
 					};
 				};

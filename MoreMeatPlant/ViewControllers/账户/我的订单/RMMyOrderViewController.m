@@ -22,6 +22,7 @@
     
     waitDeliveryController = [[RMOrderListViewController alloc]initWithNibName:@"RMOrderListViewController" bundle:nil];
     waitDeliveryController.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-40);
+    waitDeliveryController.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-40);
     [self.view addSubview:waitDeliveryController.view];
     
 }
