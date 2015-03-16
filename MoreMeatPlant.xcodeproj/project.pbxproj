@@ -129,6 +129,16 @@
 		5120FDC81AB5D9E3000E9BE1 /* RMMyHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5120FDC61AB5D9E3000E9BE1 /* RMMyHomeViewController.m */; };
 		5120FDC91AB5D9E3000E9BE1 /* RMMyHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5120FDC71AB5D9E3000E9BE1 /* RMMyHomeViewController.xib */; };
 		5120FDCB1AB5DEE9000E9BE1 /* member_my_home_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5120FDCA1AB5DEE9000E9BE1 /* member_my_home_btn.png */; };
+		5120FDDC1AB7138E000E9BE1 /* RMMyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5120FDDA1AB7138E000E9BE1 /* RMMyOrderViewController.m */; };
+		5120FDDD1AB7138E000E9BE1 /* RMMyOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5120FDDB1AB7138E000E9BE1 /* RMMyOrderViewController.xib */; };
+		5120FDE11AB71715000E9BE1 /* RMOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5120FDDF1AB71715000E9BE1 /* RMOrderListViewController.m */; };
+		5120FDE21AB71715000E9BE1 /* RMOrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5120FDE01AB71715000E9BE1 /* RMOrderListViewController.xib */; };
+		5120FDE61AB718B1000E9BE1 /* RMOrderHeadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5120FDE41AB718B1000E9BE1 /* RMOrderHeadTableViewCell.m */; };
+		5120FDE71AB718B1000E9BE1 /* RMOrderHeadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5120FDE51AB718B1000E9BE1 /* RMOrderHeadTableViewCell.xib */; };
+		5120FDEB1AB71B44000E9BE1 /* RMOrderProTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5120FDE91AB71B44000E9BE1 /* RMOrderProTableViewCell.m */; };
+		5120FDEC1AB71B44000E9BE1 /* RMOrderProTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5120FDEA1AB71B44000E9BE1 /* RMOrderProTableViewCell.xib */; };
+		5120FDF01AB71D34000E9BE1 /* RMOrderBottomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5120FDEE1AB71D34000E9BE1 /* RMOrderBottomTableViewCell.m */; };
+		5120FDF11AB71D34000E9BE1 /* RMOrderBottomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5120FDEF1AB71D34000E9BE1 /* RMOrderBottomTableViewCell.xib */; };
 		512D751A1AB1E1190027B7C7 /* RMUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 512D75181AB1E1190027B7C7 /* RMUserInfoViewController.m */; };
 		512D751B1AB1E1190027B7C7 /* RMUserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 512D75191AB1E1190027B7C7 /* RMUserInfoViewController.xib */; };
 		512D751F1AB1EA310027B7C7 /* RMUserInfoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 512D751D1AB1EA310027B7C7 /* RMUserInfoEditViewController.m */; };
@@ -483,6 +493,21 @@
 		5120FDC61AB5D9E3000E9BE1 /* RMMyHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMyHomeViewController.m; sourceTree = "<group>"; };
 		5120FDC71AB5D9E3000E9BE1 /* RMMyHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMyHomeViewController.xib; sourceTree = "<group>"; };
 		5120FDCA1AB5DEE9000E9BE1 /* member_my_home_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = member_my_home_btn.png; sourceTree = "<group>"; };
+		5120FDD91AB7138E000E9BE1 /* RMMyOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyOrderViewController.h; sourceTree = "<group>"; };
+		5120FDDA1AB7138E000E9BE1 /* RMMyOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMyOrderViewController.m; sourceTree = "<group>"; };
+		5120FDDB1AB7138E000E9BE1 /* RMMyOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMyOrderViewController.xib; sourceTree = "<group>"; };
+		5120FDDE1AB71715000E9BE1 /* RMOrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMOrderListViewController.h; sourceTree = "<group>"; };
+		5120FDDF1AB71715000E9BE1 /* RMOrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMOrderListViewController.m; sourceTree = "<group>"; };
+		5120FDE01AB71715000E9BE1 /* RMOrderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderListViewController.xib; sourceTree = "<group>"; };
+		5120FDE31AB718B1000E9BE1 /* RMOrderHeadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMOrderHeadTableViewCell.h; sourceTree = "<group>"; };
+		5120FDE41AB718B1000E9BE1 /* RMOrderHeadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMOrderHeadTableViewCell.m; sourceTree = "<group>"; };
+		5120FDE51AB718B1000E9BE1 /* RMOrderHeadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderHeadTableViewCell.xib; sourceTree = "<group>"; };
+		5120FDE81AB71B44000E9BE1 /* RMOrderProTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMOrderProTableViewCell.h; sourceTree = "<group>"; };
+		5120FDE91AB71B44000E9BE1 /* RMOrderProTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMOrderProTableViewCell.m; sourceTree = "<group>"; };
+		5120FDEA1AB71B44000E9BE1 /* RMOrderProTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderProTableViewCell.xib; sourceTree = "<group>"; };
+		5120FDED1AB71D34000E9BE1 /* RMOrderBottomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMOrderBottomTableViewCell.h; sourceTree = "<group>"; };
+		5120FDEE1AB71D34000E9BE1 /* RMOrderBottomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMOrderBottomTableViewCell.m; sourceTree = "<group>"; };
+		5120FDEF1AB71D34000E9BE1 /* RMOrderBottomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderBottomTableViewCell.xib; sourceTree = "<group>"; };
 		512D75171AB1E1190027B7C7 /* RMUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMUserInfoViewController.h; sourceTree = "<group>"; };
 		512D75181AB1E1190027B7C7 /* RMUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMUserInfoViewController.m; sourceTree = "<group>"; };
 		512D75191AB1E1190027B7C7 /* RMUserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMUserInfoViewController.xib; sourceTree = "<group>"; };
@@ -909,6 +934,7 @@
 		1D64F4E71A904E180073EB98 /* 账户 */ = {
 			isa = PBXGroup;
 			children = (
+				5120FDD81AB71372000E9BE1 /* 我的订单 */,
 				5120FDC41AB5D99C000E9BE1 /* 我的主页 */,
 				519927471AB5821E00B0F83F /* 我的收藏 */,
 				519927301AB5680200B0F83F /* 我的店铺 */,
@@ -1266,6 +1292,28 @@
 				5120FDC71AB5D9E3000E9BE1 /* RMMyHomeViewController.xib */,
 			);
 			path = "我的主页";
+			sourceTree = "<group>";
+		};
+		5120FDD81AB71372000E9BE1 /* 我的订单 */ = {
+			isa = PBXGroup;
+			children = (
+				5120FDD91AB7138E000E9BE1 /* RMMyOrderViewController.h */,
+				5120FDDA1AB7138E000E9BE1 /* RMMyOrderViewController.m */,
+				5120FDDB1AB7138E000E9BE1 /* RMMyOrderViewController.xib */,
+				5120FDDE1AB71715000E9BE1 /* RMOrderListViewController.h */,
+				5120FDDF1AB71715000E9BE1 /* RMOrderListViewController.m */,
+				5120FDE01AB71715000E9BE1 /* RMOrderListViewController.xib */,
+				5120FDE31AB718B1000E9BE1 /* RMOrderHeadTableViewCell.h */,
+				5120FDE41AB718B1000E9BE1 /* RMOrderHeadTableViewCell.m */,
+				5120FDE51AB718B1000E9BE1 /* RMOrderHeadTableViewCell.xib */,
+				5120FDE81AB71B44000E9BE1 /* RMOrderProTableViewCell.h */,
+				5120FDE91AB71B44000E9BE1 /* RMOrderProTableViewCell.m */,
+				5120FDEA1AB71B44000E9BE1 /* RMOrderProTableViewCell.xib */,
+				5120FDED1AB71D34000E9BE1 /* RMOrderBottomTableViewCell.h */,
+				5120FDEE1AB71D34000E9BE1 /* RMOrderBottomTableViewCell.m */,
+				5120FDEF1AB71D34000E9BE1 /* RMOrderBottomTableViewCell.xib */,
+			);
+			path = "我的订单";
 			sourceTree = "<group>";
 		};
 		512D75231AB1EF850027B7C7 /* 我的钱包 */ = {
@@ -1689,6 +1737,7 @@
 				1D83975E1AB3F81600DA190A /* check.png in Resources */,
 				51E2684C1AAF35FE00252DEF /* 方正正中黑简体.TTF in Resources */,
 				519926E31AB5610C00B0F83F /* btn_add_photo_s.png in Resources */,
+				5120FDEC1AB71B44000E9BE1 /* RMOrderProTableViewCell.xib in Resources */,
 				519926F41AB5610C00B0F83F /* img_39.png in Resources */,
 				1D4DA33F1A92181E006A9EBA /* RMFreshManCourseOfStudyViewController.xib in Resources */,
 				519927121AB5610C00B0F83F /* img_tzed_10.png in Resources */,
@@ -1751,6 +1800,7 @@
 				1D64F4F71A904E180073EB98 /* Default_6p.png in Resources */,
 				5199272E1AB565A900B0F83F /* member_level_left.png in Resources */,
 				1D93AB7C1AB029ED0034574C /* RMReleasePoisonDetailsCell_3.xib in Resources */,
+				5120FDE71AB718B1000E9BE1 /* RMOrderHeadTableViewCell.xib in Resources */,
 				519927131AB5610C00B0F83F /* img_tzed_11.png in Resources */,
 				51E267E61AA7462000252DEF /* RMNearFriendViewController.xib in Resources */,
 				1D93AB7A1AB029ED0034574C /* RMReleasePoisonDetailsCell_1.xib in Resources */,
@@ -1767,6 +1817,7 @@
 				5199270E1AB5610C00B0F83F /* img_tz_7.png in Resources */,
 				51E268161AADE25B00252DEF /* RMShopCarGoodsTableViewCell.xib in Resources */,
 				1D4DA3261A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.xib in Resources */,
+				5120FDDD1AB7138E000E9BE1 /* RMMyOrderViewController.xib in Resources */,
 				1D8397621AB3F81600DA190A /* check@2x.png in Resources */,
 				1D64F4FF1A904E180073EB98 /* RMHomeViewController.xib in Resources */,
 				519927561AB5870100B0F83F /* RMCorpCollectionViewController.xib in Resources */,
@@ -1775,6 +1826,7 @@
 				1D4DA34E1A9393ED006A9EBA /* RMDaqoDetailsViewController.xib in Resources */,
 				519927221AB5610C00B0F83F /* imgg_38.png in Resources */,
 				1D8397261AB2C8E200DA190A /* RMStartPostingViewController.xib in Resources */,
+				5120FDE21AB71715000E9BE1 /* RMOrderListViewController.xib in Resources */,
 				519927211AB5610C00B0F83F /* imgg_36.png in Resources */,
 				51E268411AAF342000252DEF /* RMSettlementViewController.xib in Resources */,
 				519926FA1AB5610C00B0F83F /* img_buy.png in Resources */,
@@ -1801,6 +1853,7 @@
 				519927141AB5610C00B0F83F /* img_tzed_2.png in Resources */,
 				51E2684B1AAF35FE00252DEF /* 方正正纤黑简体.TTF in Resources */,
 				519927511AB5846100B0F83F /* RMPlantCollectionViewController.xib in Resources */,
+				5120FDF11AB71D34000E9BE1 /* RMOrderBottomTableViewCell.xib in Resources */,
 				1D55762B1A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1845,9 +1898,11 @@
 				1D9CB17A1AAE9EE500BD5A7D /* AFSecurityPolicy.m in Sources */,
 				1D4DA3201A9216BA006A9EBA /* RMReleasePoisonViewController.m in Sources */,
 				51E268371AAE003000252DEF /* STDbHandle.m in Sources */,
+				5120FDF01AB71D34000E9BE1 /* RMOrderBottomTableViewCell.m in Sources */,
 				51E267F01AA74BDB00252DEF /* RMMyFriendViewController.m in Sources */,
 				512D751A1AB1E1190027B7C7 /* RMUserInfoViewController.m in Sources */,
 				1D9CB14E1AAE8B3B00BD5A7D /* RTLabel.m in Sources */,
+				5120FDE61AB718B1000E9BE1 /* RMOrderHeadTableViewCell.m in Sources */,
 				51E268101AADE19F00252DEF /* RMShopCarViewController.m in Sources */,
 				1D4EE43D1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.m in Sources */,
 				51E268361AAE003000252DEF /* STDb.m in Sources */,
@@ -1877,6 +1932,7 @@
 				1D8397491AB3F72D00DA190A /* DoImagePickerController.m in Sources */,
 				957A38FB1AB4530F00A335F7 /* RMPlantWithSaleDetailsCell.m in Sources */,
 				1D83972A1AB2CA9E00DA190A /* ZFModalTransitionAnimator.m in Sources */,
+				5120FDEB1AB71B44000E9BE1 /* RMOrderProTableViewCell.m in Sources */,
 				1D4DA3471A93090D006A9EBA /* RMDaqoCell.m in Sources */,
 				1D83974D1AB3F72D00DA190A /* DoPhotoCell.m in Sources */,
 				512D75311AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m in Sources */,
@@ -1889,6 +1945,7 @@
 				1D64F4FE1A904E180073EB98 /* RMHomeViewController.m in Sources */,
 				1D83972D1AB2D0F800DA190A /* RMStartPostingHeaderView.m in Sources */,
 				51E268661AAF4D8100252DEF /* RMAddressEditViewController.m in Sources */,
+				5120FDDC1AB7138E000E9BE1 /* RMMyOrderViewController.m in Sources */,
 				51E2681F1AADE92300252DEF /* RMShopLeaveMsTableViewCell.m in Sources */,
 				9538F3D21AB0A5BF00608FAD /* RMTableHeadView.m in Sources */,
 				1D93ABA51AB2AABE0034574C /* UIView+Effects.m in Sources */,
@@ -1902,6 +1959,7 @@
 				1D64F4FC1A904E180073EB98 /* RMAccountViewController.m in Sources */,
 				1D93AB751AB0291C0034574C /* RMReleasePoisonDetailsCell.m in Sources */,
 				1D64F5081A904E290073EB98 /* RMCustomNavController.m in Sources */,
+				5120FDE11AB71715000E9BE1 /* RMOrderListViewController.m in Sources */,
 				1D64F5101A91A9C00073EB98 /* UIButton+EnlargeEdge.m in Sources */,
 				1D8397381AB2E91400DA190A /* RMBaseTextView.m in Sources */,
 				1D8397321AB2DEBA00DA190A /* RMBaseTextField.m in Sources */,

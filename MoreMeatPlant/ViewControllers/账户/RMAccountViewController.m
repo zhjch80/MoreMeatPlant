@@ -18,6 +18,7 @@
 #import "RMMyWalletViewController.h"
 #import "RMMyCollectionViewController.h"
 #import "RMMyHomeViewController.h"
+#import "RMMyOrderViewController.h"
 
 #import "RMMyCorpViewController.h"
 
@@ -86,7 +87,9 @@
                     }
                         break;
                     case 4:{//我的订单
-                        
+                        RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
+                        order.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+                        [self presentPopUpViewController:order overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
                     }
                         break;
                     case 5:{//我的帖子
@@ -102,7 +105,7 @@
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
                         message.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-49);
-                        [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
+                        [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-49)];
                     }
                         break;
                     case 7:{//等待升级
