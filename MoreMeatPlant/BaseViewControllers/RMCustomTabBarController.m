@@ -12,6 +12,7 @@
 @interface RMCustomTabBarController ()
 {
     NSInteger viewControllerCount;
+    UIImageView * bgTabImg;
 }
 
 @end
@@ -27,6 +28,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.tabBar.hidden = YES;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kHideCustomTabbar) name:@"kHideCustomTabbar" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kShowCustomTabbar) name:@"kShowCustomTabbar" object:nil];
+
     }
     return self;
 }
@@ -56,7 +61,7 @@
         else
             height = kScreenHeight - tabbarHeight;
     
-    UIImageView * bgTabImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, tabbarHeight)];
+    bgTabImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, tabbarHeight)];
     bgTabImg.image = LOADIMAGE(@"bottom", kImageTypePNG);
     bgTabImg.userInteractionEnabled = YES;
     bgTabImg.multipleTouchEnabled = YES;
@@ -188,6 +193,39 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)kHideCustomTabbar {
+    CGFloat height = 0.f;
+    if (self.isInDeck)
+        if(isIOS7)
+            height = kScreenHeight - tabbarHeight;
+        else
+            height = kScreenHeight - tabbarHeight - 20.f;
+        else
+            height = kScreenHeight - tabbarHeight;
+
+    bgTabImg.hidden = YES;
+    [UIView animateWithDuration:0.5f animations:^{
+        _myTabbarView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 49);
+    }];
+
+}
+
+- (void)kShowCustomTabbar {
+    CGFloat height = 0.f;
+    if (self.isInDeck)
+        if(isIOS7)
+            height = kScreenHeight - tabbarHeight;
+        else
+            height = kScreenHeight - tabbarHeight - 20.f;
+        else
+            height = kScreenHeight - tabbarHeight;
+    
+    bgTabImg.hidden = NO;
+    [UIView animateWithDuration:0.5f animations:^{
+        _myTabbarView.frame = CGRectMake(0, height, kScreenWidth, 49);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

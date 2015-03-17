@@ -95,6 +95,9 @@
                         break;
                     case 4:{//我的订单
                         RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
+                        order.callback = ^(void){
+                            [self dismissPopUpViewControllerWithcompletion:nil];
+                        };
                         order.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
                         [self presentPopUpViewController:order overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
                     }

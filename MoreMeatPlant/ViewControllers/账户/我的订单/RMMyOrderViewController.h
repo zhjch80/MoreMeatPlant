@@ -8,16 +8,20 @@
 
 #import "RMBaseViewController.h"
 #import "RMOrderListViewController.h"
+
+typedef void (^RMMyOrderViewCallBack) (void);
 @interface RMMyOrderViewController : RMBaseViewController
 {
-    RMOrderListViewController * waitDeliveryController;
-    RMOrderListViewController * waitPayController;
-    RMOrderListViewController * deliveryedController;
-    RMOrderListViewController * orderDoneController;
+    RMOrderListViewController * waitDeliveryCtl;
+    RMOrderListViewController * waitPayCtl;
+    RMOrderListViewController * deliveryedCtl;
+    RMOrderListViewController * orderDoneCtl;
 }
 @property (weak, nonatomic) IBOutlet UIButton *waitDelivery;
 @property (weak, nonatomic) IBOutlet UIButton *waitPay;
 @property (weak, nonatomic) IBOutlet UIButton *deliveryed;
 @property (weak, nonatomic) IBOutlet UIButton *orderDone;
+
+@property (copy, nonatomic) RMMyOrderViewCallBack callback;
 
 @end

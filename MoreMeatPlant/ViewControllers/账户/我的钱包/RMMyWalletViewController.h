@@ -9,5 +9,7 @@
 #import "RMBaseViewController.h"
 
 @interface RMMyWalletViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *mTableView;
+
 
 @end
