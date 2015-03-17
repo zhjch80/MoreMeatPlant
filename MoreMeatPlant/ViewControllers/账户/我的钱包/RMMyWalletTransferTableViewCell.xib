@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -153,6 +153,7 @@
                     <constraint firstItem="OsZ-Xd-UFU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="4jq-ja-Wga"/>
                     <constraint firstAttribute="trailingMargin" secondItem="W5a-KN-jjY" secondAttribute="trailing" constant="19" id="7bA-lt-NQK"/>
                     <constraint firstAttribute="bottomMargin" secondItem="XMd-Lr-PgT" secondAttribute="bottom" constant="-0.5" id="Bhc-ee-Zgc"/>
+                    <constraint firstItem="XMd-Lr-PgT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="FFj-CU-ljN" secondAttribute="bottom" constant="13" id="DR5-Td-Abk"/>
                     <constraint firstItem="sc5-Ya-ziL" firstAttribute="centerY" secondItem="W5a-KN-jjY" secondAttribute="centerY" id="J1B-Yc-QNQ"/>
                     <constraint firstItem="qxJ-9P-vme" firstAttribute="leading" secondItem="Y2q-od-FSj" secondAttribute="trailing" constant="8" id="Mvo-11-Azn"/>
                     <constraint firstItem="Lii-EY-LK6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="P3W-fM-imx"/>

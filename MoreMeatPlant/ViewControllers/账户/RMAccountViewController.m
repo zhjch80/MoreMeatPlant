@@ -45,12 +45,17 @@
     _headerImgV.clipsToBounds = YES;
     
     functitleArray = [[NSMutableArray alloc]init];
-    if(/* DISABLES CODE */ (1)){//普通会员
+    funcimgArray = [[NSMutableArray alloc]init];
+    if(/* DISABLES CODE */ (0)){//普通会员
         functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"申请\n开店",@"我的\n订单",@"我的\n帖子",@"系统\n通知",@"等待\n升级",@"购物\n篮",@"附近\n肉友",@"我的\n资料" ,nil];
+        funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"sqkd",@"wddd",@"wdtz",@"xttz",@"ddsj",@"gwl",@"fjry",@"wdzl", nil];
     }
     else{//商户会员
         functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n资料",@"已出\n宝贝",@"我的\n帖子",@"系统\n通知",@"附近\n肉友",@"发布\n宝贝",@"我的\n店铺",@"发布\n广告",@"等待\n升级",nil];
+        funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wdzl",@"wddd",@"wdtz",@"xttz",@"fjry",@"fbbb",@"sqkd",@"fbgg",@"ddsj", nil];
     }
+    
+    
 }
 
 - (void)layoutViews {
@@ -60,7 +65,9 @@
     {
         RMAccountView * acountView = [[RMAccountView alloc]initWithFrame:CGRectMake(kScreenWidth-(width+3)*(i%4)-15-width, 204+(height+3)*(i/4), width, height)];
         acountView.tag = i+100;
+        acountView.backgroundColor = UIColorFromRGB(0x2a2a2a);
         acountView.titleL.text = [functitleArray objectAtIndex:i];
+        [acountView.imgV setImage:[UIImage imageNamed:[funcimgArray objectAtIndex:i]]];
         acountView.call_back = ^(RMAccountView * view){
             if(/* DISABLES CODE */ (1)){//普通会员
                 switch (view.tag-100) {

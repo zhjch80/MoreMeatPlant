@@ -10,6 +10,7 @@
 
 @interface RMAccountViewController : RMBaseViewController{
     NSMutableArray * functitleArray;
+    NSMutableArray * funcimgArray;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *headerImgV;
 @property (weak, nonatomic) IBOutlet UILabel *userNameL;

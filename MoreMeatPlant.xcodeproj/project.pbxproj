@@ -149,6 +149,19 @@
 		512D752D1AB1F3FF0027B7C7 /* RMMyWalletYueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 512D752B1AB1F3FF0027B7C7 /* RMMyWalletYueTableViewCell.xib */; };
 		512D75311AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 512D752F1AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m */; };
 		512D75321AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 512D75301AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib */; };
+		517DF7A41AB861090053EEFE /* ddsj@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF7971AB861090053EEFE /* ddsj@2x.png */; };
+		517DF7A51AB861090053EEFE /* fbbb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF7981AB861090053EEFE /* fbbb@2x.png */; };
+		517DF7A61AB861090053EEFE /* fbgg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF7991AB861090053EEFE /* fbgg@2x.png */; };
+		517DF7A71AB861090053EEFE /* fjry@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF79A1AB861090053EEFE /* fjry@2x.png */; };
+		517DF7A81AB861090053EEFE /* gwl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF79B1AB861090053EEFE /* gwl@2x.png */; };
+		517DF7A91AB861090053EEFE /* sqkd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF79C1AB861090053EEFE /* sqkd@2x.png */; };
+		517DF7AA1AB861090053EEFE /* wddd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF79D1AB861090053EEFE /* wddd@2x.png */; };
+		517DF7AB1AB861090053EEFE /* wdqb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF79E1AB861090053EEFE /* wdqb@2x.png */; };
+		517DF7AC1AB861090053EEFE /* wdry@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF79F1AB861090053EEFE /* wdry@2x.png */; };
+		517DF7AD1AB861090053EEFE /* wdsc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF7A01AB861090053EEFE /* wdsc@2x.png */; };
+		517DF7AE1AB861090053EEFE /* wdtz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF7A11AB861090053EEFE /* wdtz@2x.png */; };
+		517DF7AF1AB861090053EEFE /* wdzl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF7A21AB861090053EEFE /* wdzl@2x.png */; };
+		517DF7B01AB861090053EEFE /* xttz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 517DF7A31AB861090053EEFE /* xttz@2x.png */; };
 		5199269A1AB5605600B0F83F /* member_bottom_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 519926991AB5605600B0F83F /* member_bottom_bg.png */; };
 		519926E01AB5610C00B0F83F /* bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 5199269C1AB5610C00B0F83F /* bottom.png */; };
 		519926E11AB5610C00B0F83F /* btn_add_photo_n.png in Resources */ = {isa = PBXBuildFile; fileRef = 5199269D1AB5610C00B0F83F /* btn_add_photo_n.png */; };
@@ -523,6 +536,19 @@
 		512D752E1AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyWalletTransferTableViewCell.h; sourceTree = "<group>"; };
 		512D752F1AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMyWalletTransferTableViewCell.m; sourceTree = "<group>"; };
 		512D75301AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMyWalletTransferTableViewCell.xib; sourceTree = "<group>"; };
+		517DF7971AB861090053EEFE /* ddsj@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ddsj@2x.png"; sourceTree = "<group>"; };
+		517DF7981AB861090053EEFE /* fbbb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fbbb@2x.png"; sourceTree = "<group>"; };
+		517DF7991AB861090053EEFE /* fbgg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fbgg@2x.png"; sourceTree = "<group>"; };
+		517DF79A1AB861090053EEFE /* fjry@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fjry@2x.png"; sourceTree = "<group>"; };
+		517DF79B1AB861090053EEFE /* gwl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gwl@2x.png"; sourceTree = "<group>"; };
+		517DF79C1AB861090053EEFE /* sqkd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sqkd@2x.png"; sourceTree = "<group>"; };
+		517DF79D1AB861090053EEFE /* wddd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wddd@2x.png"; sourceTree = "<group>"; };
+		517DF79E1AB861090053EEFE /* wdqb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wdqb@2x.png"; sourceTree = "<group>"; };
+		517DF79F1AB861090053EEFE /* wdry@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wdry@2x.png"; sourceTree = "<group>"; };
+		517DF7A01AB861090053EEFE /* wdsc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wdsc@2x.png"; sourceTree = "<group>"; };
+		517DF7A11AB861090053EEFE /* wdtz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wdtz@2x.png"; sourceTree = "<group>"; };
+		517DF7A21AB861090053EEFE /* wdzl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wdzl@2x.png"; sourceTree = "<group>"; };
+		517DF7A31AB861090053EEFE /* xttz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xttz@2x.png"; sourceTree = "<group>"; };
 		519926991AB5605600B0F83F /* member_bottom_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = member_bottom_bg.png; sourceTree = "<group>"; };
 		5199269C1AB5610C00B0F83F /* bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom.png; sourceTree = "<group>"; };
 		5199269D1AB5610C00B0F83F /* btn_add_photo_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_add_photo_n.png; sourceTree = "<group>"; };
@@ -1335,6 +1361,19 @@
 		519926981AB559E100B0F83F /* member */ = {
 			isa = PBXGroup;
 			children = (
+				517DF7971AB861090053EEFE /* ddsj@2x.png */,
+				517DF7981AB861090053EEFE /* fbbb@2x.png */,
+				517DF7991AB861090053EEFE /* fbgg@2x.png */,
+				517DF79A1AB861090053EEFE /* fjry@2x.png */,
+				517DF79B1AB861090053EEFE /* gwl@2x.png */,
+				517DF79C1AB861090053EEFE /* sqkd@2x.png */,
+				517DF79D1AB861090053EEFE /* wddd@2x.png */,
+				517DF79E1AB861090053EEFE /* wdqb@2x.png */,
+				517DF79F1AB861090053EEFE /* wdry@2x.png */,
+				517DF7A01AB861090053EEFE /* wdsc@2x.png */,
+				517DF7A11AB861090053EEFE /* wdtz@2x.png */,
+				517DF7A21AB861090053EEFE /* wdzl@2x.png */,
+				517DF7A31AB861090053EEFE /* xttz@2x.png */,
 				5120FDCA1AB5DEE9000E9BE1 /* member_my_home_btn.png */,
 				5120FDBC1AB5D989000E9BE1 /* member_collection_collected.png */,
 				5120FDBD1AB5D989000E9BE1 /* member_collection_no_evaulate.png */,
@@ -1696,6 +1735,7 @@
 				51E268201AADE92300252DEF /* RMShopLeaveMsTableViewCell.xib in Resources */,
 				51E2681B1AADE77700252DEF /* RMSopCarHeadTableViewCell.xib in Resources */,
 				1D4DA3211A9216BA006A9EBA /* RMReleasePoisonViewController.xib in Resources */,
+				517DF7A51AB861090053EEFE /* fbbb@2x.png in Resources */,
 				519926E11AB5610C00B0F83F /* btn_add_photo_n.png in Resources */,
 				5199269A1AB5605600B0F83F /* member_bottom_bg.png in Resources */,
 				957A38FC1AB4530F00A335F7 /* RMPlantWithSaleDetailsCell.xib in Resources */,
@@ -1705,6 +1745,7 @@
 				1DD854871A9454E9003B12A5 /* RMReleasePoisonCell_2.xib in Resources */,
 				51E2684A1AAF35FE00252DEF /* 方正正黑简体.TTF in Resources */,
 				1D8397641AB3F81600DA190A /* down@2x.png in Resources */,
+				517DF7AD1AB861090053EEFE /* wdsc@2x.png in Resources */,
 				519927031AB5610C00B0F83F /* img_postMessage.png in Resources */,
 				519927001AB5610C00B0F83F /* img_fdqdetl_zan.png in Resources */,
 				519927071AB5610C00B0F83F /* img_tz_11.png in Resources */,
@@ -1724,6 +1765,8 @@
 				519926F91AB5610C00B0F83F /* img_backup.png in Resources */,
 				519927351AB5682700B0F83F /* RMMyCorpViewController.xib in Resources */,
 				5120FDC31AB5D989000E9BE1 /* member_collection_type_line.png in Resources */,
+				517DF7A81AB861090053EEFE /* gwl@2x.png in Resources */,
+				517DF7AB1AB861090053EEFE /* wdqb@2x.png in Resources */,
 				519927271AB562C800B0F83F /* member_pointline.png in Resources */,
 				5199270F1AB5610C00B0F83F /* img_tz_8.png in Resources */,
 				519927041AB5610C00B0F83F /* img_share.png in Resources */,
@@ -1735,6 +1778,7 @@
 				5199271A1AB5610C00B0F83F /* img_tzed_8.png in Resources */,
 				1D83972F1AB2D10C00DA190A /* RMStartPostingHeaderView.xib in Resources */,
 				1D83975E1AB3F81600DA190A /* check.png in Resources */,
+				517DF7AA1AB861090053EEFE /* wddd@2x.png in Resources */,
 				51E2684C1AAF35FE00252DEF /* 方正正中黑简体.TTF in Resources */,
 				519926E31AB5610C00B0F83F /* btn_add_photo_s.png in Resources */,
 				5120FDEC1AB71B44000E9BE1 /* RMOrderProTableViewCell.xib in Resources */,
@@ -1748,6 +1792,7 @@
 				1DD854881A9454E9003B12A5 /* RMReleasePoisonCell_3.xib in Resources */,
 				519926E51AB5610C00B0F83F /* deletecircular.png in Resources */,
 				519926EE1AB5610C00B0F83F /* img_26.png in Resources */,
+				517DF7A91AB861090053EEFE /* sqkd@2x.png in Resources */,
 				51E268111AADE19F00252DEF /* RMShopCarViewController.xib in Resources */,
 				519926E41AB5610C00B0F83F /* btn_add_photo_s@2x.png in Resources */,
 				519926FD1AB5610C00B0F83F /* img_fdq_line_1.png in Resources */,
@@ -1758,6 +1803,7 @@
 				1D4EE43E1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.xib in Resources */,
 				1D83975C1AB3F81600DA190A /* show.png in Resources */,
 				1D83974E1AB3F72D00DA190A /* DoPhotoCell.xib in Resources */,
+				517DF7B01AB861090053EEFE /* xttz@2x.png in Resources */,
 				519927291AB5630200B0F83F /* member_level_icon.png in Resources */,
 				5199270C1AB5610C00B0F83F /* img_tz_5.png in Resources */,
 				519927101AB5610C00B0F83F /* img_tz_9.png in Resources */,
@@ -1769,6 +1815,7 @@
 				1D64F4F91A904E180073EB98 /* RMTalkMoreViewController.xib in Resources */,
 				1D4DA3151A920F93006A9EBA /* RMHomeCell_sub.xib in Resources */,
 				1D64F5271A91B72C0073EB98 /* RMNearbyMerchantViewController.xib in Resources */,
+				517DF7A71AB861090053EEFE /* fjry@2x.png in Resources */,
 				5199274C1AB5825800B0F83F /* RMPostCollectionViewController.xib in Resources */,
 				512D75201AB1EA310027B7C7 /* RMUserInfoEditViewController.xib in Resources */,
 				1D83974C1AB3F72D00DA190A /* DoAlbumCell.xib in Resources */,
@@ -1791,6 +1838,7 @@
 				1D64F4FB1A904E180073EB98 /* RMDaqoViewController.xib in Resources */,
 				519927011AB5610C00B0F83F /* img_moreChat.png in Resources */,
 				519926F31AB5610C00B0F83F /* img_38.png in Resources */,
+				517DF7A41AB861090053EEFE /* ddsj@2x.png in Resources */,
 				51E268611AAF448E00252DEF /* RMSettlementTableViewCell.xib in Resources */,
 				519926FF1AB5610C00B0F83F /* img_fdqdetl_loc.png in Resources */,
 				519927161AB5610C00B0F83F /* img_tzed_4.png in Resources */,
@@ -1843,9 +1891,13 @@
 				1D93AB7B1AB029ED0034574C /* RMReleasePoisonDetailsCell_2.xib in Resources */,
 				51E2685C1AAF43D100252DEF /* RMAddAddressTableViewCell.xib in Resources */,
 				5199273F1AB568B800B0F83F /* corp_renzheng_icon.png in Resources */,
+				517DF7AE1AB861090053EEFE /* wdtz@2x.png in Resources */,
+				517DF7AC1AB861090053EEFE /* wdry@2x.png in Resources */,
 				5199271F1AB5610C00B0F83F /* imgd_38.png in Resources */,
 				512D75321AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib in Resources */,
 				519926F21AB5610C00B0F83F /* img_36.png in Resources */,
+				517DF7A61AB861090053EEFE /* fbgg@2x.png in Resources */,
+				517DF7AF1AB861090053EEFE /* wdzl@2x.png in Resources */,
 				5120FDC01AB5D989000E9BE1 /* member_collection_collected.png in Resources */,
 				519926EA1AB5610C00B0F83F /* img_06.png in Resources */,
 				51E268481AAF35FE00252DEF /* 方正正粗黑简体.TTF in Resources */,
