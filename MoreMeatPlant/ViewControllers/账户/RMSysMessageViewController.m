@@ -36,7 +36,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row%2 == 0){
+    if(indexPath.row%2 != 0){
         RMSysMessageTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMSysMessageTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMSysMessageTableViewCell" owner:self options:nil] lastObject];
@@ -56,7 +56,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row%2 == 0){
+    if(indexPath.row%2 != 0){
         return 44;
     }
     else{

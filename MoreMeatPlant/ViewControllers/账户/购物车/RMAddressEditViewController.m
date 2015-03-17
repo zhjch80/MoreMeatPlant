@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self setCustomNavTitle:@"新建地址"];
 }
 
 - (void)didReceiveMemoryWarning {

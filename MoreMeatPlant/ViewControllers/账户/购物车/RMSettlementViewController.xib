@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="方正正黑简体.TTF">
+            <string>FZZHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RMSettlementViewController">
             <connections>
-                <outlet property="mainTableView" destination="ecV-d2-9Ma" id="3bI-KG-DoY"/>
+                <outlet property="close_btn" destination="S7V-tx-0XY" id="Mgm-Ch-UFC"/>
+                <outlet property="mainTableView" destination="zVc-bS-bgV" id="Zh6-Qa-F6C"/>
                 <outlet property="view" destination="iN0-l3-epB" id="W4o-U6-Zpe"/>
             </connections>
         </placeholder>
@@ -16,48 +22,63 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ecV-d2-9Ma">
-                    <rect key="frame" x="0.0" y="34" width="320" height="534"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="DNC-31-e4O"/>
-                        <outlet property="delegate" destination="-1" id="ju3-eX-0Z8"/>
-                    </connections>
-                </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择收货地址" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jiD-6J-W2v">
-                    <rect key="frame" x="118" y="8" width="84" height="17"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rPg-V8-hHf">
-                    <rect key="frame" x="0.0" y="33" width="320" height="1"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJY-FO-hlH">
+                    <rect key="frame" x="0.0" y="15" width="320" height="553"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="rPg-V8-hHf">
+                            <rect key="frame" x="0.0" y="47" width="320" height="1"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="CHN-gi-ZTU"/>
+                            </constraints>
+                        </imageView>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zVc-bS-bgV">
+                            <rect key="frame" x="0.0" y="48.5" width="320" height="504.5"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="vIB-g0-fJw"/>
+                                <outlet property="delegate" destination="-1" id="L2J-CD-fcs"/>
+                            </connections>
+                        </tableView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择收货地址" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jiD-6J-W2v">
+                            <rect key="frame" x="118" y="15" width="84" height="17.5"/>
+                            <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                            <color key="textColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.80392156862745101" green="0.80392156862745101" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="HbK-YC-Ein"/>
+                        <constraint firstAttribute="centerX" secondItem="jiD-6J-W2v" secondAttribute="centerX" id="6NC-1T-Aub"/>
+                        <constraint firstItem="rPg-V8-hHf" firstAttribute="leading" secondItem="YJY-FO-hlH" secondAttribute="leading" id="7bC-9o-QRP"/>
+                        <constraint firstItem="jiD-6J-W2v" firstAttribute="top" secondItem="YJY-FO-hlH" secondAttribute="top" constant="15" id="HPm-8u-smf"/>
+                        <constraint firstAttribute="trailing" secondItem="rPg-V8-hHf" secondAttribute="trailing" id="VV9-PL-hkb"/>
+                        <constraint firstAttribute="trailing" secondItem="zVc-bS-bgV" secondAttribute="trailing" id="YZz-B3-h9P"/>
+                        <constraint firstItem="zVc-bS-bgV" firstAttribute="top" secondItem="rPg-V8-hHf" secondAttribute="bottom" id="ffs-Qx-A12"/>
+                        <constraint firstAttribute="bottom" secondItem="zVc-bS-bgV" secondAttribute="bottom" id="js7-lx-Fxe"/>
+                        <constraint firstItem="rPg-V8-hHf" firstAttribute="top" secondItem="jiD-6J-W2v" secondAttribute="bottom" constant="15" id="tn9-IS-325"/>
+                        <constraint firstItem="zVc-bS-bgV" firstAttribute="leading" secondItem="YJY-FO-hlH" secondAttribute="leading" id="uYR-Id-ZJA"/>
                     </constraints>
-                </imageView>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7V-tx-0XY">
-                    <rect key="frame" x="260" y="-15" width="30" height="30"/>
-                    <color key="backgroundColor" red="0.87843137250000003" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal">
+                    <rect key="frame" x="242" y="0.0" width="30" height="30"/>
+                    <state key="normal" backgroundImage="gwc_close.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="jiD-6J-W2v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="4nN-wh-iED"/>
-                <constraint firstItem="ecV-d2-9Ma" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GhZ-0p-E9B"/>
-                <constraint firstItem="rPg-V8-hHf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IJ5-Xl-YFc"/>
-                <constraint firstAttribute="trailing" secondItem="rPg-V8-hHf" secondAttribute="trailing" id="RcQ-KF-rPR"/>
-                <constraint firstAttribute="centerX" secondItem="jiD-6J-W2v" secondAttribute="centerX" id="b7F-R9-Wwe"/>
-                <constraint firstItem="ecV-d2-9Ma" firstAttribute="top" secondItem="rPg-V8-hHf" secondAttribute="bottom" id="eve-pk-w5x"/>
-                <constraint firstAttribute="bottom" secondItem="ecV-d2-9Ma" secondAttribute="bottom" id="n5w-Vc-GUX"/>
-                <constraint firstItem="rPg-V8-hHf" firstAttribute="top" secondItem="jiD-6J-W2v" secondAttribute="bottom" constant="8" id="p5J-Hd-pCO"/>
-                <constraint firstAttribute="trailing" secondItem="ecV-d2-9Ma" secondAttribute="trailing" id="yeQ-ne-XDE"/>
+                <constraint firstItem="YJY-FO-hlH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="1P2-lo-I0p"/>
+                <constraint firstItem="YJY-FO-hlH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DhT-jF-NHE"/>
+                <constraint firstAttribute="bottom" secondItem="YJY-FO-hlH" secondAttribute="bottom" id="RD4-HG-lBK"/>
+                <constraint firstAttribute="trailing" secondItem="YJY-FO-hlH" secondAttribute="trailing" id="qAl-Bi-avB"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="255" y="403"/>
+            <point key="canvasLocation" x="278" y="383"/>
         </view>
     </objects>
+    <resources>
+        <image name="gwc_close.png" width="87" height="87"/>
+        <image name="gwc_point_line.png" width="1134" height="1"/>
+    </resources>
 </document>

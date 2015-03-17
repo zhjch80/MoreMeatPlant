@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="方正正黑简体.TTF">
+            <string>FZZHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -16,19 +21,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nnz-zG-i3D">
-                        <rect key="frame" x="10" y="5" width="65" height="20"/>
+                        <rect key="frame" x="10" y="1" width="65" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="hm1-vY-Zi4"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
                         <state key="normal" title="花儿与少年">
-                            <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.1960784314" green="0.2156862745" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="hm1-vY-Zi4"/>
+                            </mask>
+                        </variation>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EQU-bX-CNY">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="detail_arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="EQU-bX-CNY">
                         <rect key="frame" x="80" y="8" width="15" height="15"/>
-                        <color key="backgroundColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="V5R-vD-0Qi"/>
                             <constraint firstAttribute="width" constant="15" id="mct-Z0-bhI"/>
@@ -44,6 +53,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="Nnz-zG-i3D" secondAttribute="centerY" id="4Fk-20-GNZ"/>
+                    <constraint firstItem="EQU-bX-CNY" firstAttribute="centerY" secondItem="Nnz-zG-i3D" secondAttribute="centerY" id="Il3-DB-Ze7"/>
                     <constraint firstItem="Nnz-zG-i3D" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="V4N-51-2mv"/>
                     <constraint firstItem="EQU-bX-CNY" firstAttribute="leading" secondItem="Nnz-zG-i3D" secondAttribute="trailing" constant="5" id="Vdl-sx-s0b"/>
                     <constraint firstItem="sJe-uV-W8o" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="W40-cE-wUQ"/>
@@ -59,4 +69,7 @@
             <point key="canvasLocation" x="427" y="242"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="detail_arrow.png" width="50" height="50"/>
+    </resources>
 </document>

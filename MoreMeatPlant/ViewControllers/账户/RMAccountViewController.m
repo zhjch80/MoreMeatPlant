@@ -46,7 +46,7 @@
     
     functitleArray = [[NSMutableArray alloc]init];
     funcimgArray = [[NSMutableArray alloc]init];
-    if(/* DISABLES CODE */ (0)){//普通会员
+    if(/* DISABLES CODE */ (1)){//普通会员
         functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"申请\n开店",@"我的\n订单",@"我的\n帖子",@"系统\n通知",@"等待\n升级",@"购物\n篮",@"附近\n肉友",@"我的\n资料" ,nil];
         funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"sqkd",@"wddd",@"wdtz",@"xttz",@"ddsj",@"gwl",@"fjry",@"wdzl", nil];
     }
@@ -114,8 +114,8 @@
                         message.callback = ^(RMSysMessageViewController * controller){
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
-                        message.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-49);
-                        [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-49)];
+                        message.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-44);
+                        [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
                     }
                         break;
                     case 7:{//等待升级

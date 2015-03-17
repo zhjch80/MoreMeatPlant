@@ -12,11 +12,65 @@
 #import "RMShopLeaveMsTableViewCell.h"
 
 #import "RMSettlementViewController.h"
-@interface RMShopCarViewController ()
+#import "UIViewController+ENPopUp.h"
+
+#import "RMAddressEditViewController.h"
+@interface RMShopCarViewController (){
+    BOOL isShow;
+}
 
 @end
 
 @implementation RMShopCarViewController
+
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+
+- (void)keyboardWillShow:(NSNotification *)noti {
+    if (!isShow) {
+        CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        CGFloat height = self.mTableView.contentSize.height;
+        self.mTableView.contentSize = CGSizeMake(self.mTableView.frame.size.width, height + size.height);
+        isShow = !isShow;
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)noti {
+    if (isShow) {
+        CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        CGFloat height = self.mTableView.contentSize.height;
+        self.mTableView.contentSize = CGSizeMake(self.mTableView.frame.size.width, height - size.height);
+        isShow = !isShow;
+    }
+}
+
+- (void)keyboardDidShow:(NSNotification *)noti {
+    
+}
+
+- (void)keyboardDidHide:(NSNotification *)noti {
+    
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,6 +79,9 @@
 }
 
 - (void)initPlat{
+    [self setCustomNavTitle:@"购物篮"];
+    _mTableView.backgroundColor = [UIColor clearColor];
+    _mTableView.opaque = NO;
     [_settleBtn addTarget:self action:@selector(settlementAction:) forControlEvents:UIControlEventTouchDown];
 }
 
@@ -73,9 +130,33 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView * v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    v.backgroundColor = [UIColor clearColor];
+    return v;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.view endEditing:YES];
+}
 - (void)settlementAction:(UIButton *)sender{
     RMSettlementViewController * settle = [[RMSettlementViewController alloc]initWithNibName:@"RMSettlementViewController" bundle:nil];
-    [self.navigationController pushViewController:settle animated:YES];
+//    [self.navigationController pushViewController:settle animated:YES];
+//    settle.callback = ^(void){
+//        [self dismissPopUpViewControllerWithcompletion:nil];
+//    };
+    settle.view.frame = CGRectMake(20, 60, kScreenWidth-20*2, kScreenHeight-60*2);
+    settle.callback = ^(void){
+        [self dismissPopUpViewControllerWithcompletion:nil];
+    };
+    settle.selectAddress_callback = ^(void){
+        RMAddressEditViewController * address_edit = [[RMAddressEditViewController alloc]initWithNibName:@"RMAddressEditViewController" bundle:nil];
+        [self.navigationController pushViewController:address_edit animated:YES];
+    };
+    [self presentPopUpViewController:settle overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
 }
 
 /*

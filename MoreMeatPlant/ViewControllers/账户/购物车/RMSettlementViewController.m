@@ -18,6 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self hideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    self.view.backgroundColor = [UIColor clearColor];
+    
+    _mainTableView.backgroundColor = [UIColor clearColor];
+    _mainTableView.opaque = NO;
+    
+    [_close_btn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];
 }
 
 #pragma mark - UItableViewDelegate
@@ -68,8 +76,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    RMAddressEditViewController * address_edit = [[RMAddressEditViewController alloc]initWithNibName:@"RMAddressEditViewController" bundle:nil];
-    [self.navigationController pushViewController:address_edit animated:YES];
+    if(self.selectAddress_callback){
+        _selectAddress_callback();
+    }
+}
+
+- (void)closeAction:(UIButton *)sender{
+    if(self.callback){
+        _callback();
+    }
 }
 
 - (void)didReceiveMemoryWarning {

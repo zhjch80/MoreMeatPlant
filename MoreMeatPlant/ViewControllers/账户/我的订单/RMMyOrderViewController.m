@@ -14,12 +14,6 @@
 
 @implementation RMMyOrderViewController
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    if(self.callback){
-        _callback();
-    }
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kHideCustomTabbar" object:nil];

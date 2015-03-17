@@ -68,7 +68,7 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:NO];
+    [self.view endEditing:YES];
 }
 
 #pragma mark - UITableVIewDelegate
