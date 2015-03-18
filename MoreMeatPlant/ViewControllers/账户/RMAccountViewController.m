@@ -21,6 +21,8 @@
 #import "RMMyOrderViewController.h"
 
 #import "RMMyCorpViewController.h"
+#import "RMPublishBabyViewController.h"
+#import "RMBabyManageViewController.h"
 
 #import "UIViewController+ENPopUp.h"
 @interface RMAccountViewController ()
@@ -72,7 +74,8 @@
             if(/* DISABLES CODE */ (1)){//普通会员
                 switch (view.tag-100) {
                     case 0:{//我的肉友
-                       
+                        RMPublishBabyViewController * publish = [[RMPublishBabyViewController alloc]initWithNibName:@"RMPublishBabyViewController" bundle:nil];
+                        [self.navigationController pushViewController:publish animated:YES];
                     }
                         break;
                     case 1:{//我的钱包
@@ -119,7 +122,8 @@
                     }
                         break;
                     case 7:{//等待升级
-                        
+                        RMBabyManageViewController * babymanage = [[RMBabyManageViewController alloc]initWithNibName:@"RMBabyManageViewController" bundle:nil];
+                        [self.navigationController pushViewController:babymanage animated:YES];
                     }
                         break;
                     case 8:{//购物车

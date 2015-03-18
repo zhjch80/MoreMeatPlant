@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="方正正黑简体.TTF">
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RMPublishPhotoTableViewCell" rowHeight="129" id="KGk-i7-Jjw" customClass="RMPublishPhotoTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="129"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fbbb_nophoto.png" translatesAutoresizingMaskIntoConstraints="NO" id="8ly-kf-k5F">
+                        <rect key="frame" x="10" y="8" width="59" height="59"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="8ly-kf-k5F" secondAttribute="height" multiplier="1:1" id="rKt-ZL-Jeg"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fbbb_nophoto.png" translatesAutoresizingMaskIntoConstraints="NO" id="mm3-MT-XsB">
+                        <rect key="frame" x="70" y="8" width="59.5" height="59"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fbbb_nophoto.png" translatesAutoresizingMaskIntoConstraints="NO" id="tUr-CO-zka">
+                        <rect key="frame" x="130" y="8" width="59.5" height="59"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fbbb_nophoto.png" translatesAutoresizingMaskIntoConstraints="NO" id="7Ow-iC-BO0">
+                        <rect key="frame" x="190" y="8" width="59.5" height="59"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fbbb_nophoto.png" translatesAutoresizingMaskIntoConstraints="NO" id="y8K-Gf-1en">
+                        <rect key="frame" x="251" y="8" width="59" height="59"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vvk-Pr-pDP">
+                        <rect key="frame" x="10" y="72" width="59" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="AqN-PB-bLP"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="cGY-nA-iBu"/>
+                            <constraint firstAttribute="width" constant="78" id="oZe-bw-hl0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="cGY-nA-iBu"/>
+                                <exclude reference="oZe-bw-hl0"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHQ-J7-BaM">
+                        <rect key="frame" x="70" y="72" width="59" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="1i6-pi-cMO"/>
+                            <constraint firstAttribute="height" constant="21" id="r6h-fX-Yae"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1i6-pi-cMO"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RrV-ea-cb3">
+                        <rect key="frame" x="130" y="72" width="59" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="5xc-gS-x9r"/>
+                            <constraint firstAttribute="height" constant="21" id="Lan-kS-5YC"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5xc-gS-x9r"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9g4-r8-rZL">
+                        <rect key="frame" x="190" y="72" width="59.5" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="2a1-dC-KHi"/>
+                            <constraint firstAttribute="width" constant="78" id="WlD-Ji-m4f"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="WlD-Ji-m4f"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="At5-QT-Gkm">
+                        <rect key="frame" x="251" y="72" width="59" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="76Q-2u-jZY"/>
+                            <constraint firstAttribute="width" constant="78" id="fVA-a8-MZe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fVA-a8-MZe"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Wq-cB-iVf">
+                        <rect key="frame" x="70" y="98" width="59" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="AcK-s6-Oyy"/>
+                            <constraint firstAttribute="height" constant="21" id="TiA-ci-fFL"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <state key="normal" title="拍照" backgroundImage="fbbb_btn_bg.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="AcK-s6-Oyy"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xj6-x1-yYz">
+                        <rect key="frame" x="130" y="98" width="59" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="RVf-fQ-XD0"/>
+                            <constraint firstAttribute="width" constant="78" id="tee-pM-NCa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <state key="normal" title="拍照" backgroundImage="fbbb_btn_bg.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="tee-pM-NCa"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pbw-fZ-L4V">
+                        <rect key="frame" x="190" y="98" width="59.5" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="043-Tb-WlY"/>
+                            <constraint firstAttribute="height" constant="21" id="EuG-ha-X9s"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <state key="normal" title="拍照" backgroundImage="fbbb_btn_bg.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="043-Tb-WlY"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frv-Hq-rJW">
+                        <rect key="frame" x="251" y="98" width="59" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="V0z-sY-v4z"/>
+                            <constraint firstAttribute="height" constant="21" id="ecd-A0-JVL"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <state key="normal" title="拍照" backgroundImage="fbbb_btn_bg.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="V0z-sY-v4z"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hw-Ll-zWc">
+                        <rect key="frame" x="10" y="98" width="59" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="8pR-UX-uRT"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="O84-Gp-Its"/>
+                            <constraint firstAttribute="height" constant="21" id="qHi-jD-cIV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <state key="normal" title="拍照" backgroundImage="fbbb_btn_bg.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="O84-Gp-Its"/>
+                                <exclude reference="8pR-UX-uRT"/>
+                            </mask>
+                        </variation>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Vvk-Pr-pDP" firstAttribute="centerY" secondItem="RrV-ea-cb3" secondAttribute="centerY" id="09O-eQ-w90"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="width" secondItem="y8K-Gf-1en" secondAttribute="height" multiplier="1:1" id="09O-pk-1CX"/>
+                    <constraint firstItem="8hw-Ll-zWc" firstAttribute="width" secondItem="Pbw-fZ-L4V" secondAttribute="width" id="0BX-nk-2C9"/>
+                    <constraint firstItem="8hw-Ll-zWc" firstAttribute="width" secondItem="Xj6-x1-yYz" secondAttribute="width" id="0cp-l1-Z6S"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="height" secondItem="mm3-MT-XsB" secondAttribute="height" id="3F4-gf-jez"/>
+                    <constraint firstAttribute="trailing" secondItem="At5-QT-Gkm" secondAttribute="trailing" constant="10" id="3Od-eE-qi4"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="width" secondItem="mm3-MT-XsB" secondAttribute="height" multiplier="1:1" id="3TW-4p-1US"/>
+                    <constraint firstItem="mm3-MT-XsB" firstAttribute="leading" secondItem="8ly-kf-k5F" secondAttribute="trailing" constant="1" id="3p0-1l-2sf"/>
+                    <constraint firstItem="8hw-Ll-zWc" firstAttribute="top" secondItem="Vvk-Pr-pDP" secondAttribute="bottom" constant="5" id="6QV-dI-x3H"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="centerY" secondItem="tUr-CO-zka" secondAttribute="centerY" id="6Vc-7g-QXa"/>
+                    <constraint firstItem="8hw-Ll-zWc" firstAttribute="centerY" secondItem="Xj6-x1-yYz" secondAttribute="centerY" id="6zQ-lH-caf"/>
+                    <constraint firstItem="8hw-Ll-zWc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Bwc-eh-Zvu"/>
+                    <constraint firstItem="3Wq-cB-iVf" firstAttribute="leading" secondItem="8hw-Ll-zWc" secondAttribute="trailing" constant="1" id="DDS-xc-YIx"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="leading" secondItem="tUr-CO-zka" secondAttribute="trailing" constant="1" id="DPN-gn-qxv"/>
+                    <constraint firstItem="Xj6-x1-yYz" firstAttribute="leading" secondItem="3Wq-cB-iVf" secondAttribute="trailing" constant="1" id="DhF-h7-vgQ"/>
+                    <constraint firstItem="Vvk-Pr-pDP" firstAttribute="width" secondItem="At5-QT-Gkm" secondAttribute="width" id="Ft8-9G-URg"/>
+                    <constraint firstItem="Vvk-Pr-pDP" firstAttribute="centerY" secondItem="At5-QT-Gkm" secondAttribute="centerY" id="HzK-FY-7dZ"/>
+                    <constraint firstItem="Pbw-fZ-L4V" firstAttribute="leading" secondItem="Xj6-x1-yYz" secondAttribute="trailing" constant="1" id="J0e-Tk-oDh"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="width" secondItem="y8K-Gf-1en" secondAttribute="width" id="JIs-pl-BWL"/>
+                    <constraint firstItem="8hw-Ll-zWc" firstAttribute="centerY" secondItem="3Wq-cB-iVf" secondAttribute="centerY" id="KUO-zK-NRb"/>
+                    <constraint firstItem="Vvk-Pr-pDP" firstAttribute="width" secondItem="RrV-ea-cb3" secondAttribute="width" id="Kvt-KO-BpV"/>
+                    <constraint firstItem="8hw-Ll-zWc" firstAttribute="width" secondItem="Frv-Hq-rJW" secondAttribute="width" id="L1u-KB-emc"/>
+                    <constraint firstItem="RrV-ea-cb3" firstAttribute="leading" secondItem="dHQ-J7-BaM" secondAttribute="trailing" constant="1" id="MSE-ik-Fkx"/>
+                    <constraint firstItem="dHQ-J7-BaM" firstAttribute="leading" secondItem="Vvk-Pr-pDP" secondAttribute="trailing" constant="1" id="NQX-Im-Kxd"/>
+                    <constraint firstItem="8hw-Ll-zWc" firstAttribute="centerY" secondItem="Frv-Hq-rJW" secondAttribute="centerY" id="NQa-HB-G4K"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="width" secondItem="tUr-CO-zka" secondAttribute="width" id="NXh-Y6-mIc"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="height" secondItem="8ly-kf-k5F" secondAttribute="height" id="OcG-db-iKk"/>
+                    <constraint firstItem="Vvk-Pr-pDP" firstAttribute="width" secondItem="dHQ-J7-BaM" secondAttribute="width" id="Pca-94-Nao"/>
+                    <constraint firstItem="9g4-r8-rZL" firstAttribute="leading" secondItem="RrV-ea-cb3" secondAttribute="trailing" constant="1" id="RWH-Ue-h42"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="height" secondItem="tUr-CO-zka" secondAttribute="height" id="SLX-cs-1Ir"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="centerY" secondItem="mm3-MT-XsB" secondAttribute="centerY" id="T9h-TM-QyO"/>
+                    <constraint firstItem="At5-QT-Gkm" firstAttribute="leading" secondItem="9g4-r8-rZL" secondAttribute="trailing" constant="1" id="W57-zg-ITO"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="width" secondItem="mm3-MT-XsB" secondAttribute="width" id="XdW-Xc-Rxl"/>
+                    <constraint firstItem="y8K-Gf-1en" firstAttribute="leading" secondItem="7Ow-iC-BO0" secondAttribute="trailing" constant="1" id="Z98-uO-6ML"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="width" secondItem="8ly-kf-k5F" secondAttribute="width" id="by8-FM-AwA"/>
+                    <constraint firstItem="Vvk-Pr-pDP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="c2i-5v-dwl"/>
+                    <constraint firstItem="Vvk-Pr-pDP" firstAttribute="top" secondItem="8ly-kf-k5F" secondAttribute="bottom" constant="5" id="d2K-kP-cBD"/>
+                    <constraint firstItem="Vvk-Pr-pDP" firstAttribute="centerY" secondItem="dHQ-J7-BaM" secondAttribute="centerY" id="daP-Dn-hb9"/>
+                    <constraint firstItem="Vvk-Pr-pDP" firstAttribute="centerY" secondItem="9g4-r8-rZL" secondAttribute="centerY" id="enV-AE-Ufz"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="width" secondItem="tUr-CO-zka" secondAttribute="height" multiplier="1:1" id="fRb-Kb-oMT"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="centerY" secondItem="8ly-kf-k5F" secondAttribute="centerY" id="ggW-lf-Cn0"/>
+                    <constraint firstItem="tUr-CO-zka" firstAttribute="leading" secondItem="mm3-MT-XsB" secondAttribute="trailing" constant="1" id="gvn-Z9-mxN"/>
+                    <constraint firstItem="8hw-Ll-zWc" firstAttribute="centerY" secondItem="Pbw-fZ-L4V" secondAttribute="centerY" id="l51-pP-owe"/>
+                    <constraint firstItem="Vvk-Pr-pDP" firstAttribute="width" secondItem="9g4-r8-rZL" secondAttribute="width" id="mJG-ub-9uh"/>
+                    <constraint firstAttribute="trailing" secondItem="y8K-Gf-1en" secondAttribute="trailing" constant="10" id="naO-WM-iQx"/>
+                    <constraint firstItem="8ly-kf-k5F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="oWp-Kb-k4g"/>
+                    <constraint firstItem="At5-QT-Gkm" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="10" id="thC-uv-Yef"/>
+                    <constraint firstAttribute="trailing" secondItem="Frv-Hq-rJW" secondAttribute="trailing" constant="10" id="u6U-XE-Vpy"/>
+                    <constraint firstItem="Frv-Hq-rJW" firstAttribute="leading" secondItem="Pbw-fZ-L4V" secondAttribute="trailing" constant="1" id="wDF-OA-yVu"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="centerY" secondItem="y8K-Gf-1en" secondAttribute="centerY" id="wEZ-rc-pV4"/>
+                    <constraint firstItem="8ly-kf-k5F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="xZF-km-8eA"/>
+                    <constraint firstItem="8hw-Ll-zWc" firstAttribute="width" secondItem="3Wq-cB-iVf" secondAttribute="width" id="yp5-S9-f9J"/>
+                    <constraint firstItem="7Ow-iC-BO0" firstAttribute="height" secondItem="y8K-Gf-1en" secondAttribute="height" id="zsw-kB-zFw"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="thC-uv-Yef"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="174" y="172.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="fbbb_btn_bg.png" width="220" height="90"/>
+        <image name="fbbb_nophoto.png" width="220" height="220"/>
+    </resources>
+</document>

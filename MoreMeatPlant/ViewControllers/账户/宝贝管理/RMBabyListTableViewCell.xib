@@ -29,12 +29,6 @@
                             <constraint firstAttribute="width" constant="60" id="WTU-aC-PVh"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2号晚霞之舞老庄" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BZ-Gh-v5D">
-                        <rect key="frame" x="78" y="8" width="107" height="17.5"/>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIu-ge-Aqo">
                         <rect key="frame" x="195" y="17" width="35" height="35"/>
                         <color key="backgroundColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -66,7 +60,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="member_pointline.png" translatesAutoresizingMaskIntoConstraints="NO" id="IyO-qY-jFy">
-                        <rect key="frame" x="0.0" y="68.5" width="320" height="1"/>
+                        <rect key="frame" x="0.0" y="68" width="320" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="GCq-4V-aHk"/>
                         </constraints>
@@ -83,6 +77,12 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2号晚霞之舞老庄" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BZ-Gh-v5D">
+                        <rect key="frame" x="78" y="8" width="107" height="17.5"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="xcN-qF-BHh" firstAttribute="leading" secondItem="hKm-NP-rFI" secondAttribute="trailing" constant="5" id="3JN-E5-hRN"/>
@@ -96,6 +96,7 @@
                     <constraint firstAttribute="trailing" secondItem="IyO-qY-jFy" secondAttribute="trailing" id="hcA-1B-Wdi"/>
                     <constraint firstItem="LkG-PX-0GL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="k95-L6-BOq"/>
                     <constraint firstItem="7BZ-Gh-v5D" firstAttribute="leading" secondItem="LkG-PX-0GL" secondAttribute="trailing" constant="8" id="oRZ-Fg-ten"/>
+                    <constraint firstItem="BIu-ge-Aqo" firstAttribute="leading" secondItem="7BZ-Gh-v5D" secondAttribute="trailing" constant="10" id="qWz-w1-YSr"/>
                     <constraint firstItem="IyO-qY-jFy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="sim-2l-U1U"/>
                     <constraint firstItem="hKm-NP-rFI" firstAttribute="leading" secondItem="BIu-ge-Aqo" secondAttribute="trailing" constant="5" id="tuV-q4-elf"/>
                     <constraint firstItem="LkG-PX-0GL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="un5-BM-vSv"/>

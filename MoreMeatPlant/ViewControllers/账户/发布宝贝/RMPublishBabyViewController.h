@@ -8,6 +8,6 @@
 
 #import "RMBaseViewController.h"
 
-@interface RMPublishBabyViewController : RMBaseViewController
+@interface RMPublishBabyViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 @end
