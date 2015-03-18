@@ -46,7 +46,7 @@
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, screenWidth - 80, 44)];
     titleLabel.userInteractionEnabled = YES;
     titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = FONT_1(20.0);
+    titleLabel.font = FONT_2(18.0);
     titleLabel.textColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
 //    titleLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.2];
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -59,18 +59,26 @@
 //    [customNav addSubview:line];
     
     leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBarButton.frame = CGRectMake(7, 14, 43, 16);
+    leftBarButton.frame = CGRectMake(3, 0, 80, 44);
     leftBarButton.tag = 1;
     [leftBarButton addTarget:self action:@selector(navgationBarButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [leftBarButton setEnlargeEdgeWithTop:25 right:25 bottom:25 left:25];
+    [leftBarButton setEnlargeEdgeWithTop:5 right:5 bottom:5 left:5];
     [customNav addSubview:leftBarButton];
     
-    rightBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBarButton.frame = CGRectMake(screenWidth - 50, 14, 43, 16);
-    rightBarButton.tag = 2;
-    [rightBarButton addTarget:self action:@selector(navgationBarButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [rightBarButton setEnlargeEdgeWithTop:25 right:25 bottom:25 left:25];
-    [customNav addSubview:rightBarButton];
+    rightOneBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightOneBarButton.frame = CGRectMake(screenWidth - 50, 0, 44, 44);
+    rightOneBarButton.tag = 2;
+    [rightOneBarButton addTarget:self action:@selector(navgationBarButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [rightOneBarButton setEnlargeEdgeWithTop:5 right:5 bottom:5 left:5];
+    [customNav addSubview:rightOneBarButton];
+    
+    rightTwoBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightTwoBarButton.frame = CGRectMake(screenWidth - 50, 0, 44, 44);
+    rightTwoBarButton.tag = 3;
+    [rightTwoBarButton addTarget:self action:@selector(navgationBarButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [rightTwoBarButton setEnlargeEdgeWithTop:5 right:5 bottom:5 left:5];
+    [customNav addSubview:rightTwoBarButton];
+    
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
@@ -86,10 +94,28 @@
     titleLabel.text = title;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+- (void)setRightBarButtonNumber:(NSInteger)number {
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    switch (number) {
+        case 1:{
+            rightOneBarButton.hidden = NO;
+            rightTwoBarButton.hidden = YES;
 
+            rightOneBarButton.frame = CGRectMake(screenWidth - 50, 0, 44, 44);
+            break;
+        }
+        case 2:{
+            rightOneBarButton.hidden = NO;
+            rightTwoBarButton.hidden = NO;
+            
+            rightOneBarButton.frame = CGRectMake(screenWidth - 90, 0, 44, 44);
+            rightTwoBarButton.frame = CGRectMake(screenWidth - 50, 0, 44, 44);
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
 
 @end

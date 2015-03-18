@@ -10,13 +10,13 @@
 #import "RMImageView.h"
 #import "RMNearbyMerchantViewController.h"
 #import "RMPlantTypeView.h"
-#import "RMPlantWithSaleBottomView.h"
+#import "RMBottomView.h"
 #import "RMStickView.h"
 #import "RMPlantWithSaleCell.h"
 #import "RMFreshPlantMarketDetailsViewController.h"
 #import "RMBaseWebViewController.h"
 
-@interface RMFreshPlantMarketViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PlantWithSaleBottomDelegate,JumpPlantDetailsDelegate>{
+@interface RMFreshPlantMarketViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,BottomDelegate,JumpPlantDetailsDelegate>{
     
 }
 @property (nonatomic, strong) UITableView * mTableView;
@@ -97,11 +97,11 @@
 #pragma mark - 加载底部View
 
 - (void)loadBottomView {
-    RMPlantWithSaleBottomView * plantWithSaleBottomView = [[RMPlantWithSaleBottomView alloc] init];
-    plantWithSaleBottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [plantWithSaleBottomView loadPlantWithSaleBottomView];
-    plantWithSaleBottomView.delegate = self;
-    [self.view addSubview:plantWithSaleBottomView];
+    RMBottomView * bottomView = [[RMBottomView alloc] init];
+    bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
+    [bottomView loadPlantWithSaleBottomView];
+    bottomView.delegate = self;
+    [self.view addSubview:bottomView];
 }
 
 #pragma mark - 加载tableViewHead

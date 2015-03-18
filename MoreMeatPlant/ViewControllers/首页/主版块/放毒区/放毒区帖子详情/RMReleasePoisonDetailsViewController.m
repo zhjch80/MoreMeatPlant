@@ -7,13 +7,13 @@
 //
 
 #import "RMReleasePoisonDetailsViewController.h"
-#import "RMReleasePoisonBottomView.h"
+#import "RMBottomView.h"
 #import "RMReleasePoisonDetailsCell.h"
 #import "RMTableHeadView.h"
 #import "RMBaseWebViewController.h"
 #import "RMCommentsView.h"
 
-@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,ReleasePoisonBottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate,CommentsViewDelegate>{
+@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate,CommentsViewDelegate>{
     BOOL isCanLoadWeb;
 }
 @property (nonatomic, strong) UITableView * mTableView;
@@ -61,11 +61,11 @@
 #pragma mark - 加载底部View
 
 - (void)loadBottomView {
-    RMReleasePoisonBottomView * releasePoisonBottomView = [[RMReleasePoisonBottomView alloc] init];
-    releasePoisonBottomView.delegate = self;
-    releasePoisonBottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [releasePoisonBottomView loadReleasePoisonDetailsBottom];
-    [self.view addSubview:releasePoisonBottomView];
+    RMBottomView * bottomView = [[RMBottomView alloc] init];
+    bottomView.delegate = self;
+    bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
+    [bottomView loadReleasePoisonDetailsBottom];
+    [self.view addSubview:bottomView];
 }
 
 - (void)releasePoisonDetailsBottomMethodWithTag:(NSInteger)tag {

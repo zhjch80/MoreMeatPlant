@@ -12,14 +12,15 @@
 #import "RMReleasePoisonCell.h"
 #import "RMStickView.h"
 #import "RMPlantTypeView.h"
-#import "RMReleasePoisonBottomView.h"
+#import "RMBottomView.h"
 #import "RMPostMessageView.h"
 #import "RMReleasePoisonDetailsViewController.h"
 #import "RMBaseWebViewController.h"
 #import "RMStartPostingViewController.h"
 #import "ZFModalTransitionAnimator.h"
+#import "RMSearchViewController.h"
 
-@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,ReleasePoisonBottomDelegate>{
+@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate>{
     
 }
 @property (nonatomic, strong) UITableView * mTableView;
@@ -35,6 +36,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setRightBarButtonNumber:2];
+    [leftBarButton setImage:LOADIMAGE(@"img_leftArrow", kImageTypePNG) forState:UIControlStateNormal];
+    [leftBarButton setTitle:@"分类" forState:UIControlStateNormal];
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    [rightOneBarButton setImage:LOADIMAGE(@"img_search", kImageTypePNG) forState:UIControlStateNormal];
+    [rightTwoBarButton setImage:LOADIMAGE(@"img_postMessage", kImageTypePNG) forState:UIControlStateNormal];
     [self setCustomNavTitle:@"放毒区(80新帖)"];
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
@@ -66,11 +73,11 @@
 #pragma mark - 加载底部View
 
 - (void)loadBottomView {
-    RMReleasePoisonBottomView * releasePoisonBottomView = [[RMReleasePoisonBottomView alloc] init];
-    releasePoisonBottomView.delegate = self;
-    releasePoisonBottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [releasePoisonBottomView loadReleasePoisonBottom];
-    [self.view addSubview:releasePoisonBottomView];
+    RMBottomView * bottomView = [[RMBottomView alloc] init];
+    bottomView.delegate = self;
+    bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
+    [bottomView loadReleasePoisonBottom];
+    [self.view addSubview:bottomView];
 }
 
 #pragma mark - 加载tableViewHead
@@ -268,6 +275,11 @@
             break;
         }
         case 2:{
+            RMSearchViewController * searchCtl = [[RMSearchViewController alloc] init];
+            [self.navigationController pushViewController:searchCtl animated:YES];
+            break;
+        }
+        case 3:{
             action = [[RMPostMessageView alloc] init];
             action.delegate = self;
             action.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);

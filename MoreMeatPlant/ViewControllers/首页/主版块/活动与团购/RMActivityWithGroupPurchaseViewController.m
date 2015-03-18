@@ -12,14 +12,14 @@
 #import "RMReleasePoisonCell.h"
 #import "RMStickView.h"
 #import "RMPlantTypeView.h"
-#import "RMReleasePoisonBottomView.h"
+#import "RMBottomView.h"
 #import "RMPostMessageView.h"
 #import "RMReleasePoisonDetailsViewController.h"
 #import "RMBaseWebViewController.h"
 #import "RMStartPostingViewController.h"
 #import "ZFModalTransitionAnimator.h"
 
-@interface RMActivityWithGroupPurchaseViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,ReleasePoisonBottomDelegate>{
+@interface RMActivityWithGroupPurchaseViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate>{
     
 }
 @property (nonatomic, strong) UITableView * mTableView;
@@ -69,11 +69,11 @@
 #pragma mark - 加载底部View
 
 - (void)loadBottomView {
-    RMReleasePoisonBottomView * releasePoisonBottomView = [[RMReleasePoisonBottomView alloc] init];
-    releasePoisonBottomView.delegate = self;
-    releasePoisonBottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [releasePoisonBottomView loadReleasePoisonBottom];
-    [self.view addSubview:releasePoisonBottomView];
+    RMBottomView * bottomView = [[RMBottomView alloc] init];
+    bottomView.delegate = self;
+    bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
+    [bottomView loadReleasePoisonBottom];
+    [self.view addSubview:bottomView];
 }
 
 #pragma mark - 加载tableViewHead

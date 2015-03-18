@@ -8,10 +8,10 @@
 
 #import "RMPlantWithSaleDetailsViewController.h"
 #import "RMPlantWithSaleHeaderView.h"
-#import "RMPlantWithSaleBottomView.h"
+#import "RMBottomView.h"
 #import "RMPlantWithSaleDetailsCell.h"
 
-@interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,PlantWithSaleBottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate>{
+@interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate>{
     
 }
 @property (nonatomic, strong) RMPlantWithSaleHeaderView * headerView;;
@@ -54,11 +54,11 @@
 }
 
 - (void)loadBottomView {
-    RMPlantWithSaleBottomView * plantWithSaleBottomVie = [[RMPlantWithSaleBottomView alloc] init];
-    plantWithSaleBottomVie.delegate = self;
-    plantWithSaleBottomVie.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [plantWithSaleBottomVie loadPlantWithSaleDetailsBottomView];
-    [self.view addSubview:plantWithSaleBottomVie];
+    RMBottomView * bottomView = [[RMBottomView alloc] init];
+    bottomView.delegate = self;
+    bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
+    [bottomView loadPlantWithSaleDetailsBottomView];
+    [self.view addSubview:bottomView];
 }
 
 - (void)plantWithSaleDetailsBottomMethodWithTag:(NSInteger)tag {
