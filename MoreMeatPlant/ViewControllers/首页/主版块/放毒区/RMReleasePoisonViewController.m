@@ -37,11 +37,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setRightBarButtonNumber:2];
-    [leftBarButton setImage:LOADIMAGE(@"img_leftArrow", kImageTypePNG) forState:UIControlStateNormal];
+    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"分类" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
-    [rightOneBarButton setImage:LOADIMAGE(@"img_search", kImageTypePNG) forState:UIControlStateNormal];
-    [rightTwoBarButton setImage:LOADIMAGE(@"img_postMessage", kImageTypePNG) forState:UIControlStateNormal];
+    [rightOneBarButton setImage:[UIImage imageNamed:@"img_search"] forState:UIControlStateNormal];
+    [rightTwoBarButton setImage:[UIImage imageNamed:@"img_postMessage"] forState:UIControlStateNormal];
     [self setCustomNavTitle:@"放毒区(80新帖)"];
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
