@@ -9,5 +9,9 @@
 #import "RMBaseViewController.h"
 
 @interface RMUpgradeSuggestViewController : RMBaseViewController
+@property (weak, nonatomic) IBOutlet UIWebView *mWebView;
+
+
+- (void)loadRequestWithUrl:(NSString *)url withTitle:(NSString *)title;
 
 @end

@@ -1,12 +1,12 @@
 //
-//  RMPlantExchangeViewController.m
+//  RMReleasePoisonViewController.m
 //  MoreMeatPlant
 //
 //  Created by runmobile on 15/2/16.
 //  Copyright (c) 2015年 runmobile. All rights reserved.
 //
 
-#import "RMPlantExchangeViewController.h"
+#import "RMReleasePoisonCenterViewController.h"
 #import "RMImageView.h"
 #import "RMNearbyMerchantViewController.h"
 #import "RMReleasePoisonCell.h"
@@ -18,8 +18,9 @@
 #import "RMBaseWebViewController.h"
 #import "RMStartPostingViewController.h"
 #import "ZFModalTransitionAnimator.h"
+#import "RMReleasePoisonViewController.h"
 
-@interface RMPlantExchangeViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,ReleasePoisonBottomDelegate>{
+@interface RMReleasePoisonCenterViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,ReleasePoisonBottomDelegate>{
     
 }
 @property (nonatomic, strong) UITableView * mTableView;
@@ -30,14 +31,12 @@
 
 @end
 
-@implementation RMPlantExchangeViewController
-@synthesize mTableView, dataArr, action, animator;
+@implementation RMReleasePoisonCenterViewController
+@synthesize mTableView, dataArr, action, animator, enabledGesture;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    [self setCustomNavTitle:@"肉肉交换"];
+    [self setCustomNavTitle:@"放毒区(80新帖)"];
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
     
@@ -59,11 +58,20 @@
     mTableView.backgroundColor = [UIColor clearColor];
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
-    
+
     [self loadTableViewHead];
     
     [self loadBottomView];
+    
+    enabledGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(manageUserInteractionEnabled)];
+    enabledGesture.numberOfTapsRequired = 100;
+    [self.view addGestureRecognizer:enabledGesture];
 
+}
+
+- (void)manageUserInteractionEnabled {
+    RMReleasePoisonViewController * releasePoisonCtl = self.PoisonDelegate;
+    [releasePoisonCtl updateSlideSwitchState];
 }
 
 #pragma mark - 加载底部View
@@ -114,7 +122,7 @@
     if (indexPath.row%3==0){
         static NSString * identifierStr = @"releasePoisonIdentifier";
         RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
-        
+    
         if (!cell){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1" owner:self options:nil] lastObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -213,8 +221,9 @@
 #pragma mark - 帖子详情
 
 - (void)jumpPostDetailsWithImage:(RMImageView *)image {
+    RMReleasePoisonViewController * releasePoisonCtl = self.PoisonDelegate;
     RMReleasePoisonDetailsViewController * releasePoisonDetailsCtl = [[RMReleasePoisonDetailsViewController alloc] init];
-    [self.navigationController pushViewController:releasePoisonDetailsCtl animated:YES];
+    [releasePoisonCtl.navigationController pushViewController:releasePoisonDetailsCtl animated:YES];
 }
 
 #pragma mark - 选择类型 开始发帖
@@ -223,7 +232,7 @@
     [action dismiss];
     RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
     startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
-    
+
     animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:startPostingCtl];
     animator.dragable = NO;
     animator.bounces = NO;
@@ -244,31 +253,34 @@
 #pragma mark - 跳转到置顶详情界面
 
 - (void)stickJumpDetailsWithOrder:(NSInteger)order {
+    RMReleasePoisonViewController * releasePoisonCtl = self.PoisonDelegate;
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
     [baseWebCtl loadRequestWithUrl:@"" withTitle: @"置顶 新手必读"];
-    [self.navigationController pushViewController:baseWebCtl animated:YES];
+    [releasePoisonCtl.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
 #pragma mark - 跳转到附近商家
 
 - (void)jumpPoisonNearbyMerchant {
+    RMReleasePoisonViewController * releasePoisonCtl = self.PoisonDelegate;
     RMNearbyMerchantViewController * nearbyMerchantCtl = [[RMNearbyMerchantViewController alloc] init];
-    [self.navigationController pushViewController:nearbyMerchantCtl animated:YES];
+    [releasePoisonCtl.navigationController pushViewController:nearbyMerchantCtl animated:YES];
 }
 
 #pragma mark - 跳转到广告
 
 - (void)jumpPopularize:(RMImageView *)image {
+    RMReleasePoisonViewController * releasePoisonCtl = self.PoisonDelegate;
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
     [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
-    [self.navigationController pushViewController:baseWebCtl animated:YES];
+    [releasePoisonCtl.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
-            NSLog(@"选取其他类别");
-            
+            RMReleasePoisonViewController * releasePoisonCtl = self.PoisonDelegate;
+            [releasePoisonCtl updateSlideSwitchState];
             break;
         }
         case 2:{
@@ -293,7 +305,8 @@
     switch (tag) {
         case 0:{
             //返回
-            [self.navigationController popViewControllerAnimated:YES];
+            RMReleasePoisonViewController * releasePoisonCtl = self.PoisonDelegate;
+            [releasePoisonCtl.navigationController popViewControllerAnimated:YES];
             break;
         }
         case 1:{
@@ -306,25 +319,16 @@
             NSLog(@"多聊");
             break;
         }
-            
+
         default:
             break;
     }
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -160,6 +160,19 @@ typedef enum{
         Class class = NSClassFromString(className);
         controller = [[class alloc] init];
     }
+    switch (indexPath.row) {
+        case 7:{
+            [controller loadRequestWithUrl:@"http://www.baidu.com" withTitle: @"新手教程"];
+            break;
+        }
+        case 8:{
+            [controller loadRequestWithUrl:@"http://www.baidu.com" withTitle: @"升级建议"];
+            break;
+        }
+            
+        default:
+            break;
+    }
     [self.navigationController pushViewController:controller animated:YES];
 }
 

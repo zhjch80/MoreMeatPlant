@@ -10,8 +10,8 @@
 		1D4DA3121A920F21006A9EBA /* RMHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4DA3101A920F21006A9EBA /* RMHomeCell.m */; };
 		1D4DA3131A920F21006A9EBA /* RMHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA3111A920F21006A9EBA /* RMHomeCell.xib */; };
 		1D4DA3151A920F93006A9EBA /* RMHomeCell_sub.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA3141A920F93006A9EBA /* RMHomeCell_sub.xib */; };
-		1D4DA3201A9216BA006A9EBA /* RMReleasePoisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonViewController.m */; };
-		1D4DA3211A9216BA006A9EBA /* RMReleasePoisonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonViewController.xib */; };
+		1D4DA3201A9216BA006A9EBA /* RMReleasePoisonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.m */; };
+		1D4DA3211A9216BA006A9EBA /* RMReleasePoisonCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.xib */; };
 		1D4DA3251A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4DA3231A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.m */; };
 		1D4DA3261A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA3241A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.xib */; };
 		1D4DA32A1A921744006A9EBA /* RMPlantExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4DA3281A921744006A9EBA /* RMPlantExchangeViewController.m */; };
@@ -57,6 +57,28 @@
 		1D64F5211A91B5CE0073EB98 /* RMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D64F5201A91B5CE0073EB98 /* RMImageView.m */; };
 		1D64F5261A91B72C0073EB98 /* RMNearbyMerchantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D64F5241A91B72C0073EB98 /* RMNearbyMerchantViewController.m */; };
 		1D64F5271A91B72C0073EB98 /* RMNearbyMerchantViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D64F5251A91B72C0073EB98 /* RMNearbyMerchantViewController.xib */; };
+		1D7AC3F41AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC3F21AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.m */; };
+		1D7AC3F51AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC3F31AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib */; };
+		1D7AC4081AB964BC002204F6 /* RMReleasePoisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4061AB964BC002204F6 /* RMReleasePoisonViewController.m */; };
+		1D7AC4091AB964BC002204F6 /* RMReleasePoisonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC4071AB964BC002204F6 /* RMReleasePoisonViewController.xib */; };
+		1D7AC40D1AB964E5002204F6 /* RMReleasePoisonLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC40B1AB964E5002204F6 /* RMReleasePoisonLeftViewController.m */; };
+		1D7AC40E1AB964E5002204F6 /* RMReleasePoisonLeftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC40C1AB964E5002204F6 /* RMReleasePoisonLeftViewController.xib */; };
+		1D7AC4141AB9791E002204F6 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4111AB9791E002204F6 /* CycleScrollView.m */; };
+		1D7AC4151AB9791E002204F6 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4131AB9791E002204F6 /* NSTimer+Addition.m */; };
+		1D7AC4261AB979A0002204F6 /* CustomRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4191AB979A0002204F6 /* CustomRefreshView.m */; };
+		1D7AC4271AB979A0002204F6 /* pull_loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC41A1AB979A0002204F6 /* pull_loading@2x.png */; };
+		1D7AC4281AB979A0002204F6 /* pull_loading@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC41B1AB979A0002204F6 /* pull_loading@3x.png */; };
+		1D7AC4291AB979A0002204F6 /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC41D1AB979A0002204F6 /* RefreshControl.m */; };
+		1D7AC42A1AB979A0002204F6 /* pull_refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC41F1AB979A0002204F6 /* pull_refresh@2x.png */; };
+		1D7AC42B1AB979A0002204F6 /* pull_refresh@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC4201AB979A0002204F6 /* pull_refresh@3x.png */; };
+		1D7AC42C1AB979A0002204F6 /* RefreshBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4221AB979A0002204F6 /* RefreshBottomView.m */; };
+		1D7AC42D1AB979A0002204F6 /* RefreshTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4241AB979A0002204F6 /* RefreshTopView.m */; };
+		1D7AC4351AB979E1002204F6 /* 方正正中黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC42F1AB979E1002204F6 /* 方正正中黑简体.TTF */; };
+		1D7AC4361AB979E1002204F6 /* 方正正准黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC4301AB979E1002204F6 /* 方正正准黑简体.TTF */; };
+		1D7AC4371AB979E1002204F6 /* 方正正大黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC4311AB979E1002204F6 /* 方正正大黑简体.TTF */; };
+		1D7AC4381AB979E1002204F6 /* 方正正粗黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC4321AB979E1002204F6 /* 方正正粗黑简体.TTF */; };
+		1D7AC4391AB979E1002204F6 /* 方正正纤黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC4331AB979E1002204F6 /* 方正正纤黑简体.TTF */; };
+		1D7AC43A1AB979E1002204F6 /* 方正正黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC4341AB979E1002204F6 /* 方正正黑简体.TTF */; };
 		1D8397251AB2C8E200DA190A /* RMStartPostingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8397231AB2C8E200DA190A /* RMStartPostingViewController.m */; };
 		1D8397261AB2C8E200DA190A /* RMStartPostingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D8397241AB2C8E200DA190A /* RMStartPostingViewController.xib */; };
 		1D83972A1AB2CA9E00DA190A /* ZFModalTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8397291AB2CA9E00DA190A /* ZFModalTransitionAnimator.m */; };
@@ -318,12 +340,6 @@
 		51E268391AAE003000252DEF /* STDbKit-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51E268321AAE003000252DEF /* STDbKit-Info.plist */; };
 		51E2683F1AAF340C00252DEF /* RMSettlementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E2683E1AAF340C00252DEF /* RMSettlementViewController.m */; };
 		51E268411AAF342000252DEF /* RMSettlementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E268401AAF342000252DEF /* RMSettlementViewController.xib */; };
-		51E268481AAF35FE00252DEF /* 方正正粗黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 51E268421AAF35FE00252DEF /* 方正正粗黑简体.TTF */; };
-		51E268491AAF35FE00252DEF /* 方正正大黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 51E268431AAF35FE00252DEF /* 方正正大黑简体.TTF */; };
-		51E2684A1AAF35FE00252DEF /* 方正正黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 51E268441AAF35FE00252DEF /* 方正正黑简体.TTF */; };
-		51E2684B1AAF35FE00252DEF /* 方正正纤黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 51E268451AAF35FE00252DEF /* 方正正纤黑简体.TTF */; };
-		51E2684C1AAF35FE00252DEF /* 方正正中黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 51E268461AAF35FE00252DEF /* 方正正中黑简体.TTF */; };
-		51E2684D1AAF35FE00252DEF /* 方正正准黑简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 51E268471AAF35FE00252DEF /* 方正正准黑简体.TTF */; };
 		51E268511AAF3DCA00252DEF /* RMAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E2684F1AAF3DCA00252DEF /* RMAddressTableViewCell.m */; };
 		51E268521AAF3DCA00252DEF /* RMAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E268501AAF3DCA00252DEF /* RMAddressTableViewCell.xib */; };
 		51E268561AAF413300252DEF /* RMPayTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268541AAF413300252DEF /* RMPayTypeTableViewCell.m */; };
@@ -359,9 +375,9 @@
 		1D4DA3101A920F21006A9EBA /* RMHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMHomeCell.m; sourceTree = "<group>"; };
 		1D4DA3111A920F21006A9EBA /* RMHomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMHomeCell.xib; sourceTree = "<group>"; };
 		1D4DA3141A920F93006A9EBA /* RMHomeCell_sub.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMHomeCell_sub.xib; sourceTree = "<group>"; };
-		1D4DA31D1A9216BA006A9EBA /* RMReleasePoisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMReleasePoisonViewController.h; sourceTree = "<group>"; };
-		1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMReleasePoisonViewController.m; sourceTree = "<group>"; };
-		1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMReleasePoisonViewController.xib; sourceTree = "<group>"; };
+		1D4DA31D1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMReleasePoisonCenterViewController.h; sourceTree = "<group>"; };
+		1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMReleasePoisonCenterViewController.m; sourceTree = "<group>"; };
+		1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMReleasePoisonCenterViewController.xib; sourceTree = "<group>"; };
 		1D4DA3221A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMActivityWithGroupPurchaseViewController.h; sourceTree = "<group>"; };
 		1D4DA3231A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMActivityWithGroupPurchaseViewController.m; sourceTree = "<group>"; };
 		1D4DA3241A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMActivityWithGroupPurchaseViewController.xib; sourceTree = "<group>"; };
@@ -433,6 +449,38 @@
 		1D64F5231A91B72C0073EB98 /* RMNearbyMerchantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMNearbyMerchantViewController.h; sourceTree = "<group>"; };
 		1D64F5241A91B72C0073EB98 /* RMNearbyMerchantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMNearbyMerchantViewController.m; sourceTree = "<group>"; };
 		1D64F5251A91B72C0073EB98 /* RMNearbyMerchantViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMNearbyMerchantViewController.xib; sourceTree = "<group>"; };
+		1D7AC3F11AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMFreshPlantMarketDetailsViewController.h; sourceTree = "<group>"; };
+		1D7AC3F21AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMFreshPlantMarketDetailsViewController.m; sourceTree = "<group>"; };
+		1D7AC3F31AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMFreshPlantMarketDetailsViewController.xib; sourceTree = "<group>"; };
+		1D7AC4051AB964BC002204F6 /* RMReleasePoisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMReleasePoisonViewController.h; sourceTree = "<group>"; };
+		1D7AC4061AB964BC002204F6 /* RMReleasePoisonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMReleasePoisonViewController.m; sourceTree = "<group>"; };
+		1D7AC4071AB964BC002204F6 /* RMReleasePoisonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMReleasePoisonViewController.xib; sourceTree = "<group>"; };
+		1D7AC40A1AB964E5002204F6 /* RMReleasePoisonLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMReleasePoisonLeftViewController.h; sourceTree = "<group>"; };
+		1D7AC40B1AB964E5002204F6 /* RMReleasePoisonLeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMReleasePoisonLeftViewController.m; sourceTree = "<group>"; };
+		1D7AC40C1AB964E5002204F6 /* RMReleasePoisonLeftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMReleasePoisonLeftViewController.xib; sourceTree = "<group>"; };
+		1D7AC4101AB9791E002204F6 /* CycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleScrollView.h; sourceTree = "<group>"; };
+		1D7AC4111AB9791E002204F6 /* CycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleScrollView.m; sourceTree = "<group>"; };
+		1D7AC4121AB9791E002204F6 /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
+		1D7AC4131AB9791E002204F6 /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
+		1D7AC4181AB979A0002204F6 /* CustomRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRefreshView.h; sourceTree = "<group>"; };
+		1D7AC4191AB979A0002204F6 /* CustomRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRefreshView.m; sourceTree = "<group>"; };
+		1D7AC41A1AB979A0002204F6 /* pull_loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull_loading@2x.png"; sourceTree = "<group>"; };
+		1D7AC41B1AB979A0002204F6 /* pull_loading@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull_loading@3x.png"; sourceTree = "<group>"; };
+		1D7AC41C1AB979A0002204F6 /* RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshControl.h; sourceTree = "<group>"; };
+		1D7AC41D1AB979A0002204F6 /* RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshControl.m; sourceTree = "<group>"; };
+		1D7AC41F1AB979A0002204F6 /* pull_refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull_refresh@2x.png"; sourceTree = "<group>"; };
+		1D7AC4201AB979A0002204F6 /* pull_refresh@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull_refresh@3x.png"; sourceTree = "<group>"; };
+		1D7AC4211AB979A0002204F6 /* RefreshBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshBottomView.h; sourceTree = "<group>"; };
+		1D7AC4221AB979A0002204F6 /* RefreshBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshBottomView.m; sourceTree = "<group>"; };
+		1D7AC4231AB979A0002204F6 /* RefreshTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshTopView.h; sourceTree = "<group>"; };
+		1D7AC4241AB979A0002204F6 /* RefreshTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshTopView.m; sourceTree = "<group>"; };
+		1D7AC4251AB979A0002204F6 /* RefreshViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshViewDelegate.h; sourceTree = "<group>"; };
+		1D7AC42F1AB979E1002204F6 /* 方正正中黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正中黑简体.TTF"; sourceTree = "<group>"; };
+		1D7AC4301AB979E1002204F6 /* 方正正准黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正准黑简体.TTF"; sourceTree = "<group>"; };
+		1D7AC4311AB979E1002204F6 /* 方正正大黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正大黑简体.TTF"; sourceTree = "<group>"; };
+		1D7AC4321AB979E1002204F6 /* 方正正粗黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正粗黑简体.TTF"; sourceTree = "<group>"; };
+		1D7AC4331AB979E1002204F6 /* 方正正纤黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正纤黑简体.TTF"; sourceTree = "<group>"; };
+		1D7AC4341AB979E1002204F6 /* 方正正黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正黑简体.TTF"; sourceTree = "<group>"; };
 		1D8397221AB2C8E200DA190A /* RMStartPostingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStartPostingViewController.h; sourceTree = "<group>"; };
 		1D8397231AB2C8E200DA190A /* RMStartPostingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStartPostingViewController.m; sourceTree = "<group>"; };
 		1D8397241AB2C8E200DA190A /* RMStartPostingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMStartPostingViewController.xib; sourceTree = "<group>"; };
@@ -767,12 +815,6 @@
 		51E2683D1AAF340C00252DEF /* RMSettlementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSettlementViewController.h; sourceTree = "<group>"; };
 		51E2683E1AAF340C00252DEF /* RMSettlementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSettlementViewController.m; sourceTree = "<group>"; };
 		51E268401AAF342000252DEF /* RMSettlementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSettlementViewController.xib; sourceTree = "<group>"; };
-		51E268421AAF35FE00252DEF /* 方正正粗黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正粗黑简体.TTF"; sourceTree = "<group>"; };
-		51E268431AAF35FE00252DEF /* 方正正大黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正大黑简体.TTF"; sourceTree = "<group>"; };
-		51E268441AAF35FE00252DEF /* 方正正黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正黑简体.TTF"; sourceTree = "<group>"; };
-		51E268451AAF35FE00252DEF /* 方正正纤黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正纤黑简体.TTF"; sourceTree = "<group>"; };
-		51E268461AAF35FE00252DEF /* 方正正中黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正中黑简体.TTF"; sourceTree = "<group>"; };
-		51E268471AAF35FE00252DEF /* 方正正准黑简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正正准黑简体.TTF"; sourceTree = "<group>"; };
 		51E2684E1AAF3DCA00252DEF /* RMAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAddressTableViewCell.h; sourceTree = "<group>"; };
 		51E2684F1AAF3DCA00252DEF /* RMAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAddressTableViewCell.m; sourceTree = "<group>"; };
 		51E268501AAF3DCA00252DEF /* RMAddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMAddressTableViewCell.xib; sourceTree = "<group>"; };
@@ -831,9 +873,15 @@
 			isa = PBXGroup;
 			children = (
 				1D4EE4391A94D5F200A46490 /* 放毒区帖子详情 */,
-				1D4DA31D1A9216BA006A9EBA /* RMReleasePoisonViewController.h */,
-				1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonViewController.m */,
-				1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonViewController.xib */,
+				1D7AC4051AB964BC002204F6 /* RMReleasePoisonViewController.h */,
+				1D7AC4061AB964BC002204F6 /* RMReleasePoisonViewController.m */,
+				1D7AC4071AB964BC002204F6 /* RMReleasePoisonViewController.xib */,
+				1D7AC40A1AB964E5002204F6 /* RMReleasePoisonLeftViewController.h */,
+				1D7AC40B1AB964E5002204F6 /* RMReleasePoisonLeftViewController.m */,
+				1D7AC40C1AB964E5002204F6 /* RMReleasePoisonLeftViewController.xib */,
+				1D4DA31D1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.h */,
+				1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.m */,
+				1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.xib */,
 				1D4DA34F1A939CA8006A9EBA /* RMReleasePoisonCell.h */,
 				1D4DA3501A939CA8006A9EBA /* RMReleasePoisonCell.m */,
 				1DD854831A9454E9003B12A5 /* RMReleasePoisonCell_1.xib */,
@@ -881,6 +929,9 @@
 				1D4DA32C1A921779006A9EBA /* RMFreshPlantMarketViewController.h */,
 				1D4DA32D1A921779006A9EBA /* RMFreshPlantMarketViewController.m */,
 				1D4DA32E1A921779006A9EBA /* RMFreshPlantMarketViewController.xib */,
+				1D7AC3F11AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.h */,
+				1D7AC3F21AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.m */,
+				1D7AC3F31AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib */,
 			);
 			path = "鲜肉市场";
 			sourceTree = "<group>";
@@ -1139,6 +1190,8 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1D7AC4161AB979A0002204F6 /* RefreshControl */,
+				1D7AC40F1AB9790B002204F6 /* CycleScrollView */,
 				1D83973C1AB3F6DC00DA190A /* DoImagePicker */,
 				1D8397271AB2CA9200DA190A /* ZFModalTransitionAnimator */,
 				1D93ABA21AB2AAB00034574C /* UIView+Effects */,
@@ -1169,6 +1222,66 @@
 				1D64F5251A91B72C0073EB98 /* RMNearbyMerchantViewController.xib */,
 			);
 			path = "附近商家";
+			sourceTree = "<group>";
+		};
+		1D7AC40F1AB9790B002204F6 /* CycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				1D7AC4101AB9791E002204F6 /* CycleScrollView.h */,
+				1D7AC4111AB9791E002204F6 /* CycleScrollView.m */,
+				1D7AC4121AB9791E002204F6 /* NSTimer+Addition.h */,
+				1D7AC4131AB9791E002204F6 /* NSTimer+Addition.m */,
+			);
+			path = CycleScrollView;
+			sourceTree = "<group>";
+		};
+		1D7AC4161AB979A0002204F6 /* RefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				1D7AC4171AB979A0002204F6 /* CustomRefreshView */,
+				1D7AC41C1AB979A0002204F6 /* RefreshControl.h */,
+				1D7AC41D1AB979A0002204F6 /* RefreshControl.m */,
+				1D7AC41E1AB979A0002204F6 /* RefreshView */,
+			);
+			path = RefreshControl;
+			sourceTree = "<group>";
+		};
+		1D7AC4171AB979A0002204F6 /* CustomRefreshView */ = {
+			isa = PBXGroup;
+			children = (
+				1D7AC4181AB979A0002204F6 /* CustomRefreshView.h */,
+				1D7AC4191AB979A0002204F6 /* CustomRefreshView.m */,
+				1D7AC41A1AB979A0002204F6 /* pull_loading@2x.png */,
+				1D7AC41B1AB979A0002204F6 /* pull_loading@3x.png */,
+			);
+			path = CustomRefreshView;
+			sourceTree = "<group>";
+		};
+		1D7AC41E1AB979A0002204F6 /* RefreshView */ = {
+			isa = PBXGroup;
+			children = (
+				1D7AC41F1AB979A0002204F6 /* pull_refresh@2x.png */,
+				1D7AC4201AB979A0002204F6 /* pull_refresh@3x.png */,
+				1D7AC4211AB979A0002204F6 /* RefreshBottomView.h */,
+				1D7AC4221AB979A0002204F6 /* RefreshBottomView.m */,
+				1D7AC4231AB979A0002204F6 /* RefreshTopView.h */,
+				1D7AC4241AB979A0002204F6 /* RefreshTopView.m */,
+				1D7AC4251AB979A0002204F6 /* RefreshViewDelegate.h */,
+			);
+			path = RefreshView;
+			sourceTree = "<group>";
+		};
+		1D7AC42E1AB979E1002204F6 /* ttfs */ = {
+			isa = PBXGroup;
+			children = (
+				1D7AC42F1AB979E1002204F6 /* 方正正中黑简体.TTF */,
+				1D7AC4301AB979E1002204F6 /* 方正正准黑简体.TTF */,
+				1D7AC4311AB979E1002204F6 /* 方正正大黑简体.TTF */,
+				1D7AC4321AB979E1002204F6 /* 方正正粗黑简体.TTF */,
+				1D7AC4331AB979E1002204F6 /* 方正正纤黑简体.TTF */,
+				1D7AC4341AB979E1002204F6 /* 方正正黑简体.TTF */,
+			);
+			path = ttfs;
 			sourceTree = "<group>";
 		};
 		1D8397271AB2CA9200DA190A /* ZFModalTransitionAnimator */ = {
@@ -1261,12 +1374,7 @@
 		1D9336EE1A8E3DFA00BA4FA7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				51E268421AAF35FE00252DEF /* 方正正粗黑简体.TTF */,
-				51E268431AAF35FE00252DEF /* 方正正大黑简体.TTF */,
-				51E268441AAF35FE00252DEF /* 方正正黑简体.TTF */,
-				51E268451AAF35FE00252DEF /* 方正正纤黑简体.TTF */,
-				51E268461AAF35FE00252DEF /* 方正正中黑简体.TTF */,
-				51E268471AAF35FE00252DEF /* 方正正准黑简体.TTF */,
+				1D7AC42E1AB979E1002204F6 /* ttfs */,
 				1D9336EF1A8E3DFA00BA4FA7 /* Info.plist */,
 				1D9336F01A8E3DFA00BA4FA7 /* main.m */,
 			);
@@ -1843,7 +1951,7 @@
 					};
 					1D9337061A8E3DFA00BA4FA7 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = WWD46XW8M3;
+						DevelopmentTeam = PTY98AP2WF;
 						TestTargetID = 1D9336EA1A8E3DFA00BA4FA7;
 					};
 				};
@@ -1895,11 +2003,13 @@
 				5157DE1B1AB8913E005E9FA5 /* fbbb_img_28.png in Resources */,
 				5199273C1AB568B800B0F83F /* menu_bg.png in Resources */,
 				5157DDF51AB87EEC005E9FA5 /* gwc_btn_bg.png in Resources */,
+				1D7AC4361AB979E1002204F6 /* 方正正准黑简体.TTF in Resources */,
 				51E268201AADE92300252DEF /* RMShopLeaveMsTableViewCell.xib in Resources */,
 				5157DDF41AB87EEC005E9FA5 /* gwc_tip_input_bg.png in Resources */,
 				5157DE1D1AB8913E005E9FA5 /* fbbb_nophoto.png in Resources */,
 				51E2681B1AADE77700252DEF /* RMSopCarHeadTableViewCell.xib in Resources */,
-				1D4DA3211A9216BA006A9EBA /* RMReleasePoisonViewController.xib in Resources */,
+				1D7AC3F51AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib in Resources */,
+				1D4DA3211A9216BA006A9EBA /* RMReleasePoisonCenterViewController.xib in Resources */,
 				517DF7A51AB861090053EEFE /* fbbb@2x.png in Resources */,
 				519926E11AB5610C00B0F83F /* btn_add_photo_n.png in Resources */,
 				5199269A1AB5605600B0F83F /* member_bottom_bg.png in Resources */,
@@ -1909,7 +2019,6 @@
 				5157DE171AB8913E005E9FA5 /* fbbb_field_bg2.png in Resources */,
 				51E268571AAF413300252DEF /* RMPayTypeTableViewCell.xib in Resources */,
 				1DD854871A9454E9003B12A5 /* RMReleasePoisonCell_2.xib in Resources */,
-				51E2684A1AAF35FE00252DEF /* 方正正黑简体.TTF in Resources */,
 				1D8397641AB3F81600DA190A /* down@2x.png in Resources */,
 				517DF7AD1AB861090053EEFE /* wdsc@2x.png in Resources */,
 				519927031AB5610C00B0F83F /* img_postMessage.png in Resources */,
@@ -1918,9 +2027,9 @@
 				519926E61AB5610C00B0F83F /* icon_keyword_photo@2x.png in Resources */,
 				519927111AB5610C00B0F83F /* img_tzed_1.png in Resources */,
 				1D4DA33A1A9217D4006A9EBA /* RMUpgradeSuggestViewController.xib in Resources */,
+				1D7AC4391AB979E1002204F6 /* 方正正纤黑简体.TTF in Resources */,
 				9538F3D41AB0A5DF00608FAD /* RMTableHeadView.xib in Resources */,
 				5199270D1AB5610C00B0F83F /* img_tz_6.png in Resources */,
-				51E2684D1AAF35FE00252DEF /* 方正正准黑简体.TTF in Resources */,
 				51E268351AAE003000252DEF /* InfoPlist.strings in Resources */,
 				5157DE311AB896B6005E9FA5 /* login_label_bg1.png in Resources */,
 				5157DDFD1AB8814F005E9FA5 /* gwc_no_select.png in Resources */,
@@ -1943,24 +2052,28 @@
 				519927041AB5610C00B0F83F /* img_share.png in Resources */,
 				519926F71AB5610C00B0F83F /* img_asc.png in Resources */,
 				519926F61AB5610C00B0F83F /* img_42.png in Resources */,
+				1D7AC40E1AB964E5002204F6 /* RMReleasePoisonLeftViewController.xib in Resources */,
 				51E268521AAF3DCA00252DEF /* RMAddressTableViewCell.xib in Resources */,
 				5120FDC91AB5D9E3000E9BE1 /* RMMyHomeViewController.xib in Resources */,
 				519926F01AB5610C00B0F83F /* img_31.png in Resources */,
 				5199271A1AB5610C00B0F83F /* img_tzed_8.png in Resources */,
+				1D7AC4371AB979E1002204F6 /* 方正正大黑简体.TTF in Resources */,
 				1D83972F1AB2D10C00DA190A /* RMStartPostingHeaderView.xib in Resources */,
 				1D83975E1AB3F81600DA190A /* check.png in Resources */,
 				517DF7AA1AB861090053EEFE /* wddd@2x.png in Resources */,
-				51E2684C1AAF35FE00252DEF /* 方正正中黑简体.TTF in Resources */,
 				519926E31AB5610C00B0F83F /* btn_add_photo_s.png in Resources */,
 				5157DDF11AB87EEC005E9FA5 /* gwc_sub_btn.png in Resources */,
 				5120FDEC1AB71B44000E9BE1 /* RMOrderProTableViewCell.xib in Resources */,
+				1D7AC4091AB964BC002204F6 /* RMReleasePoisonViewController.xib in Resources */,
 				519926F41AB5610C00B0F83F /* img_39.png in Resources */,
 				1D4DA33F1A92181E006A9EBA /* RMFreshManCourseOfStudyViewController.xib in Resources */,
+				1D7AC4351AB979E1002204F6 /* 方正正中黑简体.TTF in Resources */,
 				519927121AB5610C00B0F83F /* img_tzed_10.png in Resources */,
 				519926E01AB5610C00B0F83F /* bottom.png in Resources */,
 				5157DE331AB896B6005E9FA5 /* login_s_line.png in Resources */,
 				1D8397601AB3F81600DA190A /* down.png in Resources */,
 				1D4DA3351A921799006A9EBA /* RMPlantWithSaleViewController.xib in Resources */,
+				1D7AC43A1AB979E1002204F6 /* 方正正黑简体.TTF in Resources */,
 				519926E81AB5610C00B0F83F /* img_02.png in Resources */,
 				1DD854881A9454E9003B12A5 /* RMReleasePoisonCell_3.xib in Resources */,
 				519926E51AB5610C00B0F83F /* deletecircular.png in Resources */,
@@ -2022,11 +2135,11 @@
 				517DF7A41AB861090053EEFE /* ddsj@2x.png in Resources */,
 				51E268611AAF448E00252DEF /* RMSettlementTableViewCell.xib in Resources */,
 				5157DDF01AB87EEC005E9FA5 /* gwc_point_line.png in Resources */,
+				1D7AC4381AB979E1002204F6 /* 方正正粗黑简体.TTF in Resources */,
 				519926FF1AB5610C00B0F83F /* img_fdqdetl_loc.png in Resources */,
 				519927161AB5610C00B0F83F /* img_tzed_4.png in Resources */,
 				519926F51AB5610C00B0F83F /* img_40.png in Resources */,
 				5157DDF21AB87EEC005E9FA5 /* gwc_num_input_bg.png in Resources */,
-				51E268491AAF35FE00252DEF /* 方正正大黑简体.TTF in Resources */,
 				5199271C1AB5610C00B0F83F /* img_up.png in Resources */,
 				1D64F4F71A904E180073EB98 /* Default_6p.png in Resources */,
 				5199272E1AB565A900B0F83F /* member_level_left.png in Resources */,
@@ -2036,11 +2149,13 @@
 				519927131AB5610C00B0F83F /* img_tzed_11.png in Resources */,
 				51E267E61AA7462000252DEF /* RMNearFriendViewController.xib in Resources */,
 				1D93AB7A1AB029ED0034574C /* RMReleasePoisonDetailsCell_1.xib in Resources */,
+				1D7AC42B1AB979A0002204F6 /* pull_refresh@3x.png in Resources */,
 				5199271B1AB5610C00B0F83F /* img_tzed_9.png in Resources */,
 				1D64F4F61A904E180073EB98 /* Default_6.png in Resources */,
 				5120FDC11AB5D989000E9BE1 /* member_collection_no_evaulate.png in Resources */,
 				519927401AB568B800B0F83F /* corp_sun_icon.png in Resources */,
 				1D4DA32B1A921744006A9EBA /* RMPlantExchangeViewController.xib in Resources */,
+				1D7AC42A1AB979A0002204F6 /* pull_refresh@2x.png in Resources */,
 				1D4DA3301A921779006A9EBA /* RMFreshPlantMarketViewController.xib in Resources */,
 				519927411AB568B800B0F83F /* corp_classes_btn.png in Resources */,
 				1D83975F1AB3F81600DA190A /* close.png in Resources */,
@@ -2072,6 +2187,7 @@
 				519927051AB5610C00B0F83F /* img_tz_1.png in Resources */,
 				957A38F71AB4519E00A335F7 /* RMPlantWithSaleHeaderView.xib in Resources */,
 				51E268671AAF4D8100252DEF /* RMAddressEditViewController.xib in Resources */,
+				1D7AC4271AB979A0002204F6 /* pull_loading@2x.png in Resources */,
 				51E268391AAE003000252DEF /* STDbKit-Info.plist in Resources */,
 				1D93AB891AB13A290034574C /* RMReleasePoisonDetailsCell_4.xib in Resources */,
 				5157DE1F1AB8913E005E9FA5 /* fbbb_btn_bg_red.png in Resources */,
@@ -2091,11 +2207,10 @@
 				5120FDC01AB5D989000E9BE1 /* member_collection_collected.png in Resources */,
 				5157DE1E1AB8913E005E9FA5 /* fbbb_btn_bg.png in Resources */,
 				519926EA1AB5610C00B0F83F /* img_06.png in Resources */,
-				51E268481AAF35FE00252DEF /* 方正正粗黑简体.TTF in Resources */,
 				519926FE1AB5610C00B0F83F /* img_fdq_line_2.png in Resources */,
 				519927141AB5610C00B0F83F /* img_tzed_2.png in Resources */,
-				51E2684B1AAF35FE00252DEF /* 方正正纤黑简体.TTF in Resources */,
 				519927511AB5846100B0F83F /* RMPlantCollectionViewController.xib in Resources */,
+				1D7AC4281AB979A0002204F6 /* pull_loading@3x.png in Resources */,
 				5120FDF11AB71D34000E9BE1 /* RMOrderBottomTableViewCell.xib in Resources */,
 				1D55762B1A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.xib in Resources */,
 				5157DE271AB894C9005E9FA5 /* order_list_set_btn.png in Resources */,
@@ -2120,6 +2235,7 @@
 				1D9CB1761AAE9EE500BD5A7D /* AFURLConnectionOperation.m in Sources */,
 				1D9CB1791AAE9EE500BD5A7D /* AFNetworkReachabilityManager.m in Sources */,
 				1D9CB1741AAE9EE500BD5A7D /* AFHTTPRequestOperation.m in Sources */,
+				1D7AC4151AB9791E002204F6 /* NSTimer+Addition.m in Sources */,
 				51E268561AAF413300252DEF /* RMPayTypeTableViewCell.m in Sources */,
 				51E268091AADDFFE00252DEF /* JWBlurView.m in Sources */,
 				512D751F1AB1EA310027B7C7 /* RMUserInfoEditViewController.m in Sources */,
@@ -2131,16 +2247,18 @@
 				1D8397481AB3F72D00DA190A /* AssetHelper.m in Sources */,
 				1D64F4FA1A904E180073EB98 /* RMDaqoViewController.m in Sources */,
 				1D4DA34D1A9393ED006A9EBA /* RMDaqoDetailsViewController.m in Sources */,
+				1D7AC4141AB9791E002204F6 /* CycleScrollView.m in Sources */,
 				51E268381AAE003000252DEF /* STDbObject.m in Sources */,
 				1D55762A1A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.m in Sources */,
 				51E267FC1AA74CA800252DEF /* RMSysMessageViewController.m in Sources */,
 				1D9CB17C1AAE9EE500BD5A7D /* AFURLResponseSerialization.m in Sources */,
 				51E267E51AA7462000252DEF /* RMNearFriendViewController.m in Sources */,
 				1D9CB15A1AAE9EA000BD5A7D /* RMPublicModel.m in Sources */,
+				1D7AC4261AB979A0002204F6 /* CustomRefreshView.m in Sources */,
 				519927501AB5846100B0F83F /* RMPlantCollectionViewController.m in Sources */,
 				51E268601AAF448E00252DEF /* RMSettlementTableViewCell.m in Sources */,
 				1D9CB17A1AAE9EE500BD5A7D /* AFSecurityPolicy.m in Sources */,
-				1D4DA3201A9216BA006A9EBA /* RMReleasePoisonViewController.m in Sources */,
+				1D4DA3201A9216BA006A9EBA /* RMReleasePoisonCenterViewController.m in Sources */,
 				51E268371AAE003000252DEF /* STDbHandle.m in Sources */,
 				5120FDF01AB71D34000E9BE1 /* RMOrderBottomTableViewCell.m in Sources */,
 				51E267F01AA74BDB00252DEF /* RMMyFriendViewController.m in Sources */,
@@ -2156,7 +2274,9 @@
 				51E268511AAF3DCA00252DEF /* RMAddressTableViewCell.m in Sources */,
 				1D93AB851AB131A10034574C /* RMBaseView.m in Sources */,
 				512D752C1AB1F3FF0027B7C7 /* RMMyWalletYueTableViewCell.m in Sources */,
+				1D7AC42C1AB979A0002204F6 /* RefreshBottomView.m in Sources */,
 				1D9336F41A8E3DFA00BA4FA7 /* AppDelegate.m in Sources */,
+				1D7AC40D1AB964E5002204F6 /* RMReleasePoisonLeftViewController.m in Sources */,
 				1D4DA33E1A92181E006A9EBA /* RMFreshManCourseOfStudyViewController.m in Sources */,
 				1D55762E1A9600A60072C8C5 /* RMPlantWithSaleBottomView.m in Sources */,
 				1D4DA3391A9217D4006A9EBA /* RMUpgradeSuggestViewController.m in Sources */,
@@ -2174,6 +2294,7 @@
 				1D4DA3121A920F21006A9EBA /* RMHomeCell.m in Sources */,
 				1D4DA32A1A921744006A9EBA /* RMPlantExchangeViewController.m in Sources */,
 				1D8397491AB3F72D00DA190A /* DoImagePickerController.m in Sources */,
+				1D7AC4081AB964BC002204F6 /* RMReleasePoisonViewController.m in Sources */,
 				957A38FB1AB4530F00A335F7 /* RMPlantWithSaleDetailsCell.m in Sources */,
 				1D83972A1AB2CA9E00DA190A /* ZFModalTransitionAnimator.m in Sources */,
 				5120FDEB1AB71B44000E9BE1 /* RMOrderProTableViewCell.m in Sources */,
@@ -2205,18 +2326,21 @@
 				1D64F5081A904E290073EB98 /* RMCustomNavController.m in Sources */,
 				5120FDE11AB71715000E9BE1 /* RMOrderListViewController.m in Sources */,
 				1D64F5101A91A9C00073EB98 /* UIButton+EnlargeEdge.m in Sources */,
+				1D7AC3F41AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.m in Sources */,
 				1D8397381AB2E91400DA190A /* RMBaseTextView.m in Sources */,
 				1D8397321AB2DEBA00DA190A /* RMBaseTextField.m in Sources */,
 				1D64F5261A91B72C0073EB98 /* RMNearbyMerchantViewController.m in Sources */,
 				519927551AB5870100B0F83F /* RMCorpCollectionViewController.m in Sources */,
 				1D4DA3341A921799006A9EBA /* RMPlantWithSaleViewController.m in Sources */,
 				1D9CB1591AAE9EA000BD5A7D /* RMAFNRequestManager.m in Sources */,
+				1D7AC42D1AB979A0002204F6 /* RefreshTopView.m in Sources */,
 				1D64F5211A91B5CE0073EB98 /* RMImageView.m in Sources */,
 				1D83974B1AB3F72D00DA190A /* DoAlbumCell.m in Sources */,
 				1D64F4F81A904E180073EB98 /* RMTalkMoreViewController.m in Sources */,
 				51E2683F1AAF340C00252DEF /* RMSettlementViewController.m in Sources */,
 				5199274B1AB5825800B0F83F /* RMPostCollectionViewController.m in Sources */,
 				1D64F5061A904E290073EB98 /* RMBaseViewController.m in Sources */,
+				1D7AC4291AB979A0002204F6 /* RefreshControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2336,12 +2460,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 东凯 马 (QASNBP4646)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8549f054-d42b-4c5b-8140-23c26cf59035";
+				PROVISIONING_PROFILE = "39d5981f-d436-4eef-87d2-8a65abda8ec6";
 			};
 			name = Debug;
 		};
@@ -2350,12 +2474,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 东凯 马 (QASNBP4646)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8549f054-d42b-4c5b-8140-23c26cf59035";
+				PROVISIONING_PROFILE = "39d5981f-d436-4eef-87d2-8a65abda8ec6";
 			};
 			name = Release;
 		};

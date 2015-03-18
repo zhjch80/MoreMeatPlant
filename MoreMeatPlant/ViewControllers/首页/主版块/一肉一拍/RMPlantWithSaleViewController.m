@@ -14,18 +14,16 @@
 #import "RMStickView.h"
 #import "RMPlantWithSaleDetailsViewController.h"
 #import "RMPlantWithSaleBottomView.h"
-#import "RMPostMessageView.h"
 #import "RMBaseWebViewController.h"
 
-@interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,PostMessageSelectedPlantDelegate,PlantWithSaleBottomDelegate>
+@interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,PlantWithSaleBottomDelegate>
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
-@property (nonatomic, strong) RMPostMessageView *action;
 
 @end
 
 @implementation RMPlantWithSaleViewController
-@synthesize mTableView, dataArr, action;
+@synthesize mTableView, dataArr;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -91,6 +89,8 @@
     mTableView.tableHeaderView = headView;
 }
 
+#pragma mark -
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [dataArr count];
 }
@@ -145,13 +145,6 @@
     [self.navigationController pushViewController:nearbyMerchantCtl animated:YES];
 }
 
-#pragma mark - 选择类型 开始发帖
-
-- (void)selectedPostMessageWithPlantType:(NSString *)type {
-    NSLog(@"开始发帖 plant type:%@",type);
-    [action dismiss];
-}
-
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
@@ -159,13 +152,7 @@
             break;
         }
         case 2:{
-            action = [[RMPostMessageView alloc] init];
-            action.delegate = self;
-            action.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            action.backgroundColor = [UIColor clearColor];
-            [action initWithPostMessageView];
-            [self.view addSubview:action];
-            [action show];
+
             break;
         }
             
