@@ -1,5 +1,5 @@
 //
-//  RMReleasePoisonLeftViewController.h
+//  RMDaqoRightViewController.h
 //  MoreMeatPlant
 //
 //  Created by runmobile on 15/3/18.
@@ -8,8 +8,8 @@
 
 #import "RMBaseViewController.h"
 
-@interface RMReleasePoisonLeftViewController : RMBaseViewController
+@interface RMDaqoRightViewController : RMBaseViewController
 
-@property (nonatomic, assign) id PoisonDelegate;
+@property (nonatomic, assign) id DaqoDelegate;
 
 @end

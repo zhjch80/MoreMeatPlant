@@ -10,8 +10,8 @@
 		1D4DA3121A920F21006A9EBA /* RMHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4DA3101A920F21006A9EBA /* RMHomeCell.m */; };
 		1D4DA3131A920F21006A9EBA /* RMHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA3111A920F21006A9EBA /* RMHomeCell.xib */; };
 		1D4DA3151A920F93006A9EBA /* RMHomeCell_sub.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA3141A920F93006A9EBA /* RMHomeCell_sub.xib */; };
-		1D4DA3201A9216BA006A9EBA /* RMReleasePoisonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.m */; };
-		1D4DA3211A9216BA006A9EBA /* RMReleasePoisonCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.xib */; };
+		1D4DA3201A9216BA006A9EBA /* RMReleasePoisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonViewController.m */; };
+		1D4DA3211A9216BA006A9EBA /* RMReleasePoisonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonViewController.xib */; };
 		1D4DA3251A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4DA3231A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.m */; };
 		1D4DA3261A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA3241A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.xib */; };
 		1D4DA32A1A921744006A9EBA /* RMPlantExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4DA3281A921744006A9EBA /* RMPlantExchangeViewController.m */; };
@@ -59,10 +59,6 @@
 		1D64F5271A91B72C0073EB98 /* RMNearbyMerchantViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D64F5251A91B72C0073EB98 /* RMNearbyMerchantViewController.xib */; };
 		1D7AC3F41AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC3F21AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.m */; };
 		1D7AC3F51AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC3F31AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib */; };
-		1D7AC4081AB964BC002204F6 /* RMReleasePoisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4061AB964BC002204F6 /* RMReleasePoisonViewController.m */; };
-		1D7AC4091AB964BC002204F6 /* RMReleasePoisonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC4071AB964BC002204F6 /* RMReleasePoisonViewController.xib */; };
-		1D7AC40D1AB964E5002204F6 /* RMReleasePoisonLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC40B1AB964E5002204F6 /* RMReleasePoisonLeftViewController.m */; };
-		1D7AC40E1AB964E5002204F6 /* RMReleasePoisonLeftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC40C1AB964E5002204F6 /* RMReleasePoisonLeftViewController.xib */; };
 		1D7AC4141AB9791E002204F6 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4111AB9791E002204F6 /* CycleScrollView.m */; };
 		1D7AC4151AB9791E002204F6 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4131AB9791E002204F6 /* NSTimer+Addition.m */; };
 		1D7AC4261AB979A0002204F6 /* CustomRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4191AB979A0002204F6 /* CustomRefreshView.m */; };
@@ -137,6 +133,10 @@
 		1D9CB17B1AAE9EE500BD5A7D /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9CB1711AAE9EE500BD5A7D /* AFURLRequestSerialization.m */; };
 		1D9CB17C1AAE9EE500BD5A7D /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9CB1731AAE9EE500BD5A7D /* AFURLResponseSerialization.m */; };
 		1D9CB1801AAE9FAF00BD5A7D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9CB17F1AAE9FAF00BD5A7D /* Reachability.m */; };
+		1D9EFA311AB9B28F006F6DD8 /* RMDaqoCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9EFA2F1AB9B28F006F6DD8 /* RMDaqoCenterViewController.m */; };
+		1D9EFA321AB9B28F006F6DD8 /* RMDaqoCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9EFA301AB9B28F006F6DD8 /* RMDaqoCenterViewController.xib */; };
+		1D9EFA361AB9B29F006F6DD8 /* RMDaqoRightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9EFA341AB9B29F006F6DD8 /* RMDaqoRightViewController.m */; };
+		1D9EFA371AB9B29F006F6DD8 /* RMDaqoRightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9EFA351AB9B29F006F6DD8 /* RMDaqoRightViewController.xib */; };
 		1DCD99461A95A41500F0DEB6 /* RMPlantWithSaleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCD99441A95A41500F0DEB6 /* RMPlantWithSaleCell.m */; };
 		1DCD99471A95A41500F0DEB6 /* RMPlantWithSaleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DCD99451A95A41500F0DEB6 /* RMPlantWithSaleCell.xib */; };
 		1DD854861A9454E9003B12A5 /* RMReleasePoisonCell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DD854831A9454E9003B12A5 /* RMReleasePoisonCell_1.xib */; };
@@ -375,9 +375,9 @@
 		1D4DA3101A920F21006A9EBA /* RMHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMHomeCell.m; sourceTree = "<group>"; };
 		1D4DA3111A920F21006A9EBA /* RMHomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMHomeCell.xib; sourceTree = "<group>"; };
 		1D4DA3141A920F93006A9EBA /* RMHomeCell_sub.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMHomeCell_sub.xib; sourceTree = "<group>"; };
-		1D4DA31D1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMReleasePoisonCenterViewController.h; sourceTree = "<group>"; };
-		1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMReleasePoisonCenterViewController.m; sourceTree = "<group>"; };
-		1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMReleasePoisonCenterViewController.xib; sourceTree = "<group>"; };
+		1D4DA31D1A9216BA006A9EBA /* RMReleasePoisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMReleasePoisonViewController.h; sourceTree = "<group>"; };
+		1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMReleasePoisonViewController.m; sourceTree = "<group>"; };
+		1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMReleasePoisonViewController.xib; sourceTree = "<group>"; };
 		1D4DA3221A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMActivityWithGroupPurchaseViewController.h; sourceTree = "<group>"; };
 		1D4DA3231A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMActivityWithGroupPurchaseViewController.m; sourceTree = "<group>"; };
 		1D4DA3241A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMActivityWithGroupPurchaseViewController.xib; sourceTree = "<group>"; };
@@ -452,12 +452,6 @@
 		1D7AC3F11AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMFreshPlantMarketDetailsViewController.h; sourceTree = "<group>"; };
 		1D7AC3F21AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMFreshPlantMarketDetailsViewController.m; sourceTree = "<group>"; };
 		1D7AC3F31AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMFreshPlantMarketDetailsViewController.xib; sourceTree = "<group>"; };
-		1D7AC4051AB964BC002204F6 /* RMReleasePoisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMReleasePoisonViewController.h; sourceTree = "<group>"; };
-		1D7AC4061AB964BC002204F6 /* RMReleasePoisonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMReleasePoisonViewController.m; sourceTree = "<group>"; };
-		1D7AC4071AB964BC002204F6 /* RMReleasePoisonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMReleasePoisonViewController.xib; sourceTree = "<group>"; };
-		1D7AC40A1AB964E5002204F6 /* RMReleasePoisonLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMReleasePoisonLeftViewController.h; sourceTree = "<group>"; };
-		1D7AC40B1AB964E5002204F6 /* RMReleasePoisonLeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMReleasePoisonLeftViewController.m; sourceTree = "<group>"; };
-		1D7AC40C1AB964E5002204F6 /* RMReleasePoisonLeftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMReleasePoisonLeftViewController.xib; sourceTree = "<group>"; };
 		1D7AC4101AB9791E002204F6 /* CycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleScrollView.h; sourceTree = "<group>"; };
 		1D7AC4111AB9791E002204F6 /* CycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleScrollView.m; sourceTree = "<group>"; };
 		1D7AC4121AB9791E002204F6 /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
@@ -572,6 +566,12 @@
 		1D9CB1731AAE9EE500BD5A7D /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		1D9CB17E1AAE9FAF00BD5A7D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		1D9CB17F1AAE9FAF00BD5A7D /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		1D9EFA2E1AB9B28F006F6DD8 /* RMDaqoCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDaqoCenterViewController.h; sourceTree = "<group>"; };
+		1D9EFA2F1AB9B28F006F6DD8 /* RMDaqoCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDaqoCenterViewController.m; sourceTree = "<group>"; };
+		1D9EFA301AB9B28F006F6DD8 /* RMDaqoCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaqoCenterViewController.xib; sourceTree = "<group>"; };
+		1D9EFA331AB9B29F006F6DD8 /* RMDaqoRightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDaqoRightViewController.h; sourceTree = "<group>"; };
+		1D9EFA341AB9B29F006F6DD8 /* RMDaqoRightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDaqoRightViewController.m; sourceTree = "<group>"; };
+		1D9EFA351AB9B29F006F6DD8 /* RMDaqoRightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaqoRightViewController.xib; sourceTree = "<group>"; };
 		1DCD99431A95A41500F0DEB6 /* RMPlantWithSaleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPlantWithSaleCell.h; sourceTree = "<group>"; };
 		1DCD99441A95A41500F0DEB6 /* RMPlantWithSaleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPlantWithSaleCell.m; sourceTree = "<group>"; };
 		1DCD99451A95A41500F0DEB6 /* RMPlantWithSaleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMPlantWithSaleCell.xib; sourceTree = "<group>"; };
@@ -873,15 +873,9 @@
 			isa = PBXGroup;
 			children = (
 				1D4EE4391A94D5F200A46490 /* 放毒区帖子详情 */,
-				1D7AC4051AB964BC002204F6 /* RMReleasePoisonViewController.h */,
-				1D7AC4061AB964BC002204F6 /* RMReleasePoisonViewController.m */,
-				1D7AC4071AB964BC002204F6 /* RMReleasePoisonViewController.xib */,
-				1D7AC40A1AB964E5002204F6 /* RMReleasePoisonLeftViewController.h */,
-				1D7AC40B1AB964E5002204F6 /* RMReleasePoisonLeftViewController.m */,
-				1D7AC40C1AB964E5002204F6 /* RMReleasePoisonLeftViewController.xib */,
-				1D4DA31D1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.h */,
-				1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.m */,
-				1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonCenterViewController.xib */,
+				1D4DA31D1A9216BA006A9EBA /* RMReleasePoisonViewController.h */,
+				1D4DA31E1A9216BA006A9EBA /* RMReleasePoisonViewController.m */,
+				1D4DA31F1A9216BA006A9EBA /* RMReleasePoisonViewController.xib */,
 				1D4DA34F1A939CA8006A9EBA /* RMReleasePoisonCell.h */,
 				1D4DA3501A939CA8006A9EBA /* RMReleasePoisonCell.m */,
 				1DD854831A9454E9003B12A5 /* RMReleasePoisonCell_1.xib */,
@@ -1071,6 +1065,12 @@
 				1D64F4E41A904E180073EB98 /* RMDaqoViewController.h */,
 				1D64F4E51A904E180073EB98 /* RMDaqoViewController.m */,
 				1D64F4E61A904E180073EB98 /* RMDaqoViewController.xib */,
+				1D9EFA2E1AB9B28F006F6DD8 /* RMDaqoCenterViewController.h */,
+				1D9EFA2F1AB9B28F006F6DD8 /* RMDaqoCenterViewController.m */,
+				1D9EFA301AB9B28F006F6DD8 /* RMDaqoCenterViewController.xib */,
+				1D9EFA331AB9B29F006F6DD8 /* RMDaqoRightViewController.h */,
+				1D9EFA341AB9B29F006F6DD8 /* RMDaqoRightViewController.m */,
+				1D9EFA351AB9B29F006F6DD8 /* RMDaqoRightViewController.xib */,
 				1D4DA3441A93090D006A9EBA /* RMDaqoCell.h */,
 				1D4DA3451A93090D006A9EBA /* RMDaqoCell.m */,
 				1D4DA3461A93090D006A9EBA /* RMDaqoCell.xib */,
@@ -1986,6 +1986,7 @@
 				1D64F4FD1A904E180073EB98 /* RMAccountViewController.xib in Resources */,
 				51E267FD1AA74CA800252DEF /* RMSysMessageViewController.xib in Resources */,
 				519927191AB5610C00B0F83F /* img_tzed_7.png in Resources */,
+				1D9EFA321AB9B28F006F6DD8 /* RMDaqoCenterViewController.xib in Resources */,
 				1D83974A1AB3F72D00DA190A /* DoImagePickerController.xib in Resources */,
 				1D8397651AB3F81600DA190A /* up@2x.png in Resources */,
 				5157DE131AB8913E005E9FA5 /* btn.png in Resources */,
@@ -2002,6 +2003,7 @@
 				1D8397611AB3F81600DA190A /* up.png in Resources */,
 				5157DE1B1AB8913E005E9FA5 /* fbbb_img_28.png in Resources */,
 				5199273C1AB568B800B0F83F /* menu_bg.png in Resources */,
+				1D9EFA371AB9B29F006F6DD8 /* RMDaqoRightViewController.xib in Resources */,
 				5157DDF51AB87EEC005E9FA5 /* gwc_btn_bg.png in Resources */,
 				1D7AC4361AB979E1002204F6 /* 方正正准黑简体.TTF in Resources */,
 				51E268201AADE92300252DEF /* RMShopLeaveMsTableViewCell.xib in Resources */,
@@ -2009,7 +2011,7 @@
 				5157DE1D1AB8913E005E9FA5 /* fbbb_nophoto.png in Resources */,
 				51E2681B1AADE77700252DEF /* RMSopCarHeadTableViewCell.xib in Resources */,
 				1D7AC3F51AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib in Resources */,
-				1D4DA3211A9216BA006A9EBA /* RMReleasePoisonCenterViewController.xib in Resources */,
+				1D4DA3211A9216BA006A9EBA /* RMReleasePoisonViewController.xib in Resources */,
 				517DF7A51AB861090053EEFE /* fbbb@2x.png in Resources */,
 				519926E11AB5610C00B0F83F /* btn_add_photo_n.png in Resources */,
 				5199269A1AB5605600B0F83F /* member_bottom_bg.png in Resources */,
@@ -2052,7 +2054,6 @@
 				519927041AB5610C00B0F83F /* img_share.png in Resources */,
 				519926F71AB5610C00B0F83F /* img_asc.png in Resources */,
 				519926F61AB5610C00B0F83F /* img_42.png in Resources */,
-				1D7AC40E1AB964E5002204F6 /* RMReleasePoisonLeftViewController.xib in Resources */,
 				51E268521AAF3DCA00252DEF /* RMAddressTableViewCell.xib in Resources */,
 				5120FDC91AB5D9E3000E9BE1 /* RMMyHomeViewController.xib in Resources */,
 				519926F01AB5610C00B0F83F /* img_31.png in Resources */,
@@ -2064,7 +2065,6 @@
 				519926E31AB5610C00B0F83F /* btn_add_photo_s.png in Resources */,
 				5157DDF11AB87EEC005E9FA5 /* gwc_sub_btn.png in Resources */,
 				5120FDEC1AB71B44000E9BE1 /* RMOrderProTableViewCell.xib in Resources */,
-				1D7AC4091AB964BC002204F6 /* RMReleasePoisonViewController.xib in Resources */,
 				519926F41AB5610C00B0F83F /* img_39.png in Resources */,
 				1D4DA33F1A92181E006A9EBA /* RMFreshManCourseOfStudyViewController.xib in Resources */,
 				1D7AC4351AB979E1002204F6 /* 方正正中黑简体.TTF in Resources */,
@@ -2258,7 +2258,7 @@
 				519927501AB5846100B0F83F /* RMPlantCollectionViewController.m in Sources */,
 				51E268601AAF448E00252DEF /* RMSettlementTableViewCell.m in Sources */,
 				1D9CB17A1AAE9EE500BD5A7D /* AFSecurityPolicy.m in Sources */,
-				1D4DA3201A9216BA006A9EBA /* RMReleasePoisonCenterViewController.m in Sources */,
+				1D4DA3201A9216BA006A9EBA /* RMReleasePoisonViewController.m in Sources */,
 				51E268371AAE003000252DEF /* STDbHandle.m in Sources */,
 				5120FDF01AB71D34000E9BE1 /* RMOrderBottomTableViewCell.m in Sources */,
 				51E267F01AA74BDB00252DEF /* RMMyFriendViewController.m in Sources */,
@@ -2268,7 +2268,9 @@
 				51E268101AADE19F00252DEF /* RMShopCarViewController.m in Sources */,
 				1D4EE43D1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.m in Sources */,
 				51E268361AAE003000252DEF /* STDb.m in Sources */,
+				1D9EFA311AB9B28F006F6DD8 /* RMDaqoCenterViewController.m in Sources */,
 				1D93AB991AB1614C0034574C /* RMBaseWebViewController.m in Sources */,
+				1D9EFA361AB9B29F006F6DD8 /* RMDaqoRightViewController.m in Sources */,
 				51E268151AADE25B00252DEF /* RMShopCarGoodsTableViewCell.m in Sources */,
 				51E268011AA74E0C00252DEF /* RMSysMessageTableViewCell.m in Sources */,
 				51E268511AAF3DCA00252DEF /* RMAddressTableViewCell.m in Sources */,
@@ -2276,7 +2278,6 @@
 				512D752C1AB1F3FF0027B7C7 /* RMMyWalletYueTableViewCell.m in Sources */,
 				1D7AC42C1AB979A0002204F6 /* RefreshBottomView.m in Sources */,
 				1D9336F41A8E3DFA00BA4FA7 /* AppDelegate.m in Sources */,
-				1D7AC40D1AB964E5002204F6 /* RMReleasePoisonLeftViewController.m in Sources */,
 				1D4DA33E1A92181E006A9EBA /* RMFreshManCourseOfStudyViewController.m in Sources */,
 				1D55762E1A9600A60072C8C5 /* RMPlantWithSaleBottomView.m in Sources */,
 				1D4DA3391A9217D4006A9EBA /* RMUpgradeSuggestViewController.m in Sources */,
@@ -2294,7 +2295,6 @@
 				1D4DA3121A920F21006A9EBA /* RMHomeCell.m in Sources */,
 				1D4DA32A1A921744006A9EBA /* RMPlantExchangeViewController.m in Sources */,
 				1D8397491AB3F72D00DA190A /* DoImagePickerController.m in Sources */,
-				1D7AC4081AB964BC002204F6 /* RMReleasePoisonViewController.m in Sources */,
 				957A38FB1AB4530F00A335F7 /* RMPlantWithSaleDetailsCell.m in Sources */,
 				1D83972A1AB2CA9E00DA190A /* ZFModalTransitionAnimator.m in Sources */,
 				5120FDEB1AB71B44000E9BE1 /* RMOrderProTableViewCell.m in Sources */,

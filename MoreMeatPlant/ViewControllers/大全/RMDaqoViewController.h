@@ -10,4 +10,11 @@
 
 @interface RMDaqoViewController : RMBaseViewController
 
+/**
+ *  管理侧滑的开关状态
+ */
+- (void)updateSlideSwitchState;
+
+- (void)updataSlideStateClose;
+
 @end

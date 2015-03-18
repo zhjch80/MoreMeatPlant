@@ -7,101 +7,146 @@
 //
 
 #import "RMDaqoViewController.h"
-#import "RMPlantTypeView.h"
-#import "RMDaqoCell.h"
-#import "RMDaqoDetailsViewController.h"
+#import "RMDaqoCenterViewController.h"
+#import "RMDaqoRightViewController.h"
 
-@interface RMDaqoViewController ()<UITableViewDataSource, UITableViewDelegate, SelectedPlantTypeMethodDelegate,DaqpSelectedPlantTypeDelegate>
-@property (nonatomic, strong) NSMutableArray * dataArr;
-@property (nonatomic, strong) UITableView * mTableView;
+#define kSlideWidth         160
+
+@interface RMDaqoViewController (){
+    BOOL isLeftOpen;
+}
+@property (nonatomic, strong) RMDaqoCenterViewController * centerCtl;
+@property (nonatomic, strong) RMDaqoRightViewController * rightCtl;
 
 @end
 
 @implementation RMDaqoViewController
-@synthesize mTableView, dataArr;
+@synthesize centerCtl, rightCtl;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self setCustomNavTitle:@"全部肉肉(950)"];
-    dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
+    rightCtl = [[RMDaqoRightViewController alloc] init];
+    rightCtl.DaqoDelegate = self;
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1];
+    centerCtl = [[RMDaqoCenterViewController alloc] init];
+    centerCtl.DaqoDelegate = self;
+    centerCtl.view.backgroundColor = [UIColor whiteColor];
     
-    RMPlantTypeView * plantType = [[RMPlantTypeView alloc] init];
-    plantType.frame = CGRectMake(0, 64, kScreenWidth, kScreenWidth/7);
-    plantType.delegate = self;
-    [plantType loadPlantType];
-    [self.view addSubview:plantType];
+    [self.view addSubview:centerCtl.view];
+    centerCtl.view.tag = 2;
+    centerCtl.view.frame = self.view.bounds;
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, plantType.frame.size.height + 64, kScreenWidth, kScreenHeight - plantType.frame.size.height - 64 - 49 ) style:UITableViewStylePlain];
-    mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    mTableView.delegate = self;
-    mTableView.dataSource = self;
-    mTableView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:mTableView];
+    [self.view addSubview:rightCtl.view];
+    rightCtl.view.tag = 1;
+    rightCtl.view.frame = self.view.bounds;
+    
+    [self.view bringSubviewToFront:centerCtl.view];
+    
+    UISwipeGestureRecognizer * swipRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipGesture:)];
+    [swipRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    [centerCtl.view addGestureRecognizer:swipRight];
+    
+    UISwipeGestureRecognizer * swipLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipGesture:)];
+    [swipLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [centerCtl.view addGestureRecognizer:swipLeft];
     
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([dataArr count]%3 == 0){
-        return [dataArr count] / 3;
-    }else if ([dataArr count]%3 == 1){
-        return ([dataArr count] + 2) / 3;
-    }else {
-        return ([dataArr count] + 1) / 3;
-    }
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * identifierStr = @"DaqoidentifierStr";
-    RMDaqoCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
-    if (!cell){
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell" owner:self options:nil] lastObject];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor clearColor];
-        cell.delegate = self;
-    }
-    cell.leftTitle.text = @"雪莲";
-    cell.leftImg.identifierString = cell.leftTitle.text;
+- (void)swipGesture:(UISwipeGestureRecognizer *)swip {
+    CALayer * layer = [centerCtl.view layer];
+    layer.shadowColor = [UIColor blackColor].CGColor;
+    layer.shadowOffset = CGSizeMake(1, 1);
+    layer.shadowOpacity = 1;
+    layer.shadowRadius = 20.0;
     
-    cell.centerTitle.text = @"桃美人";
-    cell.centerImg.identifierString = cell.centerTitle.text;
-
-    cell.rightTitle.text = @"绿熊";
-    cell.rightImg.identifierString = cell.rightTitle.text;
-
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 132.0;
-}
-
-- (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
-    switch (sender.tag) {
-        case 1:{
-            
-            break;
+    if (swip.direction == UISwipeGestureRecognizerDirectionLeft) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [UIView setAnimationDidStopSelector:@selector(stopRightAnimation)];
+        [UIView setAnimationDuration:0.1];
+        [UIView setAnimationDelegate:self];
+        
+        isLeftOpen = YES;
+        centerCtl.recognizerView.hidden = NO;
+        
+        if (centerCtl.view.frame.origin.x == self.view.frame.origin.x || centerCtl.view.frame.origin.x == -kSlideWidth){
+            [centerCtl.view setFrame:CGRectMake(centerCtl.view.frame.origin.x - kSlideWidth, centerCtl.view.frame.origin.y, centerCtl.view.frame.size.width, centerCtl.view.frame.size.height)];
         }
-        case 2:{
-            
-            break;
+        [UIView commitAnimations];
+    }
+    
+    if (swip.direction == UISwipeGestureRecognizerDirectionRight) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        [UIView setAnimationDidStopSelector:@selector(stopLeftAnimation)];
+        [UIView setAnimationDuration:0.1];
+        [UIView setAnimationDelegate:self];
+        
+        isLeftOpen = NO;
+        centerCtl.recognizerView.hidden = YES;
+        
+        if (centerCtl.view.frame.origin.x == kSlideWidth){
+            [centerCtl.view setFrame:CGRectMake(centerCtl.view.frame.origin.x + kSlideWidth, centerCtl.view.frame.origin.y, centerCtl.view.frame.size.width, centerCtl.view.frame.size.height)];
         }
-            
-        default:
-            break;
+        [UIView commitAnimations];
     }
 }
 
-- (void)selectedPlantWithType:(NSString *)type {
-    NSLog(@"type:%@",type);
+- (void)stopLeftAnimation {
+    [rightCtl.view setHidden:YES];
 }
 
-- (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
-    NSLog(@"image type:%@",image.identifierString);
-    RMDaqoDetailsViewController * daqoDetailsCtl = [[RMDaqoDetailsViewController alloc] init];
-    [self.navigationController pushViewController:daqoDetailsCtl animated:YES];
+- (void)stopRightAnimation {
+    [rightCtl.view setHidden:NO];
+}
+
+- (void)updateSlideSwitchState {
+    if (isLeftOpen){
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        [UIView setAnimationDidStopSelector:@selector(stopLeftAnimation)];
+        [UIView setAnimationDuration:0.1];
+        [UIView setAnimationDelegate:self];
+        
+        isLeftOpen = NO;
+        centerCtl.recognizerView.hidden = YES;
+        
+        if (centerCtl.view.frame.origin.x == -kSlideWidth){
+            [centerCtl.view setFrame:CGRectMake(centerCtl.view.frame.origin.x + kSlideWidth, centerCtl.view.frame.origin.y, centerCtl.view.frame.size.width, centerCtl.view.frame.size.height)];
+        }
+        [UIView commitAnimations];
+    }else{
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [UIView setAnimationDidStopSelector:@selector(stopRightAnimation)];
+        [UIView setAnimationDuration:0.1];
+        [UIView setAnimationDelegate:self];
+        
+        isLeftOpen = YES;
+        centerCtl.recognizerView.hidden = NO;
+        
+        if (centerCtl.view.frame.origin.x == self.view.frame.origin.x || centerCtl.view.frame.origin.x == kSlideWidth){
+            [centerCtl.view setFrame:CGRectMake(centerCtl.view.frame.origin.x - kSlideWidth, centerCtl.view.frame.origin.y, centerCtl.view.frame.size.width, centerCtl.view.frame.size.height)];
+        }
+        [UIView commitAnimations];
+    }
+}
+
+- (void)updataSlideStateClose {
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationDidStopSelector:@selector(stopLeftAnimation)];
+    [UIView setAnimationDuration:0.1];
+    [UIView setAnimationDelegate:self];
+    
+    isLeftOpen = NO;
+    centerCtl.recognizerView.hidden = YES;
+    
+    if (centerCtl.view.frame.origin.x == -kSlideWidth){
+        [centerCtl.view setFrame:CGRectMake(centerCtl.view.frame.origin.x + kSlideWidth, centerCtl.view.frame.origin.y, centerCtl.view.frame.size.width, centerCtl.view.frame.size.height)];
+    }
+    [UIView commitAnimations];
 }
 
 - (void)didReceiveMemoryWarning {
