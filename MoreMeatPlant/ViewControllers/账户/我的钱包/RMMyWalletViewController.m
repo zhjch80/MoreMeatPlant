@@ -9,6 +9,7 @@
 #import "RMMyWalletViewController.h"
 #import "RMMyWalletTransferTableViewCell.h"
 #import "RMMyWalletYueTableViewCell.h"
+#import "DaiDodgeKeyboard.h"
 @interface RMMyWalletViewController (){
     BOOL isShow;
 }

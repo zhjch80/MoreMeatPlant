@@ -23,6 +23,8 @@
 #import "RMMyCorpViewController.h"
 #import "RMPublishBabyViewController.h"
 #import "RMBabyManageViewController.h"
+#import "RMAdvertisingViewController.h"
+#import "RMHadBabyViewController.h"
 
 #import "UIViewController+ENPopUp.h"
 @interface RMAccountViewController ()
@@ -30,7 +32,7 @@
 @end
 
 @implementation RMAccountViewController
-
+@synthesize isCorp;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -40,6 +42,9 @@
     [self initPlat];
     
     [self layoutViews];
+    
+    
+
 }
 
 - (void)initPlat{
@@ -48,7 +53,7 @@
     
     functitleArray = [[NSMutableArray alloc]init];
     funcimgArray = [[NSMutableArray alloc]init];
-    if(/* DISABLES CODE */ (1)){//普通会员
+    if(!isCorp){//普通会员
         functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"申请\n开店",@"我的\n订单",@"我的\n帖子",@"系统\n通知",@"等待\n升级",@"购物\n篮",@"附近\n肉友",@"我的\n资料" ,nil];
         funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"sqkd",@"wddd",@"wdtz",@"xttz",@"ddsj",@"gwl",@"fjry",@"wdzl", nil];
     }
@@ -71,29 +76,29 @@
         acountView.titleL.text = [functitleArray objectAtIndex:i];
         [acountView.imgV setImage:[UIImage imageNamed:[funcimgArray objectAtIndex:i]]];
         acountView.call_back = ^(RMAccountView * view){
-            if(/* DISABLES CODE */ (1)){//普通会员
+            if(!isCorp){//普通会员
                 switch (view.tag-100) {
                     case 0:{//我的肉友
-                        RMPublishBabyViewController * publish = [[RMPublishBabyViewController alloc]initWithNibName:@"RMPublishBabyViewController" bundle:nil];
-                        [self.navigationController pushViewController:publish animated:YES];
+                        
                     }
                         break;
                     case 1:{//我的钱包
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
                         mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
                         [self presentPopUpViewController:mywallet overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-108)];
-                        
                     }
                         break;
                     case 2:{//我的收藏
                         RMMyCollectionViewController * collection = [[RMMyCollectionViewController alloc]initWithNibName:@"RMMyCollectionViewController" bundle:nil];
+                    
                         [self.navigationController pushViewController:collection animated:YES];
                     }
                         break;
                     case 3:{//申请开店
                         //我的店铺
-                        RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
-                        [self.navigationController pushViewController:corp animated:YES];
+                        RMAccountViewController * account = [[RMAccountViewController alloc]initWithNibName:@"RMAccountViewController" bundle:nil];
+                        account.isCorp = YES;
+                        [self.navigationController pushViewController:account animated:YES];
                     }
                         break;
                     case 4:{//我的订单
@@ -160,56 +165,75 @@
 
             }else{//商家会员
                 switch (view.tag-100) {
-                    case 0:{
+                    case 0:{//我的肉友
                         
                     }
                         break;
-                    case 1:{
-                        
+                    case 1:{//我的钱包
+                        RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
+                        mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
+                        [self presentPopUpViewController:mywallet overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-108)];
                     }
                         break;
-                    case 2:{
-                        
+                    case 2:{//我的收藏
+                        RMMyCollectionViewController * collection = [[RMMyCollectionViewController alloc]initWithNibName:@"RMMyCollectionViewController" bundle:nil];
+                        [self.navigationController pushViewController:collection animated:YES];
                     }
                         break;
-                    case 3:{
-                        
-                    }
-                        break;
-                    case 4:{
-                        
-                    }
-                        break;
-                    case 5:{
-                        
-                    }
-                        break;
-                    case 6:{
-                        
-                    }
-                        break;
-                    case 7:{
-                        
-                    }
-                        break;
-                    case 8:{
-                        
-                    }
-                        break;
-                    case 9:{
-                        
-                    }
-                        break;
-                    case 10:{
+                    case 3:{//我的资料
                         RMUserInfoViewController * userinfo = [[RMUserInfoViewController alloc]initWithNibName:@"RMUserInfoViewController" bundle:nil];
-//                        userinfo.callback = ^(RMSysMessageViewController * controller){
-//                            [self dismissPopUpViewControllerWithcompletion:nil];
-//                        };
+                        //                        userinfo.callback = ^(RMSysMessageViewController * controller){
+                        //                            [self dismissPopUpViewControllerWithcompletion:nil];
+                        //                        };
                         userinfo.view.frame = CGRectMake(0, 84, kScreenWidth-20*2, kScreenHeight/2);
                         [self presentPopUpViewController:userinfo overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
                     }
                         break;
-                    case 11:{
+                    case 4:{//已出宝贝
+//                        RMHadBabyViewController * hadbaby = [RMHadBabyViewController alloc]
+                        RMHadBabyViewController * hadbaby = [[RMHadBabyViewController alloc]initWithNibName:@"RMHadBabyViewController" bundle:nil];
+                        hadbaby.callback = ^(void){
+                            [self dismissPopUpViewControllerWithcompletion:nil];
+                        };
+                        hadbaby.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+                        [self presentPopUpViewController:hadbaby overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+                    }
+                        break;
+                    case 5:{//我的帖子
+                        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+                        [self.navigationController pushViewController:home animated:YES];
+                    }
+                        break;
+                    case 6:{//系统通知
+                        RMSysMessageViewController * message = [[RMSysMessageViewController alloc]initWithNibName:@"RMSysMessageViewController" bundle:nil];
+                        message.callback = ^(RMSysMessageViewController * controller){
+                            [self dismissPopUpViewControllerWithcompletion:nil];
+                        };
+                        message.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-44);
+                        [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
+                    }
+                        break;
+                    case 7:{//附近肉有
+                        RMNearFriendViewController * near = [[RMNearFriendViewController alloc]initWithNibName:@"RMNearFriendViewController" bundle:nil];
+                        [self.navigationController pushViewController:near animated:YES];
+                    }
+                        break;
+                    case 8:{//发布宝贝
+                        RMPublishBabyViewController * publish = [[RMPublishBabyViewController alloc]initWithNibName:@"RMPublishBabyViewController" bundle:nil];
+                        [self.navigationController pushViewController:publish animated:YES];
+                    }
+                        break;
+                    case 9:{//我的店铺
+                        RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
+                        [self.navigationController pushViewController:corp animated:YES];
+                    }
+                        break;
+                    case 10:{//发布广告
+                        RMAdvertisingViewController * advertise = [[RMAdvertisingViewController alloc]initWithNibName:@"RMAdvertisingViewController" bundle:nil];
+                        [self.navigationController pushViewController:advertise animated:YES];
+                    }
+                        break;
+                    case 11:{//等待升级
                         
                     }
                         break;

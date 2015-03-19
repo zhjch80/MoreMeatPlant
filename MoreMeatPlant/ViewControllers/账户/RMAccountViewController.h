@@ -11,6 +11,8 @@
 @interface RMAccountViewController : RMBaseViewController{
     NSMutableArray * functitleArray;
     NSMutableArray * funcimgArray;
+    
+    
 }
 @property (weak, nonatomic) IBOutlet UIImageView *headerImgV;
 @property (weak, nonatomic) IBOutlet UILabel *userNameL;
@@ -20,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *hua_biL;//花币
 @property (weak, nonatomic) IBOutlet UIButton *member_right;
 @property (weak, nonatomic) IBOutlet UIButton *member_level;
+
+@property (assign, nonatomic) BOOL isCorp;
 
 
 @end
