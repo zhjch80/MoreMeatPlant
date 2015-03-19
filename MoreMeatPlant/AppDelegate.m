@@ -13,7 +13,9 @@
 #import "RMTalkMoreViewController.h"
 #import "RMCustomTabBarController.h"
 
-@interface AppDelegate ()
+#import "EaseMob.h"
+
+@interface AppDelegate ()<EMChatManagerDelegate>
 
 @end
 
@@ -28,6 +30,26 @@
     [self.window makeKeyAndVisible];
 
     [self loadMainViewControllers];
+    
+#pragma mark - 环信配置
+    //注册 APNS文件的名字, 需要与后台上传证书时的名字一一对应，该证书用来在有新消息时给用户推送通知
+    NSString *apnsCertName = @"";
+    [[EaseMob sharedInstance] registerSDKWithAppKey:@"snowyshell#moremeatplant" apnsCertName:apnsCertName];
+    [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
+    
+    [self registerRemoteNotification];
+    
+#warning 登录环信账号，该部分代码需要移到登录界面登录自己本身的账号成功后
+    //登录时候的账号和密码是在环信后台设置好的，以后需要自己的服务器在接口返回
+    [self loginEaseMobWithUserName:@"zhangbeibei"
+                          passWord:@"111111"
+                           success:^(id arg) {
+                               //登录成功
+                           }
+                           failure:^(id arg) {
+                               //登录失败
+                           }];
     
     return YES;
 }
@@ -71,26 +93,136 @@
     
 }
 
+#pragma mark - EMChatManagerDelegate
+
+- (void)didLoginFromOtherDevice
+{
+    //账号在其他设备登陆，登出
+    EMError *error;
+    [[EaseMob sharedInstance].chatManager logoffWithUnbindDeviceToken:YES error:&error];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"你的账号已在其他地方登录"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil,nil];
+    [alertView show];
+    //TODO:检测到账号在其他设备登录后要做的操作，如：退出该账号到登录界面等，根据项目需求来做
+}
+
+#pragma mark - 登录和退出环信方法
+
+- (void)loginEaseMobWithUserName:(NSString *)userName
+                        passWord:(NSString *)passWord
+                         success:(void(^)(id arg))success
+                         failure:(void(^)(id arg))failure
+{
+    [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:userName
+                                                        password:passWord
+                                                      completion:^(NSDictionary *loginInfo, EMError *error)
+     {
+         if (loginInfo && !error) {
+             EMError *error = [[EaseMob sharedInstance].chatManager importDataToNewDatabase];
+             if (!error) {
+                 error = [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
+             }
+             NSLog(@"环信账号登录成功");
+             if (success) success(loginInfo);
+         }else {
+             
+             NSString *errorMessage = @"";
+             switch (error.errorCode) {
+                 case EMErrorServerNotReachable:
+                 {
+                     errorMessage = @"连接服务器失败!";
+                 }
+                     break;
+                 case EMErrorServerAuthenticationFailure:
+                 {
+                     errorMessage = error.description;
+                 }
+                     break;
+                 case EMErrorServerTimeout:
+                 {
+                     errorMessage = @"连接服务器失败!";
+                 }
+                     break;
+                 default:
+                 {
+                     errorMessage = @"登录失败!";
+                 }
+                     break;
+             }
+             NSLog(@"login error %@",errorMessage);
+             if (failure) {
+                 failure(errorMessage);
+             }
+         }
+     } onQueue:nil];
+    
+}
+
+
+- (void)logoutEaseMobWithSuccess:(void(^)(id arg))success
+                         failure:(void(^)(id arg))failure
+{
+    EMError *error;
+    NSDictionary *logOutResult = [[EaseMob sharedInstance].chatManager logoffWithUnbindDeviceToken:YES error:&error];
+    if (error) {
+        if (failure) failure(error);
+    }else{
+        if (success) success(logOutResult);
+    }
+}
+
+
+#pragma mark - application
+
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [[EaseMob sharedInstance] applicationWillResignActive:application];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[EaseMob sharedInstance] applicationDidBecomeActive:application];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[EaseMob sharedInstance] applicationWillTerminate:application];
 }
+
+#pragma mark - 
+
+// 注册推送
+- (void)registerRemoteNotification{
+    UIApplication *application = [UIApplication sharedApplication];
+    application.applicationIconBadgeNumber = 0;
+    
+    if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
+    {
+        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+    
+#if !TARGET_IPHONE_SIMULATOR
+    //iOS8 注册APNS
+    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
+        [application registerForRemoteNotifications];
+    }else{
+        UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeBadge |
+        UIRemoteNotificationTypeSound |
+        UIRemoteNotificationTypeAlert;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
+    }
+#endif
+}
+
 
 @end
