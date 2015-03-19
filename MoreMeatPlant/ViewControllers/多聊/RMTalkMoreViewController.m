@@ -60,7 +60,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //进入聊天界面
     ChatViewController *chatVC = [[ChatViewController alloc] initWithChatter:_dataArray[indexPath.row] isGroup:NO];
-    [chatVC hideCustomNavigationBar:NO withHideCustomStatusBar:NO];
     chatVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatVC animated:YES];
 }

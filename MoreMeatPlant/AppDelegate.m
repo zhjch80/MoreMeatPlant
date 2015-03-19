@@ -32,7 +32,7 @@
     [self loadMainViewControllers];
     
 #pragma mark - 环信配置
-    //注册 APNS文件的名字, 需要与后台上传证书时的名字一一对应，该证书用来在有新消息时给用户推送通知
+#warning  修改一 注册 APNS文件的名字, 需要与后台上传证书时的名字一一对应，该证书用来在有新消息时给用户推送通知
     NSString *apnsCertName = @"";
     [[EaseMob sharedInstance] registerSDKWithAppKey:@"snowyshell#moremeatplant" apnsCertName:apnsCertName];
     [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
@@ -40,12 +40,12 @@
     
     [self registerRemoteNotification];
     
-#warning 登录环信账号，该部分代码需要移到登录界面登录自己本身的账号成功后
-    //登录时候的账号和密码是在环信后台设置好的，以后需要自己的服务器在接口返回
+#warning 修改二 登录环信账号，该部分代码需要移到登录界面登录自己本身的账号成功后
+    //登录时候的账号和密码是在环信后台设置好的，以后需要自己的服务器在接口返回 密码都是111111 
     [self loginEaseMobWithUserName:@"zhangbeibei"
                           passWord:@"111111"
                            success:^(id arg) {
-                               //登录成功
+                               //登录成功s
                            }
                            failure:^(id arg) {
                                //登录失败
@@ -95,8 +95,7 @@
 
 #pragma mark - EMChatManagerDelegate
 
-- (void)didLoginFromOtherDevice
-{
+- (void)didLoginFromOtherDevice {
     //账号在其他设备登陆，登出
     EMError *error;
     [[EaseMob sharedInstance].chatManager logoffWithUnbindDeviceToken:YES error:&error];

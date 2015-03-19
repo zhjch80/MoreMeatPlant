@@ -3572,7 +3572,7 @@
 				TargetAttributes = {
 					1D9336EA1A8E3DFA00BA4FA7 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = WWD46XW8M3;
+						DevelopmentTeam = PTY98AP2WF;
 					};
 					1D9337061A8E3DFA00BA4FA7 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -4262,8 +4262,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: cheng hui (7JCUSD7D5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: cheng hui (7JCUSD7D5K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -4283,7 +4283,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "c670897d-8b96-4d9b-a915-1f33e9f51396";
+				PROVISIONING_PROFILE = "39d5981f-d436-4eef-87d2-8a65abda8ec6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4305,8 +4305,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: cheng hui (7JCUSD7D5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: cheng hui (7JCUSD7D5K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4319,7 +4319,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "c670897d-8b96-4d9b-a915-1f33e9f51396";
+				PROVISIONING_PROFILE = "39d5981f-d436-4eef-87d2-8a65abda8ec6";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4330,8 +4330,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: cheng hui (7JCUSD7D5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: cheng hui (7JCUSD7D5K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4341,7 +4341,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c670897d-8b96-4d9b-a915-1f33e9f51396";
+				PROVISIONING_PROFILE = "39d5981f-d436-4eef-87d2-8a65abda8ec6";
 			};
 			name = Debug;
 		};
@@ -4350,8 +4350,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: cheng hui (7JCUSD7D5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: cheng hui (7JCUSD7D5K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
 				INFOPLIST_FILE = MoreMeatPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4361,7 +4361,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c670897d-8b96-4d9b-a915-1f33e9f51396";
+				PROVISIONING_PROFILE = "39d5981f-d436-4eef-87d2-8a65abda8ec6";
 			};
 			name = Release;
 		};
@@ -4369,8 +4369,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: cheng hui (7JCUSD7D5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: cheng hui (7JCUSD7D5K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -4382,7 +4382,7 @@
 				INFOPLIST_FILE = MoreMeatPlantTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c670897d-8b96-4d9b-a915-1f33e9f51396";
+				PROVISIONING_PROFILE = "39d5981f-d436-4eef-87d2-8a65abda8ec6";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoreMeatPlant.app/MoreMeatPlant";
 			};
 			name = Debug;
@@ -4391,8 +4391,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: cheng hui (7JCUSD7D5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: cheng hui (7JCUSD7D5K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -4400,7 +4400,7 @@
 				INFOPLIST_FILE = MoreMeatPlantTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c670897d-8b96-4d9b-a915-1f33e9f51396";
+				PROVISIONING_PROFILE = "39d5981f-d436-4eef-87d2-8a65abda8ec6";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoreMeatPlant.app/MoreMeatPlant";
 			};
 			name = Release;

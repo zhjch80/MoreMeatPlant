@@ -25,13 +25,11 @@
 #import "MessageReadManager.h"
 #import "MessageModelManager.h"
 #import "LocationViewController.h"
-//#import "ChatGroupDetailViewController.h"
 #import "UIViewController+HUD.h"
 #import "WCAlertView.h"
 #import "NSDate+Category.h"
 #import "DXMessageToolBar.h"
 #import "DXChatBarMoreView.h"
-//#import "ChatViewController+Category.h"
 
 #define KPageCount 20
 
@@ -880,7 +878,7 @@
 {
     [UIView animateWithDuration:0.3 animations:^{
         CGRect rect = self.tableView.frame;
-        rect.origin.y = 0;
+        rect.origin.y = 64;
         rect.size.height = self.view.frame.size.height - toHeight;
         self.tableView.frame = rect;
     }];
@@ -1145,7 +1143,7 @@
 {
     if (self.tableView.contentSize.height > self.tableView.frame.size.height)
     {
-        CGPoint offset = CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height);
+        CGPoint offset = CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height - 64);
         [self.tableView setContentOffset:offset animated:YES];
     }
 }
