@@ -107,7 +107,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="341" y="266"/>
+            <point key="canvasLocation" x="68" y="128"/>
         </view>
     </objects>
     <resources>

@@ -9,8 +9,7 @@
 #import "RMDaqoViewController.h"
 #import "RMDaqoCenterViewController.h"
 #import "RMDaqoRightViewController.h"
-
-#define kSlideWidth         160
+#import "RMSlideParameter.h"
 
 @interface RMDaqoViewController (){
     BOOL isLeftOpen;

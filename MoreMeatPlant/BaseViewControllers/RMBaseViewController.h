@@ -23,7 +23,7 @@
  *  @param navigationBar    自定义的navigationBar
  *  @param statusBar        自定义的statusBar
  */
-- (void)hideCustomNavigationBar:(BOOL)navigationBar withHideCustomStatusBar:(BOOL)statusBar;
+- (void)setHideCustomNavigationBar:(BOOL)navigationBar withHideCustomStatusBar:(BOOL)statusBar;
 
 /**
  *  @param  number          设置右边barbutton的数量 最多两个

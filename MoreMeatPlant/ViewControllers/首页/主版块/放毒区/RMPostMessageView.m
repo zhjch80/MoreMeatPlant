@@ -31,7 +31,7 @@
     
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
-    subHeight = 180;
+    subHeight = 220;
     
     NSArray * tzTypeArr = [NSArray arrayWithObjects:
                            @"img_tz_1",
@@ -90,7 +90,7 @@
     for (NSInteger i=0; i<2; i++){
         for (NSInteger j=0; j<6; j++) {
             UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(width/6.0 - 12 + j*40, 45 + i*40, 35, 35);
+            button.frame = CGRectMake(16 + j*50, 55 + i*50, 40, 40);
             [button setBackgroundImage:LOADIMAGE([tzTypeArr objectAtIndex:value], kImageTypePNG) forState:UIControlStateNormal];
             [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
             [button setTitle:[NSString stringWithFormat:@"发帖类型%ld",(long)value] forState:UIControlStateNormal];
@@ -102,7 +102,7 @@
     
     UIButton * postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     postBtn.frame = CGRectMake(0, 0, 100, 30);
-    postBtn.center = CGPointMake(width/2, 145);
+    postBtn.center = CGPointMake(width/2, 180);
     postBtn.backgroundColor = [UIColor colorWithRed:0.94 green:0 blue:0.32 alpha:1];
     [postBtn.layer setCornerRadius:8.0];
     [postBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

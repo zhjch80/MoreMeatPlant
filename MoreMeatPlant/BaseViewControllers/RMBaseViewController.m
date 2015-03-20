@@ -85,7 +85,7 @@
     //Ignore this super method
 }
 
-- (void)hideCustomNavigationBar:(BOOL)navigationBar withHideCustomStatusBar:(BOOL)statusBar {
+- (void)setHideCustomNavigationBar:(BOOL)navigationBar withHideCustomStatusBar:(BOOL)statusBar {
     customNav.hidden = navigationBar;
     statusView.hidden = statusBar;
 }

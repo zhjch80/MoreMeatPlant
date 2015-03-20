@@ -18,25 +18,34 @@
 #import "RMBaseWebViewController.h"
 #import "RMStartPostingViewController.h"
 #import "ZFModalTransitionAnimator.h"
+#import "RMPostClassificationView.h"
+#import "RMSearchViewController.h"
 
-@interface RMActivityWithGroupPurchaseViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate>{
+@interface RMActivityWithGroupPurchaseViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate>{
     
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
 
+@property (nonatomic, strong) RMPostClassificationView * fenleiAction;
 @property (nonatomic, strong) RMPostMessageView *action;
 @property (nonatomic, strong) ZFModalTransitionAnimator *animator;
 
 @end
 
 @implementation RMActivityWithGroupPurchaseViewController
-@synthesize mTableView, dataArr, action, animator;
+@synthesize mTableView, dataArr, action, animator, fenleiAction;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
+    [self setRightBarButtonNumber:2];
+    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setTitle:@"分类" forState:UIControlStateNormal];
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    [rightOneBarButton setImage:[UIImage imageNamed:@"img_search"] forState:UIControlStateNormal];
+    [rightTwoBarButton setImage:[UIImage imageNamed:@"img_postMessage"] forState:UIControlStateNormal];
     [self setCustomNavTitle:@"活动与团购"];
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
@@ -267,11 +276,21 @@
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
-            NSLog(@"选取其他类别");
-            
+            fenleiAction = [[RMPostClassificationView alloc] init];
+            fenleiAction.delegate = self;
+            fenleiAction.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            fenleiAction.backgroundColor = [UIColor clearColor];
+            [fenleiAction initWithPostClassificationView];
+            [self.view addSubview:fenleiAction];
+            [fenleiAction show];
             break;
         }
         case 2:{
+            RMSearchViewController * searchCtl = [[RMSearchViewController alloc] init];
+            [self.navigationController pushViewController:searchCtl animated:YES];
+            break;
+        }
+        case 3:{
             action = [[RMPostMessageView alloc] init];
             action.delegate = self;
             action.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
@@ -281,9 +300,6 @@
             [action show];
             break;
         }
-            
-        default:
-            break;
     }
 }
 

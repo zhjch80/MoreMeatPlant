@@ -129,6 +129,26 @@
     [self loadMoreMessages];
 }
 
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
+    switch (sender.tag) {
+        case 1:{
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
+        }
+        case 2:{
+            
+            break;
+        }
+        case 3:{
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
 - (void)setupBarButtonItem
 {
     //TODO:以后修改按钮的样式
@@ -158,7 +178,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self hideCustomNavigationBar:NO withHideCustomStatusBar:NO];
+    [self setHideCustomNavigationBar:NO withHideCustomStatusBar:NO];
 
     if (_isScrollToBottom) {
         [self scrollViewToBottom:YES];

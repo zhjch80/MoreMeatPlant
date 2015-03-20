@@ -15,21 +15,29 @@
 #import "RMPlantWithSaleDetailsViewController.h"
 #import "RMBottomView.h"
 #import "RMBaseWebViewController.h"
+#import "RMSearchViewController.h"
+#import "RMPostMessageView.h"
+#import "RMStartPostingViewController.h"
+#import "ZFModalTransitionAnimator.h"
 
-@interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,BottomDelegate>
+@interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,BottomDelegate,PostMessageSelectedPlantDelegate>
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
-
+@property (nonatomic, strong) RMPostMessageView * action;
+@property (nonatomic, strong) ZFModalTransitionAnimator * animator;
 @end
 
 @implementation RMPlantWithSaleViewController
-@synthesize mTableView, dataArr;
+@synthesize mTableView, dataArr, action, animator;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setCustomNavTitle:@"一肉一拍（80鲜肉）"];
+//    [self setRightBarButtonNumber:2];
+//    [rightOneBarButton setImage:[UIImage imageNamed:@"img_search"] forState:UIControlStateNormal];
+//    [rightTwoBarButton setImage:[UIImage imageNamed:@"img_postMessage"] forState:UIControlStateNormal];
+    [self setCustomNavTitle:@"一肉一拍"];
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
     
@@ -145,6 +153,7 @@
     [self.navigationController pushViewController:nearbyMerchantCtl animated:YES];
 }
 
+/*
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
@@ -152,13 +161,42 @@
             break;
         }
         case 2:{
-
+            RMSearchViewController * searchCtl = [[RMSearchViewController alloc] init];
+            [self.navigationController pushViewController:searchCtl animated:YES];
+            break;
+        }
+        case 3:{
+            action = [[RMPostMessageView alloc] init];
+            action.delegate = self;
+            action.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            action.backgroundColor = [UIColor clearColor];
+            [action initWithPostMessageView];
+            [self.view addSubview:action];
+            [action show];
+            
             break;
         }
             
         default:
             break;
     }
+}
+*/
+
+- (void)selectedPostMessageWithPlantType:(NSString *)type {
+    [action dismiss];
+    RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
+    startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
+    
+    animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:startPostingCtl];
+    animator.dragable = NO;
+    animator.bounces = NO;
+    animator.behindViewAlpha = 0.5f;
+    animator.behindViewScale = 0.5f;
+    animator.transitionDuration = 0.7f;
+    animator.direction = ZFModalTransitonDirectionBottom;
+    startPostingCtl.transitioningDelegate = animator;
+    [self presentViewController:startPostingCtl animated:YES completion:nil];
 }
 
 #pragma mark - 底部栏回调方法

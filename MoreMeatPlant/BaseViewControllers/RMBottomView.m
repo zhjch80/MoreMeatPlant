@@ -61,7 +61,7 @@
     bgimage.frame = CGRectMake(0, 0, kScreenWidth, 40);
     [self addSubview:bgimage];
     
-    NSArray * btnArr = [NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_postMessage", @"img_share", nil];
+    NSArray * btnArr = [NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_postMessage@2x", @"img_share", nil];
     
     for (NSInteger i=0; i<4; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];

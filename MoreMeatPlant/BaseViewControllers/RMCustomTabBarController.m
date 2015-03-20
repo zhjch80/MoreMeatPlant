@@ -67,6 +67,14 @@
     bgTabImg.multipleTouchEnabled = YES;
     [self.view addSubview:bgTabImg];
     
+    for (NSInteger i=0; i<3; i++) {
+        UIImageView * tabLine = [[UIImageView alloc] init];
+        tabLine.image = LOADIMAGE(@"tabLine", kImageTypePNG);
+        tabLine.frame = CGRectMake(kScreenWidth/4 + i*(kScreenWidth/4), 15, 1, 20);
+        tabLine.backgroundColor = [UIColor clearColor];
+        [bgTabImg addSubview:tabLine];
+    }
+    
     CGRect frame = CGRectMake(0, height, self.view.frame.size.width, tabbarHeight);
     _myTabbarView = [[UIScrollView alloc] initWithFrame:frame];
     _myTabbarView.showsHorizontalScrollIndicator = NO;
@@ -150,12 +158,12 @@
 //        unselectedImageArr = [NSArray arrayWithObjects:@"home_unselected_6p", @"ranking_unselected_6p", @"myChannel_unselected_6p", @"setUp_unselected_6p", nil];
 //        selectedImageArr = [NSArray arrayWithObjects:@"home_selected_6p", @"ranking_selected_6p", @"myChannel_selected_6p", @"setUp_selected_6p", nil];
 //    }else{
-        unselectedImageArr = [NSArray arrayWithObjects:@"img_34", @"img_36", @"imgg_36", @"img_40", nil];
-        selectedImageArr = [NSArray arrayWithObjects:@"imgg_38", @"imgd_38", @"img_38", @"imgd_40", nil];
+        unselectedImageArr = [NSArray arrayWithObjects:@"home", @"daquan", @"zhanghu", @"duoliao", nil];
+        selectedImageArr = [NSArray arrayWithObjects:@"home_z", @"daquan_z", @"zhanghu_z", @"duoliao_z", nil];
 //    }
     
     UIButton *selectedButton = (UIButton *)sender;
-    [selectedButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",[selectedImageArr objectAtIndex:selectedButton.tag]]] forState:UIControlStateNormal];
+    [selectedButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",[selectedImageArr objectAtIndex:selectedButton.tag]]] forState:UIControlStateNormal];
     
     if (self.selectDelegate) {
         [self.selectDelegate selctTabbarItemWithIndex:selectedButton.tag];
@@ -171,7 +179,7 @@
         }
         
         if (button.tag != selectedButton.tag){
-            [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",[unselectedImageArr objectAtIndex:button.tag]]] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",[unselectedImageArr objectAtIndex:button.tag]]] forState:UIControlStateNormal];
         }
     }
     

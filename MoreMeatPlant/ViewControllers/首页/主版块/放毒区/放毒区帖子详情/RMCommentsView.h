@@ -17,6 +17,6 @@
 @interface RMCommentsView : UIView
 @property (nonatomic, assign) id <CommentsViewDelegate>delegate;
 
-- (void)loadCommentsView;
+- (void)loadCommentsViewWithReceiver:(NSString *)receive;
 
 @end

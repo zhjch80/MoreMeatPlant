@@ -47,7 +47,7 @@ typedef enum{
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self hideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
     dataArr = [[NSMutableArray alloc] initWithObjects:
                @"",

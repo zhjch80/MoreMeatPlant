@@ -53,7 +53,7 @@
     uploadImageArr = [[NSMutableArray alloc] init];
     uploadImageCount = 0;
     
-    [self hideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
     [self loadHeaderView];
     

@@ -16,6 +16,7 @@
 @interface RMCommentsView ()<UITextViewDelegate,UIAlertViewDelegate>{
     UIView * bgView;
     UITextView * commentTextView;
+    UILabel * receiver;
     BOOL isSendMessages;
 }
 
@@ -23,7 +24,7 @@
 
 @implementation RMCommentsView
 
-- (void)loadCommentsView {
+- (void)loadCommentsViewWithReceiver:(NSString *)receive {
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [self addGestureRecognizer:gesture];
     
@@ -31,6 +32,14 @@
     bgView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
     [bgView blur];
     [self addSubview:bgView];
+    
+    receiver = [[UILabel alloc] init];
+    receiver.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 30);
+    receiver.text = [NSString stringWithFormat:@"  回复:%@",receive];
+    receiver.font = FONT_1(16.0);
+    receiver.textColor = [UIColor colorWithRed:0.42 green:0.42 blue:0.42 alpha:1];
+    receiver.backgroundColor = [UIColor clearColor];
+    [bgView addSubview:receiver];
     
     commentTextView = [[UITextView alloc] init];
     commentTextView.font = [UIFont fontWithName:@"FZZHJW--GB1-0" size:16.0];
@@ -53,16 +62,16 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         commentTextView.frame = CGRectMake(10, kScreenHeight - size.height - kCommentHeight, kScreenWidth - 20, kCommentHeight);
+        receiver.frame = CGRectMake(0, commentTextView.frame.origin.y - 35, kScreenWidth, 30);
     } completion:^(BOOL finished) {
         
     }];
 }
 
 - (void)KeyboardWillHide:(NSNotification *)noti {
-//    CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-
     [UIView animateWithDuration:0.3 animations:^{
         commentTextView.frame = CGRectMake(10, kScreenHeight, kScreenWidth - 20, kCommentHeight);
+        receiver.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 30);
     } completion:^(BOOL finished) {
         if (isSendMessages){
             NSLog(@"发送评论");

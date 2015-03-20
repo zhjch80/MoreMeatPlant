@@ -8,6 +8,12 @@
 
 #import "RMBaseView.h"
 
+@interface RMBaseView(){
+    
+}
+
+@end
+
 @implementation RMBaseView
 
 @end

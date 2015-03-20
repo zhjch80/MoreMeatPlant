@@ -7,6 +7,8 @@
 //
 
 #import "RMDaqoRightViewController.h"
+#import "RMSlideParameter.h"
+#import "RMDaqoViewController.h"
 
 @interface RMDaqoRightViewController ()<UITableViewDataSource,UITableViewDelegate>{
     
@@ -23,8 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self hideCustomNavigationBar:YES withHideCustomStatusBar:YES];
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
+    [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(kScreenWidth - kSlideWidth, 20, kSlideWidth, kScreenHeight - 20 - 49) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.backgroundColor = [UIColor clearColor];
@@ -46,5 +48,12 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        RMDaqoViewController * daqoCtl = self.DaqoDelegate;
+        [daqoCtl updateSlideSwitchState];
+    });
+}
 
 @end

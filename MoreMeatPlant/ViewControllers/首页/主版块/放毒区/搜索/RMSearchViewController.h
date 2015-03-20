@@ -7,7 +7,11 @@
 //
 
 #import "RMBaseViewController.h"
+#import "RMBaseTextField.h"
 
 @interface RMSearchViewController : RMBaseViewController
+@property (weak, nonatomic) IBOutlet RMBaseTextField *mTextField;
+
+@property (weak, nonatomic) IBOutlet UITableView *mTableView;
 
 @end

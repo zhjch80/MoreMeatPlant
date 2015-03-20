@@ -17,23 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self setCustomNavTitle:@"大全详情"];
-}
-
-- (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
-    switch (sender.tag) {
-        case 1:{
-            [self.navigationController popViewControllerAnimated:YES];
-            break;
-        }
-        case 2:{
-            
-            break;
-        }
-            
-        default:
-            break;
-    }
+    [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

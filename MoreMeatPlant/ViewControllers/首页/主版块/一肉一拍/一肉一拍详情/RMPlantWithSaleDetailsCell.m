@@ -7,11 +7,17 @@
 //
 
 #import "RMPlantWithSaleDetailsCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation RMPlantWithSaleDetailsCell
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    [self.buyNowBtn.layer setCornerRadius:5.0f];
+    [self.addToCartBtn.layer setCornerRadius:5.0f];
+    [self.contactSeller.layer setCornerRadius:5.0f];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -19,5 +25,12 @@
 
     // Configure the view for the selected state
 }
+
+- (IBAction)plantWithSlaeCellBtnClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(plantWithSaleCellMethodWithTag:)]){
+        [self.delegate plantWithSaleCellMethodWithTag:sender.tag];
+    }
+}
+
 
 @end

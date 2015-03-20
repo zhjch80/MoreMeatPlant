@@ -11,6 +11,8 @@
 #import "RMDaqoCell.h"
 #import "RMDaqoDetailsViewController.h"
 #import "RMDaqoViewController.h"
+#import "RMSearchViewController.h"
+#import "RMSlideParameter.h"
 
 @interface RMDaqoCenterViewController ()<UITableViewDataSource, UITableViewDelegate, SelectedPlantTypeMethodDelegate,DaqpSelectedPlantTypeDelegate>
 @property (nonatomic, strong) NSMutableArray * dataArr;
@@ -25,7 +27,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self setCustomNavTitle:@"全部肉肉(950)"];
+    
+    [self setRightBarButtonNumber:1];
+    leftBarButton.frame = CGRectMake(5, 1, 43, 43);
+    [leftBarButton setImage:[UIImage imageNamed:@"img_search"] forState:UIControlStateNormal];
+    [rightOneBarButton setImage:[UIImage imageNamed:@"img_RightArrow"] forState:UIControlStateNormal];
+    [rightOneBarButton setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -40)];
+    [rightOneBarButton setTitle:@"分类" forState:UIControlStateNormal];
+    [rightOneBarButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -40, 0, 10)];
+    [rightOneBarButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self setCustomNavTitle:@"全部肉肉"];
+    
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
     
     self.view.backgroundColor = [UIColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1];
@@ -127,7 +139,9 @@
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
-            
+            RMDaqoViewController * daqoCtl = self.DaqoDelegate;
+            RMSearchViewController * searchCtl = [[RMSearchViewController alloc] init];
+            [daqoCtl.navigationController pushViewController:searchCtl animated:YES];
             break;
         }
         case 2:{

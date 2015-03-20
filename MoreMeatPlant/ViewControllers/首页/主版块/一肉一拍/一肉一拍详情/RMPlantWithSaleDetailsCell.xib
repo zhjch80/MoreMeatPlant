@@ -1,19 +1,158 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="方正正中黑简体.TTF">
+            <string>FZZZHONGJW--GB1-0</string>
+            <string>FZZZHONGJW--GB1-0</string>
+            <string>FZZZHONGJW--GB1-0</string>
+            <string>FZZZHONGJW--GB1-0</string>
+        </mutableArray>
+        <mutableArray key="方正正纤黑简体.TTF">
+            <string>FZZXHJW--GB1-0</string>
+            <string>FZZXHJW--GB1-0</string>
+            <string>FZZXHJW--GB1-0</string>
+            <string>FZZXHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="RMPlantWithSaleDetailsCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="¥520" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtu-Wd-oLX">
+                        <rect key="frame" x="10" y="5" width="300" height="40"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="快递：8元 顺风：22元 库存：1件" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0Y-ei-8mI">
+                        <rect key="frame" x="10" y="5" width="300" height="40"/>
+                        <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_pointLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="e7l-r4-quy">
+                        <rect key="frame" x="10" y="37" width="300" height="1"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="亚美奶酪超完美" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDk-bf-WcF">
+                        <rect key="frame" x="10" y="41" width="160" height="25"/>
+                        <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="20"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="高3 宽4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeW-4e-RVX">
+                        <rect key="frame" x="10" y="60" width="160" height="25"/>
+                        <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_pointLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="JsP-iI-Jlz">
+                        <rect key="frame" x="10" y="85" width="170" height="1"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </imageView>
+                    <button opaque="NO" tag="103" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="md6-0H-7ik">
+                        <rect key="frame" x="200" y="71" width="110" height="20"/>
+                        <color key="backgroundColor" red="0.8666666666666667" green="0.0" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="FZZZHONGJW--GB1-0" family="FZZhengHeiS-DB-GB" pointSize="12"/>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-2"/>
+                        <state key="normal" title="立即购买">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="plantWithSlaeCellBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="sM7-eo-g25"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="104" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWb-9N-acD">
+                        <rect key="frame" x="200" y="96" width="110" height="20"/>
+                        <color key="backgroundColor" red="0.86666666670000003" green="0.0" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="FZZZHONGJW--GB1-0" family="FZZhengHeiS-DB-GB" pointSize="12"/>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-2"/>
+                        <state key="normal" title="加入购物车">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="plantWithSlaeCellBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jpw-65-su4"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="105" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esj-0f-Jw8">
+                        <rect key="frame" x="200" y="121" width="110" height="20"/>
+                        <color key="backgroundColor" red="0.86666666670000003" green="0.0" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="FZZZHONGJW--GB1-0" family="FZZhengHeiS-DB-GB" pointSize="12"/>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-2"/>
+                        <state key="normal" title="联系掌柜">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="plantWithSlaeCellBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5QG-LK-mFV"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="102" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FC7-NS-Cxg">
+                        <rect key="frame" x="283" y="41" width="26" height="26"/>
+                        <state key="normal" image="jia_img.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="plantWithSlaeCellBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Lbe-6S-be0"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1X-RV-9Ze">
+                        <rect key="frame" x="225" y="41" width="58" height="26"/>
+                        <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="FZZZHONGJW--GB1-0" family="FZZhengHeiS-DB-GB" pointSize="11"/>
+                        <color key="textColor" red="0.8666666666666667" green="0.0" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" tag="101" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YG4-dx-g84">
+                        <rect key="frame" x="199" y="41" width="26" height="26"/>
+                        <state key="normal" image="jian_img.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="plantWithSlaeCellBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ce8-kL-UWJ"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="肉肉介绍：快递全国统一8元要发顺丰的肉友请联系我改价哦！冬天包含保温箱哦！" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tc7-qm-dii">
+                        <rect key="frame" x="8" y="90" width="170" height="54"/>
+                        <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="addToCartBtn" destination="RWb-9N-acD" id="nhx-Xm-Utp"/>
+                <outlet property="buyNowBtn" destination="md6-0H-7ik" id="MJo-4c-xA6"/>
+                <outlet property="contactSeller" destination="Esj-0f-Jw8" id="DvR-wm-toQ"/>
+                <outlet property="deleteNumBtn" destination="YG4-dx-g84" id="QMY-gl-4hn"/>
+                <outlet property="lineOne" destination="e7l-r4-quy" id="rHA-2L-Wnn"/>
+                <outlet property="lineTwo" destination="JsP-iI-Jlz" id="sHW-Nd-lsh"/>
+                <outlet property="plantIntro" destination="Tc7-qm-dii" id="dBh-uy-7H6"/>
+                <outlet property="plusNumBtn" destination="FC7-NS-Cxg" id="fcf-c0-ttO"/>
+                <outlet property="price" destination="dtu-Wd-oLX" id="5n0-Hs-Psh"/>
+                <outlet property="productIntro" destination="G0Y-ei-8mI" id="D0h-as-DTr"/>
+                <outlet property="productName" destination="PDk-bf-WcF" id="h6q-8O-FPD"/>
+                <outlet property="productSubTitle" destination="QeW-4e-RVX" id="eiH-tG-AOp"/>
+                <outlet property="showNum" destination="T1X-RV-9Ze" id="38R-Xm-ePK"/>
+            </connections>
+            <point key="canvasLocation" x="200" y="250"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="img_pointLine.png" width="877" height="1"/>
+        <image name="jia_img.png" width="86" height="86"/>
+        <image name="jian_img.png" width="86" height="86"/>
+    </resources>
 </document>

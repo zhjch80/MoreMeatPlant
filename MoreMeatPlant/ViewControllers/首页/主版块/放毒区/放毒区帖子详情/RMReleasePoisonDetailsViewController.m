@@ -12,19 +12,22 @@
 #import "RMTableHeadView.h"
 #import "RMBaseWebViewController.h"
 #import "RMCommentsView.h"
+#import "NJKWebViewProgress.h"
+#import "NJKWebViewProgressView.h"
 
-@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate,CommentsViewDelegate>{
+@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate,CommentsViewDelegate,NJKWebViewProgressDelegate>{
     BOOL isCanLoadWeb;
+    NJKWebViewProgressView *_progressView;
+    NJKWebViewProgress *_progressProxy;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @property (nonatomic, strong) RMTableHeadView * tableHeadView;
-@property (nonatomic, strong) RMCommentsView * commentsView;
 
 @end
 
 @implementation RMReleasePoisonDetailsViewController
-@synthesize mTableView, dataArr, tableHeadView, commentsView;
+@synthesize mTableView, dataArr, tableHeadView;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -43,7 +46,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self hideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
     
@@ -79,11 +82,11 @@
             break;
         }
         case 2:{
-            commentsView = [[RMCommentsView alloc] init];
+            RMCommentsView * commentsView = [[RMCommentsView alloc] init];
             commentsView.delegate = self;
             commentsView.backgroundColor = [UIColor clearColor];
             commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            [commentsView loadCommentsView];
+            [commentsView loadCommentsViewWithReceiver:@"Lucy"];
             [self.view addSubview:commentsView];
             break;
         }
@@ -110,6 +113,11 @@
     tableHeadView.detailsWebView.delegate = self;
     mTableView.tableHeaderView = tableHeadView;
 
+    _progressProxy = [[NJKWebViewProgress alloc] init];
+    tableHeadView.detailsWebView.delegate = _progressProxy;
+    _progressProxy.webViewProxyDelegate = self;
+    _progressProxy.progressDelegate = self;
+    
     [tableHeadView.detailsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
 }
 
@@ -117,10 +125,6 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
-    tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, 120 + height+50);
-    tableHeadView.detailsWebView.frame = CGRectMake(0, 120, kScreenWidth, height+50);
-    mTableView.tableHeaderView = tableHeadView;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -133,6 +137,33 @@
         return isCanLoadWeb;
     }
     return NO;
+}
+
+#pragma mark - NJKWebViewProgressDelegate
+
+-(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress {
+    if (progress == 0.0) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        _progressView.progress = 0;
+        [UIView animateWithDuration:0.27 animations:^{
+            _progressView.alpha = 1.0;
+        }];
+    }
+    
+    if (progress == 1.0) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [UIView animateWithDuration:0.27 delay:progress - _progressView.progress options:0 animations:^{
+            _progressView.alpha = 0.0;
+            
+            // webView彻底加载完
+            CGFloat height = [[tableHeadView.detailsWebView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue]; //document.body.clientHeight
+            tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, 120 + height+50);
+            tableHeadView.detailsWebView.frame = CGRectMake(0, 120, kScreenWidth, height+50);
+            mTableView.tableHeaderView = tableHeadView;
+        } completion:nil];
+    }
+    
+    [_progressView setProgress:progress animated:NO];
 }
 
 #pragma mark -
@@ -231,7 +262,12 @@
 #pragma mark - 回复帖子
 
 - (void)replyMethod:(UIButton *)button {
-    NSLog(@"回复帖子");
+    RMCommentsView * commentsView = [[RMCommentsView alloc] init];
+    commentsView.delegate = self;
+    commentsView.backgroundColor = [UIColor clearColor];
+    commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    [commentsView loadCommentsViewWithReceiver:@"Kucyoung贝贝"];
+    [self.view addSubview:commentsView];
 }
 
 #pragma mark - 帖主头像

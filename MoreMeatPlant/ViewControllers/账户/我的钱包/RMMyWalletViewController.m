@@ -39,7 +39,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self hideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
 }
 
 - (void)keyboardWillShow:(NSNotification *)noti {
