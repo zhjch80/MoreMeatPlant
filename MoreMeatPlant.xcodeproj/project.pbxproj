@@ -407,6 +407,9 @@
 		1DDBBD851ABBB44500E35CD5 /* tabLine@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DDBBD821ABBB44500E35CD5 /* tabLine@3x.png */; };
 		1DDBBD891ABBBA4300E35CD5 /* RMSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DDBBD871ABBBA4300E35CD5 /* RMSearchCell.m */; };
 		1DDBBD8A1ABBBA4300E35CD5 /* RMSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDBBD881ABBBA4300E35CD5 /* RMSearchCell.xib */; };
+		1DE235F81ABD113300025D76 /* DKLiveBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE235F71ABD113300025D76 /* DKLiveBlurView.m */; };
+		1DE235FB1ABD12E600025D76 /* testBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1DE235FA1ABD12E600025D76 /* testBG.jpg */; };
+		1DE235FF1ABD14CF00025D76 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE235FE1ABD14CF00025D76 /* Accelerate.framework */; };
 		1DEB73FE1AB9CE2600EA1FA7 /* RMBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEB73FD1AB9CE2600EA1FA7 /* RMBottomView.m */; };
 		1DEB74031AB9CF4100EA1FA7 /* RMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEB74011AB9CF4100EA1FA7 /* RMSearchViewController.m */; };
 		1DEB74041AB9CF4100EA1FA7 /* RMSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DEB74021AB9CF4100EA1FA7 /* RMSearchViewController.xib */; };
@@ -1337,6 +1340,10 @@
 		1DDBBD861ABBBA4300E35CD5 /* RMSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSearchCell.h; sourceTree = "<group>"; };
 		1DDBBD871ABBBA4300E35CD5 /* RMSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSearchCell.m; sourceTree = "<group>"; };
 		1DDBBD881ABBBA4300E35CD5 /* RMSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSearchCell.xib; sourceTree = "<group>"; };
+		1DE235F61ABD113300025D76 /* DKLiveBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKLiveBlurView.h; sourceTree = "<group>"; };
+		1DE235F71ABD113300025D76 /* DKLiveBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKLiveBlurView.m; sourceTree = "<group>"; };
+		1DE235FA1ABD12E600025D76 /* testBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testBG.jpg; sourceTree = "<group>"; };
+		1DE235FE1ABD14CF00025D76 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1DEB73FC1AB9CE2600EA1FA7 /* RMBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMBottomView.h; sourceTree = "<group>"; };
 		1DEB73FD1AB9CE2600EA1FA7 /* RMBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMBottomView.m; sourceTree = "<group>"; };
 		1DEB74001AB9CF4100EA1FA7 /* RMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSearchViewController.h; sourceTree = "<group>"; };
@@ -1674,6 +1681,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DE235FF1ABD14CF00025D76 /* Accelerate.framework in Frameworks */,
 				0A41049B1ABA9CF40060FBD5 /* MobileCoreServices.framework in Frameworks */,
 				0A4104991ABA9CED0060FBD5 /* CFNetwork.framework in Frameworks */,
 				0A4104971ABA9CE10060FBD5 /* libresolv.dylib in Frameworks */,
@@ -1998,6 +2006,7 @@
 		0A4104861ABA9C3D0060FBD5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1DE235FE1ABD14CF00025D76 /* Accelerate.framework */,
 				0A41049A1ABA9CF40060FBD5 /* MobileCoreServices.framework */,
 				0A4104981ABA9CED0060FBD5 /* CFNetwork.framework */,
 				0A4104961ABA9CE10060FBD5 /* libresolv.dylib */,
@@ -2690,6 +2699,8 @@
 				1D4DA34A1A9393ED006A9EBA /* RMDaqoDetailsViewController.h */,
 				1D4DA34B1A9393ED006A9EBA /* RMDaqoDetailsViewController.m */,
 				1D4DA34C1A9393ED006A9EBA /* RMDaqoDetailsViewController.xib */,
+				1DE235F61ABD113300025D76 /* DKLiveBlurView.h */,
+				1DE235F71ABD113300025D76 /* DKLiveBlurView.m */,
 			);
 			path = "大全详情";
 			sourceTree = "<group>";
@@ -2737,6 +2748,7 @@
 		1D64F4D91A904E180073EB98 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1DE235F91ABD12DA00025D76 /* 大全 */,
 				0A41059F1ABABBF60060FBD5 /* Chat */,
 				1DEB740D1AB9D5DE00EA1FA7 /* 首页 */,
 				1DEB740E1AB9D5DE00EA1FA7 /* member */,
@@ -3226,6 +3238,14 @@
 				1DD3266F1ABC1132006CD1A8 /* NJKWebViewProgressView.m */,
 			);
 			path = NJKWebViewProgress;
+			sourceTree = "<group>";
+		};
+		1DE235F91ABD12DA00025D76 /* 大全 */ = {
+			isa = PBXGroup;
+			children = (
+				1DE235FA1ABD12E600025D76 /* testBG.jpg */,
+			);
+			path = "大全";
 			sourceTree = "<group>";
 		};
 		1DEB73FF1AB9CF4100EA1FA7 /* 搜索 */ = {
@@ -4033,6 +4053,7 @@
 				1DDBBD841ABBB44500E35CD5 /* tabLine@2x.png in Resources */,
 				1DEB75231AB9D67A00EA1FA7 /* wdzl@2x.png in Resources */,
 				0A4106511ABABBF60060FBD5 /* VoiceSearchFeedback007@2x.png in Resources */,
+				1DE235FB1ABD12E600025D76 /* testBG.jpg in Resources */,
 				1D64F4F91A904E180073EB98 /* RMTalkMoreViewController.xib in Resources */,
 				1DEB74861AB9D66800EA1FA7 /* img_tz_11.png in Resources */,
 				1D4DA3151A920F93006A9EBA /* RMHomeCell_sub.xib in Resources */,
@@ -4338,6 +4359,7 @@
 				1D9CB17A1AAE9EE500BD5A7D /* AFSecurityPolicy.m in Sources */,
 				1D4DA3201A9216BA006A9EBA /* RMReleasePoisonViewController.m in Sources */,
 				0A41058A1ABAB3C70060FBD5 /* PSTGridLayoutSection.m in Sources */,
+				1DE235F81ABD113300025D76 /* DKLiveBlurView.m in Sources */,
 				51E268371AAE003000252DEF /* STDbHandle.m in Sources */,
 				0A4105841ABAB3C70060FBD5 /* PSTCollectionViewItemKey.m in Sources */,
 				5120FDF01AB71D34000E9BE1 /* RMOrderBottomTableViewCell.m in Sources */,
