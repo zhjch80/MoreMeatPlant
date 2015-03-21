@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A4104831ABA9C100060FBD5 /* libEaseMobClientSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A41047F1ABA9C100060FBD5 /* libEaseMobClientSDK.a */; };
 		0A4104851ABA9C100060FBD5 /* EaseMob.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A4104821ABA9C100060FBD5 /* EaseMob.bundle */; };
 		0A4104881ABA9C5F0060FBD5 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4104871ABA9C5F0060FBD5 /* libstdc++.6.dylib */; };
 		0A4104891ABA9C740060FBD5 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D8397851AB4394300DA190A /* ImageIO.framework */; };
@@ -629,6 +628,14 @@
 		51D883F51ABB321E00F7A3BD /* had_baby_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D883F01ABB321E00F7A3BD /* had_baby_left.png */; };
 		51D883F61ABB321E00F7A3BD /* had_baby_point_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D883F11ABB321E00F7A3BD /* had_baby_point_line.png */; };
 		51D883F71ABB321E00F7A3BD /* had_baby_red_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D883F21ABB321E00F7A3BD /* had_baby_red_btn.png */; };
+		51D8841B1ABDCFD400F7A3BD /* RMForgotWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D884131ABDCFD400F7A3BD /* RMForgotWordViewController.m */; };
+		51D8841C1ABDCFD400F7A3BD /* RMForgotWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51D884141ABDCFD400F7A3BD /* RMForgotWordViewController.xib */; };
+		51D8841D1ABDCFD400F7A3BD /* RMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D884161ABDCFD400F7A3BD /* RMLoginViewController.m */; };
+		51D8841E1ABDCFD400F7A3BD /* RMLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51D884171ABDCFD400F7A3BD /* RMLoginViewController.xib */; };
+		51D8841F1ABDCFD400F7A3BD /* RMRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D884191ABDCFD400F7A3BD /* RMRegisterViewController.m */; };
+		51D884201ABDCFD400F7A3BD /* RMRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51D8841A1ABDCFD400F7A3BD /* RMRegisterViewController.xib */; };
+		51D884221ABDD02E00F7A3BD /* login_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 51D884211ABDD02E00F7A3BD /* login_bg.jpg */; };
+		51D884251ABDD1A300F7A3BD /* libEaseMobClientSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51D884241ABDD1A300F7A3BD /* libEaseMobClientSDK.a */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E267E51AA7462000252DEF /* RMNearFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267E31AA7462000252DEF /* RMNearFriendViewController.m */; };
 		51E267E61AA7462000252DEF /* RMNearFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E267E41AA7462000252DEF /* RMNearFriendViewController.xib */; };
@@ -786,7 +793,6 @@
 		0A41047A1ABA9C100060FBD5 /* EMNetworkMonitorDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMNetworkMonitorDefs.h; sourceTree = "<group>"; };
 		0A41047C1ABA9C100060FBD5 /* EMError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMError.h; sourceTree = "<group>"; };
 		0A41047D1ABA9C100060FBD5 /* EMErrorDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMErrorDefs.h; sourceTree = "<group>"; };
-		0A41047F1ABA9C100060FBD5 /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
 		0A4104821ABA9C100060FBD5 /* EaseMob.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EaseMob.bundle; sourceTree = "<group>"; };
 		0A4104871ABA9C5F0060FBD5 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		0A4104901ABA9CC50060FBD5 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -1610,6 +1616,17 @@
 		51D883F01ABB321E00F7A3BD /* had_baby_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = had_baby_left.png; sourceTree = "<group>"; };
 		51D883F11ABB321E00F7A3BD /* had_baby_point_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = had_baby_point_line.png; sourceTree = "<group>"; };
 		51D883F21ABB321E00F7A3BD /* had_baby_red_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = had_baby_red_btn.png; sourceTree = "<group>"; };
+		51D884121ABDCFD400F7A3BD /* RMForgotWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMForgotWordViewController.h; sourceTree = "<group>"; };
+		51D884131ABDCFD400F7A3BD /* RMForgotWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMForgotWordViewController.m; sourceTree = "<group>"; };
+		51D884141ABDCFD400F7A3BD /* RMForgotWordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMForgotWordViewController.xib; sourceTree = "<group>"; };
+		51D884151ABDCFD400F7A3BD /* RMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMLoginViewController.h; sourceTree = "<group>"; };
+		51D884161ABDCFD400F7A3BD /* RMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMLoginViewController.m; sourceTree = "<group>"; };
+		51D884171ABDCFD400F7A3BD /* RMLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMLoginViewController.xib; sourceTree = "<group>"; };
+		51D884181ABDCFD400F7A3BD /* RMRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMRegisterViewController.h; sourceTree = "<group>"; };
+		51D884191ABDCFD400F7A3BD /* RMRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMRegisterViewController.m; sourceTree = "<group>"; };
+		51D8841A1ABDCFD400F7A3BD /* RMRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMRegisterViewController.xib; sourceTree = "<group>"; };
+		51D884211ABDD02E00F7A3BD /* login_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = login_bg.jpg; sourceTree = "<group>"; };
+		51D884241ABDD1A300F7A3BD /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 		51E267E21AA7462000252DEF /* RMNearFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMNearFriendViewController.h; sourceTree = "<group>"; };
@@ -1700,6 +1717,7 @@
 				0A4104931ABA9CD20060FBD5 /* libiconv.dylib in Frameworks */,
 				0A4104911ABA9CC50060FBD5 /* libxml2.dylib in Frameworks */,
 				0A41048F1ABA9CB60060FBD5 /* libsqlite3.dylib in Frameworks */,
+				51D884251ABDD1A300F7A3BD /* libEaseMobClientSDK.a in Frameworks */,
 				0A41048E1ABA9CAA0060FBD5 /* QuartzCore.framework in Frameworks */,
 				0A41048D1ABA9CA30060FBD5 /* CoreImage.framework in Frameworks */,
 				0A41048C1ABA9C970060FBD5 /* AVFoundation.framework in Frameworks */,
@@ -1707,7 +1725,6 @@
 				0A41048A1ABA9C830060FBD5 /* CoreMedia.framework in Frameworks */,
 				0A4104891ABA9C740060FBD5 /* ImageIO.framework in Frameworks */,
 				0A4104881ABA9C5F0060FBD5 /* libstdc++.6.dylib in Frameworks */,
-				0A4104831ABA9C100060FBD5 /* libEaseMobClientSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1724,9 +1741,9 @@
 		0A4104051ABA9C100060FBD5 /* EaseMobSDK */ = {
 			isa = PBXGroup;
 			children = (
+				51D884231ABDD1A300F7A3BD /* lib */,
 				0A4104F31ABAB3C60060FBD5 /* 3rdparty */,
 				0A4104061ABA9C100060FBD5 /* include */,
-				0A41047E1ABA9C100060FBD5 /* lib */,
 				0A4104811ABA9C100060FBD5 /* resources */,
 			);
 			path = EaseMobSDK;
@@ -1996,14 +2013,6 @@
 				0A41047D1ABA9C100060FBD5 /* EMErrorDefs.h */,
 			);
 			path = ErrorManager;
-			sourceTree = "<group>";
-		};
-		0A41047E1ABA9C100060FBD5 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				0A41047F1ABA9C100060FBD5 /* libEaseMobClientSDK.a */,
-			);
-			path = lib;
 			sourceTree = "<group>";
 		};
 		0A4104811ABA9C100060FBD5 /* resources */ = {
@@ -2839,11 +2848,11 @@
 		1D64F4E71A904E180073EB98 /* 账户 */ = {
 			isa = PBXGroup;
 			children = (
+				51D884111ABDCFD400F7A3BD /* 登录 */,
 				51D883C11ABB174E00F7A3BD /* 发布广告 */,
 				51D883C21ABB174E00F7A3BD /* 已出宝贝 */,
 				5157DE371AB9BE94005E9FA5 /* 宝贝管理 */,
 				5157DE381AB9BE94005E9FA5 /* 发布宝贝 */,
-				5157DE361AB896F5005E9FA5 /* 登录 */,
 				5120FDD81AB71372000E9BE1 /* 我的订单 */,
 				5120FDC41AB5D99C000E9BE1 /* 我的主页 */,
 				519927471AB5821E00B0F83F /* 我的收藏 */,
@@ -3384,6 +3393,7 @@
 		1DEB740E1AB9D5DE00EA1FA7 /* member */ = {
 			isa = PBXGroup;
 			children = (
+				51D884211ABDD02E00F7A3BD /* login_bg.jpg */,
 				51D883EE1ABB321E00F7A3BD /* had_baby_gray_btn.png */,
 				51D883EF1ABB321E00F7A3BD /* had_baby_input.png */,
 				51D883F01ABB321E00F7A3BD /* had_baby_left.png */,
@@ -3508,13 +3518,6 @@
 				512D75301AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib */,
 			);
 			path = "我的钱包";
-			sourceTree = "<group>";
-		};
-		5157DE361AB896F5005E9FA5 /* 登录 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "登录";
 			sourceTree = "<group>";
 		};
 		5157DE371AB9BE94005E9FA5 /* 宝贝管理 */ = {
@@ -3655,6 +3658,30 @@
 				51D883DA1ABB298B00F7A3BD /* UIView+FirstResponderNotify.m */,
 			);
 			path = DaiDodgeKeyboard;
+			sourceTree = "<group>";
+		};
+		51D884111ABDCFD400F7A3BD /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				51D884121ABDCFD400F7A3BD /* RMForgotWordViewController.h */,
+				51D884131ABDCFD400F7A3BD /* RMForgotWordViewController.m */,
+				51D884141ABDCFD400F7A3BD /* RMForgotWordViewController.xib */,
+				51D884151ABDCFD400F7A3BD /* RMLoginViewController.h */,
+				51D884161ABDCFD400F7A3BD /* RMLoginViewController.m */,
+				51D884171ABDCFD400F7A3BD /* RMLoginViewController.xib */,
+				51D884181ABDCFD400F7A3BD /* RMRegisterViewController.h */,
+				51D884191ABDCFD400F7A3BD /* RMRegisterViewController.m */,
+				51D8841A1ABDCFD400F7A3BD /* RMRegisterViewController.xib */,
+			);
+			path = "登录";
+			sourceTree = "<group>";
+		};
+		51D884231ABDD1A300F7A3BD /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				51D884241ABDD1A300F7A3BD /* libEaseMobClientSDK.a */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 		51E267E11AA745AD00252DEF /* 附近肉友 */ = {
@@ -3918,6 +3945,7 @@
 				1D7AC4361AB979E1002204F6 /* 方正正准黑简体.TTF in Resources */,
 				0A4106471ABABBF60060FBD5 /* VoiceSearchFeedback002@2x.png in Resources */,
 				1D191AD81ABD4ECF00FC8623 /* testBG.jpg in Resources */,
+				51D884221ABDD02E00F7A3BD /* login_bg.jpg in Resources */,
 				1DDBBD531ABBB14700E35CD5 /* home_z@2x.png in Resources */,
 				1DEB75161AB9D67A00EA1FA7 /* member_region_icon.png in Resources */,
 				0A4106B61ABABBF60060FBD5 /* messageToolbarBg@2x.png in Resources */,
@@ -3979,6 +4007,7 @@
 				0A4106B81ABABBF60060FBD5 /* chat_receiver_audio_playing000@2x.png in Resources */,
 				0A4106B21ABABBF60060FBD5 /* chatBar_more_photo.png in Resources */,
 				5157DE471AB9C08E005E9FA5 /* RMBabyListTableViewCell.xib in Resources */,
+				51D8841E1ABDCFD400F7A3BD /* RMLoginViewController.xib in Resources */,
 				1DEB74971AB9D66800EA1FA7 /* imgd_40.png in Resources */,
 				1DEB751E1AB9D67A00EA1FA7 /* wddd@2x.png in Resources */,
 				1DEB75041AB9D67A00EA1FA7 /* img_07.png in Resources */,
@@ -4012,6 +4041,7 @@
 				1DEB74F31AB9D67A00EA1FA7 /* fbbb_no_select.png in Resources */,
 				1DEB74F01AB9D67A00EA1FA7 /* fbbb_img_06.png in Resources */,
 				0A41064A1ABABBF60060FBD5 /* VoiceSearchFeedback004.png in Resources */,
+				51D8841C1ABDCFD400F7A3BD /* RMForgotWordViewController.xib in Resources */,
 				0A4106C51ABABBF60060FBD5 /* chat_sender_audio_playing_001.png in Resources */,
 				0A41066B1ABABBF60060FBD5 /* VoiceSearchFeedback020@2x.png in Resources */,
 				1DDBBD5B1ABBB17500E35CD5 /* daquan_z@2x.png in Resources */,
@@ -4102,6 +4132,7 @@
 				1DEB745E1AB9D66800EA1FA7 /* img_03.png in Resources */,
 				1DEB74F41AB9D67A00EA1FA7 /* fbbb_nophoto.png in Resources */,
 				1DEB74E21AB9D67A00EA1FA7 /* corp_classes_btn.png in Resources */,
+				51D884201ABDCFD400F7A3BD /* RMRegisterViewController.xib in Resources */,
 				0A4106C91ABABBF60060FBD5 /* chat_sender_audio_playing_003.png in Resources */,
 				0A41064E1ABABBF60060FBD5 /* VoiceSearchFeedback006.png in Resources */,
 				1DEB751F1AB9D67A00EA1FA7 /* wdqb@2x.png in Resources */,
@@ -4343,6 +4374,7 @@
 				512D751F1AB1EA310027B7C7 /* RMUserInfoEditViewController.m in Sources */,
 				1DD8548E1A9459FC003B12A5 /* RMPostMessageView.m in Sources */,
 				0A4104D31ABAAF630060FBD5 /* EMChatTextBubbleView.m in Sources */,
+				51D8841D1ABDCFD400F7A3BD /* RMLoginViewController.m in Sources */,
 				0A4105761ABAB3C70060FBD5 /* NSData+EMImageContentType.m in Sources */,
 				1D4DA3561A939F4A006A9EBA /* RMStickView.m in Sources */,
 				1D9CB1781AAE9EE500BD5A7D /* AFURLSessionManager.m in Sources */,
@@ -4380,6 +4412,7 @@
 				1D9CB17A1AAE9EE500BD5A7D /* AFSecurityPolicy.m in Sources */,
 				1D4DA3201A9216BA006A9EBA /* RMReleasePoisonViewController.m in Sources */,
 				0A41058A1ABAB3C70060FBD5 /* PSTGridLayoutSection.m in Sources */,
+				51D8841B1ABDCFD400F7A3BD /* RMForgotWordViewController.m in Sources */,
 				1DE235F81ABD113300025D76 /* DKLiveBlurView.m in Sources */,
 				51E268371AAE003000252DEF /* STDbHandle.m in Sources */,
 				0A4105841ABAB3C70060FBD5 /* PSTCollectionViewItemKey.m in Sources */,
@@ -4452,6 +4485,7 @@
 				0A41056C1ABAB3C70060FBD5 /* MWZoomingScrollView.m in Sources */,
 				0A4105881ABAB3C70060FBD5 /* PSTGridLayoutItem.m in Sources */,
 				51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */,
+				51D8841F1ABDCFD400F7A3BD /* RMRegisterViewController.m in Sources */,
 				1D4DA3121A920F21006A9EBA /* RMHomeCell.m in Sources */,
 				1DD3266A1ABC0A97006CD1A8 /* RMPostClassificationView.m in Sources */,
 				1D4DA32A1A921744006A9EBA /* RMPlantExchangeViewController.m in Sources */,

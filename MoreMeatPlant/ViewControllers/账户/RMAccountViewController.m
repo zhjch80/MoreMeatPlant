@@ -25,6 +25,7 @@
 #import "RMBabyManageViewController.h"
 #import "RMAdvertisingViewController.h"
 #import "RMHadBabyViewController.h"
+#import "RMLoginViewController.h"
 
 #import "UIViewController+ENPopUp.h"
 @interface RMAccountViewController ()
@@ -79,7 +80,8 @@
             if(!isCorp){//普通会员
                 switch (view.tag-100) {
                     case 0:{//我的肉友
-                        
+                        RMLoginViewController * login = [[RMLoginViewController alloc]initWithNibName:@"RMLoginViewController" bundle:nil];
+                        [self.navigationController pushViewController:login animated:YES];
                     }
                         break;
                     case 1:{//我的钱包
