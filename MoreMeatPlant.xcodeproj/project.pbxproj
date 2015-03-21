@@ -240,6 +240,12 @@
 		0A4106CE1ABABBF60060FBD5 /* chat_sender_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A41063B1ABABBF60060FBD5 /* chat_sender_bg@2x.png */; };
 		0A4106D21ABAC4D00060FBD5 /* chatListCellHead.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4106D01ABAC4D00060FBD5 /* chatListCellHead.png */; };
 		0A4106D31ABAC4D00060FBD5 /* chatListCellHead@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4106D11ABAC4D00060FBD5 /* chatListCellHead@2x.png */; };
+		1D191ACC1ABD4B7E00FC8623 /* RMDaqoDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D191ACA1ABD4B7E00FC8623 /* RMDaqoDetailsCell.m */; };
+		1D191AD21ABD4BCE00FC8623 /* RMDaqoDetailsCell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D191ACE1ABD4BCE00FC8623 /* RMDaqoDetailsCell_1.xib */; };
+		1D191AD31ABD4BCE00FC8623 /* RMDaqoDetailsCell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D191ACF1ABD4BCE00FC8623 /* RMDaqoDetailsCell_2.xib */; };
+		1D191AD51ABD4BCE00FC8623 /* RMDaqoDetailsCell_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D191AD11ABD4BCE00FC8623 /* RMDaqoDetailsCell_3.xib */; };
+		1D191AD81ABD4ECF00FC8623 /* testBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1D191AD71ABD4ECF00FC8623 /* testBG.jpg */; };
+		1D191ADA1ABD54EF00FC8623 /* whiteLeftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D191AD91ABD54EF00FC8623 /* whiteLeftArrow.png */; };
 		1D4DA3121A920F21006A9EBA /* RMHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4DA3101A920F21006A9EBA /* RMHomeCell.m */; };
 		1D4DA3131A920F21006A9EBA /* RMHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA3111A920F21006A9EBA /* RMHomeCell.xib */; };
 		1D4DA3151A920F93006A9EBA /* RMHomeCell_sub.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4DA3141A920F93006A9EBA /* RMHomeCell_sub.xib */; };
@@ -408,7 +414,6 @@
 		1DDBBD891ABBBA4300E35CD5 /* RMSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DDBBD871ABBBA4300E35CD5 /* RMSearchCell.m */; };
 		1DDBBD8A1ABBBA4300E35CD5 /* RMSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDBBD881ABBBA4300E35CD5 /* RMSearchCell.xib */; };
 		1DE235F81ABD113300025D76 /* DKLiveBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE235F71ABD113300025D76 /* DKLiveBlurView.m */; };
-		1DE235FB1ABD12E600025D76 /* testBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1DE235FA1ABD12E600025D76 /* testBG.jpg */; };
 		1DE235FF1ABD14CF00025D76 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE235FE1ABD14CF00025D76 /* Accelerate.framework */; };
 		1DEB73FE1AB9CE2600EA1FA7 /* RMBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEB73FD1AB9CE2600EA1FA7 /* RMBottomView.m */; };
 		1DEB74031AB9CF4100EA1FA7 /* RMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEB74011AB9CF4100EA1FA7 /* RMSearchViewController.m */; };
@@ -1089,6 +1094,13 @@
 		0A41063B1ABABBF60060FBD5 /* chat_sender_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_sender_bg@2x.png"; sourceTree = "<group>"; };
 		0A4106D01ABAC4D00060FBD5 /* chatListCellHead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatListCellHead.png; sourceTree = "<group>"; };
 		0A4106D11ABAC4D00060FBD5 /* chatListCellHead@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatListCellHead@2x.png"; sourceTree = "<group>"; };
+		1D191AC91ABD4B7E00FC8623 /* RMDaqoDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDaqoDetailsCell.h; sourceTree = "<group>"; };
+		1D191ACA1ABD4B7E00FC8623 /* RMDaqoDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDaqoDetailsCell.m; sourceTree = "<group>"; };
+		1D191ACE1ABD4BCE00FC8623 /* RMDaqoDetailsCell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaqoDetailsCell_1.xib; sourceTree = "<group>"; };
+		1D191ACF1ABD4BCE00FC8623 /* RMDaqoDetailsCell_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaqoDetailsCell_2.xib; sourceTree = "<group>"; };
+		1D191AD11ABD4BCE00FC8623 /* RMDaqoDetailsCell_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaqoDetailsCell_3.xib; sourceTree = "<group>"; };
+		1D191AD71ABD4ECF00FC8623 /* testBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testBG.jpg; sourceTree = "<group>"; };
+		1D191AD91ABD54EF00FC8623 /* whiteLeftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteLeftArrow.png; sourceTree = "<group>"; };
 		1D4DA30F1A920F21006A9EBA /* RMHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMHomeCell.h; sourceTree = "<group>"; };
 		1D4DA3101A920F21006A9EBA /* RMHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMHomeCell.m; sourceTree = "<group>"; };
 		1D4DA3111A920F21006A9EBA /* RMHomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMHomeCell.xib; sourceTree = "<group>"; };
@@ -1342,7 +1354,6 @@
 		1DDBBD881ABBBA4300E35CD5 /* RMSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSearchCell.xib; sourceTree = "<group>"; };
 		1DE235F61ABD113300025D76 /* DKLiveBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKLiveBlurView.h; sourceTree = "<group>"; };
 		1DE235F71ABD113300025D76 /* DKLiveBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKLiveBlurView.m; sourceTree = "<group>"; };
-		1DE235FA1ABD12E600025D76 /* testBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testBG.jpg; sourceTree = "<group>"; };
 		1DE235FE1ABD14CF00025D76 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1DEB73FC1AB9CE2600EA1FA7 /* RMBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMBottomView.h; sourceTree = "<group>"; };
 		1DEB73FD1AB9CE2600EA1FA7 /* RMBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMBottomView.m; sourceTree = "<group>"; };
@@ -2586,6 +2597,15 @@
 			path = chatListCell;
 			sourceTree = "<group>";
 		};
+		1D191AD61ABD4ECF00FC8623 /* 大全 */ = {
+			isa = PBXGroup;
+			children = (
+				1D191AD71ABD4ECF00FC8623 /* testBG.jpg */,
+				1D191AD91ABD54EF00FC8623 /* whiteLeftArrow.png */,
+			);
+			path = "大全";
+			sourceTree = "<group>";
+		};
 		1D4DA3161A92163F006A9EBA /* 放毒区 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2701,6 +2721,11 @@
 				1D4DA34C1A9393ED006A9EBA /* RMDaqoDetailsViewController.xib */,
 				1DE235F61ABD113300025D76 /* DKLiveBlurView.h */,
 				1DE235F71ABD113300025D76 /* DKLiveBlurView.m */,
+				1D191AC91ABD4B7E00FC8623 /* RMDaqoDetailsCell.h */,
+				1D191ACA1ABD4B7E00FC8623 /* RMDaqoDetailsCell.m */,
+				1D191ACE1ABD4BCE00FC8623 /* RMDaqoDetailsCell_1.xib */,
+				1D191ACF1ABD4BCE00FC8623 /* RMDaqoDetailsCell_2.xib */,
+				1D191AD11ABD4BCE00FC8623 /* RMDaqoDetailsCell_3.xib */,
 			);
 			path = "大全详情";
 			sourceTree = "<group>";
@@ -2748,7 +2773,7 @@
 		1D64F4D91A904E180073EB98 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1DE235F91ABD12DA00025D76 /* 大全 */,
+				1D191AD61ABD4ECF00FC8623 /* 大全 */,
 				0A41059F1ABABBF60060FBD5 /* Chat */,
 				1DEB740D1AB9D5DE00EA1FA7 /* 首页 */,
 				1DEB740E1AB9D5DE00EA1FA7 /* member */,
@@ -3238,14 +3263,6 @@
 				1DD3266F1ABC1132006CD1A8 /* NJKWebViewProgressView.m */,
 			);
 			path = NJKWebViewProgress;
-			sourceTree = "<group>";
-		};
-		1DE235F91ABD12DA00025D76 /* 大全 */ = {
-			isa = PBXGroup;
-			children = (
-				1DE235FA1ABD12E600025D76 /* testBG.jpg */,
-			);
-			path = "大全";
 			sourceTree = "<group>";
 		};
 		1DEB73FF1AB9CF4100EA1FA7 /* 搜索 */ = {
@@ -3900,6 +3917,7 @@
 				1DEB74791AB9D66800EA1FA7 /* img_postMessage@2x.png in Resources */,
 				1D7AC4361AB979E1002204F6 /* 方正正准黑简体.TTF in Resources */,
 				0A4106471ABABBF60060FBD5 /* VoiceSearchFeedback002@2x.png in Resources */,
+				1D191AD81ABD4ECF00FC8623 /* testBG.jpg in Resources */,
 				1DDBBD531ABBB14700E35CD5 /* home_z@2x.png in Resources */,
 				1DEB75161AB9D67A00EA1FA7 /* member_region_icon.png in Resources */,
 				0A4106B61ABABBF60060FBD5 /* messageToolbarBg@2x.png in Resources */,
@@ -3948,6 +3966,7 @@
 				1D8397631AB3F81600DA190A /* close@2x.png in Resources */,
 				1DEB74721AB9D66800EA1FA7 /* img_fdq_line_1.png in Resources */,
 				0A4106A21ABABBF60060FBD5 /* chatBar_colorMore_camera@2x.png in Resources */,
+				1D191ADA1ABD54EF00FC8623 /* whiteLeftArrow.png in Resources */,
 				1DDBBD6F1ABBB1D600E35CD5 /* duoliao@2x.png in Resources */,
 				1DEB746D1AB9D66800EA1FA7 /* img_asced.png in Resources */,
 				0A41065D1ABABBF60060FBD5 /* VoiceSearchFeedback013@2x.png in Resources */,
@@ -4053,7 +4072,6 @@
 				1DDBBD841ABBB44500E35CD5 /* tabLine@2x.png in Resources */,
 				1DEB75231AB9D67A00EA1FA7 /* wdzl@2x.png in Resources */,
 				0A4106511ABABBF60060FBD5 /* VoiceSearchFeedback007@2x.png in Resources */,
-				1DE235FB1ABD12E600025D76 /* testBG.jpg in Resources */,
 				1D64F4F91A904E180073EB98 /* RMTalkMoreViewController.xib in Resources */,
 				1DEB74861AB9D66800EA1FA7 /* img_tz_11.png in Resources */,
 				1D4DA3151A920F93006A9EBA /* RMHomeCell_sub.xib in Resources */,
@@ -4065,6 +4083,7 @@
 				1DEB74F91AB9D67A00EA1FA7 /* gwc_btn_bg.png in Resources */,
 				1DEB750A1AB9D67A00EA1FA7 /* login_vaule_bg2.png in Resources */,
 				1DEB74761AB9D66800EA1FA7 /* img_leftArrow@2x.png in Resources */,
+				1D191AD31ABD4BCE00FC8623 /* RMDaqoDetailsCell_2.xib in Resources */,
 				1DEB74891AB9D66800EA1FA7 /* img_tzed_2.png in Resources */,
 				1DDBBD7B1ABBB3BD00E35CD5 /* zhanghu@3x.png in Resources */,
 				1DEB74581AB9D66800EA1FA7 /* btn_add_photo_s.png in Resources */,
@@ -4175,6 +4194,7 @@
 				1DEB74F81AB9D67A00EA1FA7 /* gwc_add_btn.png in Resources */,
 				1DEB74921AB9D66800EA1FA7 /* img_tzed_11.png in Resources */,
 				1D7AC42A1AB979A0002204F6 /* pull_refresh@2x.png in Resources */,
+				1D191AD51ABD4BCE00FC8623 /* RMDaqoDetailsCell_3.xib in Resources */,
 				1DEB75181AB9D67A00EA1FA7 /* order_line.png in Resources */,
 				1DEB75111AB9D67A00EA1FA7 /* member_level_icon.png in Resources */,
 				0A4106651ABABBF60060FBD5 /* VoiceSearchFeedback017@2x.png in Resources */,
@@ -4201,6 +4221,7 @@
 				5157DE3D1AB9BEE1005E9FA5 /* RMBabyManageViewController.xib in Resources */,
 				0A41065C1ABABBF60060FBD5 /* VoiceSearchFeedback013.png in Resources */,
 				0A4106C11ABABBF60060FBD5 /* chat_receiver_bg.png in Resources */,
+				1D191AD21ABD4BCE00FC8623 /* RMDaqoDetailsCell_1.xib in Resources */,
 				1D8397621AB3F81600DA190A /* check@2x.png in Resources */,
 				0A4106C41ABABBF60060FBD5 /* chat_sender_audio_playing_000@2x.png in Resources */,
 				1DEB74551AB9D66800EA1FA7 /* bottom.png in Resources */,
@@ -4363,6 +4384,7 @@
 				51E268371AAE003000252DEF /* STDbHandle.m in Sources */,
 				0A4105841ABAB3C70060FBD5 /* PSTCollectionViewItemKey.m in Sources */,
 				5120FDF01AB71D34000E9BE1 /* RMOrderBottomTableViewCell.m in Sources */,
+				1D191ACC1ABD4B7E00FC8623 /* RMDaqoDetailsCell.m in Sources */,
 				51E267F01AA74BDB00252DEF /* RMMyFriendViewController.m in Sources */,
 				512D751A1AB1E1190027B7C7 /* RMUserInfoViewController.m in Sources */,
 				1DEB73FE1AB9CE2600EA1FA7 /* RMBottomView.m in Sources */,

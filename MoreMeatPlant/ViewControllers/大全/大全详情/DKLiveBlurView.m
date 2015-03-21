@@ -171,4 +171,9 @@
     }
 }
 
+- (void)removeScrollViewObserver {
+    [_scrollView removeObserver: self forKeyPath: @"contentOffset"];
+
+}
+
 @end

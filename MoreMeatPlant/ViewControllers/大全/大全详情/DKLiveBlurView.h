@@ -23,4 +23,6 @@
 
 - (void)setBlurLevel:(float)blurLevel;
 
+- (void)removeScrollViewObserver;
+
 @end
