@@ -8,6 +8,9 @@
 
 #import "RMBaseViewController.h"
 
-@interface RMPublishBabyViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource>
+@interface RMPublishBabyViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource>{
+    NSMutableArray * classArray;
+}
+@property (weak, nonatomic) IBOutlet UITableView *mTableView;
 
 @end

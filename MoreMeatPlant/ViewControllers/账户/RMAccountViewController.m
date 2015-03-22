@@ -19,6 +19,7 @@
 #import "RMMyCollectionViewController.h"
 #import "RMMyHomeViewController.h"
 #import "RMMyOrderViewController.h"
+#import "RMOrderDetailViewController.h"
 
 #import "RMMyCorpViewController.h"
 #import "RMPublishBabyViewController.h"
@@ -107,6 +108,10 @@
                         RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
                         order.callback = ^(void){
                             [self dismissPopUpViewControllerWithcompletion:nil];
+                        };
+                        order.didSelectCell_callback = ^(NSIndexPath * indexpath){
+                            RMOrderDetailViewController * detail = [[RMOrderDetailViewController alloc]initWithNibName:@"RMOrderDetailViewController" bundle:nil];
+                            [self.navigationController pushViewController:detail animated:YES];
                         };
                         order.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
                         [self presentPopUpViewController:order overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];

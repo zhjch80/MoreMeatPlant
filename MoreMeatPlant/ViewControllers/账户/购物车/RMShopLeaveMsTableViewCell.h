@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalMoneyL;
 @property (weak, nonatomic) IBOutlet UILabel *numL;
 @property (weak, nonatomic) IBOutlet UILabel *totalL;
+@property (weak, nonatomic) IBOutlet UIButton *contactCorpBtn;
 
 @end

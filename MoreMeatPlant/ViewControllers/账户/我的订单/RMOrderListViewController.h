@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void (^RMOrderListViewDidSelectCell)(NSIndexPath * indexpath);
 @interface RMOrderListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *maintableView;
+@property (copy, nonatomic) RMOrderListViewDidSelectCell  didSelectCellcallback;
 @end

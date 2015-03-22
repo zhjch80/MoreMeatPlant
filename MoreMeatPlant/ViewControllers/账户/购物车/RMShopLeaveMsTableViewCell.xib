@@ -60,12 +60,6 @@
                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="380" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCv-7Q-nlO">
-                        <rect key="frame" x="172" y="43" width="24" height="15"/>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="12"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="件商品" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkX-oQ-hmd">
                         <rect key="frame" x="106" y="43" width="36" height="15"/>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="12"/>
@@ -108,6 +102,12 @@
                             <constraint firstAttribute="height" constant="1" id="xAN-pu-MtA"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="380" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCv-7Q-nlO">
+                        <rect key="frame" x="172" y="43" width="24" height="15"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="cyo-5Q-RzK" firstAttribute="centerY" secondItem="7KD-dd-YAB" secondAttribute="centerY" id="20M-II-syX"/>
@@ -141,12 +141,13 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="contactCorpBtn" destination="Zs7-iu-14O" id="NR2-Cx-B9h"/>
                 <outlet property="leaveMessageT" destination="Leg-Kk-fl1" id="Ies-LD-wCn"/>
                 <outlet property="numL" destination="q2q-c0-mZ4" id="bAl-gm-cD5"/>
                 <outlet property="totalL" destination="dCv-7Q-nlO" id="ILj-FW-oT5"/>
                 <outlet property="totalMoneyL" destination="7KD-dd-YAB" id="ajs-eY-8SR"/>
             </connections>
-            <point key="canvasLocation" x="318" y="188"/>
+            <point key="canvasLocation" x="108" y="156"/>
         </tableViewCell>
     </objects>
     <resources>

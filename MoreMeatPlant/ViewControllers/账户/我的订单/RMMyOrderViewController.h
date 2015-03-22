@@ -10,6 +10,7 @@
 #import "RMOrderListViewController.h"
 
 typedef void (^RMMyOrderViewCallBack) (void);
+typedef void (^RMMyOrderViewDidSelectCallBack) (NSIndexPath * indexpath);
 @interface RMMyOrderViewController : RMBaseViewController
 {
     RMOrderListViewController * waitDeliveryCtl;
@@ -23,5 +24,6 @@ typedef void (^RMMyOrderViewCallBack) (void);
 @property (weak, nonatomic) IBOutlet UIButton *orderDone;
 
 @property (copy, nonatomic) RMMyOrderViewCallBack callback;
+@property (copy, nonatomic) RMMyOrderViewDidSelectCallBack didSelectCell_callback;
 
 @end

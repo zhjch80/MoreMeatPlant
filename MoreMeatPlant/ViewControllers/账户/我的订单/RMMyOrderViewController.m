@@ -32,6 +32,13 @@
     waitDeliveryCtl = [[RMOrderListViewController alloc]initWithNibName:@"RMOrderListViewController" bundle:nil];
     waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
     waitDeliveryCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
+    
+    __block RMMyOrderViewController * Self = self;
+    waitDeliveryCtl.didSelectCellcallback = ^(NSIndexPath * indexpath){
+        if(Self.didSelectCell_callback){
+            Self.didSelectCell_callback(indexpath);
+        }
+    };
     [self.view addSubview:waitDeliveryCtl.view];
     
 }

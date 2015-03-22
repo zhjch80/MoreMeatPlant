@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RMPublishClassTableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *classtitleL;
+@property (weak, nonatomic) IBOutlet UIButton *addClassBtn;
+@property (retain, nonatomic) NSMutableArray * titles;
 @end

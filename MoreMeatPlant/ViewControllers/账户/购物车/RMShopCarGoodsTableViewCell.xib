@@ -123,6 +123,7 @@
                 <outlet property="content_priceL" destination="e0Z-LB-5sD" id="gxe-EE-LF6"/>
                 <outlet property="content_titleL" destination="a4f-jZ-iiB" id="nhh-LF-Puc"/>
                 <outlet property="deleteBtn" destination="FTz-XE-pGX" id="dXQ-Jo-alI"/>
+                <outlet property="numTextField" destination="yV2-na-hHd" id="lta-7v-njL"/>
                 <outlet property="subBtn" destination="YIq-ct-duO" id="nZa-Ve-wGa"/>
             </connections>
             <point key="canvasLocation" x="331" y="250.5"/>

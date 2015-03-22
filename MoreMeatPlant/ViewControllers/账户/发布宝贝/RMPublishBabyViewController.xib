@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RMPublishBabyViewController">
             <connections>
+                <outlet property="mTableView" destination="Qkc-hF-PFL" id="Y9c-y7-PrZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

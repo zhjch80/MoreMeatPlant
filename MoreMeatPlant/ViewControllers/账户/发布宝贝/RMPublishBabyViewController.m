@@ -13,6 +13,8 @@
 #import "RMPublishNumberTableViewCell.h"
 #import "RMPublishPhotoTableViewCell.h"
 #import "RMPublishSureTableViewCell.h"
+#import "DaiDodgeKeyboard.h"
+#import "NSString+Addtion.h"
 @interface RMPublishBabyViewController ()
 
 @end
@@ -22,6 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self setCustomNavTitle:@"发布宝贝"];
+    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.mTableView];
+    classArray = [[NSMutableArray alloc]init];
+    classArray = [NSMutableArray arrayWithObjects:@"一肉一拍",@"进口肉肉",@"国产肉肉",@"特价肉肉", nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -35,6 +41,7 @@
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPublishTitleTableViewCell" owner:self options:nil] lastObject];
         }
+    
         return cell;
         
     }else if(indexPath.row == 1){
@@ -48,6 +55,8 @@
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPublishClassTableViewCell" owner:self options:nil] lastObject];
         }
+        cell.titles = classArray;
+        [cell layoutSubviews];
         return cell;
     }else if (indexPath.row == 3){
         RMPublishNumberTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMPublishNumberTableViewCell"];
@@ -82,7 +91,19 @@
     }else if(indexPath.row == 1){
         return 65;
     }else if (indexPath.row == 2){
-        return 66;
+        CGFloat x = 10;
+        CGFloat y = 31;
+        for(NSString * title in classArray){
+            CGSize size = [title getcontentsizeWithfont:FONT_0(13) constrainedtosize:CGSizeMake(100, 20) linemode:NSLineBreakByCharWrapping];
+            
+            if(x+20+size.width+10*2>kScreenWidth){
+                y+=20+5;
+                x = 10;
+            }
+            x+= 10+20+size.width+10;
+        }
+        return y+31+20;
+        
     }else if (indexPath.row == 3){
         return 44;
     }else if (indexPath.row == 4){

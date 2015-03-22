@@ -39,25 +39,25 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一肉一拍" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qtt-1B-Hoi">
-                        <rect key="frame" x="38" y="34" width="56" height="17.5"/>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                        <rect key="frame" x="38" y="34" width="52" height="16"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="鲜肉市场" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYw-jr-YuW">
-                        <rect key="frame" x="136" y="34" width="56" height="17.5"/>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                        <rect key="frame" x="132" y="34" width="52" height="16"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="Fe3-a3-8kq">
-                        <rect key="frame" x="10" y="63.5" width="300" height="1"/>
+                        <rect key="frame" x="10" y="63" width="300" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="4Lt-dX-Crn"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiT-YP-yEw">
-                        <rect key="frame" x="108" y="32" width="20" height="20"/>
+                        <rect key="frame" x="104" y="32" width="20" height="20"/>
                         <color key="backgroundColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="L4s-ej-WFL"/>
@@ -84,7 +84,7 @@
                     <constraint firstItem="67A-Lf-Ef9" firstAttribute="leading" secondItem="ove-Fs-sGB" secondAttribute="leading" id="t6b-pp-97X"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="220" y="190"/>
+            <point key="canvasLocation" x="230" y="166.5"/>
         </tableViewCell>
     </objects>
     <resources>

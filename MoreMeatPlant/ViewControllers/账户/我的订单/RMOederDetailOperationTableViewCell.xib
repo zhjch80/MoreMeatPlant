@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RMOederDetailOperationTableViewCell" rowHeight="40" id="KGk-i7-Jjw" customClass="RMOederDetailOperationTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wzm-81-vhg">
+                        <rect key="frame" x="175" y="9" width="60" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="8mn-G3-d0V"/>
+                            <constraint firstAttribute="height" constant="22" id="lBm-HG-spc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="确认退货" backgroundImage="order_detail_red_btn.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9BS-U9-oJE">
+                        <rect key="frame" x="245" y="9" width="60" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="H3j-7P-Rtq"/>
+                            <constraint firstAttribute="height" constant="22" id="NCS-WS-Tor"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="确认收货" backgroundImage="order_detail_red_btn.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzF-uc-sEH">
+                        <rect key="frame" x="105" y="9" width="60" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="apu-Rf-tU2"/>
+                            <constraint firstAttribute="width" constant="60" id="nGd-ro-NZB"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="查看物流" backgroundImage="order_detail_red_btn.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="wzm-81-vhg" secondAttribute="centerY" id="F2P-yZ-Tfx"/>
+                    <constraint firstAttribute="centerY" secondItem="9BS-U9-oJE" secondAttribute="centerY" id="Nz6-Mo-tim"/>
+                    <constraint firstItem="9BS-U9-oJE" firstAttribute="leading" secondItem="wzm-81-vhg" secondAttribute="trailing" constant="10" id="W9I-9I-4MK"/>
+                    <constraint firstAttribute="trailing" secondItem="9BS-U9-oJE" secondAttribute="trailing" constant="15" id="fD4-2c-LXN"/>
+                    <constraint firstAttribute="centerY" secondItem="qzF-uc-sEH" secondAttribute="centerY" id="qDO-9N-0ow"/>
+                    <constraint firstItem="wzm-81-vhg" firstAttribute="leading" secondItem="qzF-uc-sEH" secondAttribute="trailing" constant="10" id="quD-3d-oBP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="204" y="121"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="order_detail_red_btn.png" width="282" height="94"/>
+    </resources>
+</document>

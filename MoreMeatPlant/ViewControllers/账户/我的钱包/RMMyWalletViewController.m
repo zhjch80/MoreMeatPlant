@@ -40,6 +40,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    self.view.backgroundColor = [UIColor clearColor];
 }
 
 - (void)keyboardWillShow:(NSNotification *)noti {

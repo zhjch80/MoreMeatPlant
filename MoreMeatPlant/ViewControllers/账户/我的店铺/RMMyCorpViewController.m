@@ -102,6 +102,10 @@
     [self.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
 }
 
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

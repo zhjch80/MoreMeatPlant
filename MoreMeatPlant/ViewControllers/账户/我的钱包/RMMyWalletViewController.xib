@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的钱包" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohM-Hx-4xT">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="38"/>
+                    <rect key="frame" x="0.0" y="20" width="320" height="38"/>
                     <color key="backgroundColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38" id="epD-6B-asR"/>
@@ -31,36 +31,53 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kjT-yH-FAp">
-                    <rect key="frame" x="40" y="4" width="46" height="30"/>
-                    <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="账单">
-                        <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2W-wn-Wfz">
+                    <rect key="frame" x="263" y="4" width="30" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="4O8-iO-lDZ"/>
+                        <constraint firstAttribute="width" constant="30" id="Gtd-Cn-pr7"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="gwc_close.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Eh7-oz-ndl">
-                    <rect key="frame" x="0.0" y="38" width="320" height="380"/>
+                    <rect key="frame" x="0.0" y="58" width="320" height="360"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="tDM-jl-BJ9"/>
                         <outlet property="delegate" destination="-1" id="jLD-N1-ERU"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kjT-yH-FAp">
+                    <rect key="frame" x="31" y="20" width="56" height="38"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="账单" backgroundImage="wallet_cover.png">
+                        <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="ohM-Hx-4xT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BbO-JG-icy"/>
+                <constraint firstItem="ohM-Hx-4xT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="BbO-JG-icy"/>
                 <constraint firstAttribute="trailing" secondItem="Eh7-oz-ndl" secondAttribute="trailing" id="FSQ-uE-h1w"/>
+                <constraint firstItem="F2W-wn-Wfz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="4" id="V8T-MD-KLi"/>
                 <constraint firstItem="ohM-Hx-4xT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="el7-am-Rp5"/>
                 <constraint firstItem="Eh7-oz-ndl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gml-u6-EAM"/>
                 <constraint firstAttribute="bottom" secondItem="Eh7-oz-ndl" secondAttribute="bottom" id="rHl-w7-6e5"/>
                 <constraint firstItem="Eh7-oz-ndl" firstAttribute="top" secondItem="ohM-Hx-4xT" secondAttribute="bottom" id="sAm-CF-Tax"/>
+                <constraint firstAttribute="trailing" secondItem="F2W-wn-Wfz" secondAttribute="trailing" constant="27" id="thN-xH-OYT"/>
                 <constraint firstAttribute="trailing" secondItem="ohM-Hx-4xT" secondAttribute="trailing" id="v6c-MX-Ch0"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="257" y="258"/>
+            <point key="canvasLocation" x="8" y="117"/>
         </view>
     </objects>
+    <resources>
+        <image name="gwc_close.png" width="87" height="87"/>
+        <image name="wallet_cover.png" width="164" height="98"/>
+    </resources>
 </document>

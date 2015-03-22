@@ -15,6 +15,7 @@
 #import "UIViewController+ENPopUp.h"
 
 #import "RMAddressEditViewController.h"
+#import "RMMyCorpViewController.h"
 @interface RMShopCarViewController (){
     BOOL isShow;
 }
@@ -103,19 +104,28 @@
         RMSopCarHeadTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMSopCarHeadTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMSopCarHeadTableViewCell" owner:self options:nil] lastObject];
+            [cell.corpNameL addTarget:self action:@selector(goCorpAction:) forControlEvents:UIControlEventTouchDown];
         }
+        cell.corpNameL.tag = 1000*indexPath.section;
         return cell;
     }else if(indexPath.row == 4){
         RMShopLeaveMsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMShopLeaveMsTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMShopLeaveMsTableViewCell" owner:self options:nil] lastObject];
+            [cell.contactCorpBtn addTarget:self action:@selector(contactCorpAction:) forControlEvents:UIControlEventTouchDown];
         }
+        cell.contactCorpBtn.tag = indexPath.section*1000+indexPath.row;
         return cell;
     }else{
         RMShopCarGoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMShopCarGoodsTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMShopCarGoodsTableViewCell" owner:self options:nil] lastObject];
+            [cell.addBtn addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchDown];
+            [cell.subBtn addTarget:self action:@selector(subAction:) forControlEvents:UIControlEventTouchDown];
+            cell.numTextField.delegate = self;
         }
+        cell.addBtn.tag = 1000*indexPath.section+indexPath.row;
+        cell.subBtn.tag = 1000*indexPath.section+indexPath.row+1;
         return cell;
     }
 }
@@ -142,6 +152,44 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.view endEditing:YES];
 }
+
+
+#pragma mark - 进入店铺
+- (void)goCorpAction:(UIButton *)sender{
+    NSInteger tag = sender.tag/1000;
+    RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
+    [self.navigationController pushViewController:corp animated:YES];
+}
+
+
+#pragma mark - 购物车商品数量的增减
+- (void)addAction:(UIButton *)sender{
+    NSIndexPath * indexpath = [NSIndexPath indexPathForRow:sender.tag%1000 inSection:sender.tag/1000];
+    RMShopCarGoodsTableViewCell * cell = (RMShopCarGoodsTableViewCell *)[_mTableView cellForRowAtIndexPath:indexpath];
+    NSInteger num = [cell.numTextField.text integerValue];
+    num++;
+    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
+}
+
+- (void)subAction:(UIButton *)sender{
+    NSIndexPath * indexpath = [NSIndexPath indexPathForRow:sender.tag%1000-1 inSection:sender.tag/1000];
+    RMShopCarGoodsTableViewCell * cell = (RMShopCarGoodsTableViewCell *)[_mTableView cellForRowAtIndexPath:indexpath];
+    NSInteger num = [cell.numTextField.text integerValue];
+    num--;
+    if(num == 0){
+        num = 1;
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"商品数量至少为一个" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+    }
+    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
+}
+#pragma mark - 联系卖家
+- (void)contactCorpAction:(UIButton *)sender{
+     NSIndexPath * indexpath = [NSIndexPath indexPathForRow:sender.tag%1000 inSection:sender.tag/1000];
+    NSLog(@"联系卖家%@",indexpath);
+}
+
+#pragma mark - 结算
 - (void)settlementAction:(UIButton *)sender{
     RMSettlementViewController * settle = [[RMSettlementViewController alloc]initWithNibName:@"RMSettlementViewController" bundle:nil];
 //    [self.navigationController pushViewController:settle animated:YES];

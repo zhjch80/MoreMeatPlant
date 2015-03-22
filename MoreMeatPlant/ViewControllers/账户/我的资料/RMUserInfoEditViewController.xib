@@ -59,7 +59,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="znA-6V-jAd">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="znA-6V-jAd">
                     <rect key="frame" x="100" y="83" width="174" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="fA4-TG-MFn"/>
@@ -70,7 +70,7 @@
                         <outlet property="delegate" destination="-1" id="5hV-cY-qXu"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X3W-g5-Mrc">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="X3W-g5-Mrc">
                     <rect key="frame" x="100" y="111" width="174" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="SdL-dt-yVr"/>
@@ -81,19 +81,26 @@
                         <outlet property="delegate" destination="-1" id="Msu-mA-whs"/>
                     </connections>
                 </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="wwb-1f-Qxy">
+                    <rect key="frame" x="100" y="140" width="174" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="nTn-xt-GuW"/>
+                    </constraints>
+                </imageView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="美丽的心灵才配得上美丽的肉肉" translatesAutoresizingMaskIntoConstraints="NO" id="CAm-vi-cl0">
                     <rect key="frame" x="100" y="140" width="174" height="57"/>
-                    <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="57" id="dnk-fz-0uc"/>
                     </constraints>
+                    <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="BZv-yz-uIV"/>
                     </connections>
                 </textView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yDj-4m-BZt">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="yDj-4m-BZt">
                     <rect key="frame" x="100" y="204" width="174" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="zna-Bj-h6U"/>
@@ -104,7 +111,7 @@
                         <outlet property="delegate" destination="-1" id="nxI-ws-0X6"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CjY-GA-gyQ">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="CjY-GA-gyQ">
                     <rect key="frame" x="100" y="233" width="174" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="b3N-J2-x5q"/>
@@ -123,7 +130,9 @@
                 <constraint firstItem="X3W-g5-Mrc" firstAttribute="leading" secondItem="aAj-sm-MYA" secondAttribute="trailing" constant="15" id="5i6-SY-edN"/>
                 <constraint firstItem="CAm-vi-cl0" firstAttribute="leading" secondItem="lko-Dn-0NR" secondAttribute="trailing" constant="15" id="6Hd-hG-Jzr"/>
                 <constraint firstItem="jrn-Ay-r5a" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="6d6-ST-if7"/>
+                <constraint firstItem="wwb-1f-Qxy" firstAttribute="leading" secondItem="X3W-g5-Mrc" secondAttribute="leading" id="6dP-eh-6vA"/>
                 <constraint firstItem="byO-zm-hcG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="6jI-TL-EVS"/>
+                <constraint firstItem="wwb-1f-Qxy" firstAttribute="top" secondItem="X3W-g5-Mrc" secondAttribute="bottom" constant="8" id="8bM-y6-VWv"/>
                 <constraint firstItem="aAj-sm-MYA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="BQQ-QT-4DX"/>
                 <constraint firstAttribute="trailing" secondItem="CAm-vi-cl0" secondAttribute="trailing" constant="46" id="CSw-La-pdh"/>
                 <constraint firstItem="yDj-4m-BZt" firstAttribute="leading" secondItem="byO-zm-hcG" secondAttribute="trailing" id="DjY-9v-nFo"/>
@@ -142,10 +151,15 @@
                 <constraint firstItem="byO-zm-hcG" firstAttribute="top" secondItem="CAm-vi-cl0" secondAttribute="bottom" constant="9" id="hTJ-eF-HXd"/>
                 <constraint firstItem="2dt-qj-p61" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="85" id="iAw-Ef-a6k"/>
                 <constraint firstItem="2dt-qj-p61" firstAttribute="centerY" secondItem="znA-6V-jAd" secondAttribute="centerY" id="rFB-cS-uDJ"/>
+                <constraint firstItem="wwb-1f-Qxy" firstAttribute="trailing" secondItem="X3W-g5-Mrc" secondAttribute="trailing" id="sgk-Gw-tMG"/>
                 <constraint firstItem="jrn-Ay-r5a" firstAttribute="top" secondItem="byO-zm-hcG" secondAttribute="bottom" constant="8.5" id="v4Y-qj-VsT"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="308" y="368"/>
         </view>
     </objects>
+    <resources>
+        <image name="fbbb_field_bg.png" width="450" height="90"/>
+        <image name="fbbb_field_bg2.png" width="1024" height="144"/>
+    </resources>
 </document>
