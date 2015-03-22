@@ -7,9 +7,10 @@
 //
 
 #import "RMSearchViewController.h"
-#import "RMSearchCell.h"
+#import "RMDaqoCell.h"
 
-@interface RMSearchViewController ()<UITableViewDataSource,UITableViewDelegate,SearchDelegate,UIScrollViewDelegate>{
+@interface RMSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,DaqpSelectedPlantTypeDelegate>{
+    BOOL isHideKeyboard;
     
 }
 @property (nonatomic, strong) NSMutableArray * dataArr;
@@ -54,7 +55,7 @@
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
 
     [mTextField.layer setCornerRadius:8.0f];
-    
+    mTextField.returnKeyType = UIReturnKeySearch;
     
 }
 
@@ -64,22 +65,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * identifierStr = @"ReSearchIdentifier";
-    RMSearchCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+    RMDaqoCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     if (!cell){
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMSearchCell" owner:self options:nil] lastObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell" owner:self options:nil] lastObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         cell.delegate = self;
     }
-    
-    cell.mTitle.text = @"搜索结果";
     
     return cell;
 
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44.0f;
+    return 132.0f;
+}
+
+- (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
+    NSLog(@"点击 搜索 图片");
 }
 
 #pragma mark -
@@ -94,7 +97,7 @@
 }
 
 - (void)keyboardDidHide:(NSNotification *)noti {
-    
+
 }
 
 #pragma mark - 

@@ -73,24 +73,34 @@ typedef enum{
                   @"img_31",
                   nil];
     
-    RMImageView * rmImage = [[RMImageView alloc] init];
-    rmImage.frame = CGRectMake(0, 20, kScreenWidth, 45);
-    rmImage.backgroundColor = [UIColor greenColor];
-    rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
-    [rmImage addTarget:self WithSelector:@selector(jumpHomeNearbyMerchant)];
-    [self.view addSubview:rmImage];
-    
-    RMImageView * popularizeView = [[RMImageView alloc] init];
-    popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + 20, kScreenWidth, 40);
-    popularizeView.image = LOADIMAGE(@"img_03", kImageTypePNG);
-    [popularizeView addTarget:self WithSelector:@selector(jumpPopularize:)];
-    [self.view addSubview:popularizeView];
-    
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, rmImage.frame.size.height + popularizeView.frame.size.height + 20, kScreenWidth, kScreenHeight - rmImage.frame.size.height - popularizeView.frame.size.height - 44 - 20) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, kScreenHeight - 44 - 20) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
+    
+    [self loadTableHeaderView];
+}
+
+- (void)loadTableHeaderView {
+    UIView * headerView = [[UIView alloc] init];
+    
+    RMImageView * rmImage = [[RMImageView alloc] init];
+    rmImage.frame = CGRectMake(0, 0, kScreenWidth, 45);
+    rmImage.backgroundColor = [UIColor greenColor];
+    rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
+    [rmImage addTarget:self WithSelector:@selector(jumpHomeNearbyMerchant)];
+    [headerView addSubview:rmImage];
+    
+    RMImageView * popularizeView = [[RMImageView alloc] init];
+    popularizeView.frame = CGRectMake(0, rmImage.frame.size.height, kScreenWidth, 40);
+    popularizeView.image = LOADIMAGE(@"img_03", kImageTypePNG);
+    [popularizeView addTarget:self WithSelector:@selector(jumpPopularize:)];
+    [headerView addSubview:popularizeView];
+
+    headerView.frame = CGRectMake(0, 0, kScreenWidth, rmImage.frame.size.height + popularizeView.frame.size.height);
+    
+    mTableView.tableHeaderView = headerView;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

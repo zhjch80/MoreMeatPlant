@@ -41,13 +41,7 @@
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
     
-    RMImageView * rmImage = [[RMImageView alloc] init];
-    rmImage.frame = CGRectMake(0, 64, kScreenWidth, 45);
-    rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
-    [rmImage addTarget:self WithSelector:@selector(jumpPlantWithSaleNearbyMerchant)];
-    [self.view addSubview:rmImage];
-    
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, rmImage.frame.size.height + 64, kScreenWidth, kScreenHeight - rmImage.frame.size.height - 64 - 40) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 40) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.backgroundColor = [UIColor clearColor];
@@ -74,14 +68,23 @@
 - (void)loadTableViewHead {
     UIView * headView = [[UIView alloc] init];
     
-    CGFloat height = 0;
+    RMImageView * rmImage = [[RMImageView alloc] init];
+    rmImage.frame = CGRectMake(0, 0, kScreenWidth, 45);
+    rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
+    [rmImage addTarget:self WithSelector:@selector(jumpPlantWithSaleNearbyMerchant)];
+    [headView addSubview:rmImage];
+    
+    CGFloat height = rmImage.frame.size.height;
     
     for (NSInteger i=0; i<2; i++) {
         RMStickView * stickView = [[RMStickView alloc] init];
-        stickView.frame = CGRectMake(0, 0 + i*30, kScreenWidth, 30);
+        stickView.frame = CGRectMake(0, height + i*30, kScreenWidth, 30);
         [headView addSubview:stickView];
         stickView.delegate = self;
         [stickView loadStickViewWithTitle:(i==0 ? @"新手教程！" : @"发帖前必看！") withOrder:i];
+    }
+    
+    for (NSInteger i=0; i<2; i++) {
         height = height + 30;
     }
     
