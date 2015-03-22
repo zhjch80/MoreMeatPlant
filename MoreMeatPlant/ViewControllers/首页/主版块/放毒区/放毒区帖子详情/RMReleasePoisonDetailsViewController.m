@@ -67,11 +67,11 @@
     RMBottomView * bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
     bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [bottomView loadReleasePoisonDetailsBottom];
+    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_postMessage@2x", @"img_share", nil]];
     [self.view addSubview:bottomView];
 }
 
-- (void)releasePoisonDetailsBottomMethodWithTag:(NSInteger)tag {
+- (void)bottomMethodWithTag:(NSInteger)tag {
     switch (tag) {
         case 0:{
             [self.navigationController popViewControllerAnimated:YES];

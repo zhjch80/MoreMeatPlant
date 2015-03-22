@@ -108,7 +108,7 @@
 - (void)loadBottomView {
     RMBottomView * bottomView = [[RMBottomView alloc] init];
     bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [bottomView loadPlantWithSaleBottomView];
+    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_up", @"img_moreChat", nil]];
     bottomView.delegate = self;
     [self.view addSubview:bottomView];
 }
@@ -158,7 +158,7 @@
 
 #pragma mark - 底部栏回调方法
 
-- (void)plantWithSaleBottomMethodWithTag:(NSInteger)tag {
+- (void)bottomMethodWithTag:(NSInteger)tag {
     switch (tag) {
         case 0:{
             //返回

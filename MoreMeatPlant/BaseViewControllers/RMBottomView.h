@@ -11,50 +11,21 @@
 @protocol BottomDelegate <NSObject>
 
 @optional
-/**
- *  @method 放毒区首页底部栏回调方法
- */
-- (void)releasePoisonBottomMethodWithTag:(NSInteger)tag;
 
 /**
- *  @method 放毒区详情底部栏回调方法
+ @method    回调方法
  */
-- (void)releasePoisonDetailsBottomMethodWithTag:(NSInteger)tag;
-
-/**
- *  @method 一肉一拍底部栏回调方法
- */
-- (void)plantWithSaleBottomMethodWithTag:(NSInteger)tag;
-
-/**
- *  @method 一肉一拍详情底部栏回调方法
- */
-- (void)plantWithSaleDetailsBottomMethodWithTag:(NSInteger)tag;
+- (void)bottomMethodWithTag:(NSInteger)tag;
 
 @end
 
 @interface RMBottomView : UIView
 @property (nonatomic, assign) id<BottomDelegate>delegate;
 
-
 /**
- *  @name 放毒区首页底部栏
+ *  @name 底部状态栏
+ *  @param  imageArr        图片资源
  */
-- (void)loadReleasePoisonBottom;
-
-/**
- *  @name 放毒区详情底部栏
- */
-- (void)loadReleasePoisonDetailsBottom;
-
-/**
- *  @method 一肉一拍底部栏回调方法
- */
-- (void)loadPlantWithSaleBottomView;
-
-/**
- *  @method 一肉一拍底详情部栏回调方法
- */
-- (void)loadPlantWithSaleDetailsBottomView;
+- (void)loadBottomWithImageArr:(NSArray *)imageArr;
 
 @end

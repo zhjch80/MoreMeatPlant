@@ -90,7 +90,7 @@
             title.numberOfLines = 1;
             title.textColor = [UIColor whiteColor];
             title.font = [UIFont boldSystemFontOfSize:24.0];
-            title.text = [NSString stringWithFormat:@"page index: %ld",i];
+            title.text = [NSString stringWithFormat:@"page index: %ld",(long)i];
             title.adjustsFontSizeToFitWidth = YES;
             [title sizeToFit];
             title.center = image.center;
@@ -110,7 +110,7 @@
             return [blockSelf.topDataArr count];
         };
         self.cycleView.TapActionBlock = ^(NSInteger pageIndex){
-            NSLog(@"select index %ld",pageIndex);
+            NSLog(@"select index %ld",(long)pageIndex);
         };
         mTableView.tableHeaderView = self.cycleView;
     }
@@ -118,6 +118,7 @@
 
 - (void)loadTableFooterView {
     footerView = [[[NSBundle mainBundle] loadNibNamed:@"RMBaseView" owner:nil options:nil] objectAtIndex:0];
+    footerView.mWebView.scrollView.bounces = NO;
     mTableView.tableFooterView = footerView;
     
     _progressProxy = [[NJKWebViewProgress alloc] init];
@@ -191,11 +192,11 @@
     RMBottomView * bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
     bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [bottomView loadPlantWithSaleDetailsBottomView];
+    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_buy", @"img_share", nil]];
     [self.view addSubview:bottomView];
 }
 
-- (void)plantWithSaleDetailsBottomMethodWithTag:(NSInteger)tag {
+- (void)bottomMethodWithTag:(NSInteger)tag {
     switch (tag) {
         case 0:{
             [self.navigationController popViewControllerAnimated:YES];

@@ -15,7 +15,7 @@
 #define kDKTableViewDefaultCellHeight 50.0f
 #define kDKTableViewDefaultContentInset ([UIScreen mainScreen].bounds.size.height - kDKTableViewDefaultCellHeight)
 
-@interface RMDaqoDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,DaqoDetailsDelegate,UIScrollViewDelegate>{
+@interface RMDaqoDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,DaqoDetailsDelegate,BottomDelegate>{
     BOOL isScrollLoadComplete;      //      第一次完全加载完成
     BOOL isBottomState;             //      底部状态栏的状态
     
@@ -74,12 +74,37 @@
     
     [self.view addSubview:mTableView];
     
-//TODO:修改
+
     bottomView = [[RMBottomView alloc] init];
+    bottomView.delegate = self;
     bottomView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 40);
-    [bottomView loadReleasePoisonBottom];
+    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_buy", @"img_share", nil]];
     [self.view addSubview:bottomView];
     
+}
+
+- (void)bottomMethodWithTag:(NSInteger)tag {
+    switch (tag) {
+        case 1:{
+            
+            break;
+        }
+        case 2:{
+            
+            break;
+        }
+        case 3:{
+            
+            break;
+        }
+        case 4:{
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

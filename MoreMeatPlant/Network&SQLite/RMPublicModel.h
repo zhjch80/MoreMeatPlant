@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "STDbHandle.h"              //数据库操作
 
-@interface RMPublicModel : NSObject
+@interface RMPublicModel : STDbHandle
 
 
 @end
