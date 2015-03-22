@@ -660,6 +660,8 @@
 		51D884671ABE8FD300F7A3BD /* wallet_cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D884621ABE8FD300F7A3BD /* wallet_cover.png */; };
 		51D884681ABE8FD300F7A3BD /* wallet_input.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D884631ABE8FD300F7A3BD /* wallet_input.png */; };
 		51D884691ABE8FD300F7A3BD /* wallet_input2.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D884641ABE8FD300F7A3BD /* wallet_input2.png */; };
+		51D8846B1ABF23B000F7A3BD /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D8846A1ABF23B000F7A3BD /* photo.png */; };
+		51D8846E1ABF251C00F7A3BD /* UserLoginInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D8846D1ABF251C00F7A3BD /* UserLoginInfoManager.m */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E267E51AA7462000252DEF /* RMNearFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267E31AA7462000252DEF /* RMNearFriendViewController.m */; };
 		51E267E61AA7462000252DEF /* RMNearFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E267E41AA7462000252DEF /* RMNearFriendViewController.xib */; };
@@ -1682,6 +1684,9 @@
 		51D884621ABE8FD300F7A3BD /* wallet_cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wallet_cover.png; sourceTree = "<group>"; };
 		51D884631ABE8FD300F7A3BD /* wallet_input.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wallet_input.png; sourceTree = "<group>"; };
 		51D884641ABE8FD300F7A3BD /* wallet_input2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wallet_input2.png; sourceTree = "<group>"; };
+		51D8846A1ABF23B000F7A3BD /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
+		51D8846C1ABF251C00F7A3BD /* UserLoginInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLoginInfoManager.h; sourceTree = "<group>"; };
+		51D8846D1ABF251C00F7A3BD /* UserLoginInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginInfoManager.m; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 		51E267E21AA7462000252DEF /* RMNearFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMNearFriendViewController.h; sourceTree = "<group>"; };
@@ -2921,6 +2926,8 @@
 				1D64F4E81A904E180073EB98 /* RMAccountViewController.h */,
 				1D64F4E91A904E180073EB98 /* RMAccountViewController.m */,
 				1D64F4EA1A904E180073EB98 /* RMAccountViewController.xib */,
+				51D8846C1ABF251C00F7A3BD /* UserLoginInfoManager.h */,
+				51D8846D1ABF251C00F7A3BD /* UserLoginInfoManager.m */,
 				1D64F4EB1A904E180073EB98 /* 商家账户 */,
 				1D64F4EC1A904E180073EB98 /* 用户账户 */,
 				51E267DE1A9F5A3500252DEF /* RMAccountView.h */,
@@ -3449,6 +3456,7 @@
 		1DEB740E1AB9D5DE00EA1FA7 /* member */ = {
 			isa = PBXGroup;
 			children = (
+				51D8846A1ABF23B000F7A3BD /* photo.png */,
 				51D884601ABE8FD300F7A3BD /* wallet_btn.png */,
 				51D884611ABE8FD300F7A3BD /* wallet_close.png */,
 				51D884621ABE8FD300F7A3BD /* wallet_cover.png */,
@@ -4232,6 +4240,7 @@
 				0A4106A91ABABBF60060FBD5 /* chatBar_colorMore_videoSelected@2x.png in Resources */,
 				0A41067C1ABABBF60060FBD5 /* chatBar_more_faceSelected.png in Resources */,
 				1DEB745E1AB9D66800EA1FA7 /* img_03.png in Resources */,
+				51D8846B1ABF23B000F7A3BD /* photo.png in Resources */,
 				1DEB74F41AB9D67A00EA1FA7 /* fbbb_nophoto.png in Resources */,
 				1DEB74E21AB9D67A00EA1FA7 /* corp_classes_btn.png in Resources */,
 				51D884201ABDCFD400F7A3BD /* RMRegisterViewController.xib in Resources */,
@@ -4644,6 +4653,7 @@
 				51E268661AAF4D8100252DEF /* RMAddressEditViewController.m in Sources */,
 				0A4104AB1ABAAE9B0060FBD5 /* SRSlimeView.m in Sources */,
 				5120FDDC1AB7138E000E9BE1 /* RMMyOrderViewController.m in Sources */,
+				51D8846E1ABF251C00F7A3BD /* UserLoginInfoManager.m in Sources */,
 				51E2681F1AADE92300252DEF /* RMShopLeaveMsTableViewCell.m in Sources */,
 				0A4104DA1ABAB03C0060FBD5 /* ChatSendHelper.m in Sources */,
 				9538F3D21AB0A5BF00608FAD /* RMTableHeadView.m in Sources */,

@@ -59,7 +59,7 @@
         if(cell == nil){
             cell =[[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailProTableViewCell" owner:self options:nil] lastObject];
         }
-        if(1){
+        if(/* DISABLES CODE */ (1)){
             cell.fieldHeght.constant = 0;
         }else{
             cell.fieldHeght.constant = 30;

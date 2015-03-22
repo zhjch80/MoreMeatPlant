@@ -20,7 +20,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" translatesAutoresizingMaskIntoConstraints="NO" id="bUg-iD-jEB">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="bUg-iD-jEB">
                         <rect key="frame" x="15" y="5" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="IhL-GZ-fDV"/>
@@ -76,11 +76,18 @@
                     <constraint firstItem="bUg-iD-jEB" firstAttribute="centerY" secondItem="i0N-hZ-eOh" secondAttribute="centerY" id="UNX-fB-1JX"/>
                     <constraint firstItem="KHf-8Y-Qpw" firstAttribute="leading" secondItem="bUg-iD-jEB" secondAttribute="trailing" constant="8" id="WTt-g7-lb1"/>
                     <constraint firstItem="KHf-8Y-Qpw" firstAttribute="top" secondItem="xDQ-za-BkY" secondAttribute="bottom" constant="13" id="d8d-jS-xOf"/>
+                    <constraint firstItem="KHf-8Y-Qpw" firstAttribute="leading" secondItem="xDQ-za-BkY" secondAttribute="leading" id="fqd-cY-703"/>
                     <constraint firstItem="xDQ-za-BkY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="gRI-Wo-ebf"/>
                     <constraint firstItem="xDQ-za-BkY" firstAttribute="leading" secondItem="bUg-iD-jEB" secondAttribute="trailing" constant="8" id="hvw-nr-eHO"/>
                     <constraint firstAttribute="trailing" secondItem="i0N-hZ-eOh" secondAttribute="trailing" constant="15" id="md7-UL-7u7"/>
                     <constraint firstItem="jou-Lq-JpT" firstAttribute="leading" secondItem="KHf-8Y-Qpw" secondAttribute="trailing" constant="20" id="rqI-0C-JfO"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="CMF-UP-MF1"/>
+                        <exclude reference="WTt-g7-lb1"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="content_img" destination="bUg-iD-jEB" id="hhj-lO-VOP"/>
@@ -97,6 +104,6 @@
     <resources>
         <image name="fbbb_btn_bg_red.png" width="678" height="90"/>
         <image name="order_detail_input.png" width="1135" height="98"/>
-        <image name="photo" width="50" height="50"/>
+        <image name="photo.png" width="500" height="531"/>
     </resources>
 </document>

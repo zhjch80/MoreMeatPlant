@@ -54,9 +54,9 @@
         RMPublishClassTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMPublishClassTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPublishClassTableViewCell" owner:self options:nil] lastObject];
+            [cell createItem:classArray andCallBack:nil];
+            [cell.addClassBtn addTarget:self action:@selector(addClassAction:) forControlEvents:UIControlEventTouchDown];
         }
-        cell.titles = classArray;
-        [cell layoutSubviews];
         return cell;
     }else if (indexPath.row == 3){
         RMPublishNumberTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMPublishNumberTableViewCell"];
@@ -114,6 +114,36 @@
         return 58;
     }
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+
+}
+
+- (void)addClassAction:(id)sender{
+    
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"输入要添加的分类名称" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == 0){
+        NSLog(@"取消");
+    }else{
+        
+         UITextField *tf=[alertView textFieldAtIndex:0];
+        NSLog(@"添加:%@",tf.text);
+        RMPublishClassTableViewCell * cell = (RMPublishClassTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+        NSArray * arr = [NSArray arrayWithObjects:tf.text ,nil];
+        [cell createItem:arr andCallBack:^{
+            [classArray addObjectsFromArray:arr];
+        }];
+        
+        [_mTableView reloadData];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

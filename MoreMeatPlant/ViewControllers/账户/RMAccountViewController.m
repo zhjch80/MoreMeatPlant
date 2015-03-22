@@ -45,7 +45,8 @@
     
     [self layoutViews];
     
-    
+//    CGFloat availableLabelWidth = self.userDescL.frame.size.width;
+//    self.userDescL.preferredMaxLayoutWidth = availableLabelWidth;
 
 }
 

@@ -9,17 +9,40 @@
 #import "RMPublishClassTableViewCell.h"
 #import "NSString+Addtion.h"
 #import "CONST.h"
-@implementation RMPublishClassTableViewCell
 
+@implementation RMPublishClassTableViewCell
+@synthesize x,y,index;
 - (void)awakeFromNib {
     // Initialization code
+     x = 10;
+     y = 31;
+    index = 100;
+    _titles = [[NSMutableArray alloc]init];
 }
 
-- (void)layoutSubviews{
+- (void)createItem:(NSArray *)array andCallBack:(PublishClassAdded) block{
     
-    CGFloat x = 10;
-    CGFloat y = 31;
-    for(NSString * title in self.titles){
+    NSMutableArray * arr = [[NSMutableArray alloc]initWithCapacity:0];
+    for(NSString * str in array){
+        if( [self.titles containsObject:str]){
+            [arr addObject:str];
+        }
+        else{
+            
+        }
+    }
+    if([arr count]!=0){
+        NSString * tips = [NSString stringWithFormat:@"%@已经存在,请重新添加!",[arr componentsJoinedByString:@","]];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:tips delegate:self cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
+        return;
+    }
+    [self.titles addObjectsFromArray:array];
+    if(block){
+        block();
+    }
+    
+    for(NSString * title in array){
         CGSize size = [title getcontentsizeWithfont:FONT_0(13) constrainedtosize:CGSizeMake(100, 20) linemode:NSLineBreakByCharWrapping];
         UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
@@ -28,18 +51,32 @@
             x = 10;
         }
         btn.frame = CGRectMake(x, y, 20, 20);
-        [self.contentView addSubview:btn];
+        btn.tag = index;//从100开始的
         
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(btn.frame.origin.x+btn.frame.size.width+10, y, size.width, size.height)];
         label.center = CGPointMake(label.center.x, btn.center.y);
         label.font = FONT_0(13);
         label.text = title;
+        
+        
+        
+        [self.contentView addSubview:btn];
         [self.contentView addSubview:label];
         
         x+= 10+20+size.width+10;
-                                                            
+        
+        index++;
+        NSLog(@"-----------%ld",(long)index);
     }
+    NSLog(@"+++++++%@",self.titles);
+
 }
+
+- (void)layoutSubviews{
+    
+    
+    
+   }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

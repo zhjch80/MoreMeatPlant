@@ -63,7 +63,7 @@
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FTz-XE-pGX">
-                        <rect key="frame" x="268" y="24.5" width="42" height="27"/>
+                        <rect key="frame" x="268" y="28" width="42" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Y7P-z1-gcb"/>
                             <constraint firstAttribute="width" constant="42" id="oVA-Fm-TdQ"/>
@@ -98,11 +98,13 @@
                     <constraint firstItem="Wb5-Zs-vyp" firstAttribute="top" secondItem="hJK-lH-mDx" secondAttribute="bottom" constant="7" id="Bpw-TA-5dW"/>
                     <constraint firstItem="yV2-na-hHd" firstAttribute="centerY" secondItem="ynZ-kD-WWB" secondAttribute="centerY" id="CcQ-pL-gVL"/>
                     <constraint firstItem="e0Z-LB-5sD" firstAttribute="leading" secondItem="Wb5-Zs-vyp" secondAttribute="trailing" constant="8" id="CdF-jT-9cE"/>
+                    <constraint firstAttribute="centerY" secondItem="yV2-na-hHd" secondAttribute="centerY" id="El3-BE-DLZ"/>
                     <constraint firstItem="hJK-lH-mDx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="F5b-BW-VF7"/>
                     <constraint firstAttribute="trailingMargin" secondItem="FTz-XE-pGX" secondAttribute="trailing" constant="2" id="GWS-3G-JVH"/>
                     <constraint firstAttribute="centerY" secondItem="FTz-XE-pGX" secondAttribute="centerY" id="MbT-jf-3Lr"/>
                     <constraint firstItem="Wb5-Zs-vyp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="Nhz-Jh-oS0"/>
                     <constraint firstItem="yV2-na-hHd" firstAttribute="centerY" secondItem="FTz-XE-pGX" secondAttribute="centerY" id="Pqk-Ub-zvD"/>
+                    <constraint firstAttribute="centerY" secondItem="YIq-ct-duO" secondAttribute="centerY" id="XDH-fb-Flg"/>
                     <constraint firstItem="yV2-na-hHd" firstAttribute="leading" secondItem="YIq-ct-duO" secondAttribute="trailing" id="bov-hJ-ERp"/>
                     <constraint firstItem="a4f-jZ-iiB" firstAttribute="top" secondItem="hJK-lH-mDx" secondAttribute="bottom" constant="15" id="cKG-Kn-uXd"/>
                     <constraint firstItem="yV2-na-hHd" firstAttribute="centerY" secondItem="YIq-ct-duO" secondAttribute="centerY" id="d4K-jH-bDR"/>
@@ -116,6 +118,12 @@
                     <constraint firstItem="YIq-ct-duO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="a4f-jZ-iiB" secondAttribute="trailing" constant="5" id="w4g-If-KBk"/>
                     <constraint firstItem="yV2-na-hHd" firstAttribute="baseline" secondItem="FTz-XE-pGX" secondAttribute="baseline" id="yCd-jx-1Iw"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Pqk-Ub-zvD"/>
+                        <exclude reference="yCd-jx-1Iw"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addBtn" destination="ynZ-kD-WWB" id="K6b-Y2-3V8"/>
@@ -126,7 +134,7 @@
                 <outlet property="numTextField" destination="yV2-na-hHd" id="lta-7v-njL"/>
                 <outlet property="subBtn" destination="YIq-ct-duO" id="nZa-Ve-wGa"/>
             </connections>
-            <point key="canvasLocation" x="331" y="250.5"/>
+            <point key="canvasLocation" x="296" y="189.5"/>
         </tableViewCell>
     </objects>
     <resources>
