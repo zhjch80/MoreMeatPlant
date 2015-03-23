@@ -18,6 +18,7 @@
 @interface RMStartPostingViewController ()<UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,StartPostingHeaderDelegate,DoImagePickerControllerDelegate>{
     NSInteger uploadImageCount;         //纪录已选照片数量
     NSInteger uploadImageValue;         //标记要重置的位置
+    NSInteger cameraType;               //取照类型  1 点击直接拍照    2 点击某一张图片
     
 }
 @property (nonatomic, strong) RMStartPostingHeaderView * headerView;
@@ -78,6 +79,7 @@
         RMImageView * deleteImg = [[RMImageView alloc] init];
         deleteImg.tag = 201 + i;
         deleteImg.identifierString = @"empty";
+        deleteImg.hidden = YES;
         deleteImg.frame = CGRectMake(imageView.frame.origin.x + imageView.frame.size.width - 12, imageView.frame.origin.y - 5, 20, 20);
         [deleteImg addTarget:self WithSelector:@selector(deleteUpLoadImg:)];
         deleteImg.image = LOADIMAGE(@"deletecircular", kImageTypePNG);
@@ -126,8 +128,8 @@
 
 - (void)keyboardWillShow:(NSNotification *)noti {
     CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    self.mTextView.frame = CGRectMake(0, 99, kScreenWidth, kScreenHeight - 99 - 35 - size.height);
-    self.mView.frame = CGRectMake(0, 99 + self.mTextView.frame.size.height, kScreenWidth, 35);
+    self.mTextView.frame = CGRectMake(0, 100, kScreenWidth, kScreenHeight - 100 - 35 - size.height);
+    self.mView.frame = CGRectMake(0, 100 + self.mTextView.frame.size.height, kScreenWidth, 35);
     self.mScrollView.frame = CGRectMake(0, self.mView.frame.size.height + self.mView.frame.origin.y, kScreenWidth, kScreenHeight - self.mView.frame.size.height - self.mView.frame.origin.y);
 }
 
@@ -150,6 +152,7 @@
 }
 
 - (void)addUpLoadImg:(RMImageView *)image {
+    cameraType = 2;
     uploadImageValue = image.tag;
     UIActionSheet *sheet = nil;
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -197,6 +200,7 @@
 
 - (void)deleteUpLoadImg:(RMImageView *)image {
     image.identifierString = @"empty";
+    image.hidden = YES;
     RMImageView * iv = (RMImageView *)[self.mScrollView viewWithTag:image.tag - 100];
     iv.identifierString = @"empty";
     iv.image = LOADIMAGE(@"btn_add_photo_s", kImageTypePNG);
@@ -242,6 +246,7 @@
         }
         case 2:{
             //拍照
+            cameraType = 1;
             uploadImageCount = 0;
             for (NSInteger i=0; i<8; i++){
                 RMImageView * image = (RMImageView *)[self.mScrollView viewWithTag:101+i];
@@ -293,11 +298,43 @@
     }];
     UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    RMImageView * imageView = (RMImageView *)[self.mScrollView viewWithTag:uploadImageValue];
-    imageView.identifierString = @"full";
-    imageView.image = image;
-    RMImageView * deleteImg = (RMImageView *)[self.mScrollView viewWithTag:uploadImageCount + 100];
-    deleteImg.identifierString = @"full";
+    switch (cameraType) {
+        case 1:{
+            for (NSInteger i=0; i<8; i++) {
+                RMImageView * imageView = (RMImageView *)[self.mScrollView viewWithTag:101+i];
+                RMImageView * deletetImg = (RMImageView *)[self.mScrollView viewWithTag:201+i];
+                
+                if ([imageView.identifierString isEqualToString:@"full"]){
+                    continue ;
+                }else{
+                    imageView.image = image;
+                    imageView.identifierString = @"full";
+                    
+                    deletetImg.identifierString = @"full";
+                    deletetImg.hidden = NO;
+//                    deletetImg.image = LOADIMAGE(@"deletecircular", kImageTypePNG);
+                    break;
+                }
+            }
+            break;
+        }
+        case 2:{
+            RMImageView * imageView = (RMImageView *)[self.mScrollView viewWithTag:uploadImageValue];
+            imageView.identifierString = @"full";
+            imageView.image = image;
+            
+            RMImageView * deleteImg = (RMImageView *)[self.mScrollView viewWithTag:uploadImageValue + 100];
+            
+            deleteImg.identifierString = @"full";
+            deleteImg.hidden = NO;
+
+            break;
+        }
+            
+        default:
+            break;
+    }
+ 
     
     
     /*
@@ -386,6 +423,7 @@
                     imageView.identifierString = @"full";
                     
                     deleteImage.identifierString = @"full";
+                    deleteImage.hidden = NO;
                     value ++;
                 }else{
                 }
