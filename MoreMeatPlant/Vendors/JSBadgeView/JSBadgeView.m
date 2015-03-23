@@ -20,14 +20,14 @@
 
 #define kDefaultBadgeTextColor [UIColor whiteColor]
 #define kDefaultBadgeBackgroundColor [UIColor redColor]
-#define kDefaultOverlayColor [UIColor colorWithWhite:1.0f alpha:0.3]
+#define kDefaultOverlayColor [UIColor clearColor]
 
 #define kDefaultBadgeTextFont [UIFont boldSystemFontOfSize:[UIFont systemFontSize]]
 
 #define kDefaultBadgeShadowColor [UIColor clearColor]
 
-#define kBadgeStrokeColor [UIColor whiteColor]
-#define kBadgeStrokeWidth 2.0f
+#define kBadgeStrokeColor [UIColor clearColor]
+#define kBadgeStrokeWidth 0.0f
 
 #define kMarginToDrawInside (kBadgeStrokeWidth * 2)
 
@@ -36,7 +36,7 @@
 #define kShadowColor [UIColor colorWithWhite:0.0f alpha:kShadowOpacity]
 #define kShadowRadius 1.0f
 
-#define kBadgeHeight 16.0f
+#define kBadgeHeight 15.0f
 #define kBadgeTextSideMargin 8.0f
 
 #define kBadgeCornerRadius 10.0f
@@ -115,7 +115,7 @@
     
     CGFloat textWidth = [self sizeOfTextForCurrentSettings].width;
     
-    CGFloat viewWidth = textWidth + kBadgeTextSideMargin + (kMarginToDrawInside * 2) + 8;
+    CGFloat viewWidth = textWidth + kBadgeTextSideMargin + (kMarginToDrawInside * 2) ;//+ 8;
     CGFloat viewHeight = kBadgeHeight + (kMarginToDrawInside * 2);
     
     CGFloat superviewWidth = superviewFrame.size.width;
@@ -175,7 +175,9 @@
 
 - (CGSize)sizeOfTextForCurrentSettings
 {
-    return [self.badgeText sizeWithFont:self.badgeTextFont];
+    NSDictionary *attributes = @{NSFontAttributeName: kDefaultBadgeTextFont};
+    return [self.badgeText sizeWithAttributes:attributes];
+//    return [self.badgeText sizeWithFont:self.badgeTextFont];
 }
 
 #pragma mark - Setters
@@ -367,6 +369,8 @@
                               withFont:self.badgeTextFont
                          lineBreakMode:NSLineBreakByCharWrapping  //UILineBreakModeCharacterWrap
                              alignment:NSTextAlignmentCenter];
+//            NSDictionary *attributes = @{NSFontAttributeName: kDefaultBadgeTextFont};
+//            [self.badgeText drawInRect:textFrame withAttributes:attributes];
         }
         CGContextRestoreGState(ctx);
     }

@@ -8,6 +8,7 @@
 
 #import "RMMyHomeViewController.h"
 #import "RMReleasePoisonDetailsViewController.h"
+#import "KxMenu.h"
 @interface RMMyHomeViewController ()
 
 @end
@@ -18,7 +19,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self setCustomNavTitle:@"我的帖子"];
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
+    [self loadBottomView];
+}
+
+- (void)loadBottomView {
+    bottomView = [[RMBottomView alloc] init];
+    bottomView.delegate = self;
+    bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
+    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_up", @"img_moreChat", nil]];
+    [self.view addSubview:bottomView];
+    
+    
+    UIButton * btn = (UIButton *)[bottomView viewWithTag:2];
+    badge = [[JSBadgeView alloc]initWithParentView:btn alignment:JSBadgeViewAlignmentTopRight];
+    badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
+    badge.badgeTextFont = [UIFont systemFontOfSize:12];
+    badge.badgeText = @"99";
 }
 
 
@@ -133,6 +151,46 @@
 - (void)jumpPostDetailsWithImage:(RMImageView *)image {
     RMReleasePoisonDetailsViewController * releasePoisonDetailsCtl = [[RMReleasePoisonDetailsViewController alloc] init];
     [self.navigationController pushViewController:releasePoisonDetailsCtl animated:YES];
+}
+#pragma mark - 底部栏回调方法
+
+- (void)bottomMethodWithTag:(NSInteger)tag {
+    switch (tag) {
+        case 0:{
+            //返回
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
+        }
+        case 1:{
+            //滚到置顶
+            [_mainTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:-1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+            break;
+        }
+        case 2:{
+            //多聊
+            NSLog(@"多聊");
+            KxMenuItem * item1 = [KxMenuItem menuItem:@"多聊消息" image:nil target:self action:@selector(menuSelected:) index:100];
+            item1.foreColor = UIColorFromRGB(0x585858);
+            KxMenuItem * item2 = [KxMenuItem menuItem:@"一肉一拍" image:nil target:self action:@selector(menuSelected:) index:101];
+            item2.foreColor = UIColorFromRGB(0x585858);
+            KxMenuItem * item3 = [KxMenuItem menuItem:@"鲜肉市场" image:nil target:self action:@selector(menuSelected:) index:101];
+            item3.foreColor = UIColorFromRGB(0x585858);
+            NSArray * arr = [[NSArray alloc]initWithObjects:item1,item2,item3, nil];
+            
+            [KxMenu setTintColor:[UIColor whiteColor]];
+            UIButton * btn = (UIButton *)[bottomView viewWithTag:2];
+            [KxMenu showMenuInView:self.view fromRect:CGRectMake(btn.frame.origin.x, bottomView.frame.origin.y, 100, 100) menuItems:arr];
+
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+- (void)menuSelected:(id)sender{
+    KxMenuItem * item = (KxMenuItem *)sender;
 }
 
 

@@ -8,7 +8,12 @@
 
 #import "RMBaseViewController.h"
 #import "RMReleasePoisonCell.h"
-@interface RMMyHomeViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource,PostDetatilsDelegate>
+#import "RMBottomView.h"
+#import "JSBadgeView.h"
+@interface RMMyHomeViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource,PostDetatilsDelegate,BottomDelegate>{
+    RMBottomView * bottomView;
+    JSBadgeView * badge;
+}
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @end
