@@ -34,14 +34,26 @@
     }
     
     statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 20)];
-    statusView.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1];
+    statusView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     [self.view addSubview:statusView];
     
     customNav = [[UIView alloc] initWithFrame:CGRectMake(0, 20, screenWidth, 44)];
-    customNav.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1];
+    customNav.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1];
     customNav.userInteractionEnabled = YES;
     customNav.multipleTouchEnabled = YES;
     [self.view addSubview:customNav];
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = CGRectMake(0, 0, customNav.frame.size.width, customNav.frame.size.height);
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor,
+                       (id)[UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1].CGColor,
+                       nil];
+    CGPoint startPoint = CGPointMake(0, 0);
+    CGPoint endPoint = CGPointMake(0, 1);
+    gradient.startPoint = startPoint;
+    gradient.endPoint = endPoint;
+    [customNav.layer insertSublayer:gradient atIndex:0];
     
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, screenWidth - 80, 44)];
     titleLabel.userInteractionEnabled = YES;
@@ -53,9 +65,9 @@
     titleLabel.center = CGPointMake(screenWidth/2, 22);
     [customNav addSubview:titleLabel];
     
-    UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, 42, screenWidth, 2)];
-    line.backgroundColor = [UIColor colorWithRed:0.91 green:0.33 blue:0.22 alpha:1];
-    line.userInteractionEnabled = YES;
+//    UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, 42, screenWidth, 2)];
+//    line.backgroundColor = [UIColor colorWithRed:0.91 green:0.33 blue:0.22 alpha:1];
+//    line.userInteractionEnabled = YES;
 //    [customNav addSubview:line];
     
     leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];

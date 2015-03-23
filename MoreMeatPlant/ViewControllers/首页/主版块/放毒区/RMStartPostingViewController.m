@@ -16,7 +16,9 @@
 #define kMaxLength 18
 
 @interface RMStartPostingViewController ()<UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,StartPostingHeaderDelegate,DoImagePickerControllerDelegate>{
-    NSInteger uploadImageCount;
+    NSInteger uploadImageCount;         //纪录已选照片数量
+    NSInteger uploadImageValue;         //标记要重置的位置
+    
 }
 @property (nonatomic, strong) RMStartPostingHeaderView * headerView;
 @property (strong, nonatomic) NSMutableArray * uploadImageArr;
@@ -61,6 +63,29 @@
     [self.mTextField setValue:[UIColor colorWithRed:0.58 green:0.58 blue:0.58 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
     [[UITextField appearance] setTintColor:[UIColor colorWithRed:0 green:0.67 blue:0.65 alpha:1]];
     [[UITextView appearance] setTintColor:[UIColor colorWithRed:0 green:0.67 blue:0.65 alpha:1]];
+    
+    for (NSInteger i=0; i<8; i++) {
+        RMImageView * imageView = [[RMImageView alloc] init];
+        imageView.frame = CGRectMake(0, 0, 100, 150);
+        imageView.center = CGPointMake(20 + 50 + i * imageView.frame.size.width + i * 20, self.mScrollView.frame.size.height/2);
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.image = LOADIMAGE(@"btn_add_photo_s", kImageTypePNG);
+        [imageView addTarget:self WithSelector:@selector(addUpLoadImg:)];
+        imageView.tag = 101 + i;
+        imageView.identifierString = @"empty";
+        [self.mScrollView addSubview:imageView];
+        
+        RMImageView * deleteImg = [[RMImageView alloc] init];
+        deleteImg.tag = 201 + i;
+        deleteImg.identifierString = @"empty";
+        deleteImg.frame = CGRectMake(imageView.frame.origin.x + imageView.frame.size.width - 12, imageView.frame.origin.y - 5, 20, 20);
+        [deleteImg addTarget:self WithSelector:@selector(deleteUpLoadImg:)];
+        deleteImg.image = LOADIMAGE(@"deletecircular", kImageTypePNG);
+        [self.mScrollView addSubview:deleteImg];
+        
+        [uploadImageArr addObject:imageView];
+    }
+
 }
 
 - (void)loadHeaderView {
@@ -109,28 +134,6 @@
 - (void)keyboardDidShow:(NSNotification *)noti {
     CGFloat contentY = 0;
     
-    for (NSInteger i=0; i<8; i++) {
-        RMImageView * imageView = [[RMImageView alloc] init];
-        imageView.frame = CGRectMake(0, 0, 100, 150);
-        imageView.center = CGPointMake(20 + 50 + i * imageView.frame.size.width + i * 20, self.mScrollView.frame.size.height/2);
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.image = LOADIMAGE(@"btn_add_photo_s", kImageTypePNG);
-        [imageView addTarget:self WithSelector:@selector(addUpLoadImg:)];
-        imageView.tag = 101 + i;
-        imageView.identifierString = @"empty";
-        [self.mScrollView addSubview:imageView];
-        
-        RMImageView * deleteImg = [[RMImageView alloc] init];
-        deleteImg.tag = 201 + i;
-        deleteImg.identifierString = @"empty";
-        deleteImg.frame = CGRectMake(imageView.frame.origin.x + imageView.frame.size.width - 12, imageView.frame.origin.y - 5, 20, 20);
-        [deleteImg addTarget:self WithSelector:@selector(deleteUpLoadImg:)];
-        deleteImg.image = LOADIMAGE(@"deletecircular", kImageTypePNG);
-        [self.mScrollView addSubview:deleteImg];
-        
-        [uploadImageArr addObject:imageView];
-    }
-    
     if (self.mScrollView.frame.size.height < 150){
         contentY = 150;
     }else{
@@ -147,6 +150,7 @@
 }
 
 - (void)addUpLoadImg:(RMImageView *)image {
+    uploadImageValue = image.tag;
     UIActionSheet *sheet = nil;
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         sheet  = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
@@ -288,8 +292,12 @@
     [picker dismissViewControllerAnimated:YES completion:^{
     }];
     UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    RMImageView * img = (RMImageView *)[self.mScrollView viewWithTag:101];
-    img.image = image;
+    
+    RMImageView * imageView = (RMImageView *)[self.mScrollView viewWithTag:uploadImageValue];
+    imageView.identifierString = @"full";
+    imageView.image = image;
+    RMImageView * deleteImg = (RMImageView *)[self.mScrollView viewWithTag:uploadImageCount + 100];
+    deleteImg.identifierString = @"full";
     
     
     /*
@@ -366,36 +374,27 @@
         
         NSInteger value = 0;
         
-//        for (NSInteger i=0; i<[aSelected count]; i++) {
-//            RMImageView * image = uploadImageArr[i];
-//            if ([image.identifierString isEqualToString:@"empry"]){
-//                image.image = aSelected[value];
-//            }else{
-//                continue;
-//            }
-//        }
-        
-        
-        
-        
-        for (int i = 0; i < MIN(8, aSelected.count); i++) {
-            RMImageView *iv = uploadImageArr[i];
-            iv.image = aSelected[i];
-            iv.identifierString = @"full";
-            NSLog(@"---AAAAA--%ld state:%@",(long)iv.tag,iv.identifierString);
+        for (NSInteger i=0; i<8; i++) {
+            RMImageView * imageView = (RMImageView *)[self.mScrollView viewWithTag:101+i];
+            RMImageView * deleteImage = (RMImageView *)[self.mScrollView viewWithTag:201+i];
             
-            RMImageView * deleteImage = (RMImageView *)[self.mScrollView viewWithTag:100 + iv.tag];
-            deleteImage.identifierString = @"full";
+            if ([imageView.identifierString isEqualToString:@"full"]){
+                continue ;
+            }else{
+                if ([aSelected count] > value){
+                    imageView.image = aSelected[value];
+                    imageView.identifierString = @"full";
+                    
+                    deleteImage.identifierString = @"full";
+                    value ++;
+                }else{
+                }
+            }
         }
-        
-        
-        
-        
     }else if(picker.nResultType == DO_PICKER_RESULT_ASSET) {
         for (int i = 0; i < MIN(8, aSelected.count); i++) {
             RMImageView *iv = uploadImageArr[i];
             iv.image = [ASSETHELPER getImageFromAsset:aSelected[i] type:ASSET_PHOTO_SCREEN_SIZE];
-            NSLog(@"---BBBBB--%ld",(long)iv.tag);
 
         }
         [ASSETHELPER clearData];

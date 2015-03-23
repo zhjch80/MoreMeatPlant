@@ -33,17 +33,28 @@ typedef enum{
     kRMUpgradeSuggest = 8,
 }GotoViewControllerName;
 
-@interface RMHomeViewController ()<UITableViewDataSource,UITableViewDelegate>{
-    
+@interface RMHomeViewController ()<UITableViewDataSource,UITableViewDelegate,RMAFNRequestManagerDelegate>{
+    BOOL isFirstViewDidAppear;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @property (nonatomic, strong) NSMutableArray * dataImgArr;
+@property (nonatomic, strong) RMAFNRequestManager * manager;
 
 @end
 
 @implementation RMHomeViewController
-@synthesize mTableView, dataArr, dataImgArr;
+@synthesize mTableView, dataArr, dataImgArr, manager;
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!isFirstViewDidAppear){
+        manager = [[RMAFNRequestManager alloc] init];
+        manager.delegate = self;
+        [manager getAdvertisingQueryWithType:1];
+        isFirstViewDidAppear = YES;
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -231,6 +242,12 @@ typedef enum{
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
     [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
+}
+
+#pragma mark - AFNNetwork
+
+- (void)requestError:(NSError *)error {
+    NSLog(@"error:%@",error);
 }
 
 - (void)didReceiveMemoryWarning {

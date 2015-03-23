@@ -8,94 +8,114 @@
 
 #import "RMAFNRequestManager.h"
 #import "CONST.h"
-#import "Reachability.h"
 
-#define baseUrl         @"http://vodapi.runmobile.cn/version2_00/api.php/vod/"
+#define baseUrl             @"http://218.240.30.6/drzw/index.php?com=com_appService&"
+
+#define kMSGSuccess         @"数据返回成功"
+#define kMSGFailure         @"数据返回失败"
 
 @interface RMAFNRequestManager (){
-    UIImageView * HUDImage;
+
 }
+@property (nonatomic, strong) AFHTTPRequestOperationManager * AFManager;
 
 @end
 
 @implementation RMAFNRequestManager
+@synthesize AFManager;
 
-- (AFHTTPRequestOperationManager *)creatAFNNetworkRequestManager{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer.timeoutInterval = 15;//超时
-    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject: @"text/html"];
-    return manager;
+- (void)creatAFNNetWorkRequestManager {
+    AFManager = [AFHTTPRequestOperationManager manager];
+    AFManager.responseSerializer = [AFJSONResponseSerializer serializer];
+    AFManager.requestSerializer.timeoutInterval = 15;//超时
+    AFManager.responseSerializer.acceptableContentTypes = [AFManager.responseSerializer.acceptableContentTypes setByAddingObject: @"text/html"];
 }
 
-- (void)cancelRMAFNRequestManagerRequest:(AFHTTPRequestOperationManager *)manager {
-    if (manager){
-        [manager.operationQueue cancelAllOperations];
+- (void)cancelRMAFNRequestManagerRequest {
+    if (AFManager){
+        [AFManager.operationQueue cancelAllOperations];
     }
 }
 
-- (NSString *)urlPathadress:(NSInteger)tag{
-    NSString *strUrl;
-    switch (tag) {
-        case 1:{
-            strUrl = [NSString stringWithFormat:@"%@getSlideList?",baseUrl];
-            break;
-        }
-        default:{
-            strUrl = nil;
-        }
-            break;
-    }
-    return strUrl;
-}
+#pragma mark - 工具
 
-- (NSString *)setOffsetWith:(NSString *)page andCount:(NSString *)count{
-    return [NSString stringWithFormat:@"%d",([page intValue] -1)*[count intValue]];
-}
-
-- (void)checkTheNetworkConnectionWithTitle:(NSString *)title {
-    Reachability *r = [Reachability reachabilityWithHostName:@"www.baidu.com"];
-    switch ([r currentReachabilityStatus]) {
-        case NotReachable:{
-            break;
-        }
-        default:{
-            break;
-        }
+- (NSString *)checkEmptyStringFromNULL:(NSString *)str {
+    if ([str isEqualToString:@"<null>"] || [str isEqualToString:@"(null)"] || str == nil){
+        return @"";
+    }else{
+        return str;
     }
 }
 
 #pragma mark - 接口
 
-- (void)getSlideListWithVideo_type:(NSString *)video_type {
+/**
+ *  @method     广告查询
+ *  @param      type        广告类型
+ *   1：首页广告、2：放毒区、3：放毒区帖子底部、4：一物一拍、5：鲜肉市场
+ */
+- (void)getAdvertisingQueryWithType:(NSInteger)type {
     __weak RMAFNRequestManager *weekSelf = self;
-    AFHTTPRequestOperationManager *manager = [self creatAFNNetworkRequestManager];
-    self.downLoadType = 1;
-    NSString *url = [self urlPathadress:1];
-    url = [NSString stringWithFormat:@"%@video_type=%@",url,video_type];
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        if([[responseObject objectForKey:@"code"] intValue] == 4001){
-            NSMutableArray *dataArray = [NSMutableArray array];
-            for (NSDictionary *dict in [responseObject objectForKey:@"data"]){
-                RMPublicModel *model = [[RMPublicModel alloc] init];
-                
-                               [dataArray addObject:model];
+    [self creatAFNNetWorkRequestManager];
+    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=ad&auto_id=%ld",baseUrl,(long)type];
+    [AFManager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        if ([[responseObject objectForKey:@"msg"] isEqualToString:kMSGSuccess]){
+            NSMutableArray * array = [NSMutableArray array];
+            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.content_img = [[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"];
+                model.content_img = [self checkEmptyStringFromNULL:model.content_img];
+                [array addObject:model];
             }
-            if([weekSelf.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
-                [weekSelf.delegate requestFinishiDownLoadWith:dataArray];
+            if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
+                [self.delegate requestFinishiDownLoadWith:array];
             }
-        }
-        else{
-            if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
-                [weekSelf.delegate requestError:nil];
-            }
+        }else{
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weekSelf checkTheNetworkConnectionWithTitle:@"下载失败"];
         if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
             [weekSelf.delegate requestError:error];
         }
     }];
 }
 
+/**
+ *  @method     首页栏目
+ */
+- (void)getHomeColumns {
+    __weak RMAFNRequestManager *weekSelf = self;
+    [self creatAFNNetWorkRequestManager];
+    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=indexNum&level=2",baseUrl];
+    [AFManager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        if ([[responseObject objectForKey:@"msg"] isEqualToString:kMSGSuccess]){
+            NSMutableArray * array = [NSMutableArray array];
+            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                               [array addObject:model];
+            }
+            if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
+                [self.delegate requestFinishiDownLoadWith:array];
+            }
+        }else{
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
+            [weekSelf.delegate requestError:error];
+        }
+    }];
+}
+
+/**
+ *  @method     植物大全列表
+ */
+- (void)getPlantDaqo {
+
+    
+}
+
+
+
+
+
 @end
+

@@ -10,12 +10,15 @@
 #import "DKLiveBlurView.h"
 #import "RMDaqoDetailsCell.h"
 #import "RMBottomView.h"
+#import "XHImageViewer.h"
+#import "XHBottomToolBar.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 #define kDKTableViewMainBackgroundImageFileName @"DaQuanBackground.jpg"
 #define kDKTableViewDefaultCellHeight 50.0f
 #define kDKTableViewDefaultContentInset ([UIScreen mainScreen].bounds.size.height - kDKTableViewDefaultCellHeight)
 
-@interface RMDaqoDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,DaqoDetailsDelegate,BottomDelegate>{
+@interface RMDaqoDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,DaqoDetailsDelegate,BottomDelegate,XHImageViewerDelegate>{
     BOOL isScrollLoadComplete;      //      第一次完全加载完成
     BOOL isBottomState;             //      底部状态栏的状态
     
@@ -24,11 +27,51 @@
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @property (nonatomic, strong) DKLiveBlurView *liveBlur;
 @property (nonatomic, strong) RMBottomView * bottomView;
+@property (nonatomic, strong) XHImageViewer *imageViewer;
+@property (nonatomic, strong) NSMutableArray * imageViewArr;
+@property (nonatomic, strong) XHBottomToolBar * bottomToolBar;
 
 @end
 
 @implementation RMDaqoDetailsViewController
-@synthesize mTableView, dataArr, liveBlur, bottomView;
+@synthesize mTableView, dataArr, liveBlur, bottomView, imageViewer, imageViewArr;
+
+- (void)shareButtonClicked:(UIButton *)sender {
+    UIImage *currentImage = [imageViewer currentImage];
+    if (currentImage) {
+        UIImageWriteToSavedPhotosAlbum(currentImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    }
+}
+
+- (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo {
+    NSString *msg = nil ;
+    if(error != NULL){
+        msg = @"保存图片失败\n请到 设置/隐私/照片 中设置 允许访问" ;
+    }else{
+        msg = @"保存图片成功" ;
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:msg
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+
+- (XHBottomToolBar *)bottomToolBar {
+    if (!_bottomToolBar) {
+        _bottomToolBar = [[XHBottomToolBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 44)];
+        _bottomToolBar.likeButton.hidden = YES;
+        _bottomToolBar.shareButton.center = CGPointMake(kScreenWidth/2, 44/2);
+        [_bottomToolBar.shareButton addTarget:self action:@selector(shareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _bottomToolBar;
+}
+
+- (UIView *)customBottomToolBarOfImageViewer:(XHImageViewer *)imageViewer {
+    return self.bottomToolBar;
+}
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
@@ -48,6 +91,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    imageViewArr = [[NSMutableArray alloc] init];
+
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", nil];
@@ -74,7 +119,6 @@
     
     [self.view addSubview:mTableView];
     
-
     bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
     bottomView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 40);
@@ -147,11 +191,20 @@
             cell.backgroundColor = [UIColor clearColor];
             cell.delegate = self;
         }
+        
+        for (NSInteger i=0; i<2; i++) {
+            for (NSInteger j=0; j<5; j++) {
+                RMImageView * atlasImg = [[RMImageView alloc] init];
+                atlasImg.image = [UIImage imageNamed:@"test_1.jpg"];
+                [atlasImg addTarget:self WithSelector:@selector(imageZoomMethodWithImage:)];
+                atlasImg.frame = CGRectMake(21 + j*60, 33 + i*60, 50, 50);
+                [cell.contentView addSubview:atlasImg];
+                [imageViewArr addObject:atlasImg];
+            }
+        }
+  
         return cell;
     }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -162,6 +215,34 @@
     }else{
         return 450.0f;
     }
+}
+
+#pragma mark - DaqoDetailsDelegate
+
+- (void)imageZoomMethodWithImage:(RMImageView *)image {
+    imageViewer = [[XHImageViewer alloc]
+                   initWithImageViewerWillDismissWithSelectedViewBlock:
+                   ^(XHImageViewer *imageViewer, UIImageView *selectedView) {
+                       NSInteger index = [imageViewArr indexOfObject:selectedView];
+                       NSLog(@"willDismissBlock index : %ld", (long)index);
+                   }
+                   didDismissWithSelectedViewBlock:^(XHImageViewer *imageViewer,
+                                                     UIImageView *selectedView) {
+                       NSInteger index = [imageViewArr indexOfObject:selectedView];
+                       NSLog(@"didDismissBlock index : %ld", (long)index);
+                   }
+                   didChangeToImageViewBlock:^(XHImageViewer *imageViewer,
+                                               UIImageView *selectedView) {
+                       NSInteger index = [imageViewArr indexOfObject:selectedView];
+                       NSLog(@"change:%ld",index);
+                       
+                   }];
+    imageViewer.delegate = self;
+    imageViewer.disableTouchDismiss = NO;
+    [imageViewer showWithImageViews:imageViewArr selectedView:(RMImageView *)image];
+    
+    NSInteger index = [imageViewArr indexOfObject:(RMImageView *)image];
+    NSLog(@"select:%ld",index);
 }
 
 - (void)daqoqMethodWithTag:(NSInteger)tag {
@@ -175,6 +256,8 @@
             break;
     }
 }
+
+#pragma mark -
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat widthHeight = [[UIScreen mainScreen] bounds].size.height;

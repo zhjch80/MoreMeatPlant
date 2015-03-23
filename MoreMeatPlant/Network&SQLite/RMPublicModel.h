@@ -11,5 +11,6 @@
 
 @interface RMPublicModel : STDbHandle
 
+@property (nonatomic, copy) NSString * content_img;
 
 @end

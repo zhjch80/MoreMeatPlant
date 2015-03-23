@@ -119,6 +119,9 @@
 - (void)loadTableFooterView {
     footerView = [[[NSBundle mainBundle] loadNibNamed:@"RMBaseView" owner:nil options:nil] objectAtIndex:0];
     footerView.mWebView.scrollView.bounces = NO;
+    footerView.mWebView.scrollView.scrollEnabled = NO;
+    footerView.mWebView.scrollView.showsHorizontalScrollIndicator = NO;
+    footerView.mWebView.scrollView.showsVerticalScrollIndicator = NO;
     mTableView.tableFooterView = footerView;
     
     _progressProxy = [[NJKWebViewProgress alloc] init];
