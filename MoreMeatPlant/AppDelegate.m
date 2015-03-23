@@ -12,10 +12,18 @@
 #import "RMAccountViewController.h"
 #import "RMTalkMoreViewController.h"
 #import "RMCustomTabBarController.h"
+#import "RMLoginViewController.h"
 
 #import "EaseMob.h"
 
-@interface AppDelegate ()<EMChatManagerDelegate>
+@interface AppDelegate ()<EMChatManagerDelegate>{
+    RMHomeViewController * homeCtl;
+    RMDaqoViewController * daqoCtl;
+    RMAccountViewController * accountCtl;
+    RMTalkMoreViewController * talkMoreCtl;
+    RMLoginViewController * loginCtl;
+    RMCustomTabBarController * customTabBarCtl;
+}
 
 @end
 
@@ -29,7 +37,14 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
-    [self loadMainViewControllers];
+    homeCtl = [[RMHomeViewController alloc] init];
+    daqoCtl = [[RMDaqoViewController alloc] init];
+    accountCtl = [[RMAccountViewController alloc] init];
+    talkMoreCtl = [[RMTalkMoreViewController alloc] init];
+    loginCtl = [[RMLoginViewController alloc] init];
+    
+    //TODO:判断是否登录
+    [self loadMainViewControllersWithType:2];
     
 #pragma mark - 环信配置
 #warning  修改一 注册 APNS文件的名字, 需要与后台上传证书时的名字一一对应，该证书用来在有新消息时给用户推送通知
@@ -54,15 +69,31 @@
     return YES;
 }
 
-- (void)loadMainViewControllers {
-    RMHomeViewController * homeCtl = [[RMHomeViewController alloc] init];
-    RMDaqoViewController * daqoCtl = [[RMDaqoViewController alloc] init];
-    RMAccountViewController * accountCtl = [[RMAccountViewController alloc] initWithNibName:@"RMAccountViewController" bundle:nil];
-    RMTalkMoreViewController * talkMoreCtl = [[RMTalkMoreViewController alloc] init];
+/**
+ *  @method 
+ *  @param      type        1没有登录 2已经登录
+ */
+- (void)loadMainViewControllersWithType:(NSInteger)type {
+    NSArray * controllers;
+    switch (type) {
+        case 1:{
+            //没有登录
+            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, loginCtl, talkMoreCtl, nil];
+            break;
+        }
+        case 2:{
+            //已经登录
+            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, talkMoreCtl, nil];
+            break;
+        }
+            
+        default:
+            break;
+    }
     
-    NSArray * controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, talkMoreCtl, nil];
-
-    RMCustomTabBarController * customTabBarCtl = [[RMCustomTabBarController alloc] init];
+    if (!customTabBarCtl){
+        customTabBarCtl = [[RMCustomTabBarController alloc] init];
+    }
     ((RMCustomTabBarController *)customTabBarCtl).tabbarHeight = 49;
     ((RMCustomTabBarController *)customTabBarCtl).TabarItemWidth = kScreenWidth/4.0f;
     ((RMCustomTabBarController *)customTabBarCtl).isInDeck = YES;
@@ -72,14 +103,7 @@
     UIButton *button2 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:2];
     UIButton *button3 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:3];
     
-    NSArray * imageName;
-//    if (IS_IPHONE_6_SCREEN){
-//        imageName = [NSArray arrayWithObjects:@"home_selected_6", @"ranking_unselected_6", @"myChannel_unselected_6", @"setUp_unselected_6", nil];
-//    }else if (IS_IPHONE_6p_SCREEN){
-//        imageName = [NSArray arrayWithObjects:@"home_selected_6p", @"ranking_unselected6_6p", @"myChannel_unselected_6p", @"setUp_unselected_6p", nil];
-//    }else{
-        imageName = [NSArray arrayWithObjects:@"home", @"daquan", @"zhanghu", @"duoliao", nil];
-//    }
+    NSArray * imageName = [NSArray arrayWithObjects:@"home", @"daquan", @"zhanghu", @"duoliao", nil];
 
     [button0 setImage:LOADIMAGE([imageName objectAtIndex:0], kImageTypePNG) forState:UIControlStateNormal];
     [button1 setImage:LOADIMAGE([imageName objectAtIndex:1], kImageTypePNG) forState:UIControlStateNormal];
@@ -90,7 +114,6 @@
     self.cusNav = [[RMCustomNavController alloc] initWithRootViewController:customTabBarCtl];
     self.cusNav.navigationBar.hidden = YES;
     [self.window setRootViewController:self.cusNav];
-    
 }
 
 #pragma mark - EMChatManagerDelegate

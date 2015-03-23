@@ -663,6 +663,7 @@
 		51D884691ABE8FD300F7A3BD /* wallet_input2.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D884641ABE8FD300F7A3BD /* wallet_input2.png */; };
 		51D8846B1ABF23B000F7A3BD /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D8846A1ABF23B000F7A3BD /* photo.png */; };
 		51D8846E1ABF251C00F7A3BD /* UserLoginInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D8846D1ABF251C00F7A3BD /* UserLoginInfoManager.m */; };
+		51D884711AC0530E00F7A3BD /* RMHttpOperationShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D884701AC0530E00F7A3BD /* RMHttpOperationShared.m */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E267E51AA7462000252DEF /* RMNearFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267E31AA7462000252DEF /* RMNearFriendViewController.m */; };
 		51E267E61AA7462000252DEF /* RMNearFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E267E41AA7462000252DEF /* RMNearFriendViewController.xib */; };
@@ -1697,6 +1698,8 @@
 		51D8846A1ABF23B000F7A3BD /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
 		51D8846C1ABF251C00F7A3BD /* UserLoginInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLoginInfoManager.h; sourceTree = "<group>"; };
 		51D8846D1ABF251C00F7A3BD /* UserLoginInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginInfoManager.m; sourceTree = "<group>"; };
+		51D8846F1AC0530E00F7A3BD /* RMHttpOperationShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMHttpOperationShared.h; sourceTree = "<group>"; };
+		51D884701AC0530E00F7A3BD /* RMHttpOperationShared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMHttpOperationShared.m; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 		51E267E21AA7462000252DEF /* RMNearFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMNearFriendViewController.h; sourceTree = "<group>"; };
@@ -2804,6 +2807,8 @@
 		1D4DA3401A921B93006A9EBA /* Network&SQLite */ = {
 			isa = PBXGroup;
 			children = (
+				51D8846F1AC0530E00F7A3BD /* RMHttpOperationShared.h */,
+				51D884701AC0530E00F7A3BD /* RMHttpOperationShared.m */,
 				1D9CB1551AAE9EA000BD5A7D /* RMAFNRequestManager.h */,
 				1D9CB1561AAE9EA000BD5A7D /* RMAFNRequestManager.m */,
 				1D9CB1571AAE9EA000BD5A7D /* RMPublicModel.h */,
@@ -4603,6 +4608,7 @@
 				0A4105631ABAB3C70060FBD5 /* MBProgressHUD+Add.m in Sources */,
 				0A4104D41ABAAF630060FBD5 /* EMChatVideoBubbleView.m in Sources */,
 				0A4104D01ABAAF630060FBD5 /* EMChatBaseBubbleView.m in Sources */,
+				51D884711AC0530E00F7A3BD /* RMHttpOperationShared.m in Sources */,
 				0A41056D1ABAB3C70060FBD5 /* DACircularProgressView.m in Sources */,
 				0A4105941ABAB54A0060FBD5 /* NSDateFormatter+Category.m in Sources */,
 				0A4104EE1ABAB1D70060FBD5 /* NSDate+Category.m in Sources */,

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "RMPublicModel.h"
-#import "AFNetworking.h"
 
 @protocol RMAFNRequestManagerDelegate <NSObject>
 
@@ -25,8 +24,6 @@
 @interface RMAFNRequestManager : NSObject
 
 @property(assign,nonatomic) id<RMAFNRequestManagerDelegate>delegate;
-
-- (void)cancelRMAFNRequestManagerRequest;
 
 /**
  *  @method     广告查询

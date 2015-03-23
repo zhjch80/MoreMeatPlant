@@ -31,7 +31,7 @@
             }else if (i==1){
                 button.center = CGPointMake(kScreenWidth/2, 20);
             }else{
-                button.center = CGPointMake(kScreenWidth - 20, 20);
+                button.center = CGPointMake(kScreenWidth - 25, 20);
             }
             [button setBackgroundImage:LOADIMAGE([imageArr objectAtIndex:i], kImageTypePNG) forState:UIControlStateNormal];
             button.backgroundColor = [UIColor clearColor];
@@ -51,7 +51,7 @@
             }else if (i==2){
                 button.center = CGPointMake(kScreenWidth/3+kScreenWidth/2-60, 20);
             }else{
-                button.center = CGPointMake(kScreenWidth - 20, 20);
+                button.center = CGPointMake(kScreenWidth - 25, 20);
             }
             [button setBackgroundImage:LOADIMAGE([imageArr objectAtIndex:i], kImageTypePNG) forState:UIControlStateNormal];
             button.backgroundColor = [UIColor clearColor];

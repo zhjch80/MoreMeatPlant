@@ -7,45 +7,23 @@
 //
 
 #import "RMAFNRequestManager.h"
+#import "RMHttpOperationShared.h"
 #import "CONST.h"
 
 #define baseUrl             @"http://218.240.30.6/drzw/index.php?com=com_appService&"
 
-#define kMSGSuccess         @"数据返回成功"
-#define kMSGFailure         @"数据返回失败"
+#define kMSGSuccess         @"1"
+#define kMSGFailure         @"0"
+
+#define OBJC(v) (([v isEqual:[NSNull null]])?nil:v)
 
 @interface RMAFNRequestManager (){
 
 }
-@property (nonatomic, strong) AFHTTPRequestOperationManager * AFManager;
 
 @end
 
 @implementation RMAFNRequestManager
-@synthesize AFManager;
-
-- (void)creatAFNNetWorkRequestManager {
-    AFManager = [AFHTTPRequestOperationManager manager];
-    AFManager.responseSerializer = [AFJSONResponseSerializer serializer];
-    AFManager.requestSerializer.timeoutInterval = 15;//超时
-    AFManager.responseSerializer.acceptableContentTypes = [AFManager.responseSerializer.acceptableContentTypes setByAddingObject: @"text/html"];
-}
-
-- (void)cancelRMAFNRequestManagerRequest {
-    if (AFManager){
-        [AFManager.operationQueue cancelAllOperations];
-    }
-}
-
-#pragma mark - 工具
-
-- (NSString *)checkEmptyStringFromNULL:(NSString *)str {
-    if ([str isEqualToString:@"<null>"] || [str isEqualToString:@"(null)"] || str == nil){
-        return @"";
-    }else{
-        return str;
-    }
-}
 
 #pragma mark - 接口
 
@@ -56,15 +34,13 @@
  */
 - (void)getAdvertisingQueryWithType:(NSInteger)type {
     __weak RMAFNRequestManager *weekSelf = self;
-    [self creatAFNNetWorkRequestManager];
     NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=ad&auto_id=%ld",baseUrl,(long)type];
-    [AFManager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        if ([[responseObject objectForKey:@"msg"] isEqualToString:kMSGSuccess]){
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
+        if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
             for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
-                model.content_img = [[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"];
-                model.content_img = [self checkEmptyStringFromNULL:model.content_img];
+                model.content_img = OBJC([[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                 [array addObject:model];
             }
             if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
@@ -84,9 +60,8 @@
  */
 - (void)getHomeColumns {
     __weak RMAFNRequestManager *weekSelf = self;
-    [self creatAFNNetWorkRequestManager];
     NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=indexNum&level=2",baseUrl];
-    [AFManager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if ([[responseObject objectForKey:@"msg"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
             for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){

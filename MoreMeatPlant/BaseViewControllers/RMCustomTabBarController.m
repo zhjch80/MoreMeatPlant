@@ -150,18 +150,9 @@
     NSArray * unselectedImageArr;
     NSArray * selectedImageArr;
     
-//    if (IS_IPHONE_6_SCREEN){
-//        unselectedImageArr = [NSArray arrayWithObjects:@"home_unselected_6", @"ranking_unselected_6", @"myChannel_unselected_6", @"setUp_unselected_6", nil];
-//        selectedImageArr = [NSArray arrayWithObjects:@"home_selected_6", @"ranking_selected_6", @"myChannel_selected_6", @"setUp_selected_6", nil];
-//        
-//    }else if (IS_IPHONE_6p_SCREEN){
-//        unselectedImageArr = [NSArray arrayWithObjects:@"home_unselected_6p", @"ranking_unselected_6p", @"myChannel_unselected_6p", @"setUp_unselected_6p", nil];
-//        selectedImageArr = [NSArray arrayWithObjects:@"home_selected_6p", @"ranking_selected_6p", @"myChannel_selected_6p", @"setUp_selected_6p", nil];
-//    }else{
-        unselectedImageArr = [NSArray arrayWithObjects:@"home", @"daquan", @"zhanghu", @"duoliao", nil];
-        selectedImageArr = [NSArray arrayWithObjects:@"home_z", @"daquan_z", @"zhanghu_z", @"duoliao_z", nil];
-//    }
-    
+    unselectedImageArr = [NSArray arrayWithObjects:@"home", @"daquan", @"zhanghu", @"duoliao", nil];
+    selectedImageArr = [NSArray arrayWithObjects:@"home_z", @"daquan_z", @"zhanghu_z", @"duoliao_z", nil];
+
     UIButton *selectedButton = (UIButton *)sender;
     [selectedButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",[selectedImageArr objectAtIndex:selectedButton.tag]]] forState:UIControlStateNormal];
     

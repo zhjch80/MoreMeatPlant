@@ -14,5 +14,11 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) RMCustomNavController *cusNav;
 
+/**
+ *  @method
+ *  @param      type        1没有登录       2已经登录
+ */
+- (void)loadMainViewControllersWithType:(NSInteger)type;
+
 @end
 

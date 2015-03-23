@@ -35,7 +35,7 @@
     UIButton * btn = (UIButton *)[bottomView viewWithTag:2];
     badge = [[JSBadgeView alloc]initWithParentView:btn alignment:JSBadgeViewAlignmentTopRight];
     badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-    badge.badgeTextFont = [UIFont systemFontOfSize:12];
+    badge.badgeTextFont = FONT(10.0);
     badge.badgeText = @"99";
 }
 
