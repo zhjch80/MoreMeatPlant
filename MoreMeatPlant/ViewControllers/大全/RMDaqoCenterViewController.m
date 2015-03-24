@@ -48,7 +48,7 @@
     [plantType loadPlantType];
     [self.view addSubview:plantType];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, plantType.frame.size.height + 64, kScreenWidth, kScreenHeight - plantType.frame.size.height - 64 - 49 ) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, plantType.frame.size.height + 64, kScreenWidth, kScreenHeight - plantType.frame.size.height - 64 - 44) style:UITableViewStylePlain];
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     mTableView.delegate = self;
     mTableView.dataSource = self;

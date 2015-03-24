@@ -268,6 +268,7 @@
 #pragma mark - 跳转到广告
 
 - (void)jumpPopularize:(RMImageView *)image {
+    NSLog(@"content_url:%@",image.identifierString);
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
     [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
     [self.navigationController pushViewController:baseWebCtl animated:YES];

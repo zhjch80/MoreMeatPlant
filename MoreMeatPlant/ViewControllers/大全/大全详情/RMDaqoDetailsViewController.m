@@ -13,6 +13,7 @@
 #import "XHImageViewer.h"
 #import "XHBottomToolBar.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "RMDaqoDetailsFooterView.h"
 
 #define kDKTableViewMainBackgroundImageFileName @"DaQuanBackground.jpg"
 #define kDKTableViewDefaultCellHeight 50.0f
@@ -24,7 +25,6 @@
     
 }
 @property (nonatomic, strong) UITableView * mTableView;
-@property (nonatomic, strong) NSMutableArray * dataArr;
 @property (nonatomic, strong) DKLiveBlurView *liveBlur;
 @property (nonatomic, strong) RMBottomView * bottomView;
 @property (nonatomic, strong) XHImageViewer *imageViewer;
@@ -34,7 +34,7 @@
 @end
 
 @implementation RMDaqoDetailsViewController
-@synthesize mTableView, dataArr, liveBlur, bottomView, imageViewer, imageViewArr;
+@synthesize mTableView, liveBlur, bottomView, imageViewer, imageViewArr;
 
 - (void)shareButtonClicked:(UIButton *)sender {
     UIImage *currentImage = [imageViewer currentImage];
@@ -95,8 +95,6 @@
 
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
-    dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", nil];
-    
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)) style:UITableViewStylePlain];
     
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -125,6 +123,7 @@
     [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_buy", @"img_share", nil]];
     [self.view addSubview:bottomView];
     
+    [self loadTableFooterView];
 }
 
 - (void)bottomMethodWithTag:(NSInteger)tag {
@@ -151,6 +150,22 @@
     }
 }
 
+- (void)loadTableFooterView {
+    RMDaqoDetailsFooterView * tableFooterView = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoDetailsFooterView" owner:nil options:nil] objectAtIndex:0];
+    for (NSInteger i=0; i<2; i++) {
+        for (NSInteger j=0; j<5; j++) {
+            RMImageView * atlasImg = [[RMImageView alloc] init];
+            atlasImg.image = [UIImage imageNamed:@"test_1.jpg"];
+            [atlasImg addTarget:self WithSelector:@selector(imageZoomMethodWithImage:)];
+            atlasImg.frame = CGRectMake(15 + j*60, 220 + i*60, 50, 50);
+            [tableFooterView addSubview:atlasImg];
+            [imageViewArr addObject:atlasImg];
+        }
+    }
+
+    mTableView.tableFooterView = tableFooterView;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
@@ -158,63 +173,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [dataArr count];
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0){
-        static NSString *cellIdentifier = @"DaqoDetailsCellIdentifier_1";
-        RMDaqoDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoDetailsCell_1" owner:self options:nil] lastObject];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor clearColor];
-            cell.delegate = self;
-        }
-        return cell;
-    }else if (indexPath.row == 1){
-        static NSString *cellIdentifier = @"DaqoDetailsCellIdentifier_2";
-        RMDaqoDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoDetailsCell_2" owner:self options:nil] lastObject];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor clearColor];
-            cell.delegate = self;
-        }
-        return cell;
-    }else{
-        static NSString *cellIdentifier = @"DaqoDetailsCellIdentifier_3";
-        RMDaqoDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoDetailsCell_3" owner:self options:nil] lastObject];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor clearColor];
-            cell.delegate = self;
-        }
-        
-        for (NSInteger i=0; i<2; i++) {
-            for (NSInteger j=0; j<5; j++) {
-                RMImageView * atlasImg = [[RMImageView alloc] init];
-                atlasImg.image = [UIImage imageNamed:@"test_1.jpg"];
-                [atlasImg addTarget:self WithSelector:@selector(imageZoomMethodWithImage:)];
-                atlasImg.frame = CGRectMake(21 + j*60, 33 + i*60, 50, 50);
-                [cell.contentView addSubview:atlasImg];
-                [imageViewArr addObject:atlasImg];
-            }
-        }
-  
-        return cell;
+    static NSString *cellIdentifier = @"DaqoDetailsCellIdentifier";
+    RMDaqoDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoDetailsCell" owner:self options:nil] lastObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.delegate = self;
     }
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0){
-        return 60.0;
-    }else if (indexPath.row == 1){
-        return 180.0f;
-    }else{
-        return 450.0f;
-    }
+    return 60.0;
 }
 
 #pragma mark - DaqoDetailsDelegate

@@ -26,7 +26,7 @@
     //测试数据，下面这三个账号是在环信后台注册好的，以后需要更改为接口返回的数据
     _dataArray = [[NSMutableArray alloc] initWithObjects:@"zhengjunchao",@"madongkai", nil];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 49) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 44) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.rowHeight = 50.0f;

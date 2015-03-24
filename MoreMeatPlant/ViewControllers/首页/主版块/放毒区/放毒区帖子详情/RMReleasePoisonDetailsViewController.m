@@ -157,8 +157,8 @@
             
             // webView彻底加载完
             CGFloat height = [[tableHeadView.detailsWebView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue]; //document.body.clientHeight
-            tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, 120 + height+50);
-            tableHeadView.detailsWebView.frame = CGRectMake(0, 120, kScreenWidth, height+50);
+            tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, 120 + height);
+            tableHeadView.detailsWebView.frame = CGRectMake(0, 120, kScreenWidth, height);
             mTableView.tableHeaderView = tableHeadView;
         } completion:nil];
     }

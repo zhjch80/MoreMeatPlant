@@ -33,8 +33,117 @@
 - (void)getAdvertisingQueryWithType:(NSInteger)type;
 
 /**
- *  @method     首页栏目
+ *  @method     首页栏目数量
  */
-- (void)getHomeColumns;
+- (void)getHomeColumnsNumber;
 
+/**
+ *  @method     植物大全列表
+ *  @param      pageCount       分页
+ */
+- (void)getPlantDaqoListWithPageCount:(NSInteger)pageCount;
+
+/**
+ *  @method     植物大全详情页面
+ *  @param      auto_id     植物标识
+ */
+- (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id;
+
+/**
+ *  @method     植物科目列表          接口没有给参数传递位置
+ *  @param      level       级别      1：一级、2:二级
+ */
+- (void)getPlantSubjectsListWithLevel:(NSInteger)level;
+
+/**
+ *  @method     植物大全添加图片            未完成
+ *  @param
+ */
+- (void)postPlantDaqoAddImage;
+
+/**
+ *  @method     植物大全添加纠正补充
+ *  @param      all_id              植物大全标识
+ *  @param      content_desc        补充纠正说明
+ *  @param      user_id             会员用户名
+ *  @param      user_password       会员密码
+ */
+- (void)getPlantDaqoDetailsAddTheCorrectAddWithPlantAll_id:(NSString *)all_id
+                                   withCorrectInstructions:(NSString *)content_desc
+                                               withUser_id:(NSString *)user_id
+                                          withUserPassword:(NSString *)user_password;
+
+/**
+ *  @method     防毒区 新闻列表
+ *  @param      pageCount       页数
+ */
+- (void)getReleasePoisonNewsListWithPageCount:(NSInteger)pageCount;
+
+/**
+ *  @method     防毒区 新闻列表最终页
+ *  @param      auto_id         新闻标识
+ */
+- (void)getReleasePoisonNewsDetailsWithAuto_id:(NSString *)auto_id;
+
+/**
+ *  @method     帖子列表
+ *  @param      postsType       帖子分类 1:防毒区、2:肉肉交换
+ *  @param      plantType       植物分类
+ *  @param      plantSubjects   植物科目
+ *  @param      pageCount       页数
+ *  @param      user_id         会员用户名
+ *  @param      user_password   会员密码
+ 
+ */
+- (void)getPostsListWithPostsType:(NSString *)postsType
+                    withPlantType:(NSString *)plantType
+                withPlantSubjects:(NSString *)plantSubjects
+                    withPageCount:(NSInteger)pageCount
+                      withUser_id:(NSString *)user_id
+                withUser_password:(NSString *)user_password;
+
+/**
+ *  @method     帖子最终
+ *  @param      auto_id             标识
+ *  @param      user_id             会员用户名
+ *  @param      user_password       会员密码
+ */
+- (void)getPostsListDetailsWithAuto_id:(NSString *)auto_id
+                           withUser_id:(NSString *)user_id
+                     withUser_password:(NSString *)user_password;
+
+/**
+ *  @method     帖子评论列表
+ *  @param      review_id       帖子标识
+ *  @param      pageCount       页数
+ */
+- (void)getPostsCommentsListWithReview_id:(NSString *)review_id
+                            withPageCount:(NSInteger)pageCount;
+
+/**
+ *  @method     帖子点赞       未完成
+ */
+- (void)PostPostsAddPraise;
+
+/**
+ *  @method     会员收藏
+ *  @param
+ */
+- (void)postCollect;
+
+/**
+ *  @method     帖子评论
+ */
+- (void)postPostsAddComments;
+
+/**
+ *  @method     回复帖子评论
+ */
+- (void)postReplyToPostsComment;
+
+
+
+
+
+    
 @end

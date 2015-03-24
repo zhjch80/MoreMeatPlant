@@ -33,32 +33,46 @@ typedef enum{
     kRMUpgradeSuggest = 8,
 }GotoViewControllerName;
 
+typedef enum{
+    requestAdvertising = 501,
+    requestColumns
+}RequestType;
+
 @interface RMHomeViewController ()<UITableViewDataSource,UITableViewDelegate,RMAFNRequestManagerDelegate>{
     BOOL isFirstViewDidAppear;
+    RequestType requestType;
 }
 @property (nonatomic, strong) UITableView * mTableView;
-@property (nonatomic, strong) NSMutableArray * dataArr;
-@property (nonatomic, strong) NSMutableArray * dataImgArr;
-@property (nonatomic, strong) RMAFNRequestManager * manager;
+@property (nonatomic, strong) NSMutableArray * dataArr;             //本地标题
+@property (nonatomic, strong) NSMutableArray * dataImgArr;          //本地标题对应图片资源
+@property (nonatomic, strong) NSMutableArray * advertisingArr;      //广告数据
+@property (nonatomic, strong) RMAFNRequestManager * adManager;
+@property (nonatomic, strong) RMAFNRequestManager * colManager;
 
 @end
 
 @implementation RMHomeViewController
-@synthesize mTableView, dataArr, dataImgArr, manager;
+@synthesize mTableView, dataArr, dataImgArr, adManager, advertisingArr, colManager;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!isFirstViewDidAppear){
-        manager = [[RMAFNRequestManager alloc] init];
-        manager.delegate = self;
-        [manager getAdvertisingQueryWithType:1];
+        adManager = [[RMAFNRequestManager alloc] init];
+        adManager.delegate = self;
+        requestType = requestAdvertising;
+        [adManager getAdvertisingQueryWithType:1];
         isFirstViewDidAppear = YES;
+    }
+    
+    if (!colManager){
+        colManager = [[RMAFNRequestManager alloc] init];
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    advertisingArr = [[NSMutableArray alloc] init];
     
     dataArr = [[NSMutableArray alloc] initWithObjects:
                @"",
@@ -89,8 +103,6 @@ typedef enum{
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
-    
-    [self loadTableHeaderView];
 }
 
 - (void)loadTableHeaderView {
@@ -103,13 +115,19 @@ typedef enum{
     [rmImage addTarget:self WithSelector:@selector(jumpHomeNearbyMerchant)];
     [headerView addSubview:rmImage];
     
-    RMImageView * popularizeView = [[RMImageView alloc] init];
-    popularizeView.frame = CGRectMake(0, rmImage.frame.size.height, kScreenWidth, 40);
-    popularizeView.image = LOADIMAGE(@"img_03", kImageTypePNG);
-    [popularizeView addTarget:self WithSelector:@selector(jumpPopularize:)];
-    [headerView addSubview:popularizeView];
+    NSInteger value = 0;
+    for (NSInteger i=0; i<[advertisingArr count]; i++) {
+        RMImageView * popularizeView = [[RMImageView alloc] init];
+        RMPublicModel * model = [advertisingArr objectAtIndex:i];
+        popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + i*40, kScreenWidth, 40);
+        popularizeView.identifierString = model.content_url;
+        [popularizeView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        [popularizeView addTarget:self WithSelector:@selector(jumpPopularize:)];
+        [headerView addSubview:popularizeView];
+        value ++;
+    }
 
-    headerView.frame = CGRectMake(0, 0, kScreenWidth, rmImage.frame.size.height + popularizeView.frame.size.height);
+    headerView.frame = CGRectMake(0, 0, kScreenWidth, rmImage.frame.size.height + value * 40);
     
     mTableView.tableHeaderView = headerView;
 }
@@ -245,6 +263,28 @@ typedef enum{
 }
 
 #pragma mark - AFNNetwork
+
+- (void)requestFinishiDownLoadWith:(NSMutableArray *)array {
+    switch (requestType) {
+        case requestAdvertising:{
+            advertisingArr = [NSMutableArray arrayWithArray:array];
+            
+            [self loadTableHeaderView];
+            
+            colManager.delegate = self;
+            requestType = requestColumns;
+            [colManager getHomeColumnsNumber];
+            break;
+        }
+        case requestColumns:{
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
 
 - (void)requestError:(NSError *)error {
     NSLog(@"error:%@",error);

@@ -12,6 +12,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIViewController+ENPopUp.h"
 #import "RMAFNRequestManager.h"
+#import "UIImageView+WebCache.h"
+#import "RMPublicModel.h"
 
 @interface RMBaseViewController : UIViewController{
     UIButton *leftBarButton;

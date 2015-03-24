@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -53,27 +53,27 @@
                                 <constraint firstAttribute="height" constant="1" id="BTC-jq-A0P"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="member_region_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="y1y-cj-YgV">
-                            <rect key="frame" x="127" y="76.5" width="18" height="18"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="member_region_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="y1y-cj-YgV">
+                            <rect key="frame" x="127" y="77" width="18" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="Jy1-kh-zae"/>
                                 <constraint firstAttribute="width" constant="18" id="wwh-3K-zJq"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="北京" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBC-Zu-kd9">
-                            <rect key="frame" x="147" y="79" width="22" height="13.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="北京" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBC-Zu-kd9">
+                            <rect key="frame" x="147" y="79" width="22" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="余额：2600" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0Y-OV-twF">
-                            <rect key="frame" x="188" y="79" width="58.5" height="13.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="余额：2600" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0Y-OV-twF">
+                            <rect key="frame" x="188" y="79" width="59" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="花币：2600" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7e-oX-CtK">
-                            <rect key="frame" x="252" y="79" width="58.5" height="13.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="花币：2600" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7e-oX-CtK">
+                            <rect key="frame" x="252" y="79" width="59" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -174,7 +174,7 @@
                     </variation>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="member_bottom_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="d9f-8o-iM2">
-                    <rect key="frame" x="0.0" y="359" width="320" height="160"/>
+                    <rect key="frame" x="0.0" y="364" width="320" height="160"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="d9f-8o-iM2" secondAttribute="height" multiplier="2:1" id="Hea-j7-HtJ"/>
                     </constraints>
@@ -187,7 +187,7 @@
                 <constraint firstAttribute="trailing" secondItem="Vnu-Gk-Fhe" secondAttribute="trailing" id="SfS-RA-tQK"/>
                 <constraint firstItem="Vnu-Gk-Fhe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="84" id="V1q-HS-CBb"/>
                 <constraint firstItem="d9f-8o-iM2" firstAttribute="top" secondItem="Vnu-Gk-Fhe" secondAttribute="bottom" id="Ylu-te-rzp"/>
-                <constraint firstAttribute="bottom" secondItem="d9f-8o-iM2" secondAttribute="bottom" constant="49" id="eQT-ua-7Jo"/>
+                <constraint firstAttribute="bottom" secondItem="d9f-8o-iM2" secondAttribute="bottom" constant="44" id="eQT-ua-7Jo"/>
                 <constraint firstItem="d9f-8o-iM2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hgR-nT-TgP"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
