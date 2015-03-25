@@ -13,7 +13,7 @@
 #import "RMTalkMoreViewController.h"
 #import "RMCustomTabBarController.h"
 #import "RMLoginViewController.h"
-
+#import "RMUserLoginInfoManager.h"
 #import "EaseMob.h"
 
 @interface AppDelegate ()<EMChatManagerDelegate>{
@@ -43,8 +43,11 @@
     talkMoreCtl = [[RMTalkMoreViewController alloc] init];
     loginCtl = [[RMLoginViewController alloc] init];
     
+    
+    [self validate];
+    
     //TODO:判断是否登录
-    [self loadMainViewControllersWithType:2];
+    [self loadMainViewControllersWithType:[[RMUserLoginInfoManager loginmanager] state]];
     
 #pragma mark - 环信配置
 #warning  修改一 注册 APNS文件的名字, 需要与后台上传证书时的名字一一对应，该证书用来在有新消息时给用户推送通知
@@ -68,20 +71,38 @@
     
     return YES;
 }
-
+/**
+ *  @method 验证是否登录
+ */
+- (void)validate{
+    if([[NSUserDefaults standardUserDefaults] objectForKey:LoginState]){//已经登录
+        NSString * user = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
+        NSString * pwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserPwd];
+        NSString * iscorp = [[NSUserDefaults standardUserDefaults] objectForKey:UserType];
+        NSString * coorstr = [[NSUserDefaults standardUserDefaults] objectForKey:UserCoor];
+        
+        [[RMUserLoginInfoManager loginmanager] setState:YES];
+        [[RMUserLoginInfoManager loginmanager] setUser:user];
+        [[RMUserLoginInfoManager loginmanager] setPwd:pwd];
+        [[RMUserLoginInfoManager loginmanager] setIsCorp:iscorp];
+        [[RMUserLoginInfoManager loginmanager] setCoorStr:coorstr];
+    }else{
+        
+    }
+}
 /**
  *  @method 
- *  @param      type        1没有登录 2已经登录
+ *  @param      type        0没有登录 1已经登录
  */
 - (void)loadMainViewControllersWithType:(NSInteger)type {
     NSArray * controllers;
     switch (type) {
-        case 1:{
+        case 0:{
             //没有登录
             controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, loginCtl, talkMoreCtl, nil];
             break;
         }
-        case 2:{
+        case 1:{
             //已经登录
             controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, talkMoreCtl, nil];
             break;
@@ -116,6 +137,10 @@
     [self.window setRootViewController:self.cusNav];
 }
 
+#pragma mark - 外面调用select tab的控制器
+- (void)tabSelectController:(NSInteger)index{
+    [customTabBarCtl clickButtonWithIndex:index];
+}
 #pragma mark - EMChatManagerDelegate
 
 - (void)didLoginFromOtherDevice {

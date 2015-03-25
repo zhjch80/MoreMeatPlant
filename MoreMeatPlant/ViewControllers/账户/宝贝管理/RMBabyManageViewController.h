@@ -8,6 +8,7 @@
 
 #import "RMBaseViewController.h"
 #import "RMBabyListViewController.h"
+#import "RMPublishBabyViewController.h"
 @interface RMBabyManageViewController : RMBaseViewController{
     RMBabyListViewController * all_Ctl;
     RMBabyListViewController * ware_Ctl;

@@ -609,6 +609,8 @@
 		512D752D1AB1F3FF0027B7C7 /* RMMyWalletYueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 512D752B1AB1F3FF0027B7C7 /* RMMyWalletYueTableViewCell.xib */; };
 		512D75311AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 512D752F1AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m */; };
 		512D75321AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 512D75301AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib */; };
+		5144E7921AC3168D00190C50 /* bbgl_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5144E7911AC3168D00190C50 /* bbgl_btn.png */; };
+		5144E7941AC31B8500190C50 /* img_class.png in Resources */ = {isa = PBXBuildFile; fileRef = 5144E7931AC31B8500190C50 /* img_class.png */; };
 		5157DE3C1AB9BEE1005E9FA5 /* RMBabyManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5157DE3A1AB9BEE1005E9FA5 /* RMBabyManageViewController.m */; };
 		5157DE3D1AB9BEE1005E9FA5 /* RMBabyManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5157DE3B1AB9BEE1005E9FA5 /* RMBabyManageViewController.xib */; };
 		5157DE411AB9C00A005E9FA5 /* RMBabyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5157DE3F1AB9C00A005E9FA5 /* RMBabyListViewController.m */; };
@@ -696,7 +698,7 @@
 		51D884681ABE8FD300F7A3BD /* wallet_input.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D884631ABE8FD300F7A3BD /* wallet_input.png */; };
 		51D884691ABE8FD300F7A3BD /* wallet_input2.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D884641ABE8FD300F7A3BD /* wallet_input2.png */; };
 		51D8846B1ABF23B000F7A3BD /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D8846A1ABF23B000F7A3BD /* photo.png */; };
-		51D8846E1ABF251C00F7A3BD /* UserLoginInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D8846D1ABF251C00F7A3BD /* UserLoginInfoManager.m */; };
+		51D8846E1ABF251C00F7A3BD /* RMUserLoginInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D8846D1ABF251C00F7A3BD /* RMUserLoginInfoManager.m */; };
 		51D884711AC0530E00F7A3BD /* RMHttpOperationShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D884701AC0530E00F7A3BD /* RMHttpOperationShared.m */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */; };
@@ -1651,6 +1653,8 @@
 		512D752E1AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyWalletTransferTableViewCell.h; sourceTree = "<group>"; };
 		512D752F1AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMyWalletTransferTableViewCell.m; sourceTree = "<group>"; };
 		512D75301AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMyWalletTransferTableViewCell.xib; sourceTree = "<group>"; };
+		5144E7911AC3168D00190C50 /* bbgl_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bbgl_btn.png; sourceTree = "<group>"; };
+		5144E7931AC31B8500190C50 /* img_class.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_class.png; sourceTree = "<group>"; };
 		5157DE391AB9BEE1005E9FA5 /* RMBabyManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMBabyManageViewController.h; sourceTree = "<group>"; };
 		5157DE3A1AB9BEE1005E9FA5 /* RMBabyManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMBabyManageViewController.m; sourceTree = "<group>"; };
 		5157DE3B1AB9BEE1005E9FA5 /* RMBabyManageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMBabyManageViewController.xib; sourceTree = "<group>"; };
@@ -1776,8 +1780,8 @@
 		51D884631ABE8FD300F7A3BD /* wallet_input.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wallet_input.png; sourceTree = "<group>"; };
 		51D884641ABE8FD300F7A3BD /* wallet_input2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wallet_input2.png; sourceTree = "<group>"; };
 		51D8846A1ABF23B000F7A3BD /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
-		51D8846C1ABF251C00F7A3BD /* UserLoginInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLoginInfoManager.h; sourceTree = "<group>"; };
-		51D8846D1ABF251C00F7A3BD /* UserLoginInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginInfoManager.m; sourceTree = "<group>"; };
+		51D8846C1ABF251C00F7A3BD /* RMUserLoginInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMUserLoginInfoManager.h; sourceTree = "<group>"; };
+		51D8846D1ABF251C00F7A3BD /* RMUserLoginInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMUserLoginInfoManager.m; sourceTree = "<group>"; };
 		51D8846F1AC0530E00F7A3BD /* RMHttpOperationShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMHttpOperationShared.h; sourceTree = "<group>"; };
 		51D884701AC0530E00F7A3BD /* RMHttpOperationShared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMHttpOperationShared.m; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
@@ -3065,8 +3069,8 @@
 				1D64F4E81A904E180073EB98 /* RMAccountViewController.h */,
 				1D64F4E91A904E180073EB98 /* RMAccountViewController.m */,
 				1D64F4EA1A904E180073EB98 /* RMAccountViewController.xib */,
-				51D8846C1ABF251C00F7A3BD /* UserLoginInfoManager.h */,
-				51D8846D1ABF251C00F7A3BD /* UserLoginInfoManager.m */,
+				51D8846C1ABF251C00F7A3BD /* RMUserLoginInfoManager.h */,
+				51D8846D1ABF251C00F7A3BD /* RMUserLoginInfoManager.m */,
 				51E267DE1A9F5A3500252DEF /* RMAccountView.h */,
 				51E267DF1A9F5A3500252DEF /* RMAccountView.m */,
 			);
@@ -3649,6 +3653,8 @@
 		1DEB740E1AB9D5DE00EA1FA7 /* member */ = {
 			isa = PBXGroup;
 			children = (
+				5144E7931AC31B8500190C50 /* img_class.png */,
+				5144E7911AC3168D00190C50 /* bbgl_btn.png */,
 				51D8846A1ABF23B000F7A3BD /* photo.png */,
 				51D884601ABE8FD300F7A3BD /* wallet_btn.png */,
 				51D884611ABE8FD300F7A3BD /* wallet_close.png */,
@@ -4498,6 +4504,7 @@
 				1DEB75021AB9D67A00EA1FA7 /* gwc_tip_input_bg.png in Resources */,
 				1DEB751B1AB9D67A00EA1FA7 /* order_list_set.png in Resources */,
 				1DDBBD6E1ABBB1D600E35CD5 /* duoliao.png in Resources */,
+				5144E7941AC31B8500190C50 /* img_class.png in Resources */,
 				1D7090CB1AC25DE600AE47BF /* img_tzArrow_6.png in Resources */,
 				1D7090CF1AC25DE600AE47BF /* img_tzArrowed_3.png in Resources */,
 				0A4106A61ABABBF60060FBD5 /* chatBar_colorMore_photo@2x.png in Resources */,
@@ -4535,6 +4542,7 @@
 				1D93AB7A1AB029ED0034574C /* RMReleasePoisonDetailsCell_1.xib in Resources */,
 				0A4106AD1ABABBF60060FBD5 /* chatBar_more_cameraSelected@2x.png in Resources */,
 				0A4106541ABABBF60060FBD5 /* VoiceSearchFeedback009.png in Resources */,
+				5144E7921AC3168D00190C50 /* bbgl_btn.png in Resources */,
 				0A4106BC1ABABBF60060FBD5 /* chat_receiver_audio_playing002@2x.png in Resources */,
 				1DD326601ABBFACE006CD1A8 /* jian_img.png in Resources */,
 				1DEB74FC1AB9D67A00EA1FA7 /* gwc_img_17.png in Resources */,
@@ -4891,7 +4899,7 @@
 				1DD6992C1AC10F02009A9327 /* MKAnnotationView+WebCache.m in Sources */,
 				0A4104AB1ABAAE9B0060FBD5 /* SRSlimeView.m in Sources */,
 				5120FDDC1AB7138E000E9BE1 /* RMMyOrderViewController.m in Sources */,
-				51D8846E1ABF251C00F7A3BD /* UserLoginInfoManager.m in Sources */,
+				51D8846E1ABF251C00F7A3BD /* RMUserLoginInfoManager.m in Sources */,
 				51E2681F1AADE92300252DEF /* RMShopLeaveMsTableViewCell.m in Sources */,
 				0A4104DA1ABAB03C0060FBD5 /* ChatSendHelper.m in Sources */,
 				9538F3D21AB0A5BF00608FAD /* RMTableHeadView.m in Sources */,

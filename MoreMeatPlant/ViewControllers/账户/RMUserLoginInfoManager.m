@@ -6,14 +6,15 @@
 //  Copyright (c) 2014年 易龙天. All rights reserved.
 //
 
-#import "UserLoginInfoManager.h"
+#import "RMUserLoginInfoManager.h"
 
-static UserLoginInfoManager * manager;
-@implementation UserLoginInfoManager
+static RMUserLoginInfoManager * manager;
+@implementation RMUserLoginInfoManager
 @synthesize user;
 @synthesize pwd;//密码我在登录成功的时候存在单例中的是md5编码的
 @synthesize state;
-
+@synthesize coorStr;
+@synthesize isCorp;
 
 - (id)init
 {
@@ -24,11 +25,11 @@ static UserLoginInfoManager * manager;
     return self;
 }
 
-+ (UserLoginInfoManager *)loginmanager
++ (RMUserLoginInfoManager *)loginmanager
 {
     if(manager == nil)
     {
-        manager = [[UserLoginInfoManager alloc] init];
+        manager = [[RMUserLoginInfoManager alloc] init];
     }
     return manager;//记得这里加同步锁
 }

@@ -17,7 +17,7 @@
 #import "UIViewController+HUD.h"
 #import "MBProgressHUD.h"
 #import "MBProgressHUD+Add.h"
-
+#import "RMUserLoginInfoManager.h"
 @interface RMBaseViewController : UIViewController{
     UIButton *leftBarButton;
     UIButton *rightOneBarButton;

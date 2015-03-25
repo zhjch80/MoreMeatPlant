@@ -7,7 +7,6 @@
 //
 
 #import "RMHadBabyViewController.h"
-#import "DaiDodgeKeyboard.h"
 @interface RMHadBabyViewController ()
 
 @end
@@ -17,7 +16,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
+    
     
     self.view.backgroundColor = [UIColor clearColor];
     [self setCustomNavTitle:@"已出宝贝"];

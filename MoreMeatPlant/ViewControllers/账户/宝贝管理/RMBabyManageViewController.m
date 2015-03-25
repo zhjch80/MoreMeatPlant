@@ -20,6 +20,10 @@
     
     [self setCustomNavTitle:@"宝贝管理"];
     
+    [rightTwoBarButton setTitle:@"发布" forState:UIControlStateNormal];
+    rightTwoBarButton.titleLabel.font = FONT_1(15);
+    [rightTwoBarButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
     all_Ctl = [[RMBabyListViewController alloc]initWithNibName:@"RMBabyListViewController" bundle:nil];
     all_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-44);
     all_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-44);
@@ -34,6 +38,26 @@
     class_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-44);
     class_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-44);
     
+}
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
+    switch (sender.tag) {
+        case 1:{
+            
+            break;
+        }
+        case 2:{
+            
+            break;
+        }
+        case 3:{
+            RMPublishBabyViewController * publish = [[RMPublishBabyViewController alloc]initWithNibName:@"RMPublishBabyViewController" bundle:nil];
+            [self.navigationController pushViewController:publish animated:YES];
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

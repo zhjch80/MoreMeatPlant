@@ -9,7 +9,10 @@
 #import "RMMyCorpViewController.h"
 #import "RMCorpClassesButton.h"
 #import "RMPlantWithSaleDetailsViewController.h"
-@interface RMMyCorpViewController ()
+#import "RMBottomView.h"
+@interface RMMyCorpViewController ()<BottomDelegate>{
+    RMBottomView * bottomView;
+}
 
 @end
 
@@ -21,13 +24,23 @@
     
     [self setCustomNavTitle:@"我的店铺"];
     
+    
+    
     _corp_headImgV.layer.cornerRadius = 5;
     _corp_headImgV.clipsToBounds = YES;
     
+    bottomView = [[RMBottomView alloc] init];
+    bottomView.delegate = self;
+    bottomView.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
+    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_class", @"img_up", @"img_buy", @"img_moreChat", nil]];
+    [self.view addSubview:bottomView];
+    
+    NSArray * titles = [NSArray arrayWithObjects:@"全部宝贝",@"一肉一拍",@"进口肉肉",@"老桩专区", nil];
     float width = (kScreenWidth-10*2-3)/4.0;
     for(NSInteger i = 0; i<4; i ++ ){
         RMCorpClassesButton * btn = [[RMCorpClassesButton alloc]initWithFrame:CGRectMake(10+(width+1)*(i%4), 0, width, 40)];
         btn.tag = 100+i;
+        btn.classesNameL.text = [titles objectAtIndex:i];
         btn.callback = ^(RMCorpClassesButton *sender){
         
             switch (sender.tag-100) {
@@ -71,6 +84,33 @@
     
 }
 
+#pragma mark - bottomViewDelegate
+
+- (void)bottomMethodWithTag:(NSInteger)tag {
+    switch (tag) {
+        case 1:{
+            
+            break;
+        }
+        case 2:{
+            
+            break;
+        }
+        case 3:{
+            
+            break;
+        }
+        case 4:{
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }

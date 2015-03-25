@@ -45,14 +45,14 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="W31-nS-w0M">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="W31-nS-w0M" customClass="RMBaseTextField">
                     <rect key="frame" x="128" y="254" width="115" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="l35-Qj-j4S"/>
                     </constraints>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPy-5D-hFH">
                     <rect key="frame" x="244" y="164" width="70" height="30"/>
@@ -98,20 +98,12 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="昵称或手机号" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="KUU-2K-lNI">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="昵称或手机号" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="KUU-2K-lNI" customClass="RMBaseTextField">
                     <rect key="frame" x="128" y="164" width="115" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="BDz-2u-eLy"/>
                     </constraints>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="YPq-Z4-pyO">
-                    <rect key="frame" x="157" y="209" width="86" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="Tgp-j1-bnI"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -137,6 +129,14 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="YPq-Z4-pyO" customClass="RMBaseTextField">
+                    <rect key="frame" x="157" y="209" width="86" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Tgp-j1-bnI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

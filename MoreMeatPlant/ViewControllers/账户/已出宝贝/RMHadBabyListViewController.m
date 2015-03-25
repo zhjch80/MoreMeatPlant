@@ -10,6 +10,7 @@
 #import "RMOrderProTableViewCell.h"
 #import "RMOrderHeadTableViewCell.h"
 #import "RMHadbabyTableViewCell.h"
+#import "DaiDodgeKeyboard.h"
 @interface RMHadBabyListViewController ()
 
 @end
@@ -19,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.mTableView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

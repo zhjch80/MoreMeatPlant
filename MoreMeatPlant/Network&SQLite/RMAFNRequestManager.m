@@ -15,6 +15,7 @@
 #define kMSGSuccess         @"1"
 #define kMSGFailure         @"0"
 
+#define RequestFailed @"请检查您的网络！"
 #define OBJC(v) (([v isEqual:[NSNull null]]) ? @"" : v)
 
 @interface RMAFNRequestManager (){
@@ -501,6 +502,25 @@
 //1.1~1.17 如上
 
 //1.18 ...
+
+/*************************************************************************/
+/**
+ *  @method     登录
+ */
++ (void)loginRequestWithUser:(NSString *)user Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block{
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_doLogin",user,pwd];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        if(block){
+            block(nil,[dic objectForKey:@"status"],dic);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+}
+
 
 
 @end

@@ -16,9 +16,10 @@
 
 /**
  *  @method
- *  @param      type        1没有登录       2已经登录
+ *  @param      type        0没有登录       1已经登录
  */
 - (void)loadMainViewControllersWithType:(NSInteger)type;
 
+- (void)tabSelectController:(NSInteger)index;
 @end
 

@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-@interface UserLoginInfoManager : NSObject
+@interface RMUserLoginInfoManager : NSObject
 @property (retain, nonatomic) NSString * user;//用户名称
 @property (retain, nonatomic) NSString * pwd;//登陆密码
 @property (assign, nonatomic) BOOL state;//登陆状态
-
-+ (UserLoginInfoManager *)loginmanager;
+@property (retain, nonatomic) NSString * coorStr;//经纬度（纬度，经度）
+@property (retain, nonatomic) NSString * isCorp;//YES 表示商家会员   NO 表示用户会员
++ (RMUserLoginInfoManager *)loginmanager;
 
 @end

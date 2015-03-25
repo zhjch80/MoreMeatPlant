@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface RMBabyListTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *content_img;
+@property (weak, nonatomic) IBOutlet UILabel *content_name;
+@property (weak, nonatomic) IBOutlet UILabel *content_price;
+@property (weak, nonatomic) IBOutlet UIButton *modify_btn;
+@property (weak, nonatomic) IBOutlet UIButton *shelves_btn;
+@property (weak, nonatomic) IBOutlet UIButton *delete_btn;
 
 @end

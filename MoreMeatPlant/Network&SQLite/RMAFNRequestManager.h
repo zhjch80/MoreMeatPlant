@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "RMPublicModel.h"
 
+typedef void (^RMAFNRequestManagerCallBack) (NSError * error,BOOL success,id object);
+
 @protocol RMAFNRequestManagerDelegate <NSObject>
 
 @optional
@@ -24,6 +26,7 @@
 @interface RMAFNRequestManager : NSObject
 
 @property(assign,nonatomic) id<RMAFNRequestManagerDelegate>delegate;
+
 
 /**
  *  @method     广告查询
@@ -143,7 +146,12 @@
 
 
 
+/**
+ *  @method     登录
+ *  @param      user            用户名
+ *  @param      pwd             密码 （md5编码之后的）
+ */
++ (void)loginRequestWithUser:(NSString *)user Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block;
 
 
-    
 @end

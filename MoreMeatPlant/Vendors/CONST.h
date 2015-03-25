@@ -44,3 +44,11 @@ _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
 Stuff; \
 _Pragma("clang diagnostic pop") \
 } while (0)
+
+
+//
+#define LoginState @"login_state"
+#define UserName @"user_name"
+#define UserPwd @"pwd"
+#define UserType @"is_corp"
+#define UserCoor @"coor"
