@@ -374,7 +374,6 @@
 		1D93AB991AB1614C0034574C /* RMBaseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D93AB971AB1614C0034574C /* RMBaseWebViewController.m */; };
 		1D93AB9A1AB1614C0034574C /* RMBaseWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D93AB981AB1614C0034574C /* RMBaseWebViewController.xib */; };
 		1D93ABA51AB2AABE0034574C /* UIView+Effects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D93ABA41AB2AABE0034574C /* UIView+Effects.m */; };
-		1D9CB14E1AAE8B3B00BD5A7D /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9CB14D1AAE8B3B00BD5A7D /* RTLabel.m */; };
 		1D9CB1591AAE9EA000BD5A7D /* RMAFNRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9CB1561AAE9EA000BD5A7D /* RMAFNRequestManager.m */; };
 		1D9CB15A1AAE9EA000BD5A7D /* RMPublicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9CB1581AAE9EA000BD5A7D /* RMPublicModel.m */; };
 		1D9CB1741AAE9EE500BD5A7D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9CB15F1AAE9EE500BD5A7D /* AFHTTPRequestOperation.m */; };
@@ -1362,8 +1361,6 @@
 		1D93ABA31AB2AABE0034574C /* UIView+Effects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Effects.h"; sourceTree = "<group>"; };
 		1D93ABA41AB2AABE0034574C /* UIView+Effects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Effects.m"; sourceTree = "<group>"; };
 		1D93ABA61AB2AAD20034574C /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		1D9CB14C1AAE8B3B00BD5A7D /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
-		1D9CB14D1AAE8B3B00BD5A7D /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
 		1D9CB1551AAE9EA000BD5A7D /* RMAFNRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAFNRequestManager.h; sourceTree = "<group>"; };
 		1D9CB1561AAE9EA000BD5A7D /* RMAFNRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAFNRequestManager.m; sourceTree = "<group>"; };
 		1D9CB1571AAE9EA000BD5A7D /* RMPublicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPublicModel.h; sourceTree = "<group>"; };
@@ -3165,7 +3162,6 @@
 				1D93ABA21AB2AAB00034574C /* UIView+Effects */,
 				1D9CB17D1AAE9FAF00BD5A7D /* Reachability */,
 				1D9CB15B1AAE9EE500BD5A7D /* AFNetworking */,
-				1D9CB14B1AAE8B3B00BD5A7D /* RTLabel */,
 				51E268261AAE003000252DEF /* STDbKit */,
 				51E268031AADDFEC00252DEF /* popupController */,
 				1D64F50D1A90CD150073EB98 /* CONST.h */,
@@ -3368,15 +3364,6 @@
 				1D93ABA41AB2AABE0034574C /* UIView+Effects.m */,
 			);
 			path = "UIView+Effects";
-			sourceTree = "<group>";
-		};
-		1D9CB14B1AAE8B3B00BD5A7D /* RTLabel */ = {
-			isa = PBXGroup;
-			children = (
-				1D9CB14C1AAE8B3B00BD5A7D /* RTLabel.h */,
-				1D9CB14D1AAE8B3B00BD5A7D /* RTLabel.m */,
-			);
-			path = RTLabel;
 			sourceTree = "<group>";
 		};
 		1D9CB15B1AAE9EE500BD5A7D /* AFNetworking */ = {
@@ -4778,7 +4765,6 @@
 				512D751A1AB1E1190027B7C7 /* RMUserInfoViewController.m in Sources */,
 				1DEB73FE1AB9CE2600EA1FA7 /* RMBottomView.m in Sources */,
 				1DD699321AC10F02009A9327 /* SDWebImageDownloaderOperation.m in Sources */,
-				1D9CB14E1AAE8B3B00BD5A7D /* RTLabel.m in Sources */,
 				0A4104EB1ABAB1CB0060FBD5 /* UIViewController+HUD.m in Sources */,
 				5120FDE61AB718B1000E9BE1 /* RMOrderHeadTableViewCell.m in Sources */,
 				0A4104AF1ABAAED90060FBD5 /* DXChatBarMoreView.m in Sources */,
