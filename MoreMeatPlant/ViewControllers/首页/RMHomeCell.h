@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RTLabel.h"
 
 @interface RMHomeCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *sub_title;
-@property (weak, nonatomic) IBOutlet RTLabel *titleName;
+@property (weak, nonatomic) IBOutlet UILabel *titleName;
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
 @property (weak, nonatomic) IBOutlet UIImageView *bgImg;
 

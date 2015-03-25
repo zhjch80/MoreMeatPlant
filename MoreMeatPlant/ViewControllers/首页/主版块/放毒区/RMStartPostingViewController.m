@@ -58,7 +58,7 @@
     
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
-    [self loadHeaderView];
+    [self loadHeaderViewWithTitle:self.subTitle];
     
     [self.mTextField limitTextLength:kMaxLength];
     [self.mTextField setValue:[UIColor colorWithRed:0.58 green:0.58 blue:0.58 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
@@ -90,8 +90,9 @@
 
 }
 
-- (void)loadHeaderView {
+- (void)loadHeaderViewWithTitle:(NSString *)title {
     headerView = [[[NSBundle mainBundle] loadNibNamed:@"RMStartPostingHeaderView" owner:nil options:nil] objectAtIndex:0];
+    headerView.mTitle.text = [NSString stringWithFormat:@"发帖(%@)",title];
     headerView.delegate = self;
     [self.view addSubview:headerView];
 }

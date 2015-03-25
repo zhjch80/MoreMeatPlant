@@ -14,6 +14,9 @@
 #import "RMAFNRequestManager.h"
 #import "UIImageView+WebCache.h"
 #import "RMPublicModel.h"
+#import "UIViewController+HUD.h"
+#import "MBProgressHUD.h"
+#import "MBProgressHUD+Add.h"
 
 @interface RMBaseViewController : UIViewController{
     UIButton *leftBarButton;

@@ -25,7 +25,6 @@
 #import "MessageReadManager.h"
 #import "MessageModelManager.h"
 #import "LocationViewController.h"
-#import "UIViewController+HUD.h"
 #import "WCAlertView.h"
 #import "NSDate+Category.h"
 #import "DXMessageToolBar.h"

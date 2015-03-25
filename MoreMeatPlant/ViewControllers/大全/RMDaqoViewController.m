@@ -13,6 +13,7 @@
 
 @interface RMDaqoViewController (){
     BOOL isLeftOpen;
+    BOOL isFirstViewDidAppear;
 }
 @property (nonatomic, strong) RMDaqoCenterViewController * centerCtl;
 @property (nonatomic, strong) RMDaqoRightViewController * rightCtl;
@@ -21,6 +22,14 @@
 
 @implementation RMDaqoViewController
 @synthesize centerCtl, rightCtl;
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!isFirstViewDidAppear){
+        [centerCtl requestDataWithPageCount:1];
+        isFirstViewDidAppear = YES;
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) UIView * recognizerView;
 
+- (void)requestDataWithPageCount:(NSInteger)pc;
+
 @end

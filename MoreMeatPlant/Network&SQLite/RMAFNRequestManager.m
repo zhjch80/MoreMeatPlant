@@ -15,7 +15,7 @@
 #define kMSGSuccess         @"1"
 #define kMSGFailure         @"0"
 
-#define OBJC(v) (([v isEqual:[NSNull null]])?nil:v)
+#define OBJC(v) (([v isEqual:[NSNull null]]) ? @"" : v)
 
 @interface RMAFNRequestManager (){
 
@@ -37,7 +37,6 @@
     NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=ad&auto_id=%ld",baseUrl,(long)type];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
-            NSLog(@"res:%@",responseObject);
             NSMutableArray * array = [NSMutableArray array];
             for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
@@ -58,21 +57,35 @@
 }
 
 /**
- *  @method     首页栏目数量          接口有问题
+ *  @method     首页栏目数量
  */
 - (void)getHomeColumnsNumber {
     __weak RMAFNRequestManager *weekSelf = self;
     NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=indexNum&level=2",baseUrl];
-    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
-            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
+            
+            [array addObject:@""];
+            
+            for (NSInteger i=0; i<5; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
-//                model.modules_name = OBJC([[responseObject objectForKey:@"data"] objectForKey:@"modules_name"]);
-//                model.modules_img = OBJC([[responseObject objectForKey:@"data"] objectForKey:@"modules_img"]);
-//                model.content_num = OBJC([[responseObject objectForKey:@"data"] objectForKey:@"content_num"]);
+                model.modules_name = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:0] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_name"]);
+                model.modules_img = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:0] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_img"]);
+                model.content_num = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:0] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"content_num"]);
                 [array addObject:model];
             }
+            
+            [array addObject:@""];
+        
+            for (NSInteger i=0; i<2; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.modules_name = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:1] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_name"]);
+                model.modules_img = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:1] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_img"]);
+                model.content_num = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:1] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"content_num"]);
+                [array addObject:model];
+            }
+            
             if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
                 [self.delegate requestFinishiDownLoadWith:array];
             }
@@ -86,18 +99,20 @@
 }
 
 /**
- *  @method     植物大全列表
+ *  @method     植物大全列表          少一个auto_id 字段
  *  @param      pageCount       分页
  */
 - (void)getPlantDaqoListWithPageCount:(NSInteger)pageCount {
     __weak RMAFNRequestManager *weekSelf = self;
     NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=shopAll&data=series&order=asc&per=1&row=10&page=%ld",baseUrl,(long)pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        NSMutableArray * array = [NSMutableArray array];
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
-            NSMutableArray * array = [NSMutableArray array];
-            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
+            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
-              
+                model.content_img = OBJC([[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                model.content_name = OBJC([[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                model.auto_id = OBJC([[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                 [array addObject:model];
             }
             if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){

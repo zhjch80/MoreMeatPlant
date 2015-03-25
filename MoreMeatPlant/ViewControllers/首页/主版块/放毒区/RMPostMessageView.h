@@ -10,7 +10,7 @@
 
 @protocol PostMessageSelectedPlantDelegate <NSObject>
 
-- (void)selectedPostMessageWithPlantType:(NSString *)type;
+- (void)selectedPostMessageWithPostsType:(NSInteger)type_1 withPlantType:(NSInteger)type_2;
 
 @end
 

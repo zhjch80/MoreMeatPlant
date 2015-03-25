@@ -26,6 +26,7 @@
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
+@property (nonatomic, strong) NSArray * postsTypeArr;
 
 @property (nonatomic, strong) RMPostClassificationView * fenleiAction;
 @property (nonatomic, strong) RMPostMessageView *action;
@@ -34,10 +35,12 @@
 @end
 
 @implementation RMReleasePoisonViewController
-@synthesize mTableView, dataArr, fenleiAction, action, animator;
+@synthesize mTableView, dataArr, fenleiAction, action, animator, postsTypeArr;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    postsTypeArr = [NSArray arrayWithObjects:@"家有鲜肉", @"播种育苗", @"求助提问", @"肉与花器", @"多肉绘画", @"世界见闻", nil];
+    
     [self setRightBarButtonNumber:2];
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"分类" forState:UIControlStateNormal];
@@ -48,7 +51,7 @@
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 40) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 38) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.backgroundColor = [UIColor clearColor];
@@ -228,11 +231,11 @@
 
 #pragma mark - 选择类型 开始发帖
 
-- (void)selectedPostMessageWithPlantType:(NSString *)type {
+- (void)selectedPostMessageWithPostsType:(NSInteger)type_1 withPlantType:(NSInteger)type_2 {
     [action dismiss];
     RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
     startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
-
+    
     animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:startPostingCtl];
     animator.dragable = NO;
     animator.bounces = NO;
@@ -241,6 +244,7 @@
     animator.transitionDuration = 0.7f;
     animator.direction = ZFModalTransitonDirectionBottom;
     startPostingCtl.transitioningDelegate = animator;
+    startPostingCtl.subTitle = [postsTypeArr objectAtIndexedSubscript:(type_1-401)];
     [self presentViewController:startPostingCtl animated:YES completion:nil];
 }
 

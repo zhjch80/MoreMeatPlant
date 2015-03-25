@@ -26,31 +26,32 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     
     plantTypeSelectedArr = [[NSMutableArray alloc] initWithObjects:
-                            @"img_tzed_7",
-                            @"img_tzed_8",
-                            @"img_tzed_9",
-                            @"img_tzed_10",
-                            @"img_tzed_11",
-                            @"img_tzed_12",
-                            @"img_tzed_12", nil];
+                            @"img_tzArrowed_1",
+                            @"img_tzArrowed_2",
+                            @"img_tzArrowed_3",
+                            @"img_tzArrowed_4",
+                            @"img_tzArrowed_5",
+                            @"img_tzArrowed_6",
+                            @"img_tzArrowed_7", nil];
     
     plantTypeUnselectedArr = [[NSMutableArray alloc] initWithObjects:
-                              @"img_tz_7",
-                              @"img_tz_8",
-                              @"img_tz_9",
-                              @"img_tz_10",
-                              @"img_tz_11",
-                              @"img_tz_12",
-                              @"img_tz_12", nil];
+                              @"img_tzArrow_1",
+                              @"img_tzArrow_2",
+                              @"img_tzArrow_3",
+                              @"img_tzArrow_4",
+                              @"img_tzArrow_5",
+                              @"img_tzArrow_6",
+                              @"img_tzArrow_7", nil];
     
     for (NSInteger i=0; i<7; i++) {
         RMImageView * rmImg = [[RMImageView alloc] init];
         rmImg.tag = 400+i;
         rmImg.identifierString = [NSString stringWithFormat:@"%ld",(long)i];
-        rmImg.frame = CGRectMake(4 + i*(width/7.0), 5, width/7.0 - 6, width/7.0 - 5);
         if (i==0){
+            rmImg.frame = CGRectMake(4 + i*(width/7.0), 5, width/7.0 - 6, width/7.0);
             rmImg.image = LOADIMAGE([plantTypeSelectedArr objectAtIndex:i], kImageTypePNG);
         }else{
+            rmImg.frame = CGRectMake(4 + i*(width/7.0), 5, width/7.0 - 6, width/7.0 - 5);
             rmImg.image = LOADIMAGE([plantTypeUnselectedArr objectAtIndex:i], kImageTypePNG);
         }
         [rmImg addTarget:self WithSelector:@selector(selectedPlantType:)];
@@ -68,10 +69,17 @@
     if ([self.delegate respondsToSelector:@selector(selectedPlantWithType:)]){
         [self.delegate selectedPlantWithType:image.identifierString];
         currentType = image.identifierString.integerValue;
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
         for (NSInteger i=0; i<7; i++){
             RMImageView * img = (RMImageView *)[self viewWithTag:400 + i];
+            img.frame = CGRectMake(4 + i*(width/7.0), 5, width/7.0 - 6, width/7.0 - 5);
             if (img.identifierString.integerValue == currentType){
                 img.image = LOADIMAGE([plantTypeSelectedArr objectAtIndex:i], kImageTypePNG);
+                CGFloat x = img.frame.origin.x;
+                CGFloat y = img.frame.origin.y;
+                CGFloat width = img.frame.size.width;
+                CGFloat height = img.frame.size.height;
+                image.frame = CGRectMake(x, y, width, height + 5);
             }else{
                 img.image = LOADIMAGE([plantTypeUnselectedArr objectAtIndex:i], kImageTypePNG);
             }

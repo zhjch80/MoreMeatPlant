@@ -46,13 +46,14 @@ typedef enum{
 @property (nonatomic, strong) NSMutableArray * dataArr;             //本地标题
 @property (nonatomic, strong) NSMutableArray * dataImgArr;          //本地标题对应图片资源
 @property (nonatomic, strong) NSMutableArray * advertisingArr;      //广告数据
+@property (nonatomic, strong) NSMutableArray * columnsArr;          //栏目数量
 @property (nonatomic, strong) RMAFNRequestManager * adManager;
 @property (nonatomic, strong) RMAFNRequestManager * colManager;
 
 @end
 
 @implementation RMHomeViewController
-@synthesize mTableView, dataArr, dataImgArr, adManager, advertisingArr, colManager;
+@synthesize mTableView, dataArr, dataImgArr, adManager, advertisingArr, colManager, columnsArr;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -69,33 +70,28 @@ typedef enum{
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     advertisingArr = [[NSMutableArray alloc] init];
-    
-    dataArr = [[NSMutableArray alloc] initWithObjects:
-               @"",
-               @"放毒区",
-               @"一肉一拍",
-               @"鲜肉市场",
-               @"肉肉交换",
-               @"活动与团购",
-               @"",
-               @"新手教程",
-               @"升级建议",
-               nil];
+    columnsArr = [[NSMutableArray alloc] init];
+    dataArr = [[NSMutableArray alloc] init];
     
     dataImgArr = [[NSMutableArray alloc] initWithObjects:
                   @"",
-                  @"img_06",
-                  @"img_10",
-                  @"img_14",
-                  @"img_22",
-                  @"img_26",
+                  @"img_home_1",
+                  @"img_home_2",
+                  @"img_home_3",
+                  @"img_home_4",
+                  @"img_home_5",
                   @"",
-                  @"img_29",
-                  @"img_31",
+                  @"img_home_6",
+                  @"img_home_7",
                   nil];
     
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, kScreenHeight - 44 - 20) style:UITableViewStylePlain];
@@ -168,14 +164,23 @@ typedef enum{
         }else{
             cell.bgImg.backgroundColor = [UIColor clearColor];
         }
+        RMPublicModel * model = [columnsArr objectAtIndex:indexPath.row];
         
         cell.headImg.image = LOADIMAGE([dataImgArr objectAtIndex:indexPath.row], kImageTypePNG);
+        
         if (indexPath.row == [dataArr count]-1){
-            NSString *sample_text = [NSString stringWithFormat:@"<font face='HelveticaNeue-CondensedBold' size=19 color='#2C2C2C'>%@</font>",[dataArr objectAtIndex:indexPath.row]];
-            [cell.titleName setText:sample_text];
+            cell.titleName.text = [dataArr objectAtIndex:indexPath.row];
         }else{
-            NSString *sample_text = [NSString stringWithFormat:@"<font face='HelveticaNeue-CondensedBold' size=19 color='#2C2C2C'>%@</font> <font face='' size=24 color='#4F4F4F'>(80新帖)</font>",[dataArr objectAtIndex:indexPath.row]];
-            [cell.titleName setText:sample_text];
+            NSString * numStr = [NSString stringWithFormat:@"(%@新帖)",model.content_num];
+            cell.titleName.text = [NSString stringWithFormat:@"%@ %@",[dataArr objectAtIndex:indexPath.row],numStr];
+            
+            NSInteger length = [NSString stringWithFormat:@"%@",[dataArr objectAtIndex:indexPath.row]].length;
+            NSInteger totalLength = [[NSString stringWithFormat:@"%@ %@",[dataArr objectAtIndex:indexPath.row],numStr] length];
+            
+            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@ %@",[dataArr objectAtIndex:indexPath.row],numStr]];
+            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.04 green:0.04 blue:0.04 alpha:1] range:NSMakeRange(length, totalLength - length)];
+            [oneAttributeStr addAttribute:NSFontAttributeName value:FONT_0(19.0f) range:NSMakeRange(length, totalLength - length)];
+            cell.titleName.attributedText = oneAttributeStr;
         }
     }
     return cell;
@@ -274,19 +279,33 @@ typedef enum{
             colManager.delegate = self;
             requestType = requestColumns;
             [colManager getHomeColumnsNumber];
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             break;
         }
         case requestColumns:{
-            
+            dataArr = [NSMutableArray arrayWithObjects:
+                       @"",
+                       @"放毒区",
+                       @"一肉一拍",
+                       @"鲜肉市场",
+                       @"肉肉交换",
+                       @"活动与团购",
+                       @"",
+                       @"新手教程",
+                       @"升级建议", nil];
+            columnsArr = [NSMutableArray arrayWithArray:array];
+            [mTableView reloadData];
             break;
         }
             
         default:
             break;
     }
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 - (void)requestError:(NSError *)error {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"error:%@",error);
 }
 

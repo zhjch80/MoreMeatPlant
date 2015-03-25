@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="方正正中黑简体.TTF">
+            <string>FZZZHONGJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -25,18 +30,21 @@
                         <rect key="frame" x="0.0" y="59" width="320" height="1"/>
                         <color key="backgroundColor" red="0.87376767113095233" green="0.87376767113095233" blue="0.87376767113095233" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PLN-9b-ZX0" customClass="RTLabel">
-                        <rect key="frame" x="67" y="21" width="245" height="29"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWv-Ts-6EB">
+                        <rect key="frame" x="67" y="15" width="245" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="FZZZHONGJW--GB1-0" family="FZZhengHeiS-DB-GB" pointSize="20"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bgImg" destination="hrj-Wl-z5G" id="4U6-Fd-ViC"/>
                 <outlet property="headImg" destination="Urd-SM-jZI" id="xv1-kl-uA3"/>
-                <outlet property="titleName" destination="PLN-9b-ZX0" id="3TU-j4-1Jf"/>
+                <outlet property="titleName" destination="vWv-Ts-6EB" id="gB5-bZ-QWK"/>
             </connections>
-            <point key="canvasLocation" x="55" y="143"/>
+            <point key="canvasLocation" x="55" y="141"/>
         </tableViewCell>
     </objects>
 </document>

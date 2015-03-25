@@ -8,6 +8,7 @@
 
 #import "RMSearchViewController.h"
 #import "RMDaqoCell.h"
+#import "UITextField+LimitLength.h"
 
 @interface RMSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,DaqpSelectedPlantTypeDelegate>{
     BOOL isHideKeyboard;
@@ -56,6 +57,7 @@
 
     [mTextField.layer setCornerRadius:8.0f];
     mTextField.returnKeyType = UIReturnKeySearch;
+    [mTextField limitTextLength:20];
     
 }
 
@@ -104,6 +106,10 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [mTextField resignFirstResponder];
+}
+
+- (IBAction)buttonClick:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

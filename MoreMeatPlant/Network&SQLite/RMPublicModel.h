@@ -15,6 +15,7 @@
 
 @property (nonatomic, copy) NSString * content_name;        //广告名称、植物大全名称、帖子标题
 @property (nonatomic, copy) NSString * content_img;         //广告图片URL、植物大全图集图片、植物科目图片
+@property (nonatomic, copy) NSString * content_title;
 @property (nonatomic, copy) NSString * content_url;         //待补充 广告链接URL
 @property (nonatomic, copy) NSString * modules_name;        //栏目名称、植物科目名称
 @property (nonatomic, copy) NSString * modules_img;         //栏目图片URL、植物大全图片

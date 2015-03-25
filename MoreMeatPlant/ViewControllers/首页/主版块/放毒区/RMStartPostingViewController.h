@@ -12,6 +12,8 @@
 
 @interface RMStartPostingViewController : RMBaseViewController
 
+@property (nonatomic, copy) NSString * subTitle;            //发帖 类型
+
 @property (weak, nonatomic) IBOutlet RMBaseTextField *mTextField;
 @property (weak, nonatomic) IBOutlet RMBaseTextView *mTextView;
 @property (weak, nonatomic) IBOutlet UIView *mView;

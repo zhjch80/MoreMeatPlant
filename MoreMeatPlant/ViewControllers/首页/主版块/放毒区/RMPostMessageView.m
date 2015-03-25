@@ -17,13 +17,18 @@
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGFloat width;
 
-@property (nonatomic, strong) NSString * postType;
-@property (nonatomic, assign) BOOL isSelectedPostType;
+@property (nonatomic, assign) NSInteger postType_1;
+@property (nonatomic, assign) NSInteger postType_2;
+@property (nonatomic, assign) BOOL isSelectedType_1;
+@property (nonatomic, assign) BOOL isSelectedType_2;
+
+@property (nonatomic, strong) NSArray * tzTypeArr;
+@property (nonatomic, strong) NSArray * tzTypeedArr;
 
 @end
 
 @implementation RMPostMessageView
-@synthesize subView, subHeight, height, width, postType, isSelectedPostType;
+@synthesize subView, subHeight, height, width, postType_1, postType_2, isSelectedType_1, isSelectedType_2, tzTypeArr, tzTypeedArr;
 
 - (void)initWithPostMessageView {
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
@@ -33,7 +38,7 @@
     height = [UIScreen mainScreen].bounds.size.height;
     subHeight = 220;
     
-    NSArray * tzTypeArr = [NSArray arrayWithObjects:
+    tzTypeArr = [NSArray arrayWithObjects:
                            @"img_tz_1",
                            @"img_tz_2",
                            @"img_tz_3",
@@ -47,7 +52,7 @@
                            @"img_tz_11",
                            @"img_tz_12",
                            nil];
-    NSArray * tzTypeedArr = [NSArray arrayWithObjects:
+    tzTypeedArr = [NSArray arrayWithObjects:
                              @"img_tzed_1",
                              @"img_tzed_2",
                              @"img_tzed_3",
@@ -65,7 +70,7 @@
     subView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -height, width, subHeight)];
     subView.userInteractionEnabled = YES;
     subView.multipleTouchEnabled = YES;
-    [self addSubview:self.subView];
+    [self addSubview:subView];
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = CGRectMake(0, 0, subView.frame.size.width, subView.frame.size.height);
@@ -82,6 +87,7 @@
     UILabel * title = [[UILabel alloc] init];
     title.frame = CGRectMake(0, 10, width, 25);
     title.textAlignment = NSTextAlignmentCenter;
+    title.font = FONT_1(18.0);
     title.text = @"选择发帖类别";
     title.textColor = [UIColor colorWithRed:0.91 green:0.12 blue:0.37 alpha:1];
     [subView addSubview:title];
@@ -93,7 +99,7 @@
             button.frame = CGRectMake(16 + j*50, 55 + i*50, 40, 40);
             [button setBackgroundImage:LOADIMAGE([tzTypeArr objectAtIndex:value], kImageTypePNG) forState:UIControlStateNormal];
             [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-            [button setTitle:[NSString stringWithFormat:@"发帖类型%ld",(long)value] forState:UIControlStateNormal];
+            button.tag = 401 + value;
             [button addTarget:self action:@selector(selectPostType:) forControlEvents:UIControlEventTouchUpInside];
             [subView addSubview:button];
             value ++;
@@ -113,19 +119,40 @@
 }
 
 - (void)selectPostType:(UIButton *)sender {
-    postType = sender.titleLabel.text;
-    isSelectedPostType = YES;
-    NSLog(@"选择类型:%@",postType);
+    if (sender.tag < 407){
+        for (NSInteger i=0; i<6; i++) {
+            UIButton * button = (UIButton *)[subView viewWithTag:401+i];
+            [button setBackgroundImage:LOADIMAGE([tzTypeArr objectAtIndex:i], kImageTypePNG) forState:UIControlStateNormal];
+        }
+        postType_1 = sender.tag;
+        isSelectedType_1 = YES;
+    }else{
+        for (NSInteger i=6; i<11; i++) {
+            UIButton * button = (UIButton *)[subView viewWithTag:401+i];
+            [button setBackgroundImage:LOADIMAGE([tzTypeArr objectAtIndex:i], kImageTypePNG) forState:UIControlStateNormal];
+        }
+        postType_2 = sender.tag;
+        isSelectedType_2 = YES;
+    }
+    
+    [sender setBackgroundImage:LOADIMAGE([tzTypeedArr objectAtIndex:sender.tag-401], kImageTypePNG) forState:UIControlStateNormal];
 }
 
 - (void)selectedPostPlantType {
-    if (!isSelectedPostType){
+    if (!isSelectedType_1){
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"您还没有选择发帖类型" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
         [alert show];
         return;
     }
-    if ([self.delegate respondsToSelector:@selector(selectedPostMessageWithPlantType:)]){
-        [self.delegate selectedPostMessageWithPlantType:postType];
+    
+    if (!isSelectedType_2){
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"您还没有选择植物类型" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+
+    if ([self.delegate respondsToSelector:@selector(selectedPostMessageWithPostsType:withPlantType:)]){
+        [self.delegate selectedPostMessageWithPostsType:postType_1 withPlantType:postType_2];
     }
 }
 
