@@ -138,9 +138,11 @@
 }
 
 #pragma mark - 外面调用select tab的控制器
-- (void)tabSelectController:(NSInteger)index{
+
+- (void)tabSelectController:(NSInteger)index {
     [customTabBarCtl clickButtonWithIndex:index];
 }
+
 #pragma mark - EMChatManagerDelegate
 
 - (void)didLoginFromOtherDevice {
@@ -270,6 +272,5 @@
     }
 #endif
 }
-
 
 @end

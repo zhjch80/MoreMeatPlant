@@ -113,7 +113,7 @@
     RMImageView * rmImage = [[RMImageView alloc] init];
     rmImage.frame = CGRectMake(0, 0, kScreenWidth, 45);
     rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
-    [rmImage addTarget:self WithSelector:@selector(jumpPlantWithSaleNearbyMerchant)];
+    [rmImage addTarget:self withSelector:@selector(jumpPlantWithSaleNearbyMerchant)];
     [headView addSubview:rmImage];
     
     CGFloat height = rmImage.frame.size.height;
@@ -133,7 +133,7 @@
     RMPlantTypeView * plantTypeView = [[RMPlantTypeView alloc] init];
     plantTypeView.frame = CGRectMake(0, height, kScreenWidth, kScreenWidth/7.0);
     plantTypeView.delegate = self;
-    [plantTypeView loadPlantType];
+    [plantTypeView loadPlantTypeWithImageArr:nil];
     [headView addSubview:plantTypeView];
     
     height = height + kScreenWidth/7.0;

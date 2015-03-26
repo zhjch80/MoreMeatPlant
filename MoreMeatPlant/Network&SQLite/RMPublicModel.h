@@ -29,7 +29,7 @@
 @property (nonatomic, copy) NSString * content_breed;       //繁殖
 @property (nonatomic, copy) NSString * content_desc;        //简介
 @property (nonatomic, copy) NSString * auto_code;           //植物科目标识
-@property (nonatomic, copy) NSString * sub;                 //二级分类
+@property (nonatomic, copy) NSArray * sub;           //二级分类
 @property (nonatomic, copy) NSString * content_body;        //新闻内容
 @property (nonatomic, copy) NSString * create_time;         //新闻发布时间
 @property (nonatomic, copy) NSString * content_top;         //点赞数
@@ -42,9 +42,9 @@
 @property (nonatomic, copy) NSString * is_top;              //是否点赞 ，如果不存在代表没点赞，如果等于1代表点赞了
 @property (nonatomic, copy) NSString * is_collect;          //是否收藏 ，如果不存在代表没收藏，如果等于1代表收藏了
 @property (nonatomic, copy) NSString * body;                //帖子内容按照顺序，有图片的展示图片，没图片的展示 内容
-
-
-
+@property (nonatomic, copy) NSString * member_id;           //商家会员标识
+@property (nonatomic, copy) NSString * auto_position;       //位置
+@property (nonatomic, copy) NSString * change_img;          //已点击的状态
 
 
 

@@ -14,6 +14,10 @@
 
 @property (nonatomic, strong) UIView * recognizerView;
 
+//请求分类接口
+- (void)requestPlantSubjects;
+
+//请求list
 - (void)requestDataWithPageCount:(NSInteger)pc;
 
 @end

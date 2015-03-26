@@ -48,12 +48,12 @@ typedef enum{
 @property (nonatomic, strong) NSMutableArray * advertisingArr;      //广告数据
 @property (nonatomic, strong) NSMutableArray * columnsArr;          //栏目数量
 @property (nonatomic, strong) RMAFNRequestManager * adManager;
-@property (nonatomic, strong) RMAFNRequestManager * colManager;
+@property (nonatomic, strong) RMAFNRequestManager * manager;
 
 @end
 
 @implementation RMHomeViewController
-@synthesize mTableView, dataArr, dataImgArr, adManager, advertisingArr, colManager, columnsArr;
+@synthesize mTableView, adManager, advertisingArr, manager, columnsArr, dataImgArr;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -65,8 +65,8 @@ typedef enum{
         isFirstViewDidAppear = YES;
     }
     
-    if (!colManager){
-        colManager = [[RMAFNRequestManager alloc] init];
+    if (!manager){
+        manager = [[RMAFNRequestManager alloc] init];
     }
 }
 
@@ -80,9 +80,7 @@ typedef enum{
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     advertisingArr = [[NSMutableArray alloc] init];
     columnsArr = [[NSMutableArray alloc] init];
-    dataArr = [[NSMutableArray alloc] init];
-    
-    dataImgArr = [[NSMutableArray alloc] initWithObjects:
+    dataImgArr = [NSMutableArray arrayWithObjects:
                   @"",
                   @"img_home_1",
                   @"img_home_2",
@@ -108,7 +106,7 @@ typedef enum{
     rmImage.frame = CGRectMake(0, 0, kScreenWidth, 45);
     rmImage.backgroundColor = [UIColor greenColor];
     rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
-    [rmImage addTarget:self WithSelector:@selector(jumpHomeNearbyMerchant)];
+    [rmImage addTarget:self withSelector:@selector(jumpHomeNearbyMerchant)];
     [headerView addSubview:rmImage];
     
     NSInteger value = 0;
@@ -116,9 +114,9 @@ typedef enum{
         RMImageView * popularizeView = [[RMImageView alloc] init];
         RMPublicModel * model = [advertisingArr objectAtIndex:i];
         popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + i*40, kScreenWidth, 40);
-        popularizeView.identifierString = model.content_url;
+        popularizeView.identifierString = model.member_id;
         [popularizeView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
-        [popularizeView addTarget:self WithSelector:@selector(jumpPopularize:)];
+        [popularizeView addTarget:self withSelector:@selector(jumpPopularize:)];
         [headerView addSubview:popularizeView];
         value ++;
     }
@@ -129,7 +127,7 @@ typedef enum{
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [dataArr count];
+    return [columnsArr count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -164,23 +162,28 @@ typedef enum{
         }else{
             cell.bgImg.backgroundColor = [UIColor clearColor];
         }
+        
         RMPublicModel * model = [columnsArr objectAtIndex:indexPath.row];
         
-        cell.headImg.image = LOADIMAGE([dataImgArr objectAtIndex:indexPath.row], kImageTypePNG);
+        [cell.headImg sd_setImageWithURL:[NSURL URLWithString:model.modules_img] placeholderImage:[UIImage imageNamed:[dataImgArr objectAtIndex:indexPath.row]]];
         
-        if (indexPath.row == [dataArr count]-1){
-            cell.titleName.text = [dataArr objectAtIndex:indexPath.row];
+        if (indexPath.row == [columnsArr count]-1){
+            cell.titleName.text = model.modules_name;
         }else{
-            NSString * numStr = [NSString stringWithFormat:@"(%@新帖)",model.content_num];
-            cell.titleName.text = [NSString stringWithFormat:@"%@ %@",[dataArr objectAtIndex:indexPath.row],numStr];
-            
-            NSInteger length = [NSString stringWithFormat:@"%@",[dataArr objectAtIndex:indexPath.row]].length;
-            NSInteger totalLength = [[NSString stringWithFormat:@"%@ %@",[dataArr objectAtIndex:indexPath.row],numStr] length];
-            
-            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@ %@",[dataArr objectAtIndex:indexPath.row],numStr]];
-            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.04 green:0.04 blue:0.04 alpha:1] range:NSMakeRange(length, totalLength - length)];
-            [oneAttributeStr addAttribute:NSFontAttributeName value:FONT_0(19.0f) range:NSMakeRange(length, totalLength - length)];
-            cell.titleName.attributedText = oneAttributeStr;
+            if (indexPath.row == 0 || indexPath.row == 6){
+                
+            }else{
+                NSString * numStr = [NSString stringWithFormat:@"(%@新帖)",model.content_num];
+                cell.titleName.text = [NSString stringWithFormat:@"%@ %@",model.modules_name,numStr];
+                
+                NSInteger length = [NSString stringWithFormat:@"%@",model.modules_name].length;
+                NSInteger totalLength = [[NSString stringWithFormat:@"%@ %@",model.modules_name,numStr] length];
+                
+                NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@ %@",model.modules_name,numStr]];
+                [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.04 green:0.04 blue:0.04 alpha:1] range:NSMakeRange(length, totalLength - length)];
+                [oneAttributeStr addAttribute:NSFontAttributeName value:FONT_0(19.0f) range:NSMakeRange(length, totalLength - length)];
+                cell.titleName.attributedText = oneAttributeStr;
+            }
         }
     }
     return cell;
@@ -262,6 +265,8 @@ typedef enum{
 #pragma mark - 跳转广告位置
 
 - (void)jumpPopularize:(RMImageView *)image {
+    NSLog(@"会员标识:%@",image.identifierString);
+
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
     [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
@@ -276,23 +281,13 @@ typedef enum{
             
             [self loadTableHeaderView];
             
-            colManager.delegate = self;
+            manager.delegate = self;
             requestType = requestColumns;
-            [colManager getHomeColumnsNumber];
+            [manager getHomeColumnsNumber];
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             break;
         }
         case requestColumns:{
-            dataArr = [NSMutableArray arrayWithObjects:
-                       @"",
-                       @"放毒区",
-                       @"一肉一拍",
-                       @"鲜肉市场",
-                       @"肉肉交换",
-                       @"活动与团购",
-                       @"",
-                       @"新手教程",
-                       @"升级建议", nil];
             columnsArr = [NSMutableArray arrayWithArray:array];
             [mTableView reloadData];
             break;
@@ -305,7 +300,23 @@ typedef enum{
 }
 
 - (void)requestError:(NSError *)error {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    switch (requestType) {
+        case requestAdvertising:{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            //广告位置加载错误 run
+            manager.delegate = self;
+            requestType = requestColumns;
+            [manager getHomeColumnsNumber];
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            break;
+        }
+        case requestColumns:{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
     NSLog(@"error:%@",error);
 }
 

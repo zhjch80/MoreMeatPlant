@@ -13,9 +13,9 @@
 - (void)awakeFromNib {
     // Initialization code
     
-    [self.leftImg addTarget:self WithSelector:@selector(selectedImgJumpPlantDetails:)];
-    [self.centerImg addTarget:self WithSelector:@selector(selectedImgJumpPlantDetails:)];
-    [self.rightImg addTarget:self WithSelector:@selector(selectedImgJumpPlantDetails:)];
+    [self.leftImg addTarget:self withSelector:@selector(selectedImgJumpPlantDetails:)];
+    [self.centerImg addTarget:self withSelector:@selector(selectedImgJumpPlantDetails:)];
+    [self.rightImg addTarget:self withSelector:@selector(selectedImgJumpPlantDetails:)];
     
 }
 

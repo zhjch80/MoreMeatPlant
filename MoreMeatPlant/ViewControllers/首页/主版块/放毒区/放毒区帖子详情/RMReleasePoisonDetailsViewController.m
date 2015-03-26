@@ -108,7 +108,7 @@
     tableHeadView.detailsWebView.scrollView.scrollEnabled = NO;
     [tableHeadView.detailsReportBtn.layer setCornerRadius:8.0f];
     [tableHeadView.detailsUserHead.layer setCornerRadius:20.0f];
-    [tableHeadView.detailsUserHead addTarget:self WithSelector:@selector(userHeaderClick:)];
+    [tableHeadView.detailsUserHead addTarget:self withSelector:@selector(userHeaderClick:)];
     tableHeadView.delegate = self;
     tableHeadView.detailsWebView.delegate = self;
     mTableView.tableHeaderView = tableHeadView;

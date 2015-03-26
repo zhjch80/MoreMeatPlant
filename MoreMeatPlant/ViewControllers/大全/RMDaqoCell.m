@@ -12,9 +12,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.leftImg addTarget:self WithSelector:@selector(selectedPlantType:)];
-    [self.centerImg addTarget:self WithSelector:@selector(selectedPlantType:)];
-    [self.rightImg addTarget:self WithSelector:@selector(selectedPlantType:)];
+    [self.leftImg addTarget:self withSelector:@selector(selectedPlantType:)];
+    [self.centerImg addTarget:self withSelector:@selector(selectedPlantType:)];
+    [self.rightImg addTarget:self withSelector:@selector(selectedPlantType:)];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

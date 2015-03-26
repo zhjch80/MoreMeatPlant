@@ -13,13 +13,13 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.toPromoteImg addTarget:self WithSelector:@selector(jumpPromoteClick:)];
-    [self.addPraiseImg addTarget:self WithSelector:@selector(addPraiseClick:)];
+    [self.toPromoteImg addTarget:self withSelector:@selector(jumpPromoteClick:)];
+    [self.addPraiseImg addTarget:self withSelector:@selector(addPraiseClick:)];
     
-    [self.userHead_1 addTarget:self WithSelector:@selector(userHeadClick:)];
+    [self.userHead_1 addTarget:self withSelector:@selector(userHeadClick:)];
     [self.userHead_1.layer setCornerRadius:20.0];
     
-    [self.userHead_2 addTarget:self WithSelector:@selector(userHeadClick:)];
+    [self.userHead_2 addTarget:self withSelector:@selector(userHeadClick:)];
     [self.userHead_2.layer setCornerRadius:20.0];
     
     [self.comments_2_1_bgView.layer setCornerRadius:6.0f];

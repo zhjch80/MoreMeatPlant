@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RMBaseView : UIView
+@interface RMBaseView : UIView {
+    id _target;
+    SEL _sel;
+}
+@property (nonatomic, strong) NSString *identifierString;
+
 @property (weak, nonatomic) IBOutlet UIWebView *mWebView;
+
+- (void)addTarget:(id)target withSelector:(SEL)sel;
 
 @end

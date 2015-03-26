@@ -9,52 +9,59 @@
 #import "RMPlantTypeView.h"
 #import "RMImageView.h"
 #import "CONST.h"
+#import "RMPublicModel.h"
+#import "UIImageView+WebCache.h"
 
 @interface RMPlantTypeView (){
     NSInteger currentType;
-    NSMutableArray * plantTypeSelectedArr;
-    NSMutableArray * plantTypeUnselectedArr;
+    NSInteger counts;
+    CGFloat kWidthOffset;
+    CGFloat kHeightChangeOffset;
+    CGFloat kHeightNormalOffset;
+    
 }
-
+@property (nonatomic, strong) NSMutableArray * imagesArr;
 @end
 
-
 @implementation RMPlantTypeView
+@synthesize imagesArr;
 
-- (void)loadPlantType {
+- (void)loadPlantTypeWithImageArr:(NSArray *)imageArr {
     self.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    counts = [imageArr count];
     
-    plantTypeSelectedArr = [[NSMutableArray alloc] initWithObjects:
-                            @"img_tzArrowed_1",
-                            @"img_tzArrowed_2",
-                            @"img_tzArrowed_3",
-                            @"img_tzArrowed_4",
-                            @"img_tzArrowed_5",
-                            @"img_tzArrowed_6",
-                            @"img_tzArrowed_7", nil];
+    switch (counts) {
+        case 6:{
+            kWidthOffset = 8.0;
+            kHeightChangeOffset = 7.0;
+            kHeightNormalOffset = 12.0;
+            break;
+        }
+        default:
+            kWidthOffset = 10.0;
+            kHeightChangeOffset = 7.0;
+            kHeightNormalOffset = 12.0;
+            break;
+    }
     
-    plantTypeUnselectedArr = [[NSMutableArray alloc] initWithObjects:
-                              @"img_tzArrow_1",
-                              @"img_tzArrow_2",
-                              @"img_tzArrow_3",
-                              @"img_tzArrow_4",
-                              @"img_tzArrow_5",
-                              @"img_tzArrow_6",
-                              @"img_tzArrow_7", nil];
+    imagesArr = [[NSMutableArray alloc] initWithArray:imageArr];;
+    /* 保存的值 model.auto_code model.auto_id model.change_img model.content_img model.modules_name*/
     
-    for (NSInteger i=0; i<7; i++) {
+    for (NSInteger i=0; i<counts; i++) {
         RMImageView * rmImg = [[RMImageView alloc] init];
+        RMPublicModel * model = [imagesArr objectAtIndex:i];
+        
         rmImg.tag = 400+i;
         rmImg.identifierString = [NSString stringWithFormat:@"%ld",(long)i];
         if (i==0){
-            rmImg.frame = CGRectMake(4 + i*(width/7.0), 5, width/7.0 - 6, width/7.0);
-            rmImg.image = LOADIMAGE([plantTypeSelectedArr objectAtIndex:i], kImageTypePNG);
+            rmImg.frame = CGRectMake(4 + i*(width/counts), 5, width/counts - kWidthOffset, width/counts - kHeightChangeOffset);
+            [rmImg sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
         }else{
-            rmImg.frame = CGRectMake(4 + i*(width/7.0), 5, width/7.0 - 6, width/7.0 - 5);
-            rmImg.image = LOADIMAGE([plantTypeUnselectedArr objectAtIndex:i], kImageTypePNG);
+            rmImg.frame = CGRectMake(4 + i*(width/counts), 5, width/counts - kWidthOffset, width/counts - kHeightNormalOffset);
+            [rmImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         }
-        [rmImg addTarget:self WithSelector:@selector(selectedPlantType:)];
+        [rmImg addTarget:self withSelector:@selector(selectedPlantType:)];
         [self addSubview:rmImg];
     }
     currentType = 0;
@@ -70,18 +77,20 @@
         [self.delegate selectedPlantWithType:image.identifierString];
         currentType = image.identifierString.integerValue;
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        for (NSInteger i=0; i<7; i++){
+        for (NSInteger i=0; i<counts; i++){
             RMImageView * img = (RMImageView *)[self viewWithTag:400 + i];
-            img.frame = CGRectMake(4 + i*(width/7.0), 5, width/7.0 - 6, width/7.0 - 5);
+            RMPublicModel * model = [imagesArr objectAtIndex:i];
+
+            img.frame = CGRectMake(4 + i*(width/counts), 5, width/counts - kWidthOffset, width/counts - kHeightNormalOffset);
             if (img.identifierString.integerValue == currentType){
-                img.image = LOADIMAGE([plantTypeSelectedArr objectAtIndex:i], kImageTypePNG);
+                [img sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
                 CGFloat x = img.frame.origin.x;
                 CGFloat y = img.frame.origin.y;
                 CGFloat width = img.frame.size.width;
                 CGFloat height = img.frame.size.height;
                 image.frame = CGRectMake(x, y, width, height + 5);
             }else{
-                img.image = LOADIMAGE([plantTypeUnselectedArr objectAtIndex:i], kImageTypePNG);
+                [img sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
             }
         }
     }

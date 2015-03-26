@@ -19,5 +19,6 @@
 @interface RMPlantTypeView : UIView
 @property (nonatomic, assign) id<SelectedPlantTypeMethodDelegate>delegate;
 
-- (void)loadPlantType;
+- (void)loadPlantTypeWithImageArr:(NSArray *)imageArr;
+
 @end

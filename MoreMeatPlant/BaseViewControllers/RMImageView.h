@@ -14,6 +14,6 @@
 }
 @property (nonatomic, strong) NSString *identifierString;
 
-- (void)addTarget:(id)target WithSelector:(SEL)sel;
+- (void)addTarget:(id)target withSelector:(SEL)sel;
 
 @end

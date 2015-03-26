@@ -361,6 +361,8 @@
 		1D8397631AB3F81600DA190A /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8397581AB3F81600DA190A /* close@2x.png */; };
 		1D8397641AB3F81600DA190A /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8397591AB3F81600DA190A /* down@2x.png */; };
 		1D8397651AB3F81600DA190A /* up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D83975A1AB3F81600DA190A /* up@2x.png */; };
+		1D88DB911AC40AEC00EC4295 /* RMDaqoRightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D88DB8F1AC40AEC00EC4295 /* RMDaqoRightCell.m */; };
+		1D88DB921AC40AEC00EC4295 /* RMDaqoRightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D88DB901AC40AEC00EC4295 /* RMDaqoRightCell.xib */; };
 		1D9336F11A8E3DFA00BA4FA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9336F01A8E3DFA00BA4FA7 /* main.m */; };
 		1D9336F41A8E3DFA00BA4FA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9336F31A8E3DFA00BA4FA7 /* AppDelegate.m */; };
 		1D9336FF1A8E3DFA00BA4FA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D9336FE1A8E3DFA00BA4FA7 /* Images.xcassets */; };
@@ -1339,6 +1341,9 @@
 		1D8397811AB4392900DA190A /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		1D8397831AB4393700DA190A /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		1D8397851AB4394300DA190A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		1D88DB8E1AC40AEC00EC4295 /* RMDaqoRightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDaqoRightCell.h; sourceTree = "<group>"; };
+		1D88DB8F1AC40AEC00EC4295 /* RMDaqoRightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDaqoRightCell.m; sourceTree = "<group>"; };
+		1D88DB901AC40AEC00EC4295 /* RMDaqoRightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaqoRightCell.xib; sourceTree = "<group>"; };
 		1D9336EB1A8E3DFA00BA4FA7 /* MoreMeatPlant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoreMeatPlant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D9336EF1A8E3DFA00BA4FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D9336F01A8E3DFA00BA4FA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -3039,6 +3044,9 @@
 				1D9EFA331AB9B29F006F6DD8 /* RMDaqoRightViewController.h */,
 				1D9EFA341AB9B29F006F6DD8 /* RMDaqoRightViewController.m */,
 				1D9EFA351AB9B29F006F6DD8 /* RMDaqoRightViewController.xib */,
+				1D88DB8E1AC40AEC00EC4295 /* RMDaqoRightCell.h */,
+				1D88DB8F1AC40AEC00EC4295 /* RMDaqoRightCell.m */,
+				1D88DB901AC40AEC00EC4295 /* RMDaqoRightCell.xib */,
 				1D4DA3441A93090D006A9EBA /* RMDaqoCell.h */,
 				1D4DA3451A93090D006A9EBA /* RMDaqoCell.m */,
 				1D4DA3461A93090D006A9EBA /* RMDaqoCell.xib */,
@@ -4576,6 +4584,7 @@
 				0A4106651ABABBF60060FBD5 /* VoiceSearchFeedback017@2x.png in Resources */,
 				0A4106BB1ABABBF60060FBD5 /* chat_receiver_audio_playing002.png in Resources */,
 				1DEB750F1AB9D67A00EA1FA7 /* member_collection_type_line.png in Resources */,
+				1D88DB921AC40AEC00EC4295 /* RMDaqoRightCell.xib in Resources */,
 				1DEB751A1AB9D67A00EA1FA7 /* order_list_set_btn.png in Resources */,
 				1DEB74811AB9D66800EA1FA7 /* img_tz_6.png in Resources */,
 				1D4DA3301A921779006A9EBA /* RMFreshPlantMarketViewController.xib in Resources */,
@@ -4708,6 +4717,7 @@
 			files = (
 				5120FDC81AB5D9E3000E9BE1 /* RMMyHomeViewController.m in Sources */,
 				1D386C771AC167B8000B9686 /* RMMyFriendViewController.m in Sources */,
+				1D88DB911AC40AEC00EC4295 /* RMDaqoRightCell.m in Sources */,
 				0A4105661ABAB3C70060FBD5 /* MWGridCell.m in Sources */,
 				1D9CB1761AAE9EE500BD5A7D /* AFURLConnectionOperation.m in Sources */,
 				1D9CB1791AAE9EE500BD5A7D /* AFNetworkReachabilityManager.m in Sources */,

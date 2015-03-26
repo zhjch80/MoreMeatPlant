@@ -156,7 +156,7 @@
         for (NSInteger j=0; j<5; j++) {
             RMImageView * atlasImg = [[RMImageView alloc] init];
             atlasImg.image = [UIImage imageNamed:@"test_1.jpg"];
-            [atlasImg addTarget:self WithSelector:@selector(imageZoomMethodWithImage:)];
+            [atlasImg addTarget:self withSelector:@selector(imageZoomMethodWithImage:)];
             atlasImg.frame = CGRectMake(15 + j*60, 220 + i*60, 50, 50);
             [tableFooterView addSubview:atlasImg];
             [imageViewArr addObject:atlasImg];

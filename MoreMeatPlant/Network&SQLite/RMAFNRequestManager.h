@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RMPublicModel.h"
 
-typedef void (^RMAFNRequestManagerCallBack) (NSError * error,BOOL success,id object);
+typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id object);
 
 @protocol RMAFNRequestManagerDelegate <NSObject>
 
@@ -36,7 +36,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error,BOOL success,id obj
 - (void)getAdvertisingQueryWithType:(NSInteger)type;
 
 /**
- *  @method     首页栏目数量
+ *  @method     首页栏目
  */
 - (void)getHomeColumnsNumber;
 
@@ -44,7 +44,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error,BOOL success,id obj
  *  @method     植物大全列表
  *  @param      pageCount       分页
  */
-- (void)getPlantDaqoListWithPageCount:(NSInteger)pageCount;
++ (void)getPlantDaqoListWithPageCount:(NSInteger)pageCount callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     植物大全详情页面
@@ -53,11 +53,10 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error,BOOL success,id obj
 - (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id;
 
 /**
- *  @method     植物科目列表          接口没有给参数传递位置
- *  @param      level       级别      1：一级、2:二级
+ *  @method     植物科目 大全
+ *  @param      level       级别      1：一级：大全顶部分类，2:二级：侧滑分类
  */
-- (void)getPlantSubjectsListWithLevel:(NSInteger)level;
-
++ (void)getPlantSubjectsListWithLevel:(NSInteger)level callBack:(RMAFNRequestManagerCallBack)block;
 /**
  *  @method     植物大全添加图片            未完成
  *  @param

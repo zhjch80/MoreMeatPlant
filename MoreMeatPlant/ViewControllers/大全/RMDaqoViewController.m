@@ -27,6 +27,8 @@
     [super viewDidAppear:animated];
     if (!isFirstViewDidAppear){
         [centerCtl requestDataWithPageCount:1];
+        [centerCtl requestPlantSubjects];
+        [rightCtl requestPlantSubs];
         isFirstViewDidAppear = YES;
     }
 }

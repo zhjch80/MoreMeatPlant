@@ -80,13 +80,13 @@
     RMImageView * rmImage = [[RMImageView alloc] init];
     rmImage.frame = CGRectMake(0, 0, kScreenWidth, 45);
     rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
-    [rmImage addTarget:self WithSelector:@selector(jumpPoisonNearbyMerchant)];
+    [rmImage addTarget:self withSelector:@selector(jumpPoisonNearbyMerchant)];
     [headView addSubview:rmImage];
     
     RMImageView * popularizeView = [[RMImageView alloc] init];
     popularizeView.frame = CGRectMake(0, rmImage.frame.size.height, kScreenWidth, 40);
     popularizeView.image = LOADIMAGE(@"img_03", kImageTypePNG);
-    [popularizeView addTarget:self WithSelector:@selector(jumpPopularize:)];
+    [popularizeView addTarget:self withSelector:@selector(jumpPopularize:)];
     [headView addSubview:popularizeView];
     
     CGFloat height = rmImage.frame.size.height + popularizeView.frame.size.height;
@@ -106,7 +106,7 @@
     RMPlantTypeView * plantTypeView = [[RMPlantTypeView alloc] init];
     plantTypeView.frame = CGRectMake(0, height, kScreenWidth, kScreenWidth/7.0);
     plantTypeView.delegate = self;
-    [plantTypeView loadPlantType];
+    [plantTypeView loadPlantTypeWithImageArr:nil];
     [headView addSubview:plantTypeView];
     
     height = height + kScreenWidth/7.0;

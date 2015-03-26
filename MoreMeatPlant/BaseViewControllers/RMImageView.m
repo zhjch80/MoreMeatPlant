@@ -12,7 +12,7 @@
 @implementation RMImageView
 @synthesize identifierString;
 
-- (void)addTarget:(id)target WithSelector:(SEL)sel{
+- (void)addTarget:(id)target withSelector:(SEL)sel{
     _target = target;
     _sel = sel;
     self.userInteractionEnabled = YES;

@@ -71,7 +71,7 @@
         imageView.center = CGPointMake(20 + 50 + i * imageView.frame.size.width + i * 20, self.mScrollView.frame.size.height/2);
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = LOADIMAGE(@"btn_add_photo_s", kImageTypePNG);
-        [imageView addTarget:self WithSelector:@selector(addUpLoadImg:)];
+        [imageView addTarget:self withSelector:@selector(addUpLoadImg:)];
         imageView.tag = 101 + i;
         imageView.identifierString = @"empty";
         [self.mScrollView addSubview:imageView];
@@ -81,7 +81,7 @@
         deleteImg.identifierString = @"empty";
         deleteImg.hidden = YES;
         deleteImg.frame = CGRectMake(imageView.frame.origin.x + imageView.frame.size.width - 12, imageView.frame.origin.y - 5, 20, 20);
-        [deleteImg addTarget:self WithSelector:@selector(deleteUpLoadImg:)];
+        [deleteImg addTarget:self withSelector:@selector(deleteUpLoadImg:)];
         deleteImg.image = LOADIMAGE(@"deletecircular", kImageTypePNG);
         [self.mScrollView addSubview:deleteImg];
         

@@ -10,13 +10,12 @@
 #import "RMHttpOperationShared.h"
 #import "CONST.h"
 
-#define baseUrl             @"http://218.240.30.6/drzw/index.php?com=com_appService&"
+#define baseUrl             @"http://218.240.30.6/drzw/index.php?com=com_appService"
 
 #define kMSGSuccess         @"1"
 #define kMSGFailure         @"0"
 
 #define RequestFailed @"请检查您的网络！"
-#define OBJC(v) (([v isEqual:[NSNull null]]) ? @"" : v)
 
 @interface RMAFNRequestManager (){
 
@@ -35,14 +34,14 @@
  */
 - (void)getAdvertisingQueryWithType:(NSInteger)type {
     __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=ad&auto_id=%ld",baseUrl,(long)type];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=ad&auto_id=%ld",baseUrl,(long)type];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
             for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.content_img = OBJC([[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
-                //TODO:缺一个字段
+                model.member_id = OBJC([[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
                 [array addObject:model];
             }
             if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
@@ -58,11 +57,11 @@
 }
 
 /**
- *  @method     首页栏目数量
+ *  @method     首页栏目
  */
 - (void)getHomeColumnsNumber {
     __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=indexNum&level=2",baseUrl];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=indexNum&level=2",baseUrl];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
@@ -103,27 +102,15 @@
  *  @method     植物大全列表          少一个auto_id 字段
  *  @param      pageCount       分页
  */
-- (void)getPlantDaqoListWithPageCount:(NSInteger)pageCount {
-    __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=shopAll&data=series&order=asc&per=1&row=10&page=%ld",baseUrl,(long)pageCount];
-    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        NSMutableArray * array = [NSMutableArray array];
-        if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
-            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++) {
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                model.content_img = OBJC([[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
-                model.content_name = OBJC([[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
-                model.auto_id = OBJC([[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
-                [array addObject:model];
-            }
-            if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
-                [self.delegate requestFinishiDownLoadWith:array];
-            }
-        }else{
++ (void)getPlantDaqoListWithPageCount:(NSInteger)pageCount callBack:(RMAFNRequestManagerCallBack)block {
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAll&data=series&order=asc&per=1&row=10&page=%ld",baseUrl,(long)pageCount];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block (nil, [responseObject objectForKey:@"status"], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
-            [weekSelf.delegate requestError:error];
+        if (block){
+            block (error, NO, kMSGFailure);
         }
     }];
 }
@@ -134,7 +121,7 @@
  */
 - (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id {
     __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=shopAllview&auto_id=%@",baseUrl,auto_id];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAllview&auto_id=%@",baseUrl,auto_id];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
@@ -156,28 +143,18 @@
 }
 
 /**
- *  @method     植物科目列表          接口没有给参数传递位置
- *  @param      level       级别      1：一级、2:二级
+ *  @method     植物科目 大全
+ *  @param      level       级别      1：一级：大全顶部分类，2:二级：侧滑分类
  */
-- (void)getPlantSubjectsListWithLevel:(NSInteger)level {
-    __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=shopCourse",baseUrl];
-    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
-            NSMutableArray * array = [NSMutableArray array];
-            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                
-                [array addObject:model];
-            }
-            if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
-                [self.delegate requestFinishiDownLoadWith:array];
-            }
-        }else{
++ (void)getPlantSubjectsListWithLevel:(NSInteger)level callBack:(RMAFNRequestManagerCallBack)block {
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopCourse&level=%ld",baseUrl,level];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if(block){
+            block(nil, [responseObject objectForKey:@"status"], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
-            [weekSelf.delegate requestError:error];
+        if(block){
+            block(error, NO, kMSGFailure);
         }
     }];
 }
@@ -221,7 +198,7 @@
                                                withUser_id:(NSString *)user_id
                                           withUserPassword:(NSString *)user_password {
     __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@method=save&app_com=com_center&task=addAlldesc&frm[all_id]=%@&frm[content_desc]=%@&ID=%@&PWD=%@",baseUrl,all_id,content_desc,user_id,user_password];
+    NSString * url = [NSString stringWithFormat:@"%@&method=save&app_com=com_center&task=addAlldesc&frm[all_id]=%@&frm[content_desc]=%@&ID=%@&PWD=%@",baseUrl,all_id,content_desc,user_id,user_password];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
@@ -248,7 +225,7 @@
  */
 - (void)getReleasePoisonNewsListWithPageCount:(NSInteger)pageCount {
     __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=shopNews&data=1&per=1&row=10&optionid=970&page=%ld",baseUrl,(long)pageCount];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNews&data=1&per=1&row=10&optionid=970&page=%ld",baseUrl,(long)pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
@@ -275,7 +252,7 @@
  */
 - (void)getReleasePoisonNewsDetailsWithAuto_id:(NSString *)auto_id {
     __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=shopNewsview&auto_id=%@",baseUrl,auto_id];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNewsview&auto_id=%@",baseUrl,auto_id];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
@@ -314,7 +291,7 @@
                       withUser_id:(NSString *)user_id
                 withUser_password:(NSString *)user_password {
     __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=shopNote&type=%@&class=%@&course=%@&per=1&row=10&page=%ld&ID=%@&PWD=%@",baseUrl,postsType,plantType,plantSubjects,(long)pageCount,user_id,user_password];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&type=%@&class=%@&course=%@&per=1&row=10&page=%ld&ID=%@&PWD=%@",baseUrl,postsType,plantType,plantSubjects,(long)pageCount,user_id,user_password];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
@@ -345,7 +322,7 @@
                            withUser_id:(NSString *)user_id
                      withUser_password:(NSString *)user_password {
     __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=shopNote&auto_id=%@&ID=%@&PWD=%@",baseUrl,auto_id,user_id,user_password];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&auto_id=%@&ID=%@&PWD=%@",baseUrl,auto_id,user_id,user_password];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
@@ -374,7 +351,7 @@
 - (void)getPostsCommentsListWithReview_id:(NSString *)review_id
                             withPageCount:(NSInteger)pageCount {
     __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@method=appSev&app_com=com_shop&task=shopNotereview&review_id=%@&per=1&row=10&page=%ld",baseUrl,review_id,(long)pageCount];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNotereview&review_id=%@&per=1&row=10&page=%ld",baseUrl,review_id,(long)pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
             NSMutableArray * array = [NSMutableArray array];
@@ -504,8 +481,11 @@
 //1.18 ...
 
 /*************************************************************************/
+
 /**
  *  @method     登录
+ *  @param      user            用户名
+ *  @param      pwd             密码 （md5编码之后的）
  */
 + (void)loginRequestWithUser:(NSString *)user Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block{
     NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_doLogin",user,pwd];

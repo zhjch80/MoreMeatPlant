@@ -16,25 +16,26 @@
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
 
-@interface RMDaqoCenterViewController ()<UITableViewDataSource, UITableViewDelegate, SelectedPlantTypeMethodDelegate,DaqpSelectedPlantTypeDelegate,RMAFNRequestManagerDelegate,RefreshControlDelegate>{
+@interface RMDaqoCenterViewController ()<UITableViewDataSource, UITableViewDelegate, SelectedPlantTypeMethodDelegate,DaqpSelectedPlantTypeDelegate,RefreshControlDelegate>{
     BOOL isRefresh;
     NSInteger pageCount;
     BOOL isLoadComplete;
 }
 @property (nonatomic, strong) NSMutableArray * dataArr;
+@property (nonatomic, strong) NSMutableArray * subsPlantArr;
 @property (nonatomic, strong) UITableView * mTableView;
-@property (nonatomic, strong) RMAFNRequestManager * plantsManager;
 @property (nonatomic, strong) RefreshControl * refreshControl;
+@property (nonatomic, strong) RMPlantTypeView * plantTypeView;
 
 @end
 
 @implementation RMDaqoCenterViewController
-@synthesize mTableView, dataArr, plantsManager, refreshControl;
+@synthesize mTableView, dataArr, refreshControl, subsPlantArr, plantTypeView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+
     [self setRightBarButtonNumber:1];
     leftBarButton.frame = CGRectMake(5, 1, 43, 43);
     [leftBarButton setImage:[UIImage imageNamed:@"img_search"] forState:UIControlStateNormal];
@@ -49,13 +50,7 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1];
     
-    RMPlantTypeView * plantType = [[RMPlantTypeView alloc] init];
-    plantType.frame = CGRectMake(0, 64, kScreenWidth, kScreenWidth/7);
-    plantType.delegate = self;
-    [plantType loadPlantType];
-    [self.view addSubview:plantType];
-    
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, plantType.frame.size.height + 64, kScreenWidth, kScreenHeight - plantType.frame.size.height - 64 - 44) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, plantTypeView.frame.size.height + 64, kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 44) style:UITableViewStylePlain];
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     mTableView.delegate = self;
     mTableView.dataSource = self;
@@ -199,43 +194,103 @@
 
 #pragma mark -  数据请求
 
-- (void)requestDataWithPageCount:(NSInteger)pc {
-    plantsManager = [[RMAFNRequestManager alloc] init];
-    plantsManager.delegate = self;
-    [plantsManager getPlantDaqoListWithPageCount:pc];
+/**
+ *  @method     获取顶部分类
+ */
+- (void)requestPlantSubjects {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-}
-
-- (void)requestFinishiDownLoadWith:(NSMutableArray *)array {
-    if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
-        [dataArr removeAllObjects];
-        dataArr = [NSMutableArray arrayWithArray:array];
-        [mTableView reloadData];
-        [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
-    }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
-        if (array.count == 0){
-            [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+    [RMAFNRequestManager getPlantSubjectsListWithLevel:1 callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            isLoadComplete = YES;
-            return;
+            return ;
         }
-        dataArr = [NSMutableArray arrayWithArray:array];
-        [mTableView reloadData];
-        [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-    }
-    
-    if (isRefresh){
-        [dataArr removeAllObjects];
-        dataArr = [NSMutableArray arrayWithArray:array];
-        [mTableView reloadData];
-    }
-
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        if (success){
+            subsPlantArr = [[NSMutableArray alloc] init];
+            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
+                model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                model.change_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"change_img"]);
+                model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                model.modules_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"modules_name"]);
+                [subsPlantArr addObject:model];
+            }
+            
+            plantTypeView = [[RMPlantTypeView alloc] init];
+            plantTypeView.frame = CGRectMake(0, 64, kScreenWidth, kScreenWidth/7 + 5);
+            plantTypeView.delegate = self;
+            [plantTypeView loadPlantTypeWithImageArr:subsPlantArr];
+            [self.view addSubview:plantTypeView];
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                mTableView.frame = CGRectMake(0, plantTypeView.frame.size.height + 64, kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 44);
+            } completion:^(BOOL finished) {
+            }];
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
 
-- (void)requestError:(NSError *)error {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    NSLog(@"error:%@",error);
+/**
+ *  @method     获取list数据
+ *  @param      pc          分页
+ */
+- (void)requestDataWithPageCount:(NSInteger)pc {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getPlantDaqoListWithPageCount:pc callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success) {
+            if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+            }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
+                if ([[object objectForKey:@"data"] count] == 0){
+                    [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    isLoadComplete = YES;
+                    return;
+                }
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            }
+            
+            if (isRefresh){
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+            }
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
 
 #pragma mark 刷新代理

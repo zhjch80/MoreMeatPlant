@@ -21,25 +21,46 @@
 #import "RMSearchViewController.h"
 #import "RMPostClassificationView.h"
 
-@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate>{
+typedef enum {
+    requestAdvertising = 501,
+    requestList
+}RequestType;
+
+@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RMAFNRequestManagerDelegate>{
+    BOOL isFirstViewDidAppear;
     
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
+@property (nonatomic, strong) NSMutableArray * advertisingArr;
 @property (nonatomic, strong) NSArray * postsTypeArr;
 
 @property (nonatomic, strong) RMPostClassificationView * fenleiAction;
 @property (nonatomic, strong) RMPostMessageView *action;
 @property (nonatomic, strong) ZFModalTransitionAnimator *animator;
+@property (nonatomic, strong) RMAFNRequestManager * manager;
+@property (nonatomic, assign) RequestType requestType;
 
 @end
 
 @implementation RMReleasePoisonViewController
-@synthesize mTableView, dataArr, fenleiAction, action, animator, postsTypeArr;
+@synthesize mTableView, dataArr, fenleiAction, action, animator, postsTypeArr, manager, requestType, advertisingArr;
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!isFirstViewDidAppear){
+        [manager getAdvertisingQueryWithType:2];
+        requestType = requestAdvertising;
+        isFirstViewDidAppear = YES;
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     postsTypeArr = [NSArray arrayWithObjects:@"家有鲜肉", @"播种育苗", @"求助提问", @"肉与花器", @"多肉绘画", @"世界见闻", nil];
+    advertisingArr = [[NSMutableArray alloc] init];
+    manager = [[RMAFNRequestManager alloc] init];
+    manager.delegate = self;
     
     [self setRightBarButtonNumber:2];
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
@@ -81,16 +102,21 @@
     RMImageView * rmImage = [[RMImageView alloc] init];
     rmImage.frame = CGRectMake(0, 0, kScreenWidth, 45);
     rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
-    [rmImage addTarget:self WithSelector:@selector(jumpPoisonNearbyMerchant)];
+    [rmImage addTarget:self withSelector:@selector(jumpPoisonNearbyMerchant)];
     [headView addSubview:rmImage];
     
-    RMImageView * popularizeView = [[RMImageView alloc] init];
-    popularizeView.frame = CGRectMake(0, rmImage.frame.size.height, kScreenWidth, 40);
-    popularizeView.image = LOADIMAGE(@"img_03", kImageTypePNG);
-    [popularizeView addTarget:self WithSelector:@selector(jumpPopularize:)];
-    [headView addSubview:popularizeView];
+    NSInteger value = 0;
+    for (NSInteger i=0; i<[advertisingArr count]; i++) {
+        RMImageView * popularizeView = [[RMImageView alloc] init];
+        RMPublicModel * model = [advertisingArr objectAtIndex:i];
+        popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + i*40, kScreenWidth, 40);
+        [popularizeView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        [popularizeView addTarget:self withSelector:@selector(jumpPopularize:)];
+        [headView addSubview:popularizeView];
+        value ++;
+    }
     
-    CGFloat height = rmImage.frame.size.height + popularizeView.frame.size.height;
+    CGFloat height = rmImage.frame.size.height + 40 * value;
     
     for (NSInteger i=0; i<2; i++) {
         RMStickView * stickView = [[RMStickView alloc] init];
@@ -105,9 +131,9 @@
     }
     
     RMPlantTypeView * plantTypeView = [[RMPlantTypeView alloc] init];
-    plantTypeView.frame = CGRectMake(0, height, kScreenWidth, kScreenWidth/7.0);
+    plantTypeView.frame = CGRectMake(0, height, kScreenWidth, kScreenWidth/7.0 + 5);
     plantTypeView.delegate = self;
-    [plantTypeView loadPlantType];
+    [plantTypeView loadPlantTypeWithImageArr:nil];
     [headView addSubview:plantTypeView];
     
     height = height + kScreenWidth/7.0;
@@ -334,6 +360,58 @@
         default:
             break;
     }
+}
+
+#pragma mark - 数据请求
+
+- (void)requestListWithPageCount:(NSInteger)pageCount {
+    //TODO:第二个 三个参数 不对 不知道怎么传值
+    requestType = requestList;
+    [manager getPostsListWithPostsType:@"1" withPlantType:@"1" withPlantSubjects:@"1000" withPageCount:1 withUser_id:@"" withUser_password:@""];
+}
+
+- (void)requestFinishiDownLoadWith:(NSMutableArray *)array {
+    switch (requestType) {
+        case requestAdvertising:{
+            advertisingArr = [NSMutableArray arrayWithArray:array];
+            
+            [self loadTableViewHead];
+            
+//            [self requestListWithPageCount:1];
+
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            break;
+        }
+        case requestList:{
+//            columnsArr = [NSMutableArray arrayWithArray:array];
+//            [mTableView reloadData];
+            break;
+        }
+            
+        default:
+            break;
+    }
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
+- (void)requestError:(NSError *)error {
+    switch (requestType) {
+        case requestAdvertising:{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            //广告位置加载错误 run
+            requestType = requestList;
+            [manager getHomeColumnsNumber];
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            break;
+        }
+        case requestList:{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
+    NSLog(@"error:%@",error);
 }
 
 - (void)didReceiveMemoryWarning {

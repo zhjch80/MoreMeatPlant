@@ -12,4 +12,6 @@
 
 @property (nonatomic, assign) id DaqoDelegate;
 
+- (void)requestPlantSubs;
+
 @end

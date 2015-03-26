@@ -15,18 +15,18 @@
     [self.bgView.layer setCornerRadius:8.0];
     [self.userHeadImg.layer setCornerRadius:12.0];
     
-    [self.leftImg addTarget:self WithSelector:@selector(selectedPostDetatils:)];
-    [self.rightImg addTarget:self WithSelector:@selector(selectedPostDetatils:)];
+    [self.leftImg addTarget:self withSelector:@selector(selectedPostDetatils:)];
+    [self.rightImg addTarget:self withSelector:@selector(selectedPostDetatils:)];
     
-    [self.leftTwoImg addTarget:self WithSelector:@selector(selectedPostDetatils:)];
-    [self.rightUpTwoImg addTarget:self WithSelector:@selector(selectedPostDetatils:)];
-    [self.rightDownTwoImg addTarget:self WithSelector:@selector(selectedPostDetatils:)];
+    [self.leftTwoImg addTarget:self withSelector:@selector(selectedPostDetatils:)];
+    [self.rightUpTwoImg addTarget:self withSelector:@selector(selectedPostDetatils:)];
+    [self.rightDownTwoImg addTarget:self withSelector:@selector(selectedPostDetatils:)];
     
-    [self.threeImg addTarget:self WithSelector:@selector(selectedPostDetatils:)];
+    [self.threeImg addTarget:self withSelector:@selector(selectedPostDetatils:)];
     
-    [self.likeImg addTarget:self WithSelector:@selector(addLike:)];
-    [self.chatImg addTarget:self WithSelector:@selector(addChat:)];
-    [self.praiseImg addTarget:self WithSelector:@selector(addPraise:)];
+    [self.likeImg addTarget:self withSelector:@selector(addLike:)];
+    [self.chatImg addTarget:self withSelector:@selector(addChat:)];
+    [self.praiseImg addTarget:self withSelector:@selector(addPraise:)];
     
 }
 
