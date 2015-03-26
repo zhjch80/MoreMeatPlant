@@ -43,12 +43,6 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对方用户名：花儿与少年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lii-EY-LK6">
-                        <rect key="frame" x="24" y="79" width="154" height="17.5"/>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
-                        <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="P2E-S6-3xG">
                         <rect key="frame" x="122" y="44" width="171" height="26"/>
                         <constraints>
@@ -145,18 +139,35 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="pAv-El-34F">
+                        <rect key="frame" x="122" y="75" width="106" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="8gK-kF-94r"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="输入金额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4LV-mq-FF2">
+                        <rect key="frame" x="24" y="78" width="60" height="18.5"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="P2E-S6-3xG" firstAttribute="leading" secondItem="pAv-El-34F" secondAttribute="leading" id="0PB-Xx-j4y"/>
                     <constraint firstAttribute="trailingMargin" secondItem="XMd-Lr-PgT" secondAttribute="trailing" constant="15" id="0cg-NO-wS3"/>
                     <constraint firstAttribute="trailingMargin" secondItem="lbn-Ga-fd0" secondAttribute="trailing" constant="19" id="3zu-5y-Whx"/>
                     <constraint firstItem="P2E-S6-3xG" firstAttribute="centerY" secondItem="VzY-Mm-2J5" secondAttribute="centerY" id="44x-WY-NE1"/>
                     <constraint firstItem="OsZ-Xd-UFU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="4jq-ja-Wga"/>
+                    <constraint firstItem="pAv-El-34F" firstAttribute="centerY" secondItem="tR1-CF-Nb5" secondAttribute="centerY" id="4ts-cG-P1F"/>
                     <constraint firstAttribute="trailingMargin" secondItem="W5a-KN-jjY" secondAttribute="trailing" constant="19" id="7bA-lt-NQK"/>
                     <constraint firstAttribute="bottomMargin" secondItem="XMd-Lr-PgT" secondAttribute="bottom" constant="-0.5" id="Bhc-ee-Zgc"/>
+                    <constraint firstItem="4LV-mq-FF2" firstAttribute="leading" secondItem="VzY-Mm-2J5" secondAttribute="leading" id="COl-R2-DH5"/>
                     <constraint firstItem="XMd-Lr-PgT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="FFj-CU-ljN" secondAttribute="bottom" constant="13" id="DR5-Td-Abk"/>
                     <constraint firstItem="sc5-Ya-ziL" firstAttribute="centerY" secondItem="W5a-KN-jjY" secondAttribute="centerY" id="J1B-Yc-QNQ"/>
                     <constraint firstItem="qxJ-9P-vme" firstAttribute="leading" secondItem="Y2q-od-FSj" secondAttribute="trailing" constant="8" id="Mvo-11-Azn"/>
-                    <constraint firstItem="Lii-EY-LK6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="P3W-fM-imx"/>
+                    <constraint firstItem="4LV-mq-FF2" firstAttribute="centerY" secondItem="tR1-CF-Nb5" secondAttribute="centerY" id="NFr-lR-bKj"/>
                     <constraint firstItem="0yX-0M-5gN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="Rdn-RU-hnG"/>
                     <constraint firstAttribute="trailingMargin" secondItem="tR1-CF-Nb5" secondAttribute="trailing" constant="19" id="S2W-Mp-cCb"/>
                     <constraint firstItem="VzY-Mm-2J5" firstAttribute="top" secondItem="0yX-0M-5gN" secondAttribute="bottom" constant="10.5" id="UL6-Oi-9BP"/>
@@ -172,17 +183,28 @@
                     <constraint firstItem="1ro-l5-Lug" firstAttribute="centerY" secondItem="lbn-Ga-fd0" secondAttribute="centerY" id="gXR-rS-nL4"/>
                     <constraint firstItem="W5a-KN-jjY" firstAttribute="leading" secondItem="sc5-Ya-ziL" secondAttribute="trailing" constant="1" id="iCc-Hc-zjq"/>
                     <constraint firstItem="P2E-S6-3xG" firstAttribute="leading" secondItem="VzY-Mm-2J5" secondAttribute="trailing" constant="8" id="iRU-9t-vMI"/>
-                    <constraint firstItem="tR1-CF-Nb5" firstAttribute="centerY" secondItem="Lii-EY-LK6" secondAttribute="centerY" id="izU-iE-XYN"/>
+                    <constraint firstItem="4LV-mq-FF2" firstAttribute="top" secondItem="VzY-Mm-2J5" secondAttribute="bottom" constant="12" id="jdw-5o-gs6"/>
                     <constraint firstItem="VzY-Mm-2J5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="lFR-vI-gQ8"/>
-                    <constraint firstItem="1ro-l5-Lug" firstAttribute="top" secondItem="Lii-EY-LK6" secondAttribute="bottom" constant="36.5" id="mf0-bz-IxR"/>
+                    <constraint firstItem="tR1-CF-Nb5" firstAttribute="leading" secondItem="pAv-El-34F" secondAttribute="trailing" constant="8" id="nTQ-ht-hYQ"/>
                     <constraint firstItem="XMd-Lr-PgT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="oEI-I4-GLc"/>
                     <constraint firstItem="1ro-l5-Lug" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="oKO-5e-hdK"/>
-                    <constraint firstItem="Lii-EY-LK6" firstAttribute="top" secondItem="P2E-S6-3xG" secondAttribute="bottom" constant="9" id="rB0-Ml-A4C"/>
+                    <constraint firstItem="1ro-l5-Lug" firstAttribute="top" secondItem="4LV-mq-FF2" secondAttribute="bottom" constant="36.5" id="woW-vS-rh4"/>
                     <constraint firstItem="0yX-0M-5gN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="xyd-9i-Tvh"/>
                     <constraint firstAttribute="trailingMargin" secondItem="FFj-CU-ljN" secondAttribute="trailing" constant="19" id="yef-kY-b4K"/>
                     <constraint firstItem="qxJ-9P-vme" firstAttribute="top" secondItem="OsZ-Xd-UFU" secondAttribute="bottom" constant="3.5" id="zBj-VA-ipz"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="alipayName" destination="OsZ-Xd-UFU" id="1IF-mP-nxD"/>
+                <outlet property="codeField" destination="W5a-KN-jjY" id="kQs-o7-e2y"/>
+                <outlet property="mobileL" destination="Y2q-od-FSj" id="PmA-Hb-Bu1"/>
+                <outlet property="moneyField" destination="pAv-El-34F" id="UPh-jy-2Dq"/>
+                <outlet property="otherAccountField" destination="P2E-S6-3xG" id="1v9-Hh-wG7"/>
+                <outlet property="sendCodeBtn" destination="qxJ-9P-vme" id="BUz-OI-EVt"/>
+                <outlet property="sureBtn" destination="tR1-CF-Nb5" id="JSq-tb-mxK"/>
+                <outlet property="sureWithdrawalBtn" destination="FFj-CU-ljN" id="Re9-3X-0gp"/>
+                <outlet property="withdrawalField" destination="lbn-Ga-fd0" id="PBg-ZX-cI9"/>
+            </connections>
             <point key="canvasLocation" x="139" y="280"/>
         </tableViewCell>
     </objects>

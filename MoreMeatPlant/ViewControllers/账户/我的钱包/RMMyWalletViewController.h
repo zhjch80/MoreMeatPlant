@@ -8,8 +8,17 @@
 
 #import "RMBaseViewController.h"
 
+typedef void (^RMMyWalletViewCloseCallBack)(id sender);
+typedef void (^RMMyWalletViewBillCallBack)(id sender);
+
+
 @interface RMMyWalletViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
+@property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 
+@property (weak, nonatomic) IBOutlet UIButton *billBtn;
+
+@property (copy, nonatomic) RMMyWalletViewBillCallBack billcallback;
+@property (copy, nonatomic) RMMyWalletViewCloseCallBack closecallback;
 
 @end

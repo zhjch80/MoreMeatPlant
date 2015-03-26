@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RMPayTypeTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *yu_e_payBtn;
+@property (weak, nonatomic) IBOutlet UIButton *alipayBtn;
 
 @end

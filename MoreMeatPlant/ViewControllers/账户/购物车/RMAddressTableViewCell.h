@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface RMAddressTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *selectAddressBtn;
+@property (weak, nonatomic) IBOutlet UILabel *linkName;
+@property (weak, nonatomic) IBOutlet UILabel *mobile;
+@property (weak, nonatomic) IBOutlet UILabel *detailAddress;
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
 
 @end

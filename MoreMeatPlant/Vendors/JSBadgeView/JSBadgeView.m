@@ -31,13 +31,13 @@
 
 #define kMarginToDrawInside (kBadgeStrokeWidth * 2)
 
-#define kShadowOffset CGSizeMake(0.0f, 3.0f)
-#define kShadowOpacity 0.4f
+#define kShadowOffset CGSizeMake(0.0f, 0.0f)
+#define kShadowOpacity 1.0f
 #define kShadowColor [UIColor colorWithWhite:0.0f alpha:kShadowOpacity]
 #define kShadowRadius 1.0f
 
 #define kBadgeHeight 15.0f
-#define kBadgeTextSideMargin 8.0f
+#define kBadgeTextSideMargin 4.0f
 
 #define kBadgeCornerRadius 10.0f
 
@@ -114,9 +114,10 @@
     CGRect superviewFrame = CGRectIsEmpty(_frameToPositionInRelationWith) ? self.superview.frame : _frameToPositionInRelationWith;
     
     CGFloat textWidth = [self sizeOfTextForCurrentSettings].width;
+    CGFloat textHeight = [self sizeOfTextForCurrentSettings].height;
     
     CGFloat viewWidth = textWidth + kBadgeTextSideMargin + (kMarginToDrawInside * 2) ;//+ 8;
-    CGFloat viewHeight = kBadgeHeight + (kMarginToDrawInside * 2);
+    CGFloat viewHeight = textHeight + (kMarginToDrawInside * 2);
     
     CGFloat superviewWidth = superviewFrame.size.width;
     CGFloat superviewHeight = superviewFrame.size.height;

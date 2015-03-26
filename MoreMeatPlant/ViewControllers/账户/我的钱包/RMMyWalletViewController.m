@@ -41,6 +41,11 @@
     
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     self.view.backgroundColor = [UIColor clearColor];
+    
+    [_billBtn addTarget:self action:@selector(billAction:) forControlEvents:UIControlEventTouchDown];
+    [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];
+    
+    
 }
 
 - (void)keyboardWillShow:(NSNotification *)noti {
@@ -82,13 +87,20 @@
         RMMyWalletYueTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMMyWalletYueTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMMyWalletYueTableViewCell" owner:self options:nil] lastObject];
+             [cell.chargeRecordBtn addTarget:self action:@selector(billAction:) forControlEvents:UIControlEventTouchDown];
+            [cell.chargeBtn addTarget:self action:@selector(chargeAction:) forControlEvents:UIControlEventTouchDown];
+            [cell.turnBtn addTarget:self action:@selector(sureTurnAction:) forControlEvents:UIControlEventTouchDown];
         }
+       
         return cell;
     }
     else{
         RMMyWalletTransferTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMMyWalletTransferTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMMyWalletTransferTableViewCell" owner:self options:nil] lastObject];
+            [cell.sureBtn addTarget:self action:@selector(sureTurnOutAction:) forControlEvents:UIControlEventTouchDown];
+            [cell.sureWithdrawalBtn addTarget:self action:@selector(sureWithdrawalAction:) forControlEvents:UIControlEventTouchDown];
+            [cell.sendCodeBtn addTarget:self action:@selector(sendCodeAction:) forControlEvents:UIControlEventTouchDown];
         }
         return cell;
     }
@@ -100,6 +112,44 @@
     }
     else{
         return 334.f;
+    }
+}
+
+
+#pragma mark - 发送验证码
+- (void)sendCodeAction:(id)sender{
+
+}
+
+#pragma mark - 确认转出
+- (void)sureTurnOutAction:(id)sender{
+
+}
+#pragma mark - 确认提现
+- (void)sureWithdrawalAction:(id)sender{
+    
+}
+
+#pragma mark - 充值
+- (void)chargeAction:(id)sender{
+
+}
+
+#pragma mark - 确认转余额为花币
+- (void)sureTurnAction:(id)sender{
+
+}
+
+#pragma mark - 关闭
+- (void)closeAction:(id)sender{
+    if(_closecallback){
+        _closecallback(sender);
+    }
+}
+#pragma mark - 账单
+- (void)billAction:(id)sender{
+    if(_billcallback){
+        _billcallback(sender);
     }
 }
 

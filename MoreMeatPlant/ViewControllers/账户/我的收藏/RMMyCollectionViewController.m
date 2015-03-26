@@ -20,6 +20,12 @@
     
     [self setCustomNavTitle:@"我的收藏"];
     
+    
+    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+
+    
     current_index = 0;
     postCollectionController = [[RMPostCollectionViewController alloc]initWithNibName:@"RMPostCollectionViewController" bundle:nil];
     postCollectionController.view.frame = CGRectMake(0, _operationView.frame.origin.y+_operationView.frame.size.height, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height)-49);
@@ -86,6 +92,25 @@
     }];
     }
 
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
+        switch (sender.tag) {
+            case 1:{
+                [self.navigationController popViewControllerAnimated:YES];
+                break;
+            }
+            case 2:{
+                
+                break;
+            }
+            case 3:{
+                
+                break;
+            }
+                
+            default:
+                break;
+        }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

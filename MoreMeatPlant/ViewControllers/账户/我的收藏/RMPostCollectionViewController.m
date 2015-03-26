@@ -8,6 +8,7 @@
 
 #import "RMPostCollectionViewController.h"
 #import "RMReleasePoisonDetailsViewController.h"
+
 @interface RMPostCollectionViewController ()
 
 @end
@@ -17,7 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
+    
+    dataArr = [[NSMutableArray alloc] initWithObjects:@"",@"",@"",@"", nil];
     
 }
 #pragma mark -

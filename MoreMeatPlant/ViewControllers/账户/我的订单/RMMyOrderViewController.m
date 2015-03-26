@@ -29,6 +29,11 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor clearColor];
     [self setCustomNavTitle:@"我的订单"];
+    
+    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    
     waitDeliveryCtl = [[RMOrderListViewController alloc]initWithNibName:@"RMOrderListViewController" bundle:nil];
     waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
     waitDeliveryCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);

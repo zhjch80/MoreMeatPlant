@@ -611,6 +611,7 @@
 		512D752D1AB1F3FF0027B7C7 /* RMMyWalletYueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 512D752B1AB1F3FF0027B7C7 /* RMMyWalletYueTableViewCell.xib */; };
 		512D75311AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 512D752F1AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m */; };
 		512D75321AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 512D75301AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib */; };
+		51319DE21AC47497002320B8 /* RMLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51319DE11AC47497002320B8 /* RMLocationManager.m */; };
 		5144E7921AC3168D00190C50 /* bbgl_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5144E7911AC3168D00190C50 /* bbgl_btn.png */; };
 		5144E7941AC31B8500190C50 /* img_class.png in Resources */ = {isa = PBXBuildFile; fileRef = 5144E7931AC31B8500190C50 /* img_class.png */; };
 		5144E7D71AC4401F00190C50 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5144E7D41AC4401F00190C50 /* libbaidumapapi.a */; };
@@ -1661,6 +1662,8 @@
 		512D752E1AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyWalletTransferTableViewCell.h; sourceTree = "<group>"; };
 		512D752F1AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMyWalletTransferTableViewCell.m; sourceTree = "<group>"; };
 		512D75301AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMyWalletTransferTableViewCell.xib; sourceTree = "<group>"; };
+		51319DE01AC47497002320B8 /* RMLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMLocationManager.h; sourceTree = "<group>"; };
+		51319DE11AC47497002320B8 /* RMLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMLocationManager.m; sourceTree = "<group>"; };
 		5144E7911AC3168D00190C50 /* bbgl_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bbgl_btn.png; sourceTree = "<group>"; };
 		5144E7931AC31B8500190C50 /* img_class.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_class.png; sourceTree = "<group>"; };
 		5144E7971AC4401F00190C50 /* BMapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMapKit.h; sourceTree = "<group>"; };
@@ -3405,6 +3408,8 @@
 				1D64F4DE1A904E180073EB98 /* ViewControllers */,
 				1D9336F21A8E3DFA00BA4FA7 /* AppDelegate.h */,
 				1D9336F31A8E3DFA00BA4FA7 /* AppDelegate.m */,
+				51319DE01AC47497002320B8 /* RMLocationManager.h */,
+				51319DE11AC47497002320B8 /* RMLocationManager.m */,
 				1D9336FE1A8E3DFA00BA4FA7 /* Images.xcassets */,
 				1D9336EE1A8E3DFA00BA4FA7 /* Supporting Files */,
 			);
@@ -4957,6 +4962,7 @@
 				0A4104AA1ABAAE9B0060FBD5 /* SRRefreshView.m in Sources */,
 				51D883D01ABB1D0C00F7A3BD /* RMAdvertisingSectionTableViewCell.m in Sources */,
 				0A41057D1ABAB3C70060FBD5 /* UIView+EMWebCacheOperation.m in Sources */,
+				51319DE21AC47497002320B8 /* RMLocationManager.m in Sources */,
 				51E268511AAF3DCA00252DEF /* RMAddressTableViewCell.m in Sources */,
 				1D93AB851AB131A10034574C /* RMBaseView.m in Sources */,
 				0A4105691ABAB3C70060FBD5 /* MWPhotoBrowser.m in Sources */,

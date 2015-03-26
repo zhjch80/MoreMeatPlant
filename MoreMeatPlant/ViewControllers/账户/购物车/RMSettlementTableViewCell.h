@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RMSettlementTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *settlementBtn;
 
 @end

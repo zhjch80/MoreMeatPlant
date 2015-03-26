@@ -26,8 +26,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [_mapView viewWillDisappear];
-    _mapView.delegate = nil; // 不用时，置nil
+    _mapView.delegate = nil; //不用时，置nil
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -98,6 +98,13 @@
                     case 1:{//我的钱包
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
                         mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
+                        mywallet.closecallback = ^(UIButton * sender){
+                            [self dismissPopUpViewControllerWithcompletion:nil];
+                        };
+                        mywallet.billcallback = ^(UIButton * sender){
+                            //跳转到账单界面push
+                            
+                        };
                         [self presentPopUpViewController:mywallet overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-108)];
                     }
                         break;
@@ -136,13 +143,13 @@
                         [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
                     }
                         break;
-                    case 6:{//等待升级
-                       
-                    }
-                        break;
-                    case 7:{//购物车
+                    case 6:{//购物车
                         RMShopCarViewController * shopcar = [[RMShopCarViewController alloc]initWithNibName:@"RMShopCarViewController" bundle:nil];
                         [self.navigationController pushViewController:shopcar animated:YES];
+                    }
+                        break;
+                    case 7:{//等待升级
+                       
                         
                     }
                         break;

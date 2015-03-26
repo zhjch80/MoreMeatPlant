@@ -81,6 +81,11 @@
 
 - (void)initPlat{
     [self setCustomNavTitle:@"购物篮"];
+    
+    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    
     _mTableView.backgroundColor = [UIColor clearColor];
     _mTableView.opaque = NO;
     [_settleBtn addTarget:self action:@selector(settlementAction:) forControlEvents:UIControlEventTouchDown];
@@ -122,6 +127,7 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMShopCarGoodsTableViewCell" owner:self options:nil] lastObject];
             [cell.addBtn addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchDown];
             [cell.subBtn addTarget:self action:@selector(subAction:) forControlEvents:UIControlEventTouchDown];
+            [cell.deleteBtn addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchDown];
             cell.numTextField.delegate = self;
         }
         cell.addBtn.tag = 1000*indexPath.section+indexPath.row;
@@ -183,6 +189,12 @@
     }
     cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
 }
+
+#pragma mark - 删除
+- (void)deleteAction:(id)sender{
+
+}
+
 #pragma mark - 联系卖家
 - (void)contactCorpAction:(UIButton *)sender{
      NSIndexPath * indexpath = [NSIndexPath indexPathForRow:sender.tag%1000 inSection:sender.tag/1000];
@@ -205,6 +217,29 @@
         [self.navigationController pushViewController:address_edit animated:YES];
     };
     [self presentPopUpViewController:settle overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+}
+
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
+    switch (sender.tag) {
+        case 1:
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+            break;
+        case 2:
+        {
+            
+        }
+            break;
+        case 3:
+        {
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 /*

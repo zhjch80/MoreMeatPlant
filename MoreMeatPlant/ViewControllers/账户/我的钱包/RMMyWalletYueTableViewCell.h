@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface RMMyWalletYueTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *yu_eL;
+@property (weak, nonatomic) IBOutlet UIButton *chargeRecordBtn;
+@property (weak, nonatomic) IBOutlet UIButton *chargeBtn;
+@property (weak, nonatomic) IBOutlet UILabel *hua_biL;
+@property (weak, nonatomic) IBOutlet UITextField *yue_Z_huabiTextField;
+@property (weak, nonatomic) IBOutlet UIButton *turnBtn;
 
 @end

@@ -39,19 +39,6 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsY-yg-3hL">
-                        <rect key="frame" x="185" y="16" width="57" height="25.5"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="25.5" id="Ewn-k5-wtW"/>
-                            <constraint firstAttribute="width" constant="57" id="WGa-UM-LvA"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
-                        <state key="normal" title="充值记录" backgroundImage="wallet_btn.png">
-                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sjb-NV-qpc">
                         <rect key="frame" x="250" y="16" width="46" height="25.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -59,7 +46,7 @@
                             <constraint firstAttribute="width" constant="46" id="9ii-R5-Acu"/>
                             <constraint firstAttribute="height" constant="25.5" id="PHu-g0-IPY"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
                         <state key="normal" title="充值" backgroundImage="wallet_btn.png">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -105,8 +92,21 @@
                             <constraint firstAttribute="height" constant="25.5" id="BSa-Pp-TVe"/>
                             <constraint firstAttribute="width" constant="123" id="HKQ-Ec-GfM"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
                         <state key="normal" title="确认余额转为花币" backgroundImage="wallet_btn.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsY-yg-3hL">
+                        <rect key="frame" x="185" y="16" width="57" height="25.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25.5" id="Ewn-k5-wtW"/>
+                            <constraint firstAttribute="width" constant="57" id="WGa-UM-LvA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
+                        <state key="normal" title="充值记录" backgroundImage="wallet_btn.png">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -137,7 +137,15 @@
                     <constraint firstItem="fym-63-gYD" firstAttribute="top" secondItem="sdE-PE-ALw" secondAttribute="bottom" constant="14.5" id="zpu-gf-Dv3"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="240" y="148.5"/>
+            <connections>
+                <outlet property="chargeBtn" destination="Sjb-NV-qpc" id="4hs-qz-GYe"/>
+                <outlet property="chargeRecordBtn" destination="MsY-yg-3hL" id="nAq-FM-XZj"/>
+                <outlet property="hua_biL" destination="sdE-PE-ALw" id="m5y-rn-rt3"/>
+                <outlet property="turnBtn" destination="PZ5-nY-3Ui" id="bK6-K5-1jk"/>
+                <outlet property="yu_eL" destination="Jcr-uc-9ny" id="qjA-TK-S17"/>
+                <outlet property="yue_Z_huabiTextField" destination="fym-63-gYD" id="AX7-EF-Esl"/>
+            </connections>
+            <point key="canvasLocation" x="235" y="211.5"/>
         </tableViewCell>
     </objects>
     <resources>

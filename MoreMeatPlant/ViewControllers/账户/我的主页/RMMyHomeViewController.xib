@@ -13,8 +13,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RMMyHomeViewController">
             <connections>
+                <outlet property="attentionHeBtn" destination="Vhu-y9-VtE" id="JYZ-Nl-56m"/>
+                <outlet property="city" destination="tlB-2e-D70" id="xUT-Ak-Dcc"/>
+                <outlet property="content_img" destination="LfR-7F-Pan" id="gq7-T3-FhK"/>
+                <outlet property="content_name" destination="wA0-KN-xxO" id="2jJ-Ri-tFp"/>
+                <outlet property="content_signature" destination="Rcs-So-ek9" id="GFD-0i-pmM"/>
+                <outlet property="hua_bi" destination="vT8-he-avS" id="GVt-JI-64I"/>
                 <outlet property="mainTableView" destination="3ww-Tf-wla" id="3Kq-fp-dmx"/>
+                <outlet property="sendPrivateMsgBtn" destination="eJ2-Rn-zvS" id="wUH-MI-l0h"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yu_e" destination="yy4-vK-UeH" id="lAL-1Y-dlW"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -178,7 +186,7 @@
                 <constraint firstAttribute="bottom" secondItem="3ww-Tf-wla" secondAttribute="bottom" constant="40" id="ikt-h2-Ju6"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="28" y="83"/>
+            <point key="canvasLocation" x="59" y="124"/>
         </view>
     </objects>
     <resources>

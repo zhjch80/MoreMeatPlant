@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RMAddAddressTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *addAddress;
 
 @end
