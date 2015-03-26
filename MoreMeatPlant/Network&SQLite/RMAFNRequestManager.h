@@ -33,12 +33,11 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      type        广告类型
  *   1：首页广告、2：放毒区、3：放毒区帖子底部、4：一物一拍、5：鲜肉市场
  */
-- (void)getAdvertisingQueryWithType:(NSInteger)type;
-
++ (void)getAdvertisingQueryWithType:(NSInteger)type callBack:(RMAFNRequestManagerCallBack)block;
 /**
  *  @method     首页栏目
  */
-- (void)getHomeColumnsNumber;
++ (void)getHomeColumnsNumberCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     植物大全列表
@@ -97,12 +96,13 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      user_password   会员密码
  
  */
-- (void)getPostsListWithPostsType:(NSString *)postsType
++ (void)getPostsListWithPostsType:(NSString *)postsType
                     withPlantType:(NSString *)plantType
                 withPlantSubjects:(NSString *)plantSubjects
                     withPageCount:(NSInteger)pageCount
                       withUser_id:(NSString *)user_id
-                withUser_password:(NSString *)user_password;
+                withUser_password:(NSString *)user_password
+                         callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     帖子最终

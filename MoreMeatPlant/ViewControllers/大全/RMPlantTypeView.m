@@ -33,9 +33,9 @@
     
     switch (counts) {
         case 6:{
-            kWidthOffset = 8.0;
-            kHeightChangeOffset = 7.0;
-            kHeightNormalOffset = 12.0;
+            kWidthOffset = 0.0;
+            kHeightChangeOffset = 0.0;
+            kHeightNormalOffset = 0.0;
             break;
         }
         default:
@@ -55,10 +55,10 @@
         rmImg.tag = 400+i;
         rmImg.identifierString = [NSString stringWithFormat:@"%ld",(long)i];
         if (i==0){
-            rmImg.frame = CGRectMake(4 + i*(width/counts), 5, width/counts - kWidthOffset, width/counts - kHeightChangeOffset);
+            rmImg.frame = CGRectMake(5 + i*(width/counts), 5, 44, 49);
             [rmImg sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
         }else{
-            rmImg.frame = CGRectMake(4 + i*(width/counts), 5, width/counts - kWidthOffset, width/counts - kHeightNormalOffset);
+            rmImg.frame = CGRectMake(5 + i*(width/counts), 5, 44, 44);
             [rmImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         }
         [rmImg addTarget:self withSelector:@selector(selectedPlantType:)];
@@ -81,7 +81,7 @@
             RMImageView * img = (RMImageView *)[self viewWithTag:400 + i];
             RMPublicModel * model = [imagesArr objectAtIndex:i];
 
-            img.frame = CGRectMake(4 + i*(width/counts), 5, width/counts - kWidthOffset, width/counts - kHeightNormalOffset);
+            img.frame = CGRectMake(4 + i*(width/counts), 5, 44, 44);
             if (img.identifierString.integerValue == currentType){
                 [img sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
                 CGFloat x = img.frame.origin.x;

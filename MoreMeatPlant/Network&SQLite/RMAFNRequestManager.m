@@ -32,26 +32,15 @@
  *  @param      type        广告类型
  *   1：首页广告、2：放毒区、3：放毒区帖子底部、4：一物一拍、5：鲜肉市场
  */
-- (void)getAdvertisingQueryWithType:(NSInteger)type {
-    __weak RMAFNRequestManager *weekSelf = self;
++ (void)getAdvertisingQueryWithType:(NSInteger)type callBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=ad&auto_id=%ld",baseUrl,(long)type];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
-        if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
-            NSMutableArray * array = [NSMutableArray array];
-            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                model.content_img = OBJC([[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
-                model.member_id = OBJC([[[responseObject objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
-                [array addObject:model];
-            }
-            if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
-                [self.delegate requestFinishiDownLoadWith:array];
-            }
-        }else{
+        if (block){
+            block (nil, [responseObject objectForKey:@"status"], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
-            [weekSelf.delegate requestError:error];
+        if (block){
+            block (error, NO, kMSGFailure);
         }
     }];
 }
@@ -59,41 +48,15 @@
 /**
  *  @method     首页栏目
  */
-- (void)getHomeColumnsNumber {
-    __weak RMAFNRequestManager *weekSelf = self;
++ (void)getHomeColumnsNumberCallBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=indexNum&level=2",baseUrl];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
-            NSMutableArray * array = [NSMutableArray array];
-            
-            [array addObject:@""];
-            
-            for (NSInteger i=0; i<5; i++) {
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                model.modules_name = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:0] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_name"]);
-                model.modules_img = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:0] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_img"]);
-                model.content_num = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:0] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"content_num"]);
-                [array addObject:model];
-            }
-            
-            [array addObject:@""];
-        
-            for (NSInteger i=0; i<2; i++){
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                model.modules_name = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:1] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_name"]);
-                model.modules_img = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:1] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_img"]);
-                model.content_num = OBJC([[[[[responseObject objectForKey:@"data"] objectAtIndex:1] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"content_num"]);
-                [array addObject:model];
-            }
-            
-            if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
-                [self.delegate requestFinishiDownLoadWith:array];
-            }
-        }else{
+        if (block){
+            block (nil, [responseObject objectForKey:@"status"], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
-            [weekSelf.delegate requestError:error];
+        if (block){
+            block (error, NO, kMSGFailure);
         }
     }];
 }
@@ -284,30 +247,21 @@
  *  @param      user_password   会员密码
 
  */
-- (void)getPostsListWithPostsType:(NSString *)postsType
++ (void)getPostsListWithPostsType:(NSString *)postsType
                     withPlantType:(NSString *)plantType
                 withPlantSubjects:(NSString *)plantSubjects
                     withPageCount:(NSInteger)pageCount
                       withUser_id:(NSString *)user_id
-                withUser_password:(NSString *)user_password {
-    __weak RMAFNRequestManager *weekSelf = self;
+                withUser_password:(NSString *)user_password
+                         callBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&type=%@&class=%@&course=%@&per=1&row=10&page=%ld&ID=%@&PWD=%@",baseUrl,postsType,plantType,plantSubjects,(long)pageCount,user_id,user_password];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
-            NSMutableArray * array = [NSMutableArray array];
-            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                
-                [array addObject:model];
-            }
-            if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
-                [self.delegate requestFinishiDownLoadWith:array];
-            }
-        }else{
+        if (block){
+            block (nil, [responseObject objectForKey:@"status"], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
-            [weekSelf.delegate requestError:error];
+        if (block){
+            block(error, NO, kMSGFailure);
         }
     }];
 }

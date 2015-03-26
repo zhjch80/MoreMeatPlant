@@ -33,40 +33,25 @@ typedef enum{
     kRMUpgradeSuggest = 8,
 }GotoViewControllerName;
 
-typedef enum{
-    requestAdvertising = 501,
-    requestColumns
-}RequestType;
-
-@interface RMHomeViewController ()<UITableViewDataSource,UITableViewDelegate,RMAFNRequestManagerDelegate>{
+@interface RMHomeViewController ()<UITableViewDataSource,UITableViewDelegate>{
     BOOL isFirstViewDidAppear;
-    RequestType requestType;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;             //本地标题
 @property (nonatomic, strong) NSMutableArray * dataImgArr;          //本地标题对应图片资源
 @property (nonatomic, strong) NSMutableArray * advertisingArr;      //广告数据
 @property (nonatomic, strong) NSMutableArray * columnsArr;          //栏目数量
-@property (nonatomic, strong) RMAFNRequestManager * adManager;
-@property (nonatomic, strong) RMAFNRequestManager * manager;
 
 @end
 
 @implementation RMHomeViewController
-@synthesize mTableView, adManager, advertisingArr, manager, columnsArr, dataImgArr;
+@synthesize mTableView, advertisingArr, columnsArr, dataImgArr;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!isFirstViewDidAppear){
-        adManager = [[RMAFNRequestManager alloc] init];
-        adManager.delegate = self;
-        requestType = requestAdvertising;
-        [adManager getAdvertisingQueryWithType:1];
+        [self requestAdvertisingQuery];
         isFirstViewDidAppear = YES;
-    }
-    
-    if (!manager){
-        manager = [[RMAFNRequestManager alloc] init];
     }
 }
 
@@ -92,7 +77,7 @@ typedef enum{
                   @"img_home_7",
                   nil];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, kScreenHeight - 44 - 20) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, kScreenHeight - 46 - 20) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -272,52 +257,73 @@ typedef enum{
     [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
-#pragma mark - AFNNetwork
+#pragma mark - 数据请求
 
-- (void)requestFinishiDownLoadWith:(NSMutableArray *)array {
-    switch (requestType) {
-        case requestAdvertising:{
-            advertisingArr = [NSMutableArray arrayWithArray:array];
-            
+/**
+ *  @method     广告
+ */
+- (void)requestAdvertisingQuery {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getAdvertisingQueryWithType:1 callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error::%@",error);
+            [self requestColumns];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
+                [advertisingArr addObject:model];
+            }
+
             [self loadTableHeaderView];
             
-            manager.delegate = self;
-            requestType = requestColumns;
-            [manager getHomeColumnsNumber];
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            break;
+            [self requestColumns];
         }
-        case requestColumns:{
-            columnsArr = [NSMutableArray arrayWithArray:array];
-            [mTableView reloadData];
-            break;
-        }
-            
-        default:
-            break;
-    }
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 
-- (void)requestError:(NSError *)error {
-    switch (requestType) {
-        case requestAdvertising:{
+/**
+ *  @method     list
+ */
+- (void)requestColumns {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getHomeColumnsNumberCallBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            //广告位置加载错误 run
-            manager.delegate = self;
-            requestType = requestColumns;
-            [manager getHomeColumnsNumber];
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            break;
+            return ;
         }
-        case requestColumns:{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            break;
+        
+        if (success){
+            [columnsArr addObject:@""];
+            
+            for (NSInteger i=0; i<5; i++) {
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.modules_name = OBJC([[[[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_name"]);
+                model.modules_img = OBJC([[[[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_img"]);
+                model.content_num = OBJC([[[[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"content_num"]);
+                [columnsArr addObject:model];
+            }
+            
+            [columnsArr addObject:@""];
+            
+            for (NSInteger i=0; i<2; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.modules_name = OBJC([[[[[object objectForKey:@"data"] objectAtIndex:1] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_name"]);
+                model.modules_img = OBJC([[[[[object objectForKey:@"data"] objectAtIndex:1] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"modules_img"]);
+                model.content_num = OBJC([[[[[object objectForKey:@"data"] objectAtIndex:1] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"content_num"]);
+                [columnsArr addObject:model];
+            }
         }
-        default:
-            break;
-    }
-    NSLog(@"error:%@",error);
+        [mTableView reloadData];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -21,12 +21,7 @@
 #import "RMSearchViewController.h"
 #import "RMPostClassificationView.h"
 
-typedef enum {
-    requestAdvertising = 501,
-    requestList
-}RequestType;
-
-@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RMAFNRequestManagerDelegate>{
+@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate>{
     BOOL isFirstViewDidAppear;
     
 }
@@ -38,19 +33,16 @@ typedef enum {
 @property (nonatomic, strong) RMPostClassificationView * fenleiAction;
 @property (nonatomic, strong) RMPostMessageView *action;
 @property (nonatomic, strong) ZFModalTransitionAnimator *animator;
-@property (nonatomic, strong) RMAFNRequestManager * manager;
-@property (nonatomic, assign) RequestType requestType;
 
 @end
 
 @implementation RMReleasePoisonViewController
-@synthesize mTableView, dataArr, fenleiAction, action, animator, postsTypeArr, manager, requestType, advertisingArr;
+@synthesize mTableView, dataArr, fenleiAction, action, animator, postsTypeArr, advertisingArr;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!isFirstViewDidAppear){
-        [manager getAdvertisingQueryWithType:2];
-        requestType = requestAdvertising;
+        [self requestAdvertisingQuery];
         isFirstViewDidAppear = YES;
     }
 }
@@ -59,8 +51,6 @@ typedef enum {
     [super viewDidLoad];
     postsTypeArr = [NSArray arrayWithObjects:@"家有鲜肉", @"播种育苗", @"求助提问", @"肉与花器", @"多肉绘画", @"世界见闻", nil];
     advertisingArr = [[NSMutableArray alloc] init];
-    manager = [[RMAFNRequestManager alloc] init];
-    manager.delegate = self;
     
     [self setRightBarButtonNumber:2];
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
@@ -364,54 +354,36 @@ typedef enum {
 
 #pragma mark - 数据请求
 
-- (void)requestListWithPageCount:(NSInteger)pageCount {
-    //TODO:第二个 三个参数 不对 不知道怎么传值
-    requestType = requestList;
-    [manager getPostsListWithPostsType:@"1" withPlantType:@"1" withPlantSubjects:@"1000" withPageCount:1 withUser_id:@"" withUser_password:@""];
-}
-
-- (void)requestFinishiDownLoadWith:(NSMutableArray *)array {
-    switch (requestType) {
-        case requestAdvertising:{
-            advertisingArr = [NSMutableArray arrayWithArray:array];
+- (void)requestAdvertisingQuery {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getAdvertisingQueryWithType:2 callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error::%@",error);
+            [self requestListWithPageCount:1];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
+                [advertisingArr addObject:model];
+            }
             
             [self loadTableViewHead];
             
-//            [self requestListWithPageCount:1];
-
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            break;
+            [self requestListWithPageCount:1];
         }
-        case requestList:{
-//            columnsArr = [NSMutableArray arrayWithArray:array];
-//            [mTableView reloadData];
-            break;
-        }
-            
-        default:
-            break;
-    }
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 
-- (void)requestError:(NSError *)error {
-    switch (requestType) {
-        case requestAdvertising:{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            //广告位置加载错误 run
-            requestType = requestList;
-            [manager getHomeColumnsNumber];
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            break;
-        }
-        case requestList:{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            break;
-        }
-        default:
-            break;
-    }
-    NSLog(@"error:%@",error);
+- (void)requestListWithPageCount:(NSInteger)pageCount {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    RMAFNRequestManager getPostsListWithPostsType:<#(NSString *)#> withPlantType:<#(NSString *)#> withPlantSubjects:<#(NSString *)#> withPageCount:<#(NSInteger)#> withUser_id:<#(NSString *)#> withUser_password:<#(NSString *)#> callBack:<#^(NSError *error, BOOL success, id object)block#>
+
 }
 
 - (void)didReceiveMemoryWarning {

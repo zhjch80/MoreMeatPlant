@@ -219,7 +219,7 @@
             }
             
             plantTypeView = [[RMPlantTypeView alloc] init];
-            plantTypeView.frame = CGRectMake(0, 64, kScreenWidth, kScreenWidth/7 + 5);
+            plantTypeView.frame = CGRectMake(0, 64, kScreenWidth, 54);
             plantTypeView.delegate = self;
             [plantTypeView loadPlantTypeWithImageArr:subsPlantArr];
             [self.view addSubview:plantTypeView];
