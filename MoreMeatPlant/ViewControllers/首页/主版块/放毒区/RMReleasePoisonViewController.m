@@ -26,9 +26,11 @@
     
 }
 @property (nonatomic, strong) UITableView * mTableView;
-@property (nonatomic, strong) NSMutableArray * dataArr;
-@property (nonatomic, strong) NSMutableArray * advertisingArr;
-@property (nonatomic, strong) NSArray * postsTypeArr;
+@property (nonatomic, strong) NSMutableArray * dataArr;         //列表数据
+@property (nonatomic, strong) NSMutableArray * advertisingArr;  //广告数据
+@property (nonatomic, strong) NSMutableArray * postsTypeArr;    //植物分类
+@property (nonatomic, strong) NSMutableArray * subsPlantArr;    //植物科目
+@property (nonatomic, strong) NSMutableArray * newsArr;         //新闻
 
 @property (nonatomic, strong) RMPostClassificationView * fenleiAction;
 @property (nonatomic, strong) RMPostMessageView *action;
@@ -37,20 +39,21 @@
 @end
 
 @implementation RMReleasePoisonViewController
-@synthesize mTableView, dataArr, fenleiAction, action, animator, postsTypeArr, advertisingArr;
+@synthesize mTableView, dataArr, fenleiAction, action, animator, postsTypeArr, advertisingArr, subsPlantArr, newsArr;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!isFirstViewDidAppear){
         [self requestAdvertisingQuery];
+        [self requestNews];
+        [self requestPlantSubjects];
+        [self reqestPlantClassification];
         isFirstViewDidAppear = YES;
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    postsTypeArr = [NSArray arrayWithObjects:@"家有鲜肉", @"播种育苗", @"求助提问", @"肉与花器", @"多肉绘画", @"世界见闻", nil];
-    advertisingArr = [[NSMutableArray alloc] init];
     
     [self setRightBarButtonNumber:2];
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
@@ -60,6 +63,11 @@
     [rightTwoBarButton setImage:[UIImage imageNamed:@"img_postMessage"] forState:UIControlStateNormal];
     [self setCustomNavTitle:@"放毒区"];
     
+    advertisingArr = [[NSMutableArray alloc] init];
+    postsTypeArr = [[NSMutableArray alloc] init];
+    subsPlantArr = [[NSMutableArray alloc] init];
+    newsArr = [[NSMutableArray alloc] init];
+    
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
     
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 38) style:UITableViewStylePlain];
@@ -68,8 +76,6 @@
     mTableView.backgroundColor = [UIColor clearColor];
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
-
-    [self loadTableViewHead];
     
     [self loadBottomView];
 }
@@ -86,7 +92,7 @@
 
 #pragma mark - 加载tableViewHead
 
-- (void)loadTableViewHead {
+- (void)loadTableHeaderView {
     UIView * headView = [[UIView alloc] init];
     
     RMImageView * rmImage = [[RMImageView alloc] init];
@@ -354,13 +360,15 @@
 
 #pragma mark - 数据请求
 
+/**
+ *  请求广告查询
+ */
 - (void)requestAdvertisingQuery {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager getAdvertisingQueryWithType:2 callBack:^(NSError *error, BOOL success, id object) {
         if (error){
-            NSLog(@"error::%@",error);
-            [self requestListWithPageCount:1];
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSLog(@"广告查询error::%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             return ;
         }
         
@@ -372,16 +380,103 @@
                 [advertisingArr addObject:model];
             }
             
-            [self loadTableViewHead];
-            
-            [self requestListWithPageCount:1];
+            [self loadTableHeaderView];
         }
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
 }
 
-- (void)requestListWithPageCount:(NSInteger)pageCount {
+/**
+ *  请求置顶数据
+ */
+- (void)requestNews {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getNewsWithOptionid:970 withPageCount:1 callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            [newsArr removeAllObjects];
+            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                model.view_link = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"view_link"]);
+                [newsArr addObject:model];
+            }
+            [self loadTableHeaderView];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
+/**
+ *  请求植物分类  (家有鲜肉，播种育苗...)
+ */
+- (void)reqestPlantClassification {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getPlantClassificationWithxCallBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"植物分类error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            [postsTypeArr removeAllObjects];
+            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.label = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"label"]);
+                model.value = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"value"]);
+                [postsTypeArr addObject:model];
+            }
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
+/**
+ *  请求植物科目  (景天科，番杏科，仙人球...)
+ */
+- (void)requestPlantSubjects {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getPlantSubjectsListWithLevel:1 callBack:^(NSError *error, BOOL success, id object) {
+        if (error) {
+            NSLog(@"植物科目error:%@",error);
+            [self requestListWithPageCount:1];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success) {
+            subsPlantArr = [[NSMutableArray alloc] init];
+            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
+                model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                model.change_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"change_img"]);
+                model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                model.modules_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"modules_name"]);
+                [subsPlantArr addObject:model];
+            }
+            
+            [self loadTableHeaderView];
+
+            [self requestListWithPageCount:1];
+
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
+/**
+ *
+ */
+- (void)requestListWithPageCount:(NSInteger)pageCount {
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 //    RMAFNRequestManager getPostsListWithPostsType:<#(NSString *)#> withPlantType:<#(NSString *)#> withPlantSubjects:<#(NSString *)#> withPageCount:<#(NSInteger)#> withUser_id:<#(NSString *)#> withUser_password:<#(NSString *)#> callBack:<#^(NSError *error, BOOL success, id object)block#>
 
 }

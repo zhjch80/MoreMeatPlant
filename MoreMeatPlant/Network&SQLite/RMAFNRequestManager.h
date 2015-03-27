@@ -40,6 +40,30 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
 + (void)getHomeColumnsNumberCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
+ *  @method     植物分类 (家有鲜肉，播种育苗...)
+ */
++ (void)getPlantClassificationWithxCallBack:(RMAFNRequestManagerCallBack)block;
+
+/**
+ *  @method     植物科目 (传值一：得 景天科，番杏科，仙人球... 传值二：得详细)
+ *  @param      level       级别      1：一级：大全顶部分类，2:二级：侧滑分类
+ */
++ (void)getPlantSubjectsListWithLevel:(NSInteger)level callBack:(RMAFNRequestManagerCallBack)block;
+
+/**
+ *  @method     News
+ *  @param      pageCount       页数
+ *  @param      optionid        类别 
+ *      970（放毒区）971（一肉一拍）972（鲜肉市场）973（肉肉交换）977（新手教程）
+ */
++ (void)getNewsWithOptionid:(NSInteger)optionid withPageCount:(NSInteger)pageCount callBack:(RMAFNRequestManagerCallBack)block;
+
+/**
+ *  @method     News    详情页
+ *  @param      auto_id         新闻标识
+ */
++ (void)getNewsDetailsWithAuto_id:(NSString *)auto_id callBack:(RMAFNRequestManagerCallBack)block;
+/**
  *  @method     植物大全列表
  *  @param      pageCount       分页
  */
@@ -51,11 +75,6 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  */
 - (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id;
 
-/**
- *  @method     植物科目 大全
- *  @param      level       级别      1：一级：大全顶部分类，2:二级：侧滑分类
- */
-+ (void)getPlantSubjectsListWithLevel:(NSInteger)level callBack:(RMAFNRequestManagerCallBack)block;
 /**
  *  @method     植物大全添加图片            未完成
  *  @param
@@ -73,18 +92,6 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                                    withCorrectInstructions:(NSString *)content_desc
                                                withUser_id:(NSString *)user_id
                                           withUserPassword:(NSString *)user_password;
-
-/**
- *  @method     防毒区 新闻列表
- *  @param      pageCount       页数
- */
-- (void)getReleasePoisonNewsListWithPageCount:(NSInteger)pageCount;
-
-/**
- *  @method     防毒区 新闻列表最终页
- *  @param      auto_id         新闻标识
- */
-- (void)getReleasePoisonNewsDetailsWithAuto_id:(NSString *)auto_id;
 
 /**
  *  @method     帖子列表

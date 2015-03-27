@@ -62,11 +62,63 @@
 }
 
 /**
+ *  @method     植物分类
+ */
++ (void)getPlantClassificationWithxCallBack:(RMAFNRequestManagerCallBack)block {
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=otherVars&type=classType",baseUrl];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block (nil, [responseObject objectForKey:@"status"], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
+/**
  *  @method     植物大全列表          少一个auto_id 字段
  *  @param      pageCount       分页
  */
 + (void)getPlantDaqoListWithPageCount:(NSInteger)pageCount callBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAll&data=series&order=asc&per=1&row=10&page=%ld",baseUrl,(long)pageCount];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block (nil, [responseObject objectForKey:@"status"], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
+/**
+ *  @method     News
+ *  @param      pageCount       页数
+ *  @param      optionid        类别
+ *      970（放毒区）971（一肉一拍）972（鲜肉市场）973（肉肉交换）977（新手教程）
+ */
++ (void)getNewsWithOptionid:(NSInteger)optionid withPageCount:(NSInteger)pageCount callBack:(RMAFNRequestManagerCallBack)block {
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNews&data=1&per=1&row=10&optionid=%ld&page=%ld",baseUrl,optionid,pageCount];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block (nil, [responseObject objectForKey:@"status"], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
+/**
+ *  @method     News    详情页
+ *  @param      auto_id         新闻标识
+ */
++ (void)getNewsDetailsWithAuto_id:(NSString *)auto_id callBack:(RMAFNRequestManagerCallBack)block {
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNewsview&auto_id=%@",baseUrl,auto_id];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block (nil, [responseObject objectForKey:@"status"], responseObject);
@@ -181,61 +233,6 @@
         }
     }];
 }
-
-/**
- *  @method     防毒区 新闻列表
- *  @param      pageCount       页数
- */
-- (void)getReleasePoisonNewsListWithPageCount:(NSInteger)pageCount {
-    __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNews&data=1&per=1&row=10&optionid=970&page=%ld",baseUrl,(long)pageCount];
-    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
-            NSMutableArray * array = [NSMutableArray array];
-            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                
-                [array addObject:model];
-            }
-            if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
-                [self.delegate requestFinishiDownLoadWith:array];
-            }
-        }else{
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
-            [weekSelf.delegate requestError:error];
-        }
-    }];
-}
-
-/**
- *  @method     防毒区 新闻列表最终页
- *  @param      auto_id         新闻标识
- */
-- (void)getReleasePoisonNewsDetailsWithAuto_id:(NSString *)auto_id {
-    __weak RMAFNRequestManager *weekSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNewsview&auto_id=%@",baseUrl,auto_id];
-    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
-            NSMutableArray * array = [NSMutableArray array];
-            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                
-                [array addObject:model];
-            }
-            if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
-                [self.delegate requestFinishiDownLoadWith:array];
-            }
-        }else{
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
-            [weekSelf.delegate requestError:error];
-        }
-    }];
-}
-
 
 /**
  *  @method     帖子列表

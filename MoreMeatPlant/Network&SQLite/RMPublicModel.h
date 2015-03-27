@@ -45,9 +45,9 @@
 @property (nonatomic, copy) NSString * member_id;           //商家会员标识
 @property (nonatomic, copy) NSString * auto_position;       //位置
 @property (nonatomic, copy) NSString * change_img;          //已点击的状态
-
-
-
+@property (nonatomic, copy) NSString * label;               //植物分类 （家有鲜肉，播种育苗...）
+@property (nonatomic, copy) NSString * value;               //植物分类 对应的标识
+@property (nonatomic, copy) NSString * view_link;           //链接
 
 
 
