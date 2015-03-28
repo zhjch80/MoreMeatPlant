@@ -282,7 +282,7 @@
             fenleiAction.delegate = self;
             fenleiAction.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
             fenleiAction.backgroundColor = [UIColor clearColor];
-            [fenleiAction initWithPostClassificationView];
+            [fenleiAction initWithPostClassificationViewWithPlantArr:nil withSubsPlant:nil];
             [self.view addSubview:fenleiAction];
             [fenleiAction show];
             break;
@@ -297,7 +297,7 @@
             action.delegate = self;
             action.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
             action.backgroundColor = [UIColor clearColor];
-            [action initWithPostMessageView];
+            [action initWithPostMessageViewWithPlantArr:nil withSubsPlant:nil];
             [self.view addSubview:action];
             [action show];
             break;

@@ -23,14 +23,19 @@
 
 @interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate>{
     BOOL isFirstViewDidAppear;
-    
+    BOOL isLoadAdver;       //是否已经加载广告
+    BOOL isLoadNews;        //是否已经加载置顶
+    BOOL isSubsPlant;       //是否已经加载科目
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;         //列表数据
 @property (nonatomic, strong) NSMutableArray * advertisingArr;  //广告数据
-@property (nonatomic, strong) NSMutableArray * postsTypeArr;    //植物分类
+@property (nonatomic, strong) NSMutableArray * plantTypeArr;    //植物分类
 @property (nonatomic, strong) NSMutableArray * subsPlantArr;    //植物科目
 @property (nonatomic, strong) NSMutableArray * newsArr;         //新闻
+
+@property (nonatomic, assign) NSInteger plantRequestValue;       //请求list数据 默认传空 用户可以选择植物分类
+@property (nonatomic, assign) NSInteger subsPlantRequestValue;   //请求list数据 默认传空 用户可以选择科目
 
 @property (nonatomic, strong) RMPostClassificationView * fenleiAction;
 @property (nonatomic, strong) RMPostMessageView *action;
@@ -39,7 +44,7 @@
 @end
 
 @implementation RMReleasePoisonViewController
-@synthesize mTableView, dataArr, fenleiAction, action, animator, postsTypeArr, advertisingArr, subsPlantArr, newsArr;
+@synthesize mTableView, dataArr, fenleiAction, action, animator, plantTypeArr, advertisingArr, subsPlantArr, newsArr, plantRequestValue, subsPlantRequestValue;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -64,9 +69,12 @@
     [self setCustomNavTitle:@"放毒区"];
     
     advertisingArr = [[NSMutableArray alloc] init];
-    postsTypeArr = [[NSMutableArray alloc] init];
+    plantTypeArr = [[NSMutableArray alloc] init];
     subsPlantArr = [[NSMutableArray alloc] init];
     newsArr = [[NSMutableArray alloc] init];
+    
+    plantRequestValue = 1000;
+    subsPlantRequestValue = 1000;
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
     
@@ -93,6 +101,8 @@
 #pragma mark - 加载tableViewHead
 
 - (void)loadTableHeaderView {
+    mTableView.tableHeaderView = nil;
+    
     UIView * headView = [[UIView alloc] init];
     
     RMImageView * rmImage = [[RMImageView alloc] init];
@@ -106,6 +116,7 @@
         RMImageView * popularizeView = [[RMImageView alloc] init];
         RMPublicModel * model = [advertisingArr objectAtIndex:i];
         popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + i*40, kScreenWidth, 40);
+        popularizeView.identifierString = model.member_id;
         [popularizeView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         [popularizeView addTarget:self withSelector:@selector(jumpPopularize:)];
         [headView addSubview:popularizeView];
@@ -114,22 +125,23 @@
     
     CGFloat height = rmImage.frame.size.height + 40 * value;
     
-    for (NSInteger i=0; i<2; i++) {
+    for (NSInteger i=0; i<[newsArr count]; i++) {
+        RMPublicModel * model = [newsArr objectAtIndex:i];
         RMStickView * stickView = [[RMStickView alloc] init];
         stickView.frame = CGRectMake(0, height + i*30, kScreenWidth, 30);
         [headView addSubview:stickView];
         stickView.delegate = self;
-        [stickView loadStickViewWithTitle:(i==0 ? @"新手教程！" : @"发帖前必看！") withOrder:i];
+        [stickView loadStickViewWithTitle:model.content_name withOrder:i];
     }
     
-    for (NSInteger i=0; i<2; i++) {
+    for (NSInteger i=0; i<[newsArr count]; i++) {
         height = height + 30;
     }
     
     RMPlantTypeView * plantTypeView = [[RMPlantTypeView alloc] init];
     plantTypeView.frame = CGRectMake(0, height, kScreenWidth, kScreenWidth/7.0 + 5);
     plantTypeView.delegate = self;
-    [plantTypeView loadPlantTypeWithImageArr:nil];
+    [plantTypeView loadPlantTypeWithImageArr:subsPlantArr];
     [headView addSubview:plantTypeView];
     
     height = height + kScreenWidth/7.0;
@@ -255,6 +267,7 @@
 
 - (void)selectedPostMessageWithPostsType:(NSInteger)type_1 withPlantType:(NSInteger)type_2 {
     [action dismiss];
+    RMPublicModel * model = [plantTypeArr objectAtIndex:type_1-401];
     RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
     startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
     
@@ -266,21 +279,31 @@
     animator.transitionDuration = 0.7f;
     animator.direction = ZFModalTransitonDirectionBottom;
     startPostingCtl.transitioningDelegate = animator;
-    startPostingCtl.subTitle = [postsTypeArr objectAtIndexedSubscript:(type_1-401)];
+    startPostingCtl.subTitle = model.label;
     [self presentViewController:startPostingCtl animated:YES completion:nil];
 }
 
 #pragma mark - 选择肉肉类型
 
 - (void)selectedPlantWithType:(NSString *)type {
-    NSLog(@"type:%@",type);
+    NSLog(@"科目：type:%@",type);
+}
+
+- (void)selectedPlantType:(NSInteger)type {
+    NSLog(@"分类：type:%ld",type);
+    if (type<6){
+        plantRequestValue = type;
+    }else{
+        subsPlantRequestValue = type;
+    }
 }
 
 #pragma mark - 跳转到置顶详情界面
 
 - (void)stickJumpDetailsWithOrder:(NSInteger)order {
+    RMPublicModel * model = [newsArr objectAtIndex:order];
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"置顶 新手必读"];
+    [baseWebCtl loadRequestWithUrl:model.view_link withTitle:[NSString stringWithFormat:@"置顶 %@",model.content_name]];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
@@ -294,11 +317,13 @@
 #pragma mark - 跳转到广告
 
 - (void)jumpPopularize:(RMImageView *)image {
-    NSLog(@"content_url:%@",image.identifierString);
+    NSLog(@"member_id:%@",image.identifierString);
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
     [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
+
+#pragma mark -
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
@@ -307,7 +332,7 @@
             fenleiAction.delegate = self;
             fenleiAction.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
             fenleiAction.backgroundColor = [UIColor clearColor];
-            [fenleiAction initWithPostClassificationView];
+            [fenleiAction initWithPostClassificationViewWithPlantArr:plantTypeArr withSubsPlant:subsPlantArr];
             [self.view addSubview:fenleiAction];
             [fenleiAction show];
             break;
@@ -322,7 +347,7 @@
             action.delegate = self;
             action.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
             action.backgroundColor = [UIColor clearColor];
-            [action initWithPostMessageView];
+            [action initWithPostMessageViewWithPlantArr:plantTypeArr withSubsPlant:subsPlantArr];
             [self.view addSubview:action];
             [action show];
             break;
@@ -403,6 +428,8 @@
             for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                model.content_title = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_title"]);
                 model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                 model.view_link = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"view_link"]);
                 [newsArr addObject:model];
@@ -426,12 +453,12 @@
         }
         
         if (success){
-            [postsTypeArr removeAllObjects];
+            [plantTypeArr removeAllObjects];
             for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.label = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"label"]);
                 model.value = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"value"]);
-                [postsTypeArr addObject:model];
+                [plantTypeArr addObject:model];
             }
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
@@ -473,12 +500,39 @@
 }
 
 /**
- *
+ *  请求List数据
  */
 - (void)requestListWithPageCount:(NSInteger)pageCount {
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    RMAFNRequestManager getPostsListWithPostsType:<#(NSString *)#> withPlantType:<#(NSString *)#> withPlantSubjects:<#(NSString *)#> withPageCount:<#(NSInteger)#> withUser_id:<#(NSString *)#> withUser_password:<#(NSString *)#> callBack:<#^(NSError *error, BOOL success, id object)block#>
-
+    NSString * plantType = @"";
+    NSString * subjectsType = @"";
+    
+    if (plantRequestValue == 1000){
+        plantType = @"";
+    }else{
+        RMPublicModel * model_1 = [plantTypeArr objectAtIndex:plantRequestValue];
+        plantType = model_1.value;
+    }
+    
+    if (subsPlantRequestValue == 1000){
+        subjectsType = @"";
+    }else{
+        RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
+        subjectsType = model_2.auto_code;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getPostsListWithPostsType:@"1" withPlantType:plantType withPlantSubjects:subjectsType withPageCount:1 withUser_id:@"" withUser_password:@"" callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            NSLog(@"object:%@",object);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

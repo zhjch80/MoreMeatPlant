@@ -10,6 +10,8 @@
 #import "RMImageView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CONST.h"
+#import "RMPublicModel.h"
+#import "UIImageView+WebCache.h"
 
 @interface RMPostMessageView ()
 @property (nonatomic, strong) UIImageView * subView;
@@ -22,50 +24,24 @@
 @property (nonatomic, assign) BOOL isSelectedType_1;
 @property (nonatomic, assign) BOOL isSelectedType_2;
 
-@property (nonatomic, strong) NSArray * tzTypeArr;
-@property (nonatomic, strong) NSArray * tzTypeedArr;
+@property (nonatomic, strong) NSMutableArray * plantArrs;
+@property (nonatomic, strong) NSMutableArray * subsPlantArrs;
 
 @end
 
 @implementation RMPostMessageView
-@synthesize subView, subHeight, height, width, postType_1, postType_2, isSelectedType_1, isSelectedType_2, tzTypeArr, tzTypeedArr;
+@synthesize subView, subHeight, height, width, postType_1, postType_2, isSelectedType_1, isSelectedType_2, plantArrs, subsPlantArrs;
 
-- (void)initWithPostMessageView {
+- (void)initWithPostMessageViewWithPlantArr:(NSArray *)plantArr withSubsPlant:(NSArray *)subsPlantArr {
+    plantArrs = [[NSMutableArray alloc] initWithArray:plantArr];
+    subsPlantArrs = [[NSMutableArray alloc] initWithArray:subsPlantArr];
+    
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [self addGestureRecognizer:gesture];
     
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     subHeight = 220;
-    
-    tzTypeArr = [NSArray arrayWithObjects:
-                           @"img_tz_1",
-                           @"img_tz_2",
-                           @"img_tz_3",
-                           @"img_tz_4",
-                           @"img_tz_5",
-                           @"img_tz_6",
-                           @"img_tz_7",
-                           @"img_tz_8",
-                           @"img_tz_9",
-                           @"img_tz_10",
-                           @"img_tz_11",
-                           @"img_tz_12",
-                           nil];
-    tzTypeedArr = [NSArray arrayWithObjects:
-                             @"img_tzed_1",
-                             @"img_tzed_2",
-                             @"img_tzed_3",
-                             @"img_tzed_4",
-                             @"img_tzed_5",
-                             @"img_tzed_6",
-                             @"img_tzed_7",
-                             @"img_tzed_8",
-                             @"img_tzed_9",
-                             @"img_tzed_10",
-                             @"img_tzed_11",
-                             @"img_tzed_12",
-                             nil];
 
     subView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -height, width, subHeight)];
     subView.userInteractionEnabled = YES;
@@ -92,18 +68,40 @@
     title.textColor = [UIColor colorWithRed:0.91 green:0.12 blue:0.37 alpha:1];
     [subView addSubview:title];
     
-    NSInteger value = 0;
-    for (NSInteger i=0; i<2; i++){
-        for (NSInteger j=0; j<6; j++) {
-            UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(16 + j*50, 55 + i*50, 40, 40);
-            [button setBackgroundImage:LOADIMAGE([tzTypeArr objectAtIndex:value], kImageTypePNG) forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-            button.tag = 401 + value;
-            [button addTarget:self action:@selector(selectPostType:) forControlEvents:UIControlEventTouchUpInside];
-            [subView addSubview:button];
-            value ++;
-        }
+    for (NSInteger i=0; i<[plantArr count]; i++) {
+        RMPublicModel * model = [plantArr objectAtIndex:i];
+        NSString * befStr = [model.label substringToIndex:2];
+        NSString * aftStr = [model.label substringFromIndex:2];
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.backgroundColor = [UIColor colorWithRed:0.58 green:0.58 blue:0.58 alpha:1];
+        button.frame = CGRectMake(16 + i*50, 55, 40, 40);
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        button.titleLabel.font = FONT_1(12.0);
+        button.titleLabel.numberOfLines = 2;
+        [button.layer setCornerRadius:5.0f];
+        button.tag = 401+i;
+        [button setTitle:[NSString stringWithFormat:@"%@\n%@",befStr,aftStr] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(selectPostsType:) forControlEvents:UIControlEventTouchUpInside];
+        [subView addSubview:button];
+    }
+    
+    for (NSInteger i=0; i<6; i++) {
+        RMPublicModel * model = [subsPlantArr objectAtIndex:i];
+        UIImageView * image = [[UIImageView alloc] init];
+        image.userInteractionEnabled = YES;
+        image.multipleTouchEnabled = YES;
+        image.frame = CGRectMake(16 + i*50, 105, 40, 40);
+        image.tag = 401 + 6 + i;
+        [image sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        image.backgroundColor = [UIColor clearColor];
+        [subView addSubview:image];
+        
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(16 + i*50, 105, 40, 40);
+        button.tag = 401 + 6 + i;
+        [button addTarget:self action:@selector(selectPostsType:) forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor = [UIColor clearColor];
+        [subView addSubview:button];
     }
     
     UIButton * postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -118,26 +116,32 @@
     [subView addSubview:postBtn];
 }
 
-- (void)selectPostType:(UIButton *)sender {
-    if (sender.tag < 407){
-        for (NSInteger i=0; i<6; i++) {
-            UIButton * button = (UIButton *)[subView viewWithTag:401+i];
-            [button setBackgroundImage:LOADIMAGE([tzTypeArr objectAtIndex:i], kImageTypePNG) forState:UIControlStateNormal];
+- (void)selectPostsType:(UIButton *)sender {
+    if (sender.tag < 6+401){
+        for (NSInteger i=0; i<[plantArrs count]; i++) {
+            UIButton * button = (UIButton *)[subView viewWithTag:i+401];
+            [button setBackgroundColor:[UIColor colorWithRed:0.58 green:0.58 blue:0.58 alpha:1]];
         }
-        postType_1 = sender.tag;
+        [sender setBackgroundColor:[UIColor colorWithRed:0.94 green:0 blue:0.32 alpha:1]];
+        postType_1 = sender.tag;/*401--406*/
         isSelectedType_1 = YES;
     }else{
-        for (NSInteger i=6; i<11; i++) {
-            UIButton * button = (UIButton *)[subView viewWithTag:401+i];
-            [button setBackgroundImage:LOADIMAGE([tzTypeArr objectAtIndex:i], kImageTypePNG) forState:UIControlStateNormal];
+        for (NSInteger i=0; i<[subsPlantArrs count]; i++){
+            RMPublicModel * model = [subsPlantArrs objectAtIndex:i];
+            UIImageView * image = (UIImageView *)[subView viewWithTag:i + 6+401];
+            [image sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         }
-        postType_2 = sender.tag;
+        RMPublicModel * model = [subsPlantArrs objectAtIndex:sender.tag-6-401];
+        UIImageView * image = (UIImageView *)[subView viewWithTag:sender.tag];
+        [image sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
+        postType_2 = sender.tag;/*407--412*/
         isSelectedType_2 = YES;
     }
-    
-    [sender setBackgroundImage:LOADIMAGE([tzTypeedArr objectAtIndex:sender.tag-401], kImageTypePNG) forState:UIControlStateNormal];
 }
 
+/**
+ *      发帖
+ */
 - (void)selectedPostPlantType {
     if (!isSelectedType_1){
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"您还没有选择发帖类型" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];

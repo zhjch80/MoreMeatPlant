@@ -23,7 +23,7 @@
     [super viewDidAppear:animated];
     if (isFirstAppear){
         [self setCustomNavTitle:mTitle];
-        [mWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
+        [mWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:mUrl] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
         isFirstAppear = NO;
     }
 }

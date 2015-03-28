@@ -13,14 +13,14 @@
 
 @optional
 
-- (void)selectedPostClassificationWithPlantType:(NSString *)type;
+- (void)selectedPlantType:(NSInteger)type;
 
 @end
 
 @interface RMPostClassificationView : UIView
 @property (nonatomic, assign) id<PostClassificationDelegate>delegate;
 
-- (void)initWithPostClassificationView;
+- (void)initWithPostClassificationViewWithPlantArr:(NSArray *)plantArr withSubsPlant:(NSArray *)subsPlantArr;
 
 - (void)show;
 

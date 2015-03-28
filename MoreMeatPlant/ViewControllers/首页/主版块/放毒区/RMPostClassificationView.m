@@ -7,9 +7,10 @@
 //
 
 #import "RMPostClassificationView.h"
-#import "RMImageView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CONST.h"
+#import "RMPublicModel.h"
+#import "UIImageView+WebCache.h"
 
 @interface RMPostClassificationView ()
 @property (nonatomic, strong) UIImageView * subView;
@@ -17,50 +18,18 @@
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGFloat width;
 
-@property (nonatomic, strong) NSString * postType;
-
 @end
 
 @implementation RMPostClassificationView
-@synthesize subView, subHeight, height, width, postType;
+@synthesize subView, subHeight, height, width;
 
-
-- (void)initWithPostClassificationView {
+- (void)initWithPostClassificationViewWithPlantArr:(NSArray *)plantArr withSubsPlant:(NSArray *)subsPlantArr {
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [self addGestureRecognizer:gesture];
     
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     subHeight = 180;
-    
-    NSArray * tzTypeArr = [NSArray arrayWithObjects:
-                           @"img_tz_1",
-                           @"img_tz_2",
-                           @"img_tz_3",
-                           @"img_tz_4",
-                           @"img_tz_5",
-                           @"img_tz_6",
-                           @"img_tz_7",
-                           @"img_tz_8",
-                           @"img_tz_9",
-                           @"img_tz_10",
-                           @"img_tz_11",
-                           @"img_tz_12",
-                           nil];
-    NSArray * tzTypeedArr = [NSArray arrayWithObjects:
-                             @"img_tzed_1",
-                             @"img_tzed_2",
-                             @"img_tzed_3",
-                             @"img_tzed_4",
-                             @"img_tzed_5",
-                             @"img_tzed_6",
-                             @"img_tzed_7",
-                             @"img_tzed_8",
-                             @"img_tzed_9",
-                             @"img_tzed_10",
-                             @"img_tzed_11",
-                             @"img_tzed_12",
-                             nil];
     
     subView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -height, width, subHeight)];
     subView.userInteractionEnabled = YES;
@@ -86,18 +55,40 @@
     title.textColor = [UIColor colorWithRed:0.91 green:0.12 blue:0.37 alpha:1];
     [subView addSubview:title];
     
-    NSInteger value = 0;
-    for (NSInteger i=0; i<2; i++){
-        for (NSInteger j=0; j<6; j++) {
-            UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(16 + j*50, 55 + i*50, 40, 40);
-            [button setBackgroundImage:LOADIMAGE([tzTypeArr objectAtIndex:value], kImageTypePNG) forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-            [button setTitle:[NSString stringWithFormat:@"发帖类型%ld",(long)value] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(selectPostType:) forControlEvents:UIControlEventTouchUpInside];
-            [subView addSubview:button];
-            value ++;
-        }
+    for (NSInteger i=0; i<[plantArr count]; i++) {
+        RMPublicModel * model = [plantArr objectAtIndex:i];
+        NSString * befStr = [model.label substringToIndex:2];
+        NSString * aftStr = [model.label substringFromIndex:2];
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.backgroundColor = [UIColor colorWithRed:0.95 green:0 blue:0.32 alpha:1];
+        button.frame = CGRectMake(16 + i*50, 55, 40, 40);
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        button.titleLabel.font = FONT_1(12.0);
+        button.titleLabel.numberOfLines = 2;
+        [button.layer setCornerRadius:5.0f];
+        button.tag = i;
+        [button setTitle:[NSString stringWithFormat:@"%@\n%@",befStr,aftStr] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(selectUpdataListType:) forControlEvents:UIControlEventTouchUpInside];
+        [subView addSubview:button];
+    }
+    
+    for (NSInteger i=0; i<[subsPlantArr count]; i++) {
+        RMPublicModel * model = [subsPlantArr objectAtIndex:i];
+        UIImageView * image = [[UIImageView alloc] init];
+        image.userInteractionEnabled = YES;
+        image.multipleTouchEnabled = YES;
+        image.frame = CGRectMake(16 + i*50, 105, 40, 40);
+        image.tag = 6+i;
+        [image sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        image.backgroundColor = [UIColor clearColor];
+        [subView addSubview:image];
+        
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(16 + i*50, 105, 40, 40);
+        button.tag = 6 + i;
+        [button addTarget:self action:@selector(selectUpdataListType:) forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor = [UIColor clearColor];
+        [subView addSubview:button];
     }
 }
 
@@ -119,10 +110,11 @@
     }];
 }
 
-- (void)selectPostType:(UIButton *)sender {
-    postType = sender.titleLabel.text;
+- (void)selectUpdataListType:(UIButton *)sender {
     [self dismiss];
+    if ([self.delegate respondsToSelector:@selector(selectedPlantType:)]){
+        [self.delegate selectedPlantType:sender.tag];
+    }
 }
-
 
 @end

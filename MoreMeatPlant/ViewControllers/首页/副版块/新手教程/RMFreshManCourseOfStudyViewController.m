@@ -7,67 +7,83 @@
 //
 
 #import "RMFreshManCourseOfStudyViewController.h"
+#import "RefreshControl.h"
+#import "CustomRefreshView.h"
+#import "RMBaseWebViewController.h"
 
-@interface RMFreshManCourseOfStudyViewController ()<UIWebViewDelegate>{
+@interface RMFreshManCourseOfStudyViewController ()<UITableViewDataSource,UITableViewDelegate,RefreshControlDelegate>{
     BOOL isFirstAppear;
+    BOOL isRefresh;
+    NSInteger pageCount;
+    BOOL isLoadComplete;
 }
-@property (nonatomic, copy) NSString * mTitle;
-@property (nonatomic, copy) NSString * mUrl;
+@property (nonatomic, strong) UITableView * mTableView;
+@property (nonatomic, strong) NSMutableArray * dataArr;
+@property (nonatomic, strong) RefreshControl * refreshControl;
 
 @end
 
 @implementation RMFreshManCourseOfStudyViewController
-@synthesize mTitle, mUrl, mWebView;
+@synthesize mTableView, dataArr, refreshControl;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (isFirstAppear){
-        [self setCustomNavTitle:mTitle];
-        [mWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
+        [self requestNewsListWithPageCount:1];
         isFirstAppear = NO;
     }
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    //清除cookies
-    NSHTTPCookie *cookie;
-    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (cookie in [storage cookies]) {
-        [storage deleteCookie:cookie];
-    }
-    //清除UIWebView的缓存
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self setCustomNavTitle:@""];
+    [self setCustomNavTitle:@"新手教程"];
+    dataArr = [[NSMutableArray alloc] init];
+    
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64) style:UITableViewStylePlain];
+    mTableView.delegate = self;
+    mTableView.dataSource = self;
+    mTableView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:mTableView];
+    mTableView.tableFooterView = nil;
+    mTableView.tableFooterView = [[UIView alloc] init];
+    
+    refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
+    refreshControl.topEnabled = YES;
+    refreshControl.bottomEnabled = YES;
+    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    
+    pageCount = 1;
+    isRefresh = YES;
     isFirstAppear = YES;
 }
 
-- (void)loadRequestWithUrl:(NSString *)url withTitle:(NSString *)title{
-    mTitle = title;
-    mUrl = url;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [dataArr count];
 }
 
-#pragma mark -
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString * identifierStr = @"freshManCourseOfStudyIdentifier";
     
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     
+    if (!cell){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierStr];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.backgroundColor = [UIColor clearColor];
+    }
+    RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
+
+    cell.textLabel.text = model.content_name;
+    return cell;
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
+    RMBaseWebViewController * baseWebView = [[RMBaseWebViewController alloc] init];
+    [baseWebView loadRequestWithUrl:model.view_link withTitle:model.content_name];
+    [self.navigationController pushViewController:baseWebView animated:YES];
 }
 
 #pragma mark -
@@ -85,6 +101,90 @@
             
         default:
             break;
+    }
+}
+
+#pragma mark - 数据请求
+
+- (void)requestNewsListWithPageCount:(NSInteger)pc {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getNewsWithOptionid:977 withPageCount:pc callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.view_link = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"view_link"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+            }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
+                if ([[object objectForKey:@"data"] count] == 0){
+                    [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    isLoadComplete = YES;
+                    return;
+                }
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.view_link = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"view_link"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            }
+            
+            if (isRefresh){
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.view_link = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"view_link"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+            }
+
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
+#pragma mark 刷新代理
+
+- (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
+    if (direction == RefreshDirectionTop) { //下拉刷新
+        pageCount = 1;
+        isRefresh = YES;
+        isLoadComplete = NO;
+        [self requestNewsListWithPageCount:1];
+    }else if(direction == RefreshDirectionBottom) { //上拉加载
+        if (isLoadComplete){
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self showHint:@"没有更多教程啦"];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            });
+        }else{
+            pageCount ++;
+            isRefresh = NO;
+            [self requestNewsListWithPageCount:pageCount];
+        }
     }
 }
 
