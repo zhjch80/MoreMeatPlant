@@ -45,6 +45,9 @@
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
     //NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    if(self.callback){
+        _callback(userLocation);
+    }
 }
 
 /**

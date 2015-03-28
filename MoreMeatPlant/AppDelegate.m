@@ -16,6 +16,7 @@
 #import "RMUserLoginInfoManager.h"
 #import "EaseMob.h"
 #import "BMapKit.h"
+#import "RMLocationManager.h"
 
 @interface AppDelegate ()<EMChatManagerDelegate>{
     RMHomeViewController * homeCtl;
@@ -25,6 +26,7 @@
     RMLoginViewController * loginCtl;
     RMCustomTabBarController * customTabBarCtl;
     BMKMapManager* _mapManager;
+    RMLocationManager * locationManager;
 }
 
 @end
@@ -84,12 +86,12 @@
  *  @method 验证是否登录
  */
 - (void)validate{
-    if([[NSUserDefaults standardUserDefaults] objectForKey:LoginState]){//已经登录
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:LoginState] boolValue]){//已经登录
         NSString * user = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
         NSString * pwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserPwd];
         NSString * iscorp = [[NSUserDefaults standardUserDefaults] objectForKey:UserType];
         NSString * coorstr = [[NSUserDefaults standardUserDefaults] objectForKey:UserCoor];
-        
+        NSLog(@"appdelegate用户类型：%@",iscorp);
         [[RMUserLoginInfoManager loginmanager] setState:YES];
         [[RMUserLoginInfoManager loginmanager] setUser:user];
         [[RMUserLoginInfoManager loginmanager] setPwd:pwd];
@@ -248,8 +250,28 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    
+    
+    __block AppDelegate * dele = self;
+    if(locationManager == nil){
+        locationManager = [[RMLocationManager alloc]init];
+    }
+    [locationManager startLocation];
+        locationManager.callback = ^(BMKUserLocation * userLocation){
+            if(userLocation){
+                [dele->locationManager stopLocation];
+                NSString * coor = [NSString stringWithFormat:@"%f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude];
+                [[RMUserLoginInfoManager loginmanager] setCoorStr:coor];
+                NSLog(@"%@",coor);
+            }
+        };
+    
     [[EaseMob sharedInstance] applicationDidBecomeActive:application];
 }
+
+//- (RMLocationManager *)getLocationManager{
+//    return locationManager;
+//}
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     [[EaseMob sharedInstance] applicationWillTerminate:application];

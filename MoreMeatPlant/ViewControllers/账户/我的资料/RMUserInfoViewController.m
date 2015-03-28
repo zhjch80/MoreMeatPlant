@@ -23,8 +23,15 @@
     
     [_editBtn addTarget:self action:@selector(operation:) forControlEvents:UIControlEventTouchDown];
     [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];
+    [_modifyBtn addTarget:self action:@selector(modifyAction:) forControlEvents:UIControlEventTouchDown];
     
-    
+}
+
+#pragma mark - 修改密码
+- (void)modifyAction:(UIButton *)sender{
+    if(self.modify_callback){
+        _modify_callback (self);
+    }
 }
 
 - (void)operation:(UIButton *)sender{

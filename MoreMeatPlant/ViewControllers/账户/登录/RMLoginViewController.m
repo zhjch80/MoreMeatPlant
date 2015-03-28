@@ -13,45 +13,64 @@
 #import "FileMangerObject.h"
 
 #import "AppDelegate.h"
+
+
+
 @interface RMLoginViewController ()
 
 @end
 
 @implementation RMLoginViewController
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)dealloc{
+    [DaiDodgeKeyboard removeRegisterTheViewNeedDodgeKeyboard];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
-    
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
-    
+    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
+
     [_forgotPassBtn addTarget:self action:@selector(forgotAction:) forControlEvents:UIControlEventTouchDown];
     [_loginBtn addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchDown];
     [_registBtn addTarget:self action:@selector(registerAction:) forControlEvents:UIControlEventTouchDown];
     
 }
 
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
 
 - (void)loginAction:(id)sender{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager loginRequestWithUser:_userTextField.text Pwd:[FileMangerObject md5:_passTextField.text] andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        RMPublicModel * model = (RMPublicModel *)object;
         if(error){
             NSLog(@"error:%@",error);
         }
-        if(success){//登录成功
+        if(success&&model.status){//登录成功
             [[NSUserDefaults standardUserDefaults] setValue:_userTextField.text forKey:UserName];
             [[NSUserDefaults standardUserDefaults] setValue:[FileMangerObject md5:_passTextField.text] forKey:UserPwd];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LoginState];
-            [[NSUserDefaults standardUserDefaults] setValue:[[object objectForKey:@"data"] objectForKey:@"s_type"] forKey:UserType];
+            [[NSUserDefaults standardUserDefaults] setValue:model.s_type forKey:UserType];
             
             NSString * user = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
             NSString * pwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserPwd];
             NSString * iscorp = [[NSUserDefaults standardUserDefaults] objectForKey:UserType];
             NSString * coorstr = [[NSUserDefaults standardUserDefaults] objectForKey:UserCoor];
+            NSLog(@"登录用户类型：%@",iscorp);
             
             [[RMUserLoginInfoManager loginmanager] setState:YES];
             [[RMUserLoginInfoManager loginmanager] setUser:user];
@@ -67,7 +86,7 @@
         }else{
             
         }
-        [MBProgressHUD showSuccess:[object objectForKey:@"msg"] toView:self.view];
+        [MBProgressHUD showSuccess:model.msg toView:self.view];
     }];
 }
 - (void)forgotAction:(id)sender{

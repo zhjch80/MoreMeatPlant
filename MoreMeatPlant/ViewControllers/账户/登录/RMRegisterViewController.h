@@ -8,7 +8,9 @@
 
 #import "RMBaseViewController.h"
 
-@interface RMRegisterViewController : RMBaseViewController
+@interface RMRegisterViewController : RMBaseViewController{
+    BOOL isCorp;
+}
 @property (weak, nonatomic) IBOutlet UIButton *user_btn;
 @property (weak, nonatomic) IBOutlet UIButton *corp_btn;
 @property (weak, nonatomic) IBOutlet UITextField *mobileTextField;

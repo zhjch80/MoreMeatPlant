@@ -151,7 +151,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
 - (void)postReplyToPostsComment;
 
 
-
+/*************************************************************************/
 /**
  *  @method     登录
  *  @param      user            用户名
@@ -159,5 +159,11 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  */
 + (void)loginRequestWithUser:(NSString *)user Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block;
 
+
++ (void)registerRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code Nick:(NSString *)nick Type:(NSString *)type Gps:(NSString *)gps andCallBack:(RMAFNRequestManagerCallBack)block;
++ (void)registerSendCodeWith:(NSString *)mobile andCallBack:(RMAFNRequestManagerCallBack)block;
++ (void)forgotPwdSendCodeWith:(NSString *)mobile andCallBack:(RMAFNRequestManagerCallBack)block;
+
++ (void)resetPwdRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code andCallBack:(RMAFNRequestManagerCallBack)block;
 
 @end

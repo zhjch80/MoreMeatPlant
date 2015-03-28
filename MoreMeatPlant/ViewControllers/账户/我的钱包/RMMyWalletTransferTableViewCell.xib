@@ -37,13 +37,13 @@
                             <constraint firstAttribute="width" constant="57" id="KKr-13-JKa"/>
                             <constraint firstAttribute="height" constant="25.5" id="QCi-xM-L36"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
                         <state key="normal" title="确认转出" backgroundImage="wallet_btn.png">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="P2E-S6-3xG">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="P2E-S6-3xG" customClass="RMBaseTextField">
                         <rect key="frame" x="122" y="44" width="171" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="3jE-KO-fxB"/>
@@ -69,7 +69,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="lbn-Ga-fd0">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="lbn-Ga-fd0" customClass="RMBaseTextField">
                         <rect key="frame" x="92" y="130" width="201" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="7Qs-5D-bmq"/>
@@ -89,7 +89,7 @@
                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="W5a-KN-jjY">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="W5a-KN-jjY" customClass="RMBaseTextField">
                         <rect key="frame" x="172" y="219" width="121" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="TWg-3G-0Ex"/>
@@ -105,14 +105,14 @@
                             <constraint firstAttribute="width" constant="121" id="Gps-GI-Drc"/>
                             <constraint firstAttribute="height" constant="30" id="i7d-1X-RIb"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
                         <state key="normal" title="确认提现" backgroundImage="wallet_btn.png">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确认提现后，我们将在24小时之内处理病通过系统消息通知你！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="273" translatesAutoresizingMaskIntoConstraints="NO" id="XMd-Lr-PgT">
-                        <rect key="frame" x="24" y="297" width="273" height="29"/>
+                        <rect key="frame" x="23" y="297" width="274" height="29"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="29" id="rHc-l3-zaE"/>
                         </constraints>
@@ -133,13 +133,13 @@
                             <constraint firstAttribute="width" constant="80" id="1Rr-DF-uM7"/>
                             <constraint firstAttribute="height" constant="25.5" id="pje-Y3-25Z"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
                         <state key="normal" title="发送验证码" backgroundImage="wallet_btn.png">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="pAv-El-34F">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="pAv-El-34F" customClass="RMBaseTextField">
                         <rect key="frame" x="122" y="75" width="106" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="8gK-kF-94r"/>
@@ -186,7 +186,7 @@
                     <constraint firstItem="4LV-mq-FF2" firstAttribute="top" secondItem="VzY-Mm-2J5" secondAttribute="bottom" constant="12" id="jdw-5o-gs6"/>
                     <constraint firstItem="VzY-Mm-2J5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="lFR-vI-gQ8"/>
                     <constraint firstItem="tR1-CF-Nb5" firstAttribute="leading" secondItem="pAv-El-34F" secondAttribute="trailing" constant="8" id="nTQ-ht-hYQ"/>
-                    <constraint firstItem="XMd-Lr-PgT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="oEI-I4-GLc"/>
+                    <constraint firstItem="XMd-Lr-PgT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="oEI-I4-GLc"/>
                     <constraint firstItem="1ro-l5-Lug" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="oKO-5e-hdK"/>
                     <constraint firstItem="1ro-l5-Lug" firstAttribute="top" secondItem="4LV-mq-FF2" secondAttribute="bottom" constant="36.5" id="woW-vS-rh4"/>
                     <constraint firstItem="0yX-0M-5gN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="xyd-9i-Tvh"/>

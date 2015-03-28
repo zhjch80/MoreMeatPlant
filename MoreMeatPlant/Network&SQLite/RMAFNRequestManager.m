@@ -442,9 +442,36 @@
     NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_doLogin",user,pwd];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
-        if(block){
-            block(nil,[dic objectForKey:@"status"],dic);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(![[dic objectForKey:@"data"] isKindOfClass:[NSDictionary class]]){
+        
+        }else{
+            model.s_type = [OBJC([dic objectForKey:@"data"]) objectForKey:@"s_type"];
         }
+        if(block){
+            block(nil,YES,model);
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+}
+
++ (void)registerRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code Nick:(NSString *)nick Type:(NSString *)type Gps:(NSString *)gps andCallBack:(RMAFNRequestManagerCallBack)block{
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&frm[content_name]=%@&content_code=%@&GPS=%@&type=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_register",user,pwd,nick,code,gps,type];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if(block){
             block(error,NO,RequestFailed);
@@ -453,6 +480,59 @@
 }
 
 
++ (void)registerSendCodeWith:(NSString *)mobile andCallBack:(RMAFNRequestManagerCallBack)block{
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@",baseUrl,@"&method=save&app_com=com_passport&task=registerCode",mobile];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
 
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+}
+
+
++ (void)forgotPwdSendCodeWith:(NSString *)mobile andCallBack:(RMAFNRequestManagerCallBack)block{
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_pwdCode",mobile];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+}
+
+
++ (void)resetPwdRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code andCallBack:(RMAFNRequestManagerCallBack)block{
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&content_code=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_register",user,pwd,code];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+}
 @end
 

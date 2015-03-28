@@ -78,9 +78,9 @@
         CGFloat red = components[0];
         CGFloat green = components[1];
         CGFloat blue = components[2];
-        [self setBackgroundColor:[UIColor colorWithRed:red green:green blue:blue alpha:alphaValue]];
+        [self setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8]];
     }else{
-        [self setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:alphaValue]];
+        [self setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8]];
     }
 }
 

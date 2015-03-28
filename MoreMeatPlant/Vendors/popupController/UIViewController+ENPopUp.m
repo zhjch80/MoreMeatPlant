@@ -9,6 +9,7 @@
 #import "UIViewController+ENPopUp.h"
 #import "JWBlurView.h"
 #import <objc/runtime.h>
+#import "UIView+Effects.h"
 
 static void * ENPopupViewControllerPropertyKey = &ENPopupViewControllerPropertyKey;
 
@@ -69,6 +70,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     // Add overlay
     UIView *overlayView = [[UIView alloc] initWithFrame:bounds];
     overlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [overlayView blur];
     overlayView.tag = kENPopUpOverlayViewTag;
     overlayView.backgroundColor = [UIColor clearColor];
     
@@ -77,20 +79,20 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     bluredView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     bluredView.tag = kENPopUpBluredViewTag;
     [bluredView setBlurAlpha:.0f];
-    [bluredView setAlpha:.0f];
+    [bluredView setAlpha:0.8f];
     [bluredView setBlurColor:[UIColor clearColor]];
     bluredView.backgroundColor = [UIColor clearColor];
-    [overlayView addSubview:bluredView];
+//    [overlayView addSubview:bluredView];
     
     // Make the background clickable
-    UIButton * dismissButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    dismissButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    dismissButton.backgroundColor = [UIColor clearColor];
-    dismissButton.frame = sourceView.bounds;
-    [overlayView addSubview:dismissButton];
-    
-    [dismissButton addTarget:self action:@selector(dismissPopUpViewController)
-            forControlEvents:UIControlEventTouchUpInside];
+//    UIButton * dismissButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    dismissButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    dismissButton.backgroundColor = [UIColor clearColor];
+//    dismissButton.frame = sourceView.bounds;
+//    [overlayView addSubview:dismissButton];
+//    
+//    [dismissButton addTarget:self action:@selector(dismissPopUpViewController)
+//            forControlEvents:UIControlEventTouchUpInside];
     
     // Customize popUpView
     popUpView.layer.cornerRadius = 3.5f;
@@ -138,6 +140,12 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
                          [self.en_popupViewController viewWillAppear:NO];
                          [blurView setAlpha:1.f];
                          popupView.layer.transform = transform;
+                         UIView *overlayView = [self.view viewWithTag:kENPopUpOverlayViewTag];
+                         [overlayView setAlpha:0.0];
+                         [UIView animateWithDuration:0.2 animations:^{
+                             [overlayView setAlpha:1.0f];
+                         } completion:^(BOOL finished) {
+                         }];
                      }
                      completion:^(BOOL finished) {
                          [self.en_popupViewController viewDidAppear:NO];
@@ -164,7 +172,11 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
                      completion:^(BOOL finished) {
                          [popupView removeFromSuperview];
                          [blurView  removeFromSuperview];
-                         [overlayView  removeFromSuperview];
+                         [UIView animateWithDuration:0.2 animations:^{
+                             [overlayView setAlpha:0.0f];
+                         } completion:^(BOOL finished) {
+                             [overlayView  removeFromSuperview];
+                         }];
                          [self.en_popupViewController viewDidDisappear:NO];
                          self.en_popupViewController = nil;
 						 if (completionBlock != nil) {

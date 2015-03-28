@@ -70,7 +70,7 @@
                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="fym-63-gYD">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="wallet_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="fym-63-gYD" customClass="RMBaseTextField">
                         <rect key="frame" x="23" y="82" width="147" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="MQh-lI-e3l"/>

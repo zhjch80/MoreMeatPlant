@@ -17,6 +17,7 @@
             <string>FZZHJW--GB1-0</string>
             <string>FZZHJW--GB1-0</string>
             <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -26,6 +27,7 @@
                 <outlet property="closeBtn" destination="blN-3O-aRy" id="6UZ-by-MsS"/>
                 <outlet property="editBtn" destination="DMi-aw-8XF" id="RyZ-OD-uoU"/>
                 <outlet property="mobileL" destination="hf9-ZV-0iv" id="bRb-46-4BL"/>
+                <outlet property="modifyBtn" destination="w3x-Kx-vxn" id="PcS-QH-RLS"/>
                 <outlet property="nickL" destination="bTI-VF-UeX" id="RAt-lP-VHd"/>
                 <outlet property="passwordL" destination="Ngq-ug-p8I" id="0uc-Du-VKP"/>
                 <outlet property="signatureL" destination="vTp-Ra-beG" id="Mxh-mY-rY7"/>
@@ -60,6 +62,10 @@
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ngq-ug-p8I">
                             <rect key="frame" x="69" y="58" width="59.5" height="18.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="59.5" id="3db-Hg-TZ4"/>
+                                <constraint firstAttribute="height" constant="18.5" id="z3e-d6-BxJ"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -112,11 +118,23 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3x-Kx-vxn">
+                            <rect key="frame" x="252" y="55" width="60" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="P9x-cf-mgs"/>
+                                <constraint firstAttribute="height" constant="25" id="PLL-Qd-GTe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                            <state key="normal" title="修改" backgroundImage="fbbb_btn_bg_red.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="1Js-kr-q3g" firstAttribute="leading" secondItem="N5S-8n-1SW" secondAttribute="trailing" constant="3" id="1i3-G3-T4N"/>
                         <constraint firstItem="RhK-Ub-3gX" firstAttribute="leading" secondItem="S7i-N1-Bey" secondAttribute="leading" constant="21" id="2pR-K7-djU"/>
+                        <constraint firstItem="Ngq-ug-p8I" firstAttribute="centerY" secondItem="w3x-Kx-vxn" secondAttribute="centerY" id="7Gk-vy-cV8"/>
                         <constraint firstItem="RhK-Ub-3gX" firstAttribute="top" secondItem="jaA-vj-Wzm" secondAttribute="bottom" constant="9.5" id="7ey-Sq-iKD"/>
                         <constraint firstItem="hf9-ZV-0iv" firstAttribute="top" secondItem="vTp-Ra-beG" secondAttribute="bottom" constant="10.5" id="AYF-CF-SZv"/>
                         <constraint firstItem="DMi-aw-8XF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1Js-kr-q3g" secondAttribute="bottom" constant="20" id="DMG-Af-7eN"/>
@@ -136,6 +154,7 @@
                         <constraint firstItem="IDJ-1c-h0P" firstAttribute="centerY" secondItem="bTI-VF-UeX" secondAttribute="centerY" id="mP5-hG-LG7"/>
                         <constraint firstItem="N5S-8n-1SW" firstAttribute="centerY" secondItem="1Js-kr-q3g" secondAttribute="centerY" id="n8s-sm-nXT"/>
                         <constraint firstItem="N5S-8n-1SW" firstAttribute="leading" secondItem="S7i-N1-Bey" secondAttribute="leading" constant="21" id="oxS-dz-hHD"/>
+                        <constraint firstAttribute="trailing" secondItem="w3x-Kx-vxn" secondAttribute="trailing" constant="8" id="qWk-H0-guU"/>
                         <constraint firstItem="jaA-vj-Wzm" firstAttribute="leading" secondItem="S7i-N1-Bey" secondAttribute="leading" constant="21" id="tZI-wX-90N"/>
                         <constraint firstAttribute="centerX" secondItem="DMi-aw-8XF" secondAttribute="centerX" id="vdO-5Q-7db"/>
                         <constraint firstItem="IDJ-1c-h0P" firstAttribute="leading" secondItem="S7i-N1-Bey" secondAttribute="leading" constant="21" id="zbe-QI-bQo"/>
@@ -180,6 +199,7 @@
         </view>
     </objects>
     <resources>
+        <image name="fbbb_btn_bg_red.png" width="678" height="90"/>
         <image name="gwc_close.png" width="87" height="87"/>
     </resources>
 </document>

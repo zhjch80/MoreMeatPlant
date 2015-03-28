@@ -48,7 +48,7 @@
                         <constraint firstAttribute="width" constant="80" id="uAm-SP-t3B"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                    <state key="normal" title="商家用户" backgroundImage="login_btn_bg.png">
+                    <state key="normal" title="商家用户" backgroundImage="login_no_select_bg.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="default">
@@ -66,7 +66,7 @@
                         <constraint firstAttribute="width" constant="51" id="rhj-bw-sEZ"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                    <state key="normal" title="普通用户" backgroundImage="login_btn_bg.png">
+                    <state key="normal" title="普通用户" backgroundImage="login_select_bg.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="default">
@@ -77,7 +77,7 @@
                     </variation>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHH-Qo-28a">
-                    <rect key="frame" x="77" y="309" width="51" height="30"/>
+                    <rect key="frame" x="77" y="299" width="51" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="51" id="V4v-xp-5fy"/>
                         <constraint firstAttribute="height" constant="30" id="haZ-kE-iHL"/>
@@ -88,7 +88,7 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dvD-Ll-RkF">
-                    <rect key="frame" x="77" y="264" width="51" height="30"/>
+                    <rect key="frame" x="77" y="254" width="51" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="51" id="KaK-Do-9wT"/>
                         <constraint firstAttribute="height" constant="30" id="NkB-rb-Dx0"/>
@@ -99,7 +99,7 @@
                     </state>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="注册之后不能修改" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="l2q-6I-Oc2" customClass="RMBaseTextField">
-                    <rect key="frame" x="128" y="264" width="115" height="30"/>
+                    <rect key="frame" x="128" y="254" width="115" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="EH7-2I-kMo"/>
                     </constraints>
@@ -108,7 +108,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3o-eK-2iL">
-                    <rect key="frame" x="244" y="174" width="70" height="30"/>
+                    <rect key="frame" x="244" y="164" width="70" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="51" id="64v-ee-OaS"/>
                         <constraint firstAttribute="height" constant="30" id="XGF-ji-1QC"/>
@@ -125,7 +125,7 @@
                     </variation>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NyX-Pa-wAH">
-                    <rect key="frame" x="77" y="354" width="166" height="30"/>
+                    <rect key="frame" x="77" y="344" width="166" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="iZs-CK-P92"/>
                         <constraint firstAttribute="width" constant="51" id="zj0-px-lJi"/>
@@ -141,7 +141,7 @@
                     </variation>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZI-IW-vLx">
-                    <rect key="frame" x="77" y="174" width="51" height="30"/>
+                    <rect key="frame" x="77" y="164" width="51" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="BdX-30-YZQ"/>
                         <constraint firstAttribute="width" constant="51" id="Hw8-rP-vEG"/>
@@ -152,7 +152,7 @@
                     </state>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="昵称或手机号" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="hti-vr-hUs" customClass="RMBaseTextField">
-                    <rect key="frame" x="128" y="174" width="115" height="30"/>
+                    <rect key="frame" x="128" y="164" width="115" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="pAH-Ed-0hX"/>
                     </constraints>
@@ -161,7 +161,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="1gA-Ci-d1k" customClass="RMBaseTextField">
-                    <rect key="frame" x="157" y="219" width="86" height="30"/>
+                    <rect key="frame" x="157" y="209" width="86" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="YiU-4s-uOf"/>
                     </constraints>
@@ -169,7 +169,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pi9-XE-A8C">
-                    <rect key="frame" x="77" y="219" width="80" height="30"/>
+                    <rect key="frame" x="77" y="209" width="80" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="QlV-2g-IFj"/>
                         <constraint firstAttribute="height" constant="30" id="v48-02-Pc9"/>
@@ -180,7 +180,7 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dB6-py-vvg">
-                    <rect key="frame" x="183" y="399" width="60" height="30"/>
+                    <rect key="frame" x="183" y="389" width="60" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Nxe-8h-Yk1"/>
                         <constraint firstAttribute="width" constant="60" id="PJa-xc-Mhp"/>
@@ -191,7 +191,7 @@
                     </state>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="bZo-vc-XU2" customClass="RMBaseTextField">
-                    <rect key="frame" x="128" y="309" width="115" height="30"/>
+                    <rect key="frame" x="128" y="299" width="115" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="ZkJ-kt-Tzb"/>
                     </constraints>
@@ -223,7 +223,7 @@
                 <constraint firstItem="l2q-6I-Oc2" firstAttribute="trailing" secondItem="bZo-vc-XU2" secondAttribute="trailing" id="PfG-0d-EKf"/>
                 <constraint firstItem="l2q-6I-Oc2" firstAttribute="trailing" secondItem="NyX-Pa-wAH" secondAttribute="trailing" id="Psu-9M-Dsb"/>
                 <constraint firstItem="Pi9-XE-A8C" firstAttribute="top" secondItem="1gA-Ci-d1k" secondAttribute="top" id="TTW-Yg-zoG"/>
-                <constraint firstItem="wZI-IW-vLx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="174" id="aOx-Ve-nMs"/>
+                <constraint firstItem="wZI-IW-vLx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="164" id="aOx-Ve-nMs"/>
                 <constraint firstItem="wZI-IW-vLx" firstAttribute="leading" secondItem="Pi9-XE-A8C" secondAttribute="leading" id="b11-Co-sDJ"/>
                 <constraint firstItem="rPJ-Qf-8Jw" firstAttribute="width" secondItem="k3G-ef-c5X" secondAttribute="width" id="fc8-af-7dS"/>
                 <constraint firstItem="CHH-Qo-28a" firstAttribute="top" secondItem="bZo-vc-XU2" secondAttribute="top" id="h4g-cl-dIn"/>
@@ -244,6 +244,8 @@
         <image name="login_bg.jpg" width="1242" height="2208"/>
         <image name="login_btn_bg.png" width="549" height="97"/>
         <image name="login_label_bg1.png" width="171" height="97"/>
+        <image name="login_no_select_bg.png" width="266" height="110"/>
+        <image name="login_select_bg.png" width="266" height="110"/>
         <image name="login_vaule_bg1.png" width="378" height="96"/>
     </resources>
 </document>

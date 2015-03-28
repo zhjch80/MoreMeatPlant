@@ -28,6 +28,7 @@
 #import "RMHadBabyViewController.h"
 #import "RMLoginViewController.h"
 #import "AppDelegate.h"
+#import "RMModifyPassWordViewController.h"
 
 #import "UIViewController+ENPopUp.h"
 
@@ -97,8 +98,10 @@
                         break;
                     case 1:{//我的钱包
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
+                        rightTwoBarButton.enabled = NO;
                         mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
                         mywallet.closecallback = ^(UIButton * sender){
+                            rightTwoBarButton.enabled = YES;
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
                         mywallet.billcallback = ^(UIButton * sender){
@@ -164,6 +167,11 @@
                         userinfo.close_action = ^(RMUserInfoViewController * controller){
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
+                        userinfo.modify_callback = ^(RMUserInfoViewController *controller){
+                            //跳转到修改密码
+                            RMModifyPassWordViewController * modify = [[RMModifyPassWordViewController alloc]initWithNibName:@"RMModifyPassWordViewController" bundle:nil];
+                            [self.navigationController pushViewController:modify animated:YES];
+                        };
                         
                         userinfo.callback = ^(RMUserInfoViewController * controller){
                             
@@ -187,7 +195,17 @@
                         break;
                     case 1:{//我的钱包
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
+                        rightTwoBarButton.enabled = NO;
                         mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
+                        mywallet.closecallback = ^(UIButton * sender){
+                            rightTwoBarButton.enabled = YES;
+                            [self dismissPopUpViewControllerWithcompletion:nil];
+                        };
+                        mywallet.billcallback = ^(UIButton * sender){
+                            //跳转到账单界面push
+                            
+                        };
+
                         [self presentPopUpViewController:mywallet overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-108)];
                     }
                         break;

@@ -12,10 +12,14 @@ typedef void (^RMUserInfoCallBack) (RMUserInfoViewController *controller);
 
 typedef void (^RMUserInfoCloseAction) (RMUserInfoViewController *controller);
 
-@interface RMUserInfoViewController : RMBaseViewController
-@property (copy, nonatomic) RMUserInfoCallBack callback;
+typedef void (^RMUserInfoModifyAction) (RMUserInfoViewController *controller);
 
-@property (copy, nonatomic) RMUserInfoCloseAction close_action;
+@interface RMUserInfoViewController : RMBaseViewController
+@property (copy, nonatomic) RMUserInfoCallBack callback;//编辑
+
+@property (copy, nonatomic) RMUserInfoCloseAction close_action;//关闭/返回
+
+@property (copy, nonatomic) RMUserInfoModifyAction modify_callback;//修改
 
 @property (weak, nonatomic) IBOutlet UILabel *nickL;
 @property (weak, nonatomic) IBOutlet UILabel *passwordL;
@@ -24,5 +28,6 @@ typedef void (^RMUserInfoCloseAction) (RMUserInfoViewController *controller);
 @property (weak, nonatomic) IBOutlet UILabel *apliyL;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *modifyBtn;
 
 @end

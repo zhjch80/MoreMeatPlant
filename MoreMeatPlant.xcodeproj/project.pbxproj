@@ -734,6 +734,10 @@
 		51E268611AAF448E00252DEF /* RMSettlementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E2685F1AAF448E00252DEF /* RMSettlementTableViewCell.xib */; };
 		51E268661AAF4D8100252DEF /* RMAddressEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268641AAF4D8100252DEF /* RMAddressEditViewController.m */; };
 		51E268671AAF4D8100252DEF /* RMAddressEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E268651AAF4D8100252DEF /* RMAddressEditViewController.xib */; };
+		51E4B18E1AC64E8D00714F3E /* RMModifyPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E4B18C1AC64E8D00714F3E /* RMModifyPassWordViewController.m */; };
+		51E4B18F1AC64E8D00714F3E /* RMModifyPassWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E4B18D1AC64E8D00714F3E /* RMModifyPassWordViewController.xib */; };
+		51E4B1921AC6534600714F3E /* login_select_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 51E4B1901AC6534600714F3E /* login_select_bg.png */; };
+		51E4B1931AC6534600714F3E /* login_no_select_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 51E4B1911AC6534600714F3E /* login_no_select_bg.png */; };
 		9538F3D21AB0A5BF00608FAD /* RMTableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538F3D11AB0A5BF00608FAD /* RMTableHeadView.m */; };
 		9538F3D41AB0A5DF00608FAD /* RMTableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9538F3D31AB0A5DF00608FAD /* RMTableHeadView.xib */; };
 		9538F3DC1AB1C83F00608FAD /* RMCommentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538F3DB1AB1C83F00608FAD /* RMCommentsView.m */; };
@@ -1907,6 +1911,11 @@
 		51E268631AAF4D8100252DEF /* RMAddressEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAddressEditViewController.h; sourceTree = "<group>"; };
 		51E268641AAF4D8100252DEF /* RMAddressEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAddressEditViewController.m; sourceTree = "<group>"; };
 		51E268651AAF4D8100252DEF /* RMAddressEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMAddressEditViewController.xib; sourceTree = "<group>"; };
+		51E4B18B1AC64E8D00714F3E /* RMModifyPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMModifyPassWordViewController.h; sourceTree = "<group>"; };
+		51E4B18C1AC64E8D00714F3E /* RMModifyPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMModifyPassWordViewController.m; sourceTree = "<group>"; };
+		51E4B18D1AC64E8D00714F3E /* RMModifyPassWordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMModifyPassWordViewController.xib; sourceTree = "<group>"; };
+		51E4B1901AC6534600714F3E /* login_select_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_select_bg.png; sourceTree = "<group>"; };
+		51E4B1911AC6534600714F3E /* login_no_select_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_no_select_bg.png; sourceTree = "<group>"; };
 		9538F3CE1AB09BAA00608FAD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9538F3D01AB0A5BF00608FAD /* RMTableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMTableHeadView.h; sourceTree = "<group>"; };
 		9538F3D11AB0A5BF00608FAD /* RMTableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMTableHeadView.m; sourceTree = "<group>"; };
@@ -3735,6 +3744,8 @@
 		1DEB740E1AB9D5DE00EA1FA7 /* member */ = {
 			isa = PBXGroup;
 			children = (
+				51E4B1901AC6534600714F3E /* login_select_bg.png */,
+				51E4B1911AC6534600714F3E /* login_no_select_bg.png */,
 				5144E7931AC31B8500190C50 /* img_class.png */,
 				5144E7911AC3168D00190C50 /* bbgl_btn.png */,
 				51D8846A1ABF23B000F7A3BD /* photo.png */,
@@ -4227,6 +4238,9 @@
 				512D751C1AB1EA310027B7C7 /* RMUserInfoEditViewController.h */,
 				512D751D1AB1EA310027B7C7 /* RMUserInfoEditViewController.m */,
 				512D751E1AB1EA310027B7C7 /* RMUserInfoEditViewController.xib */,
+				51E4B18B1AC64E8D00714F3E /* RMModifyPassWordViewController.h */,
+				51E4B18C1AC64E8D00714F3E /* RMModifyPassWordViewController.m */,
+				51E4B18D1AC64E8D00714F3E /* RMModifyPassWordViewController.xib */,
 			);
 			path = "我的资料";
 			sourceTree = "<group>";
@@ -4585,6 +4599,7 @@
 				1DEB74711AB9D66800EA1FA7 /* img_collectiom.png in Resources */,
 				0A4106AB1ABABBF60060FBD5 /* chatBar_more_camera@2x.png in Resources */,
 				0A4106BD1ABABBF60060FBD5 /* chat_receiver_audio_playing003.png in Resources */,
+				51E4B1931AC6534600714F3E /* login_no_select_bg.png in Resources */,
 				0A4106AA1ABABBF60060FBD5 /* chatBar_more_camera.png in Resources */,
 				0A4106CE1ABABBF60060FBD5 /* chat_sender_bg@2x.png in Resources */,
 				1DEB74771AB9D66800EA1FA7 /* img_moreChat.png in Resources */,
@@ -4619,11 +4634,13 @@
 				1DEB745B1AB9D66800EA1FA7 /* icon_keyword_photo@2x.png in Resources */,
 				1DE43B8D1ABFBADB0035420E /* test_1.jpg in Resources */,
 				0A4106631ABABBF60060FBD5 /* VoiceSearchFeedback016@2x.png in Resources */,
+				51E4B1921AC6534600714F3E /* login_select_bg.png in Resources */,
 				0A4106641ABABBF60060FBD5 /* VoiceSearchFeedback017.png in Resources */,
 				1D83974C1AB3F72D00DA190A /* DoAlbumCell.xib in Resources */,
 				5157DE6D1AB9DA95005E9FA5 /* RMPublishPhotoTableViewCell.xib in Resources */,
 				0A4106A91ABABBF60060FBD5 /* chatBar_colorMore_videoSelected@2x.png in Resources */,
 				0A41067C1ABABBF60060FBD5 /* chatBar_more_faceSelected.png in Resources */,
+				51E4B18F1AC64E8D00714F3E /* RMModifyPassWordViewController.xib in Resources */,
 				1D7090CA1AC25DE600AE47BF /* img_tzArrow_5.png in Resources */,
 				1DEB745E1AB9D66800EA1FA7 /* img_03.png in Resources */,
 				51D8846B1ABF23B000F7A3BD /* photo.png in Resources */,
@@ -4882,6 +4899,7 @@
 				1D9CB1741AAE9EE500BD5A7D /* AFHTTPRequestOperation.m in Sources */,
 				0A41059E1ABAB6BB0060FBD5 /* XHMessageTextView.m in Sources */,
 				1D7AC4151AB9791E002204F6 /* NSTimer+Addition.m in Sources */,
+				51E4B18E1AC64E8D00714F3E /* RMModifyPassWordViewController.m in Sources */,
 				0A4105861ABAB3C70060FBD5 /* PSTCollectionViewUpdateItem.m in Sources */,
 				0A4105871ABAB3C70060FBD5 /* PSTGridLayoutInfo.m in Sources */,
 				1D386C8B1AC16916000B9686 /* RMSysMessageTableViewCell.m in Sources */,

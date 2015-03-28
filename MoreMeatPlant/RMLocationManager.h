@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "BMapKit.h"
 
+typedef void (^RMLocationManagerCallBack) (BMKUserLocation *);
+
 @interface RMLocationManager : NSObject<BMKLocationServiceDelegate>{
     BMKLocationService * _locService;
 }
 
-@property (assign, nonatomic) id delegate;
+@property (copy, nonatomic)  RMLocationManagerCallBack callback;
 - (void)startLocation;
 - (void)stopLocation;
 @end

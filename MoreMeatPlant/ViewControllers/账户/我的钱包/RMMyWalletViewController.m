@@ -142,7 +142,7 @@
 
 #pragma mark - 关闭
 - (void)closeAction:(id)sender{
-    if(_closecallback){
+    if(self.closecallback){
         _closecallback(sender);
     }
 }

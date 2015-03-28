@@ -10,7 +10,7 @@
 #import "STDbHandle.h"              //数据库操作
 
 @interface RMPublicModel : STDbHandle
-@property (nonatomic, copy) NSString * status;
+@property (nonatomic, assign) BOOL  status;
 @property (nonatomic, copy) NSString * msg;
 
 @property (nonatomic, copy) NSString * content_name;        //广告名称、植物大全名称、帖子标题
@@ -50,6 +50,7 @@
 @property (nonatomic, copy) NSString * view_link;           //链接
 
 
+@property (nonatomic, copy) NSString * s_type;              //登录用户类型
 
 
 @end
