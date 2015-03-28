@@ -36,7 +36,7 @@
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=ad&auto_id=%ld",baseUrl,(long)type];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -52,7 +52,7 @@
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=indexNum&level=2",baseUrl];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -68,7 +68,7 @@
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=otherVars&type=classType",baseUrl];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -85,7 +85,7 @@
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAll&data=series&order=asc&per=1&row=10&page=%ld",baseUrl,(long)pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -101,10 +101,10 @@
  *      970（放毒区）971（一肉一拍）972（鲜肉市场）973（肉肉交换）977（新手教程）
  */
 + (void)getNewsWithOptionid:(NSInteger)optionid withPageCount:(NSInteger)pageCount callBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNews&data=1&per=1&row=10&optionid=%ld&page=%ld",baseUrl,optionid,pageCount];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNews&data=1&per=1&row=10&optionid=%ld&page=%ld",baseUrl,(long)optionid,(long)pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -121,7 +121,7 @@
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNewsview&auto_id=%@",baseUrl,auto_id];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -162,10 +162,10 @@
  *  @param      level       级别      1：一级：大全顶部分类，2:二级：侧滑分类
  */
 + (void)getPlantSubjectsListWithLevel:(NSInteger)level callBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopCourse&level=%ld",baseUrl,level];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopCourse&level=%ld",baseUrl,(long)level];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if(block){
-            block(nil, [responseObject objectForKey:@"status"], responseObject);
+            block(nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if(block){
@@ -254,7 +254,7 @@
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&type=%@&class=%@&course=%@&per=1&row=10&page=%ld&ID=%@&PWD=%@",baseUrl,postsType,plantType,plantSubjects,(long)pageCount,user_id,user_password];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
