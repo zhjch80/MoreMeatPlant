@@ -13,7 +13,6 @@
 #import "RMPublishNumberTableViewCell.h"
 #import "RMPublishPhotoTableViewCell.h"
 #import "RMPublishSureTableViewCell.h"
-#import "DaiDodgeKeyboard.h"
 #import "NSString+Addtion.h"
 @interface RMPublishBabyViewController ()
 
@@ -25,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"发布宝贝"];
-    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.mTableView];
+//    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.mTableView];
     classArray = [[NSMutableArray alloc]init];
     classArray = [NSMutableArray arrayWithObjects:@"一肉一拍",@"进口肉肉",@"国产肉肉",@"特价肉肉", nil];
 }

@@ -76,7 +76,7 @@
                             <constraint firstAttribute="height" constant="26" id="MQh-lI-e3l"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hC8-Dy-gwk">
                         <rect key="frame" x="8" y="132" width="304" height="1"/>

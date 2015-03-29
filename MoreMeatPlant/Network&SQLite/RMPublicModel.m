@@ -10,6 +10,14 @@
 
 @implementation RMPublicModel
 
+- (id)init{
+    if(self == [super init]){
+        _imgs = [[NSMutableArray alloc]init];
+        _body = [[NSMutableArray alloc]init];
+    }
+    return self;
+}
+
 //#pragma mark NSCoding
 //- (void)encodeWithCoder:(NSCoder *)aCoder {
 //    [aCoder encodeObject:_name forKey:@"name"];

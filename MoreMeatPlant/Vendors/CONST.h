@@ -17,6 +17,7 @@
 #define IS_IPHONE_6p_SCREEN ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO) //1242, 2208   1080, 1920
 
 #define OBJC(v) (([v isEqual:[NSNull null]]) ? @"" : v)
+#define OBJC_Nil(v) (([v isEqual:[NSNull null]]) ? nil : v)
 
 #define FONT(_size) [UIFont systemFontOfSize:(_size)]
 #define FONT_0(_size) [UIFont fontWithName:@"FZZXHJW--GB1-0" size:(_size)]

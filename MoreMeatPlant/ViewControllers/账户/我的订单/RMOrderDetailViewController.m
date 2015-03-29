@@ -12,7 +12,6 @@
 #import "RMOrderDetailNumTableViewCell.h"
 #import "RMOrderDetailEvaluateTableViewCell.h"
 #import "RMOederDetailOperationTableViewCell.h"
-#import "DaiDodgeKeyboard.h"
 @interface RMOrderDetailViewController ()
 
 @end
@@ -28,7 +27,7 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
-    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.mTableView];
+//    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.mTableView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

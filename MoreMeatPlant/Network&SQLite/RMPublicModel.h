@@ -36,12 +36,14 @@
 @property (nonatomic, copy) NSString * content_collect;     //收藏数
 @property (nonatomic, copy) NSString * content_review;      //评论数
 @property (nonatomic, copy) NSString * content_class;       //植物分类
+@property (nonatomic, copy) NSString * content_course;       //植物科目
+
 @property (nonatomic, copy) NSString * member;              //会员信息，member_name:会员昵称,content_face:会员头像
-@property (nonatomic, copy) NSString * imgs;                //列表图片数组，3种前台展示形式,根据图片数量判断
+@property (nonatomic, copy) NSMutableArray * imgs;                //列表图片数组，3种前台展示形式,根据图片数量判断
 @property (nonatomic, copy) NSString * is_review;           //是否评论 ，如果不存在代表没评论，如果等于1代表评论了
 @property (nonatomic, copy) NSString * is_top;              //是否点赞 ，如果不存在代表没点赞，如果等于1代表点赞了
 @property (nonatomic, copy) NSString * is_collect;          //是否收藏 ，如果不存在代表没收藏，如果等于1代表收藏了
-@property (nonatomic, copy) NSString * body;                //帖子内容按照顺序，有图片的展示图片，没图片的展示 内容
+@property (nonatomic, copy) NSMutableArray * body;                //帖子内容按照顺序，有图片的展示图片，没图片的展示 内容
 @property (nonatomic, copy) NSString * member_id;           //商家会员标识
 @property (nonatomic, copy) NSString * auto_position;       //位置
 @property (nonatomic, copy) NSString * change_img;          //已点击的状态
@@ -53,4 +55,43 @@
 @property (nonatomic, copy) NSString * s_type;              //登录用户类型
 
 
+@property (nonatomic, strong) NSString *contentMobile;      //会员手机号
+@property (nonatomic, strong) NSString *levelId;            //商家店铺级别
+@property (nonatomic, strong) NSString *contentAddress;     //商家地址
+@property (nonatomic, strong) NSString *contentEmail;       //联系邮箱
+@property (nonatomic, strong) NSString *contentContact;     //商家联系电话
+@property (nonatomic, strong) NSString *contentUser;        //用户名
+@property (nonatomic, assign) double balance;               //余额
+@property (nonatomic, strong) NSString *zfbNo;              //支付宝账号
+@property (nonatomic, assign) double spendmoney;            //花币余额
+@property (nonatomic, strong) NSString *contentName;        //昵称
+@property (nonatomic, strong) NSString *contentQm;          //签名
+@property (nonatomic, strong) NSString *contentFace;        //会员头像
+@property (nonatomic, strong) NSString *contentGps;         //会员位置
+@property (nonatomic, strong) NSString *contentLinkname;    //商家负责人
+
+@property (nonatomic, retain) NSString * content_value;     //收支金额
+@property (nonatomic, retain) NSString * content_status;    //收支状态
+@property (nonatomic, retain) NSString * content_item;      //具体内容
+
+@property (nonatomic, retain) NSString * msg_title;     //消息标题
+@property (nonatomic, retain) NSString * msg_text;      //消息内容
+@property (nonatomic, retain) NSString * msg_read;      //读取状态
+
+@property (nonatomic, retain) NSString * content_price;     //宝贝价格
+@property (nonatomic, retain) NSString * is_shelf;      //宝贝上下架状态
+@property (nonatomic, retain) NSString * publish;      //宝贝审核状态（1：已审核，0：未审核）已审核:在前台可以查询，下架宝贝  未审核:可以再会员中心编辑宝贝，申请上架
+
+@property (nonatomic, retain) NSString * content_express;      //快递名称
+@property (nonatomic, retain) NSString * express_price;      //快递费用
+@property (nonatomic, retain) NSString * is_sf;      //是否使用顺丰快递，1：代表使用，0：代表不使用
+@property (nonatomic, retain) NSString * member_class;      //会员默认分类，多个用“，”号隔开
+
+@property (nonatomic, retain) NSString * content_face;      //会员头像
+@property (nonatomic, retain) NSString * member_name;       //会员昵称
+
+@property (nonatomic, retain) NSString * content_type;      //类型
+@property (nonatomic, retain) NSString * content_gps;       //会员位置gps
+
+@property (nonatomic, assign) NSInteger num;                //广告位数量
 @end

@@ -9,7 +9,6 @@
 #import "RMLoginViewController.h"
 #import "RMRegisterViewController.h"
 #import "RMForgotWordViewController.h"
-#import "DaiDodgeKeyboard.h"
 #import "FileMangerObject.h"
 
 #import "AppDelegate.h"
@@ -31,7 +30,7 @@
 }
 
 - (void)dealloc{
-    [DaiDodgeKeyboard removeRegisterTheViewNeedDodgeKeyboard];
+//    [DaiDodgeKeyboard removeRegisterTheViewNeedDodgeKeyboard];
 }
 
 - (void)viewDidLoad {
@@ -39,7 +38,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
-    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
+//    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
 
     [_forgotPassBtn addTarget:self action:@selector(forgotAction:) forControlEvents:UIControlEventTouchDown];
     [_loginBtn addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchDown];

@@ -11,5 +11,5 @@
 @interface RMBaseTextField : UITextField
 @property (nonatomic, strong) UIColor *placeHolderColor;
 @property (nonatomic, strong) UILabel *customerLeftView;
-
+@property (assign, nonatomic) CGFloat offset_top;//距离顶部的偏移
 @end

@@ -9,7 +9,6 @@
 #import "RMAdvertisingViewController.h"
 #import "RMAdvertisingSectionTableViewCell.h"
 #import "RMAdvertisingHeadTableViewCell.h"
-#import "DaiDodgeKeyboard.h"
 @interface RMAdvertisingViewController ()
 
 @end
@@ -20,7 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
+//    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

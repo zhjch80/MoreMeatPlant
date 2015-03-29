@@ -24,51 +24,6 @@
 
 @implementation RMShopCarViewController
 
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
-}
-
-
-- (void)keyboardWillShow:(NSNotification *)noti {
-    if (!isShow) {
-        CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-        CGFloat height = self.mTableView.contentSize.height;
-        self.mTableView.contentSize = CGSizeMake(self.mTableView.frame.size.width, height + size.height);
-        isShow = !isShow;
-    }
-}
-
-- (void)keyboardWillHide:(NSNotification *)noti {
-    if (isShow) {
-        CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-        CGFloat height = self.mTableView.contentSize.height;
-        self.mTableView.contentSize = CGSizeMake(self.mTableView.frame.size.width, height - size.height);
-        isShow = !isShow;
-    }
-}
-
-- (void)keyboardDidShow:(NSNotification *)noti {
-    
-}
-
-- (void)keyboardDidHide:(NSNotification *)noti {
-    
-}
-
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }

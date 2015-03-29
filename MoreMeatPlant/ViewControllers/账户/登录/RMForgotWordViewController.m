@@ -7,7 +7,6 @@
 //
 
 #import "RMForgotWordViewController.h"
-#import "DaiDodgeKeyboard.h"
 #import "FileMangerObject.h"
 @interface RMForgotWordViewController ()
 
@@ -24,14 +23,14 @@
 }
 
 - (void)dealloc{
-    [DaiDodgeKeyboard removeRegisterTheViewNeedDodgeKeyboard];
+//    [DaiDodgeKeyboard removeRegisterTheViewNeedDodgeKeyboard];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
-    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
+//    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
 
     [_back_login_btn addTarget:self action:@selector(backLoginAction:) forControlEvents:UIControlEventTouchDown];
     [_sendCodeBtn addTarget:self action:@selector(sendCodeAction:) forControlEvents:UIControlEventTouchDown];

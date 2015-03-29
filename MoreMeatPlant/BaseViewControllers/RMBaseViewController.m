@@ -8,8 +8,11 @@
 
 #import "RMBaseViewController.h"
 
-@interface RMBaseViewController (){
+//#import "IQKeyboardManager.h"
+#import "IQKeyboardReturnKeyHandler.h"
 
+@interface RMBaseViewController (){
+    IQKeyboardReturnKeyHandler *returnKeyHandler;
 }
 @property (nonatomic, strong) UIView * statusView;
 @property (nonatomic, strong) UIView * customNav;
@@ -19,6 +22,11 @@
 
 @implementation RMBaseViewController
 @synthesize statusView, customNav, titleLabel;
+
+-(void)dealloc
+{
+    returnKeyHandler = nil;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -90,6 +98,12 @@
     [rightTwoBarButton addTarget:self action:@selector(navgationBarButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [rightTwoBarButton setEnlargeEdgeWithTop:5 right:5 bottom:5 left:5];
     [customNav addSubview:rightTwoBarButton];
+    
+    
+    returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
+    [returnKeyHandler setLastTextFieldReturnKeyType:UIReturnKeyDone];
+    returnKeyHandler.toolbarManageBehaviour = IQAutoToolbarByPosition;
+
     
 }
 

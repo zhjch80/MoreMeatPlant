@@ -7,7 +7,6 @@
 //
 
 #import "RMRegisterViewController.h"
-#import "DaiDodgeKeyboard.h"
 #import "FileMangerObject.h"
 #import "AppDelegate.h"
 @interface RMRegisterViewController ()
@@ -25,7 +24,7 @@
 }
 
 - (void)dealloc{
-    [DaiDodgeKeyboard removeRegisterTheViewNeedDodgeKeyboard];
+//    [DaiDodgeKeyboard removeRegisterTheViewNeedDodgeKeyboard];
 }
 
 - (void)viewDidLoad {
@@ -33,7 +32,7 @@
     // Do any additional setup after loading the view from its nib.
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
-    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
+//    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
 
     
     [_user_btn addTarget:self action:@selector(selectRegisterType:) forControlEvents:UIControlEventTouchDown];
