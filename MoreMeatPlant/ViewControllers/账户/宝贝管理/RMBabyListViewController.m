@@ -8,15 +8,30 @@
 
 #import "RMBabyListViewController.h"
 #import "RMBabyListTableViewCell.h"
-@interface RMBabyListViewController ()
+#import "RefreshControl.h"
+#import "CustomRefreshView.h"
+#import "UIViewController+HUD.h"
+@interface RMBabyListViewController ()<RefreshControlDelegate>{
+    NSInteger pageCount;
+    BOOL isRefresh;
+    BOOL isLoadComplete;
+}
+@property (nonatomic, strong) RefreshControl * refreshControl;
 
 @end
 
 @implementation RMBabyListViewController
-
+@synthesize refreshControl;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    refreshControl=[[RefreshControl alloc] initWithScrollView:_mTableView delegate:self];
+    refreshControl.topEnabled = YES;
+    refreshControl.bottomEnabled = YES;
+    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    pageCount = 1;
+    isRefresh = YES;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -31,6 +46,31 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 70;
+}
+
+
+#pragma mark 刷新代理
+
+- (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
+    if (direction == RefreshDirectionTop) { //下拉刷新
+        pageCount = 1;
+        isRefresh = YES;
+        isLoadComplete = NO;
+        //        [self requestDataWithPageCount:1];
+    }else if(direction == RefreshDirectionBottom) { //上拉加载
+        if (isLoadComplete){
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self showHint:@"没有更多肉肉啦"];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            });
+        }else{
+            pageCount ++;
+            isRefresh = NO;
+            //            [self requestDataWithPageCount:pageCount];
+        }
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {

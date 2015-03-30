@@ -10,10 +10,12 @@
 
 @implementation RMBaseTextField
 @synthesize offset_top;
+@synthesize offset_left;
 - (id)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
         [[UITextField appearance] setTintColor:[UIColor redColor]];
         offset_top = 1.0;
+        offset_left = 3.0;
     }
     return self;
 }
@@ -21,21 +23,22 @@
     if(self = [super initWithCoder:aDecoder]){
         [[UITextField appearance] setTintColor:[UIColor redColor]];
         offset_top = 1.0;
+        offset_left = 3.0;
     }
     return self;
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectMake(10, offset_top, bounds.size.width, bounds.size.height);
+    return CGRectMake(offset_left, offset_top, bounds.size.width, bounds.size.height);
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    return CGRectMake(10, offset_top, bounds.size.width, bounds.size.height);
+    return CGRectMake(offset_left, offset_top, bounds.size.width, bounds.size.height);
 }
 
 //控制placeHolder的位置
 - (CGRect)placeholderRectForBounds:(CGRect)bounds {
-    return CGRectMake(10, offset_top, bounds.size.width-5, bounds.size.height);
+    return CGRectMake(offset_left, offset_top, bounds.size.width-5, bounds.size.height);
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {

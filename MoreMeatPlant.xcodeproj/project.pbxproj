@@ -715,6 +715,8 @@
 		51DB4CC21AC7CB0800A6064D /* IQUIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CB41AC7CB0800A6064D /* IQUIView+IQKeyboardToolbar.m */; };
 		51DB4CC31AC7CB0800A6064D /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4CB71AC7CB0800A6064D /* IQKeyboardManager.bundle */; };
 		51DB4CC71AC86BF000A6064D /* UIView+Expland.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CC61AC86BF000A6064D /* UIView+Expland.m */; };
+		51DB4CCB1AC9BC9600A6064D /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CCA1AC9BC9600A6064D /* VPImageCropperViewController.m */; };
+		51DB4CCE1AC9BDD100A6064D /* UIViewController+VPImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CCD1AC9BDD100A6064D /* UIViewController+VPImageCropper.m */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */; };
 		51E268091AADDFFE00252DEF /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268071AADDFFE00252DEF /* JWBlurView.m */; };
@@ -1892,6 +1894,10 @@
 		51DB4CB71AC7CB0800A6064D /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
 		51DB4CC51AC86BF000A6064D /* UIView+Expland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Expland.h"; sourceTree = "<group>"; };
 		51DB4CC61AC86BF000A6064D /* UIView+Expland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Expland.m"; sourceTree = "<group>"; };
+		51DB4CC91AC9BC9600A6064D /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		51DB4CCA1AC9BC9600A6064D /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
+		51DB4CCC1AC9BDD100A6064D /* UIViewController+VPImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+VPImageCropper.h"; sourceTree = "<group>"; };
+		51DB4CCD1AC9BDD100A6064D /* UIViewController+VPImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+VPImageCropper.m"; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 		51E268041AADDFFE00252DEF /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
@@ -3268,6 +3274,7 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				51DB4CC81AC9BC9600A6064D /* VPImageCropper */,
 				51DB4CC41AC86BF000A6064D /* UIView+DrawCorner */,
 				51DB4C971AC7CB0800A6064D /* IQKeyBoardManager */,
 				5144E7951AC4401F00190C50 /* BaiduMap_IOSSDK_v2.6.0_Lib */,
@@ -4262,6 +4269,17 @@
 			path = "UIView+DrawCorner";
 			sourceTree = "<group>";
 		};
+		51DB4CC81AC9BC9600A6064D /* VPImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				51DB4CC91AC9BC9600A6064D /* VPImageCropperViewController.h */,
+				51DB4CCA1AC9BC9600A6064D /* VPImageCropperViewController.m */,
+				51DB4CCC1AC9BDD100A6064D /* UIViewController+VPImageCropper.h */,
+				51DB4CCD1AC9BDD100A6064D /* UIViewController+VPImageCropper.m */,
+			);
+			path = VPImageCropper;
+			sourceTree = "<group>";
+		};
 		51E268031AADDFEC00252DEF /* popupController */ = {
 			isa = PBXGroup;
 			children = (
@@ -5021,6 +5039,7 @@
 				1D4DA3561A939F4A006A9EBA /* RMStickView.m in Sources */,
 				1D9CB1781AAE9EE500BD5A7D /* AFURLSessionManager.m in Sources */,
 				5199275A1AB5876500B0F83F /* RMMyCollectionViewController.m in Sources */,
+				51DB4CCE1AC9BDD100A6064D /* UIViewController+VPImageCropper.m in Sources */,
 				51D8845C1ABE82CC00F7A3BD /* NSString+Addtion.m in Sources */,
 				0A41057A1ABAB3C70060FBD5 /* UIImage+EMWebP.m in Sources */,
 				1DD326661ABC08B2006CD1A8 /* RMMerchantsShopViewController.m in Sources */,
@@ -5172,6 +5191,7 @@
 				1D83974D1AB3F72D00DA190A /* DoPhotoCell.m in Sources */,
 				512D75311AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m in Sources */,
 				1D4DA3431A93044C006A9EBA /* RMPlantTypeView.m in Sources */,
+				51DB4CCB1AC9BC9600A6064D /* VPImageCropperViewController.m in Sources */,
 				0A41056E1ABAB3C70060FBD5 /* EMSDImageCache.m in Sources */,
 				512D75271AB1F2190027B7C7 /* RMMyWalletViewController.m in Sources */,
 				1D4DA32F1A921779006A9EBA /* RMFreshPlantMarketViewController.m in Sources */,

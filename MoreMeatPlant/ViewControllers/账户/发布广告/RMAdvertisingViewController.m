@@ -20,6 +20,13 @@
     // Do any additional setup after loading the view from its nib.
     
 //    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
+    [self setCustomNavTitle:@"发布广告"];
+    
+    
+    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -49,6 +56,11 @@
         return 251;
     }
 }
+
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

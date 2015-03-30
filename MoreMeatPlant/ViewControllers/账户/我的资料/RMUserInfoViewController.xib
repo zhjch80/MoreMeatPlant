@@ -31,6 +31,7 @@
                 <outlet property="nickL" destination="bTI-VF-UeX" id="RAt-lP-VHd"/>
                 <outlet property="passwordL" destination="Ngq-ug-p8I" id="0uc-Du-VKP"/>
                 <outlet property="signatureL" destination="vTp-Ra-beG" id="Mxh-mY-rY7"/>
+                <outlet property="titleLabel" destination="ZOO-lO-bZK" id="9Ac-wx-wVX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -108,13 +109,12 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMi-aw-8XF">
                             <rect key="frame" x="117" y="275" width="86" height="30"/>
-                            <color key="backgroundColor" red="0.8901960784313725" green="0.086274509803921567" blue="0.34509803921568627" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="86" id="Lsg-dz-HTx"/>
                                 <constraint firstAttribute="height" constant="30" id="YDx-H2-ekA"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="18"/>
-                            <state key="normal" title="编辑">
+                            <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                            <state key="normal" title="编辑" backgroundImage="member_my_home_btn.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
@@ -125,7 +125,7 @@
                                 <constraint firstAttribute="height" constant="25" id="PLL-Qd-GTe"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                            <state key="normal" title="修改" backgroundImage="fbbb_btn_bg_red.png">
+                            <state key="normal" title="修改" backgroundImage="member_my_home_btn.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
@@ -199,7 +199,7 @@
         </view>
     </objects>
     <resources>
-        <image name="fbbb_btn_bg_red.png" width="678" height="90"/>
         <image name="gwc_close.png" width="87" height="87"/>
+        <image name="member_my_home_btn.png" width="242" height="89"/>
     </resources>
 </document>

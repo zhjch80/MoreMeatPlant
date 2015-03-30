@@ -15,6 +15,8 @@
                 <outlet property="close_btn" destination="S7V-tx-0XY" id="Mgm-Ch-UFC"/>
                 <outlet property="headerView" destination="YJY-FO-hlH" id="nFr-QP-q9p"/>
                 <outlet property="mainTableView" destination="zVc-bS-bgV" id="Zh6-Qa-F6C"/>
+                <outlet property="titleLabel" destination="jiD-6J-W2v" id="brm-vS-b01"/>
+                <outlet property="titleView" destination="YJY-FO-hlH" id="gya-GR-7J8"/>
                 <outlet property="view" destination="iN0-l3-epB" id="W4o-U6-Zpe"/>
             </connections>
         </placeholder>
@@ -23,16 +25,22 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7V-tx-0XY">
+                    <rect key="frame" x="242" y="0.0" width="30" height="30"/>
+                    <state key="normal" backgroundImage="gwc_close.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJY-FO-hlH">
                     <rect key="frame" x="0.0" y="15" width="320" height="553"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="rPg-V8-hHf">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="rPg-V8-hHf">
                             <rect key="frame" x="0.0" y="47" width="320" height="1"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="CHN-gi-ZTU"/>
                             </constraints>
                         </imageView>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zVc-bS-bgV">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zVc-bS-bgV">
                             <rect key="frame" x="0.0" y="48.5" width="320" height="504.5"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -40,7 +48,7 @@
                                 <outlet property="delegate" destination="-1" id="L2J-CD-fcs"/>
                             </connections>
                         </tableView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="选择收货地址" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jiD-6J-W2v">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择收货地址" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jiD-6J-W2v">
                             <rect key="frame" x="118" y="15" width="84" height="17.5"/>
                             <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
                             <color key="textColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -60,12 +68,6 @@
                         <constraint firstItem="zVc-bS-bgV" firstAttribute="leading" secondItem="YJY-FO-hlH" secondAttribute="leading" id="uYR-Id-ZJA"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7V-tx-0XY">
-                    <rect key="frame" x="242" y="0.0" width="30" height="30"/>
-                    <state key="normal" backgroundImage="gwc_close.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>

@@ -37,7 +37,7 @@
 #define kShadowRadius 1.0f
 
 #define kBadgeHeight 15.0f
-#define kBadgeTextSideMargin 4.0f
+#define kBadgeTextSideMargin 0.0f
 
 #define kBadgeCornerRadius 10.0f
 
@@ -117,7 +117,7 @@
     CGFloat textHeight = [self sizeOfTextForCurrentSettings].height;
     
     CGFloat viewWidth = textWidth + kBadgeTextSideMargin + (kMarginToDrawInside * 2) ;//+ 8;
-    CGFloat viewHeight = textHeight + (kMarginToDrawInside * 2);
+    CGFloat viewHeight = textWidth +kBadgeTextSideMargin+ (kMarginToDrawInside * 2);
     
     CGFloat superviewWidth = superviewFrame.size.width;
     CGFloat superviewHeight = superviewFrame.size.height;

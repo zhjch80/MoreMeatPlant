@@ -26,4 +26,6 @@ typedef void (^RMSettlementViewSettle) (void);
 @property (copy, nonatomic) RMSettlementViewSelectPayment payment_callback;
 @property (copy, nonatomic) RMSettlementViewSettle settle_callback;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIView *titleView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @end

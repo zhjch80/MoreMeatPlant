@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (Expland)
-- (void)drawCorner:(UIRectCorner)rectconer;
+- (void)drawCorner:(UIRectCorner)rectconer withFrame:(CGRect)frame;
 @end

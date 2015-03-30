@@ -7,7 +7,7 @@
 //
 
 #import "RMUserInfoViewController.h"
-
+#import "UIView+Expland.h"
 @interface RMUserInfoViewController ()
 
 @end
@@ -24,6 +24,8 @@
     [_editBtn addTarget:self action:@selector(operation:) forControlEvents:UIControlEventTouchDown];
     [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];
     [_modifyBtn addTarget:self action:@selector(modifyAction:) forControlEvents:UIControlEventTouchDown];
+    
+   
     
 }
 

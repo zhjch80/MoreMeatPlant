@@ -15,6 +15,7 @@
                 <outlet property="billBtn" destination="kjT-yH-FAp" id="GiF-TY-GkF"/>
                 <outlet property="closeBtn" destination="F2W-wn-Wfz" id="oG4-Ws-eMo"/>
                 <outlet property="mTableView" destination="Eh7-oz-ndl" id="yXW-tH-KJW"/>
+                <outlet property="titleLabel" destination="ohM-Hx-4xT" id="gzk-l7-4W4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

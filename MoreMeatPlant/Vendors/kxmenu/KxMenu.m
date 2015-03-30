@@ -44,11 +44,8 @@ const CGFloat kArrowSize = 12.f;
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-@interface KxMenuView : UIView
-@end
 
-@interface KxMenuOverlay : UIView
-@end
+
 
 @implementation KxMenuOverlay
 
@@ -468,6 +465,7 @@ typedef enum {
             
             [button setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
             
+            itemView.tag = menuItem.tag;
             [itemView addSubview:button];
         }
         
@@ -497,6 +495,7 @@ typedef enum {
             UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
             titleLabel.text = menuItem.title;
             titleLabel.font = titleFont;
+            titleLabel.tag = 1;
             titleLabel.textAlignment = menuItem.alignment;
             titleLabel.textColor = menuItem.foreColor ? menuItem.foreColor : [UIColor whiteColor];
             titleLabel.backgroundColor = [UIColor clearColor];
@@ -769,10 +768,10 @@ static UIFont *gTitleFont;
 
 @implementation KxMenu {
     
-    KxMenuView *_menuView;
+//    KxMenuView *_menuView;
     BOOL        _observing;
 }
-
+@synthesize _menuView;
 + (instancetype) sharedMenu
 {
     static dispatch_once_t onceToken;

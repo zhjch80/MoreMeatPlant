@@ -25,5 +25,5 @@
 
 @property (assign, nonatomic) BOOL isCorp;
 
-
+- (void)initPlat;
 @end

@@ -31,7 +31,7 @@
 #import "RMModifyPassWordViewController.h"
 
 #import "UIViewController+ENPopUp.h"
-
+#import "UIView+Expland.h"
 #define GeneralMember @"1"
 @interface RMAccountViewController ()
 
@@ -45,6 +45,16 @@
     
     [self setCustomNavTitle:@"账户"];
     
+    _headerImgV.layer.cornerRadius = 5;
+    _headerImgV.clipsToBounds = YES;
+    
+    functitleArray = [[NSMutableArray alloc]init];
+    funcimgArray = [[NSMutableArray alloc]init];
+    
+    
+    [rightTwoBarButton setTitle:@"注销" forState:UIControlStateNormal];
+    rightTwoBarButton.titleLabel.font = FONT_1(15);
+    [rightTwoBarButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self initPlat];
     
     [self layoutViews];
@@ -56,16 +66,8 @@
 }
 
 - (void)initPlat{
-    _headerImgV.layer.cornerRadius = 5;
-    _headerImgV.clipsToBounds = YES;
-    
-    functitleArray = [[NSMutableArray alloc]init];
-    funcimgArray = [[NSMutableArray alloc]init];
-    
-    
-    [rightTwoBarButton setTitle:@"注销" forState:UIControlStateNormal];
-    rightTwoBarButton.titleLabel.font = FONT_1(15);
-    [rightTwoBarButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [funcimgArray removeAllObjects];
+    [functitleArray removeAllObjects];
     
     if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:GeneralMember]){//普通会员
         functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n订单",@"我的\n帖子",@"系统\n通知",@"购物\n篮",@"等待\n升级",@"附近\n肉友",@"我的\n资料" ,nil];
@@ -100,6 +102,8 @@
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
                         rightTwoBarButton.enabled = NO;
                         mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
+                        [mywallet.titleLabel drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, mywallet.titleLabel.frame.size.height)];
+                        
                         mywallet.closecallback = ^(UIButton * sender){
                             rightTwoBarButton.enabled = YES;
                             [self dismissPopUpViewControllerWithcompletion:nil];
@@ -180,6 +184,8 @@
                             
                         };
                         userinfo.view.frame = CGRectMake(20, 0, kScreenWidth-20*2, kScreenHeight/3*2);
+                        
+                        [userinfo.titleLabel drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, userinfo.titleLabel.frame.size.height)];
                         [self presentPopUpViewController:userinfo overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-44-64)];
                     }
                         break;

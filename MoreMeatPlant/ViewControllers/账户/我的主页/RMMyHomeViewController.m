@@ -9,12 +9,19 @@
 #import "RMMyHomeViewController.h"
 #import "RMReleasePoisonDetailsViewController.h"
 #import "KxMenu.h"
-@interface RMMyHomeViewController ()
+@interface RMMyHomeViewController ()<RefreshControlDelegate>{
+    NSInteger pageCount;
+    BOOL isRefresh;
+    BOOL isLoadComplete;
+}
+@property (nonatomic, strong) RefreshControl * refreshControl;
+
 
 @end
 
 @implementation RMMyHomeViewController
 @synthesize dataArr;
+@synthesize refreshControl;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,6 +34,14 @@
     
     _content_img.layer.cornerRadius = 5;
     _content_img.clipsToBounds = YES;
+    
+    
+    refreshControl=[[RefreshControl alloc] initWithScrollView:_mainTableView delegate:self];
+    refreshControl.topEnabled = YES;
+    refreshControl.bottomEnabled = YES;
+    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    pageCount = 1;
+    isRefresh = YES;
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
     [self loadBottomView];
@@ -204,6 +219,31 @@
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+#pragma mark 刷新代理
+
+- (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
+    if (direction == RefreshDirectionTop) { //下拉刷新
+        pageCount = 1;
+        isRefresh = YES;
+        isLoadComplete = NO;
+        //        [self requestDataWithPageCount:1];
+    }else if(direction == RefreshDirectionBottom) { //上拉加载
+        if (isLoadComplete){
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self showHint:@"没有更多肉肉啦"];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            });
+        }else{
+            pageCount ++;
+            isRefresh = NO;
+            //            [self requestDataWithPageCount:pageCount];
+        }
+        
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

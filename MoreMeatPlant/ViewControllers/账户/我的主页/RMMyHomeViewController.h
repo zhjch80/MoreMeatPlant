@@ -10,6 +10,7 @@
 #import "RMReleasePoisonCell.h"
 #import "RMBottomView.h"
 #import "JSBadgeView.h"
+#import "KxMenu.h"
 @interface RMMyHomeViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource,PostDetatilsDelegate,BottomDelegate>{
     RMBottomView * bottomView;
     JSBadgeView * badge;

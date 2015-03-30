@@ -16,6 +16,7 @@
 
 #import "RMAddressEditViewController.h"
 #import "RMMyCorpViewController.h"
+#import "UIView+Expland.h"
 @interface RMShopCarViewController (){
     BOOL isShow;
 }
@@ -164,6 +165,7 @@
 //        [self dismissPopUpViewControllerWithcompletion:nil];
 //    };
     settle.view.frame = CGRectMake(20, 60, kScreenWidth-20*2, kScreenHeight-60*2);
+    [settle.titleView drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, kScreenHeight-60*2)];
     settle.callback = ^(void){
         [self dismissPopUpViewControllerWithcompletion:nil];
     };

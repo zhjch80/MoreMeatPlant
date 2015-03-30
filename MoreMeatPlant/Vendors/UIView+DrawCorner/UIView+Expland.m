@@ -9,11 +9,12 @@
 #import "UIView+Expland.h"
 
 @implementation UIView (Expland)
-- (void)drawCorner:(UIRectCorner)rectconer
+- (void)drawCorner:(UIRectCorner)rectconer withFrame:(CGRect)frame
 {
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:rectconer cornerRadii:CGSizeMake(10, 10)];
+    NSLog(@"%@",[NSValue valueWithCGRect:frame]);
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:frame byRoundingCorners:rectconer cornerRadii:CGSizeMake(5, 5)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.frame = self.bounds;
+    maskLayer.frame = frame;
     maskLayer.path = maskPath.CGPath;
     self.layer.mask = maskLayer;
 }

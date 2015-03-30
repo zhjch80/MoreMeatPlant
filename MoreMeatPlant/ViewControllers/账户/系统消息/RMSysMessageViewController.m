@@ -9,11 +9,17 @@
 #import "RMSysMessageViewController.h"
 #import "RMSysMessageTableViewCell.h"
 
-@interface RMSysMessageViewController ()
+@interface RMSysMessageViewController ()<RefreshControlDelegate>{
+    NSInteger pageCount;
+    BOOL isRefresh;
+    BOOL isLoadComplete;
+}
+@property (nonatomic, strong) RefreshControl * refreshControl;
 
 @end
 
 @implementation RMSysMessageViewController
+@synthesize refreshControl;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,6 +30,14 @@
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    
+    
+    refreshControl=[[RefreshControl alloc] initWithScrollView:_mainTableView delegate:self];
+    refreshControl.topEnabled = YES;
+    refreshControl.bottomEnabled = YES;
+    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    pageCount = 1;
+    isRefresh = YES;
     
     [self initPlat];
 }
@@ -84,6 +98,30 @@
             
         default:
             break;
+    }
+}
+
+
+#pragma mark 刷新代理
+- (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
+    if (direction == RefreshDirectionTop) { //下拉刷新
+        pageCount = 1;
+        isRefresh = YES;
+        isLoadComplete = NO;
+        //        [self requestDataWithPageCount:1];
+    }else if(direction == RefreshDirectionBottom) { //上拉加载
+        if (isLoadComplete){
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self showHint:@"没有更多肉肉啦"];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            });
+        }else{
+            pageCount ++;
+            isRefresh = NO;
+            //            [self requestDataWithPageCount:pageCount];
+        }
+        
     }
 }
 

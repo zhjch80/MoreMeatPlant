@@ -116,6 +116,7 @@
         case 1:{
             //已经登录
             controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, talkMoreCtl, nil];
+            [accountCtl initPlat];
             break;
         }
             

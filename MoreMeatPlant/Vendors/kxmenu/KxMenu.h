@@ -52,8 +52,16 @@
 
 @end
 
-@interface KxMenu : NSObject
 
+@interface KxMenuOverlay : UIView
+@end
+
+@interface KxMenuView : UIView
+@end
+
+
+@interface KxMenu : NSObject
+@property (retain, nonatomic) KxMenuView * _menuView;
 + (void) showMenuInView:(UIView *)view
                fromRect:(CGRect)rect
               menuItems:(NSArray *)menuItems;
@@ -67,3 +75,5 @@
 + (void) setTitleFont: (UIFont *) titleFont;
 
 @end
+
+

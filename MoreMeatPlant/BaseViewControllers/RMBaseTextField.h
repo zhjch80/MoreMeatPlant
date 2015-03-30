@@ -12,4 +12,5 @@
 @property (nonatomic, strong) UIColor *placeHolderColor;
 @property (nonatomic, strong) UILabel *customerLeftView;
 @property (assign, nonatomic) CGFloat offset_top;//距离顶部的偏移
+@property (assign, nonatomic) CGFloat offset_left;//距离左边的偏移
 @end

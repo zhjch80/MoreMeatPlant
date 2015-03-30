@@ -9,6 +9,7 @@
 #import "RMMyWalletViewController.h"
 #import "RMMyWalletTransferTableViewCell.h"
 #import "RMMyWalletYueTableViewCell.h"
+#import "UIView+Expland.h"
 @interface RMMyWalletViewController (){
     BOOL isShow;
 }
@@ -43,7 +44,6 @@
     
     [_billBtn addTarget:self action:@selector(billAction:) forControlEvents:UIControlEventTouchDown];
     [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];
-    
     
 }
 
@@ -134,7 +134,19 @@
 
 #pragma mark - 充值
 - (void)chargeAction:(id)sender{
-
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"充值" message:@"请输入充值金额" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+}
+#pragma mark - AlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == 0){
+        NSLog(@"取消");
+    }else{
+        
+        UITextField *tf=[alertView textFieldAtIndex:0];
+        NSLog(@"确认充值%@",tf.text);
+    }
 }
 
 #pragma mark - 确认转余额为花币

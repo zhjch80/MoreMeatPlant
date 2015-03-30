@@ -8,7 +8,15 @@
 
 #import "RMBaseViewController.h"
 #import "RMPlantWithSaleCell.h"
-@interface RMMyCorpViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource,JumpPlantDetailsDelegate>
+#import "JSBadgeView.h"
+#import "KxMenu.h"
+#import "RMBottomView.h"
+@interface RMMyCorpViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource,BottomDelegate,JumpPlantDetailsDelegate>{
+    RMBottomView * bottomView;
+    JSBadgeView * badge;
+    JSBadgeView * car_badge;
+    JSBadgeView * chat_badge;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *bannerImgV;
 @property (weak, nonatomic) IBOutlet UIImageView *corp_headImgV;
 @property (weak, nonatomic) IBOutlet UILabel *corp_nameL;
