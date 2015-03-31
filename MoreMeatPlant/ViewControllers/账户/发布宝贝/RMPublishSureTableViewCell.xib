@@ -52,6 +52,9 @@
                     <constraint firstItem="fwc-mS-SQz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="glT-UR-c62"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="surePublish" destination="fwc-mS-SQz" id="3mD-fY-4RI"/>
+            </connections>
             <point key="canvasLocation" x="198" y="161"/>
         </tableViewCell>
     </objects>

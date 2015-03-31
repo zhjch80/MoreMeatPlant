@@ -21,5 +21,7 @@ typedef void (^RMMyWalletViewBillCallBack)(id sender);
 @property (copy, nonatomic) RMMyWalletViewBillCallBack billcallback;
 @property (copy, nonatomic) RMMyWalletViewCloseCallBack closecallback;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (retain, nonatomic) NSString * zfb_no;
+@property (retain, nonatomic) NSString * content_mobile;
 
 @end

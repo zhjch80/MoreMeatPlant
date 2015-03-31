@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RMPublishPlateTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *yryp_btn;
+@property (weak, nonatomic) IBOutlet UIButton *xrsc_btn;
 
 @end

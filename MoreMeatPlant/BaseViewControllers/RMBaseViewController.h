@@ -20,7 +20,7 @@
 #import "RMUserLoginInfoManager.h"
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
-
+#import "UIImageView+WebCache.h"
 @interface RMBaseViewController : UIViewController{
     UIButton *leftBarButton;
     UIButton *rightOneBarButton;

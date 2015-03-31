@@ -67,23 +67,6 @@
                             </mask>
                         </variation>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHQ-J7-BaM">
-                        <rect key="frame" x="70" y="72" width="59" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="78" id="1i6-pi-cMO"/>
-                            <constraint firstAttribute="height" constant="21" id="r6h-fX-Yae"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
-                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="1i6-pi-cMO"/>
-                            </mask>
-                        </variation>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RrV-ea-cb3">
                         <rect key="frame" x="130" y="72" width="59" height="21"/>
                         <constraints>
@@ -222,6 +205,23 @@
                             </mask>
                         </variation>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHQ-J7-BaM">
+                        <rect key="frame" x="70" y="72" width="59" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="1i6-pi-cMO"/>
+                            <constraint firstAttribute="height" constant="21" id="r6h-fX-Yae"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
+                            <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1i6-pi-cMO"/>
+                            </mask>
+                        </variation>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Vvk-Pr-pDP" firstAttribute="centerY" secondItem="RrV-ea-cb3" secondAttribute="centerY" id="09O-eQ-w90"/>
@@ -284,7 +284,24 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="174" y="172.5"/>
+            <connections>
+                <outlet property="camera1" destination="8hw-Ll-zWc" id="YJJ-Fk-Ryz"/>
+                <outlet property="camera2" destination="3Wq-cB-iVf" id="dz1-NO-50T"/>
+                <outlet property="camera3" destination="Xj6-x1-yYz" id="OL4-Uy-Rx0"/>
+                <outlet property="camera4" destination="Pbw-fZ-L4V" id="Axk-we-6sQ"/>
+                <outlet property="camera5" destination="Frv-Hq-rJW" id="pc7-Px-gm0"/>
+                <outlet property="img1" destination="8ly-kf-k5F" id="Cdy-pV-tXs"/>
+                <outlet property="img2" destination="mm3-MT-XsB" id="EeQ-2b-nwd"/>
+                <outlet property="img3" destination="tUr-CO-zka" id="0zE-ls-tAc"/>
+                <outlet property="img4" destination="7Ow-iC-BO0" id="6Bl-GW-5Rq"/>
+                <outlet property="img5" destination="y8K-Gf-1en" id="prZ-7i-TVY"/>
+                <outlet property="picSelect1" destination="Vvk-Pr-pDP" id="pPg-hT-jyu"/>
+                <outlet property="picSelect2" destination="dHQ-J7-BaM" id="e4z-1N-2W1"/>
+                <outlet property="picSelect3" destination="RrV-ea-cb3" id="E7q-3p-9ce"/>
+                <outlet property="picSelect4" destination="9g4-r8-rZL" id="PWf-SU-MR5"/>
+                <outlet property="picSelect5" destination="At5-QT-Gkm" id="7CP-Su-TSC"/>
+            </connections>
+            <point key="canvasLocation" x="236" y="166.5"/>
         </tableViewCell>
     </objects>
     <resources>

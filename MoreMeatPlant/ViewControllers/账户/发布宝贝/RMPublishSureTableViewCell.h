@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RMPublishSureTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *surePublish;
 
 @end

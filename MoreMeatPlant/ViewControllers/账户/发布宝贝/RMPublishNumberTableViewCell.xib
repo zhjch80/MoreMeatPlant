@@ -51,6 +51,10 @@
                     <constraint firstAttribute="trailing" secondItem="U75-ss-vSl" secondAttribute="trailing" constant="10" id="p3D-LF-Caq"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="numTextfield" destination="J3X-lc-bdK" id="QEY-u8-8OP"/>
+            </connections>
+            <point key="canvasLocation" x="217" y="204"/>
         </tableViewCell>
     </objects>
     <resources>

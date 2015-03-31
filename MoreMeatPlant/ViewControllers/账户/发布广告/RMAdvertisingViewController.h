@@ -8,7 +8,10 @@
 
 #import "RMBaseViewController.h"
 
-@interface RMAdvertisingViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate>
+@interface RMAdvertisingViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate>{
+    NSMutableArray * planteArray;
+    NSMutableArray * selectArray;
+}
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
 
 @end

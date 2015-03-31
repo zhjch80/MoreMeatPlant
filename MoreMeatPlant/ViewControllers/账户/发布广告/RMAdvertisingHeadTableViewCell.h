@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RMAdvertisingHeadTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *publishBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *placeImgV;
 
 @end

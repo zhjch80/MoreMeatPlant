@@ -14,7 +14,8 @@
 #import "RMPublishPhotoTableViewCell.h"
 #import "RMPublishSureTableViewCell.h"
 #import "NSString+Addtion.h"
-@interface RMPublishBabyViewController ()
+#import "RMVPImageCropper.h"
+@interface RMPublishBabyViewController ()<RMVPImageCropperDelegate>
 
 @end
 
@@ -24,7 +25,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"发布宝贝"];
-//    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.mTableView];
+    
+    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    
     classArray = [[NSMutableArray alloc]init];
     classArray = [NSMutableArray arrayWithObjects:@"一肉一拍",@"进口肉肉",@"国产肉肉",@"特价肉肉", nil];
 }
@@ -63,11 +68,41 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPublishNumberTableViewCell" owner:self options:nil] lastObject];
         }
         return cell;
-    }else if (indexPath.row == 4){
+    }else if (indexPath.row == 4||indexPath.row == 5){
         RMPublishPhotoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMPublishPhotoTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPublishPhotoTableViewCell" owner:self options:nil] lastObject];
+            [cell.picSelect1 addTarget:self action:@selector(selectFromPics:) forControlEvents:UIControlEventTouchDown];
+            [cell.picSelect2 addTarget:self action:@selector(selectFromPics:) forControlEvents:UIControlEventTouchDown];
+            [cell.picSelect3 addTarget:self action:@selector(selectFromPics:) forControlEvents:UIControlEventTouchDown];
+            [cell.picSelect4 addTarget:self action:@selector(selectFromPics:) forControlEvents:UIControlEventTouchDown];
+            [cell.picSelect5 addTarget:self action:@selector(selectFromPics:) forControlEvents:UIControlEventTouchDown];
+            
+            [cell.camera1 addTarget:self action:@selector(selectFromCamera:) forControlEvents:UIControlEventTouchDown];
+            [cell.camera2 addTarget:self action:@selector(selectFromCamera:) forControlEvents:UIControlEventTouchDown];
+            [cell.camera3 addTarget:self action:@selector(selectFromCamera:) forControlEvents:UIControlEventTouchDown];
+            [cell.camera4 addTarget:self action:@selector(selectFromCamera:) forControlEvents:UIControlEventTouchDown];
+            [cell.camera5 addTarget:self action:@selector(selectFromCamera:) forControlEvents:UIControlEventTouchDown];
+            
         }
+        cell.picSelect1.tag = indexPath.row*100+1;
+        cell.picSelect2.tag = indexPath.row*100+2;
+        cell.picSelect3.tag = indexPath.row*100+3;
+        cell.picSelect4.tag = indexPath.row*100+4;
+        cell.picSelect5.tag = indexPath.row*100+5;
+        
+        cell.camera1.tag = indexPath.row*200+1;
+        cell.camera2.tag = indexPath.row*200+2;
+        cell.camera3.tag = indexPath.row*200+3;
+        cell.camera4.tag = indexPath.row*200+4;
+        cell.camera5.tag = indexPath.row*200+5;
+        
+        cell.img1.tag = indexPath.row*300+1;
+        cell.img2.tag = indexPath.row*300+2;
+        cell.img3.tag = indexPath.row*300+3;
+        cell.img4.tag = indexPath.row*300+4;
+        cell.img5.tag = indexPath.row*300+5;
+        
         return cell;
     }else if (indexPath.row == 5){
         RMPublishPhotoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMPublishPhotoTableViewCell"];
@@ -118,6 +153,21 @@
 
 }
 
+#pragma mark - 拍照
+- (void)selectFromCamera:(UIButton *)sender{
+    [[RMVPImageCropper shareImageCropper] setCtl:self];
+    [[RMVPImageCropper shareImageCropper] set_scale:1.0];
+    [[RMVPImageCropper shareImageCropper] openCamera];
+    img_tag = (sender.tag/200)*300+sender.tag%200;
+}
+#pragma mark - 从相册选择图片
+- (void)selectFromPics:(UIButton *)sender{
+    [[RMVPImageCropper shareImageCropper] setCtl:self];
+    [[RMVPImageCropper shareImageCropper] set_scale:1.0];
+    [[RMVPImageCropper shareImageCropper] openPics];
+    img_tag = (sender.tag/100)*300+sender.tag%100;
+}
+
 - (void)addClassAction:(id)sender{
     
     UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"输入要添加的分类名称" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -141,6 +191,22 @@
         
         [_mTableView reloadData];
     }
+}
+
+#pragma mark - RMimageCropperDelegate
+- (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage{
+    
+    RMPublishPhotoTableViewCell * cell = (RMPublishPhotoTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:img_tag/300 inSection:0]];
+    UIImageView * img = (UIImageView *)[cell.contentView viewWithTag:img_tag];
+    [img setImage:editedImage];
+}
+
+- (void)RMimageCropperDidCancel:(VPImageCropperViewController *)cropperViewController{
+    NSLog(@"发布宝贝取消选择图片");
+}
+
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

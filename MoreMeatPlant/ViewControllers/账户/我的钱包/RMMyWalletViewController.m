@@ -20,19 +20,12 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)viewDidLoad {
@@ -47,35 +40,6 @@
     
 }
 
-//- (void)keyboardWillShow:(NSNotification *)noti {
-//    if (!isShow) {
-//        CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-//        CGFloat height = self.mTableView.contentSize.height;
-//        self.mTableView.contentSize = CGSizeMake(self.mTableView.frame.size.width, height + size.height);
-//        isShow = !isShow;
-//    }
-//}
-//
-//- (void)keyboardWillHide:(NSNotification *)noti {
-//    if (isShow) {
-//        CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-//        CGFloat height = self.mTableView.contentSize.height;
-//        self.mTableView.contentSize = CGSizeMake(self.mTableView.frame.size.width, height - size.height);
-//        isShow = !isShow;
-//    }
-//}
-
-- (void)keyboardDidShow:(NSNotification *)noti {
-    
-}
-
-- (void)keyboardDidHide:(NSNotification *)noti {
-    
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES];
-}
 
 #pragma mark - UITableVIewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -101,6 +65,8 @@
             [cell.sureWithdrawalBtn addTarget:self action:@selector(sureWithdrawalAction:) forControlEvents:UIControlEventTouchDown];
             [cell.sendCodeBtn addTarget:self action:@selector(sendCodeAction:) forControlEvents:UIControlEventTouchDown];
         }
+        cell.mobileL.text = _content_mobile;
+        cell.alipayName.text = [NSString stringWithFormat:@"支付宝: %@",_zfb_no];
         return cell;
     }
 }
@@ -120,16 +86,66 @@
 
 #pragma mark - 发送验证码
 - (void)sendCodeAction:(id)sender{
-
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager withdrawalSendCode:_content_mobile andCallBack:^(NSError *error, BOOL success, id object) {
+        RMPublicModel * model = object;
+        
+        if(success && model.status){
+            
+        }
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD showSuccess:model.msg toView:self.view];
+    }];
 }
 
 #pragma mark - 确认转出
 - (void)sureTurnOutAction:(id)sender{
-
+    
+    RMMyWalletTransferTableViewCell * cell =  (RMMyWalletTransferTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    if([cell.otherAccountField.text length]>0 && [cell.moneyField.text length]>0){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [RMAFNRequestManager memberTransforWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] ToOtherMember:cell.otherAccountField.text Number:cell.moneyField.text andCallBack:^(NSError *error, BOOL success, id object) {
+            RMPublicModel * model = object;
+            if(success && model.status){
+                
+            }else{
+                
+            }
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD showSuccess:model.msg toView:self.view];
+        }];
+    }else if ([cell.otherAccountField.text length]==0){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入对方账号！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+    }else if ([cell.moneyField.text length]==0){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入转出金额!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+    }
+    
 }
 #pragma mark - 确认提现
 - (void)sureWithdrawalAction:(id)sender{
     
+    RMMyWalletTransferTableViewCell * cell =  (RMMyWalletTransferTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    if([cell.withdrawalField.text length]>0){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [RMAFNRequestManager memberWithdrawalWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Code:cell.codeField.text Number:cell.withdrawalField.text andCallBack:^(NSError *error, BOOL success, id object) {
+            RMPublicModel * model = object;
+            if(success && model.status){
+            
+            }else{
+                
+            }
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD showMessag:model.msg toView:self.view];
+        }];
+    }else if ([cell.withdrawalField.text length]==0){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入提现金额！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+    }else if ([cell.codeField.text length]==0){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入验证码!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+    }
 }
 
 #pragma mark - 充值
@@ -151,7 +167,24 @@
 
 #pragma mark - 确认转余额为花币
 - (void)sureTurnAction:(id)sender{
-
+    
+    RMMyWalletYueTableViewCell * cell = (RMMyWalletYueTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    if([cell.yue_Z_huabiTextField.text length]>0){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [RMAFNRequestManager yu_eTurnHuabiWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Number:cell.yue_Z_huabiTextField.text andCallBack:^(NSError *error, BOOL success, id object) {
+            RMPublicModel * model = object;
+            if(success && model.status){
+            
+            }else{
+            
+            }
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [MBProgressHUD showSuccess:model.msg toView:self.view];
+        }];
+    }else{
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入转换的数目!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+    }
 }
 
 #pragma mark - 关闭

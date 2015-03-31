@@ -29,14 +29,6 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="lQM-mk-dVG" customClass="RMBaseTextField">
-                        <rect key="frame" x="58" y="8" width="174" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="z3I-T0-a1l"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="肉肉介绍" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9r-p0-eb6">
                         <rect key="frame" x="10" y="42" width="30" height="37"/>
                         <constraints>
@@ -134,6 +126,14 @@
                             </mask>
                         </variation>
                     </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="lQM-mk-dVG" customClass="RMBaseTextField">
+                        <rect key="frame" x="58" y="8" width="174" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="z3I-T0-a1l"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="xWO-9K-h4P" firstAttribute="leading" secondItem="6Ab-Zs-3ik" secondAttribute="leading" id="2B4-MJ-04x"/>
@@ -169,7 +169,16 @@
                     <constraint firstItem="Oh8-Bh-Smu" firstAttribute="leading" secondItem="yIv-w1-CSy" secondAttribute="trailing" constant="8" id="zua-u1-9dw"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="191" y="133"/>
+            <connections>
+                <outlet property="content_descField" destination="6Ab-Zs-3ik" id="vDL-cf-1KT"/>
+                <outlet property="content_price" destination="xWO-9K-h4P" id="LKP-RW-qGg"/>
+                <outlet property="qt_nameField" destination="yIv-w1-CSy" id="Xfx-am-2qU"/>
+                <outlet property="qt_priceField" destination="Oh8-Bh-Smu" id="Kco-VX-eoz"/>
+                <outlet property="selectQt" destination="83Y-7n-PEc" id="D6a-XQ-jY7"/>
+                <outlet property="select_shunf" destination="dF0-Nn-RJl" id="llY-MJ-fpo"/>
+                <outlet property="titleTextfield" destination="lQM-mk-dVG" id="6oo-1Q-hGz"/>
+            </connections>
+            <point key="canvasLocation" x="173" y="132"/>
         </tableViewCell>
     </objects>
     <resources>

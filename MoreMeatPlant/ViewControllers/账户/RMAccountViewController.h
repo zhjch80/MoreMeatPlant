@@ -11,7 +11,7 @@
 @interface RMAccountViewController : RMBaseViewController{
     NSMutableArray * functitleArray;
     NSMutableArray * funcimgArray;
-    
+    RMPublicModel * _model;
     
 }
 @property (weak, nonatomic) IBOutlet UIImageView *headerImgV;

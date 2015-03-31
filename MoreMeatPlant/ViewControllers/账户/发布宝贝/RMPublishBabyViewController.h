@@ -10,6 +10,8 @@
 
 @interface RMPublishBabyViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>{
     NSMutableArray * classArray;
+    
+    NSInteger img_tag;
 }
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
 

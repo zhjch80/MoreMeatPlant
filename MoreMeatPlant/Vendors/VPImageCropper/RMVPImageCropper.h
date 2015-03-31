@@ -24,4 +24,6 @@
 @property (retain, nonatomic) UIImage * selfimage;
 + (id)shareImageCropper;
 - (void)showActionSheet;
+- (void)openPics;
+- (void)openCamera;
 @end

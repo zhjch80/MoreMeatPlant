@@ -30,7 +30,7 @@ static RMVPImageCropper * _imageCropper = nil;
 }
 
 - (void)showActionSheet{
-    UIActionSheet * sheet = [[UIActionSheet alloc]initWithTitle:@"获取照片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从从相册获取", nil];
+    UIActionSheet * sheet = [[UIActionSheet alloc]initWithTitle:@"获取照片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册获取", nil];
     [sheet showInView:[(UIViewController *)self.ctl view]];
 }
 
@@ -111,12 +111,12 @@ static RMVPImageCropper * _imageCropper = nil;
         [(UIViewController *)self.ctl presentViewController:imgCropperVC animated:YES completion:^{
             // TO DO
             
-            if(self.selfimage == nil)
-            {
-                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择图片！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-                [alert show];
-                return;
-            }
+//            if(self.selfimage == nil)
+//            {
+//                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择图片！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+//                [alert show];
+//                return;
+//            }
         }];
     }];
     

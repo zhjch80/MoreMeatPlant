@@ -40,6 +40,15 @@
 
 @implementation RMAccountViewController
 @synthesize isCorp;
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if(_model == nil){
+        _model = [[RMPublicModel alloc]init];
+    }
+    [self loadInfo];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -67,7 +76,35 @@
 //    CGFloat availableLabelWidth = self.userDescL.frame.size.width;
 //    self.userDescL.preferredMaxLayoutWidth = availableLabelWidth;
 
-    
+    [self loadInfo];
+}
+//@property (weak, nonatomic) IBOutlet UIImageView *headerImgV;
+//@property (weak, nonatomic) IBOutlet UILabel *userNameL;
+//@property (weak, nonatomic) IBOutlet UILabel *userDescL;
+//@property (weak, nonatomic) IBOutlet UILabel *regionL;
+//@property (weak, nonatomic) IBOutlet UILabel *yu_eL;//余额
+//@property (weak, nonatomic) IBOutlet UILabel *hua_biL;//花币
+//@property (weak, nonatomic) IBOutlet UIButton *member_right;
+//@property (weak, nonatomic) IBOutlet UIButton *member_level;
+- (void)loadInfo{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager myInfoRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
+        RMPublicModel * model = object;
+        _model = model;
+        if(success && model.status){
+            [self.headerImgV sd_setImageWithURL:[NSURL URLWithString:model.contentFace] placeholderImage:[UIImage imageNamed:@"nophote"]];
+            self.userNameL.text = model.contentName;
+            self.userDescL.text = model.contentQm;
+            self.regionL.text = model.contentGps;
+            self.yu_eL.text = [NSString stringWithFormat:@"余额:%.0f",model.balance];
+            self.hua_biL.text = [NSString stringWithFormat:@"花币:%.0f",model.spendmoney];
+            [self.member_right setTitle:model.levelId forState:UIControlStateNormal];
+            [self.member_level setTitle:model.levelId forState:UIControlStateNormal];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }else{
+            
+        }
+    }];
 }
 
 - (void)initPlat{
@@ -106,6 +143,8 @@
                     case 1:{//我的钱包
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
                         rightTwoBarButton.enabled = NO;
+                        mywallet.zfb_no = _model.zfbNo;
+                        mywallet.content_mobile = _model.contentMobile;
                         mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
                         [mywallet.titleLabel drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, mywallet.titleLabel.frame.size.height)];
                         
@@ -207,6 +246,8 @@
                     case 1:{//我的钱包
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
                         rightTwoBarButton.enabled = NO;
+                        mywallet.zfb_no = _model.zfbNo;
+                        mywallet.content_mobile = _model.contentMobile;
                         mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
                         mywallet.closecallback = ^(UIButton * sender){
                             rightTwoBarButton.enabled = YES;
@@ -347,7 +388,7 @@
 #pragma mark - 换头像
 - (void)replaceHeaderImg:(UITapGestureRecognizer *)tap{
     [[RMVPImageCropper shareImageCropper] setCtl:self];
-    [[RMVPImageCropper shareImageCropper] set_scale:0.14];
+    [[RMVPImageCropper shareImageCropper] set_scale:1.0];
     [[RMVPImageCropper shareImageCropper] showActionSheet];
 }
 

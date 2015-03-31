@@ -722,6 +722,8 @@
 		51DB4CD11ACA915800A6064D /* RMVPImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CD01ACA915800A6064D /* RMVPImageCropper.m */; };
 		51DB4CD61ACA989400A6064D /* DSGlobelFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CD31ACA989400A6064D /* DSGlobelFunc.m */; };
 		51DB4CD71ACA989400A6064D /* FileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CD51ACA989400A6064D /* FileUtil.m */; };
+		51DB4CDA1ACAE31A00A6064D /* RMSectionFooterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CD91ACAE31A00A6064D /* RMSectionFooterTableViewCell.m */; };
+		51DB4CDC1ACAE32B00A6064D /* RMSectionFooterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4CDB1ACAE32B00A6064D /* RMSectionFooterTableViewCell.xib */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */; };
 		51E268091AADDFFE00252DEF /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268071AADDFFE00252DEF /* JWBlurView.m */; };
@@ -1913,6 +1915,9 @@
 		51DB4CD31ACA989400A6064D /* DSGlobelFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSGlobelFunc.m; sourceTree = "<group>"; };
 		51DB4CD41ACA989400A6064D /* FileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtil.h; sourceTree = "<group>"; };
 		51DB4CD51ACA989400A6064D /* FileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtil.m; sourceTree = "<group>"; };
+		51DB4CD81ACAE31A00A6064D /* RMSectionFooterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSectionFooterTableViewCell.h; sourceTree = "<group>"; };
+		51DB4CD91ACAE31A00A6064D /* RMSectionFooterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSectionFooterTableViewCell.m; sourceTree = "<group>"; };
+		51DB4CDB1ACAE32B00A6064D /* RMSectionFooterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSectionFooterTableViewCell.xib; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 		51E268041AADDFFE00252DEF /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
@@ -4143,6 +4148,9 @@
 				51D883CD1ABB1D0C00F7A3BD /* RMAdvertisingSectionTableViewCell.h */,
 				51D883CE1ABB1D0C00F7A3BD /* RMAdvertisingSectionTableViewCell.m */,
 				51D883CF1ABB1D0C00F7A3BD /* RMAdvertisingSectionTableViewCell.xib */,
+				51DB4CD81ACAE31A00A6064D /* RMSectionFooterTableViewCell.h */,
+				51DB4CD91ACAE31A00A6064D /* RMSectionFooterTableViewCell.m */,
+				51DB4CDB1ACAE32B00A6064D /* RMSectionFooterTableViewCell.xib */,
 			);
 			path = "发布广告";
 			sourceTree = "<group>";
@@ -4620,6 +4628,7 @@
 				1DDBBD6B1ABBB1CB00E35CD5 /* duoliao_z@2x.png in Resources */,
 				0A4106811ABABBF60060FBD5 /* chat_location_annotation_someone@2x.png in Resources */,
 				1DDBBD631ABBB19200E35CD5 /* zhanghu_z@2x.png in Resources */,
+				51DB4CDC1ACAE32B00A6064D /* RMSectionFooterTableViewCell.xib in Resources */,
 				1DEB74641AB9D66800EA1FA7 /* img_home_6.png in Resources */,
 				5144E7D81AC4401F00190C50 /* mapapi.bundle in Resources */,
 				1D8397641AB3F81600DA190A /* down@2x.png in Resources */,
@@ -5183,6 +5192,7 @@
 				0A41056F1ABAB3C70060FBD5 /* EMSDWebImageCompat.m in Sources */,
 				95AA6F491ABF8CD2007F4C9E /* UIImage+Utility.m in Sources */,
 				1DCD99461A95A41500F0DEB6 /* RMPlantWithSaleCell.m in Sources */,
+				51DB4CDA1ACAE31A00A6064D /* RMSectionFooterTableViewCell.m in Sources */,
 				1DD699351AC10F02009A9327 /* UIButton+WebCache.m in Sources */,
 				0A4105911ABAB43E0060FBD5 /* UIResponder+Router.m in Sources */,
 				1DD6993A1AC10F02009A9327 /* UIImageView+WebCache.m in Sources */,

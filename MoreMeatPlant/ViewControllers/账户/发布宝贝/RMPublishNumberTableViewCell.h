@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RMBaseTextField.h"
 @interface RMPublishNumberTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet RMBaseTextField *numTextfield;
 
 @end
