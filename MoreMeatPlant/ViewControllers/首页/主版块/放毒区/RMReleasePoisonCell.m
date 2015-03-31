@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     // Initialization code
     [self.bgView.layer setCornerRadius:8.0];
+    self.userHeadImg.clipsToBounds = YES;
     [self.userHeadImg.layer setCornerRadius:12.0];
     
     [self.leftImg addTarget:self withSelector:@selector(selectedPostDetatils:)];
@@ -28,6 +29,7 @@
     [self.chatImg addTarget:self withSelector:@selector(addChat:)];
     [self.praiseImg addTarget:self withSelector:@selector(addPraise:)];
     
+    self.threeImg.contentMode = UIViewContentModeRedraw;
 }
 
 - (void)selectedPostDetatils:(RMImageView *)image {

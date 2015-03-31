@@ -22,6 +22,7 @@
 #import "RMPostClassificationView.h"
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
+#import "NSString+TimeInterval.h"
 
 @interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate>{
     BOOL isFirstViewDidAppear;
@@ -85,7 +86,7 @@
     
     dataArr = [[NSMutableArray alloc] init];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 38) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 40) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.backgroundColor = [UIColor clearColor];
@@ -160,7 +161,7 @@
     [plantTypeView loadPlantTypeWithImageArr:subsPlantArr];
     [headView addSubview:plantTypeView];
     
-    height = height + kScreenWidth/7.0;
+    height = height + kScreenWidth/7.0 + 5;
     
     headView.frame = CGRectMake(0, 0, kScreenWidth, height);
     mTableView.tableHeaderView = headView;
@@ -173,33 +174,19 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row%3==0){
-        static NSString * identifierStr = @"releasePoisonIdentifier_1";
-        RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+    return [self loadIndexPath:indexPath withTableView:tableView];
+}
+
+- (UITableViewCell *)loadIndexPath:(NSIndexPath *)indexPath withTableView:(UITableView *)tableView {
+    RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
+    NSInteger value = 0;
+    if ([model.imgs isKindOfClass:[NSNull class]]){
+        value = 0;
+    }else{
+        value = [model.imgs count];
+    }
     
-        if (!cell){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1" owner:self options:nil] lastObject];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
-            cell.delegate = self;
-        }
-        
-        cell.plantTitle.text = @"未读 家有鲜肉 刚入的罗密欧，美不？";
-        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:@"未读 家有鲜肉 刚入的罗密欧，美不？"];
-        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
-        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
-        cell.plantTitle.attributedText = oneAttributeStr;
-        
-        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
-        cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
-        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
-        
-        cell.userName.text = @"Lucy 10分钟前";
-        cell.likeTitle.text = @"99+";
-        cell.chatTitle.text = @"99+";
-        cell.praiseTitle.text = @"99+";
-        return cell;
-    }else if (indexPath.row%3 == 1){
+    if (value >= 3){
         static NSString * identifierStr = @"releasePoisonIdentifier_2";
         RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         
@@ -210,22 +197,64 @@
             cell.delegate = self;
         }
         
-        cell.plantTitle.text = @"已读 家有鲜肉 刚入的罗密欧，美不？";
-        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:@"已读 家有鲜肉 刚入的罗密欧，美不？"];
+        cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.59 green:0.59 blue:0.59 alpha:1] range:NSMakeRange(0, 2)];
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
         cell.plantTitle.attributedText = oneAttributeStr;
+        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
+        cell.userName.text = [NSString stringWithFormat:@"%@ %@",[model.members objectForKey:@"member_name"],[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
+        
+        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
+        [cell.rightUpTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:nil];
+        [cell.rightDownTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:2] objectForKey:@"content_img"]] placeholderImage:nil];
+
+        cell.leftImg.identifierString = model.auto_id;
+        cell.rightUpTwoImg.identifierString = model.auto_id;
+        cell.rightDownTwoImg.identifierString = model.auto_id;
         
         cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
         cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
         cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
         
-        cell.userName.text = @"Lucy 10分钟前";
-        cell.likeTitle.text = @"99+";
-        cell.chatTitle.text = @"99+";
-        cell.praiseTitle.text = @"99+";
+        cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
+        cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
+        cell.praiseTitle.text = [self getLargeNumbersToSpecificStr:model.content_top];
         return cell;
-    }else{
+    }else if (value == 2){
+        static NSString * identifierStr = @"releasePoisonIdentifier_1";
+        RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+        
+        if (!cell){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1" owner:self options:nil] lastObject];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
+            cell.delegate = self;
+        }
+        
+        cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
+        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
+        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
+        cell.plantTitle.attributedText = oneAttributeStr;
+        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
+        cell.userName.text = [NSString stringWithFormat:@"%@ %@",[model.members objectForKey:@"member_name"],[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
+        
+        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
+        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:nil];
+
+        cell.leftImg.identifierString = model.auto_id;
+        cell.rightImg.identifierString = model.auto_id;
+        
+        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
+        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        
+        cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
+        cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
+        cell.praiseTitle.text = [self getLargeNumbersToSpecificStr:model.content_top];
+        return cell;
+    } else {
         static NSString * identifierStr = @"releasePoisonIdentifier_3";
         RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         
@@ -236,20 +265,30 @@
             cell.delegate = self;
         }
         
-        cell.plantTitle.text = @"未读 家有鲜肉 刚入的罗密欧，美不？";
-        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:@"未读 家有鲜肉 刚入的罗密欧，美不？"];
+        cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
         cell.plantTitle.attributedText = oneAttributeStr;
+        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
+        
+        cell.userName.text = [NSString stringWithFormat:@"%@ %@",[model.members objectForKey:@"member_name"],[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
+        
+        if ([model.imgs isKindOfClass:[NSNull class]]){
+            [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:@"http://lady.southcn.com/6/images/attachement/jpg/site4/20110524/90fba609e4270f45626e36.jpg"] placeholderImage:nil];
+        }else{
+            [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
+        }
+        
+        cell.threeImg.identifierString = model.auto_id;
         
         cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
         cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
         cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
         
-        cell.userName.text = @"Lucy 10分钟前";
-        cell.likeTitle.text = @"99+";
-        cell.chatTitle.text = @"99+";
-        cell.praiseTitle.text = @"99+";
+        cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
+        cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
+        cell.praiseTitle.text = [self getLargeNumbersToSpecificStr:model.content_top];
         return cell;
     }
 }
@@ -275,6 +314,7 @@
 #pragma mark - 帖子详情
 
 - (void)jumpPostDetailsWithImage:(RMImageView *)image {
+    NSLog(@"auto_id:%@",image.identifierString);
     RMReleasePoisonDetailsViewController * releasePoisonDetailsCtl = [[RMReleasePoisonDetailsViewController alloc] init];
     [self.navigationController pushViewController:releasePoisonDetailsCtl animated:YES];
 }
@@ -637,6 +677,16 @@
             isRefresh = NO;
             [self requestListWithPageCount:pageCount];
         }
+    }
+}
+
+#pragma mark - 工具
+
+- (NSString *)getLargeNumbersToSpecificStr:(NSString *)str {
+    if (str.length >= 3){
+        return @"99+";
+    }else{
+        return str;
     }
 }
 

@@ -120,12 +120,12 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
 /**
  *  @method     帖子最终
  *  @param      auto_id             标识
- *  @param      user_id             会员用户名
- *  @param      user_password       会员密码
+ *  @param      user_id             会员用户名      不是必须
+ *  @param      user_password       会员密码       不是必须
  */
-- (void)getPostsListDetailsWithAuto_id:(NSString *)auto_id
++ (void)getPostsListDetailsWithAuto_id:(NSString *)auto_id
                            withUser_id:(NSString *)user_id
-                     withUser_password:(NSString *)user_password;
+                     withUser_password:(NSString *)user_password callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     宝贝列表
@@ -150,29 +150,59 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      review_id       帖子标识
  *  @param      pageCount       页数
  */
-- (void)getPostsCommentsListWithReview_id:(NSString *)review_id
-                            withPageCount:(NSInteger)pageCount;
++ (void)getPostsCommentsListWithReview_id:(NSString *)review_id
+                            withPageCount:(NSInteger)pageCount
+                                 callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
- *  @method     帖子点赞       未完成
+ *  @method     帖子点赞
+ *  @param      auto_id             帖子标识
+ *  @param      user_id             用户名
+ *  @param      user_password       用户密码
  */
-- (void)PostPostsAddPraise;
++ (void)postPostsAddPraiseWithAuto_id:(NSString *)auto_id
+                               withID:(NSString *)user_id
+                              withPWD:(NSString *)user_password
+                             callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     会员收藏
- *  @param
+ *  @param      collect_id          收藏的标识
+ *  @param      content_type        收藏类型：1：帖子、2：店铺、3：宝贝
+ *  @param      user_id             会员用户名
+ *  @param      password            会员密码
  */
-- (void)postCollect;
++ (void)postMembersCollectWithCollect_id:(NSString *)collect_id
+                        withContent_type:(NSString *)content_type
+                                  withID:(NSString *)user_id
+                                 withPWD:(NSString *)user_password
+                                callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     帖子评论
+ *  @param      review_id               帖子标识
+ *  @param      content_body            评论内容
+ *  @param      user_id                 会员用户名
+ *  @param      user_password           会员密码
  */
-- (void)postPostsAddComments;
++ (void)postPostsAddCommentsWithReview_id:(NSString *)review_id
+                         withContent_body:(NSString *)content_body
+                                   withID:(NSString *)user_id
+                                  withPWD:(NSString *)user_password
+                                 callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     回复帖子评论
+ *  @param      comment_id              评论标识
+ *  @param      content_body            回复评论内容
+ *  @param      user_id                 会员用户名
+ *  @param      user_password           会员密码      
  */
-- (void)postReplyToPostsComment;
++ (void)postReplyToPostsCommentWithComment_id:(NSString *)comment_id
+                             withContent_body:(NSString *)content_body
+                                       withID:(NSString *)user_id
+                                      withPWD:(NSString *)user_password
+                                     callBack:(RMAFNRequestManagerCallBack)block;
 
 
 /*************************************************************************/

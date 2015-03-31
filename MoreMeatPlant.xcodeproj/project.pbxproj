@@ -317,6 +317,8 @@
 		1D7090D11AC25DE600AE47BF /* img_tzArrowed_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D7090C31AC25DE600AE47BF /* img_tzArrowed_5.png */; };
 		1D7090D21AC25DE600AE47BF /* img_tzArrowed_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D7090C41AC25DE600AE47BF /* img_tzArrowed_6.png */; };
 		1D7090D31AC25DE600AE47BF /* img_tzArrowed_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D7090C51AC25DE600AE47BF /* img_tzArrowed_7.png */; };
+		1D75E93B1ACAABCA008BC5FE /* NSString+TimeInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75E9381ACAABCA008BC5FE /* NSString+TimeInterval.m */; };
+		1D75E93C1ACAABCA008BC5FE /* NSString+TransformToDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75E93A1ACAABCA008BC5FE /* NSString+TransformToDate.m */; };
 		1D7AC3F41AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC3F21AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.m */; };
 		1D7AC3F51AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC3F31AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib */; };
 		1D7AC4141AB9791E002204F6 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4111AB9791E002204F6 /* CycleScrollView.m */; };
@@ -1297,6 +1299,10 @@
 		1D7090C31AC25DE600AE47BF /* img_tzArrowed_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tzArrowed_5.png; sourceTree = "<group>"; };
 		1D7090C41AC25DE600AE47BF /* img_tzArrowed_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tzArrowed_6.png; sourceTree = "<group>"; };
 		1D7090C51AC25DE600AE47BF /* img_tzArrowed_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tzArrowed_7.png; sourceTree = "<group>"; };
+		1D75E9371ACAABCA008BC5FE /* NSString+TimeInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TimeInterval.h"; sourceTree = "<group>"; };
+		1D75E9381ACAABCA008BC5FE /* NSString+TimeInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TimeInterval.m"; sourceTree = "<group>"; };
+		1D75E9391ACAABCA008BC5FE /* NSString+TransformToDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TransformToDate.h"; sourceTree = "<group>"; };
+		1D75E93A1ACAABCA008BC5FE /* NSString+TransformToDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TransformToDate.m"; sourceTree = "<group>"; };
 		1D7AC3F11AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMFreshPlantMarketDetailsViewController.h; sourceTree = "<group>"; };
 		1D7AC3F21AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMFreshPlantMarketDetailsViewController.m; sourceTree = "<group>"; };
 		1D7AC3F31AB95723002204F6 /* RMFreshPlantMarketDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMFreshPlantMarketDetailsViewController.xib; sourceTree = "<group>"; };
@@ -2452,6 +2458,10 @@
 				0A4105901ABAB43E0060FBD5 /* UIResponder+Router.m */,
 				0A4105951ABAB6510060FBD5 /* ConvertToCommonEmoticonsHelper.h */,
 				0A4105961ABAB6510060FBD5 /* ConvertToCommonEmoticonsHelper.m */,
+				1D75E9371ACAABCA008BC5FE /* NSString+TimeInterval.h */,
+				1D75E9381ACAABCA008BC5FE /* NSString+TimeInterval.m */,
+				1D75E9391ACAABCA008BC5FE /* NSString+TransformToDate.h */,
+				1D75E93A1ACAABCA008BC5FE /* NSString+TransformToDate.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -5162,6 +5172,7 @@
 				0A4104D51ABAAF630060FBD5 /* EMChatTimeCell.m in Sources */,
 				1D9CB17B1AAE9EE500BD5A7D /* AFURLRequestSerialization.m in Sources */,
 				0A41058D1ABAB3C70060FBD5 /* TTGlobalUICommon.m in Sources */,
+				1D75E93C1ACAABCA008BC5FE /* NSString+TransformToDate.m in Sources */,
 				51D884521ABE66B000F7A3BD /* RMOrderDetailEvaluateTableViewCell.m in Sources */,
 				1D8397351AB2E15A00DA190A /* UITextField+LimitLength.m in Sources */,
 				95AA6F4E1ABF8CD2007F4C9E /* XHViewState.m in Sources */,
@@ -5175,6 +5186,7 @@
 				1DD699351AC10F02009A9327 /* UIButton+WebCache.m in Sources */,
 				0A4105911ABAB43E0060FBD5 /* UIResponder+Router.m in Sources */,
 				1DD6993A1AC10F02009A9327 /* UIImageView+WebCache.m in Sources */,
+				1D75E93B1ACAABCA008BC5FE /* NSString+TimeInterval.m in Sources */,
 				1D64F51E1A91B0B90073EB98 /* RMPopularizeView.m in Sources */,
 				51DB4CB81AC7CB0800A6064D /* IQNSArray+Sort.m in Sources */,
 				5157DE4B1AB9CADB005E9FA5 /* KxMenu.m in Sources */,

@@ -276,6 +276,13 @@
     NSLog(@"帖主 👦");
 }
 
+#pragma 数据请求
+
+- (void)requestDetatils {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
