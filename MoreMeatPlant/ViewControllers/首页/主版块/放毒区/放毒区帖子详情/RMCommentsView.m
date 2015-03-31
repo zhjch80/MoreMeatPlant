@@ -35,7 +35,7 @@
     
     receiver = [[UILabel alloc] init];
     receiver.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 30);
-    receiver.text = [NSString stringWithFormat:@"  回复:%@",receive];
+    receiver.text = receive;
     receiver.font = FONT_1(16.0);
     receiver.textColor = [UIColor colorWithRed:0.42 green:0.42 blue:0.42 alpha:1];
     receiver.backgroundColor = [UIColor clearColor];

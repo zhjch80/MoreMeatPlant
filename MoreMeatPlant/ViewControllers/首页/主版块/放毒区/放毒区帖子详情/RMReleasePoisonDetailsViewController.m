@@ -86,7 +86,7 @@
             commentsView.delegate = self;
             commentsView.backgroundColor = [UIColor clearColor];
             commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            [commentsView loadCommentsViewWithReceiver:@"Lucy"];
+            [commentsView loadCommentsViewWithReceiver:@"   回复：Lucy"];
             [self.view addSubview:commentsView];
             break;
         }

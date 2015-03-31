@@ -23,8 +23,9 @@
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
 #import "NSString+TimeInterval.h"
+#import "RMCommentsView.h"
 
-@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate>{
+@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate,CommentsViewDelegate>{
     BOOL isFirstViewDidAppear;
     BOOL isRefresh;
     NSInteger pageCount;
@@ -213,6 +214,10 @@
         cell.rightUpTwoImg.identifierString = model.auto_id;
         cell.rightDownTwoImg.identifierString = model.auto_id;
         
+        cell.likeImg.identifierString = model.auto_id;
+        cell.chatImg.identifierString = model.auto_id;
+        cell.praiseImg.identifierString = model.auto_id;
+        
         cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
         cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
         cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
@@ -245,6 +250,9 @@
 
         cell.leftImg.identifierString = model.auto_id;
         cell.rightImg.identifierString = model.auto_id;
+        cell.likeImg.identifierString = model.auto_id;
+        cell.chatImg.identifierString = model.auto_id;
+        cell.praiseImg.identifierString = model.auto_id;
         
         cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
         cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
@@ -281,6 +289,9 @@
         }
         
         cell.threeImg.identifierString = model.auto_id;
+        cell.likeImg.identifierString = model.auto_id;
+        cell.chatImg.identifierString = model.auto_id;
+        cell.praiseImg.identifierString = model.auto_id;
         
         cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
         cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
@@ -297,18 +308,53 @@
     return 180.0;
 }
 
-#pragma mark - 添加喜欢 赞 评论
+#pragma mark - 添加收藏 赞 评论
 
 - (void)addLikeWithImage:(RMImageView *)image {
-    NSLog(@"添加喜欢");
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager postMembersCollectWithCollect_id:@"" withContent_type:@"" withID:@"" withPWD:@"" callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
 
 - (void)addChatWithImage:(RMImageView *)image {
-    NSLog(@"添加评论");
+    for (NSInteger i=0; i<[dataArr count]; i++){
+        RMPublicModel * model = [dataArr objectAtIndex:i];
+        if ([model.auto_id isEqualToString:image.identifierString]){
+            RMCommentsView * commentsView = [[RMCommentsView alloc] init];
+            commentsView.delegate = self;
+            commentsView.backgroundColor = [UIColor clearColor];
+            commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  评论:%@",[model.members objectForKey:@"member_name"]]];
+            [self.view addSubview:commentsView];
+            break;
+        }
+    }
 }
 
 - (void)addPraiseWithImage:(RMImageView *)image {
-    NSLog(@"添加赞");
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager postPostsAddPraiseWithAuto_id:image.identifierString withID:@"" withPWD:@"" callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
 
 #pragma mark - 帖子详情
