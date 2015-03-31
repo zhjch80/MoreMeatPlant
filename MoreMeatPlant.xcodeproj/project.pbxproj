@@ -717,6 +717,9 @@
 		51DB4CC71AC86BF000A6064D /* UIView+Expland.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CC61AC86BF000A6064D /* UIView+Expland.m */; };
 		51DB4CCB1AC9BC9600A6064D /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CCA1AC9BC9600A6064D /* VPImageCropperViewController.m */; };
 		51DB4CCE1AC9BDD100A6064D /* UIViewController+VPImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CCD1AC9BDD100A6064D /* UIViewController+VPImageCropper.m */; };
+		51DB4CD11ACA915800A6064D /* RMVPImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CD01ACA915800A6064D /* RMVPImageCropper.m */; };
+		51DB4CD61ACA989400A6064D /* DSGlobelFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CD31ACA989400A6064D /* DSGlobelFunc.m */; };
+		51DB4CD71ACA989400A6064D /* FileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CD51ACA989400A6064D /* FileUtil.m */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */; };
 		51E268091AADDFFE00252DEF /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268071AADDFFE00252DEF /* JWBlurView.m */; };
@@ -1898,6 +1901,12 @@
 		51DB4CCA1AC9BC9600A6064D /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		51DB4CCC1AC9BDD100A6064D /* UIViewController+VPImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+VPImageCropper.h"; sourceTree = "<group>"; };
 		51DB4CCD1AC9BDD100A6064D /* UIViewController+VPImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+VPImageCropper.m"; sourceTree = "<group>"; };
+		51DB4CCF1ACA915800A6064D /* RMVPImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMVPImageCropper.h; sourceTree = "<group>"; };
+		51DB4CD01ACA915800A6064D /* RMVPImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMVPImageCropper.m; sourceTree = "<group>"; };
+		51DB4CD21ACA989400A6064D /* DSGlobelFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSGlobelFunc.h; sourceTree = "<group>"; };
+		51DB4CD31ACA989400A6064D /* DSGlobelFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSGlobelFunc.m; sourceTree = "<group>"; };
+		51DB4CD41ACA989400A6064D /* FileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtil.h; sourceTree = "<group>"; };
+		51DB4CD51ACA989400A6064D /* FileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtil.m; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 		51E268041AADDFFE00252DEF /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
@@ -4276,6 +4285,12 @@
 				51DB4CCA1AC9BC9600A6064D /* VPImageCropperViewController.m */,
 				51DB4CCC1AC9BDD100A6064D /* UIViewController+VPImageCropper.h */,
 				51DB4CCD1AC9BDD100A6064D /* UIViewController+VPImageCropper.m */,
+				51DB4CCF1ACA915800A6064D /* RMVPImageCropper.h */,
+				51DB4CD01ACA915800A6064D /* RMVPImageCropper.m */,
+				51DB4CD21ACA989400A6064D /* DSGlobelFunc.h */,
+				51DB4CD31ACA989400A6064D /* DSGlobelFunc.m */,
+				51DB4CD41ACA989400A6064D /* FileUtil.h */,
+				51DB4CD51ACA989400A6064D /* FileUtil.m */,
 			);
 			path = VPImageCropper;
 			sourceTree = "<group>";
@@ -5011,6 +5026,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51DB4CD71ACA989400A6064D /* FileUtil.m in Sources */,
 				5120FDC81AB5D9E3000E9BE1 /* RMMyHomeViewController.m in Sources */,
 				1D386C771AC167B8000B9686 /* RMMyFriendViewController.m in Sources */,
 				1D88DB911AC40AEC00EC4295 /* RMDaqoRightCell.m in Sources */,
@@ -5090,6 +5106,7 @@
 				5120FDE61AB718B1000E9BE1 /* RMOrderHeadTableViewCell.m in Sources */,
 				0A4104AF1ABAAED90060FBD5 /* DXChatBarMoreView.m in Sources */,
 				51E268101AADE19F00252DEF /* RMShopCarViewController.m in Sources */,
+				51DB4CD11ACA915800A6064D /* RMVPImageCropper.m in Sources */,
 				5157DE581AB9DA0E005E9FA5 /* RMPublishTitleTableViewCell.m in Sources */,
 				1D4EE43D1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.m in Sources */,
 				51E268361AAE003000252DEF /* STDb.m in Sources */,
@@ -5195,6 +5212,7 @@
 				0A41056E1ABAB3C70060FBD5 /* EMSDImageCache.m in Sources */,
 				512D75271AB1F2190027B7C7 /* RMMyWalletViewController.m in Sources */,
 				1D4DA32F1A921779006A9EBA /* RMFreshPlantMarketViewController.m in Sources */,
+				51DB4CD61ACA989400A6064D /* DSGlobelFunc.m in Sources */,
 				51DB4CBA1AC7CB0800A6064D /* IQUIWindow+Hierarchy.m in Sources */,
 				1D9CB1771AAE9EE500BD5A7D /* AFHTTPSessionManager.m in Sources */,
 				0A4105701ABAB3C70060FBD5 /* EMSDWebImageDecoder.m in Sources */,

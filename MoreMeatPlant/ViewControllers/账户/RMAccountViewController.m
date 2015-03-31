@@ -32,8 +32,9 @@
 
 #import "UIViewController+ENPopUp.h"
 #import "UIView+Expland.h"
+#import "RMVPImageCropper.h"
 #define GeneralMember @"1"
-@interface RMAccountViewController ()
+@interface RMAccountViewController ()<RMVPImageCropperDelegate>
 
 @end
 
@@ -47,6 +48,10 @@
     
     _headerImgV.layer.cornerRadius = 5;
     _headerImgV.clipsToBounds = YES;
+    
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(replaceHeaderImg:)];
+    [_headerImgV addGestureRecognizer:tap];
+    _headerImgV.userInteractionEnabled = YES;
     
     functitleArray = [[NSMutableArray alloc]init];
     funcimgArray = [[NSMutableArray alloc]init];
@@ -337,6 +342,22 @@
     [[RMUserLoginInfoManager loginmanager] setPwd:pwd];
     [[RMUserLoginInfoManager loginmanager] setIsCorp:iscorp];
     [[RMUserLoginInfoManager loginmanager] setCoorStr:coorstr];
+}
+
+#pragma mark - 换头像
+- (void)replaceHeaderImg:(UITapGestureRecognizer *)tap{
+    [[RMVPImageCropper shareImageCropper] setCtl:self];
+    [[RMVPImageCropper shareImageCropper] set_scale:0.14];
+    [[RMVPImageCropper shareImageCropper] showActionSheet];
+}
+
+#pragma mark - RMimageCropperDelegate
+- (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage{
+    NSLog(@"马东凯头像－－－－－－%@",editedImage);
+}
+
+- (void)RMimageCropperDidCancel:(VPImageCropperViewController *)cropperViewController{
+    NSLog(@"取消替换头像");
 }
 
 - (void)didReceiveMemoryWarning {
