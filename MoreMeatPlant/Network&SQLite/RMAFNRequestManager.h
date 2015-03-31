@@ -33,7 +33,8 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      type        广告类型
  *   1：首页广告、2：放毒区、3：放毒区帖子底部、4：一物一拍、5：鲜肉市场
  */
-+ (void)getAdvertisingQueryWithType:(NSInteger)type callBack:(RMAFNRequestManagerCallBack)block;
++ (void)getAdvertisingQueryWithType:(NSInteger)type
+                           callBack:(RMAFNRequestManagerCallBack)block;
 /**
  *  @method     首页栏目
  */
@@ -48,7 +49,8 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @method     植物科目 (传值一：得 景天科，番杏科，仙人球... 传值二：得详细)
  *  @param      level       级别      1：一级：大全顶部分类，2:二级：侧滑分类
  */
-+ (void)getPlantSubjectsListWithLevel:(NSInteger)level callBack:(RMAFNRequestManagerCallBack)block;
++ (void)getPlantSubjectsListWithLevel:(NSInteger)level
+                             callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     News
@@ -56,18 +58,22 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      optionid        类别 
  *      970（放毒区）971（一肉一拍）972（鲜肉市场）973（肉肉交换）977（新手教程）
  */
-+ (void)getNewsWithOptionid:(NSInteger)optionid withPageCount:(NSInteger)pageCount callBack:(RMAFNRequestManagerCallBack)block;
++ (void)getNewsWithOptionid:(NSInteger)optionid
+              withPageCount:(NSInteger)pageCount
+                   callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     News    详情页
  *  @param      auto_id         新闻标识
  */
-+ (void)getNewsDetailsWithAuto_id:(NSString *)auto_id callBack:(RMAFNRequestManagerCallBack)block;
++ (void)getNewsDetailsWithAuto_id:(NSString *)auto_id
+                         callBack:(RMAFNRequestManagerCallBack)block;
 /**
  *  @method     植物大全列表
  *  @param      pageCount       分页
  */
-+ (void)getPlantDaqoListWithPageCount:(NSInteger)pageCount callBack:(RMAFNRequestManagerCallBack)block;
++ (void)getPlantDaqoListWithPageCount:(NSInteger)pageCount
+                             callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     植物大全详情页面
@@ -120,6 +126,24 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
 - (void)getPostsListDetailsWithAuto_id:(NSString *)auto_id
                            withUser_id:(NSString *)user_id
                      withUser_password:(NSString *)user_password;
+
+/**
+ *  @method     宝贝列表
+ *  @param      plantClass      宝贝分类    1、为一肉一拍 2、鲜肉市场
+ *  @param      plantCourse     植物科目
+ *  @param      pageCount       分页
+ */
++ (void)getBabyListWithPlantClassWith:(NSInteger)plantClass
+                           withCourse:(NSInteger)plantCourse
+                            withCount:(NSInteger)pageCount
+                             callBack:(RMAFNRequestManagerCallBack)block;
+
+/**
+ *  @method     宝贝列表详情
+ *  @param      auto_id         宝贝标识
+ */
++ (void)getBabyListDetalisWithAuto_id:(NSString *)auto_id
+                             callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     帖子评论列表

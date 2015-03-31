@@ -20,9 +20,15 @@
 #import "ZFModalTransitionAnimator.h"
 #import "RMSearchViewController.h"
 #import "RMPostClassificationView.h"
+#import "RefreshControl.h"
+#import "CustomRefreshView.h"
 
-@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate>{
+@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate>{
     BOOL isFirstViewDidAppear;
+    BOOL isRefresh;
+    NSInteger pageCount;
+    BOOL isLoadComplete;
+    
     BOOL isLoadAdver;       //是否已经加载广告
     BOOL isLoadNews;        //是否已经加载置顶
     BOOL isSubsPlant;       //是否已经加载科目
@@ -40,11 +46,12 @@
 @property (nonatomic, strong) RMPostClassificationView * fenleiAction;
 @property (nonatomic, strong) RMPostMessageView *action;
 @property (nonatomic, strong) ZFModalTransitionAnimator *animator;
+@property (nonatomic, strong) RefreshControl * refreshControl;
 
 @end
 
 @implementation RMReleasePoisonViewController
-@synthesize mTableView, dataArr, fenleiAction, action, animator, plantTypeArr, advertisingArr, subsPlantArr, newsArr, plantRequestValue, subsPlantRequestValue;
+@synthesize mTableView, dataArr, fenleiAction, action, animator, plantTypeArr, advertisingArr, subsPlantArr, newsArr, plantRequestValue, subsPlantRequestValue, refreshControl;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -70,13 +77,13 @@
     
     advertisingArr = [[NSMutableArray alloc] init];
     plantTypeArr = [[NSMutableArray alloc] init];
-    subsPlantArr = [[NSMutableArray alloc] init];
+
     newsArr = [[NSMutableArray alloc] init];
     
     plantRequestValue = 1000;
     subsPlantRequestValue = 1000;
     
-    dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
+    dataArr = [[NSMutableArray alloc] init];
     
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 38) style:UITableViewStylePlain];
     mTableView.delegate = self;
@@ -84,6 +91,15 @@
     mTableView.backgroundColor = [UIColor clearColor];
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
+    
+    refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
+    refreshControl.topEnabled = YES;
+    refreshControl.bottomEnabled = YES;
+    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    
+    pageCount = 1;
+    isRefresh = YES;
+    isFirstViewDidAppear = NO;
     
     [self loadBottomView];
 }
@@ -158,7 +174,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row%3==0){
-        static NSString * identifierStr = @"releasePoisonIdentifier";
+        static NSString * identifierStr = @"releasePoisonIdentifier_1";
         RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     
         if (!cell){
@@ -184,7 +200,7 @@
         cell.praiseTitle.text = @"99+";
         return cell;
     }else if (indexPath.row%3 == 1){
-        static NSString * identifierStr = @"releasePoisonIdentifier";
+        static NSString * identifierStr = @"releasePoisonIdentifier_2";
         RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         
         if (!cell){
@@ -210,7 +226,7 @@
         cell.praiseTitle.text = @"99+";
         return cell;
     }else{
-        static NSString * identifierStr = @"releasePoisonIdentifier";
+        static NSString * identifierStr = @"releasePoisonIdentifier_3";
         RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         
         if (!cell){
@@ -502,7 +518,7 @@
 /**
  *  请求List数据
  */
-- (void)requestListWithPageCount:(NSInteger)pageCount {
+- (void)requestListWithPageCount:(NSInteger)pc {
     NSString * plantType = @"";
     NSString * subjectsType = @"";
     
@@ -521,7 +537,7 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getPostsListWithPostsType:@"1" withPlantType:plantType withPlantSubjects:subjectsType withPageCount:1 withUser_id:@"" withUser_password:@"" callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getPostsListWithPostsType:@"1" withPlantType:plantType withPlantSubjects:subjectsType withPageCount:pc withUser_id:@"" withUser_password:@"" callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -529,10 +545,99 @@
         }
         
         if (success){
-            NSLog(@"object:%@",object);
+            if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_type = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_type"]);
+                    model.content_class = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_class"]);
+                    model.content_course = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_course"]);
+                    model.content_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_top"]);
+                    model.content_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_collect"]);
+                    model.content_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_review"]);
+                    model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                    model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
+                    model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+            }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
+                if ([[object objectForKey:@"data"] count] == 0){
+                    [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    isLoadComplete = YES;
+                    return;
+                }
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_type = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_type"]);
+                    model.content_class = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_class"]);
+                    model.content_course = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_course"]);
+                    model.content_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_top"]);
+                    model.content_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_collect"]);
+                    model.content_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_review"]);
+                    model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                    model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
+                    model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            }
+            
+            if (isRefresh){
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_type = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_type"]);
+                    model.content_class = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_class"]);
+                    model.content_course = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_course"]);
+                    model.content_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_top"]);
+                    model.content_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_collect"]);
+                    model.content_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_review"]);
+                    model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                    model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
+                    model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    [dataArr addObject:model];
+                }
+
+                [mTableView reloadData];
+            }
+            
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];
+}
+
+#pragma mark 刷新代理
+
+- (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
+    if (direction == RefreshDirectionTop) { //下拉刷新
+        pageCount = 1;
+        isRefresh = YES;
+        isLoadComplete = NO;
+        [self requestListWithPageCount:1];
+    }else if(direction == RefreshDirectionBottom) { //上拉加载
+        if (isLoadComplete){
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self showHint:@"没有更多帖子啦"];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            });
+        }else{
+            pageCount ++;
+            isRefresh = NO;
+            [self requestListWithPageCount:pageCount];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -94,4 +94,6 @@
 @property (nonatomic, retain) NSString * content_gps;       //会员位置gps
 
 @property (nonatomic, assign) NSInteger num;                //广告位数量
+@property (nonatomic, copy) NSMutableArray * members;       //会员信息
+
 @end

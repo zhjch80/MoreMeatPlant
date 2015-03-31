@@ -235,6 +235,46 @@
 }
 
 /**
+ *  @method     宝贝列表
+ *  @param      plantClass      宝贝分类    1、为一肉一拍 2、鲜肉市场
+ *  @param      plantCourse     植物科目
+ *  @param      pageCount       分页
+ */
++ (void)getBabyListWithPlantClassWith:(NSInteger)plantClass
+                           withCourse:(NSInteger)plantCourse
+                            withCount:(NSInteger)pageCount
+                             callBack:(RMAFNRequestManagerCallBack)block {
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%ld&course=%ld&per=1&row=10&page=%ld",baseUrl,plantClass,plantCourse,pageCount];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
+/**
+ *  @method     宝贝列表详情
+ *  @param      auto_id         宝贝标识
+ */
++ (void)getBabyListDetalisWithAuto_id:(NSString *)auto_id
+                             callBack:(RMAFNRequestManagerCallBack)block {
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProductview&auto_id=%@",baseUrl,auto_id];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
+/**
  *  @method     帖子列表
  *  @param      postsType       帖子分类 1:防毒区、2:肉肉交换
  *  @param      plantType       植物分类

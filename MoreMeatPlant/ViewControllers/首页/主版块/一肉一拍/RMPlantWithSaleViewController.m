@@ -19,16 +19,37 @@
 #import "RMPostMessageView.h"
 #import "RMStartPostingViewController.h"
 #import "ZFModalTransitionAnimator.h"
+#import "RefreshControl.h"
+#import "CustomRefreshView.h"
 
-@interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,BottomDelegate,PostMessageSelectedPlantDelegate>
+@interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,BottomDelegate,PostMessageSelectedPlantDelegate,RefreshControlDelegate>{
+    BOOL isFirstViewDidAppear;
+    BOOL isRefresh;
+    NSInteger pageCount;
+    BOOL isLoadComplete;
+}
 @property (nonatomic, strong) UITableView * mTableView;
-@property (nonatomic, strong) NSMutableArray * dataArr;
+@property (nonatomic, strong) NSMutableArray * dataArr;         //list数据
+@property (nonatomic, strong) NSMutableArray * newsArr;         //置顶数据
+@property (nonatomic, strong) NSMutableArray * subsPlantArr;    //植物科目
+
 @property (nonatomic, strong) RMPostMessageView * action;
 @property (nonatomic, strong) ZFModalTransitionAnimator * animator;
+@property (nonatomic, strong) RefreshControl * refreshControl;
+
 @end
 
 @implementation RMPlantWithSaleViewController
-@synthesize mTableView, dataArr, action, animator;
+@synthesize mTableView, dataArr, action, animator, refreshControl, newsArr, subsPlantArr;
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!isFirstViewDidAppear){
+        [self requestNews];
+        [self requestPlantSubjects];
+        isFirstViewDidAppear = YES;
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,7 +60,8 @@
 //    [rightTwoBarButton setImage:[UIImage imageNamed:@"img_postMessage"] forState:UIControlStateNormal];
     [self setCustomNavTitle:@"一肉一拍"];
     
-    dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
+    newsArr = [[NSMutableArray alloc] init];
+    dataArr = [[NSMutableArray alloc] init];
     
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 40) style:UITableViewStylePlain];
     mTableView.delegate = self;
@@ -47,8 +69,15 @@
     mTableView.backgroundColor = [UIColor clearColor];
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
- 
-    [self loadTableViewHead];
+    
+    refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
+    refreshControl.topEnabled = YES;
+    refreshControl.bottomEnabled = YES;
+    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    
+    pageCount = 1;
+    isRefresh = YES;
+    isFirstViewDidAppear = NO;
     
     [self loadBottomView];
 }
@@ -66,6 +95,8 @@
 #pragma mark - 加载tableViewHead
 
 - (void)loadTableViewHead {
+    mTableView.tableHeaderView = nil;
+    
     UIView * headView = [[UIView alloc] init];
     
     RMImageView * rmImage = [[RMImageView alloc] init];
@@ -76,22 +107,23 @@
     
     CGFloat height = rmImage.frame.size.height;
     
-    for (NSInteger i=0; i<2; i++) {
+    for (NSInteger i=0; i<[newsArr count]; i++) {
+        RMPublicModel * model = [newsArr objectAtIndex:i];
         RMStickView * stickView = [[RMStickView alloc] init];
         stickView.frame = CGRectMake(0, height + i*30, kScreenWidth, 30);
         [headView addSubview:stickView];
         stickView.delegate = self;
-        [stickView loadStickViewWithTitle:(i==0 ? @"新手教程！" : @"发帖前必看！") withOrder:i];
+        [stickView loadStickViewWithTitle:model.content_name withOrder:i];
     }
     
-    for (NSInteger i=0; i<2; i++) {
+    for (NSInteger i=0; i<[newsArr count]; i++) {
         height = height + 30;
     }
     
     RMPlantTypeView * plantTypeView = [[RMPlantTypeView alloc] init];
-    plantTypeView.frame = CGRectMake(0, height, kScreenWidth, kScreenWidth/7.0);
+    plantTypeView.frame = CGRectMake(0, height, kScreenWidth, kScreenWidth/7.0 + 5);
     plantTypeView.delegate = self;
-    [plantTypeView loadPlantTypeWithImageArr:nil];
+    [plantTypeView loadPlantTypeWithImageArr:subsPlantArr];
     [headView addSubview:plantTypeView];
     
     height = height + kScreenWidth/7.0;
@@ -103,7 +135,13 @@
 #pragma mark -
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [dataArr count];
+    if ([dataArr count]%3 == 0){
+        return [dataArr count] / 3;
+    }else if ([dataArr count]%3 == 1){
+        return ([dataArr count] + 2) / 3;
+    }else {
+        return ([dataArr count] + 1) / 3;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,14 +153,37 @@
         cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
         cell.delegate = self;
     }
-    cell.leftPrice.text = @" ¥560";
-    cell.centerPrice.text = @" ¥240";
-    cell.rightPrice.text = @" ¥360";
     
-    cell.leftName.text = @" 极品雪莲";
-    cell.centerName.text = @" 桃美人";
-    cell.rightName.text = @" 极品亚美奶酪";
-
+    if(indexPath.row*3 < dataArr.count){
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
+        cell.leftPrice.text = model.content_price;
+        cell.leftName.text = model.content_name;
+        cell.leftImg.identifierString = model.auto_id;
+        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+    }else{
+        cell.leftPrice.hidden = YES;
+        cell.leftImg.hidden = YES;
+    }
+    if(indexPath.row*3+1 < dataArr.count){
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
+        cell.centerPrice.text = model.content_price;
+        cell.centerName.text = model.content_name;
+        cell.centerImg.identifierString = model.auto_id;
+        [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+    }else{
+        cell.centerPrice.hidden = YES;
+        cell.centerImg.hidden = YES;
+    }
+    if(indexPath.row*3+2 < dataArr.count){
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
+        cell.rightPrice.text = model.content_price;
+        cell.rightName.text = model.content_name;
+        cell.rightImg.identifierString = model.auto_id;
+        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+    }else{
+        cell.rightPrice.hidden = YES;
+        cell.rightImg.hidden = YES;
+    }
     return cell;
 }
 
@@ -131,6 +192,7 @@
 }
 
 - (void)jumpPlantDetailsWithImage:(RMImageView *)image {
+    NSLog(@"au_id:%@",image.identifierString);
     RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
     [self.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
 }
@@ -141,11 +203,16 @@
     NSLog(@"type:%@",type);
 }
 
+- (void)selectedPostMessageWithPostsType:(NSInteger)type_1 withPlantType:(NSInteger)type_2 {
+    
+}
+
 #pragma mark - 跳转到置顶详情界面
 
 - (void)stickJumpDetailsWithOrder:(NSInteger)order {
+    RMPublicModel * model = [newsArr objectAtIndex:order];
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:@"" withTitle:@"置顶 新手教程"];
+    [baseWebCtl loadRequestWithUrl:model.view_link withTitle:[NSString stringWithFormat:@"置顶 %@",model.content_name]];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
@@ -224,6 +291,159 @@
             
         default:
             break;
+    }
+}
+
+#pragma mark - 数据请求
+
+/**
+ *  请求置顶数据
+ */
+- (void)requestNews {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getNewsWithOptionid:971 withPageCount:1 callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            [newsArr removeAllObjects];
+            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                model.content_title = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_title"]);
+                model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                model.view_link = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"view_link"]);
+                [newsArr addObject:model];
+            }
+            [self loadTableViewHead];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
+/**
+ *  请求植物科目  (景天科，番杏科，仙人球...)
+ */
+- (void)requestPlantSubjects {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getPlantSubjectsListWithLevel:1 callBack:^(NSError *error, BOOL success, id object) {
+        if (error) {
+            NSLog(@"植物科目error:%@",error);
+            [self requestListWithPlantCourse:1000 withPageCount:1];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success) {
+            subsPlantArr = [[NSMutableArray alloc] init];
+            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
+                model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                model.change_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"change_img"]);
+                model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                model.modules_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"modules_name"]);
+                [subsPlantArr addObject:model];
+            }
+            
+            [self loadTableViewHead];
+            
+            [self requestListWithPlantCourse:1000 withPageCount:1];
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
+/**
+ *  @method     请求list 列表
+ *  @param      plantClass      宝贝分类    1、为一肉一拍 2、鲜肉市场
+ *  @param      plantCourse     植物科目
+ *  @param      pageCount       分页
+ */
+- (void)requestListWithPlantCourse:(NSInteger)plantCourse withPageCount:(NSInteger)pc {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getBabyListWithPlantClassWith:1 withCourse:plantCourse withCount:pc callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_price = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_price"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+            }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
+                if ([[object objectForKey:@"data"] count] == 0){
+                    [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    isLoadComplete = YES;
+                    return;
+                }
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_price = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_price"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            }
+            
+            if (isRefresh){
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_price = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_price"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+            }
+
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
+#pragma mark 刷新代理
+
+- (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
+    if (direction == RefreshDirectionTop) { //下拉刷新
+        pageCount = 1;
+        isRefresh = YES;
+        isLoadComplete = NO;
+        [self requestListWithPlantCourse:1000 withPageCount:1];
+    }else if(direction == RefreshDirectionBottom) { //上拉加载
+        if (isLoadComplete){
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self showHint:@"没有更多宝贝啦"];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            });
+        }else{
+            pageCount ++;
+            isRefresh = NO;
+            [self requestListWithPlantCourse:1000 withPageCount:pageCount];
+        }
     }
 }
 

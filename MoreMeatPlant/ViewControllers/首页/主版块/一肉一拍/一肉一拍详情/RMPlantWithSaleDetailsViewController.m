@@ -31,7 +31,7 @@
 @end
 
 @implementation RMPlantWithSaleDetailsViewController
-@synthesize headerView, mTableView, dataArr, cycleView, topDataArr, footerView;
+@synthesize headerView, mTableView, dataArr, cycleView, topDataArr, footerView, auto_id;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
