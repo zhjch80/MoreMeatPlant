@@ -47,11 +47,13 @@
     messageArray = [[NSMutableArray alloc]init];
     _mainTableView.opaque = NO;
     _mainTableView.backgroundColor = [UIColor clearColor];
+    
+    [self requestData];
 }
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 12;
+    return [messageArray count]*2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -60,6 +62,27 @@
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMSysMessageTableViewCell" owner:self options:nil] lastObject];
         }
+//        @property (weak, nonatomic) IBOutlet UIImageView *imgV;
+//        @property (weak, nonatomic) IBOutlet UILabel *subtitleL;
+//        @property (weak, nonatomic) IBOutlet UILabel *titleL;
+//        @property (weak, nonatomic) IBOutlet UILabel *readStateL;
+//        @property (weak, nonatomic) IBOutlet UILabel *timeL;
+//        @property (weak, nonatomic) IBOutlet UIImageView *detailImgV;
+//        @property (weak, nonatomic) IBOutlet UIView *messageV;
+        
+        
+
+        RMPublicModel * model = [messageArray objectAtIndex:indexPath.row/2];
+//        [cell.imgV sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"nophote"]];
+        cell.titleL.text = model.msg_title;
+        cell.subtitleL.text = model.msg_text;
+        cell.readStateL.text = model.msg_read;
+        if([model.msg_read isEqualToString:@"未读"]){
+            [cell.detailImgV setImage:[UIImage imageNamed:@"detail_arrow_red"]];
+        }else{
+            [cell.detailImgV setImage:[UIImage imageNamed:@"detail_arrow"]];
+        }
+        cell.timeL.text = model.create_time;
         return cell;
     }
     else{
@@ -70,6 +93,7 @@
             cell.backgroundColor = [UIColor clearColor];
             cell.contentView.backgroundColor = [UIColor clearColor];
         }
+        
         return cell;
     }
 }
@@ -80,6 +104,13 @@
     }
     else{
         return 10.f;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(self.didselect_callback){
+        RMPublicModel * model = [messageArray objectAtIndex:indexPath.row/2];
+        _didselect_callback(model.auto_id);
     }
 }
 
@@ -101,6 +132,37 @@
     }
 }
 
+- (void)requestData{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager systemMessageWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
+        if(success){
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if(pageCount == 1){
+                [messageArray removeAllObjects];
+                [messageArray addObjectsFromArray:object];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+                if([object count] == 0){
+                    [MBProgressHUD showSuccess:@"暂无消息" toView:self.view];
+                    
+                }
+            }else{
+                [messageArray addObjectsFromArray:object];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                if([object count] == 0){
+                    [MBProgressHUD showSuccess:@"没有更多消息了" toView:self.view];
+                    pageCount--;
+                }
+            }
+            
+
+        }else{
+            [MBProgressHUD showSuccess:object toView:self.view];
+        }
+        
+        [_mainTableView reloadData];
+       
+    }];
+}
 
 #pragma mark 刷新代理
 - (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
@@ -108,7 +170,7 @@
         pageCount = 1;
         isRefresh = YES;
         isLoadComplete = NO;
-        //        [self requestDataWithPageCount:1];
+        [self requestData];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
@@ -119,7 +181,7 @@
         }else{
             pageCount ++;
             isRefresh = NO;
-            //            [self requestDataWithPageCount:pageCount];
+           [self requestData];
         }
         
     }

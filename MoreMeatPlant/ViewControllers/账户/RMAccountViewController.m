@@ -33,6 +33,7 @@
 #import "UIViewController+ENPopUp.h"
 #import "UIView+Expland.h"
 #import "RMVPImageCropper.h"
+#import "RMSystemMessageDetailViewController.h"
 #define GeneralMember @"1"
 @interface RMAccountViewController ()<RMVPImageCropperDelegate>
 
@@ -46,7 +47,9 @@
     if(_model == nil){
         _model = [[RMPublicModel alloc]init];
     }
-    [self loadInfo];
+    if(!isShow){
+        [self loadInfo];
+    }
 }
 
 - (void)viewDidLoad {
@@ -141,6 +144,7 @@
                     }
                         break;
                     case 1:{//我的钱包
+                        isShow = YES;
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
                         rightTwoBarButton.enabled = NO;
                         mywallet.zfb_no = _model.zfbNo;
@@ -150,6 +154,7 @@
                         
                         mywallet.closecallback = ^(UIButton * sender){
                             rightTwoBarButton.enabled = YES;
+                            isShow = NO;
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
                         mywallet.billcallback = ^(UIButton * sender){
@@ -186,9 +191,17 @@
                     case 5:{//系统消息
 //                        RMSysMessageViewController * message = [[RMSysMessageViewController alloc]initWithNibName:@"RMSysMessageViewController" bundle:nil];
 //                        [self.navigationController pushViewController:message animated:YES];
+                        isShow = YES;
                         RMSysMessageViewController * message = [[RMSysMessageViewController alloc]initWithNibName:@"RMSysMessageViewController" bundle:nil];
                         message.callback = ^(RMSysMessageViewController * controller){
+                            isShow = NO;
                             [self dismissPopUpViewControllerWithcompletion:nil];
+                        };
+                        
+                        message.didselect_callback = ^(NSString * auto_id){
+                            RMSystemMessageDetailViewController * detail = [[RMSystemMessageDetailViewController alloc]initWithNibName:@"RMSystemMessageDetailViewController" bundle:nil];
+                            detail.auto_id = auto_id;
+                            [self.navigationController pushViewController:detail animated:YES];
                         };
                         message.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-44);
                         [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
@@ -244,6 +257,7 @@
                     }
                         break;
                     case 1:{//我的钱包
+                        isShow = YES;
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
                         rightTwoBarButton.enabled = NO;
                         mywallet.zfb_no = _model.zfbNo;
@@ -251,6 +265,7 @@
                         mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
                         mywallet.closecallback = ^(UIButton * sender){
                             rightTwoBarButton.enabled = YES;
+                            isShow = NO;
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
                         mywallet.billcallback = ^(UIButton * sender){
@@ -267,9 +282,11 @@
                     }
                         break;
                     case 3:{//我的资料
+                        isShow = YES;
                         RMUserInfoViewController * userinfo = [[RMUserInfoViewController alloc]initWithNibName:@"RMUserInfoViewController" bundle:nil];
                         
                         userinfo.close_action = ^(RMUserInfoViewController * controller){
+                            isShow = NO;
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
                         
@@ -286,8 +303,10 @@
                         break;
                     case 4:{//已出宝贝
 //                        RMHadBabyViewController * hadbaby = [RMHadBabyViewController alloc]
+                        isShow = YES;
                         RMHadBabyViewController * hadbaby = [[RMHadBabyViewController alloc]initWithNibName:@"RMHadBabyViewController" bundle:nil];
                         hadbaby.callback = ^(void){
+                            isShow = NO;
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
                         hadbaby.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
@@ -300,10 +319,19 @@
                     }
                         break;
                     case 6:{//系统通知
+                        isShow = YES;
                         RMSysMessageViewController * message = [[RMSysMessageViewController alloc]initWithNibName:@"RMSysMessageViewController" bundle:nil];
                         message.callback = ^(RMSysMessageViewController * controller){
+                            isShow = NO;
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
+                        
+                        message.didselect_callback = ^(NSString * auto_id){
+                            RMSystemMessageDetailViewController * detail = [[RMSystemMessageDetailViewController alloc]initWithNibName:@"RMSystemMessageDetailViewController" bundle:nil];
+                            detail.auto_id = auto_id;
+                            [self.navigationController pushViewController:detail animated:YES];
+                        };
+
                         message.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-44);
                         [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
                     }

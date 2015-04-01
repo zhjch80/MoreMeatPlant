@@ -52,6 +52,14 @@
 }
 
 - (void)loginAction:(id)sender{
+    if(_userTextField.text.length==0){
+        [MBProgressHUD showError:@"请输入手机号或者昵称" toView:self.view];
+        return;
+    }else if (_passTextField.text.length == 0){
+        [MBProgressHUD showError:@"请输入密码" toView:self.view];
+        return;
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager loginRequestWithUser:_userTextField.text Pwd:[FileMangerObject md5:_passTextField.text] andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

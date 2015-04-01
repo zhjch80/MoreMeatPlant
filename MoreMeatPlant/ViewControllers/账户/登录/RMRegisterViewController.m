@@ -24,16 +24,12 @@
 }
 
 - (void)dealloc{
-//    [DaiDodgeKeyboard removeRegisterTheViewNeedDodgeKeyboard];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
-    
-//    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
-
     
     [_user_btn addTarget:self action:@selector(selectRegisterType:) forControlEvents:UIControlEventTouchDown];
     _user_btn.tag = 2014;
@@ -53,6 +49,20 @@
 }
 - (void)sureAction:(id)sender{
     //personal  corp
+    if(_mobileTextField.text.length==0){
+        [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+        return;
+    }else if(_codeTextField.text.length == 0){
+        [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+        return;
+    }else if (_nickTextField.text.length == 0){
+        [MBProgressHUD showError:@"请输入昵称" toView:self.view];
+        return;
+    }else if (_passTextField.text.length == 0){
+        [MBProgressHUD showError:@"请输入密码" toView:self.view];
+        return;
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString * type = nil;
     if(isCorp){
@@ -115,6 +125,12 @@
 }
 
 - (void)sendCodeAction:(id)sender{
+    if(_mobileTextField.text.length==0){
+    
+        [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+        return;
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager registerSendCodeWith:_mobileTextField.text andCallBack:^(NSError *error, BOOL success, id object) {
         RMPublicModel * model = (RMPublicModel *)object;

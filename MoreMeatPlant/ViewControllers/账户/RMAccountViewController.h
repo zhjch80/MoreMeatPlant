@@ -12,6 +12,7 @@
     NSMutableArray * functitleArray;
     NSMutableArray * funcimgArray;
     RMPublicModel * _model;
+    BOOL isShow;//YES 表示当前界面有其他控制器的View
     
 }
 @property (weak, nonatomic) IBOutlet UIImageView *headerImgV;

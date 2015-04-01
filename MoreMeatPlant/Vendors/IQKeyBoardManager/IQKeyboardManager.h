@@ -205,7 +205,7 @@ extern NSInteger const kIQPreviousNextButtonToolbarTag;
  
     @abstract If YES, then it plays inputClick sound on next/previous/done click.
  */
-@property(nonatomic, assign) BOOL shouldPlayInputClicks;
+@property(nonatomic, assign) BOOL shouldPlayInputClicks;//在点击前进或者后退的时候会play声音
 
 
 /*******************************************/
@@ -220,7 +220,7 @@ extern NSInteger const kIQPreviousNextButtonToolbarTag;
  
     @discussion Sometimes strange animations may be produced if uses default curve style animation in iOS 7 and changing the textFields very frequently.
  */
-@property(nonatomic, assign) BOOL shouldAdoptDefaultKeyboardAnimation;
+@property(nonatomic, assign) BOOL shouldAdoptDefaultKeyboardAnimation;//采用默认的键盘动画
 
 
 /*******************************************/
@@ -234,7 +234,7 @@ extern NSInteger const kIQPreviousNextButtonToolbarTag;
  
     @param disabledClass: Class in which library should not adjust view to show textField.
  */
--(void)disableInViewControllerClass:(Class)disabledClass;
+-(void)disableInViewControllerClass:(Class)disabledClass;//禁掉键盘的通知事件在某个控制器下
 -(void)removeDisableInViewControllerClass:(Class)disabledClass;
 
 /**
@@ -243,7 +243,7 @@ extern NSInteger const kIQPreviousNextButtonToolbarTag;
  
     @param toolbarDisabledClass: Class in which library should not add toolbar over textField.
  */
--(void)disableToolbarInViewControllerClass:(Class)toolbarDisabledClass;
+-(void)disableToolbarInViewControllerClass:(Class)toolbarDisabledClass;//禁掉键盘上的toobar（forward/next）在某个控制器下
 -(void)removeDisableToolbarInViewControllerClass:(Class)toolbarDisabledClass;
 
 /**

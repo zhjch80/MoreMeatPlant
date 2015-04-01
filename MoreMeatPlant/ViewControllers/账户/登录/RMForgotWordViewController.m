@@ -47,6 +47,17 @@
 }
 
 - (void)sureAction:(id)sender{
+    if(_mobileTextField.text.length==0){
+        [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+        return;
+    }else if(_codeTextField.text.length == 0){
+        [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+        return;
+    }else if (_passTextField.text.length == 0){
+        [MBProgressHUD showError:@"请输入密码" toView:self.view];
+        return;
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager resetPwdRequestWithUser:_mobileTextField.text Pwd:[FileMangerObject md5:_passTextField.text] Code:_codeTextField.text andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -84,6 +95,11 @@
 }
 
 - (void)sendCodeAction:(id)sender{
+    if(_mobileTextField.text.length==0){
+        [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+        return;
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager forgotPwdSendCodeWith:_mobileTextField.text andCallBack:^(NSError *error, BOOL success, id object) {
         RMPublicModel * model = (RMPublicModel *)object;

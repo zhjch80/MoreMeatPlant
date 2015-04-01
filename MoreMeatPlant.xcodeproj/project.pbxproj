@@ -728,6 +728,8 @@
 		51DB4CD71ACA989400A6064D /* FileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CD51ACA989400A6064D /* FileUtil.m */; };
 		51DB4CDA1ACAE31A00A6064D /* RMSectionFooterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CD91ACAE31A00A6064D /* RMSectionFooterTableViewCell.m */; };
 		51DB4CDC1ACAE32B00A6064D /* RMSectionFooterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4CDB1ACAE32B00A6064D /* RMSectionFooterTableViewCell.xib */; };
+		51DB4CE01ACC485600A6064D /* RMSystemMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CDE1ACC485600A6064D /* RMSystemMessageDetailViewController.m */; };
+		51DB4CE11ACC485600A6064D /* RMSystemMessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4CDF1ACC485600A6064D /* RMSystemMessageDetailViewController.xib */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */; };
 		51E268091AADDFFE00252DEF /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268071AADDFFE00252DEF /* JWBlurView.m */; };
@@ -1926,6 +1928,9 @@
 		51DB4CD81ACAE31A00A6064D /* RMSectionFooterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSectionFooterTableViewCell.h; sourceTree = "<group>"; };
 		51DB4CD91ACAE31A00A6064D /* RMSectionFooterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSectionFooterTableViewCell.m; sourceTree = "<group>"; };
 		51DB4CDB1ACAE32B00A6064D /* RMSectionFooterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSectionFooterTableViewCell.xib; sourceTree = "<group>"; };
+		51DB4CDD1ACC485600A6064D /* RMSystemMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSystemMessageDetailViewController.h; sourceTree = "<group>"; };
+		51DB4CDE1ACC485600A6064D /* RMSystemMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSystemMessageDetailViewController.m; sourceTree = "<group>"; };
+		51DB4CDF1ACC485600A6064D /* RMSystemMessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSystemMessageDetailViewController.xib; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 		51E268041AADDFFE00252DEF /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
@@ -2974,6 +2979,9 @@
 				1D386C881AC16916000B9686 /* RMSysMessageViewController.h */,
 				1D386C891AC16916000B9686 /* RMSysMessageViewController.m */,
 				1D386C8A1AC16916000B9686 /* RMSysMessageViewController.xib */,
+				51DB4CDD1ACC485600A6064D /* RMSystemMessageDetailViewController.h */,
+				51DB4CDE1ACC485600A6064D /* RMSystemMessageDetailViewController.m */,
+				51DB4CDF1ACC485600A6064D /* RMSystemMessageDetailViewController.xib */,
 			);
 			path = "系统消息";
 			sourceTree = "<group>";
@@ -4876,6 +4884,7 @@
 				51D884671ABE8FD300F7A3BD /* wallet_cover.png in Resources */,
 				1D386C8C1AC16916000B9686 /* RMSysMessageTableViewCell.xib in Resources */,
 				51D883F61ABB321E00F7A3BD /* had_baby_point_line.png in Resources */,
+				51DB4CE11ACC485600A6064D /* RMSystemMessageDetailViewController.xib in Resources */,
 				1DEB74701AB9D66800EA1FA7 /* img_chat.png in Resources */,
 				1DEB74E81AB9D67A00EA1FA7 /* detail_arrow.png in Resources */,
 				1D64F4F71A904E180073EB98 /* Default_6p.png in Resources */,
@@ -5242,6 +5251,7 @@
 				5120FDEB1AB71B44000E9BE1 /* RMOrderProTableViewCell.m in Sources */,
 				51D8842E1ABE620A00F7A3BD /* RMOrderDetailProTableViewCell.m in Sources */,
 				1D4DA3471A93090D006A9EBA /* RMDaqoCell.m in Sources */,
+				51DB4CE01ACC485600A6064D /* RMSystemMessageDetailViewController.m in Sources */,
 				0A4105771ABAB3C70060FBD5 /* UIButton+EMWebCache.m in Sources */,
 				1D83974D1AB3F72D00DA190A /* DoPhotoCell.m in Sources */,
 				512D75311AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m in Sources */,
