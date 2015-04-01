@@ -10,7 +10,7 @@
 #import "RMDaqoCell.h"
 #import "UITextField+LimitLength.h"
 
-@interface RMSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,DaqpSelectedPlantTypeDelegate>{
+@interface RMSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextFieldDelegate,DaqpSelectedPlantTypeDelegate>{
     BOOL isHideKeyboard;
     
 }
@@ -38,7 +38,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -53,8 +52,8 @@
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
 
-    dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
-
+    dataArr = [[NSMutableArray alloc] init];
+    mTextField.delegate = self;
     [mTextField.layer setCornerRadius:8.0f];
     mTextField.returnKeyType = UIReturnKeySearch;
     [mTextField limitTextLength:20];
@@ -102,7 +101,11 @@
 
 }
 
-#pragma mark - 
+- (IBAction)searchClick:(UIButton *)sender {
+    NSLog(@"搜索 %@",mTextField.text);
+}
+
+#pragma mark -
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [mTextField resignFirstResponder];
@@ -115,6 +118,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - 请求数据
+
+- (void)request {
+    
 }
 
 @end

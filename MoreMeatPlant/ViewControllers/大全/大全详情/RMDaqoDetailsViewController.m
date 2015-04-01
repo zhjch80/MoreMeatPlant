@@ -14,14 +14,17 @@
 #import "XHBottomToolBar.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "RMDaqoDetailsFooterView.h"
+#import "RMCommentsView.h"
 
 #define kDKTableViewMainBackgroundImageFileName @"DaQuanBackground.jpg"
 #define kDKTableViewDefaultCellHeight 50.0f
 #define kDKTableViewDefaultContentInset ([UIScreen mainScreen].bounds.size.height - kDKTableViewDefaultCellHeight)
 
-@interface RMDaqoDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,DaqoDetailsDelegate,BottomDelegate,XHImageViewerDelegate>{
+@interface RMDaqoDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,DaqoDetailsDelegate,BottomDelegate,XHImageViewerDelegate,DaqoDetailsFooterDelegate,CommentsViewDelegate>{
     BOOL isScrollLoadComplete;      //      第一次完全加载完成
     BOOL isBottomState;             //      底部状态栏的状态
+    BOOL isFistViewDidAppear;
+    BOOL isTakingPictures;          //是否在选取图片
     
 }
 @property (nonatomic, strong) UITableView * mTableView;
@@ -30,11 +33,12 @@
 @property (nonatomic, strong) XHImageViewer *imageViewer;
 @property (nonatomic, strong) NSMutableArray * imageViewArr;
 @property (nonatomic, strong) XHBottomToolBar * bottomToolBar;
+@property (nonatomic, strong) RMPublicModel * dataModel;
 
 @end
 
 @implementation RMDaqoDetailsViewController
-@synthesize mTableView, liveBlur, bottomView, imageViewer, imageViewArr;
+@synthesize mTableView, liveBlur, bottomView, imageViewer, imageViewArr, dataModel;
 
 - (void)shareButtonClicked:(UIButton *)sender {
     UIImage *currentImage = [imageViewer currentImage];
@@ -76,16 +80,26 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-    [liveBlur removeScrollViewObserver];
+    if (!isTakingPictures){
+        [liveBlur removeScrollViewObserver];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 }
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!isFistViewDidAppear){
+        [self requestDetails];
+        isFistViewDidAppear = YES;
+    }
 }
 
 - (void)viewDidLoad {
@@ -123,11 +137,15 @@
     [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_buy", @"img_share", nil]];
     [self.view addSubview:bottomView];
     
-    [self loadTableFooterView];
+    isFistViewDidAppear = NO;
 }
 
 - (void)bottomMethodWithTag:(NSInteger)tag {
     switch (tag) {
+        case 0:{
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
+        }
         case 1:{
             
             break;
@@ -140,10 +158,6 @@
             
             break;
         }
-        case 4:{
-            
-            break;
-        }
             
         default:
             break;
@@ -151,18 +165,84 @@
 }
 
 - (void)loadTableFooterView {
+    CGFloat offsetY = 0;
+    
+    offsetY = [UtilityFunc boundingRectWithSize:CGSizeMake(kScreenWidth - 20, 0) font:[UIFont systemFontOfSize:15.0f] text:dataModel.content_desc].height - 100;
+    
+    offsetY = (offsetY < 0 ? 0 : offsetY);
+    
     RMDaqoDetailsFooterView * tableFooterView = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoDetailsFooterView" owner:nil options:nil] objectAtIndex:0];
+    tableFooterView.delegate = self;
+    
+    tableFooterView.frame = CGRectMake(tableFooterView.frame.origin.x, tableFooterView.frame.origin.y, tableFooterView.frame.size.width, tableFooterView.frame.size.height + offsetY);
+    
+    tableFooterView.intro.frame = CGRectMake(tableFooterView.intro.frame.origin.x, tableFooterView.intro.frame.origin.y, tableFooterView.intro.frame.size.width, tableFooterView.intro.frame.size.height + offsetY);
+    
+    tableFooterView.lineTwo.frame = CGRectMake(tableFooterView.lineTwo.frame.origin.x, tableFooterView.lineTwo.frame.origin.y + offsetY, tableFooterView.lineTwo.frame.size.width, tableFooterView.lineTwo.frame.size.height);
+    tableFooterView.atlas.frame = CGRectMake(tableFooterView.atlas.frame.origin.x, tableFooterView.atlas.frame.origin.y + offsetY, tableFooterView.atlas.frame.size.width, tableFooterView.atlas.frame.size.height);
+    
+    for (NSInteger i=0; i<10; i++){
+        UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:501+i];
+        image.frame = CGRectMake(image.frame.origin.x, image.frame.origin.y + offsetY, image.frame.size.width, image.frame.size.height);
+    }
+    
+    tableFooterView.planting.frame = CGRectMake(tableFooterView.planting.frame.origin.x, tableFooterView.planting.frame.origin.y + offsetY, tableFooterView.planting.frame.size.width, tableFooterView.planting.frame.size.height);
+    
+    tableFooterView.lineThree.frame = CGRectMake(tableFooterView.lineThree.frame.origin.x, tableFooterView.lineThree.frame.origin.y + offsetY, tableFooterView.lineThree.frame.size.width, tableFooterView.lineThree.frame.size.height);
+    
+    tableFooterView.lineFour.frame = CGRectMake(tableFooterView.lineFour.frame.origin.x, tableFooterView.lineFour.frame.origin.y + offsetY, tableFooterView.lineFour.frame.size.width, tableFooterView.lineFour.frame.size.height);
+
+    tableFooterView.breeding.frame = CGRectMake(tableFooterView.breeding.frame.origin.x, tableFooterView.breeding.frame.origin.y + offsetY, tableFooterView.breeding.frame.size.width, tableFooterView.breeding.frame.size.height);
+    
+    tableFooterView.breedingContent.frame = CGRectMake(tableFooterView.breedingContent.frame.origin.x, tableFooterView.breedingContent.frame.origin.y + offsetY, tableFooterView.breedingContent.frame.size.width, tableFooterView.breedingContent.frame.size.height);
+    
+    tableFooterView.addImageBtn.frame = CGRectMake(tableFooterView.addImageBtn.frame.origin.x, tableFooterView.addImageBtn.frame.origin.y + offsetY, tableFooterView.addImageBtn.frame.size.width, tableFooterView.addImageBtn.frame.size.height);
+    
+    
+    tableFooterView.addedAndCorrectedBtn.frame = CGRectMake(tableFooterView.addedAndCorrectedBtn.frame.origin.x, tableFooterView.addedAndCorrectedBtn.frame.origin.y + offsetY, tableFooterView.addedAndCorrectedBtn.frame.size.width, tableFooterView.addedAndCorrectedBtn.frame.size.height);
+    
+    tableFooterView.chineseName.text = dataModel.family_name;
+    tableFooterView.englishName.text = [NSString stringWithFormat:@"拉丁文: %@",dataModel.latin_name];
+    
+    tableFooterView.intro.text = dataModel.content_desc;
+    
+    NSInteger count = 0;
     for (NSInteger i=0; i<2; i++) {
         for (NSInteger j=0; j<5; j++) {
-            RMImageView * atlasImg = [[RMImageView alloc] init];
-            atlasImg.image = [UIImage imageNamed:@"test_1.jpg"];
-            [atlasImg addTarget:self withSelector:@selector(imageZoomMethodWithImage:)];
-            atlasImg.frame = CGRectMake(15 + j*60, 220 + i*60, 50, 50);
-            [tableFooterView addSubview:atlasImg];
-            [imageViewArr addObject:atlasImg];
+            if (count >= dataModel.imgs.count){
+                break;
+            }else{
+                RMImageView * atlasImg = [[RMImageView alloc] init];
+                [atlasImg sd_setImageWithURL:[NSURL URLWithString:[[dataModel.imgs objectAtIndex:count] objectForKey:@"content_img"]] placeholderImage:nil];
+                [atlasImg addTarget:self withSelector:@selector(imageZoomMethodWithImage:)];
+                atlasImg.frame = CGRectMake(15 + j*60, 220 + i*60 + offsetY, 50, 50);
+                [tableFooterView addSubview:atlasImg];
+                [imageViewArr addObject:atlasImg];
+                count ++;
+            }
         }
     }
 
+    for (NSInteger i=0; i<5; i++) {
+        UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:501+i];
+        if (i >= dataModel.content_plant1.integerValue){
+            image.image = [UIImage imageNamed:@"img_yushui_empty"];
+        }else{
+            image.image = [UIImage imageNamed:@"img_yushui_full"];
+        }
+    }
+    
+    for (NSInteger i=0; i<5; i++) {
+        UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:506+i];
+        if (i >= dataModel.content_plant2.integerValue){
+            image.image = [UIImage imageNamed:@"img_sun_empty"];
+        }else{
+            image.image = [UIImage imageNamed:@"img_sun_full"];
+        }
+    }
+    
+    tableFooterView.breedingContent.text = dataModel.content_breed;
+    
     mTableView.tableFooterView = tableFooterView;
 }
 
@@ -185,6 +265,7 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.delegate = self;
     }
+    cell.plantName.text = dataModel.content_name;
     return cell;
 }
 
@@ -232,6 +313,87 @@
     }
 }
 
+- (void)footerBtnMethodWithTag:(NSInteger)tag {
+    switch (tag) {
+        case 1:{
+            isTakingPictures = YES;
+            UIActionSheet *sheet = nil;
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                sheet  = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+            }else{
+                sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+            }
+            [sheet showInView:self.view];
+            break;
+        }
+        case 2:{
+            RMCommentsView * commentsView = [[RMCommentsView alloc] init];
+            commentsView.delegate = self;
+            commentsView.backgroundColor = [UIColor clearColor];
+            commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  补充:%@",@"补充说明"]];
+            [self.view addSubview:commentsView];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSUInteger sourceType = 0;
+    // 判断是否支持相机
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        switch (buttonIndex) {
+            case 0:{
+                // 相机
+                sourceType = UIImagePickerControllerSourceTypeCamera;
+                break;
+            }
+            case 1:{
+                // 相册
+                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                break;
+            }
+            case 2:{
+                // 取消
+                return;
+            }
+        }
+    } else {
+        if (buttonIndex == 1) {
+            return;
+        } else {
+            sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        }
+    }
+    // 跳转到相机或相册页面
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = YES;
+    imagePickerController.sourceType = sourceType;
+    [self presentViewController:imagePickerController animated:YES completion:^{}];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
+    isTakingPictures = NO;
+    [picker dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    isTakingPictures = NO;
+    [picker dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    isTakingPictures = NO;
+    [picker dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
 #pragma mark -
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -264,6 +426,89 @@
             }];
         }
     }
+}
+
+#pragma mark - 请求数据
+
+/** 
+ *  @param      详情
+ */
+- (void)requestDetails {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getPlantDaqoDetailsWithAuto_id:self.auto_id callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            dataModel = [[RMPublicModel alloc] init];
+            dataModel.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"auto_id"]);
+            dataModel.content_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_name"]);
+            dataModel.content_course = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_course"]);
+            dataModel.content_grow = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_grow"]);
+            dataModel.content_grow = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_grow"]);
+            dataModel.content_img = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_img"]);
+            dataModel.content_bimg = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_bimg"]);
+            dataModel.family_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"family_name"]);
+            dataModel.latin_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"latin_name"]);
+            dataModel.content_desc = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_desc"]);
+            dataModel.content_plant1 = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_plant1"]);
+            dataModel.content_plant2 = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_plant2"]);
+            dataModel.content_breed = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_breed"]);
+            
+            dataModel.imgs = [[object objectForKey:@"data"] objectForKey:@"img"];
+            
+            [liveBlur sd_setImageWithURL:[NSURL URLWithString:dataModel.content_bimg]];
+            
+            liveBlur.originalImage = liveBlur.image;
+            
+            [mTableView reloadData];
+            
+            [self loadTableFooterView];
+
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
+/**
+ *   @method     添加图片
+ */
+- (void)requestAddImageView {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager postPlantDaqoAddImageWithAll_id:dataModel.auto_id withContent_img:@"" withID:@"" withPWD:@"" callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
+/**
+ *  @method      纠正与补充
+ */
+- (void)requestSupplement {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getPlantDaqoDetailsAddTheCorrectAddWithPlantAll_id:dataModel.auto_id withCorrectInstructions:@"" withUser_id:@"" withUserPassword:@"" callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

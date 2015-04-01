@@ -135,6 +135,7 @@
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
         cell.leftTitle.text = model.content_name;
         [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        cell.leftImg.identifierString = model.auto_id;
     }else{
         cell.leftTitle.hidden = YES;
         cell.leftImg.hidden = YES;
@@ -143,6 +144,7 @@
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
         cell.centerTitle.text = model.content_name;
         [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        cell.centerImg.identifierString = model.auto_id;
     }else{
         cell.centerTitle.hidden = YES;
         cell.centerImg.hidden = YES;
@@ -151,6 +153,7 @@
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
         cell.rightTitle.text = model.content_name;
         [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        cell.rightImg.identifierString = model.auto_id;
     }else{
         cell.rightTitle.hidden = YES;
         cell.rightImg.hidden = YES;
@@ -186,9 +189,9 @@
 }
 
 - (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
-    NSLog(@"image type:%@",image.identifierString);
     RMDaqoViewController * daqoCtl = self.DaqoDelegate;
     RMDaqoDetailsViewController * daqoDetailsCtl = [[RMDaqoDetailsViewController alloc] init];
+    daqoDetailsCtl.auto_id = image.identifierString;
     [daqoCtl.navigationController pushViewController:daqoDetailsCtl animated:YES];
 }
 

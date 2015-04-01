@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DaqoDetailsFooterDelegate <NSObject>
+
+- (void)footerBtnMethodWithTag:(NSInteger)tag;
+
+@end
+
 @interface RMDaqoDetailsFooterView : UIView
+@property (nonatomic, assign) id<DaqoDetailsFooterDelegate>delegate;
 
 @property (weak, nonatomic) IBOutlet UILabel *chineseName;
 @property (weak, nonatomic) IBOutlet UILabel *englishName;

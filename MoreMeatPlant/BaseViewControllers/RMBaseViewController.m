@@ -9,7 +9,6 @@
 #import "RMBaseViewController.h"
 
 //#import "IQKeyboardManager.h"
-#import "IQKeyboardReturnKeyHandler.h"
 
 @interface RMBaseViewController (){
     IQKeyboardReturnKeyHandler *returnKeyHandler;
@@ -23,8 +22,7 @@
 @implementation RMBaseViewController
 @synthesize statusView, customNav, titleLabel;
 
--(void)dealloc
-{
+-(void)dealloc {
     returnKeyHandler = nil;
 }
 

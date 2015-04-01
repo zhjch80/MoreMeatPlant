@@ -25,6 +25,17 @@
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"升级建议"];
     
+    [self setRightBarButtonNumber:1];
+    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+
+    [rightOneBarButton setTitle:@"提交" forState:UIControlStateNormal];
+    [rightOneBarButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [self.mTextView.layer setCornerRadius:8.0f];
+    self.mTextView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+    
     isFirstAppear = YES;
 }
 
@@ -35,7 +46,7 @@
             break;
         }
         case 2:{
-            
+            NSLog(@"提交");
             break;
         }
             

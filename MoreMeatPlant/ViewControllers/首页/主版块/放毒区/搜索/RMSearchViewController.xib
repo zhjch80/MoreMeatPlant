@@ -8,12 +8,16 @@
         <mutableArray key="方正正纤黑简体.TTF">
             <string>FZZXHJW--GB1-0</string>
         </mutableArray>
+        <mutableArray key="方正正黑简体.TTF">
+            <string>FZZHJW--GB1-0</string>
+        </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RMSearchViewController">
             <connections>
                 <outlet property="mTableView" destination="jAt-zO-Qqk" id="LHn-vo-jOu"/>
                 <outlet property="mTextField" destination="uXZ-AB-17E" id="fFb-UQ-cU2"/>
+                <outlet property="searchBtn" destination="H2U-Ek-yBa" id="lbc-ve-sry"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -34,11 +38,22 @@
                                 <action selector="buttonClick:" destination="-1" eventType="touchUpInside" id="ruq-be-BXy"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2U-Ek-yBa">
+                            <rect key="frame" x="274" y="8" width="46" height="30"/>
+                            <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="15"/>
+                            <state key="normal" title="搜索">
+                                <color key="titleColor" red="0.34991164434523814" green="0.34991164434523814" blue="0.34991164434523814" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="searchClick:" destination="-1" eventType="touchUpInside" id="yYm-MM-dYN"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.91062127976190477" green="0.91062127976190477" blue="0.91062127976190477" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入要搜索的内容" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uXZ-AB-17E" customClass="RMBaseTextField">
-                    <rect key="frame" x="45" y="24" width="270" height="35"/>
+                    <rect key="frame" x="45" y="24" width="230" height="35"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="16"/>
                     <textInputTraits key="textInputTraits"/>

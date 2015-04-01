@@ -18,4 +18,10 @@
 }
 */
 
+- (IBAction)footerbuttonClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(footerBtnMethodWithTag:)]){
+        [self.delegate footerBtnMethodWithTag:sender.tag];
+    }
+}
+
 @end

@@ -79,13 +79,21 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @method     植物大全详情页面
  *  @param      auto_id     植物标识
  */
-- (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id;
++ (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id
+                              callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
- *  @method     植物大全添加图片            未完成
- *  @param
- */
-- (void)postPlantDaqoAddImage;
+ *  @method     植物大全添加图片
+ *  @param      all_id          植物标识
+ *  @param      content_img     图片字段
+ *  @param      user_id         会员用户名
+ *  @param      user_password   会员密码
+*/
++ (void)postPlantDaqoAddImageWithAll_id:(NSString *)all_id
+                     withContent_img:(NSString *)content_img
+                              withID:(NSString *)user_id
+                             withPWD:(NSString *)user_password
+                            callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     植物大全添加纠正补充
@@ -94,10 +102,10 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      user_id             会员用户名
  *  @param      user_password       会员密码
  */
-- (void)getPlantDaqoDetailsAddTheCorrectAddWithPlantAll_id:(NSString *)all_id
++ (void)getPlantDaqoDetailsAddTheCorrectAddWithPlantAll_id:(NSString *)all_id
                                    withCorrectInstructions:(NSString *)content_desc
                                                withUser_id:(NSString *)user_id
-                                          withUserPassword:(NSString *)user_password;
+                                          withUserPassword:(NSString *)user_password callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     帖子列表

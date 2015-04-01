@@ -134,25 +134,16 @@
  *  @method     植物大全详情页面
  *  @param      auto_id     植物标识
  */
-- (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id {
-    __weak RMAFNRequestManager *weekSelf = self;
++ (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id
+                              callBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAllview&auto_id=%@",baseUrl,auto_id];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
-            NSMutableArray * array = [NSMutableArray array];
-            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                
-                [array addObject:model];
-            }
-            if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
-                [self.delegate requestFinishiDownLoadWith:array];
-            }
-        }else{
+        if (block){
+            block (nil, [responseObject objectForKey:@"status"], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
-            [weekSelf.delegate requestError:error];
+        if (block){
+            block (error, NO, kMSGFailure);
         }
     }];
 }
@@ -175,28 +166,35 @@
 }
 
 /**
- *  @method     植物大全添加图片            未完成
- *  @param
+ *  @method     植物大全添加图片
+ *  @param      all_id          植物标识
+ *  @param      content_img     图片字段
+ *  @param      user_id         会员用户名
+ *  @param      user_password   会员密码
  */
-- (void)postPlantDaqoAddImage {
-    __weak RMAFNRequestManager *weekSelf = self;
++ (void)postPlantDaqoAddImageWithAll_id:(NSString *)all_id
+                        withContent_img:(NSString *)content_img
+                                 withID:(NSString *)user_id
+                                withPWD:(NSString *)user_password
+                               callBack:(RMAFNRequestManagerCallBack)block {
     NSString *url = @"http://218.240.30.6/drzw/index.php";
     NSDictionary * parameter = @{
                                  @"com": @"com_appService",
                                  @"method": @"save",
                                  @"app_com": @"com_center",
                                  @"task": @"addAllimg",
-                                 @"frm[all_id]": @"植物大全标识",
-                                 @"content_img": @"图片字段",
-                                 @"ID": @"会员用户名",
-                                 @"PWD": @"会员密码"
+                                 @"frm[all_id]": all_id,
+                                 @"content_img": content_img,
+                                 @"ID": user_id,
+                                 @"PWD": user_password
                                  };
     [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-       
-    
+        if (block) {
+            block (nil, [responseObject objectForKey:@"status"], responseObject);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
-            [weekSelf.delegate requestError:error];
+        if (block){
+            block (error, NO, kMSGFailure);
         }
     }];
 }
@@ -208,28 +206,18 @@
  *  @param      user_id             会员用户名
  *  @param      user_password       会员密码
  */
-- (void)getPlantDaqoDetailsAddTheCorrectAddWithPlantAll_id:(NSString *)all_id
++ (void)getPlantDaqoDetailsAddTheCorrectAddWithPlantAll_id:(NSString *)all_id
                                    withCorrectInstructions:(NSString *)content_desc
                                                withUser_id:(NSString *)user_id
-                                          withUserPassword:(NSString *)user_password {
-    __weak RMAFNRequestManager *weekSelf = self;
+                                          withUserPassword:(NSString *)user_password callBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = [NSString stringWithFormat:@"%@&method=save&app_com=com_center&task=addAlldesc&frm[all_id]=%@&frm[content_desc]=%@&ID=%@&PWD=%@",baseUrl,all_id,content_desc,user_id,user_password];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        if ([[responseObject objectForKey:@"status"] isEqualToString:kMSGSuccess]){
-            NSMutableArray * array = [NSMutableArray array];
-            for (NSInteger i=0; i<[[responseObject objectForKey:@"data"] count]; i++){
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                
-                [array addObject:model];
-            }
-            if ([self.delegate respondsToSelector:@selector(requestFinishiDownLoadWith:)]){
-                [self.delegate requestFinishiDownLoadWith:array];
-            }
-        }else{
+        if (block){
+            block (nil, [responseObject objectForKey:@"status"], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if([weekSelf.delegate respondsToSelector:@selector(requestError:)]){
-            [weekSelf.delegate requestError:error];
+        if (block){
+            block (error, NO, kMSGFailure);
         }
     }];
 }

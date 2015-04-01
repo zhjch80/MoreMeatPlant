@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -22,126 +22,185 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="640"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="拉丁文：Echeveria Lauii" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5K-95-Gwv">
-                    <rect key="frame" x="8" y="36" width="300" height="28"/>
-                    <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="16"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="景天科：石莲花属" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJO-cH-jwM">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OJO-cH-jwM">
                     <rect key="frame" x="8" y="8" width="300" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="16"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_pointLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Zh-sJ-q28">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k5K-95-Gwv">
+                    <rect key="frame" x="8" y="36" width="300" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="16"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_pointLine.png" id="4Zh-sJ-q28">
                     <rect key="frame" x="8" y="65" width="310" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="简介:&quot;冬种型&quot;品种景天科拟石莲花属［雪莲］EcheveriaLauii 肥厚的叶子如汤匙般，顶端圆钝或稍尖（其中顶端圆钝的称‘圆叶雪莲’）。褐绿的叶片被浓厚的灰白货浅蓝灰色粉末覆盖，极为圣洁美丽。褐红色穗状小花在春季开放。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jdr-Bi-ZAT">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jdr-Bi-ZAT">
                     <rect key="frame" x="8" y="75" width="300" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_pointLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Jn-sb-xGh">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_pointLine.png" id="2Jn-sb-xGh">
                     <rect key="frame" x="8" y="183" width="310" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="种植:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qrv-6k-aCJ">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图集:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KQ1-TD-soe">
+                    <rect key="frame" x="10" y="192" width="310" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="16"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="种植:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qrv-6k-aCJ">
                     <rect key="frame" x="10" y="338" width="310" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="boT-aM-WeB">
+                <imageView userInteractionEnabled="NO" tag="501" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="boT-aM-WeB">
                     <rect key="frame" x="23" y="363" width="20" height="20"/>
-                    <color key="backgroundColor" red="0.69356617300000001" green="0.71987407989999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMx-zP-BRb">
+                <imageView userInteractionEnabled="NO" tag="502" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="nMx-zP-BRb">
                     <rect key="frame" x="47" y="363" width="20" height="20"/>
-                    <color key="backgroundColor" red="0.69356617300000001" green="0.71987407989999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zc3-Jj-Nrk">
+                <imageView userInteractionEnabled="NO" tag="503" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="zc3-Jj-Nrk">
                     <rect key="frame" x="71" y="363" width="20" height="20"/>
-                    <color key="backgroundColor" red="0.69356617300000001" green="0.71987407989999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Fr-oK-hh9">
+                <imageView userInteractionEnabled="NO" tag="504" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="7Fr-oK-hh9">
                     <rect key="frame" x="95" y="363" width="20" height="20"/>
-                    <color key="backgroundColor" red="0.69356617300000001" green="0.71987407989999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rNH-wC-7UO">
+                <imageView userInteractionEnabled="NO" tag="505" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="rNH-wC-7UO">
                     <rect key="frame" x="119" y="363" width="20" height="20"/>
-                    <color key="backgroundColor" red="0.69356617300000001" green="0.71987407989999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6fk-h3-O66">
+                <imageView userInteractionEnabled="NO" tag="506" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="6fk-h3-O66">
                     <rect key="frame" x="176" y="363" width="20" height="20"/>
-                    <color key="backgroundColor" red="0.69356617300000001" green="0.71987407989999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="THw-Ap-5Hf">
+                <imageView userInteractionEnabled="NO" tag="507" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="THw-Ap-5Hf">
                     <rect key="frame" x="200" y="363" width="20" height="20"/>
-                    <color key="backgroundColor" red="0.69356617300000001" green="0.71987407989999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qru-Bq-1bD">
+                <imageView userInteractionEnabled="NO" tag="508" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="qru-Bq-1bD">
                     <rect key="frame" x="225" y="363" width="20" height="20"/>
-                    <color key="backgroundColor" red="0.69356617300000001" green="0.71987407989999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NUA-Kq-TMi">
+                <imageView userInteractionEnabled="NO" tag="509" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="NUA-Kq-TMi">
                     <rect key="frame" x="250" y="363" width="20" height="20"/>
-                    <color key="backgroundColor" red="0.69356617300000001" green="0.71987407989999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lrV-ub-JBC">
+                <imageView userInteractionEnabled="NO" tag="510" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="lrV-ub-JBC">
                     <rect key="frame" x="275" y="363" width="20" height="20"/>
-                    <color key="backgroundColor" red="0.69356617300000001" green="0.71987407989999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_pointLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="CRB-UJ-DM9">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_pointLine.png" id="CRB-UJ-DM9">
                     <rect key="frame" x="10" y="393" width="310" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="繁殖：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7P-ee-vM0">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="繁殖：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z7P-ee-vM0">
                     <rect key="frame" x="10" y="402" width="310" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="叶插、播种" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKo-y9-2X0">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qKo-y9-2X0">
                     <rect key="frame" x="10" y="435" width="310" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_pointLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="TKz-ck-0Us">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_pointLine.png" id="TKz-ck-0Us">
                     <rect key="frame" x="10" y="493" width="310" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hB-rv-Db9">
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8hB-rv-Db9">
                     <rect key="frame" x="51" y="526" width="68" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.86666666670000003" green="0.0" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="添加图片">
                         <color key="titleColor" red="0.97012567370000002" green="0.96115248929999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="footerbuttonClick:" destination="69q-oX-35A" eventType="touchUpInside" id="Xyb-9m-tcy"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OC0-b8-3Dd">
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OC0-b8-3Dd">
                     <rect key="frame" x="176" y="526" width="93" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.86666666670000003" green="0.0" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="纠正与补充">
                         <color key="titleColor" red="0.97012567370000002" green="0.96115248929999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="footerbuttonClick:" destination="69q-oX-35A" eventType="touchUpInside" id="ddk-nN-qZM"/>
+                    </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="图集:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQ1-TD-soe">
-                    <rect key="frame" x="10" y="192" width="310" height="25"/>
-                    <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="16"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addImageBtn" destination="8hB-rv-Db9" id="XVl-bb-gfs"/>
+                <outlet property="addedAndCorrectedBtn" destination="OC0-b8-3Dd" id="ibu-ap-foO"/>
+                <outlet property="atlas" destination="KQ1-TD-soe" id="maO-kB-WXb"/>
+                <outlet property="breeding" destination="z7P-ee-vM0" id="PZT-4S-Gau"/>
+                <outlet property="breedingContent" destination="qKo-y9-2X0" id="dx4-8h-y3a"/>
+                <outlet property="chineseName" destination="OJO-cH-jwM" id="10J-DQ-Fqj"/>
+                <outlet property="englishName" destination="k5K-95-Gwv" id="Jrr-kT-fbb"/>
+                <outlet property="intro" destination="Jdr-Bi-ZAT" id="lmW-6z-jZB"/>
+                <outlet property="lineFour" destination="TKz-ck-0Us" id="tvW-4W-Lg2"/>
+                <outlet property="lineOne" destination="4Zh-sJ-q28" id="pb8-UN-Jo4"/>
+                <outlet property="lineThree" destination="CRB-UJ-DM9" id="gAe-5d-awg"/>
+                <outlet property="lineTwo" destination="2Jn-sb-xGh" id="UMz-d8-WOF"/>
+                <outlet property="planting" destination="Qrv-6k-aCJ" id="d13-DS-b7w"/>
+                <outlet property="planting_1" destination="boT-aM-WeB" id="hbH-AV-7Oa"/>
+                <outlet property="planting_10" destination="lrV-ub-JBC" id="x5Z-4I-zs8"/>
+                <outlet property="planting_2" destination="nMx-zP-BRb" id="Nal-uh-SzC"/>
+                <outlet property="planting_3" destination="zc3-Jj-Nrk" id="ecI-0q-gTU"/>
+                <outlet property="planting_4" destination="7Fr-oK-hh9" id="IyN-PV-X2e"/>
+                <outlet property="planting_5" destination="rNH-wC-7UO" id="CqV-Wb-1o3"/>
+                <outlet property="planting_6" destination="6fk-h3-O66" id="P9Y-Dz-txo"/>
+                <outlet property="planting_7" destination="THw-Ap-5Hf" id="TcO-S2-Slh"/>
+                <outlet property="planting_8" destination="qru-Bq-1bD" id="pjS-Wy-eqn"/>
+                <outlet property="planting_9" destination="NUA-Kq-TMi" id="DT7-gN-Fkg"/>
+            </connections>
             <point key="canvasLocation" x="250" y="268"/>
         </view>
     </objects>
     <resources>
         <image name="img_pointLine.png" width="877" height="1"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

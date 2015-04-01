@@ -204,7 +204,7 @@
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
         cell.plantTitle.attributedText = oneAttributeStr;
         [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
-        cell.userName.text = [NSString stringWithFormat:@"%@ %@",[model.members objectForKey:@"member_name"],[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
+        cell.userName.text = [NSString stringWithFormat:@"%@",[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]]; //[model.members objectForKey:@"member_name"]
         
         [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
         [cell.rightUpTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:nil];
@@ -243,7 +243,7 @@
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
         cell.plantTitle.attributedText = oneAttributeStr;
         [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
-        cell.userName.text = [NSString stringWithFormat:@"%@ %@",[model.members objectForKey:@"member_name"],[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
+        cell.userName.text = [NSString stringWithFormat:@"%@",[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];//[model.members objectForKey:@"member_name"]
         
         [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
         [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:nil];
@@ -280,7 +280,7 @@
         cell.plantTitle.attributedText = oneAttributeStr;
         [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
         
-        cell.userName.text = [NSString stringWithFormat:@"%@ %@",[model.members objectForKey:@"member_name"],[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
+        cell.userName.text = [NSString stringWithFormat:@"%@",[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];//[model.members objectForKey:@"member_name"]
         
         if ([model.imgs isKindOfClass:[NSNull class]]){
             [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:@"http://lady.southcn.com/6/images/attachement/jpg/site4/20110524/90fba609e4270f45626e36.jpg"] placeholderImage:nil];

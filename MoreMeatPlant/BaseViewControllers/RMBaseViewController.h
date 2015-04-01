@@ -21,6 +21,9 @@
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
 #import "UIImageView+WebCache.h"
+#import "KeyboardManager.h"
+#import "UtilityFunc.h"
+
 @interface RMBaseViewController : UIViewController{
     UIButton *leftBarButton;
     UIButton *rightOneBarButton;

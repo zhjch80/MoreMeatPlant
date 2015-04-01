@@ -38,6 +38,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"新手教程"];
+    
+    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+
     dataArr = [[NSMutableArray alloc] init];
     
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64) style:UITableViewStylePlain];

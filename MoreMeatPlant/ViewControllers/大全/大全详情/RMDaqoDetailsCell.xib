@@ -29,8 +29,8 @@
                             <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="tmd-2q-7Si"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="雪莲" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s77-ne-2iU">
-                        <rect key="frame" x="213" y="0.0" width="99" height="60"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s77-ne-2iU">
+                        <rect key="frame" x="84" y="3" width="220" height="60"/>
                         <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="27"/>
                         <color key="textColor" red="0.96549479166666663" green="0.96549479166666663" blue="0.96549479166666663" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -41,7 +41,7 @@
                 <outlet property="backupBtn" destination="Pqr-X5-Yay" id="QdJ-X5-QeP"/>
                 <outlet property="plantName" destination="s77-ne-2iU" id="ymZ-3I-K9G"/>
             </connections>
-            <point key="canvasLocation" x="229" y="265"/>
+            <point key="canvasLocation" x="229" y="262"/>
         </tableViewCell>
     </objects>
     <resources>

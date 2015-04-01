@@ -15,7 +15,7 @@
 
 #define kMaxLength 18
 
-@interface RMStartPostingViewController ()<UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,StartPostingHeaderDelegate,DoImagePickerControllerDelegate>{
+@interface RMStartPostingViewController ()<UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,StartPostingHeaderDelegate,DoImagePickerControllerDelegate>{
     NSInteger uploadImageCount;         //纪录已选照片数量
     NSInteger uploadImageValue;         //标记要重置的位置
     NSInteger cameraType;               //取照类型  1 点击直接拍照    2 点击某一张图片

@@ -12,6 +12,7 @@
 @interface RMSearchViewController : RMBaseViewController
 @property (weak, nonatomic) IBOutlet RMBaseTextField *mTextField;
 
+@property (weak, nonatomic) IBOutlet UIButton *searchBtn;
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
 
 @end

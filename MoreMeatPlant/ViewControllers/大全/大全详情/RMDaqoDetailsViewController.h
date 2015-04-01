@@ -10,4 +10,6 @@
 
 @interface RMDaqoDetailsViewController : RMBaseViewController
 
+@property (nonatomic, copy) NSString * auto_id;
+
 @end
