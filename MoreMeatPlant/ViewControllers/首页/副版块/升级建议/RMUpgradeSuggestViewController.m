@@ -25,6 +25,8 @@
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"升级建议"];
     
+    returnKeyHandler.delegate = nil;
+    
     [self setRightBarButtonNumber:1];
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];

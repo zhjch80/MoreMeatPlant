@@ -28,6 +28,7 @@
     UIButton *leftBarButton;
     UIButton *rightOneBarButton;
     UIButton *rightTwoBarButton;
+    IQKeyboardReturnKeyHandler *returnKeyHandler;
 
 }
 

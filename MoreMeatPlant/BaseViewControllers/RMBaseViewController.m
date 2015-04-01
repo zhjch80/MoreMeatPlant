@@ -11,7 +11,6 @@
 //#import "IQKeyboardManager.h"
 
 @interface RMBaseViewController (){
-    IQKeyboardReturnKeyHandler *returnKeyHandler;
 }
 @property (nonatomic, strong) UIView * statusView;
 @property (nonatomic, strong) UIView * customNav;
