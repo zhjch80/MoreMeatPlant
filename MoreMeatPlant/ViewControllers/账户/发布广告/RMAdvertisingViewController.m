@@ -29,9 +29,23 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
-    planteArray = [[NSMutableArray alloc]initWithObjects:@"",@"",@"",@"",@"", nil];
+    planteArray = [[NSMutableArray alloc]init];
     selectArray = [[NSMutableArray alloc]init];
-    
+    [self planteRequest];
+}
+
+- (void)planteRequest{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager corpAdvantageListRequestWithUser:[[RMUserLoginInfoManager loginmanager]user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            [planteArray addObjectsFromArray:object];
+            [_mTableView reloadData];
+        }else{
+            [MBProgressHUD showError:object toView:self.view];
+        }
+
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -62,9 +76,12 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMSectionFooterTableViewCell" owner:self options:nil] lastObject];
             [cell.surePublish addTarget:self action:@selector(surePublishAction:) forControlEvents:UIControlEventTouchDown];
         }
+        cell.balanceL.text = [NSString stringWithFormat:@"%.0f",[(RMPublicModel *)[planteArray lastObject] balance]];
+        cell.totalL.text = [NSString stringWithFormat:@"共计: %ld (%.0f米)",num_total,money_total];
         return cell;
     }
     else {
+
         RMAdvertisingSectionTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMAdvertisingSectionTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMAdvertisingSectionTableViewCell" owner:self options:nil] lastObject];
@@ -72,10 +89,16 @@
             
             [cell.subBtn addTarget:self action:@selector(subAction:) forControlEvents:UIControlEventTouchDown];
             [cell.addBtn addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchDown];
+            cell.numTextField.delegate = self;
         }
         cell.selectBtn.tag = indexPath.row*100;
         cell.subBtn.tag = indexPath.row*100+1;
         cell.addBtn.tag = indexPath.row*100+2;
+        RMPublicModel * model = [planteArray objectAtIndex:indexPath.row-2];
+        cell.planteName.text = model.content_name;
+//        cell.numTextField.text = [NSString stringWithFormat:@"%ld",model.textField_value];
+        cell.priceL.text = [NSString stringWithFormat:@"%@米/天",model.content_price];
+        cell.yu_weiL.text = [NSString stringWithFormat:@"余位 %ld",model.num];
         return cell;
     }
 }
@@ -95,15 +118,20 @@
 #pragma mark - 选择 100
 - (void)selectAction:(UIButton *)sender{
     RMAdvertisingSectionTableViewCell * cell =  (RMAdvertisingSectionTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag/100 inSection:0]];
+//    RMPublicModel * model = [planteArray objectAtIndex:sender.tag/100-2];
     for(NSNumber * number in selectArray){
         if(sender.tag/100 == [number integerValue]){
+//            model.textField_value = 0;
             [cell.selectBtn setBackgroundImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
             [selectArray removeObject:number];
+            [self caculateDays];
             return;
         }
     }
-    [cell.selectBtn setBackgroundImage:[UIImage imageNamed:@"gwc_select"] forState:UIControlStateNormal];
+//    model.textField_value = 1;
+    [cell.selectBtn setBackgroundImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
     [selectArray addObject:[NSNumber numberWithInteger:sender.tag/100]];
+    [self caculateDays];
 }
 
 #pragma mark - 减 101
@@ -117,7 +145,10 @@
     }else{
         cell.numTextField.text = [NSString stringWithFormat:@"%ld",++num];
     }
+    RMPublicModel * model = [planteArray objectAtIndex:sender.tag/100-2];
+    model.textField_value = num;
     
+    [self caculateDays];
 }
 
 #pragma mark - 加 102
@@ -126,24 +157,85 @@
     NSInteger num = [cell.numTextField.text integerValue];
     num++;
     cell.numTextField.text = [NSString stringWithFormat:@"%ld",num];
+    RMPublicModel * model = [planteArray objectAtIndex:sender.tag/100-2];
+    model.textField_value = num;
+    [self caculateDays];
+}
+
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if([textField.text length] == 0 ){
+        textField.text = 0;
+    }
+    [self caculateDays];
+}
+
+
+- (void)caculateDays{
+    num_total = 0;
+    money_total = 0;
+    for(NSNumber * number in selectArray){
+        RMAdvertisingSectionTableViewCell * cell =  (RMAdvertisingSectionTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[number integerValue] inSection:0]];
+        RMPublicModel * model = [planteArray objectAtIndex:number.integerValue-2];
+        num_total+=[cell.numTextField.text integerValue];
+        money_total += [cell.numTextField.text integerValue]*[model.content_price floatValue];
+    }
+    [_mTableView reloadData];
 }
 
 #pragma mark - 确认发布
 - (void)surePublishAction:(UIButton *)sender{
+    NSLog(@"%@",selectArray);
+    int i = 0;
+    NSMutableDictionary * multabledic = [[NSMutableDictionary alloc]init];
+    for(NSNumber * number in selectArray){
+        RMAdvertisingSectionTableViewCell * cell =  (RMAdvertisingSectionTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[number integerValue] inSection:0]];
+        RMPublicModel * model = [planteArray objectAtIndex:[number integerValue]-2];
+        [multabledic setValue:model.auto_id forKey:[NSString stringWithFormat:@"frm[position][%d]",i]];
+        [multabledic setValue:cell.numTextField.text forKey:[NSString stringWithFormat:@"frm[day][%d]",i]];
+        i++;
+    }
+    if([selectArray count] == 0){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请先选择广告位" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if (default_image == nil){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择广告位显示图片" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        
+        return;
+    }
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager corpAdvantageApplyWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Dic:multabledic filePath:_filePath andCallBack:^(NSError *error, BOOL success, id object) {
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * model = object;
+            [MBProgressHUD showSuccess:model.msg toView:self.view];
+        }else{
+            [MBProgressHUD showSuccess:object toView:self.view];
+        }
+        
+    }];
 }
 
 - (void)postImg:(UIButton *)sender{
     [[RMVPImageCropper shareImageCropper] setCtl:self];
     [[RMVPImageCropper shareImageCropper] set_scale:0.14];
     [[RMVPImageCropper shareImageCropper] showActionSheet];
+    [[RMVPImageCropper shareImageCropper] setFileName:@"content_img.png"];
 }
 
 
 #pragma mark - RMimageCropperDelegate
-- (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage{
+- (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage andfilePath:(NSURL *)filePath{
     RMAdvertisingHeadTableViewCell * cell = (RMAdvertisingHeadTableViewCell*)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [cell.placeImgV setImage:editedImage];
+    _filePath = filePath;
+    default_image = editedImage;
+    NSLog(@"发布广告图片路径:%@",filePath);
 }
 
 - (void)RMimageCropperDidCancel:(VPImageCropperViewController *)cropperViewController{

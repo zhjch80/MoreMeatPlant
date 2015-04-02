@@ -8,9 +8,13 @@
 
 #import "RMBaseViewController.h"
 
-@interface RMAdvertisingViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate>{
+@interface RMAdvertisingViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>{
     NSMutableArray * planteArray;
     NSMutableArray * selectArray;
+    NSURL * _filePath;
+    UIImage * default_image;
+    NSInteger num_total;
+    float money_total;
 }
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
 

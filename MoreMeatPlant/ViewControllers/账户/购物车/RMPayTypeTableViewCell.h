@@ -11,5 +11,6 @@
 @interface RMPayTypeTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *yu_e_payBtn;
 @property (weak, nonatomic) IBOutlet UIButton *alipayBtn;
+@property (weak, nonatomic) IBOutlet UILabel *yu_eL;
 
 @end

@@ -731,6 +731,7 @@
 		51DB4CDC1ACAE32B00A6064D /* RMSectionFooterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4CDB1ACAE32B00A6064D /* RMSectionFooterTableViewCell.xib */; };
 		51DB4CE01ACC485600A6064D /* RMSystemMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CDE1ACC485600A6064D /* RMSystemMessageDetailViewController.m */; };
 		51DB4CE11ACC485600A6064D /* RMSystemMessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4CDF1ACC485600A6064D /* RMSystemMessageDetailViewController.xib */; };
+		51DB4DDA1ACDA6D800A6064D /* fbbb_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4DD91ACDA6D800A6064D /* fbbb_select.png */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */; };
 		51E268091AADDFFE00252DEF /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268071AADDFFE00252DEF /* JWBlurView.m */; };
@@ -1933,6 +1934,7 @@
 		51DB4CDD1ACC485600A6064D /* RMSystemMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSystemMessageDetailViewController.h; sourceTree = "<group>"; };
 		51DB4CDE1ACC485600A6064D /* RMSystemMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSystemMessageDetailViewController.m; sourceTree = "<group>"; };
 		51DB4CDF1ACC485600A6064D /* RMSystemMessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSystemMessageDetailViewController.xib; sourceTree = "<group>"; };
+		51DB4DD91ACDA6D800A6064D /* fbbb_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fbbb_select.png; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 		51E268041AADDFFE00252DEF /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
@@ -3871,6 +3873,7 @@
 				1DEB74AC1AB9D67A00EA1FA7 /* fbbb_img_28.png */,
 				1DEB74AD1AB9D67A00EA1FA7 /* fbbb_img_32.png */,
 				1DEB74AE1AB9D67A00EA1FA7 /* fbbb_no_select.png */,
+				51DB4DD91ACDA6D800A6064D /* fbbb_select.png */,
 				1DEB74AF1AB9D67A00EA1FA7 /* fbbb_nophoto.png */,
 				1DEB74B01AB9D67A00EA1FA7 /* fbbb@2x.png */,
 				1DEB74B11AB9D67A00EA1FA7 /* fbgg@2x.png */,
@@ -4591,6 +4594,7 @@
 				1D83974A1AB3F72D00DA190A /* DoImagePickerController.xib in Resources */,
 				1DEB747A1AB9D66800EA1FA7 /* img_search@2x.png in Resources */,
 				1D1DAE2B1ACBDCD100FC4C4C /* img_yushui_full.png in Resources */,
+				51DB4DDA1ACDA6D800A6064D /* fbbb_select.png in Resources */,
 				1D8397651AB3F81600DA190A /* up@2x.png in Resources */,
 				1DDBBD5F1ABBB17E00E35CD5 /* daquan@2x.png in Resources */,
 				51D883D11ABB1D0C00F7A3BD /* RMAdvertisingSectionTableViewCell.xib in Resources */,

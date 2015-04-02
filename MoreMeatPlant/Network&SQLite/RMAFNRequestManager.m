@@ -746,11 +746,12 @@
  */
 + (void)addressEditOrNewPostWithUser:(NSString *)user Pwd:(NSString *)pwd Autoid:(NSString *)auto_id ContactName:(NSString *)name Mobile:(NSString *)mobile Address:(NSString *)address andCallBack:(RMAFNRequestManagerCallBack)block{
     //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_pcenter&task=updateAdd&auto_id=3&ID=test&PWD=202cb962ac59075b964b07152d234b70&frm[content_name]=小马哥&frm[content_mobile]=15678789900&frm[content_address]=朝阳区慈云寺
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_pcenter&task=updateAdd&ID=test&PWD=202CB962AC59075B964B07152D234B70&frm[content_name]=%E5%B0%8F%E5%87%AF&frm[content_mobile]=15456765555&frm[content_address]=%25E5%258C%2597%25E4%25BA%25AC%25E5%25B8%2582%25E6%259C%259D%25E9%2598%25B3%25E5%258C%25BA%25E6%2585%2588%25E4%25BA%2591%25E5%25AF%25BA%25E7%258F%25A0%25E8%259A%258C%25202000%25203%2520%25E5%258F%25B7%25E6%25A5%25BC%25201605%25E5%25AE%25A4
     NSString * url = nil;
     if(auto_id == nil){
-        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&frm[content_name]=%@&frm[content_mobile]=%@&frm[content_address]=%@",baseUrl,@"&method=appSev&app_com=com_pcenter&task=updateAdd",user,pwd,name,mobile,[address stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&frm[content_name]=%@&frm[content_mobile]=%@&frm[content_address]=%@",baseUrl,@"&method=save&app_com=com_pcenter&task=updateAdd",user,pwd,name,mobile,address];
     }else{
-        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@&frm[content_name]=%@&frm[content_mobile]=%@&frm[content_address]=%@",baseUrl,@"&method=appSev&app_com=com_pcenter&task=updateAdd",user,pwd,auto_id,name,mobile,[address stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@&frm[content_name]=%@&frm[content_mobile]=%@&frm[content_address]=%@",baseUrl,@"&method=appSev&app_com=com_pcenter&task=updateAdd",user,pwd,auto_id,name,mobile,address];
     }
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
@@ -1231,12 +1232,13 @@
 /**
  *  @method     广告位申请
  */
-+ (void)corpAdvantageApplyWithUser:(NSString *)user Pwd:(NSString *)pwd Dic:(NSDictionary *)dic andCallBack:(RMAFNRequestManagerCallBack)block {
++ (void)corpAdvantageApplyWithUser:(NSString *)user Pwd:(NSString *)pwd Dic:(NSDictionary *)dic filePath:(NSURL *)filepath andCallBack:(RMAFNRequestManagerCallBack)block {
     //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_ccenter&task=addAd&content_img=1&frm[position][]=1&frm[day][]=3&ID=18513217782&PWD=202cb962ac59075b964b07152d234b70
-    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_passport&task=updateProduct",user,pwd];
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_ccenter&task=addAd",user,pwd];
 
     [[RMHttpOperationShared sharedClient] POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        //        [formData appendPartWithFileURL:filePath name:@"content_img" error:nil];
+            [formData appendPartWithFileURL:filepath name:@"content_img" error:nil];
+        NSLog(@"%@/n%@",formData,filepath);
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         RMPublicModel * model = [[RMPublicModel alloc]init];
@@ -1252,6 +1254,7 @@
         }
     }];
 }
+///var/mobile/Containers/Data/Application/7DC6BD20-49C3-4676-8268-9EA38F5278E1/Documents/ilpCache/imagecache/content_img
 
 /**
  *  @method     会员订单列表

@@ -10,13 +10,19 @@
 @class RMSettlementViewController;
 typedef void (^RMSettlementViewCloseCallBack) (void);
 
-typedef void (^RMSettlementViewSelectAddress) (void);
-typedef void (^RMSettlementViewEditAddress) (void);
+typedef void (^RMSettlementViewSelectAddress) (RMPublicModel * model_);
+typedef void (^RMSettlementViewEditAddress) (RMPublicModel * model_);
 typedef void (^RMSettlementViewAddAddress) (void);
 typedef void (^RMSettlementViewSelectPayment) (void);
 typedef void (^RMSettlementViewSettle) (void);
 
 @interface RMSettlementViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate>
+{
+    NSMutableArray * addressArray;
+    RMPublicModel * _model;
+    NSString * balance;
+    
+}
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @property (weak, nonatomic) IBOutlet UIButton *close_btn;
 @property (copy, nonatomic) RMSettlementViewCloseCallBack callback;
@@ -28,4 +34,8 @@ typedef void (^RMSettlementViewSettle) (void);
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (retain, nonatomic) NSString * paymentType;
+@property (retain, nonatomic) NSMutableArray * addressArray;
+
+- (void)requestAddresslist;
 @end

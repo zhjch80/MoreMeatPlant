@@ -13,8 +13,10 @@
 
 @protocol RMVPImageCropperDelegate <NSObject>
 
-- (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage;
+- (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage andfilePath:(NSURL *)filePath;
 - (void)RMimageCropperDidCancel:(VPImageCropperViewController *)cropperViewController;
+
+@optional
 
 @end
 
@@ -22,6 +24,8 @@
 @property (assign, nonatomic) id<RMVPImageCropperDelegate>ctl;
 @property (assign, nonatomic) CGFloat _scale;
 @property (retain, nonatomic) UIImage * selfimage;
+@property (retain, nonatomic) NSString * fileName;
+
 + (id)shareImageCropper;
 - (void)showActionSheet;
 - (void)openPics;

@@ -114,6 +114,12 @@
     [funcimgArray removeAllObjects];
     [functitleArray removeAllObjects];
     
+    for(UIView * v in self.view.subviews){
+        if([v isKindOfClass:[RMAccountView class]]){
+            [v removeFromSuperview];
+        }
+    }
+    
     if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:GeneralMember]){//普通会员
         functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n订单",@"我的\n帖子",@"系统\n通知",@"购物\n篮",@"等待\n升级",@"附近\n肉友",@"我的\n资料" ,nil];
         funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wddd",@"wdtz",@"xttz",@"gwl",@"ddsj",@"fjry",@"wdzl", nil];
@@ -123,7 +129,7 @@
         funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wdzl",@"wddd",@"wdtz",@"xttz",@"fjry",@"fbbb",@"sqkd",@"fbgg",@"ddsj", nil];
     }
     
-    
+    [self layoutViews];
 }
 
 - (void)layoutViews {

@@ -14,10 +14,14 @@
 
 #define IOS8 [[[[UIDevice currentDevice] systemVersion] substringToIndex:1] intValue]>=8
 
-#define kPhotoName              @"content_license.png"
+//#define kPhotoName              @"content_license.png"
 #define kImageCachePath         @"imagecache"
 
 #define ORIGINAL_MAX_WIDTH 640.0f
+
+@interface RMVPImageCropper ()
+@property (retain, nonatomic) NSString * filePath;
+@end
 
 static RMVPImageCropper * _imageCropper = nil;
 
@@ -199,13 +203,17 @@ static RMVPImageCropper * _imageCropper = nil;
     NSString *path = [[FileUtil getCachePathFor:kImageCachePath] stringByAppendingPathComponent:imageName];
     // 将图片写入文件
     [imageData writeToFile:path atomically:NO];
+    _filePath = path;
     NSLog(@"%@",path);
 }
 
 
 #pragma mark VPImageCropperDelegate
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage {
+    
     self.selfimage = editedImage;
+    [self saveImage:editedImage withName:_fileName];
+    
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
         // TO DO
         if (IOS7) { // 判断是否是IOS7
@@ -214,8 +222,8 @@ static RMVPImageCropper * _imageCropper = nil;
             
         }
         
-        if([self.ctl respondsToSelector:@selector(RMimageCropper: didFinished:)]){
-            [self.ctl RMimageCropper:cropperViewController didFinished:self.selfimage];
+        if([self.ctl respondsToSelector:@selector(RMimageCropper: didFinished: andfilePath:)]){
+            [self.ctl RMimageCropper:cropperViewController didFinished:self.selfimage andfilePath:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@",_filePath]]];
         }
         
     }];

@@ -26,47 +26,109 @@
     _mainTableView.opaque = NO;
     
     [_close_btn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];
+    
+    addressArray = [[NSMutableArray alloc]init];
+    _model = [[RMPublicModel alloc] init];
+    
+    _paymentType = @"1";
+    
+    [self loadInfo];
+    [self requestAddresslist];
+}
+
+- (void)loadInfo{
+    [RMAFNRequestManager myInfoRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
+        RMPublicModel * model = object;
+        _model = model;
+        if(success && model.status){
+            balance = [NSString stringWithFormat:@"%.0f",model.balance];
+            [_mainTableView reloadData];
+        }else{
+            
+        }
+    }];
+}
+
+
+- (void)requestAddresslist{
+    [addressArray removeAllObjects];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager addressRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            [addressArray addObjectsFromArray:object];
+        }else{
+            [MBProgressHUD showError:object toView:self.view];
+        }
+        [_mainTableView reloadData];
+    }];
 }
 
 #pragma mark - UItableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return [addressArray count]+3;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row<2){
+    if(indexPath.row<[addressArray count]){
         RMAddressTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMAddressTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMAddressTableViewCell" owner:self options:nil] lastObject];
+            [cell.editBtn addTarget:self action:@selector(editAction:) forControlEvents:UIControlEventTouchDown];
         }
+        RMPublicModel * model = [addressArray objectAtIndex:indexPath.row];
+        if([model isEqual:_model]){
+            [cell.selectAddressBtn setImage:[UIImage imageNamed:@"gwc_select"] forState:UIControlStateNormal];
+        }else{
+            [cell.selectAddressBtn setImage:[UIImage imageNamed:@"gwc_no_select"] forState:UIControlStateNormal];
+        }
+
+        cell.linkName.text = model.contentName;
+        cell.mobile.text = model.contentMobile;
+        cell.detailAddress.text = model.contentAddress;
+        cell.editBtn.tag = 100+indexPath.row;
         return cell;
-    }else if(indexPath.row == 2){
+    }else if(indexPath.row == [addressArray count]){
         RMAddAddressTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMAddAddressTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMAddAddressTableViewCell" owner:self options:nil] lastObject];
+            [cell.addAddress addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchDown];
         }
         return cell;
-    }else if (indexPath.row == 3){
+    }else if (indexPath.row == [addressArray count]+1){
         RMPayTypeTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMPayTypeTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPayTypeTableViewCell" owner:self options:nil] lastObject];
+            [cell.yu_e_payBtn addTarget:self action:@selector(selectPaymentType:) forControlEvents:UIControlEventTouchDown];
+            [cell.alipayBtn addTarget:self action:@selector(selectPaymentType:) forControlEvents:UIControlEventTouchDown];
+        }
+        cell.yu_e_payBtn.tag = 100;
+        cell.alipayBtn.tag = 101;
+        cell.yu_eL.text = balance;
+        if([self.paymentType isEqualToString: @"1"]){
+            [cell.yu_e_payBtn setBackgroundImage:[UIImage imageNamed:@"gwc_select"] forState:UIControlStateNormal];
+            [cell.alipayBtn setBackgroundImage:[UIImage imageNamed:@"gwc_no_select"] forState:UIControlStateNormal];
+        }else{
+            [cell.yu_e_payBtn setBackgroundImage:[UIImage imageNamed:@"gwc_no_select"] forState:UIControlStateNormal];
+            [cell.alipayBtn setBackgroundImage:[UIImage imageNamed:@"gwc_select"] forState:UIControlStateNormal];
         }
         return cell;
     }else{
         RMSettlementTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMSettlementTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMSettlementTableViewCell" owner:self options:nil] lastObject];
+            [cell.settlementBtn addTarget:self action:@selector(settlementAction:) forControlEvents:UIControlEventTouchDown];
         }
         return cell;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row<2){
+    if(indexPath.row<[addressArray count]){
         return 100;
-    }else if(indexPath.row == 2){
+    }else if(indexPath.row == [addressArray count]){
         
         return 36;
-    }else if (indexPath.row == 3){
+    }else if (indexPath.row == [addressArray count]+1){
         
         return 44;
     }else{
@@ -76,14 +138,48 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(self.selectAddress_callback){
-        _selectAddress_callback();
+    if([addressArray count]!=0){
+        _model = [addressArray objectAtIndex:indexPath.row];
+        [tableView reloadData];
+        if(self.selectAddress_callback){
+            _selectAddress_callback(_model);
+        }
     }
 }
 
 - (void)closeAction:(UIButton *)sender{
     if(self.callback){
         _callback();
+    }
+}
+
+- (void)editAction:(UIButton *)sender{
+    RMPublicModel * model = [addressArray objectAtIndex:sender.tag%100];
+    if(_editAddress_callback){
+        _editAddress_callback(model);
+    }
+}
+
+- (void)addAction:(UIButton *)sender{
+    if(_addAddress_callback){
+        _addAddress_callback ();
+    }
+}
+
+- (void)selectPaymentType:(UIButton *)sender{
+    if(sender.tag == 100){
+        self.paymentType = @"1";
+        
+    }else{
+        self.paymentType = @"2";
+    }
+    [_mainTableView reloadData];
+}
+
+- (void)settlementAction:(UIButton *)sender{
+    //结算
+    if(_settle_callback){
+        _settle_callback();
     }
 }
 

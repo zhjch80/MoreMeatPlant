@@ -62,6 +62,12 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xzk-Cr-ILS">
+                        <rect key="frame" x="0.0" y="99" width="320" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="piE-7g-Wku"/>
+                        </constraints>
+                    </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FtJ-X9-Q7W">
                         <rect key="frame" x="8" y="8" width="15" height="15"/>
                         <constraints>
@@ -72,12 +78,6 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xzk-Cr-ILS">
-                        <rect key="frame" x="0.0" y="99" width="320" height="1"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="piE-7g-Wku"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="dFk-JX-6k3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="W9X-A1-IrS" secondAttribute="trailing" constant="10" id="3iX-2W-u4R"/>

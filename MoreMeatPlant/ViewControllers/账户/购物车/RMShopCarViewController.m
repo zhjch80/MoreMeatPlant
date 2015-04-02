@@ -17,8 +17,9 @@
 #import "RMAddressEditViewController.h"
 #import "RMMyCorpViewController.h"
 #import "UIView+Expland.h"
-@interface RMShopCarViewController (){
+@interface RMShopCarViewController ()<RMAddressEditViewCompletedDelegate>{
     BOOL isShow;
+    __block RMSettlementViewController * settle;
 }
 
 @end
@@ -159,21 +160,37 @@
 
 #pragma mark - 结算
 - (void)settlementAction:(UIButton *)sender{
-    RMSettlementViewController * settle = [[RMSettlementViewController alloc]initWithNibName:@"RMSettlementViewController" bundle:nil];
-//    [self.navigationController pushViewController:settle animated:YES];
-//    settle.callback = ^(void){
-//        [self dismissPopUpViewControllerWithcompletion:nil];
-//    };
+    
+    __block RMShopCarViewController * SELF = self;
+    settle = [[RMSettlementViewController alloc]initWithNibName:@"RMSettlementViewController" bundle:nil];
+    
     settle.view.frame = CGRectMake(20, 60, kScreenWidth-20*2, kScreenHeight-60*2);
     [settle.titleView drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, kScreenHeight-60*2)];
     settle.callback = ^(void){
-        [self dismissPopUpViewControllerWithcompletion:nil];
+        [SELF dismissPopUpViewControllerWithcompletion:nil];
     };
-    settle.selectAddress_callback = ^(void){
+    settle.settle_callback = ^(void){//支付宝网站支付
+       
+    };
+    settle.editAddress_callback = ^(RMPublicModel * model_){
         RMAddressEditViewController * address_edit = [[RMAddressEditViewController alloc]initWithNibName:@"RMAddressEditViewController" bundle:nil];
-        [self.navigationController pushViewController:address_edit animated:YES];
+        address_edit._model = [[RMPublicModel alloc]init];
+        address_edit._model = model_;
+        address_edit.delegate = SELF;
+        
+        [SELF.navigationController pushViewController:address_edit animated:YES];
     };
+    settle.addAddress_callback = ^(void){
+        RMAddressEditViewController * address_edit = [[RMAddressEditViewController alloc]initWithNibName:@"RMAddressEditViewController" bundle:nil];
+        [SELF.navigationController pushViewController:address_edit animated:YES];
+    };
+    
     [self presentPopUpViewController:settle overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+}
+
+- (void)RMAddressEditViewCompleted{
+    
+    [settle requestAddresslist];
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{

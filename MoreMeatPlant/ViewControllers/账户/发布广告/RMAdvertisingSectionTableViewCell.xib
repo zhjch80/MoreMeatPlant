@@ -32,20 +32,20 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100米/天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JcJ-b8-eE0">
-                        <rect key="frame" x="76" y="11" width="58" height="17.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100米/天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JcJ-b8-eE0">
+                        <rect key="frame" x="116" y="11" width="58" height="17.5"/>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
                         <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="余位 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVd-y6-Ht8">
-                        <rect key="frame" x="142" y="11" width="42" height="17.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="余位 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVd-y6-Ht8">
+                        <rect key="frame" x="182" y="11" width="42" height="17.5"/>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
                         <color key="textColor" red="0.67843137249999996" green="0.67843137249999996" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FR9-5h-dG1">
-                        <rect key="frame" x="194" y="10" width="20" height="20"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FR9-5h-dG1">
+                        <rect key="frame" x="234" y="10" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="04a-1C-dFJ"/>
                             <constraint firstAttribute="width" constant="20" id="llv-5v-Hkb"/>
@@ -56,8 +56,8 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" background="gwc_num_input_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="WJc-sq-8tn">
-                        <rect key="frame" x="214" y="10" width="36" height="20"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" background="gwc_num_input_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="WJc-sq-8tn">
+                        <rect key="frame" x="254" y="10" width="36" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="OiX-PW-ZIH"/>
                             <constraint firstAttribute="width" constant="36" id="hFn-xX-IT4"/>
@@ -66,8 +66,8 @@
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufd-tD-zHT">
-                        <rect key="frame" x="250" y="10" width="20" height="20"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufd-tD-zHT">
+                        <rect key="frame" x="290" y="10" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="dJF-PU-MCs"/>
                             <constraint firstAttribute="height" constant="20" id="iPq-8n-DL2"/>
@@ -78,8 +78,8 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="首页" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hf-6o-mkR">
-                        <rect key="frame" x="38" y="11" width="28" height="17.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="首页广告位" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hf-6o-mkR">
+                        <rect key="frame" x="38" y="11" width="68" height="17.5"/>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
                         <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -87,6 +87,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="4Hf-6o-mkR" firstAttribute="leading" secondItem="p3V-7m-O8V" secondAttribute="trailing" constant="8" id="BXa-lu-Rkd"/>
+                    <constraint firstItem="JcJ-b8-eE0" firstAttribute="leading" secondItem="4Hf-6o-mkR" secondAttribute="trailing" constant="10" id="Bh6-cg-19w"/>
                     <constraint firstItem="p3V-7m-O8V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="FuV-bG-VJL"/>
                     <constraint firstItem="WJc-sq-8tn" firstAttribute="leading" secondItem="FR9-5h-dG1" secondAttribute="trailing" id="Guf-eW-aWt"/>
                     <constraint firstItem="JcJ-b8-eE0" firstAttribute="leading" secondItem="4Hf-6o-mkR" secondAttribute="trailing" constant="10" id="Mdx-Y6-Red"/>
@@ -109,6 +110,7 @@
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="i8f-bp-BCv"/>
+                        <exclude reference="Mdx-Y6-Red"/>
                         <exclude reference="t7d-OS-Gln"/>
                     </mask>
                 </variation>
@@ -122,7 +124,7 @@
                 <outlet property="subBtn" destination="FR9-5h-dG1" id="yqz-tG-mbJ"/>
                 <outlet property="yu_weiL" destination="RVd-y6-Ht8" id="cWx-CN-P4I"/>
             </connections>
-            <point key="canvasLocation" x="245" y="44"/>
+            <point key="canvasLocation" x="108" y="119"/>
         </tableViewCell>
     </objects>
     <resources>

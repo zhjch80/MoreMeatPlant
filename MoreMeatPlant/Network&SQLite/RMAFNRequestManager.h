@@ -512,9 +512,10 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param user  用户名
  *  @param pwd   密码
  *  @param dic   需要上传的信息
+ *  @param filepath   图像的文件路径
  *  @param block 回调
  */
-+ (void)corpAdvantageApplyWithUser:(NSString *)user Pwd:(NSString *)pwd Dic:(NSDictionary *)dic andCallBack:(RMAFNRequestManagerCallBack)block;
++ (void)corpAdvantageApplyWithUser:(NSString *)user Pwd:(NSString *)pwd Dic:(NSDictionary *)dic filePath:(NSURL *)filepath andCallBack:(RMAFNRequestManagerCallBack)block ;
 
 
 /**
