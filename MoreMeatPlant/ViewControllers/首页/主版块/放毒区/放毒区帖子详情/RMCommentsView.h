@@ -8,14 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum{
+    kRMReleasePoisonListComment = 1,
+    kRMReleasePoisonListReplyComment = 2
+}RequestType;
+
 @protocol CommentsViewDelegate <NSObject>
 
-//- (void)method;
+@optional
+
+- (void)commentSuccessMethodWithType:(NSInteger)type;
+
+- (void)commentFailureMethodWithType:(NSInteger)type;
 
 @end
 
 @interface RMCommentsView : UIView
 @property (nonatomic, assign) id <CommentsViewDelegate>delegate;
+@property (nonatomic, assign) RequestType requestType;      //请求类型
+@property (nonatomic, copy) NSString * code;                //标识
 
 - (void)loadCommentsViewWithReceiver:(NSString *)receive;
 

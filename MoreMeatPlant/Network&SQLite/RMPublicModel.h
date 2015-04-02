@@ -96,6 +96,7 @@
 @property (nonatomic, assign) NSInteger num;                //广告位数量
 @property (nonatomic, copy) NSMutableDictionary * members;       //会员信息
 @property (nonatomic, copy) NSString * content_grow;
+@property (nonatomic, copy) NSString * create_user;
 
 
 @end

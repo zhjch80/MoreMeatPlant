@@ -15,27 +15,34 @@
 #import "NJKWebViewProgress.h"
 #import "NJKWebViewProgressView.h"
 
-@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate,CommentsViewDelegate,NJKWebViewProgressDelegate>{
+@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate,CommentsViewDelegate>{
     BOOL isCanLoadWeb;
     NJKWebViewProgressView *_progressView;
     NJKWebViewProgress *_progressProxy;
+    
+    BOOL isFirstViewDidAppear;
+    BOOL isRefresh;
+    NSInteger pageCount;
+    BOOL isLoadComplete;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
+@property (nonatomic, strong) NSMutableArray * dataCommentArr;
 @property (nonatomic, strong) RMTableHeadView * tableHeadView;
+@property (nonatomic, strong) RMPublicModel * dataModel;
 
 @end
 
 @implementation RMReleasePoisonDetailsViewController
-@synthesize mTableView, dataArr, tableHeadView;
+@synthesize mTableView, dataArr, tableHeadView, dataCommentArr, dataModel;
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
+    [super viewWillDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
 
@@ -43,12 +50,21 @@
     return YES;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!isFirstViewDidAppear) {
+        [self requestDetatils];
+        isFirstViewDidAppear = YES;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    dataModel = [[RMPublicModel alloc] init];
     
-    dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
+    dataCommentArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
     
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 40) style:UITableViewStylePlain];
     mTableView.delegate = self;
@@ -57,8 +73,6 @@
     [self.view addSubview:mTableView];
     
     [self loadBottomView];
-    
-    [self loadTableHeadView];
 }
 
 #pragma mark - 加载底部View
@@ -102,74 +116,76 @@
 
 - (void)loadTableHeadView {
     tableHeadView = [[[NSBundle mainBundle] loadNibNamed:@"RMTableHeadView" owner:nil options:nil] objectAtIndex:0];
-    tableHeadView.detailsWebView.scrollView.bounces = NO;
-    tableHeadView.detailsWebView.scrollView.showsVerticalScrollIndicator = NO;
-    tableHeadView.detailsWebView.scrollView.showsHorizontalScrollIndicator = NO;
-    tableHeadView.detailsWebView.scrollView.scrollEnabled = NO;
     [tableHeadView.detailsReportBtn.layer setCornerRadius:8.0f];
     [tableHeadView.detailsUserHead.layer setCornerRadius:20.0f];
     [tableHeadView.detailsUserHead addTarget:self withSelector:@selector(userHeaderClick:)];
     tableHeadView.delegate = self;
-    tableHeadView.detailsWebView.delegate = self;
     mTableView.tableHeaderView = tableHeadView;
 
-    _progressProxy = [[NJKWebViewProgress alloc] init];
-    tableHeadView.detailsWebView.delegate = _progressProxy;
-    _progressProxy.webViewProxyDelegate = self;
-    _progressProxy.progressDelegate = self;
     
-    [tableHeadView.detailsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView{
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"失败 error:%@",error);
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if (!isCanLoadWeb){
-        isCanLoadWeb = !isCanLoadWeb;
-        return isCanLoadWeb;
-    }
-    return NO;
-}
-
-#pragma mark - NJKWebViewProgressDelegate
-
--(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress {
-    if (progress == 0.0) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        _progressView.progress = 0;
-        [UIView animateWithDuration:0.27 animations:^{
-            _progressView.alpha = 1.0;
-        }];
-    }
+//    tableHeadView.detailsWebView.scrollView.bounces = NO;
+//    tableHeadView.detailsWebView.scrollView.showsVerticalScrollIndicator = NO;
+//    tableHeadView.detailsWebView.scrollView.showsHorizontalScrollIndicator = NO;
+//    tableHeadView.detailsWebView.scrollView.scrollEnabled = NO;
+//    tableHeadView.detailsWebView.delegate = self;
     
-    if (progress == 1.0) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        [UIView animateWithDuration:0.27 delay:progress - _progressView.progress options:0 animations:^{
-            _progressView.alpha = 0.0;
-            
-            // webView彻底加载完
-            CGFloat height = [[tableHeadView.detailsWebView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue]; //document.body.clientHeight
-            tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, 120 + height);
-            tableHeadView.detailsWebView.frame = CGRectMake(0, 120, kScreenWidth, height);
-            mTableView.tableHeaderView = tableHeadView;
-        } completion:nil];
-    }
-    
-    [_progressView setProgress:progress animated:NO];
+//    _progressProxy = [[NJKWebViewProgress alloc] init];
+//    tableHeadView.detailsWebView.delegate = _progressProxy;
+//    _progressProxy.webViewProxyDelegate = self;
+//    _progressProxy.progressDelegate = self;
+//    
+//    [tableHeadView.detailsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
 }
+
+//- (void)webViewDidStartLoad:(UIWebView *)webView{
+//}
+//
+//- (void)webViewDidFinishLoad:(UIWebView *)webView {
+//}
+//
+//- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+//    NSLog(@"失败 error:%@",error);
+//}
+//
+//- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+//    if (!isCanLoadWeb){
+//        isCanLoadWeb = !isCanLoadWeb;
+//        return isCanLoadWeb;
+//    }
+//    return NO;
+//}
+//
+//#pragma mark - NJKWebViewProgressDelegate
+//
+//-(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress {
+//    if (progress == 0.0) {
+//        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+//        _progressView.progress = 0;
+//        [UIView animateWithDuration:0.27 animations:^{
+//            _progressView.alpha = 1.0;
+//        }];
+//    }
+//    
+//    if (progress == 1.0) {
+//        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//        [UIView animateWithDuration:0.27 delay:progress - _progressView.progress options:0 animations:^{
+//            _progressView.alpha = 0.0;
+//            
+//            // webView彻底加载完
+//            CGFloat height = [[tableHeadView.detailsWebView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue]; //document.body.clientHeight
+//            tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, 120 + height);
+//            tableHeadView.detailsWebView.frame = CGRectMake(0, 120, kScreenWidth, height);
+//            mTableView.tableHeaderView = tableHeadView;
+//        } completion:nil];
+//    }
+//    
+//    [_progressView setProgress:progress animated:NO];
+//}
 
 #pragma mark -
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [dataArr count];
+    return [dataCommentArr count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -279,8 +295,40 @@
 #pragma 数据请求
 
 - (void)requestDetatils {
+    NSString * user_id = [RMUserLoginInfoManager loginmanager].user;
+    NSString * user_password = [RMUserLoginInfoManager loginmanager].pwd;
+    user_id = ([user_id length] > 0 ? user_id : @"");
+    user_password = ([user_password length] > 0 ? user_password : @"");
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getPostsListDetailsWithAuto_id:self.auto_id withUser_id:user_id withUser_password:user_password callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            dataModel.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"auto_id"]);
+            dataModel.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_name"]);
+            dataModel.content_type = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_type"]);
+            dataModel.content_class = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_class"]);
+            dataModel.content_course = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_course"]);
+            dataModel.content_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_top"]);
+            dataModel.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"create_time"]);
+            dataModel.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"member_id"]);
+            dataModel.imgs = [[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"imgs"];
+            dataModel.content_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_collect"]);
+            dataModel.is_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"is_collect"]);
+            dataModel.content_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_review"]);
+            dataModel.is_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"is_review"]);
+            dataModel.is_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"is_top"]);
+            dataModel.members = [[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"member"];
+            [self loadTableHeadView];
 
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

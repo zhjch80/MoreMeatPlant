@@ -465,6 +465,34 @@
     }];
 }
 
+/**
+ *  @method     匿名提交升级建议
+ *  @param      title
+ *  @param      content
+ */
++ (void)postAnonymousSubmissionsUpgradeSuggestionsWithContent_title:(NSString *)title
+                                                   withContent_body:(NSString *)content
+                                                           callBack:(RMAFNRequestManagerCallBack)block {
+    NSString *url = @"http://218.240.30.6/drzw/index.php";
+    NSDictionary * parameter = @{
+                                 @"com": @"com_appService",
+                                 @"method": @"save",
+                                 @"app_com": @"com_shop",
+                                 @"task": @"addGuest",
+                                 @"frm[content_title]": title,
+                                 @"frm[content_body]": content,
+                                 };
+    [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        if (block){
+            block (nil, [responseObject objectForKey:@"status"], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
 /*************************************************************************/
 
 /**

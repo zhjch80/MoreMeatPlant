@@ -51,6 +51,9 @@
     // Do any additional setup after loading the view from its nib.
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
+    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[RMSearchViewController class]];
+    
+    [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMSearchViewController class]];
 
     dataArr = [[NSMutableArray alloc] init];
     mTextField.delegate = self;

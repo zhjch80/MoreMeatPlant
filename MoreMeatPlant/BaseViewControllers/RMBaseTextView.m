@@ -10,6 +10,20 @@
 
 @implementation RMBaseTextView
 
+- (id)initWithFrame:(CGRect)frame{
+    if(self = [super initWithFrame:frame]){
+        [[UITextView appearance] setTintColor:[UIColor redColor]];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    if(self = [super initWithCoder:aDecoder]){
+        [[UITextView appearance] setTintColor:[UIColor redColor]];
+    }
+    return self;
+}
+
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
     UIMenuController *menuController = [UIMenuController sharedMenuController];
     if (menuController) {

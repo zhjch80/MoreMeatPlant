@@ -9,5 +9,6 @@
 #import "RMBaseViewController.h"
 
 @interface RMReleasePoisonDetailsViewController : RMBaseViewController
+@property (nonatomic, copy) NSString * auto_id;
 
 @end

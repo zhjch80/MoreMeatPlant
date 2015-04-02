@@ -8,8 +8,10 @@
 
 #import "RMBaseViewController.h"
 #import "RMBaseTextView.h"
+#import "RMBaseTextField.h"
 
 @interface RMUpgradeSuggestViewController : RMBaseViewController
+@property (weak, nonatomic) IBOutlet RMBaseTextField *mTextField;
 @property (weak, nonatomic) IBOutlet RMBaseTextView *mTextView;
 @property (weak, nonatomic) IBOutlet UIScrollView *mScro;
 

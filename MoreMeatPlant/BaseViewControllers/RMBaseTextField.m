@@ -11,6 +11,7 @@
 @implementation RMBaseTextField
 @synthesize offset_top;
 @synthesize offset_left;
+
 - (id)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
         [[UITextField appearance] setTintColor:[UIColor redColor]];

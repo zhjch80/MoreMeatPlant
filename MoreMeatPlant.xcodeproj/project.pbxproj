@@ -409,6 +409,7 @@
 		1DD3266A1ABC0A97006CD1A8 /* RMPostClassificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD326691ABC0A97006CD1A8 /* RMPostClassificationView.m */; };
 		1DD326701ABC1132006CD1A8 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD3266D1ABC1132006CD1A8 /* NJKWebViewProgress.m */; };
 		1DD326711ABC1132006CD1A8 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD3266F1ABC1132006CD1A8 /* NJKWebViewProgressView.m */; };
+		1DD5C0D01ACD1EF6003CA930 /* img_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1DD5C0CF1ACD1EF6003CA930 /* img_default.jpg */; };
 		1DD6992C1AC10F02009A9327 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD6990C1AC10F02009A9327 /* MKAnnotationView+WebCache.m */; };
 		1DD6992D1AC10F02009A9327 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD6990E1AC10F02009A9327 /* NSData+ImageContentType.m */; };
 		1DD6992E1AC10F02009A9327 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD699101AC10F02009A9327 /* SDImageCache.m */; };
@@ -1456,6 +1457,7 @@
 		1DD3266E1ABC1132006CD1A8 /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
 		1DD3266F1ABC1132006CD1A8 /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
 		1DD326721ABC28F3006CD1A8 /* RMSlideParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSlideParameter.h; sourceTree = "<group>"; };
+		1DD5C0CF1ACD1EF6003CA930 /* img_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_default.jpg; sourceTree = "<group>"; };
 		1DD6990B1AC10F02009A9327 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		1DD6990C1AC10F02009A9327 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		1DD6990D1AC10F02009A9327 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -2927,6 +2929,7 @@
 		1D191AD61ABD4ECF00FC8623 /* 大全 */ = {
 			isa = PBXGroup;
 			children = (
+				1DD5C0CF1ACD1EF6003CA930 /* img_default.jpg */,
 				1D1DAE281ACBDCD100FC4C4C /* img_yushui_full.png */,
 				1D1DAE291ACBDCD100FC4C4C /* img_yushui_empty.png */,
 				1D1DAE2A1ACBDCD100FC4C4C /* img_sun_full.png */,
@@ -4830,6 +4833,7 @@
 				0A41064E1ABABBF60060FBD5 /* VoiceSearchFeedback006.png in Resources */,
 				1DEB751F1AB9D67A00EA1FA7 /* wdqb@2x.png in Resources */,
 				0A4106601ABABBF60060FBD5 /* VoiceSearchFeedback015.png in Resources */,
+				1DD5C0D01ACD1EF6003CA930 /* img_default.jpg in Resources */,
 				0A4106881ABABBF60060FBD5 /* faceDelete.png in Resources */,
 				1DEB74ED1AB9D67A00EA1FA7 /* fbbb_field_bg3.png in Resources */,
 				1DEB74871AB9D66800EA1FA7 /* img_tz_12.png in Resources */,

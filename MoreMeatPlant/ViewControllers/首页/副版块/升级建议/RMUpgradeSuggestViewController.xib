@@ -7,12 +7,14 @@
     <customFonts key="customFonts">
         <mutableArray key="方正正纤黑简体.TTF">
             <string>FZZXHJW--GB1-0</string>
+            <string>FZZXHJW--GB1-0</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RMUpgradeSuggestViewController">
             <connections>
                 <outlet property="mScro" destination="rfX-xI-diU" id="13Y-dJ-qEX"/>
+                <outlet property="mTextField" destination="GP6-qu-aN8" id="xWr-V3-iWS"/>
                 <outlet property="mTextView" destination="aqE-WY-1bQ" id="luW-3O-m21"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,10 +25,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfX-xI-diU">
-                    <rect key="frame" x="0.0" y="64" width="320" height="400"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="200"/>
                     <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="标题" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GP6-qu-aN8" customClass="RMBaseTextField">
+                            <rect key="frame" x="5" y="5" width="310" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="17"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqE-WY-1bQ" customClass="RMBaseTextView">
-                            <rect key="frame" x="5" y="5" width="310" height="300"/>
+                            <rect key="frame" x="5" y="45" width="310" height="180"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

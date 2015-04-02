@@ -10,6 +10,8 @@
 #import "UIView+Effects.h"
 #import "CONST.h"
 #import <QuartzCore/QuartzCore.h>
+#import "RMAFNRequestManager.h"
+#import "RMUserLoginInfoManager.h"
 
 #define kCommentHeight      150.0
 
@@ -17,6 +19,7 @@
     UIView * bgView;
     UITextView * commentTextView;
     UILabel * receiver;
+    UIButton * sendBtn;
     BOOL isSendMessages;
 }
 
@@ -34,12 +37,19 @@
     [self addSubview:bgView];
     
     receiver = [[UILabel alloc] init];
-    receiver.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 30);
+    receiver.frame = CGRectMake(0, kScreenHeight, kScreenWidth-70, 30);
     receiver.text = receive;
     receiver.font = FONT_1(16.0);
     receiver.textColor = [UIColor colorWithRed:0.42 green:0.42 blue:0.42 alpha:1];
     receiver.backgroundColor = [UIColor clearColor];
     [bgView addSubview:receiver];
+    
+//    sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    sendBtn.frame = CGRectMake(kScreenWidth-60, kScreenHeight, 50 , 30);
+//    [sendBtn addTarget:self action:@selector(sendButtonClick) forControlEvents:UIControlEventTouchUpInside];
+//    [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
+//    [sendBtn setTitleColor:[UIColor colorWithRed:0.42 green:0.42 blue:0.42 alpha:1] forState:UIControlStateNormal];
+//    [bgView addSubview:sendBtn];
     
     commentTextView = [[UITextView alloc] init];
     commentTextView.font = [UIFont fontWithName:@"FZZHJW--GB1-0" size:16.0];
@@ -47,7 +57,7 @@
     commentTextView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
     commentTextView.frame = CGRectMake(10, kScreenHeight, kScreenWidth - 20, kCommentHeight);
     [[UITextView appearance] setTintColor:[UIColor blackColor]];
-    commentTextView.returnKeyType = UIReturnKeyDone;
+    commentTextView.returnKeyType = UIReturnKeySend;
     [commentTextView.layer setCornerRadius:8.0f];
     [bgView addSubview:commentTextView];
     
@@ -62,7 +72,8 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         commentTextView.frame = CGRectMake(10, kScreenHeight - size.height - kCommentHeight, kScreenWidth - 20, kCommentHeight);
-        receiver.frame = CGRectMake(0, commentTextView.frame.origin.y - 35, kScreenWidth, 30);
+        receiver.frame = CGRectMake(0, commentTextView.frame.origin.y - 35, kScreenWidth-70, 30);
+        sendBtn.frame = CGRectMake(kScreenWidth-60,  commentTextView.frame.origin.y - 35, 50 , 30);
     } completion:^(BOOL finished) {
         
     }];
@@ -71,12 +82,18 @@
 - (void)KeyboardWillHide:(NSNotification *)noti {
     [UIView animateWithDuration:0.3 animations:^{
         commentTextView.frame = CGRectMake(10, kScreenHeight, kScreenWidth - 20, kCommentHeight);
-        receiver.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 30);
+        receiver.frame = CGRectMake(0, kScreenHeight, kScreenWidth-70, 30);
+        sendBtn.frame = CGRectMake(kScreenWidth-60,  kScreenHeight, 50 , 30);
     } completion:^(BOOL finished) {
         if (isSendMessages){
-            NSLog(@"发送评论");
+            if (self.requestType == kRMReleasePoisonListComment){
+                //帖子评论
+                [self requestPostsComment];
+            }else{
+                
+            }
         }else{
-            NSLog(@"不发送评论");
+            NSLog(@"不发送");
         }
         [UIView animateWithDuration:0.2 animations:^{
             
@@ -102,7 +119,7 @@
 
 - (void)dismiss {
     if (commentTextView.text.length!=0){
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"您确定放弃该评论么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"放弃？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alert show];
     }else{
         [UIView animateWithDuration:0.2 animations:^{
@@ -118,7 +135,6 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0:{
-            NSLog(@"cancel comments");
             break;
         }
         case 1:{
@@ -135,6 +151,33 @@
         default:
             break;
     }
+}
+
+//- (void)sendButtonClick {
+//    NSLog(@"发送");
+//}
+
+#pragma mark - 发送请求
+
+/**
+ *  @method     放毒区 评论帖子
+ */
+- (void)requestPostsComment {
+    [RMAFNRequestManager postPostsAddCommentsWithReview_id:self.code withContent_body:commentTextView.text withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            if ([self.delegate respondsToSelector:@selector(commentFailureMethodWithType:)]){
+                [self.delegate commentFailureMethodWithType:self.requestType];
+            }
+            return ;
+        }
+       
+        if (success){
+            if ([self.delegate respondsToSelector:@selector(commentSuccessMethodWithType:)]){
+                [self.delegate commentSuccessMethodWithType:self.requestType];
+            }
+        }
+    }];
 }
 
 @end

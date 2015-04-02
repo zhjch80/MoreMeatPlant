@@ -18,6 +18,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self.mTextField becomeFirstResponder];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.view endEditing:NO];
 }
 
 - (void)viewDidLoad {
@@ -25,7 +31,9 @@
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"升级建议"];
     
-    returnKeyHandler.delegate = nil;
+    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[RMUpgradeSuggestViewController class]];
+    
+    [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMUpgradeSuggestViewController class]];
     
     [self setRightBarButtonNumber:1];
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
@@ -48,13 +56,31 @@
             break;
         }
         case 2:{
-            NSLog(@"提交");
+            [self requestUpgradeSuggestionsWithTitle:self.mTextField.text withContent:self.mTextView.text];
             break;
         }
             
         default:
             break;
     }
+}
+
+#pragma mark - 数据请求
+
+- (void)requestUpgradeSuggestionsWithTitle:(NSString *)title withContent:(NSString *)content {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager postAnonymousSubmissionsUpgradeSuggestionsWithContent_title:title withContent_body:content callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -69,6 +69,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[RMReleasePoisonViewController class]];
+    
+    [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMReleasePoisonViewController class]];
+    
     [self setRightBarButtonNumber:2];
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"分类" forState:UIControlStateNormal];
@@ -157,7 +161,7 @@
     }
     
     RMPlantTypeView * plantTypeView = [[RMPlantTypeView alloc] init];
-    plantTypeView.frame = CGRectMake(0, height, kScreenWidth, kScreenWidth/7.0 + 5);
+    plantTypeView.frame = CGRectMake(0, height, kScreenWidth, kScreenWidth/7.0 + 8);
     plantTypeView.delegate = self;
     [plantTypeView loadPlantTypeWithImageArr:subsPlantArr];
     [headView addSubview:plantTypeView];
@@ -204,13 +208,22 @@
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
         cell.plantTitle.attributedText = oneAttributeStr;
         [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
-        cell.userName.text = [NSString stringWithFormat:@"%@",[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]]; //[model.members objectForKey:@"member_name"]
         
-        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
-        [cell.rightUpTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:nil];
-        [cell.rightDownTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:2] objectForKey:@"content_img"]] placeholderImage:nil];
+        NSString * _name;
+        if ([[model.members objectForKey:@"member_name"] length] > 5){
+            _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
+            _name = [NSString stringWithFormat:@"%@...",_name];
+        }else{
+            _name = [model.members objectForKey:@"member_name"];
+        }
+        
+        cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
+        
+        [cell.leftTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
+        [cell.rightUpTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
+        [cell.rightDownTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:2] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
 
-        cell.leftImg.identifierString = model.auto_id;
+        cell.leftTwoImg.identifierString = model.auto_id;
         cell.rightUpTwoImg.identifierString = model.auto_id;
         cell.rightDownTwoImg.identifierString = model.auto_id;
         
@@ -243,10 +256,19 @@
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
         cell.plantTitle.attributedText = oneAttributeStr;
         [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
-        cell.userName.text = [NSString stringWithFormat:@"%@",[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];//[model.members objectForKey:@"member_name"]
         
-        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
-        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:nil];
+        NSString * _name;
+        if ([[model.members objectForKey:@"member_name"] length] > 5){
+            _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
+            _name = [NSString stringWithFormat:@"%@...",_name];
+        }else{
+            _name = [model.members objectForKey:@"member_name"];
+        }
+        
+        cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
+        
+        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
+        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
 
         cell.leftImg.identifierString = model.auto_id;
         cell.rightImg.identifierString = model.auto_id;
@@ -280,12 +302,20 @@
         cell.plantTitle.attributedText = oneAttributeStr;
         [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
         
-        cell.userName.text = [NSString stringWithFormat:@"%@",[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];//[model.members objectForKey:@"member_name"]
+        NSString * _name;
+        if ([[model.members objectForKey:@"member_name"] length] > 5){
+            _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
+            _name = [NSString stringWithFormat:@"%@...",_name];
+        }else{
+            _name = [model.members objectForKey:@"member_name"];
+        }
+        
+        cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
         
         if ([model.imgs isKindOfClass:[NSNull class]]){
-            [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:@"http://lady.southcn.com/6/images/attachement/jpg/site4/20110524/90fba609e4270f45626e36.jpg"] placeholderImage:nil];
+            cell.threeImg.image = [UIImage imageNamed:@"img_default.jpg"];
         }else{
-            [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
+            [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
         }
         
         cell.threeImg.identifierString = model.auto_id;
@@ -311,8 +341,13 @@
 #pragma mark - 添加收藏 赞 评论
 
 - (void)addLikeWithImage:(RMImageView *)image {
+    if (![RMUserLoginInfoManager loginmanager].state){
+        NSLog(@"去登录.....");
+        return;
+    }
+
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager postMembersCollectWithCollect_id:@"" withContent_type:@"" withID:@"" withPWD:@"" callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager postMembersCollectWithCollect_id:image.identifierString withContent_type:@"1" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -327,6 +362,11 @@
 }
 
 - (void)addChatWithImage:(RMImageView *)image {
+    if (![RMUserLoginInfoManager loginmanager].state){
+        NSLog(@"去登录.....");
+        return;
+    }
+    
     for (NSInteger i=0; i<[dataArr count]; i++){
         RMPublicModel * model = [dataArr objectAtIndex:i];
         if ([model.auto_id isEqualToString:image.identifierString]){
@@ -334,6 +374,8 @@
             commentsView.delegate = self;
             commentsView.backgroundColor = [UIColor clearColor];
             commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            commentsView.requestType = kRMReleasePoisonListComment;
+            commentsView.code = image.identifierString;
             [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  评论:%@",[model.members objectForKey:@"member_name"]]];
             [self.view addSubview:commentsView];
             break;
@@ -341,9 +383,24 @@
     }
 }
 
+//评论成功
+- (void)commentSuccessMethodWithType:(NSInteger)type {
+    
+}
+
+//评论失败
+- (void)commentFailureMethodWithType:(NSInteger)type {
+    
+}
+
 - (void)addPraiseWithImage:(RMImageView *)image {
+    if (![RMUserLoginInfoManager loginmanager].state){
+        NSLog(@"去登录.....");
+        return;
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager postPostsAddPraiseWithAuto_id:image.identifierString withID:@"" withPWD:@"" callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager postPostsAddPraiseWithAuto_id:image.identifierString withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -360,8 +417,8 @@
 #pragma mark - 帖子详情
 
 - (void)jumpPostDetailsWithImage:(RMImageView *)image {
-    NSLog(@"auto_id:%@",image.identifierString);
     RMReleasePoisonDetailsViewController * releasePoisonDetailsCtl = [[RMReleasePoisonDetailsViewController alloc] init];
+    releasePoisonDetailsCtl.auto_id = image.identifierString;
     [self.navigationController pushViewController:releasePoisonDetailsCtl animated:YES];
 }
 
@@ -385,19 +442,24 @@
     [self presentViewController:startPostingCtl animated:YES completion:nil];
 }
 
-#pragma mark - 选择肉肉类型
+#pragma mark - 选择科目
 
 - (void)selectedPlantWithType:(NSString *)type {
-    NSLog(@"科目：type:%@",type);
+    subsPlantRequestValue = type.integerValue;
+    isRefresh = YES;
+    [self requestListWithPageCount:1];
 }
 
+#pragma mark - 选择分类
+
 - (void)selectedPlantType:(NSInteger)type {
-    NSLog(@"分类：type:%ld",type);
     if (type<6){
         plantRequestValue = type;
     }else{
-        subsPlantRequestValue = type;
+        subsPlantRequestValue = type-6;
     }
+    isRefresh = YES;
+    [self requestListWithPageCount:1];
 }
 
 #pragma mark - 跳转到置顶详情界面
@@ -419,6 +481,7 @@
 #pragma mark - 跳转到广告
 
 - (void)jumpPopularize:(RMImageView *)image {
+    //TODO:数据显示不出来
     NSLog(@"member_id:%@",image.identifierString);
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
     [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];

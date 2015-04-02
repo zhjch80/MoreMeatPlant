@@ -212,6 +212,14 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                                       withPWD:(NSString *)user_password
                                      callBack:(RMAFNRequestManagerCallBack)block;
 
+/**
+ *  @method     匿名提交升级建议
+ *  @param      title
+ *  @param      content
+ */
++ (void)postAnonymousSubmissionsUpgradeSuggestionsWithContent_title:(NSString *)title
+                                                   withContent_body:(NSString *)content
+                                                           callBack:(RMAFNRequestManagerCallBack)block;
 
 /*************************************************************************/
 /**
