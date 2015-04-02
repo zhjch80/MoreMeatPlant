@@ -12,13 +12,14 @@
 #import "RMTableHeadView.h"
 #import "RMBaseWebViewController.h"
 #import "RMCommentsView.h"
-#import "NJKWebViewProgress.h"
-#import "NJKWebViewProgressView.h"
+#import "NSString+TimeInterval.h"
+//#import "NJKWebViewProgress.h"
+//#import "NJKWebViewProgressView.h"
 
 @interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate,CommentsViewDelegate>{
     BOOL isCanLoadWeb;
-    NJKWebViewProgressView *_progressView;
-    NJKWebViewProgress *_progressProxy;
+//    NJKWebViewProgressView *_progressView;
+//    NJKWebViewProgress *_progressProxy;
     
     BOOL isFirstViewDidAppear;
     BOOL isRefresh;
@@ -61,6 +62,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[RMReleasePoisonDetailsViewController class]];
+    
+    [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMReleasePoisonDetailsViewController class]];
+    
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     dataModel = [[RMPublicModel alloc] init];
     
@@ -100,7 +105,7 @@
             commentsView.delegate = self;
             commentsView.backgroundColor = [UIColor clearColor];
             commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            [commentsView loadCommentsViewWithReceiver:@"   回复：Lucy"];
+            [commentsView loadCommentsViewWithReceiver:[NSString  stringWithFormat:@"   评论：%@",[dataModel.members objectForKey:@"member_name"]]];
             [self.view addSubview:commentsView];
             break;
         }
@@ -118,11 +123,45 @@
     tableHeadView = [[[NSBundle mainBundle] loadNibNamed:@"RMTableHeadView" owner:nil options:nil] objectAtIndex:0];
     [tableHeadView.detailsReportBtn.layer setCornerRadius:8.0f];
     [tableHeadView.detailsUserHead.layer setCornerRadius:20.0f];
+    tableHeadView.detailsUserHead.clipsToBounds = YES;
     [tableHeadView.detailsUserHead addTarget:self withSelector:@selector(userHeaderClick:)];
     tableHeadView.delegate = self;
+    
+    tableHeadView.detailsTitle.text = dataModel.content_name;
+    tableHeadView.detailsTime.text = dataModel.create_time;
+    tableHeadView.detailsUserNameTime.text = [NSString stringWithFormat:@"%@ %@",[dataModel.members objectForKey:@"member_name"],[[NSString stringWithFormat:@"%@:00",dataModel.create_time] intervalSinceNow]];
+    tableHeadView.detailsLocation.text = @"正在定位. . .";
+    [tableHeadView.detailsUserHead sd_setImageWithURL:[NSURL URLWithString:[dataModel.members objectForKey:@"content_face"]] placeholderImage:nil];
+
+    CGFloat offsetY = 0;
+    offsetY = offsetY + 120;
+    
+    if ([dataModel.imgs isKindOfClass:[NSNull class]]){
+        
+    }else{
+        for (NSInteger i=0; i<[dataModel.imgs count]; i++) {
+            UILabel * body = [[UILabel alloc] init];
+            CGFloat bodyHeight = [UtilityFunc boundingRectWithSize:CGSizeMake(kScreenWidth - 20, 0) font:[UIFont systemFontOfSize:15.0] text:[[dataModel.imgs objectAtIndex:i] objectForKey:@"content_body"]].height;
+            body.text = [[dataModel.imgs objectAtIndex:i] objectForKey:@"content_body"];
+            body.numberOfLines = 0;
+            body.font = [UIFont systemFontOfSize:15.0];
+            body.frame = CGRectMake(10, offsetY + 20, kScreenWidth - 20, bodyHeight + 20);
+            [tableHeadView addSubview:body];
+            
+            UIImageView * imageView = [[UIImageView alloc] init];
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[[dataModel.imgs objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [imageView setFrame:CGRectMake(5, body.frame.size.height + body.frame.origin.y + 25, kScreenWidth - 10, image.size.height)];
+            }];
+            [tableHeadView addSubview:imageView];
+            
+            offsetY = offsetY + bodyHeight + imageView.frame.size.height + 90;
+        }
+    }
+
+    tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, offsetY);
     mTableView.tableHeaderView = tableHeadView;
 
-    
 //    tableHeadView.detailsWebView.scrollView.bounces = NO;
 //    tableHeadView.detailsWebView.scrollView.showsVerticalScrollIndicator = NO;
 //    tableHeadView.detailsWebView.scrollView.showsHorizontalScrollIndicator = NO;
@@ -272,7 +311,12 @@
 #pragma mark - 举报此帖
 
 - (void)reportMethod:(UIButton *)button {
-    NSLog(@"举报此帖");
+    RMCommentsView * commentsView = [[RMCommentsView alloc] init];
+    commentsView.delegate = self;
+    commentsView.backgroundColor = [UIColor clearColor];
+    commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"   举报:%@",[dataModel.members objectForKey:@"member_name"]]];
+    [self.view addSubview:commentsView];
 }
 
 #pragma mark - 回复帖子
@@ -282,7 +326,7 @@
     commentsView.delegate = self;
     commentsView.backgroundColor = [UIColor clearColor];
     commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-    [commentsView loadCommentsViewWithReceiver:@"Kucyoung贝贝"];
+    [commentsView loadCommentsViewWithReceiver:@"   回复:Kucyoung贝贝"];
     [self.view addSubview:commentsView];
 }
 

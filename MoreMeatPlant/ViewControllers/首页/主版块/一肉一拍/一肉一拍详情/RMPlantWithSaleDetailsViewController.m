@@ -13,13 +13,8 @@
 #import "CycleScrollView.h"
 #import "RMBaseView.h"
 #import "RMMerchantsShopViewController.h"
-#import "NJKWebViewProgress.h"
-#import "NJKWebViewProgressView.h"
 
-@interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate,NJKWebViewProgressDelegate>{
-    BOOL isCanLoadWeb;
-    NJKWebViewProgressView *_progressView;
-    NJKWebViewProgress *_progressProxy;
+@interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate>{
 }
 @property (nonatomic, strong) RMPlantWithSaleHeaderView * headerView;;
 @property (nonatomic, strong) UITableView * mTableView;
@@ -27,15 +22,18 @@
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @property (nonatomic, strong) NSMutableArray * topDataArr;
 @property (nonatomic, strong) RMBaseView * footerView;
+@property (nonatomic, strong) RMPublicModel * dataModel;
 
 @end
 
 @implementation RMPlantWithSaleDetailsViewController
-@synthesize headerView, mTableView, dataArr, cycleView, topDataArr, footerView, auto_id;
+@synthesize headerView, mTableView, dataArr, cycleView, topDataArr, footerView, auto_id,dataModel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    dataModel = [[RMPublicModel alloc] init];
+    
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", nil];
     topDataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", nil];
     
@@ -118,63 +116,8 @@
 
 - (void)loadTableFooterView {
     footerView = [[[NSBundle mainBundle] loadNibNamed:@"RMBaseView" owner:nil options:nil] objectAtIndex:0];
-    footerView.mWebView.scrollView.bounces = NO;
-    footerView.mWebView.scrollView.scrollEnabled = NO;
-    footerView.mWebView.scrollView.showsHorizontalScrollIndicator = NO;
-    footerView.mWebView.scrollView.showsVerticalScrollIndicator = NO;
     mTableView.tableFooterView = footerView;
     
-    _progressProxy = [[NJKWebViewProgress alloc] init];
-    footerView.mWebView.delegate = _progressProxy;
-    _progressProxy.webViewProxyDelegate = self;
-    _progressProxy.progressDelegate = self;
-    
-    [footerView.mWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0]];
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"失败 error:%@",error);
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if (!isCanLoadWeb){
-        isCanLoadWeb = !isCanLoadWeb;
-        return isCanLoadWeb;
-    }
-    return NO;
-}
-
-#pragma mark - NJKWebViewProgressDelegate
-
--(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress {
-    if (progress == 0.0) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        _progressView.progress = 0;
-        [UIView animateWithDuration:0.27 animations:^{
-            _progressView.alpha = 1.0;
-        }];
-    }
-    
-    if (progress == 1.0) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        [UIView animateWithDuration:0.27 delay:progress - _progressView.progress options:0 animations:^{
-            _progressView.alpha = 0.0;
-            
-            // webView彻底加载完
-            CGFloat height = [[footerView.mWebView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];//document.body.clientHeight
-            footerView.frame = CGRectMake(0, 0, kScreenWidth, height+50);
-            footerView.mWebView.frame = CGRectMake(0, 0, kScreenWidth, height+50);
-            mTableView.tableFooterView= footerView;
-        } completion:nil];
-    }
-    
-    [_progressView setProgress:progress animated:NO];
 }
 
 #pragma mark -

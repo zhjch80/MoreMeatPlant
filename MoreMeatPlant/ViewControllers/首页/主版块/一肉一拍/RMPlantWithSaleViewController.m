@@ -126,7 +126,7 @@
     [plantTypeView loadPlantTypeWithImageArr:subsPlantArr];
     [headView addSubview:plantTypeView];
     
-    height = height + kScreenWidth/7.0;
+    height = height + kScreenWidth/7.0 + 5;
     
     headView.frame = CGRectMake(0, 0, kScreenWidth, height);
     mTableView.tableHeaderView = headView;
@@ -145,7 +145,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * identifierStr = @"homeIdentifier";
+    static NSString * identifierStr = @"plantWithSaleIdentifier";
     RMPlantWithSaleCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     if (!cell){
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell" owner:self options:nil] lastObject];
@@ -156,7 +156,10 @@
     
     if(indexPath.row*3 < dataArr.count){
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
-        cell.leftPrice.text = model.content_price;
+        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
+        cell.leftPrice.attributedText = oneAttributeStr;
         cell.leftName.text = model.content_name;
         cell.leftImg.identifierString = model.auto_id;
         [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
@@ -166,7 +169,10 @@
     }
     if(indexPath.row*3+1 < dataArr.count){
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
-        cell.centerPrice.text = model.content_price;
+        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
+        cell.centerPrice.attributedText = oneAttributeStr;
         cell.centerName.text = model.content_name;
         cell.centerImg.identifierString = model.auto_id;
         [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
@@ -176,7 +182,10 @@
     }
     if(indexPath.row*3+2 < dataArr.count){
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
-        cell.rightPrice.text = model.content_price;
+        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
+        cell.rightPrice.attributedText = oneAttributeStr;
         cell.rightName.text = model.content_name;
         cell.rightImg.identifierString = model.auto_id;
         [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
