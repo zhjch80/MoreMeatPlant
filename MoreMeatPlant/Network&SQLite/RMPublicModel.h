@@ -98,6 +98,8 @@
 @property (nonatomic, copy) NSMutableDictionary * members;       //会员信息
 @property (nonatomic, copy) NSString * content_grow;
 @property (nonatomic, copy) NSString * create_user;
+@property (nonatomic, copy) NSString * series;
+
 
 
 @end

@@ -14,8 +14,6 @@
 }
 @property (nonatomic, strong) NSString *identifierString;
 
-@property (weak, nonatomic) IBOutlet UIWebView *mWebView;
-
 - (void)addTarget:(id)target withSelector:(SEL)sel;
 
 @end

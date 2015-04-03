@@ -155,6 +155,9 @@
     }
     
     if(indexPath.row*3 < dataArr.count){
+        cell.leftPrice.hidden = NO;
+        cell.leftImg.hidden = NO;
+        cell.leftName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
         NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
@@ -166,8 +169,12 @@
     }else{
         cell.leftPrice.hidden = YES;
         cell.leftImg.hidden = YES;
+        cell.leftName.hidden = YES;
     }
     if(indexPath.row*3+1 < dataArr.count){
+        cell.centerPrice.hidden = NO;
+        cell.centerImg.hidden = NO;
+        cell.centerName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
         NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
@@ -179,8 +186,12 @@
     }else{
         cell.centerPrice.hidden = YES;
         cell.centerImg.hidden = YES;
+        cell.centerName.hidden = YES;
     }
     if(indexPath.row*3+2 < dataArr.count){
+        cell.rightPrice.hidden = NO;
+        cell.rightImg.hidden = NO;
+        cell.rightName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
         NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
@@ -192,6 +203,7 @@
     }else{
         cell.rightPrice.hidden = YES;
         cell.rightImg.hidden = YES;
+        cell.rightName.hidden = YES;
     }
     return cell;
 }
@@ -201,8 +213,8 @@
 }
 
 - (void)jumpPlantDetailsWithImage:(RMImageView *)image {
-    NSLog(@"au_id:%@",image.identifierString);
     RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
+    plantWithSaleDetailsCtl.auto_id = image.identifierString;
     [self.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
 }
 

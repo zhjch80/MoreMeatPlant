@@ -404,8 +404,6 @@
 		1DD3265F1ABBFACE006CD1A8 /* jia_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DD3265C1ABBFACE006CD1A8 /* jia_img.png */; };
 		1DD326601ABBFACE006CD1A8 /* jian_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DD3265D1ABBFACE006CD1A8 /* jian_img.png */; };
 		1DD326621ABBFE6B006CD1A8 /* RMBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DD326611ABBFE6B006CD1A8 /* RMBaseView.xib */; };
-		1DD326661ABC08B2006CD1A8 /* RMMerchantsShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD326641ABC08B2006CD1A8 /* RMMerchantsShopViewController.m */; };
-		1DD326671ABC08B2006CD1A8 /* RMMerchantsShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DD326651ABC08B2006CD1A8 /* RMMerchantsShopViewController.xib */; };
 		1DD3266A1ABC0A97006CD1A8 /* RMPostClassificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD326691ABC0A97006CD1A8 /* RMPostClassificationView.m */; };
 		1DD326701ABC1132006CD1A8 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD3266D1ABC1132006CD1A8 /* NJKWebViewProgress.m */; };
 		1DD326711ABC1132006CD1A8 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD3266F1ABC1132006CD1A8 /* NJKWebViewProgressView.m */; };
@@ -1448,9 +1446,6 @@
 		1DD3265C1ABBFACE006CD1A8 /* jia_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jia_img.png; sourceTree = "<group>"; };
 		1DD3265D1ABBFACE006CD1A8 /* jian_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jian_img.png; sourceTree = "<group>"; };
 		1DD326611ABBFE6B006CD1A8 /* RMBaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMBaseView.xib; sourceTree = "<group>"; };
-		1DD326631ABC08B2006CD1A8 /* RMMerchantsShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMerchantsShopViewController.h; sourceTree = "<group>"; };
-		1DD326641ABC08B2006CD1A8 /* RMMerchantsShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMerchantsShopViewController.m; sourceTree = "<group>"; };
-		1DD326651ABC08B2006CD1A8 /* RMMerchantsShopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMerchantsShopViewController.xib; sourceTree = "<group>"; };
 		1DD326681ABC0A97006CD1A8 /* RMPostClassificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPostClassificationView.h; sourceTree = "<group>"; };
 		1DD326691ABC0A97006CD1A8 /* RMPostClassificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPostClassificationView.m; sourceTree = "<group>"; };
 		1DD3266C1ABC1132006CD1A8 /* NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgress.h; sourceTree = "<group>"; };
@@ -3153,9 +3148,6 @@
 				957A38F31AB4519E00A335F7 /* RMPlantWithSaleHeaderView.h */,
 				957A38F41AB4519E00A335F7 /* RMPlantWithSaleHeaderView.m */,
 				957A38F51AB4519E00A335F7 /* RMPlantWithSaleHeaderView.xib */,
-				1DD326631ABC08B2006CD1A8 /* RMMerchantsShopViewController.h */,
-				1DD326641ABC08B2006CD1A8 /* RMMerchantsShopViewController.m */,
-				1DD326651ABC08B2006CD1A8 /* RMMerchantsShopViewController.xib */,
 			);
 			path = "一肉一拍详情";
 			sourceTree = "<group>";
@@ -3331,6 +3323,7 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1D64F50D1A90CD150073EB98 /* CONST.h */,
 				1D1DAE301ACBDF8B00FC4C4C /* UtilityFunc */,
 				51DB4CC81AC9BC9600A6064D /* VPImageCropper */,
 				51DB4CC41AC86BF000A6064D /* UIView+DrawCorner */,
@@ -3352,7 +3345,6 @@
 				1D9CB15B1AAE9EE500BD5A7D /* AFNetworking */,
 				51E268261AAE003000252DEF /* STDbKit */,
 				51E268031AADDFEC00252DEF /* popupController */,
-				1D64F50D1A90CD150073EB98 /* CONST.h */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -5058,7 +5050,6 @@
 				0A4106AE1ABABBF60060FBD5 /* chatBar_more_location.png in Resources */,
 				1DEB74E11AB9D67A00EA1FA7 /* btn.png in Resources */,
 				0A4104A91ABAAE9B0060FBD5 /* sr_refresh@2X.png in Resources */,
-				1DD326671ABC08B2006CD1A8 /* RMMerchantsShopViewController.xib in Resources */,
 				1DEB74821AB9D66800EA1FA7 /* img_tz_7.png in Resources */,
 				1D55762B1A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.xib in Resources */,
 			);
@@ -5111,7 +5102,6 @@
 				51DB4CCE1AC9BDD100A6064D /* UIViewController+VPImageCropper.m in Sources */,
 				51D8845C1ABE82CC00F7A3BD /* NSString+Addtion.m in Sources */,
 				0A41057A1ABAB3C70060FBD5 /* UIImage+EMWebP.m in Sources */,
-				1DD326661ABC08B2006CD1A8 /* RMMerchantsShopViewController.m in Sources */,
 				1D8397481AB3F72D00DA190A /* AssetHelper.m in Sources */,
 				1D64F4FA1A904E180073EB98 /* RMDaqoViewController.m in Sources */,
 				1D4DA34D1A9393ED006A9EBA /* RMDaqoDetailsViewController.m in Sources */,

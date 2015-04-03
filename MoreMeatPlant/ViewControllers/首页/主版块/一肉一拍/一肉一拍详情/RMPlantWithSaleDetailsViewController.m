@@ -12,9 +12,12 @@
 #import "RMPlantWithSaleDetailsCell.h"
 #import "CycleScrollView.h"
 #import "RMBaseView.h"
-#import "RMMerchantsShopViewController.h"
 
 @interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate>{
+    BOOL isFirstViewDidAppear;
+    BOOL isRefresh;
+    NSInteger pageCount;
+    BOOL isLoadComplete;
 }
 @property (nonatomic, strong) RMPlantWithSaleHeaderView * headerView;;
 @property (nonatomic, strong) UITableView * mTableView;
@@ -27,19 +30,24 @@
 @end
 
 @implementation RMPlantWithSaleDetailsViewController
-@synthesize headerView, mTableView, dataArr, cycleView, topDataArr, footerView, auto_id,dataModel;
+@synthesize headerView, mTableView, dataArr, cycleView, topDataArr, footerView, auto_id, dataModel;
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!isFirstViewDidAppear){
+        [self requestDetals];
+        isFirstViewDidAppear = YES;
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    dataModel = [[RMPublicModel alloc] init];
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", nil];
     topDataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", nil];
     
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
-    
-    [self loadHeaderView];
     
     [self loadBottomView];
     
@@ -48,10 +56,6 @@
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
-    
-    [self loadTableHeaderView];
-    
-    [self loadTableFooterView];
 }
 
 - (void)loadTableHeaderView {
@@ -116,8 +120,24 @@
 
 - (void)loadTableFooterView {
     footerView = [[[NSBundle mainBundle] loadNibNamed:@"RMBaseView" owner:nil options:nil] objectAtIndex:0];
-    mTableView.tableFooterView = footerView;
     
+    __block CGFloat offsetY = 0;
+    
+    if ([dataModel.body isKindOfClass:[NSNull class]]){
+        
+    }else{
+        for (NSInteger i=0; i<[dataModel.body count]; i++) {
+            UIImageView * imageView = [[UIImageView alloc] init];
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",baseHeaderUrl,[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]]] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [imageView setFrame:CGRectMake(5, offsetY + 20, kScreenWidth - 10, image.size.height)];
+                offsetY = offsetY + imageView.frame.size.height + 30;
+                footerView.frame = CGRectMake(0, 0, kScreenWidth, offsetY);
+                mTableView.tableFooterView = footerView;
+            }];
+            [footerView addSubview:imageView];
+        }
+    }
 }
 
 #pragma mark -
@@ -126,12 +146,15 @@
     headerView = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleHeaderView" owner:nil options:nil] objectAtIndex:0];
     headerView.delegate = self;
     [headerView.userHeader.layer setCornerRadius:20.0f];
+    headerView.userHeader.clipsToBounds = YES;
+    [headerView.userHeader sd_setImageWithURL:[NSURL URLWithString:[dataModel.members objectForKey:@"content_face"]] placeholderImage:nil];
+    headerView.userName.text = [dataModel.members objectForKey:@"member_name"];
+    headerView.userLocation.text = @"正在定位. . .";
     [self.view addSubview:headerView];
 }
 
 - (void)intoShopMethodWithBtn:(UIButton *)button {
-    RMMerchantsShopViewController * merchantsShopCtl = [[RMMerchantsShopViewController alloc] init];
-    [self.navigationController pushViewController:merchantsShopCtl animated:YES];
+    NSLog(@"进店");
 }
 
 - (void)loadBottomView {
@@ -191,29 +214,89 @@
 - (void)plantWithSaleCellMethodWithTag:(NSInteger)tag {
     switch (tag) {
         case 101:{
-            NSLog(@"减");
+            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            RMPlantWithSaleDetailsCell * cell = (RMPlantWithSaleDetailsCell *)[mTableView cellForRowAtIndexPath:indexPath];
+            NSInteger num = [[NSString stringWithFormat:@"%@",cell.showNum.text] integerValue];
+            if (num <= 0){
+            }else{
+                num--;
+            }
+            cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
             break;
         }
         case 102:{
-            NSLog(@"加");
+            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            RMPlantWithSaleDetailsCell * cell = (RMPlantWithSaleDetailsCell *)[mTableView cellForRowAtIndexPath:indexPath];
+            NSInteger num = [[NSString stringWithFormat:@"%@",cell.showNum.text] integerValue];
+            if (num > 9){
+            }else{
+                num++;
+            }
+            cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
             break;
         }
         case 103:{
-            NSLog(@"立即购买");
+            NSLog(@"立即购买auto_id:%@",self.auto_id);
             break;
         }
         case 104:{
-            NSLog(@"加入购物车");
+            NSLog(@"加入购物车auto_id:%@",self.auto_id);
             break;
         }
         case 105:{
-            NSLog(@"联系掌柜");
+            NSLog(@"联系掌柜auto_id:%@",self.auto_id);
             break;
         }
             
         default:
             break;
     }
+}
+
+
+#pragma mark - 数据请求
+
+- (void)requestDetals {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getBabyListDetalisWithAuto_id:self.auto_id callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            dataModel = [[RMPublicModel alloc] init];
+            dataModel.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"auto_id"]);
+            dataModel.content_course = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_course"]);
+            dataModel.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_img"]);
+            dataModel.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"create_time"]);
+            dataModel.create_user = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"create_user"]);
+            dataModel.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_name"]);
+            dataModel.content_desc = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_desc"]);
+            dataModel.content_price = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_price"]);
+            dataModel.content_express = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_express"]);
+            dataModel.express_price = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"express_price"]);
+            dataModel.content_num = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_num"]);
+            dataModel.content_class = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_class"]);
+            dataModel.member_class = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"member_class"]);
+            dataModel.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"member_id"]);
+            dataModel.is_sf = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"is_sf"]);
+            dataModel.body = [[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"body"];
+            dataModel.members = [[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"member"];
+            dataModel.series = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"series"]);
+            
+            [self loadHeaderView];
+            
+            [mTableView reloadData];
+            
+            [self loadTableHeaderView];
+            
+            [self loadTableFooterView];
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

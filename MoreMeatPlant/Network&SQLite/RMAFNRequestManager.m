@@ -139,7 +139,7 @@
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAllview&auto_id=%@",baseUrl,auto_id];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -190,7 +190,7 @@
                                  };
     [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block) {
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -213,7 +213,7 @@
     NSString * url = [NSString stringWithFormat:@"%@&method=save&app_com=com_center&task=addAlldesc&frm[all_id]=%@&frm[content_desc]=%@&ID=%@&PWD=%@",baseUrl,all_id,content_desc,user_id,user_password];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -232,7 +232,7 @@
                            withCourse:(NSInteger)plantCourse
                             withCount:(NSInteger)pageCount
                              callBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%ld&course=%ld&per=1&row=10&page=%ld",baseUrl,plantClass,plantCourse,pageCount];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%ld&course=%ld&per=1&row=10&page=%ld",baseUrl,(long)plantClass,(long)plantCourse,(long)pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
@@ -303,7 +303,7 @@
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&auto_id=%@&ID=%@&PWD=%@",baseUrl,auto_id,user_id,user_password];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -323,7 +323,7 @@
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNotereview&review_id=%@&per=1&row=10&page=%ld",baseUrl,review_id,(long)pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block) {
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -354,7 +354,7 @@
                                  };
     [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -388,7 +388,7 @@
                                  };
     [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
@@ -422,7 +422,7 @@
                                  };
     [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -456,7 +456,7 @@
                                  };
     [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
@@ -484,7 +484,7 @@
                                  };
     [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
-            block (nil, [responseObject objectForKey:@"status"], responseObject);
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block){
