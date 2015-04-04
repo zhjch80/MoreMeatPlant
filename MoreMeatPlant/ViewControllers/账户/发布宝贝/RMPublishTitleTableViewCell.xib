@@ -96,13 +96,13 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Oh8-Bh-Smu" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="价格" minimumFontSize="17" background="fbbb_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Oh8-Bh-Smu" customClass="RMBaseTextField">
                         <rect key="frame" x="265" y="116" width="40" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="0G6-a0-5Vj"/>
                             <constraint firstAttribute="height" constant="21" id="FzG-tK-Lfe"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="OcT-85-paE">
@@ -111,21 +111,6 @@
                             <constraint firstAttribute="height" constant="1" id="gek-Vn-ifb"/>
                         </constraints>
                     </imageView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="yIv-w1-CSy" customClass="RMBaseTextField">
-                        <rect key="frame" x="217" y="116" width="40" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="40" id="4ad-Fp-xwo"/>
-                            <constraint firstAttribute="height" constant="21" id="SpT-du-Avl"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="kp1-Ha-dXO"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="kp1-Ha-dXO"/>
-                            </mask>
-                        </variation>
-                    </textField>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="lQM-mk-dVG" customClass="RMBaseTextField">
                         <rect key="frame" x="58" y="8" width="174" height="21"/>
                         <constraints>
@@ -133,6 +118,21 @@
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="快递" minimumFontSize="17" background="fbbb_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="yIv-w1-CSy" customClass="RMBaseTextField">
+                        <rect key="frame" x="217" y="116" width="40" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="4ad-Fp-xwo"/>
+                            <constraint firstAttribute="height" constant="21" id="SpT-du-Avl"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="kp1-Ha-dXO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="kp1-Ha-dXO"/>
+                            </mask>
+                        </variation>
                     </textField>
                 </subviews>
                 <constraints>

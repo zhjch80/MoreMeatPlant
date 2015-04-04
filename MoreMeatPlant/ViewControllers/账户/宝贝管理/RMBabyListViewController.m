@@ -11,6 +11,10 @@
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
 #import "UIViewController+HUD.h"
+#import "RMAFNRequestManager.h"
+#import "RMUserLoginInfoManager.h"
+#import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
 @interface RMBabyListViewController ()<RefreshControlDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
@@ -32,16 +36,39 @@
     [refreshControl registerClassForTopView:[CustomRefreshView class]];
     pageCount = 1;
     isRefresh = YES;
+    
+    babyArray = [[NSMutableArray alloc]init];
+    
+    [self requestDataWithPageCount:pageCount];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return [babyArray count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     RMBabyListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMBabyListTableViewCell"];
     if(cell == nil){
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RMBabyListTableViewCell" owner:self options:nil] lastObject];
+        [cell.modify_btn addTarget:self action:@selector(modify_btnAction:) forControlEvents:UIControlEventTouchDown];
+        [cell.delete_btn addTarget:self action:@selector(delete_btnAction:) forControlEvents:UIControlEventTouchDown];
+        [cell.shelves_btn addTarget:self action:@selector(shelves_btnAction:) forControlEvents:UIControlEventTouchDown];
     }
+
+    if([babyArray count]>0){
+        RMPublicModel * model = [babyArray objectAtIndex:indexPath.row];
+        [cell.content_img sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"nophote"]];
+        cell.content_name.text = model.content_name;
+        cell.content_price.text = model.content_price;
+        if([model.is_shelf boolValue]){
+            [cell.shelves_btn setTitle:@"下架" forState:UIControlStateNormal];
+        }else{
+            [cell.shelves_btn setTitle:@"上架" forState:UIControlStateNormal];
+        }
+
+    }
+    cell.modify_btn.tag = 100*indexPath.row;
+    cell.shelves_btn.tag = 100*indexPath.row+1;
+    cell.delete_btn.tag  =100*indexPath.row+2;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -54,23 +81,87 @@
 - (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
     if (direction == RefreshDirectionTop) { //下拉刷新
         pageCount = 1;
-        isRefresh = YES;
-        isLoadComplete = NO;
-        //        [self requestDataWithPageCount:1];
+        [babyArray removeAllObjects];
+        [self requestDataWithPageCount:1];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
-        if (isLoadComplete){
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self showHint:@"没有更多肉肉啦"];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-            });
-        }else{
-            pageCount ++;
-            isRefresh = NO;
-            //            [self requestDataWithPageCount:pageCount];
-        }
-        
+        pageCount ++;
+        [self requestDataWithPageCount:pageCount];
     }
+}
+
+- (void)requestDataWithPageCount:(NSInteger)page{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager corpBabyListWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Page:page andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            if([object isKindOfClass:[RMPublicModel class]]){//模型类
+                RMPublicModel * model = object;
+                if(model.status){
+                    if(pageCount == 1){
+                        [self showHint:@"您还没有发布宝贝噢！"];
+                        [refreshControl finishRefreshingDirection:RefreshDirectionTop];
+                    }else{
+                        [self showHint:@"没有更多宝贝啦！"];
+                        [refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                    }
+                }else{
+                    [self showHint:model.msg];
+                }
+            }else{//数组
+                [babyArray addObjectsFromArray:object];
+                if(pageCount == 1){
+                    [refreshControl finishRefreshingDirection:RefreshDirectionTop];
+                }else{
+                    [refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                }
+            }
+        }else{
+            [self showHint:object];
+        }
+        [_mTableView reloadData];
+    }];
+}
+#pragma mark - 修改宝贝发布信息
+- (void)modify_btnAction:(UIButton *)sender{
+    RMPublicModel * model = [babyArray objectAtIndex:sender.tag
+                             /100];
+    if(self.modifycallback){
+        _modifycallback (model);
+    }
+}
+#pragma mark - 删除宝贝
+- (void)delete_btnAction:(UIButton *)sender{
+//    RMPublicModel * model = [babyArray objectAtIndex:sender.tag
+//                             /100];
+    
+}
+#pragma mark - 上下架宝贝
+- (void)shelves_btnAction:(UIButton *)sender{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    RMPublicModel * model = [babyArray objectAtIndex:sender.tag
+                             /100];
+    BOOL isup ;
+    if([model.is_shelf boolValue]){
+        isup = NO;
+    }else{
+        isup = YES;
+    }
+    
+    [RMAFNRequestManager babyShelfOperationWithUser:[[RMUserLoginInfoManager loginmanager]user] Pwd:[[RMUserLoginInfoManager loginmanager]pwd] upShelf:isup Autoid:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        RMPublicModel * _model = object;
+        if(success){
+            if(_model.status){
+                model.is_shelf = [NSString stringWithFormat:@"%d",![model.is_shelf boolValue]];
+            }else{
+                
+            }
+            [self showHint:_model.msg];
+            [_mTableView reloadData];
+        }else{
+            [self showHint:object];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

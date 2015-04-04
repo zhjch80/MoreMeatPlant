@@ -466,6 +466,25 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
 + (void)corpBabyListWithUser:(NSString *)user Pwd:(NSString *)pwd Page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
+ *  商家会员分类请求
+ *
+ *  @param user  用户名
+ *  @param pwd   密码
+ *  @param block 回调
+ */
++ (void)corpbabyClassRequestWithUser:(NSString *)user Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block;
+
+/**
+ *  商家会员分类增加
+ *
+ *  @param user
+ *  @param pwd
+ *  @param name     添加的分类名称
+ *  @param block 
+ */
++ (void)corpbabyAddClassWithUser:(NSString *)user Pwd:(NSString *)pwd className:(NSString *)name andCallBack:(RMAFNRequestManagerCallBack)block;
+
+/**
  *  商家会员宝贝编辑界面的数据请求
  *
  *  @param user    用户名
@@ -475,16 +494,20 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  */
 + (void)babyPublishDataRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Autoid:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block;
 
+
+
 /**
  *  宝贝发布/编辑
  *
  *  @param user   用户名
  *  @param pwd    密码
  *  @param auto_id 宝贝标示，nil表示新发布，否则为编辑
- *  @param dic    发布需要post的信息
+ *  @param newPhotoDic       新发布的图片信息
+ *  @param modifyPhotoDic    修改的图片信息
+ *  @param otherDic          其他post信息
  *  @param block  回调
  */
-+ (void)babyPublishWithUser:(NSString *)user Pwd:(NSString *)pwd Auto_id:(NSString *)auto_id Dic:(NSDictionary *)dic andCallBack:(RMAFNRequestManagerCallBack)block;
++ (void)babyPublishWithUser:(NSString *)user Pwd:(NSString *)pwd Auto_id:(NSString *)auto_id newPhotoDic:(NSDictionary *)newPhotoDic modifyPhotoDic:(NSDictionary *)modifyPhotoDic otherDic:(NSDictionary *)otherDic andCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  宝贝上下架处理

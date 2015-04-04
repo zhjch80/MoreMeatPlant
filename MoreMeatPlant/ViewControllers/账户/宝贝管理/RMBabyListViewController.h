@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RMBabyListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+#import "RMPublicModel.h"
+typedef void (^RMBabyListViewModifyCallback) (RMPublicModel * _model);
+@interface RMBabyListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+    NSMutableArray * babyArray;
+}
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
+@property (copy, nonatomic) RMBabyListViewModifyCallback modifycallback;
 
 @end

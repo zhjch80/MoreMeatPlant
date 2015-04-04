@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
-            timestampString = "449685280.73483"
+            timestampString = "449851483.910568"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1252"
-            endingLineNumber = "1252"
+            startingLineNumber = "1336"
+            endingLineNumber = "1336"
             landmarkName = "+corpAdvantageApplyWithUser:Pwd:Dic:filePath:andCallBack:"
             landmarkType = "5">
          </BreakpointContent>
@@ -121,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/AppDelegate.m"
-            timestampString = "449683150.205685"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x5b9d;&#x8d1d;&#x7ba1;&#x7406;/RMBabyListViewController.m"
+            timestampString = "449819412.501536"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "-loadMainViewControllersWithType:"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "-shelves_btnAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,13 +137,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/RMAccountViewController.m"
-            timestampString = "449683341.541703"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x5b9d;&#x8d1d;&#x7ba1;&#x7406;/RMBabyListViewController.m"
+            timestampString = "449819758.251932"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "-initPlat"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "-shelves_btnAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
+            timestampString = "449851482.852218"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1186"
+            endingLineNumber = "1186"
+            landmarkName = "+babyPublishWithUser:Pwd:Auto_id:newPhotoDic:modifyPhotoDic:otherDic:andCallBack:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol RMPublishClassTableViewCellDelegate <NSObject>
+- (void)RMPublishClassTableViewCellDidSelectCourse:(UIButton *)sender;
+@end
+
 typedef void (^PublishClassAdded) (void);
 @interface RMPublishClassTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *classtitleL;
@@ -15,5 +19,6 @@ typedef void (^PublishClassAdded) (void);
 @property (assign, nonatomic) CGFloat x;
 @property (assign, nonatomic) CGFloat y;
 @property (assign, nonatomic) NSInteger index;
+@property (assign, nonatomic) id<RMPublishClassTableViewCellDelegate> delegate;
 - (void)createItem:(NSArray *)array andCallBack:(PublishClassAdded) block;
 @end

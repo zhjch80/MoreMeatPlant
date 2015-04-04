@@ -35,15 +35,36 @@
     [self.view addSubview:all_Ctl.view];
     
     
-    ware_Ctl = [[RMBabyListViewController alloc]initWithNibName:@"RMBabyListViewController" bundle:nil];
-    ware_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-44);
-    ware_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-44);
+    __block RMBabyManageViewController * SELF = self;
+    all_Ctl.modifycallback = ^(RMPublicModel *model){
+        RMPublishBabyViewController * publish = [[RMPublishBabyViewController alloc]initWithNibName:@"RMPublishBabyViewController" bundle:nil];
+        publish.auto_id = model.auto_id;
+        [SELF.navigationController pushViewController:publish animated:YES];
+    };
     
-    class_Ctl = [[RMBabyListViewController alloc]initWithNibName:@"RMBabyListViewController" bundle:nil];
-    class_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-44);
-    class_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-44);
     
+//    ware_Ctl = [[RMBabyListViewController alloc]initWithNibName:@"RMBabyListViewController" bundle:nil];
+//    ware_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-44);
+//    ware_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-44);
+//    
+//    class_Ctl = [[RMBabyListViewController alloc]initWithNibName:@"RMBabyListViewController" bundle:nil];
+//    class_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-44);
+//    class_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-44);
+    [_warehouse_baby_btn addTarget:self action:@selector(warehouse_baby_btnAction:) forControlEvents:UIControlEventTouchDown];
+    [_class_baby_btn addTarget:self action:@selector(class_baby_btnAction:) forControlEvents:UIControlEventTouchDown];
 }
+
+
+- (void)warehouse_baby_btnAction:(UIButton *)sender{
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂未开通，敬请期待！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+    [alert show];
+}
+
+- (void)class_baby_btnAction:(UIButton *)sender{
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂未开通，敬请期待！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+    [alert show];
+}
+
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
     switch (sender.tag) {
         case 1:{

@@ -730,6 +730,8 @@
 		51DB4CE01ACC485600A6064D /* RMSystemMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4CDE1ACC485600A6064D /* RMSystemMessageDetailViewController.m */; };
 		51DB4CE11ACC485600A6064D /* RMSystemMessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4CDF1ACC485600A6064D /* RMSystemMessageDetailViewController.xib */; };
 		51DB4DDA1ACDA6D800A6064D /* fbbb_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4DD91ACDA6D800A6064D /* fbbb_select.png */; };
+		51DB4DDE1ACFBA3400A6064D /* RMPublishCourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4DDC1ACFBA3400A6064D /* RMPublishCourseTableViewCell.m */; };
+		51DB4DDF1ACFBA3400A6064D /* RMPublishCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4DDD1ACFBA3400A6064D /* RMPublishCourseTableViewCell.xib */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */; };
 		51E268091AADDFFE00252DEF /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268071AADDFFE00252DEF /* JWBlurView.m */; };
@@ -1930,6 +1932,9 @@
 		51DB4CDE1ACC485600A6064D /* RMSystemMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSystemMessageDetailViewController.m; sourceTree = "<group>"; };
 		51DB4CDF1ACC485600A6064D /* RMSystemMessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSystemMessageDetailViewController.xib; sourceTree = "<group>"; };
 		51DB4DD91ACDA6D800A6064D /* fbbb_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fbbb_select.png; sourceTree = "<group>"; };
+		51DB4DDB1ACFBA3400A6064D /* RMPublishCourseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPublishCourseTableViewCell.h; sourceTree = "<group>"; };
+		51DB4DDC1ACFBA3400A6064D /* RMPublishCourseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPublishCourseTableViewCell.m; sourceTree = "<group>"; };
+		51DB4DDD1ACFBA3400A6064D /* RMPublishCourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMPublishCourseTableViewCell.xib; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 		51E268041AADDFFE00252DEF /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
@@ -4092,6 +4097,9 @@
 				5157DE5F1AB9DA5B005E9FA5 /* RMPublishClassTableViewCell.h */,
 				5157DE601AB9DA5B005E9FA5 /* RMPublishClassTableViewCell.m */,
 				5157DE611AB9DA5B005E9FA5 /* RMPublishClassTableViewCell.xib */,
+				51DB4DDB1ACFBA3400A6064D /* RMPublishCourseTableViewCell.h */,
+				51DB4DDC1ACFBA3400A6064D /* RMPublishCourseTableViewCell.m */,
+				51DB4DDD1ACFBA3400A6064D /* RMPublishCourseTableViewCell.xib */,
 				5157DE641AB9DA78005E9FA5 /* RMPublishNumberTableViewCell.h */,
 				5157DE651AB9DA78005E9FA5 /* RMPublishNumberTableViewCell.m */,
 				5157DE661AB9DA78005E9FA5 /* RMPublishNumberTableViewCell.xib */,
@@ -4787,6 +4795,7 @@
 				0A4106901ABABBF60060FBD5 /* chatBar_keyboard.png in Resources */,
 				1DDBBD841ABBB44500E35CD5 /* tabLine@2x.png in Resources */,
 				1DEB75231AB9D67A00EA1FA7 /* wdzl@2x.png in Resources */,
+				51DB4DDF1ACFBA3400A6064D /* RMPublishCourseTableViewCell.xib in Resources */,
 				0A4106511ABABBF60060FBD5 /* VoiceSearchFeedback007@2x.png in Resources */,
 				1D64F4F91A904E180073EB98 /* RMTalkMoreViewController.xib in Resources */,
 				1DEB74861AB9D66800EA1FA7 /* img_tz_11.png in Resources */,
@@ -5121,6 +5130,7 @@
 				0A41056D1ABAB3C70060FBD5 /* DACircularProgressView.m in Sources */,
 				51DB4CBF1AC7CB0800A6064D /* IQBarButtonItem.m in Sources */,
 				0A4105941ABAB54A0060FBD5 /* NSDateFormatter+Category.m in Sources */,
+				51DB4DDE1ACFBA3400A6064D /* RMPublishCourseTableViewCell.m in Sources */,
 				0A4104EE1ABAB1D70060FBD5 /* NSDate+Category.m in Sources */,
 				0A4104E21ABAB0770060FBD5 /* MessageModel.m in Sources */,
 				1D9CB15A1AAE9EA000BD5A7D /* RMPublicModel.m in Sources */,

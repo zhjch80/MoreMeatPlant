@@ -1012,22 +1012,89 @@
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         NSMutableArray * Array = [[NSMutableArray alloc]init];
         NSArray * dataArray = OBJC_Nil([dic objectForKey:@"data"]);
-        for(NSDictionary * dataDic in dataArray){
+        if([dataArray count]>0){
+            for(NSDictionary * dataDic in dataArray){
+                RMPublicModel * model = [[RMPublicModel alloc]init];
+                model.status = [[dic objectForKey:@"status"] boolValue];
+                model.msg = [dic objectForKey:@"msg"];
+                model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
+                model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
+                model.content_price = OBJC_Nil([dataDic objectForKey:@"content_price"]);
+                model.content_img = OBJC_Nil([dataDic objectForKey:@"content_img"]);
+                model.is_shelf = OBJC_Nil([dataDic objectForKey:@"is_shelf"]);
+                model.publish = OBJC_Nil([dataDic objectForKey:@"publish"]);
+                
+                [Array addObject:model];
+            }
+            if(block){
+                block(nil,YES,Array);
+            }
+
+        }else{
             RMPublicModel * model = [[RMPublicModel alloc]init];
             model.status = [[dic objectForKey:@"status"] boolValue];
             model.msg = [dic objectForKey:@"msg"];
-            model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
-            model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
-            model.content_price = OBJC_Nil([dataDic objectForKey:@"content_price"]);
-            model.content_img = OBJC_Nil([dataDic objectForKey:@"content_img"]);
-            model.is_shelf = OBJC_Nil([dataDic objectForKey:@"is_shelf"]);
-            model.publish = OBJC_Nil([dataDic objectForKey:@"publish"]);
             
-            [Array addObject:model];
+            if(block){
+                block(nil,YES,model);
+            }
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+}
+
+
+/**
+ *  @method     商家分类请求
+ */
++ (void)corpbabyClassRequestWithUser:(NSString *)user Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_ccenter&task=memberClass&per=all&ID=demoker&PWD=e10adc3949ba59abbe56e057f20f883e
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&date=create_time&order=asc",baseUrl,@"&method=appSev&app_com=com_ccenter&task=memberClass&per=all",user,pwd];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        NSArray * dataArray = OBJC_Nil([dic objectForKey:@"data"]);
+        NSMutableArray * array = [[NSMutableArray alloc]init];
+        for(NSDictionary * dict in dataArray){
+            RMPublicModel * model = [[RMPublicModel alloc] init];
+            model.status = [[dict objectForKey:@"status"] boolValue];
+            model.msg = [dict objectForKey:@"msg"];
+            model.content_name = [dict objectForKey:@"content_name"];
+            model.auto_id = [dict objectForKey:@"auto_id"];
+            [array addObject:model];
         }
         if(block){
-            block(nil,YES,Array);
+            block (nil,YES,array);
         }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block (error,NO,RequestFailed);
+        }
+    }];
+    
+}
+
+
+/**
+ *  @method     商家分类添加
+ */
++ (void)corpbabyAddClassWithUser:(NSString *)user Pwd:(NSString *)pwd className:(NSString *)name andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_ccenter&task=addMemberClass&&frm[content_name]=123&ID=18513217782&PWD=e10adc3949ba59abbe56e057f20f883e
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&frm[content_name]=%@",baseUrl,@"&method=save&app_com=com_ccenter&task=addMemberClass",user,pwd,name];
+   
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if(block){
             block(error,NO,RequestFailed);
@@ -1062,9 +1129,11 @@
             model.member_id = OBJC_Nil([dataDic objectForKey:@"member_id"]);
             model.content_desc = OBJC_Nil([dataDic objectForKey:@"content_desc"]);
             model.content_class = OBJC_Nil([dataDic objectForKey:@"content_class"]);
+            model.member_class = OBJC_Nil([dataDic objectForKey:@"member_class"]);
+            model.content_course = OBJC_Nil([dataDic objectForKey:@"content_course"]);
         
-        for(NSDictionary * dict in [dataDic objectForKey:@"body"]){
-            [model.body addObject:[dict objectForKey:@"content_img"]];
+        for(NSDictionary * dict in OBJC_Nil([dataDic objectForKey:@"body"])){
+            [model.body addObject:dict];
         }
         if(block){
             block(nil,YES,model);
@@ -1079,17 +1148,31 @@
 /**
  *  @method     商家宝贝发布
  */
-+ (void)babyPublishWithUser:(NSString *)user Pwd:(NSString *)pwd Auto_id:(NSString *)auto_id Dic:(NSDictionary *)dic andCallBack:(RMAFNRequestManagerCallBack)block {
++ (void)babyPublishWithUser:(NSString *)user Pwd:(NSString *)pwd Auto_id:(NSString *)auto_id newPhotoDic:(NSDictionary *)newPhotoDic modifyPhotoDic:(NSDictionary *)modifyPhotoDic otherDic:(NSDictionary *)otherDic andCallBack:(RMAFNRequestManagerCallBack)block {
     //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_ccenter&task=updateProduct&frm[content_name]=123&frm[content_desc]=23123&frm[content_price]=23&frm[content_express]=23&frm[express_price]=23&frm[is_sf]=1&frm[content_num]=1&frm[content_class]=1&frm[content_course]=1000&frm[member_class]=,1,2,&&ID=18513217782&PWD=202cb962ac59075b964b07152d234b70
+    NSLog(@"%@",newPhotoDic);
+    NSLog(@"-------------------------------------------------------");
+    NSLog(@"%@",modifyPhotoDic);
     NSString * url = nil;
     if(auto_id == nil){
-        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_passport&task=updateProduct",user,pwd];
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_ccenter&task=updateProduct",user,pwd];
     }else{
-        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_passport&task=updateProduct",user,pwd];
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@",baseUrl,@"&method=save&app_com=com_ccenter&task=updateProduct",user,pwd,auto_id];
     }
    
-    [[RMHttpOperationShared sharedClient] POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [[RMHttpOperationShared sharedClient] POST:url parameters:otherDic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //        [formData appendPartWithFileURL:filePath name:@"content_face" error:nil];
+        int i = 0;
+        for(NSString * key in [newPhotoDic allKeys]){
+            [formData appendPartWithFileURL:[newPhotoDic objectForKey:key] name:[NSString stringWithFormat:@"frm[body][content_img][%d]",i] error:nil];
+            i++;
+        }
+        
+        for(NSString * key in [modifyPhotoDic allKeys]){
+            [formData appendPartWithFileURL:[modifyPhotoDic objectForKey:key] name:[NSString stringWithFormat:@"frm[body][auto_id][%@]",key] error:nil];
+            i++;
+        }
+        
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         RMPublicModel * model = [[RMPublicModel alloc]init];
@@ -1111,11 +1194,12 @@
  */
 + (void)babyShelfOperationWithUser:(NSString *)user Pwd:(NSString *)pwd upShelf:(BOOL)isUp Autoid:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block{
     //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_ccenter&task=upproShelf&auto_id=1&ID=18513217782&PWD=202cb962ac59075b964b07152d234b70
+
     NSString * url = nil;
     if(isUp){
-        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@",baseUrl,@"&method=save&app_com=com_passport&task=upproShelf",user,pwd,auto_id];
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@",baseUrl,@"&method=save&app_com=com_ccenter&task=upproShelf",user,pwd,auto_id];
     }else{
-        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@",baseUrl,@"&method=save&app_com=com_passport&task=downproShelf",user,pwd,auto_id];
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@",baseUrl,@"&method=save&app_com=com_ccenter&task=downproShelf",user,pwd,auto_id];
     }
     
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
