@@ -221,6 +221,20 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                                                    withContent_body:(NSString *)content
                                                            callBack:(RMAFNRequestManagerCallBack)block;
 
+/**
+ *  @method         放毒区详情举报
+ *  @param          user_id                 会员名
+ *  @param          user_password           会员密码
+ *  @param          note_id                 帖子标识
+ *  @param          note_content            举报内容
+ */
++ (void)postReleasePoisonDetailsToReportWithID:(NSString *)user_id
+                                       withPWD:(NSString *)user_password
+                                   wirhNote_id:(NSString *)note_id
+                              withNote_content:(NSString *)note_content
+                                      callBack:(RMAFNRequestManagerCallBack)block;
+
+
 /*************************************************************************/
 /**
  *  @method     登录

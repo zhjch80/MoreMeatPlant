@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 typedef enum{
-    kRMReleasePoisonListComment = 1,
-    kRMReleasePoisonListReplyComment = 2
+    kRMReleasePoisonListComment = 1,                //放毒区列表评论
+    kRMReleasePoisonListReplyComment = 2,           //放毒区回复
+    kRMReleasePoisonToReport = 3                    //放毒区详情举报
 }RequestType;
 
 @protocol CommentsViewDelegate <NSObject>

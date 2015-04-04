@@ -299,6 +299,25 @@
 #pragma mark - 给此帖点赞
 
 - (void)addPraiseMethod:(RMImageView *)image {
+    if (![RMUserLoginInfoManager loginmanager].state){
+        NSLog(@"去登录.....");
+        return;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager postPostsAddPraiseWithAuto_id:dataModel.auto_id withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+    
     NSLog(@"点赞👍");
 }
 
@@ -313,10 +332,30 @@
 - (void)reportMethod:(UIButton *)button {
     RMCommentsView * commentsView = [[RMCommentsView alloc] init];
     commentsView.delegate = self;
+    commentsView.requestType = kRMReleasePoisonToReport;
+    commentsView.code = dataModel.auto_id;
     commentsView.backgroundColor = [UIColor clearColor];
     commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
     [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"   举报:%@",[dataModel.members objectForKey:@"member_name"]]];
     [self.view addSubview:commentsView];
+}
+
+- (void)commentSuccessMethodWithType:(NSInteger)type {
+    if (type == 3){
+        //举报
+        
+    }else{
+        
+    }
+}
+
+- (void)commentFailureMethodWithType:(NSInteger)type {
+    if (type == 3){
+        //举报
+        
+    }else{
+        
+    }
 }
 
 #pragma mark - 回复帖子

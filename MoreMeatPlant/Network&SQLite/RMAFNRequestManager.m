@@ -493,6 +493,40 @@
     }];
 }
 
+/**
+ *  @method         放毒区详情举报
+ *  @param          user_id                 会员名
+ *  @param          user_password           会员密码
+ *  @param          note_id                 帖子标识
+ *  @param          note_content            举报内容
+ */
++ (void)postReleasePoisonDetailsToReportWithID:(NSString *)user_id
+                                       withPWD:(NSString *)user_password
+                                   wirhNote_id:(NSString *)note_id
+                              withNote_content:(NSString *)note_content
+                                      callBack:(RMAFNRequestManagerCallBack)block {
+    NSString *url = @"http://218.240.30.6/drzw/index.php";
+    NSDictionary * parameter = @{
+                                 @"com": @"com_appService",
+                                 @"method": @"save",
+                                 @"app_com": @"com_center",
+                                 @"task": @"com_center",
+                                 @"ID": user_id,
+                                 @"PWD": user_password,
+                                 @"frm[note_id]": note_id,
+                                 @"note_id": note_content,
+                                 };
+    [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        if (block){
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
 /*************************************************************************/
 
 /**

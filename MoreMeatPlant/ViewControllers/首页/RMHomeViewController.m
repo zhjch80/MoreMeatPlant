@@ -21,6 +21,7 @@
 //副版块
 #import "RMFreshManCourseOfStudyViewController.h"
 #import "RMUpgradeSuggestViewController.h"
+#import "RMBaseView.h"
 
 typedef enum{
     kRMDefault = 100,
@@ -41,11 +42,12 @@ typedef enum{
 @property (nonatomic, strong) NSMutableArray * dataImgArr;          //本地标题对应图片资源
 @property (nonatomic, strong) NSMutableArray * advertisingArr;      //广告数据
 @property (nonatomic, strong) NSMutableArray * columnsArr;          //栏目数量
+@property (nonatomic, strong) RMBaseView * overloadingView;
 
 @end
 
 @implementation RMHomeViewController
-@synthesize mTableView, advertisingArr, columnsArr, dataImgArr;
+@synthesize mTableView, advertisingArr, columnsArr, dataImgArr, overloadingView;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -60,8 +62,13 @@ typedef enum{
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
+- (void)overloadingCurrentDataMethod {
+    [self requestAdvertisingQuery];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     advertisingArr = [[NSMutableArray alloc] init];
     columnsArr = [[NSMutableArray alloc] init];
@@ -82,6 +89,14 @@ typedef enum{
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
+    
+    overloadingView = [[RMBaseView alloc] init];
+    overloadingView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    overloadingView.backgroundColor = [UIColor clearColor];
+    overloadingView.userInteractionEnabled = YES;
+    overloadingView.multipleTouchEnabled = YES;
+    [overloadingView addTarget:self withSelector:@selector(overloadingCurrentDataMethod)];
+    [self.view addSubview:overloadingView];
 }
 
 - (void)loadTableHeaderView {
@@ -308,7 +323,11 @@ typedef enum{
                 [columnsArr addObject:model];
             }
         }
+
+        overloadingView.hidden = YES;
+
         [mTableView reloadData];
+        
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
 }

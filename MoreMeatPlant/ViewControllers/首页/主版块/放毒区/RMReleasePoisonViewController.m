@@ -493,11 +493,13 @@
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
-            fenleiAction = [[RMPostClassificationView alloc] init];
-            fenleiAction.delegate = self;
-            fenleiAction.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            fenleiAction.backgroundColor = [UIColor clearColor];
-            [fenleiAction initWithPostClassificationViewWithPlantArr:plantTypeArr withSubsPlant:subsPlantArr];
+            if (!fenleiAction){
+                fenleiAction = [[RMPostClassificationView alloc] init];
+                fenleiAction.delegate = self;
+                fenleiAction.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+                fenleiAction.backgroundColor = [UIColor clearColor];
+                [fenleiAction initWithPostClassificationViewWithPlantArr:plantTypeArr withSubsPlant:subsPlantArr];
+            }
             [self.view addSubview:fenleiAction];
             [fenleiAction show];
             break;
@@ -625,6 +627,7 @@
                 model.value = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"value"]);
                 [plantTypeArr addObject:model];
             }
+                    
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];

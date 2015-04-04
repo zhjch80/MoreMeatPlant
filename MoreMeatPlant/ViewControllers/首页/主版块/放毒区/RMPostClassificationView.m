@@ -18,12 +18,18 @@
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGFloat width;
 
+@property (nonatomic, strong) NSMutableArray * globPlantArr;
+@property (nonatomic, strong) NSMutableArray * globSubsPlantArr;
+
 @end
 
 @implementation RMPostClassificationView
-@synthesize subView, subHeight, height, width;
+@synthesize subView, subHeight, height, width, globPlantArr, globSubsPlantArr;
 
 - (void)initWithPostClassificationViewWithPlantArr:(NSArray *)plantArr withSubsPlant:(NSArray *)subsPlantArr {
+    globPlantArr = [[NSMutableArray alloc] initWithArray:plantArr];
+    globSubsPlantArr = [[NSMutableArray alloc] initWithArray:subsPlantArr];
+    
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [self addGestureRecognizer:gesture];
     
@@ -60,7 +66,7 @@
         NSString * befStr = [model.label substringToIndex:2];
         NSString * aftStr = [model.label substringFromIndex:2];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.backgroundColor = [UIColor colorWithRed:0.95 green:0 blue:0.32 alpha:1];
+        button.backgroundColor = [UIColor colorWithRed:0.58 green:0.58 blue:0.58 alpha:1];
         button.frame = CGRectMake(16 + i*50, 55, 40, 40);
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         button.titleLabel.font = FONT_1(12.0);
@@ -112,6 +118,24 @@
 
 - (void)selectUpdataListType:(UIButton *)sender {
     [self dismiss];
+    if (sender.tag < 5){
+        for (NSInteger i=0; i<[globPlantArr count]; i++) {
+            UIButton * button = (UIButton *)[subView viewWithTag:i];
+            button.backgroundColor = [UIColor colorWithRed:0.58 green:0.58 blue:0.58 alpha:1];
+        }
+        sender.backgroundColor = [UIColor colorWithRed:0.95 green:0 blue:0.32 alpha:1];
+    }else{
+        for (NSInteger i=0; i<[globSubsPlantArr count]; i++) {
+            RMPublicModel * model = [globSubsPlantArr objectAtIndex:i];
+            UIImageView * imageView = (UIImageView *)[subView viewWithTag:i+6];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        }
+        
+        UIImageView * imageView = (UIImageView *)[subView viewWithTag:sender.tag];
+        RMPublicModel * model = [globSubsPlantArr objectAtIndex:sender.tag-6];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
+    }
+
     if ([self.delegate respondsToSelector:@selector(selectedPlantType:)]){
         [self.delegate selectedPlantType:sender.tag];
     }

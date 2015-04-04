@@ -12,6 +12,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "RMAFNRequestManager.h"
 #import "RMUserLoginInfoManager.h"
+#import "UIViewController+HUD.h"
+#import "MBProgressHUD.h"
+#import "MBProgressHUD+Add.h"
 
 #define kCommentHeight      150.0
 
@@ -43,13 +46,6 @@
     receiver.textColor = [UIColor colorWithRed:0.42 green:0.42 blue:0.42 alpha:1];
     receiver.backgroundColor = [UIColor clearColor];
     [bgView addSubview:receiver];
-    
-//    sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    sendBtn.frame = CGRectMake(kScreenWidth-60, kScreenHeight, 50 , 30);
-//    [sendBtn addTarget:self action:@selector(sendButtonClick) forControlEvents:UIControlEventTouchUpInside];
-//    [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
-//    [sendBtn setTitleColor:[UIColor colorWithRed:0.42 green:0.42 blue:0.42 alpha:1] forState:UIControlStateNormal];
-//    [bgView addSubview:sendBtn];
     
     commentTextView = [[UITextView alloc] init];
     commentTextView.font = [UIFont fontWithName:@"FZZHJW--GB1-0" size:16.0];
@@ -89,8 +85,9 @@
             if (self.requestType == kRMReleasePoisonListComment){
                 //帖子评论
                 [self requestPostsComment];
-            }else{
-                
+            }else if (self.requestType == kRMReleasePoisonToReport){
+                //放毒区详情举报
+                [self requestToReport];
             }
         }else{
             NSLog(@"不发送");
@@ -153,10 +150,6 @@
     }
 }
 
-//- (void)sendButtonClick {
-//    NSLog(@"发送");
-//}
-
 #pragma mark - 发送请求
 
 /**
@@ -177,6 +170,31 @@
                 [self.delegate commentSuccessMethodWithType:self.requestType];
             }
         }
+    }];
+}
+
+/**
+ *  @method     放毒区详情举报
+ */
+- (void)requestToReport {
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
+    [RMAFNRequestManager  postReleasePoisonDetailsToReportWithID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd wirhNote_id:self.code withNote_content:commentTextView.text callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self animated:YES];
+            if ([self.delegate respondsToSelector:@selector(commentFailureMethodWithType:)]){
+                [self.delegate commentFailureMethodWithType:self.requestType];
+            }
+            return ;
+        }
+        
+        if (success){
+            [MBProgressHUD hideAllHUDsForView:self animated:YES];
+            if ([self.delegate respondsToSelector:@selector(commentSuccessMethodWithType:)]){
+                [self.delegate commentSuccessMethodWithType:self.requestType];
+            }
+        }
+        
     }];
 }
 
