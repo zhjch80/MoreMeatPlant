@@ -732,6 +732,9 @@
 		51DB4DDA1ACDA6D800A6064D /* fbbb_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4DD91ACDA6D800A6064D /* fbbb_select.png */; };
 		51DB4DDE1ACFBA3400A6064D /* RMPublishCourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4DDC1ACFBA3400A6064D /* RMPublishCourseTableViewCell.m */; };
 		51DB4DDF1ACFBA3400A6064D /* RMPublishCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4DDD1ACFBA3400A6064D /* RMPublishCourseTableViewCell.xib */; };
+		51DB4E141AD130C100A6064D /* RMProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4E131AD130C100A6064D /* RMProductModel.m */; };
+		51DB4E171AD130DA00A6064D /* RMCorpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4E161AD130DA00A6064D /* RMCorpModel.m */; };
+		51DB4E1B1AD1525000A6064D /* UIAlertView+Expland.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4E1A1AD1525000A6064D /* UIAlertView+Expland.m */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */; };
 		51E268091AADDFFE00252DEF /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268071AADDFFE00252DEF /* JWBlurView.m */; };
@@ -1935,6 +1938,12 @@
 		51DB4DDB1ACFBA3400A6064D /* RMPublishCourseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPublishCourseTableViewCell.h; sourceTree = "<group>"; };
 		51DB4DDC1ACFBA3400A6064D /* RMPublishCourseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPublishCourseTableViewCell.m; sourceTree = "<group>"; };
 		51DB4DDD1ACFBA3400A6064D /* RMPublishCourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMPublishCourseTableViewCell.xib; sourceTree = "<group>"; };
+		51DB4E121AD130C100A6064D /* RMProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMProductModel.h; sourceTree = "<group>"; };
+		51DB4E131AD130C100A6064D /* RMProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMProductModel.m; sourceTree = "<group>"; };
+		51DB4E151AD130DA00A6064D /* RMCorpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCorpModel.h; sourceTree = "<group>"; };
+		51DB4E161AD130DA00A6064D /* RMCorpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCorpModel.m; sourceTree = "<group>"; };
+		51DB4E191AD1525000A6064D /* UIAlertView+Expland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Expland.h"; sourceTree = "<group>"; };
+		51DB4E1A1AD1525000A6064D /* UIAlertView+Expland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Expland.m"; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 		51E268041AADDFFE00252DEF /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
@@ -3096,6 +3105,10 @@
 				1D9CB1561AAE9EA000BD5A7D /* RMAFNRequestManager.m */,
 				1D9CB1571AAE9EA000BD5A7D /* RMPublicModel.h */,
 				1D9CB1581AAE9EA000BD5A7D /* RMPublicModel.m */,
+				51DB4E121AD130C100A6064D /* RMProductModel.h */,
+				51DB4E131AD130C100A6064D /* RMProductModel.m */,
+				51DB4E151AD130DA00A6064D /* RMCorpModel.h */,
+				51DB4E161AD130DA00A6064D /* RMCorpModel.m */,
 			);
 			path = "Network&SQLite";
 			sourceTree = "<group>";
@@ -3328,6 +3341,7 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				51DB4E181AD1525000A6064D /* UIAlerView+Expland */,
 				1D64F50D1A90CD150073EB98 /* CONST.h */,
 				1D1DAE301ACBDF8B00FC4C4C /* UtilityFunc */,
 				51DB4CC81AC9BC9600A6064D /* VPImageCropper */,
@@ -4339,6 +4353,15 @@
 			path = VPImageCropper;
 			sourceTree = "<group>";
 		};
+		51DB4E181AD1525000A6064D /* UIAlerView+Expland */ = {
+			isa = PBXGroup;
+			children = (
+				51DB4E191AD1525000A6064D /* UIAlertView+Expland.h */,
+				51DB4E1A1AD1525000A6064D /* UIAlertView+Expland.m */,
+			);
+			path = "UIAlerView+Expland";
+			sourceTree = "<group>";
+		};
 		51E268031AADDFEC00252DEF /* popupController */ = {
 			isa = PBXGroup;
 			children = (
@@ -5164,6 +5187,7 @@
 				1D4EE43D1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.m in Sources */,
 				51E268361AAE003000252DEF /* STDb.m in Sources */,
 				0A41058C1ABAB3C70060FBD5 /* THProgressView.m in Sources */,
+				51DB4E141AD130C100A6064D /* RMProductModel.m in Sources */,
 				1DD699391AC10F02009A9327 /* UIImageView+HighlightedWebCache.m in Sources */,
 				0A41056A1ABAB3C70060FBD5 /* MWTapDetectingImageView.m in Sources */,
 				51D884291ABE61AA00F7A3BD /* RMOrderDetailViewController.m in Sources */,
@@ -5246,6 +5270,7 @@
 				1D4DA32A1A921744006A9EBA /* RMPlantExchangeViewController.m in Sources */,
 				0A41057F1ABAB3C70060FBD5 /* PSTCollectionView.m in Sources */,
 				1D8397491AB3F72D00DA190A /* DoImagePickerController.m in Sources */,
+				51DB4E171AD130DA00A6064D /* RMCorpModel.m in Sources */,
 				5157DE531AB9CC5D005E9FA5 /* RMPublishBabyViewController.m in Sources */,
 				0A4105741ABAB3C70060FBD5 /* EMSDWebImagePrefetcher.m in Sources */,
 				51D883C61ABB179400F7A3BD /* RMAdvertisingViewController.m in Sources */,
@@ -5324,6 +5349,7 @@
 				1D8397381AB2E91400DA190A /* RMBaseTextView.m in Sources */,
 				0A4104CF1ABAAF630060FBD5 /* EMChatAudioBubbleView.m in Sources */,
 				95AA6F4C1ABF8CD2007F4C9E /* XHFileAttribute.m in Sources */,
+				51DB4E1B1AD1525000A6064D /* UIAlertView+Expland.m in Sources */,
 				0A4105751ABAB3C70060FBD5 /* MKAnnotationView+EMWebCache.m in Sources */,
 				0A4105621ABAB3C70060FBD5 /* EmojiEmoticons.m in Sources */,
 				1DD699371AC10F02009A9327 /* UIImage+MultiFormat.m in Sources */,

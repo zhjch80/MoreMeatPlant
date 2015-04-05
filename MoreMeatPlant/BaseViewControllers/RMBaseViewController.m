@@ -7,7 +7,8 @@
 //
 
 #import "RMBaseViewController.h"
-
+#import "RMCorpModel.h"
+#import "RMProductModel.h"
 //#import "IQKeyboardManager.h"
 
 @interface RMBaseViewController (){

@@ -18,7 +18,7 @@ typedef void (^RMSettlementViewSettle) (void);
 
 @interface RMSettlementViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate>
 {
-    NSMutableArray * addressArray;
+//    NSMutableArray * addressArray;
     RMPublicModel * _model;
     NSString * balance;
     

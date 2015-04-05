@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "STDbHandle.h"              //数据库操作
 
-@interface RMPublicModel : STDbHandle
+@interface RMPublicModel : STDbObject
 @property (nonatomic, assign) BOOL  status;
 @property (nonatomic, copy) NSString * msg;
 
@@ -93,7 +93,7 @@
 @property (nonatomic, retain) NSString * content_type;      //类型
 @property (nonatomic, retain) NSString * content_gps;       //会员位置gps
 
-@property (nonatomic, assign) NSInteger num;                //广告位数量
+@property (nonatomic, assign) NSInteger num;                //广告位数量/商品数量
 @property (nonatomic, assign) NSInteger textField_value;    //申请广告位的天数
 @property (nonatomic, copy) NSMutableDictionary * members;       //会员信息
 @property (nonatomic, copy) NSString * content_grow;

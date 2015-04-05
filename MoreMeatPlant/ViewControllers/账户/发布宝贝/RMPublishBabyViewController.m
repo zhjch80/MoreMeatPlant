@@ -30,6 +30,16 @@
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"发布宝贝"];
     
+    
+    NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+    for(int i = 0;i<10;i++){
+        [dic setValue:@"东东" forKey:[NSString stringWithFormat:@"%d",i]];
+    }
+    NSLog(@"%@",dic);
+    NSLog(@"--------------------");
+    NSLog(@"%@",[dic allKeys]);
+
+    
     isCourseFirst = YES;
     isClassFirst = YES;
     
@@ -45,6 +55,7 @@
     modifyImageDic = [[NSMutableDictionary alloc]init];
     
     newAddPhotoDic = [[NSMutableDictionary alloc]init];
+    newAddImageDic = [[NSMutableDictionary alloc]init];
     
     [self courseRequest];
     
@@ -61,6 +72,7 @@
             RMPublicModel * model = object;
             if(model.status){
                 current_Model = model;
+                NSLog(@"%@",current_Model.body);
             }else{
                 
             }
@@ -257,11 +269,11 @@
                     [cell.img1 sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                 }else if(j == 1){
                     [cell.img2 sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
-                }else if(j == 3){
+                }else if(j == 2){
                     [cell.img3 sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
-                }else if (j == 4) {
+                }else if (j == 3) {
                     [cell.img4 sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
-                }else if (j == 5){
+                }else if (j == 4){
                     [cell.img5 sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                 }
                 j++;
@@ -269,15 +281,15 @@
         }else if(indexPath.row == 6){
             int j = 0;
             for(NSDictionary * dic in current_Model.body){
-                if(j == 6){
+                if(j == 5){
                     [cell.img1 sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
-                }else if(j == 7){
+                }else if(j == 6){
                     [cell.img2 sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
-                }else if(j == 8){
+                }else if(j == 7){
                     [cell.img3 sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
-                }else if (j == 9) {
+                }else if (j == 8) {
                     [cell.img4 sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
-                }else if (j == 10){
+                }else if (j == 9){
                     [cell.img5 sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                 }
                 j++;
@@ -288,6 +300,22 @@
             UIImageView * imageV = (UIImageView *)[cell.contentView viewWithTag:[n integerValue]];
             [imageV setImage:[modifyImageDic objectForKey:n]];
         }
+        
+        for(NSString * key in [newAddImageDic allKeys]){
+            NSInteger tag = 0;;
+            
+            if([key integerValue]>5){
+                tag = 6*300+[key integerValue]-5;
+                UIImageView * imageV = (UIImageView *)[cell.contentView viewWithTag:tag];
+                [imageV setImage:[newAddImageDic objectForKey:key]];
+            }else{
+                 tag = 5*300+[key integerValue];
+                UIImageView * imageV = (UIImageView *)[cell.contentView viewWithTag:tag];
+                [imageV setImage:[newAddImageDic objectForKey:key]];
+            }
+        }
+        
+        NSLog(@"&&&&&&&&&%@",newAddImageDic);
         
         return cell;
     }else{
@@ -389,10 +417,24 @@
 }
 #pragma mark - 从相册选择图片
 - (void)selectFromPics:(UIButton *)sender{
+    
+    img_tag = (sender.tag/100)*300+sender.tag%100;
+
     [[RMVPImageCropper shareImageCropper] setCtl:self];
     [[RMVPImageCropper shareImageCropper] set_scale:1.0];
     [[RMVPImageCropper shareImageCropper] openPics];
-    img_tag = (sender.tag/100)*300+sender.tag%100;
+    if((img_tag/300-5)*5+img_tag%300<=[current_Model.body count]){
+        
+        NSDictionary * dic = OBJC_Nil([current_Model.body objectAtIndex:(img_tag/300-5)*5+img_tag%300-1]);
+        if(dic){
+            [[RMVPImageCropper shareImageCropper] setFileName:[NSString stringWithFormat:@"frm[body][auto_id][%@].png",[dic objectForKey:@"auto_id"]]];
+            NSLog(@"%@",[NSString stringWithFormat:@"frm[body][auto_id][%@].png",[dic objectForKey:@"auto_id"]]);
+        }
+    }else{
+        [[RMVPImageCropper shareImageCropper] setFileName:[NSString stringWithFormat:@"frm[body][content_img][%lu].png",(img_tag/300-5)*5+img_tag%300-[current_Model.body count]-1]];
+        NSLog(@"%@",[NSString stringWithFormat:@"frm[body][content_img][%lu].png",(img_tag/300-5)*5+img_tag%300-[current_Model.body count]-1]);
+    }
+    
 }
 
 - (void)addClassAction:(id)sender{
@@ -496,12 +538,13 @@
     
     if((img_tag/300-5)*5+img_tag%300<=[current_Model.body count]){
         [modifyImageDic setObject:editedImage forKey:[NSString stringWithFormat:@"%ld",img_tag]];
-        NSDictionary * dic = OBJC_Nil([current_Model.body objectAtIndex:(img_tag/300-5)*5+img_tag%300]);
+        NSDictionary * dic = OBJC_Nil([current_Model.body objectAtIndex:(img_tag/300-5)*5+img_tag%300-1]);
         if(dic){
-            [modifyPhotoDic setObject:filePath forKey:[dic objectForKey:@"auto_id"]];
+            [modifyPhotoDic setObject:filePath forKey:[NSString stringWithFormat:@"%ld",(img_tag/300-5)*5+img_tag%300-1]];
         }
     }else{
-        [newAddPhotoDic setObject:filePath forKey:[NSString stringWithFormat:@"%ld",(img_tag/300-5)*5+img_tag%300]];
+        [newAddPhotoDic setObject:filePath forKey:[NSString stringWithFormat:@"%ld",(img_tag/300-5)*5+img_tag%300-1]];
+        [newAddImageDic setObject:editedImage forKey:[NSString stringWithFormat:@"%ld",(img_tag/300-5)*5+img_tag%300]];
     }
     [_mTableView reloadData];
 //    RMPublishPhotoTableViewCell * cell = (RMPublishPhotoTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:img_tag/300 inSection:0]];
@@ -531,7 +574,11 @@
     [dic setValue:current_Model.member_class forKey:@"frm[member_class]"];
     [dic setValue:current_Model.content_num forKey:@"frm[content_num]"];
     
-    NSLog(@"%@",dic);
+    for(NSString * key in [modifyPhotoDic allKeys]){
+        [dic setValue:[[current_Model.body objectAtIndex:[key integerValue]] objectForKey:@"auto_id"] forKey:[NSString stringWithFormat:@"frm[body][auto_id][%@]",key]];
+    }
+    
+    NSLog(@"参数：%@",dic);
     NSLog(@"-------------------------------------------------------");
    
     

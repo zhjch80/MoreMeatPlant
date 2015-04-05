@@ -574,4 +574,25 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param block   回调
  */
 + (void)corpReturnSureWithUser:(NSString *)user Pwd:(NSString *)pwd orderId:(NSString *)orderid andCallBack:(RMAFNRequestManagerCallBack)block;
+
+/**
+ *  购物车库存验证接口
+ *
+ *  @param user
+ *  @param pwd
+ *  @param auto_id 宝贝id
+ *  @param num     数量
+ *  @param block   回调
+ */
++ (void)valliateGoodsNumWithUser:(NSString *)user Pwd:(NSString *)pwd auto_id:(NSString *)auto_id Nums:(NSInteger)num andCallBack:(RMAFNRequestManagerCallBack)block;
+//218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_pcenter&task=addOrder&auto_id=1,2&num=1,2&express=2,1&frm[payment_id]=1&frm[content_linkname]=1&frm[content_mobile]=15110511214&frm[content_address]=111111111111&&ID=test&PWD=e10adc3949ba59abbe56e057f20f883e
+/**
+ *  提交订单
+ *
+ *  @param user
+ *  @param pwd
+ *  @param dictionary 用户的地址等一系列信息，包括支付方式
+ *  @param block
+ */
++ (void)commitOrderWithUser:(NSString *)user Pwd:(NSString *)pwd withDic:(NSDictionary *)dictionary andCallBack:(RMAFNRequestManagerCallBack)block;
 @end

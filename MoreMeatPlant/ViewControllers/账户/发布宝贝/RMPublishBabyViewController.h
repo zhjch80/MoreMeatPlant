@@ -16,6 +16,7 @@
     NSMutableDictionary * modifyPhotoDic;//auto_id为key,path为value
     NSMutableDictionary * modifyImageDic;//tag-100为key,image为value
     NSMutableDictionary * newAddPhotoDic;//新增图片字典
+    NSMutableDictionary * newAddImageDic;//新增图片显示字典，里面存的是image和key
     
 }
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;

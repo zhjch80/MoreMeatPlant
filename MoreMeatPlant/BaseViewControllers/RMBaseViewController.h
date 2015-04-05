@@ -23,6 +23,7 @@
 #import "UIImageView+WebCache.h"
 #import "KeyboardManager.h"
 #import "UtilityFunc.h"
+#import "STDbHandle.h"
 
 @interface RMBaseViewController : UIViewController{
     UIButton *leftBarButton;

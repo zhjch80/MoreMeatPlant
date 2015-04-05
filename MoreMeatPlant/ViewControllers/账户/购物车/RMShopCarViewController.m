@@ -17,17 +17,27 @@
 #import "RMAddressEditViewController.h"
 #import "RMMyCorpViewController.h"
 #import "UIView+Expland.h"
+#import "UIAlertView+Expland.h"
 @interface RMShopCarViewController ()<RMAddressEditViewCompletedDelegate>{
     BOOL isShow;
     __block RMSettlementViewController * settle;
+    NSMutableArray * dataArray;
+    NSString * defaultNumber;//用户点击textfield输入前的值
 }
 
 @end
+
 
 @implementation RMShopCarViewController
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self caculateProductTotal];
 }
 
 - (void)viewDidLoad {
@@ -48,17 +58,57 @@
     [_settleBtn addTarget:self action:@selector(settlementAction:) forControlEvents:UIControlEventTouchDown];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)caculateProductTotal
+{
+    float n = 0;
+    if(!dataArray){
+        dataArray = [[NSMutableArray alloc] init];
+    }
+    [dataArray removeAllObjects];
+    NSArray * merchants = [RMCorpModel allDbObjects];
+    if([merchants count]==0)
+    {
+        _all_total_moneyL.text = [NSString stringWithFormat:@"¥%d",0];
+    }
+    for(RMCorpModel * shop in merchants)
+    {
+        NSMutableDictionary * dic = [[NSMutableDictionary alloc] init];
+        [dic setValue:shop.corp_id forKey:@"corp_id"];
+        [dic setValue:shop.corp_name forKey:@"corp_name"];
+        NSMutableArray * arr = [[NSMutableArray alloc] init];
+        for(RMProductModel * p in [RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",shop.corp_id] orderby:@"corp_id"])
+        {
+            [arr addObject:p];
+                n+= [p.content_price floatValue];
+            _all_total_moneyL.text = [NSString stringWithFormat:@"¥%.2f",n];
+        }
+        
+        if([arr count]!=0)
+        {
+            [dic setObject:arr forKey:@"products"];
+            [dataArray addObject:dic];
+        }
+        
+    }
+    
+    [_mTableView reloadData];
+}
+
+- (float)caculateSection:(NSIndexPath *)indexpath{
+    float n = 0;
+    for(RMProductModel * product in [[dataArray objectAtIndex:indexpath.section] objectForKey:@"products"]){
+        n += product.content_num * [product.content_price floatValue];
+    }
+    return n;
 }
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return [dataArray count];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3+2;
+    return [[[dataArray objectAtIndex:section] objectForKey:@"products"] count]+2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -69,14 +119,23 @@
             [cell.corpNameL addTarget:self action:@selector(goCorpAction:) forControlEvents:UIControlEventTouchDown];
         }
         cell.corpNameL.tag = 1000*indexPath.section;
+        NSDictionary * dic = [dataArray objectAtIndex:indexPath.section];
+        [cell.corpNameL setTitle:[dic objectForKey:@"corp_name"] forState:UIControlStateNormal];
         return cell;
-    }else if(indexPath.row == 4){
+    }else if(indexPath.row == [[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] count]+1){
         RMShopLeaveMsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMShopLeaveMsTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMShopLeaveMsTableViewCell" owner:self options:nil] lastObject];
             [cell.contactCorpBtn addTarget:self action:@selector(contactCorpAction:) forControlEvents:UIControlEventTouchDown];
         }
         cell.contactCorpBtn.tag = indexPath.section*1000+indexPath.row;
+        cell.totalMoneyL.text = [NSString stringWithFormat:@"%.0f",[self caculateSection:indexPath]];
+        cell.totalL.text = [NSString stringWithFormat:@"%.0f",[self caculateSection:indexPath]];
+        int n = 0;
+        for(RMProductModel * model in [[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"]){
+            n+=model.content_num;
+        }
+        cell.numL.text = [NSString stringWithFormat:@"%d",n];
         return cell;
     }else{
         RMShopCarGoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMShopCarGoodsTableViewCell"];
@@ -86,9 +145,17 @@
             [cell.subBtn addTarget:self action:@selector(subAction:) forControlEvents:UIControlEventTouchDown];
             [cell.deleteBtn addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchDown];
             cell.numTextField.delegate = self;
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:cell.numTextField];
         }
+        cell.deleteBtn.tag = 100000*indexPath.section+indexPath.row;
+        cell.numTextField.tag = 3000*indexPath.section+indexPath.row;
         cell.addBtn.tag = 1000*indexPath.section+indexPath.row;
         cell.subBtn.tag = 1000*indexPath.section+indexPath.row+1;
+        RMProductModel * product = [[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] objectAtIndex:indexPath.row-1];
+        [cell.content_imgV sd_setImageWithURL:[NSURL URLWithString:product.content_img] placeholderImage:[UIImage imageNamed:@"nophote"]];
+        cell.content_titleL.text = product.content_name;
+        cell.content_priceL.text = product.content_price;
+        cell.numTextField.text = [NSString stringWithFormat:@"%ld",product.content_num];
         return cell;
     }
 }
@@ -96,7 +163,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
         return 30;
-    }else if (indexPath.row == 4){
+    }else if (indexPath.row == [[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] count]+1){
         return 106;
     }else{
         return 77;
@@ -117,38 +184,127 @@
 }
 
 
+
+
 #pragma mark - 进入店铺
 - (void)goCorpAction:(UIButton *)sender{
     NSInteger tag = sender.tag/1000;
     RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
+    RMProductModel * product = [[[[dataArray objectAtIndex:tag] objectAtIndex:tag] objectForKey:@"products"] lastObject];
+    corp.auto_id = product.corp_id;
     [self.navigationController pushViewController:corp animated:YES];
 }
 
-
+- (RMShopCarGoodsTableViewCell *)getShopCell:(NSInteger)section and:(NSInteger)row
+{
+    RMShopCarGoodsTableViewCell * cell = (RMShopCarGoodsTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
+    return cell;
+}
 #pragma mark - 购物车商品数量的增减
 - (void)addAction:(UIButton *)sender{
-    NSIndexPath * indexpath = [NSIndexPath indexPathForRow:sender.tag%1000 inSection:sender.tag/1000];
-    RMShopCarGoodsTableViewCell * cell = (RMShopCarGoodsTableViewCell *)[_mTableView cellForRowAtIndexPath:indexpath];
-    NSInteger num = [cell.numTextField.text integerValue];
-    num++;
-    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
+//    NSIndexPath * indexpath = [NSIndexPath indexPathForRow:sender.tag%1000 inSection:sender.tag/1000];
+//    RMShopCarGoodsTableViewCell * cell = (RMShopCarGoodsTableViewCell *)[_mTableView cellForRowAtIndexPath:indexpath];
+//    NSInteger num = [cell.numTextField.text integerValue];
+//    num++;
+//    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
+    
+    NSInteger section = sender.tag/1000;
+    NSInteger row = sender.tag%1000;
+    NSIndexPath * indexpath = [NSIndexPath indexPathForRow:row inSection:section];
+    RMShopCarGoodsTableViewCell * cell = [self getShopCell:indexpath.section and:indexpath.row];
+    NSInteger n = [cell.numTextField.text integerValue];
+    defaultNumber = cell.numTextField.text ;
+    [self validationAction:indexpath andN:++n];
+}
+
+- (void)validationAction:(NSIndexPath *)indexpath andN:(NSInteger)num{
+    
+    RMProductModel * product = [[[dataArray objectAtIndex:indexpath.section] objectForKey:@"products"] objectAtIndex:indexpath.row-1];
+    RMShopCarGoodsTableViewCell * cell = [self getShopCell:indexpath.section and:indexpath.row];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager valliateGoodsNumWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] auto_id:product.auto_id Nums:num andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                RMProductModel * pro = [[RMProductModel alloc]init];
+                pro.content_num = product.content_num;
+                pro.auto_id = product.auto_id;
+                if([RMProductModel existDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",product.auto_id]])
+                {
+                    RMProductModel * product2 = [[RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",product.auto_id] orderby:nil] lastObject];
+                    product2.content_num = num;
+                    [product2 updatetoDb];
+                }
+                else
+                {
+                    [pro insertToDb];
+                }
+                
+                cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
+                [self caculateProductTotal];
+            }else{
+                cell.numTextField.text = defaultNumber;
+            }
+            [self showHint:model.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
+
 }
 
 - (void)subAction:(UIButton *)sender{
-    NSIndexPath * indexpath = [NSIndexPath indexPathForRow:sender.tag%1000-1 inSection:sender.tag/1000];
-    RMShopCarGoodsTableViewCell * cell = (RMShopCarGoodsTableViewCell *)[_mTableView cellForRowAtIndexPath:indexpath];
-    NSInteger num = [cell.numTextField.text integerValue];
-    num--;
-    if(num == 0){
-        num = 1;
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"商品数量至少为一个" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-        [alert show];
+//    NSIndexPath * indexpath = [NSIndexPath indexPathForRow:sender.tag%1000-1 inSection:sender.tag/1000];
+//    RMShopCarGoodsTableViewCell * cell = (RMShopCarGoodsTableViewCell *)[_mTableView cellForRowAtIndexPath:indexpath];
+//    NSInteger num = [cell.numTextField.text integerValue];
+//    num--;
+//    if(num == 0){
+//        num = 1;
+//        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"商品数量至少为一个" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+//        [alert show];
+//    }
+//    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
+    
+    NSInteger section = sender.tag/1000;
+    NSInteger row = sender.tag%1000-1;
+    RMShopCarGoodsTableViewCell * cell = [self getShopCell:section and:row];
+    NSIndexPath * indexpath = [NSIndexPath indexPathForRow:row inSection:section];
+    NSInteger n = [cell.numTextField.text integerValue];
+    defaultNumber = cell.numTextField.text ;
+    if(n == 1)
+    {
+        
     }
-    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
+    else
+    {
+        [self validationAction:indexpath andN:--n];
+    }
+
 }
 
 #pragma mark - 删除
-- (void)deleteAction:(id)sender{
+- (void)deleteAction:(UIButton *)sender{
+    NSIndexPath * indexpath = [NSIndexPath indexPathForRow:sender.tag%100000 inSection:sender.tag/100000];
+    RMProductModel * product = [[[dataArray objectAtIndex:indexpath.section] objectForKey:@"products"] objectAtIndex:indexpath.row-1];
+    
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您确定要删除这个宝贝吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert handlerCancel:^(UIAlertView *alertView) {
+        
+    }];
+    [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+        if( [RMProductModel removeDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",product.auto_id]])
+        {
+            if([RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",product.corp_id] orderby:@"corp_id"] == nil)
+            {
+                [RMCorpModel removeDbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",product.corp_id] ];
+            }
+        }
+        
+        [self caculateProductTotal];
+    }];
+    [alert show];
 
 }
 
@@ -182,6 +338,7 @@
     };
     settle.addAddress_callback = ^(void){
         RMAddressEditViewController * address_edit = [[RMAddressEditViewController alloc]initWithNibName:@"RMAddressEditViewController" bundle:nil];
+        address_edit.delegate = SELF;
         [SELF.navigationController pushViewController:address_edit animated:YES];
     };
     
@@ -216,6 +373,37 @@
     }
 }
 
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    defaultNumber = textField.text;
+}
+
+
+#pragma mark - 输入框文字检测
+
+- (void)textFieldChanged:(NSNotification *)noti {
+    
+    UITextField * textfield = noti.object;
+    NSInteger section = [textfield tag]/3000;
+    int row = [textfield tag]%3000;
+    NSIndexPath * indexpath = [NSIndexPath indexPathForRow:row inSection:section];
+    if(textfield.text.length == 0)
+    {
+        
+    }
+    else
+    {
+        [self validationAction:indexpath andN:[[textfield text] integerValue]];
+    }
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 /*
 #pragma mark - Navigation
 

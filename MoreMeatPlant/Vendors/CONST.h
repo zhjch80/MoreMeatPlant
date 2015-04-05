@@ -57,3 +57,6 @@ _Pragma("clang diagnostic pop") \
 #define UserPwd @"pwd"
 #define UserType @"is_corp"
 #define UserCoor @"coor"
+
+#import "RMProductModel.h"
+#import "RMCorpModel.h"

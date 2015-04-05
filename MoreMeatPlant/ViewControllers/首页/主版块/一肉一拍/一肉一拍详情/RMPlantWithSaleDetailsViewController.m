@@ -12,12 +12,18 @@
 #import "RMPlantWithSaleDetailsCell.h"
 #import "CycleScrollView.h"
 #import "RMBaseView.h"
+#import "RMSettlementViewController.h"
+#import "RMAddressEditViewController.h"
+#import "UIView+Expland.h"
 
-@interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate>{
+@interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate,RMAddressEditViewCompletedDelegate>{
     BOOL isFirstViewDidAppear;
     BOOL isRefresh;
     NSInteger pageCount;
     BOOL isLoadComplete;
+    
+    BOOL isAddShopCar;//判断是否是加入购物车还是立即购买                demoker添加
+    RMSettlementViewController * settle;
 }
 @property (nonatomic, strong) RMPlantWithSaleHeaderView * headerView;;
 @property (nonatomic, strong) UITableView * mTableView;
@@ -107,7 +113,7 @@
             
             __block RMPlantWithSaleDetailsViewController * blockSelf = self;
             
-            cycleView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) animationDuration:3];
+            cycleView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) animationDuration:-1];
             cycleView.backgroundColor = [UIColor whiteColor];
             cycleView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
                 return displayArr[pageIndex];
@@ -279,10 +285,14 @@
         }
         case 103:{
             NSLog(@"立即购买auto_id:%@",self.auto_id);
+            [self valliateNums];
+            isAddShopCar = NO;
             break;
         }
         case 104:{
             NSLog(@"加入购物车auto_id:%@",self.auto_id);
+            [self valliateNums];
+            isAddShopCar = YES;
             break;
         }
         case 105:{
@@ -295,6 +305,101 @@
     }
 }
 
+
+#pragma mark - 验证库存，加入购物车
+- (void)valliateNums{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager valliateGoodsNumWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] auto_id:self.auto_id Nums:1 andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                if(isAddShopCar){//加入购物车
+                    [self addGoodsToShopCar];
+                }else{//立即购买
+                    [self buyNow];
+                }
+            }else{
+                
+            }
+            [self showHint:model.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
+}
+#pragma mark -添加宝贝到购物车
+- (void)addGoodsToShopCar{
+
+    RMProductModel * product = [[RMProductModel alloc]init];
+    product.auto_id = dataModel.auto_id;
+    product.content_img = dataModel.content_img;
+    product.content_name = dataModel.content_name;
+    product.content_price = dataModel.content_price;
+    product.content_express = dataModel.content_express;
+    product.express_price = dataModel.express_price;
+    product.corp_id = dataModel.member_id;
+    product.content_num = 1;
+    
+    NSLog(@"%@",product);
+    
+    RMCorpModel * shop = [[RMCorpModel alloc]init];
+    shop.corp_id = dataModel.member_id;
+    shop.corp_name = [dataModel.members objectForKey:@"member_name"];
+    if([RMCorpModel existDbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",shop.corp_id]])
+    {
+        [shop updatetoDb];
+    }
+    else
+    {
+        [shop insertToDb];
+    }
+    
+    if([RMProductModel existDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",product.auto_id]])
+    {
+        [product updatetoDb];
+    }
+    else
+    {
+        [product insertToDb];
+    }
+    [self showHint:@"添加购物车成功!"];
+}
+
+#pragma mark -立即购买
+- (void)buyNow{
+    __block RMPlantWithSaleDetailsViewController * SELF = self;
+    settle = [[RMSettlementViewController alloc]initWithNibName:@"RMSettlementViewController" bundle:nil];
+    
+    settle.view.frame = CGRectMake(20, 60, kScreenWidth-20*2, kScreenHeight-60*2);
+    [settle.titleView drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, kScreenHeight-60*2)];
+    settle.callback = ^(void){
+        [SELF dismissPopUpViewControllerWithcompletion:nil];
+    };
+    settle.settle_callback = ^(void){//支付宝网站支付
+        
+    };
+    settle.editAddress_callback = ^(RMPublicModel * model_){
+        RMAddressEditViewController * address_edit = [[RMAddressEditViewController alloc]initWithNibName:@"RMAddressEditViewController" bundle:nil];
+        address_edit._model = [[RMPublicModel alloc]init];
+        address_edit._model = model_;
+        address_edit.delegate = SELF;
+        
+        [SELF.navigationController pushViewController:address_edit animated:YES];
+    };
+    settle.addAddress_callback = ^(void){
+        RMAddressEditViewController * address_edit = [[RMAddressEditViewController alloc]initWithNibName:@"RMAddressEditViewController" bundle:nil];
+        address_edit.delegate = SELF;
+        [SELF.navigationController pushViewController:address_edit animated:YES];
+    };
+    
+    [self presentPopUpViewController:settle overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+}
+- (void)RMAddressEditViewCompleted{
+    
+    [settle requestAddresslist];
+}
 
 #pragma mark - 数据请求
 

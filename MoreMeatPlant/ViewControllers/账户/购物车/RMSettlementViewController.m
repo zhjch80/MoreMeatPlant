@@ -14,7 +14,7 @@
 #import "RMSettlementTableViewCell.h"
 #import "RMAddressEditViewController.h"
 @implementation RMSettlementViewController
-
+@synthesize addressArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

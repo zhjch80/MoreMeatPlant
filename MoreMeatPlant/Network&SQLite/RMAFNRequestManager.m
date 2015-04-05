@@ -1184,9 +1184,9 @@
  */
 + (void)babyPublishWithUser:(NSString *)user Pwd:(NSString *)pwd Auto_id:(NSString *)auto_id newPhotoDic:(NSDictionary *)newPhotoDic modifyPhotoDic:(NSDictionary *)modifyPhotoDic otherDic:(NSDictionary *)otherDic andCallBack:(RMAFNRequestManagerCallBack)block {
     //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_ccenter&task=updateProduct&frm[content_name]=123&frm[content_desc]=23123&frm[content_price]=23&frm[content_express]=23&frm[express_price]=23&frm[is_sf]=1&frm[content_num]=1&frm[content_class]=1&frm[content_course]=1000&frm[member_class]=,1,2,&&ID=18513217782&PWD=202cb962ac59075b964b07152d234b70
-    NSLog(@"%@",newPhotoDic);
+    NSLog(@"新添加的照片%@",newPhotoDic);
     NSLog(@"-------------------------------------------------------");
-    NSLog(@"%@",modifyPhotoDic);
+    NSLog(@"修改的图片%@",modifyPhotoDic);
     NSString * url = nil;
     if(auto_id == nil){
         url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_ccenter&task=updateProduct",user,pwd];
@@ -1195,17 +1195,21 @@
     }
    
     [[RMHttpOperationShared sharedClient] POST:url parameters:otherDic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        //        [formData appendPartWithFileURL:filePath name:@"content_face" error:nil];
-        int i = 0;
-        for(NSString * key in [newPhotoDic allKeys]){
-            [formData appendPartWithFileURL:[newPhotoDic objectForKey:key] name:[NSString stringWithFormat:@"frm[body][content_img][%d]",i] error:nil];
-            i++;
+        
+        int j = 0;
+        for(NSString * key in [modifyPhotoDic allKeys]){
+            [formData appendPartWithFileURL:[modifyPhotoDic objectForKey:key] name:[NSString stringWithFormat:@"frm[body][content_img][%d]",j] error:nil];
+//            NSLog(@"%@+++++++++",[NSString stringWithFormat:@"frm[body][auto_id][%@]",key]);
+            j++;
         }
         
-        for(NSString * key in [modifyPhotoDic allKeys]){
-            [formData appendPartWithFileURL:[modifyPhotoDic objectForKey:key] name:[NSString stringWithFormat:@"frm[body][auto_id][%@]",key] error:nil];
-            i++;
+        for(NSString * key in [newPhotoDic allKeys]){
+            [formData appendPartWithFileURL:[newPhotoDic objectForKey:key] name:[NSString stringWithFormat:@"frm[body][content_img][%d]",j] error:nil];
+            NSLog(@"%@==========%@",[NSString stringWithFormat:@"frm[body][content_img][%d]",j],[newPhotoDic objectForKey:key]);
+            j++;
         }
+        
+       
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
@@ -1515,4 +1519,46 @@
         }
     }];
 }
+
+#pragma mark - 购物车库存验证
++ (void)valliateGoodsNumWithUser:(NSString *)user Pwd:(NSString *)pwd auto_id:(NSString *)auto_id Nums:(NSInteger)num andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_shop&task=addCart&plugin=com_shopProduct&num=1&auto_id=1
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@&num=%ld",baseUrl,@"&method=save&app_com=com_shop&task=addCart&plugin=com_shopProduct",user,pwd,auto_id,(long)num];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+    
+}
+
+
+#pragma mark - 提交订单接口
++ (void)commitOrderWithUser:(NSString *)user Pwd:(NSString *)pwd withDic:(NSDictionary *)dictionary andCallBack:(RMAFNRequestManagerCallBack)block{
+     NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_pcenter&task=addOrder",user,pwd];
+    [[RMHttpOperationShared sharedClient] POST:url parameters:dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+
+    }];
+}
+
 @end

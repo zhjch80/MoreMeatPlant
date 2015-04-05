@@ -29,5 +29,5 @@
 @property (weak, nonatomic) IBOutlet UIView *headbackView;
 @property (weak, nonatomic) IBOutlet UIView *classesView;
 @property (weak, nonatomic) IBOutlet UITableView *mainTableview;
-
+@property (retain, nonatomic) NSString * auto_id;
 @end
