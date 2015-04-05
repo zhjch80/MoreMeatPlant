@@ -43,7 +43,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    dataArr = [[NSMutableArray alloc] initWithObjects:@"", nil];
+    dataArr = [[NSMutableArray alloc] init];
     
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
@@ -57,35 +57,14 @@
 }
 
 - (void)loadTableHeaderView {
-    if ([dataModel.body count] == 1){
-        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
-        image.userInteractionEnabled = YES;
-        image.backgroundColor = [UIColor clearColor];
-        [image sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
+    if ([dataModel.body isKindOfClass:[NSNull class]]){
         
-//        UILabel * title = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];
-//        title.backgroundColor = [UIColor clearColor];
-//        title.userInteractionEnabled = YES;
-//        title.numberOfLines = 1;
-//        title.textColor = [UIColor whiteColor];
-//        title.font = [UIFont boldSystemFontOfSize:24.0];
-//        title.text = [NSString stringWithFormat:@"page index: %d",1];
-//        title.adjustsFontSizeToFitWidth = YES;
-//        [title sizeToFit];
-//        title.center = image.center;
-//        [image addSubview:title];
-        
-        mTableView.tableHeaderView = image;
     }else{
-        NSMutableArray *displayArr = [@[] mutableCopy];
-        NSInteger count = ([dataModel.body count]>5 ? 5 : [dataModel.body count]);
-        
-        for (NSInteger i=0; i<count; i++) {
-            
+        if ([dataModel.body count] == 1){
             UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
             image.userInteractionEnabled = YES;
             image.backgroundColor = [UIColor clearColor];
-            [image sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil];
+            [image sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
             
 //            UILabel * title = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];
 //            title.backgroundColor = [UIColor clearColor];
@@ -93,29 +72,54 @@
 //            title.numberOfLines = 1;
 //            title.textColor = [UIColor whiteColor];
 //            title.font = [UIFont boldSystemFontOfSize:24.0];
-//            title.text = [NSString stringWithFormat:@"page index: %ld",(long)i];
+//            title.text = [NSString stringWithFormat:@"page index: %d",1];
 //            title.adjustsFontSizeToFitWidth = YES;
 //            [title sizeToFit];
 //            title.center = image.center;
 //            [image addSubview:title];
             
-            [displayArr addObject:image];
+            mTableView.tableHeaderView = image;
+        }else{
+            NSMutableArray *displayArr = [@[] mutableCopy];
+            NSInteger count = ([dataModel.body count]>5 ? 5 : [dataModel.body count]);
+            
+            for (NSInteger i=0; i<count; i++) {
+                
+                UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
+                image.userInteractionEnabled = YES;
+                image.backgroundColor = [UIColor clearColor];
+                [image sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil];
+                
+//                UILabel * title = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];
+//                title.backgroundColor = [UIColor clearColor];
+//                title.userInteractionEnabled = YES;
+//                title.numberOfLines = 1;
+//                title.textColor = [UIColor whiteColor];
+//                title.font = [UIFont boldSystemFontOfSize:24.0];
+//                title.text = [NSString stringWithFormat:@"page index: %ld",(long)i];
+//                title.adjustsFontSizeToFitWidth = YES;
+//                [title sizeToFit];
+//                title.center = image.center;
+//                [image addSubview:title];
+                
+                [displayArr addObject:image];
+            }
+            
+            __block RMPlantWithSaleDetailsViewController * blockSelf = self;
+            
+            cycleView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) animationDuration:3];
+            cycleView.backgroundColor = [UIColor whiteColor];
+            cycleView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+                return displayArr[pageIndex];
+            };
+            self.cycleView.totalPagesCount = ^NSInteger(void){
+                return ([blockSelf.dataModel.body count]>5 ? 5 : [blockSelf.dataModel.body count]);
+            };
+            self.cycleView.TapActionBlock = ^(NSInteger pageIndex){
+                NSLog(@"select index %ld",(long)pageIndex);
+            };
+            mTableView.tableHeaderView = self.cycleView;
         }
-        
-        __block RMPlantWithSaleDetailsViewController * blockSelf = self;
-        
-        cycleView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) animationDuration:3];
-        cycleView.backgroundColor = [UIColor whiteColor];
-        cycleView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
-            return displayArr[pageIndex];
-        };
-        self.cycleView.totalPagesCount = ^NSInteger(void){
-            return ([blockSelf.dataModel.body count]>5 ? 5 : [blockSelf.dataModel.body count]);
-        };
-        self.cycleView.TapActionBlock = ^(NSInteger pageIndex){
-            NSLog(@"select index %ld",(long)pageIndex);
-        };
-        mTableView.tableHeaderView = self.cycleView;
     }
 }
 
@@ -173,7 +177,24 @@
             break;
         }
         case 1:{
+            if (![RMUserLoginInfoManager loginmanager].state){
+                NSLog(@"去登录...");
+                return ;
+            }
             
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [RMAFNRequestManager postMembersCollectWithCollect_id:dataModel.auto_id withContent_type:@"3" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+                if (error){
+                    NSLog(@"error:%@",error);
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    return ;
+                }
+                
+                if (success){
+                    
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                }
+            }];
             break;
         }
         case 2:{
@@ -217,11 +238,19 @@
         cell.productIntro.text = [NSString stringWithFormat:@"快递：%@元 库存:%@件",dataModel.express_price,dataModel.content_num];
     }
     
+    cell.productName.text = dataModel.content_name;
+    cell.plantIntro.text = dataModel.content_desc;
+    
+    CGFloat offsetY = [UtilityFunc boundingRectWithSize:CGSizeMake(kScreenWidth - 150, 0) font:FONT(13.0) text:dataModel.content_desc].height;
+    
+    cell.plantIntro.frame = CGRectMake(8, 90, kScreenWidth - 150, offsetY);
+    [cell setCellHeight:90 + offsetY];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 150.0f;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return (cell.frame.size.height > 165 ? cell.frame.size.height : 165);
 }
 
 - (void)plantWithSaleCellMethodWithTag:(NSInteger)tag {
@@ -298,6 +327,8 @@
             dataModel.body = [[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"body"];
             dataModel.members = [[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"member"];
             dataModel.series = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"series"]);
+            
+            [dataArr addObject:dataModel];
             
             [self loadHeaderView];
             

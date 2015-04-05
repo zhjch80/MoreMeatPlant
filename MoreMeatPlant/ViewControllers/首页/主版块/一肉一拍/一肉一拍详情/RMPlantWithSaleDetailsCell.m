@@ -8,6 +8,7 @@
 
 #import "RMPlantWithSaleDetailsCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CONST.h"
 
 @implementation RMPlantWithSaleDetailsCell
 
@@ -30,6 +31,10 @@
     if ([self.delegate respondsToSelector:@selector(plantWithSaleCellMethodWithTag:)]){
         [self.delegate plantWithSaleCellMethodWithTag:sender.tag];
     }
+}
+
+- (void)setCellHeight:(CGFloat)height {
+    [self setFrame:CGRectMake(0, 0, kScreenWidth, height)];
 }
 
 

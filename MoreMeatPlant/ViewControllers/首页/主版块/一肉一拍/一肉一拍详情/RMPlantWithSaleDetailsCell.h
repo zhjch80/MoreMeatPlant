@@ -22,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *productIntro;
 @property (weak, nonatomic) IBOutlet UIImageView *lineOne;
 @property (weak, nonatomic) IBOutlet UILabel *productName;
-@property (weak, nonatomic) IBOutlet UILabel *productSubTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *lineTwo;
 @property (weak, nonatomic) IBOutlet UILabel *plantIntro;
 @property (weak, nonatomic) IBOutlet UIButton *buyNowBtn;
@@ -31,5 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *deleteNumBtn;
 @property (weak, nonatomic) IBOutlet UIButton *plusNumBtn;
 @property (weak, nonatomic) IBOutlet UILabel *showNum;
+
+- (void)setCellHeight:(CGFloat)height;
 
 @end
