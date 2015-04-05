@@ -23,14 +23,13 @@
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) CycleScrollView * cycleView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
-@property (nonatomic, strong) NSMutableArray * topDataArr;
 @property (nonatomic, strong) RMBaseView * footerView;
 @property (nonatomic, strong) RMPublicModel * dataModel;
 
 @end
 
 @implementation RMPlantWithSaleDetailsViewController
-@synthesize headerView, mTableView, dataArr, cycleView, topDataArr, footerView, auto_id, dataModel;
+@synthesize headerView, mTableView, dataArr, cycleView, footerView, auto_id, dataModel;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -45,7 +44,6 @@
     // Do any additional setup after loading the view from its nib.
     
     dataArr = [[NSMutableArray alloc] initWithObjects:@"", nil];
-    topDataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", nil];
     
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
@@ -59,44 +57,47 @@
 }
 
 - (void)loadTableHeaderView {
-    if ([topDataArr count] == 1){
+    if ([dataModel.body count] == 1){
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
         image.userInteractionEnabled = YES;
-        image.backgroundColor = [UIColor yellowColor];
+        image.backgroundColor = [UIColor clearColor];
+        [image sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
         
-        UILabel * title = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];
-        title.backgroundColor = [UIColor clearColor];
-        title.userInteractionEnabled = YES;
-        title.numberOfLines = 1;
-        title.textColor = [UIColor whiteColor];
-        title.font = [UIFont boldSystemFontOfSize:24.0];
-        title.text = [NSString stringWithFormat:@"page index: %d",1];
-        title.adjustsFontSizeToFitWidth = YES;
-        [title sizeToFit];
-        title.center = image.center;
-        [image addSubview:title];
+//        UILabel * title = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];
+//        title.backgroundColor = [UIColor clearColor];
+//        title.userInteractionEnabled = YES;
+//        title.numberOfLines = 1;
+//        title.textColor = [UIColor whiteColor];
+//        title.font = [UIFont boldSystemFontOfSize:24.0];
+//        title.text = [NSString stringWithFormat:@"page index: %d",1];
+//        title.adjustsFontSizeToFitWidth = YES;
+//        [title sizeToFit];
+//        title.center = image.center;
+//        [image addSubview:title];
         
         mTableView.tableHeaderView = image;
     }else{
         NSMutableArray *displayArr = [@[] mutableCopy];
+        NSInteger count = ([dataModel.body count]>5 ? 5 : [dataModel.body count]);
         
-        for (NSInteger i=0; i<[topDataArr count]; i++) {
+        for (NSInteger i=0; i<count; i++) {
             
             UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
             image.userInteractionEnabled = YES;
-            image.backgroundColor = [UIColor cyanColor];
+            image.backgroundColor = [UIColor clearColor];
+            [image sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil];
             
-            UILabel * title = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];
-            title.backgroundColor = [UIColor clearColor];
-            title.userInteractionEnabled = YES;
-            title.numberOfLines = 1;
-            title.textColor = [UIColor whiteColor];
-            title.font = [UIFont boldSystemFontOfSize:24.0];
-            title.text = [NSString stringWithFormat:@"page index: %ld",(long)i];
-            title.adjustsFontSizeToFitWidth = YES;
-            [title sizeToFit];
-            title.center = image.center;
-            [image addSubview:title];
+//            UILabel * title = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];
+//            title.backgroundColor = [UIColor clearColor];
+//            title.userInteractionEnabled = YES;
+//            title.numberOfLines = 1;
+//            title.textColor = [UIColor whiteColor];
+//            title.font = [UIFont boldSystemFontOfSize:24.0];
+//            title.text = [NSString stringWithFormat:@"page index: %ld",(long)i];
+//            title.adjustsFontSizeToFitWidth = YES;
+//            [title sizeToFit];
+//            title.center = image.center;
+//            [image addSubview:title];
             
             [displayArr addObject:image];
         }
@@ -109,7 +110,7 @@
             return displayArr[pageIndex];
         };
         self.cycleView.totalPagesCount = ^NSInteger(void){
-            return [blockSelf.topDataArr count];
+            return ([blockSelf.dataModel.body count]>5 ? 5 : [blockSelf.dataModel.body count]);
         };
         self.cycleView.TapActionBlock = ^(NSInteger pageIndex){
             NSLog(@"select index %ld",(long)pageIndex);
@@ -129,7 +130,7 @@
         for (NSInteger i=0; i<[dataModel.body count]; i++) {
             UIImageView * imageView = [[UIImageView alloc] init];
             imageView.contentMode = UIViewContentModeScaleAspectFill;
-            [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",baseHeaderUrl,[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]]] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]]] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 [imageView setFrame:CGRectMake(5, offsetY + 20, kScreenWidth - 10, image.size.height)];
                 offsetY = offsetY + imageView.frame.size.height + 30;
                 footerView.frame = CGRectMake(0, 0, kScreenWidth, offsetY);
@@ -204,6 +205,18 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.delegate = self;
     }
+    
+    NSString * _price = [NSString stringWithFormat:@"¥%@",dataModel.content_price];
+    NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+    [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
+    cell.price.attributedText = oneAttributeStr;
+
+    if ([dataModel.is_sf isEqualToString:@"1"]){
+        cell.productIntro.text = [NSString stringWithFormat:@"快递：%@元 顺风:22元 库存:%@件",dataModel.express_price,dataModel.content_num];
+    }else{
+        cell.productIntro.text = [NSString stringWithFormat:@"快递：%@元 库存:%@件",dataModel.express_price,dataModel.content_num];
+    }
+    
     return cell;
 }
 

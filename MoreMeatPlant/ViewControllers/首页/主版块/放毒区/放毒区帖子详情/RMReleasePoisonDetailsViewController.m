@@ -97,15 +97,39 @@
             break;
         }
         case 1:{
-            NSLog(@"收藏");
+            if (![RMUserLoginInfoManager loginmanager].state){
+                NSLog(@"去登录.....");
+                return;
+            }
+            
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [RMAFNRequestManager postMembersCollectWithCollect_id:dataModel.auto_id withContent_type:@"1" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+                if (error){
+                    NSLog(@"error:%@",error);
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    return ;
+                }
+                
+                if (success){
+                    
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                }
+            }];
             break;
         }
         case 2:{
+            if (![RMUserLoginInfoManager loginmanager].state){
+                NSLog(@"去登录.....");
+                return;
+            }
+            
             RMCommentsView * commentsView = [[RMCommentsView alloc] init];
             commentsView.delegate = self;
             commentsView.backgroundColor = [UIColor clearColor];
             commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            [commentsView loadCommentsViewWithReceiver:[NSString  stringWithFormat:@"   评论：%@",[dataModel.members objectForKey:@"member_name"]]];
+            commentsView.requestType = kRMReleasePoisonListComment;
+            commentsView.code = dataModel.auto_id;
+            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  评论:%@",[dataModel.members objectForKey:@"member_name"]]];
             [self.view addSubview:commentsView];
             break;
         }
