@@ -427,8 +427,8 @@
         
         NSDictionary * dic = OBJC_Nil([current_Model.body objectAtIndex:(img_tag/300-5)*5+img_tag%300-1]);
         if(dic){
-            [[RMVPImageCropper shareImageCropper] setFileName:[NSString stringWithFormat:@"frm[body][auto_id][%@].png",[dic objectForKey:@"auto_id"]]];
-            NSLog(@"%@",[NSString stringWithFormat:@"frm[body][auto_id][%@].png",[dic objectForKey:@"auto_id"]]);
+            [[RMVPImageCropper shareImageCropper] setFileName:[NSString stringWithFormat:@"frm[body][auto_id][%ld].png",(img_tag/300-5)*5+img_tag%300-1]];
+            NSLog(@"%@",[NSString stringWithFormat:@"frm[body][auto_id][%ld].png",(img_tag/300-5)*5+img_tag%300-1]);
         }
     }else{
         [[RMVPImageCropper shareImageCropper] setFileName:[NSString stringWithFormat:@"frm[body][content_img][%lu].png",(img_tag/300-5)*5+img_tag%300-[current_Model.body count]-1]];
@@ -538,10 +538,8 @@
     
     if((img_tag/300-5)*5+img_tag%300<=[current_Model.body count]){
         [modifyImageDic setObject:editedImage forKey:[NSString stringWithFormat:@"%ld",img_tag]];
-        NSDictionary * dic = OBJC_Nil([current_Model.body objectAtIndex:(img_tag/300-5)*5+img_tag%300-1]);
-        if(dic){
-            [modifyPhotoDic setObject:filePath forKey:[NSString stringWithFormat:@"%ld",(img_tag/300-5)*5+img_tag%300-1]];
-        }
+        
+        [modifyPhotoDic setObject:filePath forKey:[NSString stringWithFormat:@"%ld",(img_tag/300-5)*5+img_tag%300-1]];
     }else{
         [newAddPhotoDic setObject:filePath forKey:[NSString stringWithFormat:@"%ld",(img_tag/300-5)*5+img_tag%300-1]];
         [newAddImageDic setObject:editedImage forKey:[NSString stringWithFormat:@"%ld",(img_tag/300-5)*5+img_tag%300]];
@@ -587,7 +585,10 @@
         if(success){
             RMPublicModel * model = object;
             if(model.status){
-                
+                if(self.publishCompleted){
+                    self.publishCompleted ();
+                }
+                [self.navigationController popViewControllerAnimated:YES];
             }
             [self showHint:model.msg];
         }else{

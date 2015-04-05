@@ -7,7 +7,7 @@
 //
 
 #import "RMBaseViewController.h"
-
+typedef void (^RMPublishBabyViewCtlCallBack)(void);
 @interface RMPublishBabyViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,UITextFieldDelegate,UITextViewDelegate>{
     NSMutableArray * classArray;
     NSMutableArray * courseArray;
@@ -21,5 +21,6 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
 @property (retain, nonatomic) NSString * auto_id;
+@property (copy, nonatomic) RMPublishBabyViewCtlCallBack publishCompleted;
 
 @end

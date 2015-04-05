@@ -290,17 +290,17 @@
     RMProductModel * product = [[[dataArray objectAtIndex:indexpath.section] objectForKey:@"products"] objectAtIndex:indexpath.row-1];
     
     UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您确定要删除这个宝贝吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    [alert handlerCancel:^(UIAlertView *alertView) {
-        
-    }];
     [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
-        if( [RMProductModel removeDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",product.auto_id]])
-        {
-            if([RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",product.corp_id] orderby:@"corp_id"] == nil)
-            {
-                [RMCorpModel removeDbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",product.corp_id] ];
-            }
-        }
+         if(btnIndex == 1){
+             if( [RMProductModel removeDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",product.auto_id]])
+             {
+           
+                 if([RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",product.corp_id] orderby:@"corp_id"] == nil)
+                 {
+                     [RMCorpModel removeDbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",product.corp_id] ];
+                 }
+             }
+         }
         
         [self caculateProductTotal];
     }];

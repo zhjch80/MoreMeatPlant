@@ -1196,17 +1196,14 @@
    
     [[RMHttpOperationShared sharedClient] POST:url parameters:otherDic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
-        int j = 0;
         for(NSString * key in [modifyPhotoDic allKeys]){
-            [formData appendPartWithFileURL:[modifyPhotoDic objectForKey:key] name:[NSString stringWithFormat:@"frm[body][content_img][%d]",j] error:nil];
-//            NSLog(@"%@+++++++++",[NSString stringWithFormat:@"frm[body][auto_id][%@]",key]);
-            j++;
+            [formData appendPartWithFileURL:[modifyPhotoDic objectForKey:key] name:[NSString stringWithFormat:@"frm[body][content_img][%@]",key] error:nil];
+            NSLog(@"%@+++++++++",[NSString stringWithFormat:@"frm[body][auto_id][%@]",key]);
         }
         
         for(NSString * key in [newPhotoDic allKeys]){
-            [formData appendPartWithFileURL:[newPhotoDic objectForKey:key] name:[NSString stringWithFormat:@"frm[body][content_img][%d]",j] error:nil];
-            NSLog(@"%@==========%@",[NSString stringWithFormat:@"frm[body][content_img][%d]",j],[newPhotoDic objectForKey:key]);
-            j++;
+            [formData appendPartWithFileURL:[newPhotoDic objectForKey:key] name:[NSString stringWithFormat:@"frm[body][content_img][%@]",key] error:nil];
+            NSLog(@"%@==========%@",[NSString stringWithFormat:@"frm[body][content_img][%@]",key],[newPhotoDic objectForKey:key]);
         }
         
        

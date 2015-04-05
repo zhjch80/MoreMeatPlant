@@ -39,6 +39,9 @@
     all_Ctl.modifycallback = ^(RMPublicModel *model){
         RMPublishBabyViewController * publish = [[RMPublishBabyViewController alloc]initWithNibName:@"RMPublishBabyViewController" bundle:nil];
         publish.auto_id = model.auto_id;
+        publish.publishCompleted = ^(void){
+            [SELF->all_Ctl requestDataWithPageCount:1];
+        };
         [SELF.navigationController pushViewController:publish animated:YES];
     };
     
@@ -77,6 +80,9 @@
         }
         case 3:{
             RMPublishBabyViewController * publish = [[RMPublishBabyViewController alloc]initWithNibName:@"RMPublishBabyViewController" bundle:nil];
+            publish.publishCompleted = ^(void){
+                [self->all_Ctl requestDataWithPageCount:1];
+            };
             [self.navigationController pushViewController:publish animated:YES];
             break;
         }
