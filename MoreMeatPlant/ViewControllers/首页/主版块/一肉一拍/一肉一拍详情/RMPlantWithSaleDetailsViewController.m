@@ -139,10 +139,14 @@
     }else{
         for (NSInteger i=0; i<[dataModel.body count]; i++) {
             UIImageView * imageView = [[UIImageView alloc] init];
-            imageView.contentMode = UIViewContentModeScaleAspectFill;
             [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]]] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                [imageView setFrame:CGRectMake(5, offsetY + 20, kScreenWidth - 10, image.size.height)];
+                
+                CGFloat height = image.size.height/image.size.width * kScreenWidth;
+
+                [imageView setFrame:CGRectMake(0, offsetY + 20, kScreenWidth, height)];
+                
                 offsetY = offsetY + imageView.frame.size.height + 30;
+  
                 footerView.frame = CGRectMake(0, 0, kScreenWidth, offsetY);
                 mTableView.tableFooterView = footerView;
             }];

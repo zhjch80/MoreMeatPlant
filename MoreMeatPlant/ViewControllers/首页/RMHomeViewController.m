@@ -113,7 +113,7 @@ typedef enum{
     for (NSInteger i=0; i<[advertisingArr count]; i++) {
         RMImageView * popularizeView = [[RMImageView alloc] init];
         RMPublicModel * model = [advertisingArr objectAtIndex:i];
-        popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + i*40, kScreenWidth, 40);
+        popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + i*45, kScreenWidth, 45);
         popularizeView.identifierString = model.member_id;
         [popularizeView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         [popularizeView addTarget:self withSelector:@selector(jumpPopularize:)];
@@ -121,7 +121,7 @@ typedef enum{
         value ++;
     }
 
-    headerView.frame = CGRectMake(0, 0, kScreenWidth, rmImage.frame.size.height + value * 40);
+    headerView.frame = CGRectMake(0, 0, kScreenWidth, rmImage.frame.size.height + value * 45);
     
     mTableView.tableHeaderView = headerView;
 }
@@ -173,7 +173,7 @@ typedef enum{
             if (indexPath.row == 0 || indexPath.row == 6){
                 
             }else{
-                NSString * numStr = [NSString stringWithFormat:@"(%@新帖)",model.content_num];
+                NSString * numStr = [NSString stringWithFormat:@"(%@新帖)",(model.content_num.integerValue > 0 ? model.content_num : @"0")];
                 cell.titleName.text = [NSString stringWithFormat:@"%@ %@",model.modules_name,numStr];
                 
                 NSInteger length = [NSString stringWithFormat:@"%@",model.modules_name].length;

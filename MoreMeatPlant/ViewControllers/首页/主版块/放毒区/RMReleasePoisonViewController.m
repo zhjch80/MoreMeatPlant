@@ -86,8 +86,8 @@
 
     newsArr = [[NSMutableArray alloc] init];
     
-    plantRequestValue = 1000;
-    subsPlantRequestValue = 1000;
+    plantRequestValue = -9999;
+    subsPlantRequestValue = -9999;
     
     dataArr = [[NSMutableArray alloc] init];
     
@@ -674,14 +674,14 @@
     NSString * plantType = @"";
     NSString * subjectsType = @"";
     
-    if (plantRequestValue == 1000){
+    if (plantRequestValue == -9999){
         plantType = @"";
     }else{
         RMPublicModel * model_1 = [plantTypeArr objectAtIndex:plantRequestValue];
         plantType = model_1.value;
     }
     
-    if (subsPlantRequestValue == 1000){
+    if (subsPlantRequestValue == -9999){
         subjectsType = @"";
     }else{
         RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
@@ -689,7 +689,7 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getPostsListWithPostsType:@"1" withPlantType:plantType withPlantSubjects:subjectsType withPageCount:pc withUser_id:@"" withUser_password:@"" callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getPostsListWithPostsType:@"1" withPlantType:plantType withPlantSubjects:subjectsType withPageCount:pc withUser_id:OBJC([RMUserLoginInfoManager loginmanager].user) withUser_password:OBJC([RMUserLoginInfoManager loginmanager].pwd) callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

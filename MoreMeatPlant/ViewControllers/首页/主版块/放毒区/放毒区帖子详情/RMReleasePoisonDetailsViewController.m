@@ -25,17 +25,19 @@
     BOOL isRefresh;
     NSInteger pageCount;
     BOOL isLoadComplete;
+    NSInteger praiseCellCount;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @property (nonatomic, strong) NSMutableArray * dataCommentArr;
 @property (nonatomic, strong) RMTableHeadView * tableHeadView;
 @property (nonatomic, strong) RMPublicModel * dataModel;
+@property (nonatomic, strong) NSMutableArray * advertisingArr;
 
 @end
 
 @implementation RMReleasePoisonDetailsViewController
-@synthesize mTableView, dataArr, tableHeadView, dataCommentArr, dataModel;
+@synthesize mTableView, dataArr, tableHeadView, dataCommentArr, dataModel, advertisingArr;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -69,13 +71,16 @@
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     dataModel = [[RMPublicModel alloc] init];
     
-    dataCommentArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
+    dataCommentArr = [[NSMutableArray alloc] init];
+    advertisingArr = [[NSMutableArray alloc] init];
     
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 40) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
+    
+    praiseCellCount = 0;
     
     [self loadBottomView];
 }
@@ -175,7 +180,10 @@
             UIImageView * imageView = [[UIImageView alloc] init];
             imageView.contentMode = UIViewContentModeScaleAspectFill;
             [imageView sd_setImageWithURL:[NSURL URLWithString:[[dataModel.imgs objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                [imageView setFrame:CGRectMake(5, body.frame.size.height + body.frame.origin.y + 25, kScreenWidth - 10, image.size.height)];
+                
+                CGFloat height = image.size.height/image.size.width * kScreenWidth;
+
+                [imageView setFrame:CGRectMake(0, body.frame.size.height + body.frame.origin.y + 25, kScreenWidth, height)];
             }];
             [tableHeadView addSubview:imageView];
             
@@ -185,6 +193,9 @@
 
     tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, offsetY);
     mTableView.tableHeaderView = tableHeadView;
+    
+    praiseCellCount = 1;
+    [mTableView reloadData];
 
 //    tableHeadView.detailsWebView.scrollView.bounces = NO;
 //    tableHeadView.detailsWebView.scrollView.showsVerticalScrollIndicator = NO;
@@ -248,11 +259,12 @@
 #pragma mark -
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [dataCommentArr count];
+    return [dataCommentArr count] + [advertisingArr count] + praiseCellCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0){
+        //赞
         static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_1";
         RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         if (!cell){
@@ -261,7 +273,8 @@
             cell.delegate = self;
         }
         return cell;
-    }else if (indexPath.row == 1){
+    }else if (indexPath.row > 0 && indexPath.row <= [advertisingArr count]){
+        //广告
         static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_2";
         RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         if (!cell){
@@ -270,39 +283,47 @@
             cell.backgroundColor = [UIColor clearColor];
             cell.delegate = self;
         }
-        return cell;
-    }else if (indexPath.row < 6){
-        static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_3";
-        RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
-        if (!cell){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_3" owner:self options:nil] lastObject];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor clearColor];
-            cell.delegate = self;
-        }
-//        [cell setFrame:cell.cellFrame];
+        RMPublicModel * model = [advertisingArr objectAtIndex:indexPath.row - 1];
+        
+        [cell.toPromoteImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        cell.toPromoteImg.identifierString = model.member_id;
         return cell;
     }else{
-        static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_4";
-        RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
-        if (!cell){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_4" owner:self options:nil] lastObject];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor clearColor];
-            cell.delegate = self;
-        }
-        cell.comments_2_1.text = @"Kucyoung贝贝\n在哪里买的呀，给个链接呗！";
-        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:@"Kucyoung贝贝\n在哪里买的呀，给个链接呗！"];
-        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:1 green:0.18 blue:0.45 alpha:1] range:NSMakeRange(0, 10)];
-        cell.comments_2_1.attributedText = oneAttributeStr;
-        
-        //        [cell setFrame:cell.cellFrame];
-        return cell;
+//        if (){
+            //评论
+            static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_3";
+            RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+            if (!cell){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_3" owner:self options:nil] lastObject];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.backgroundColor = [UIColor clearColor];
+                cell.delegate = self;
+            }
+//        [cell setFrame:cell.cellFrame];
+            return cell;
+//        }else{
+//            //回复
+//            static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_4";
+//            RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+//            if (!cell){
+//                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_4" owner:self options:nil] lastObject];
+//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                cell.backgroundColor = [UIColor clearColor];
+//                cell.delegate = self;
+//            }
+//            cell.comments_2_1.text = @"Kucyoung贝贝\n在哪里买的呀，给个链接呗！";
+//            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:@"Kucyoung贝贝\n在哪里买的呀，给个链接呗！"];
+//            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:1 green:0.18 blue:0.45 alpha:1] range:NSMakeRange(0, 10)];
+//            cell.comments_2_1.attributedText = oneAttributeStr;
+//            
+////        [cell setFrame:cell.cellFrame];
+//            return cell;
+//        }
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0 | indexPath.row == 1){
+    if (indexPath.row >= 0 && indexPath.row <= [advertisingArr count]){
         return 50.0;
     }else if (indexPath.row < 6){
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -315,6 +336,7 @@
 #pragma mark - 跳转到广告位置
 
 - (void)jumpPromoteMethod:(RMImageView *)image {
+    NSLog(@"member_id:%@",image.identifierString);
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
     [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
@@ -431,9 +453,39 @@
             dataModel.is_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"is_review"]);
             dataModel.is_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"is_top"]);
             dataModel.members = [[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"member"];
+            
             [self loadTableHeadView];
 
+            [self requestAdvertisingQuery];
+            
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
+/**
+ *  @method     广告
+ */
+- (void)requestAdvertisingQuery {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getAdvertisingQueryWithType:3 callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error::%@",error);
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
+                [advertisingArr addObject:model];
+            }
+
+            [mTableView reloadData];
+            
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
     }];
 }

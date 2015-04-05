@@ -37,10 +37,12 @@
 @property (nonatomic, strong) ZFModalTransitionAnimator * animator;
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
+@property (nonatomic, assign) NSInteger subsPlantRequestValue;   //请求list数据 默认传空 用户可以选择科目
+
 @end
 
 @implementation RMPlantWithSaleViewController
-@synthesize mTableView, dataArr, action, animator, refreshControl, newsArr, subsPlantArr;
+@synthesize mTableView, dataArr, action, animator, refreshControl, newsArr, subsPlantArr, subsPlantRequestValue;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -78,6 +80,7 @@
     pageCount = 1;
     isRefresh = YES;
     isFirstViewDidAppear = NO;
+    subsPlantRequestValue = -9999;
     
     [self loadBottomView];
 }
@@ -221,7 +224,18 @@
 #pragma mark - 选择肉肉类型
 
 - (void)selectedPlantWithType:(NSString *)type {
-    NSLog(@"type:%@",type);
+    subsPlantRequestValue = type.integerValue;
+    isRefresh = YES;
+    NSString * subjectsType = @"";
+    
+    if (subsPlantRequestValue == -9999){
+        subjectsType = @"";
+    }else{
+        RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
+        subjectsType = model_2.auto_code;
+    }
+    
+    [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
 }
 
 - (void)selectedPostMessageWithPostsType:(NSInteger)type_1 withPlantType:(NSInteger)type_2 {
@@ -354,7 +368,16 @@
     [RMAFNRequestManager getPlantSubjectsListWithLevel:1 callBack:^(NSError *error, BOOL success, id object) {
         if (error) {
             NSLog(@"植物科目error:%@",error);
-            [self requestListWithPlantCourse:1000 withPageCount:1];
+            NSString * subjectsType = @"";
+            
+            if (subsPlantRequestValue == -9999){
+                subjectsType = @"";
+            }else{
+                RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
+                subjectsType = model_2.auto_code;
+            }
+            
+            [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             return ;
         }
@@ -373,7 +396,16 @@
             
             [self loadTableViewHead];
             
-            [self requestListWithPlantCourse:1000 withPageCount:1];
+            NSString * subjectsType = @"";
+            
+            if (subsPlantRequestValue == -9999){
+                subjectsType = @"";
+            }else{
+                RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
+                subjectsType = model_2.auto_code;
+            }
+            
+            [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
             
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
@@ -452,7 +484,16 @@
         pageCount = 1;
         isRefresh = YES;
         isLoadComplete = NO;
-        [self requestListWithPlantCourse:1000 withPageCount:1];
+        NSString * subjectsType = @"";
+
+        if (subsPlantRequestValue == -9999){
+            subjectsType = @"";
+        }else{
+            RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
+            subjectsType = model_2.auto_code;
+        }
+        
+        [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
@@ -463,7 +504,15 @@
         }else{
             pageCount ++;
             isRefresh = NO;
-            [self requestListWithPlantCourse:1000 withPageCount:pageCount];
+            NSString * subjectsType = @"";
+            
+            if (subsPlantRequestValue == -9999){
+                subjectsType = @"";
+            }else{
+                RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
+                subjectsType = model_2.auto_code;
+            }
+            [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:pageCount];
         }
     }
 }

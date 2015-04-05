@@ -21,6 +21,7 @@
 #import "ZFModalTransitionAnimator.h"
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
+#import "RMPlantWithSaleDetailsViewController.h"
 
 @interface RMFreshPlantMarketViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,BottomDelegate,JumpPlantDetailsDelegate,PostMessageSelectedPlantDelegate,RefreshControlDelegate>{
     BOOL isFirstViewDidAppear;
@@ -37,10 +38,12 @@
 @property (nonatomic, strong) ZFModalTransitionAnimator * animator;
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
+@property (nonatomic, assign) NSInteger subsPlantRequestValue;   //请求list数据 默认传空 用户可以选择科目
+
 @end
 
 @implementation RMFreshPlantMarketViewController
-@synthesize mTableView, dataArr, action, animator, newsArr, subsPlantArr, refreshControl;
+@synthesize mTableView, dataArr, action, animator, newsArr, subsPlantArr, refreshControl, subsPlantRequestValue;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -78,7 +81,8 @@
     pageCount = 1;
     isRefresh = YES;
     isFirstViewDidAppear = NO;
-    
+    subsPlantRequestValue = -9999;
+
     [self loadBottomView];
 }
 
@@ -102,6 +106,9 @@
         cell.delegate = self;
     }
     if(indexPath.row*3 < dataArr.count){
+        cell.leftPrice.hidden = NO;
+        cell.leftImg.hidden = NO;
+        cell.leftName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
         cell.leftPrice.text = model.content_price;
         cell.leftName.text = model.content_name;
@@ -110,8 +117,12 @@
     }else{
         cell.leftPrice.hidden = YES;
         cell.leftImg.hidden = YES;
+        cell.leftName.hidden = YES;
     }
     if(indexPath.row*3+1 < dataArr.count){
+        cell.centerPrice.hidden = NO;
+        cell.centerImg.hidden = NO;
+        cell.centerName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
         cell.centerPrice.text = model.content_price;
         cell.centerName.text = model.content_name;
@@ -120,8 +131,12 @@
     }else{
         cell.centerPrice.hidden = YES;
         cell.centerImg.hidden = YES;
+        cell.centerName.hidden = YES;
     }
     if(indexPath.row*3+2 < dataArr.count){
+        cell.rightPrice.hidden = NO;
+        cell.rightImg.hidden = NO;
+        cell.rightName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
         cell.rightPrice.text = model.content_price;
         cell.rightName.text = model.content_name;
@@ -130,6 +145,7 @@
     }else{
         cell.rightPrice.hidden = YES;
         cell.rightImg.hidden = YES;
+        cell.rightName.hidden = YES;
     }
     
     return cell;
@@ -140,14 +156,30 @@
 }
 
 - (void)jumpPlantDetailsWithImage:(RMImageView *)image {
-    RMFreshPlantMarketDetailsViewController * freshPlantMarketDetailsCtl = [[RMFreshPlantMarketDetailsViewController alloc] init];
-    [self.navigationController pushViewController:freshPlantMarketDetailsCtl animated:YES];
+    RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
+    plantWithSaleDetailsCtl.auto_id = image.identifierString;
+    [self.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
 }
 
 #pragma mark - 选择肉肉类型
 
 - (void)selectedPlantWithType:(NSString *)type {
-    NSLog(@"type:%@",type);
+    subsPlantRequestValue = type.integerValue;
+    isRefresh = YES;
+    NSString * subjectsType = @"";
+    
+    if (subsPlantRequestValue == -9999){
+        subjectsType = @"";
+    }else{
+        RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
+        subjectsType = model_2.auto_code;
+    }
+    
+    [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
+}
+
+- (void)selectedPostMessageWithPostsType:(NSInteger)type_1 withPlantType:(NSInteger)type_2 {
+    
 }
 
 #pragma mark - 加载底部View
@@ -208,8 +240,9 @@
 #pragma mark - 跳转到置顶详情界面
 
 - (void)stickJumpDetailsWithOrder:(NSInteger)order {
+    RMPublicModel * model = [newsArr objectAtIndex:order];
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:@"" withTitle:@"置顶 新手教程"];
+    [baseWebCtl loadRequestWithUrl:model.view_link withTitle:[NSString stringWithFormat:@"置顶 %@",model.content_name]];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
@@ -323,7 +356,16 @@
     [RMAFNRequestManager getPlantSubjectsListWithLevel:1 callBack:^(NSError *error, BOOL success, id object) {
         if (error) {
             NSLog(@"植物科目error:%@",error);
-            [self requestListWithPlantCourse:1000 withPageCount:1];
+            NSString * subjectsType = @"";
+            
+            if (subsPlantRequestValue == -9999){
+                subjectsType = @"";
+            }else{
+                RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
+                subjectsType = model_2.auto_code;
+            }
+            
+            [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             return ;
         }
@@ -342,7 +384,16 @@
             
             [self loadTableViewHead];
             
-            [self requestListWithPlantCourse:1000 withPageCount:1];
+            NSString * subjectsType = @"";
+            
+            if (subsPlantRequestValue == -9999){
+                subjectsType = @"";
+            }else{
+                RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
+                subjectsType = model_2.auto_code;
+            }
+            
+            [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
             
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
@@ -421,18 +472,37 @@
         pageCount = 1;
         isRefresh = YES;
         isLoadComplete = NO;
-        [self requestListWithPlantCourse:1000 withPageCount:1];
+        NSString * subjectsType = @"";
+        
+        if (subsPlantRequestValue == -9999){
+            subjectsType = @"";
+        }else{
+            RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
+            subjectsType = model_2.auto_code;
+        }
+        
+        [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self showHint:@"没有更多宝贝啦"];
+                [self showHint:@"没有更多鲜肉啦"];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
             });
         }else{
             pageCount ++;
             isRefresh = NO;
-            [self requestListWithPlantCourse:1000 withPageCount:pageCount];
+            
+            NSString * subjectsType = @"";
+            
+            if (subsPlantRequestValue == -9999){
+                subjectsType = @"";
+            }else{
+                RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
+                subjectsType = model_2.auto_code;
+            }
+            
+            [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:pageCount];
         }
     }
 }

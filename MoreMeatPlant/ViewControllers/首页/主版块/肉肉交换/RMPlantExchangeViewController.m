@@ -83,8 +83,8 @@
     
     newsArr = [[NSMutableArray alloc] init];
     
-    plantRequestValue = 1000;
-    subsPlantRequestValue = 1000;
+    plantRequestValue = -9999;
+    subsPlantRequestValue = -9999;
     
     dataArr = [[NSMutableArray alloc] init];
     
@@ -212,11 +212,11 @@
         [cell.rightUpTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:nil];
         [cell.rightDownTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:2] objectForKey:@"content_img"]] placeholderImage:nil];
         
-        cell.leftImg.identifierString = model.auto_id;
+        cell.leftTwoImg.identifierString = model.auto_id;
         cell.rightUpTwoImg.identifierString = model.auto_id;
         cell.rightDownTwoImg.identifierString = model.auto_id;
         
-        cell.likeImg.identifierString = model.auto_id;
+        cell.leftTwoImg.identifierString = model.auto_id;
         cell.chatImg.identifierString = model.auto_id;
         cell.praiseImg.identifierString = model.auto_id;
         
@@ -313,8 +313,13 @@
 #pragma mark - 添加收藏 赞 评论
 
 - (void)addLikeWithImage:(RMImageView *)image {
+    if (![RMUserLoginInfoManager loginmanager].state){
+        NSLog(@"去登录.....");
+        return;
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager postMembersCollectWithCollect_id:@"" withContent_type:@"" withID:@"" withPWD:@"" callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager postMembersCollectWithCollect_id:image.identifierString withContent_type:@"1" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -329,11 +334,18 @@
 }
 
 - (void)addChatWithImage:(RMImageView *)image {
+    if (![RMUserLoginInfoManager loginmanager].state){
+        NSLog(@"去登录.....");
+        return;
+    }
+    
     for (NSInteger i=0; i<[dataArr count]; i++){
         RMPublicModel * model = [dataArr objectAtIndex:i];
         if ([model.auto_id isEqualToString:image.identifierString]){
             RMCommentsView * commentsView = [[RMCommentsView alloc] init];
             commentsView.delegate = self;
+            commentsView.requestType = kRMReleasePoisonListComment;
+            commentsView.code = image.identifierString;
             commentsView.backgroundColor = [UIColor clearColor];
             commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
             [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  评论:%@",[model.members objectForKey:@"member_name"]]];
@@ -343,9 +355,24 @@
     }
 }
 
+//评论成功
+- (void)commentSuccessMethodWithType:(NSInteger)type {
+    
+}
+
+//评论失败
+- (void)commentFailureMethodWithType:(NSInteger)type {
+    
+}
+
 - (void)addPraiseWithImage:(RMImageView *)image {
+    if (![RMUserLoginInfoManager loginmanager].state){
+        NSLog(@"去登录.....");
+        return;
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager postPostsAddPraiseWithAuto_id:image.identifierString withID:@"" withPWD:@"" callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager postPostsAddPraiseWithAuto_id:image.identifierString withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -362,8 +389,8 @@
 #pragma mark - 帖子详情
 
 - (void)jumpPostDetailsWithImage:(RMImageView *)image {
-    NSLog(@"auto_id:%@",image.identifierString);
     RMReleasePoisonDetailsViewController * releasePoisonDetailsCtl = [[RMReleasePoisonDetailsViewController alloc] init];
+    releasePoisonDetailsCtl.auto_id = image.identifierString;
     [self.navigationController pushViewController:releasePoisonDetailsCtl animated:YES];
 }
 
@@ -390,16 +417,19 @@
 #pragma mark - 选择肉肉类型
 
 - (void)selectedPlantWithType:(NSString *)type {
-    NSLog(@"type:%@",type);
+    subsPlantRequestValue = type.integerValue;
+    isRefresh = YES;
+    [self requestListWithPageCount:1];
 }
 
 - (void)selectedPlantType:(NSInteger)type {
-    NSLog(@"分类：type:%ld",type);
     if (type<6){
         plantRequestValue = type;
     }else{
-        subsPlantRequestValue = type;
+        subsPlantRequestValue = type-6;
     }
+    isRefresh = YES;
+    [self requestListWithPageCount:1];
 }
 
 #pragma mark - 跳转到置顶详情界面
@@ -430,11 +460,13 @@
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
-            fenleiAction = [[RMPostClassificationView alloc] init];
-            fenleiAction.delegate = self;
-            fenleiAction.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            fenleiAction.backgroundColor = [UIColor clearColor];
-            [fenleiAction initWithPostClassificationViewWithPlantArr:plantTypeArr withSubsPlant:subsPlantArr];
+            if (!fenleiAction){
+                fenleiAction = [[RMPostClassificationView alloc] init];
+                fenleiAction.delegate = self;
+                fenleiAction.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+                fenleiAction.backgroundColor = [UIColor clearColor];
+                [fenleiAction initWithPostClassificationViewWithPlantArr:plantTypeArr withSubsPlant:subsPlantArr];
+            }
             [self.view addSubview:fenleiAction];
             [fenleiAction show];
             break;
@@ -604,14 +636,14 @@
     NSString * plantType = @"";
     NSString * subjectsType = @"";
     
-    if (plantRequestValue == 1000){
+    if (plantRequestValue == -9999){
         plantType = @"";
     }else{
         RMPublicModel * model_1 = [plantTypeArr objectAtIndex:plantRequestValue];
         plantType = model_1.value;
     }
     
-    if (subsPlantRequestValue == 1000){
+    if (subsPlantRequestValue == -9999){
         subjectsType = @"";
     }else{
         RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
