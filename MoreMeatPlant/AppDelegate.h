@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "RMCustomNavController.h"
-
+#import "RMShareViewDelegate.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) RMCustomNavController *cusNav;
+@property (retain, nonatomic) RMShareViewDelegate * viewdelegate;
 
 /**
  *  @method

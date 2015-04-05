@@ -20,6 +20,22 @@
 	<string>1.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>sina</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb306649366</string>
+				<string>wx5354085a0152c131</string>
+				<string>QQ41AB286B</string>
+				<string>tencent1101736043</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0.0</string>
 	<key>LSRequiresIPhoneOS</key>
