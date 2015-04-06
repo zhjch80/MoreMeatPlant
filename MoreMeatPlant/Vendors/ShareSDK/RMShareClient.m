@@ -11,8 +11,7 @@
 #define APPID @"1234567890"
 
 @implementation RMShareClient
-- (id)init
-{
+- (id)init {
     self = [super init];
     if(self)
     {
@@ -21,8 +20,8 @@
     return self;
     
 }
-- (void)share:(NSDictionary *)dic
-{
+
+- (void)share:(NSDictionary *)dic {
     NSArray *shareList = [ShareSDK getShareListWithType:ShareTypeSinaWeibo, ShareTypeTencentWeibo,ShareTypeQQSpace,ShareTypeSMS,ShareTypeCopy,ShareTypeWeixiSession,ShareTypeWeixiTimeline,ShareTypeQQ,ShareTypeWeixiFav, nil];
     
     //创建分享内容

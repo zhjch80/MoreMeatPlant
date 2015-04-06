@@ -149,7 +149,7 @@ typedef enum{
         }
         if (indexPath.row%2 == 0){
             CAGradientLayer *gradient = [CAGradientLayer layer];
-            gradient.frame = CGRectMake(0, 0, cell.bgImg.frame.size.width, cell.bgImg.frame.size.height);
+            gradient.frame = CGRectMake(0, 0, kScreenWidth, cell.bgImg.frame.size.height);
             gradient.colors = [NSArray arrayWithObjects:
                                (id)[UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1].CGColor,
                                (id)[UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor,
@@ -173,7 +173,12 @@ typedef enum{
             if (indexPath.row == 0 || indexPath.row == 6){
                 
             }else{
-                NSString * numStr = [NSString stringWithFormat:@"(%@新帖)",(model.content_num.integerValue > 0 ? model.content_num : @"0")];
+                NSString * numStr;
+                if (indexPath.row == 2 | indexPath.row == 3){
+                    numStr = [NSString stringWithFormat:@"(%@新肉)",(model.content_num.integerValue > 0 ? model.content_num : @"0")];
+                }else{
+                    numStr = [NSString stringWithFormat:@"(%@新帖)",(model.content_num.integerValue > 0 ? model.content_num : @"0")];
+                }
                 cell.titleName.text = [NSString stringWithFormat:@"%@ %@",model.modules_name,numStr];
                 
                 NSInteger length = [NSString stringWithFormat:@"%@",model.modules_name].length;

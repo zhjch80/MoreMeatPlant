@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <ShareSDK/ShareSDK.h>
 #import "AppDelegate.h"
+
 typedef void(^ShareButtonClickedCompleted)(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end);
+
 @interface RMShareClient : NSObject
 {
     AppDelegate * appdelegate;

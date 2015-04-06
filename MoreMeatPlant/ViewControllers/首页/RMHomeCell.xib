@@ -19,14 +19,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hrj-Wl-z5G">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hrj-Wl-z5G">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Urd-SM-jZI">
                         <rect key="frame" x="14" y="7" width="45" height="45"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M8q-TY-MQh">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8q-TY-MQh">
                         <rect key="frame" x="0.0" y="59" width="320" height="1"/>
                         <color key="backgroundColor" red="0.87376767113095233" green="0.87376767113095233" blue="0.87376767113095233" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -34,10 +34,20 @@
                         <rect key="frame" x="67" y="15" width="245" height="30"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="FZZZHONGJW--GB1-0" family="FZZhengHeiS-DB-GB" pointSize="20"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="M8q-TY-MQh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0H5-De-9PY"/>
+                    <constraint firstAttribute="bottom" secondItem="hrj-Wl-z5G" secondAttribute="bottom" constant="-1" id="FmW-AY-vvI"/>
+                    <constraint firstItem="M8q-TY-MQh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="59" id="MIX-e2-PG1"/>
+                    <constraint firstItem="hrj-Wl-z5G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XWx-yp-iYk"/>
+                    <constraint firstAttribute="trailing" secondItem="hrj-Wl-z5G" secondAttribute="trailing" id="dbE-aF-o0t"/>
+                    <constraint firstAttribute="trailing" secondItem="M8q-TY-MQh" secondAttribute="trailing" id="jb4-wM-KO2"/>
+                    <constraint firstItem="hrj-Wl-z5G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="o3s-av-Gzt"/>
+                    <constraint firstAttribute="bottom" secondItem="M8q-TY-MQh" secondAttribute="bottom" constant="-1" id="vKM-dy-78E"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bgImg" destination="hrj-Wl-z5G" id="4U6-Fd-ViC"/>
