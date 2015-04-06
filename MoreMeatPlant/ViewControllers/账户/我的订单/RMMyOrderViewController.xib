@@ -5,11 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="方正正黑简体.TTF">
-            <string>FZZHJW--GB1-0</string>
-            <string>FZZHJW--GB1-0</string>
-            <string>FZZHJW--GB1-0</string>
-            <string>FZZHJW--GB1-0</string>
+        <mutableArray key="方正正准黑简体.TTF">
+            <string>FZZZHUNHJW--GB1-0</string>
+            <string>FZZZHUNHJW--GB1-0</string>
+            <string>FZZZHUNHJW--GB1-0</string>
+            <string>FZZZHUNHJW--GB1-0</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -35,8 +35,9 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMi-J2-VPs">
                             <rect key="frame" x="160" y="0.0" width="79.5" height="40"/>
-                            <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="14"/>
                             <state key="normal" title="已发货">
+                                <color key="titleColor" red="0.93725490196078431" green="0.57647058823529407" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
@@ -48,22 +49,24 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rup-07-3cK">
                             <rect key="frame" x="0.0" y="0.0" width="79" height="40"/>
-                            <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="14"/>
                             <state key="normal" title="等待发货">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cz-8d-MOH">
                             <rect key="frame" x="241" y="0.0" width="79" height="40"/>
-                            <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="14"/>
                             <state key="normal" title="已完成">
+                                <color key="titleColor" red="0.93725490196078431" green="0.57647058823529407" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rH6-ff-Oj0">
                             <rect key="frame" x="80" y="0.0" width="79.5" height="40"/>
-                            <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="14"/>
                             <state key="normal" title="等待付款">
+                                <color key="titleColor" red="0.93725490196078431" green="0.57647058823529407" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>

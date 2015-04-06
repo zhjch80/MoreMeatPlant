@@ -595,4 +595,14 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param block
  */
 + (void)commitOrderWithUser:(NSString *)user Pwd:(NSString *)pwd withDic:(NSDictionary *)dictionary andCallBack:(RMAFNRequestManagerCallBack)block;
+
+/**
+ *  支付宝支付接口
+ *
+ *  @param user
+ *  @param pwd
+ *  @param isdirect 是否直接购买
+ *  @param order_sn 订单号
+ */
++ (NSString *)alipayWithUser:(NSString *)user Pwd:(NSString *)pwd isDirectPurchase:(BOOL)isdirect Order_sn:(NSString *)order_sn;
 @end

@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" translatesAutoresizingMaskIntoConstraints="NO" id="mb1-S0-Kuc">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="mb1-S0-Kuc">
                         <rect key="frame" x="15" y="5" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="cQo-RI-bBQ"/>
@@ -65,11 +65,17 @@
                     <constraint firstItem="mb1-S0-Kuc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="vxU-qK-6ig"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="203" y="200"/>
+            <connections>
+                <outlet property="content_img" destination="mb1-S0-Kuc" id="yf9-5Y-uTj"/>
+                <outlet property="content_name" destination="NP6-zs-TbQ" id="ne3-tE-r89"/>
+                <outlet property="content_num" destination="8nd-9V-ISR" id="0KM-0t-dsK"/>
+                <outlet property="content_price" destination="02J-h5-K2i" id="o1x-Fc-DIe"/>
+            </connections>
+            <point key="canvasLocation" x="227" y="144"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="order_line.png" width="1134" height="1"/>
-        <image name="photo" width="50" height="50"/>
+        <image name="photo.png" width="500" height="531"/>
     </resources>
 </document>

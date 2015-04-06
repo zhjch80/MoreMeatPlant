@@ -11,8 +11,6 @@
 
 @interface RMSysMessageViewController ()<RefreshControlDelegate>{
     NSInteger pageCount;
-    BOOL isRefresh;
-    BOOL isLoadComplete;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
@@ -37,7 +35,6 @@
     refreshControl.bottomEnabled = YES;
     [refreshControl registerClassForTopView:[CustomRefreshView class]];
     pageCount = 1;
-    isRefresh = YES;
     
     [self initPlat];
 }
@@ -62,15 +59,6 @@
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMSysMessageTableViewCell" owner:self options:nil] lastObject];
         }
-//        @property (weak, nonatomic) IBOutlet UIImageView *imgV;
-//        @property (weak, nonatomic) IBOutlet UILabel *subtitleL;
-//        @property (weak, nonatomic) IBOutlet UILabel *titleL;
-//        @property (weak, nonatomic) IBOutlet UILabel *readStateL;
-//        @property (weak, nonatomic) IBOutlet UILabel *timeL;
-//        @property (weak, nonatomic) IBOutlet UIImageView *detailImgV;
-//        @property (weak, nonatomic) IBOutlet UIView *messageV;
-        
-        
 
         RMPublicModel * model = [messageArray objectAtIndex:indexPath.row/2];
 //        [cell.imgV sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"nophote"]];
@@ -135,8 +123,8 @@
 - (void)requestData{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager systemMessageWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
-             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             if(pageCount == 1){
                 [messageArray removeAllObjects];
                 [messageArray addObjectsFromArray:object];
@@ -156,7 +144,7 @@
             
 
         }else{
-            [MBProgressHUD showSuccess:object toView:self.view];
+                    [self showHint:object];
         }
         
         [_mainTableView reloadData];
@@ -168,21 +156,10 @@
 - (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
     if (direction == RefreshDirectionTop) { //下拉刷新
         pageCount = 1;
-        isRefresh = YES;
-        isLoadComplete = NO;
         [self requestData];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
-        if (isLoadComplete){
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self showHint:@"没有更多肉肉啦"];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-            });
-        }else{
             pageCount ++;
-            isRefresh = NO;
            [self requestData];
-        }
         
     }
 }

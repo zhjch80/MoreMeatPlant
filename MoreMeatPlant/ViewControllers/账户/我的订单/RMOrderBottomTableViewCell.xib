@@ -141,7 +141,15 @@
                     <constraint firstItem="0tH-nf-HK6" firstAttribute="centerY" secondItem="OO5-GL-pYO" secondAttribute="centerY" id="ylq-Sv-NyJ"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="190" y="157"/>
+            <connections>
+                <outlet property="content_realpayL" destination="135-bW-g7A" id="S3u-9b-Wdd"/>
+                <outlet property="express_price" destination="u3e-Z0-5tO" id="ca8-BH-AoP"/>
+                <outlet property="leftBtn" destination="SyD-xJ-CmI" id="ltu-V3-dVt"/>
+                <outlet property="rightBtn" destination="I2N-bv-IdI" id="ob8-Bs-Yp8"/>
+                <outlet property="totalMoneyL" destination="8Ww-he-c45" id="AaR-N0-6XQ"/>
+                <outlet property="totalNumL" destination="6XY-bs-pPp" id="gwp-nU-yFE"/>
+            </connections>
+            <point key="canvasLocation" x="412" y="118"/>
         </tableViewCell>
     </objects>
     <resources>

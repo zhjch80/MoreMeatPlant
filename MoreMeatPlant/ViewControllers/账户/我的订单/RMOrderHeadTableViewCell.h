@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface RMOrderHeadTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *corp_name;
+@property (weak, nonatomic) IBOutlet UILabel *create_time;
 
+@property (weak, nonatomic) IBOutlet UILabel *order_status;
 @end

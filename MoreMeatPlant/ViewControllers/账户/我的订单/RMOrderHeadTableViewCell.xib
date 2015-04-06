@@ -5,9 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="方正正准黑简体.TTF">
+            <string>FZZZHUNHJW--GB1-0</string>
+            <string>FZZZHUNHJW--GB1-0</string>
+        </mutableArray>
         <mutableArray key="方正正黑简体.TTF">
-            <string>FZZHJW--GB1-0</string>
-            <string>FZZHJW--GB1-0</string>
             <string>FZZHJW--GB1-0</string>
         </mutableArray>
     </customFonts>
@@ -28,7 +30,7 @@
                             <constraint firstAttribute="width" constant="18" id="wFg-QZ-VAy"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014.12.31 18:30" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLb-Tl-C6m">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2014.12.31 18:30" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLb-Tl-C6m">
                         <rect key="frame" x="116" y="8" width="88.5" height="13.5"/>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -36,7 +38,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="等待卖家发货" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vuj-cR-WbV">
                         <rect key="frame" x="239" y="8" width="66" height="13.5"/>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
+                        <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="11"/>
                         <color key="textColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -48,7 +50,7 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="花儿与少年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f96-Uu-cFs">
                         <rect key="frame" x="15" y="7" width="65" height="16"/>
-                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -73,7 +75,12 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="213" y="181.5"/>
+            <connections>
+                <outlet property="corp_name" destination="f96-Uu-cFs" id="3bo-v4-9eC"/>
+                <outlet property="create_time" destination="bLb-Tl-C6m" id="hf0-zG-Zd5"/>
+                <outlet property="order_status" destination="vuj-cR-WbV" id="xA9-fO-f4n"/>
+            </connections>
+            <point key="canvasLocation" x="245" y="186"/>
         </tableViewCell>
     </objects>
     <resources>

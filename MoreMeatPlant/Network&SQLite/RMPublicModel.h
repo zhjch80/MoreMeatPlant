@@ -109,6 +109,21 @@
 @property (retain, nonatomic) NSString * content_address;
 
 
-
+@property (retain, nonatomic) NSString * content_sn;    //订单编号
+@property (retain, nonatomic) NSString * is_pay;        //支付状态
+@property (retain, nonatomic) NSString * is_status;     //订单状态（0未处理1待发货2已
+                                                        //发货3已签收4已取消5已完成）如果是退货清单（0已退货,等待商家确认1退货已完成）
+@property (retain, nonatomic) NSString * is_paystatus;  //支付状态
+@property (retain, nonatomic) NSString * member_user;   //会员用户名
+@property (retain, nonatomic) NSString * content_total; //订单金额
+@property (retain, nonatomic) NSString * content_realPay;//实际支付,暂不用
+@property (retain, nonatomic) NSString * express_no;    //快递单号
+@property (retain, nonatomic) NSString * express_name;  //快递名称
+@property (retain, nonatomic) NSString * expresspay;    //快递费用
+@property (retain, nonatomic) NSDictionary * corp;      //店铺信息
+@property (retain, nonatomic) NSString * corp_id;       //商家id
+@property (retain, nonatomic) NSDictionary * mem;       //会员信息
+@property (retain, nonatomic) NSArray * pros;    //商品信息
+@property (retain, nonatomic) NSString * order_message;  //订单备注,暂不用
 
 @end

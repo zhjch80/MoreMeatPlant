@@ -10,6 +10,7 @@
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
 #import "UIViewController+HUD.h"
+#import "RMBaseViewController.h"
 @interface RMCorpCollectionViewController ()<RefreshControlDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
@@ -26,7 +27,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
+    self.mainTableView.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
+    
+    dataArr = [[NSMutableArray alloc] init];
     
     refreshControl=[[RefreshControl alloc] initWithScrollView:_mainTableView delegate:self];
     refreshControl.topEnabled = YES;
@@ -34,8 +37,10 @@
     [refreshControl registerClassForTopView:[CustomRefreshView class]];
     pageCount = 1;
     isRefresh = YES;
+    [self requestDataWithPageCount];
 }
 
+#pragma mark -
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([dataArr count]%3 == 0){
@@ -56,15 +61,34 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.delegate = self;
     }
-    cell.leftTitle.text = @"雪莲";
-    cell.leftImg.identifierString = cell.leftTitle.text;
     
-    cell.centerTitle.text = @"桃美人";
-    cell.centerImg.identifierString = cell.centerTitle.text;
-    
-    cell.rightTitle.text = @"绿熊";
-    cell.rightImg.identifierString = cell.rightTitle.text;
-    
+    if(indexPath.row*3 < dataArr.count){
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
+        cell.leftTitle.text = model.content_name;
+        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        cell.leftImg.identifierString = model.auto_id;
+    }else{
+        cell.leftTitle.hidden = YES;
+        cell.leftImg.hidden = YES;
+    }
+    if(indexPath.row*3+1 < dataArr.count){
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
+        cell.centerTitle.text = model.content_name;
+        [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        cell.centerImg.identifierString = model.auto_id;
+    }else{
+        cell.centerTitle.hidden = YES;
+        cell.centerImg.hidden = YES;
+    }
+    if(indexPath.row*3+2 < dataArr.count){
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
+        cell.rightTitle.text = model.content_name;
+        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        cell.rightImg.identifierString = model.auto_id;
+    }else{
+        cell.rightTitle.hidden = YES;
+        cell.rightImg.hidden = YES;
+    }
     return cell;
 }
 
@@ -91,7 +115,9 @@
 
 
 - (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
-   
+    if(self.detailcall_back){
+        self.detailcall_back (image.identifierString);
+    }
 }
 
 
@@ -101,7 +127,7 @@
         pageCount = 1;
         isRefresh = YES;
         isLoadComplete = NO;
-        //        [self requestDataWithPageCount:1];
+        [self requestDataWithPageCount];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
@@ -112,12 +138,43 @@
         }else{
             pageCount ++;
             isRefresh = NO;
-            //            [self requestDataWithPageCount:pageCount];
+            [self requestDataWithPageCount];
         }
         
     }
 }
 
+
+- (void)requestDataWithPageCount{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager myCollectionRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:@"2" Page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            if(pageCount == 1){
+                [dataArr removeAllObjects];
+                [dataArr addObjectsFromArray:object];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+                if([object count] == 0){
+                    [self showHint:@"暂无收藏"];
+                }
+            }else{
+                [dataArr addObjectsFromArray:object];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                if([object count] == 0){
+                    [self showHint:@"没有更多收藏了"];
+                    pageCount--;
+                }
+            }
+            
+            
+        }else{
+            [self showHint:object];
+        }
+        
+        [_mainTableView reloadData];
+    }];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

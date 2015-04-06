@@ -12,6 +12,9 @@
 
 #define baseUrl             @"http://218.240.30.6/drzw/index.php?com=com_appService"
 
+#define PayHttp @"http://http://218.240.30.6/drzw/pay/app_js/alipayapi.php?"
+
+
 #define kMSGSuccess         @"1"
 #define kMSGFailure         @"0"
 
@@ -1286,7 +1289,7 @@
                 model.content_gps = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"content_gps"]);
                 
                 for (NSDictionary * dict in OBJC_Nil([diction objectForKey:@"imgs"])){
-                    [model.imgs addObject:[dict objectForKey:@"content_img"]];
+                    [model.imgs addObject:dict];
                 }
                 
             }else if ([type isEqualToString:@"2"]){//店铺
@@ -1395,12 +1398,25 @@
             model.status = [[dic objectForKey:@"status"] boolValue];
             model.msg = [dic objectForKey:@"msg"];
             model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
-//            model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
-//            model.content_price = OBJC_Nil([dataDic objectForKey:@"content_price"]);
-//            model.content_img = OBJC_Nil([dataDic objectForKey:@"content_img"]);
-//            model.is_shelf = OBJC_Nil([dataDic objectForKey:@"is_shelf"]);
-//            model.publish = OBJC_Nil([dataDic objectForKey:@"publish"]);
-            
+            model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
+            model.content_status = OBJC_Nil([dataDic objectForKey:@"content_status"]);
+            model.content_linkname = OBJC_Nil([dataDic objectForKey:@"content_linkname"]);
+            model.content_address = OBJC_Nil([dataDic objectForKey:@"content_adress"]);
+            model.content_mobile = OBJC_Nil([dataDic objectForKey:@"content_mobile"]);
+            model.is_pay = OBJC_Nil([dataDic objectForKey:@"is_pay"]);//支付文字状态
+            model.payment_id = OBJC_Nil([dataDic objectForKey:@"payment_id"]);
+            model.content_total = OBJC_Nil([dataDic objectForKey:@"content_total"]);
+            model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
+            model.content_realPay = OBJC_Nil([dataDic objectForKey:@"content_realPay"]);
+            model.order_message = OBJC_Nil([dataDic objectForKey:@"order_message"]);
+            model.corp_id = OBJC_Nil([dataDic objectForKey:@"content_id"]);
+            model.corp = OBJC_Nil([dataDic objectForKey:@"corp"]);
+            model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
+            model.mem = OBJC_Nil([dataDic objectForKey:@"mem"]);
+            model.pros = OBJC_Nil([dataDic objectForKey:@"pros"]);
+            model.is_status = OBJC_Nil([dataDic objectForKey:@"is_status"]);
+            model.is_paystatus = OBJC_Nil([dataDic objectForKey:@"is_paystatus"]);
+            model.create_time = OBJC_Nil([dataDic objectForKey:@"create_time"]);
             [Array addObject:model];
         }
         if(block){
@@ -1556,6 +1572,12 @@
         }
 
     }];
+}
+
+#pragma mark - 支付宝支付界面
++ (NSString *)alipayWithUser:(NSString *)user Pwd:(NSString *)pwd isDirectPurchase:(BOOL)isdirect Order_sn:(NSString *)order_sn{
+     NSString * url = [NSString stringWithFormat:@"%@&order_sn=%@&ID=%@&PWD=%@",PayHttp,order_sn,user,pwd];
+    return url;
 }
 
 @end

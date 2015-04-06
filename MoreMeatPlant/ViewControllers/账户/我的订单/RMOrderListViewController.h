@@ -7,9 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void (^RMOrderListViewDidSelectCell)(NSIndexPath * indexpath);
-@interface RMOrderListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+#import "RMBaseViewController.h"
+typedef void (^RMOrderListViewDidSelectCallBack)(NSIndexPath * indexpath);
+typedef void (^RMOrderListViewGoPayCallBack)(RMPublicModel *model);
+typedef void (^RMOrderListViewSeeLogisticsCallBack)(RMPublicModel *model);
+@interface RMOrderListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+    NSMutableArray * orderlists;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *maintableView;
-@property (copy, nonatomic) RMOrderListViewDidSelectCell  didSelectCellcallback;
+@property (retain, nonatomic) NSString * order_type;
+@property (copy, nonatomic) RMOrderListViewDidSelectCallBack  didSelectCellcallback;
+@property (copy, nonatomic) RMOrderListViewGoPayCallBack gopay_callback;
+@property (copy, nonatomic) RMOrderListViewSeeLogisticsCallBack seeLogistics_callback;
+- (void)requestData;
 @end

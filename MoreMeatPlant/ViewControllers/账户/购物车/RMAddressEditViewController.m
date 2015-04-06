@@ -60,7 +60,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }else{
-            [MBProgressHUD showSuccess:object toView:self.view];
+                    [self showHint:object];
         }
     }];
 }

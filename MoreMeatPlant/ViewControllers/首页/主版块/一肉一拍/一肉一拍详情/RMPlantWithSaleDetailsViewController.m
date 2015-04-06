@@ -15,6 +15,8 @@
 #import "RMSettlementViewController.h"
 #import "RMAddressEditViewController.h"
 #import "UIView+Expland.h"
+#import "RMAliPayViewController.h"
+#import "RMMyCorpViewController.h"
 
 @interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate,RMAddressEditViewCompletedDelegate>{
     BOOL isFirstViewDidAppear;
@@ -24,6 +26,7 @@
     
     BOOL isAddShopCar;//判断是否是加入购物车还是立即购买                demoker添加
     RMSettlementViewController * settle;
+    RMPublicModel * parameterModel;
 }
 @property (nonatomic, strong) RMPlantWithSaleHeaderView * headerView;;
 @property (nonatomic, strong) UITableView * mTableView;
@@ -169,7 +172,9 @@
 }
 
 - (void)intoShopMethodWithBtn:(UIButton *)button {
-    NSLog(@"进店");
+    RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
+    corp.auto_id = dataModel.member_id;
+    [self.navigationController pushViewController:corp animated:YES];
 }
 
 - (void)loadBottomView {
@@ -399,8 +404,56 @@
         [SELF.navigationController pushViewController:address_edit animated:YES];
     };
     
+    settle.payment_callback = ^(NSString * payment_id){
+        SELF->parameterModel.payment_id = payment_id;
+    };
+    settle.selectAddress_callback = ^ (RMPublicModel * model){
+        SELF->parameterModel.content_linkname = model.contentName;
+        SELF->parameterModel.content_mobile = model.contentMobile;
+        SELF->parameterModel.content_address = model.contentAddress;
+    };
+    
     [self presentPopUpViewController:settle overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
 }
+
+#pragma mark - 提交订单
+- (void)commitOrderAction{
+    
+    parameterModel.express = [dataModel.is_sf boolValue]?@"1":@"2";
+    
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
+    [dict setValue:dataModel.auto_id forKey:@"auto_id"];
+    [dict setValue:@"1" forKey:@"num"];
+    [dict setValue:parameterModel.payment_id forKey:@"frm[payment_id]"];
+    [dict setValue:parameterModel.express forKey:@"express"];
+    [dict setValue:parameterModel.content_linkname forKey:@"frm[content_linkname]"];
+    [dict setValue:parameterModel.content_mobile forKey:@"frm[content_mobile]"];
+    [dict setValue:parameterModel.content_address forKey:@"frm[content_address]"];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager commitOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] withDic:dict andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                if([parameterModel.payment_id isEqualToString:@"2"]){
+                    RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
+                    alipay.is_direct = YES;
+                    alipay.order_id = @"";//支付宝支付的订单号
+                    [self.navigationController pushViewController:alipay animated:YES];
+                }
+            }else{
+                
+            }
+            [self showHint:model.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
+}
+
+
+
 - (void)RMAddressEditViewCompleted{
     
     [settle requestAddresslist];

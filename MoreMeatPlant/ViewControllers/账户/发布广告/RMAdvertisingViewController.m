@@ -215,7 +215,7 @@
             RMPublicModel * model = object;
             [MBProgressHUD showSuccess:model.msg toView:self.view];
         }else{
-            [MBProgressHUD showSuccess:object toView:self.view];
+                    [self showHint:object];
         }
         
     }];

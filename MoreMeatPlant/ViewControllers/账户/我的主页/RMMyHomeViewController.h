@@ -11,6 +11,7 @@
 #import "RMBottomView.h"
 #import "JSBadgeView.h"
 #import "KxMenu.h"
+typedef void (^RMMyHomeViewCtlDetailCallBack) (NSString * auto_id);
 @interface RMMyHomeViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource,PostDetatilsDelegate,BottomDelegate>{
     RMBottomView * bottomView;
     JSBadgeView * badge;
@@ -25,4 +26,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *hua_bi;
 @property (weak, nonatomic) IBOutlet UIButton *sendPrivateMsgBtn;
 @property (weak, nonatomic) IBOutlet UIButton *attentionHeBtn;
+@property (copy, nonatomic) RMMyHomeViewCtlDetailCallBack detailcall_back;
+
 @end

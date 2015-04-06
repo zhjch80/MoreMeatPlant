@@ -1,52 +1,41 @@
 //
-//  RMSystemMessageDetailViewController.m
+//  RMSeeLogisticsViewController.m
 //  MoreMeatPlant
 //
-//  Created by 马东凯 on 15/4/1.
+//  Created by 马东凯 on 15/4/6.
 //  Copyright (c) 2015年 runmobile. All rights reserved.
 //
 
-#import "RMSystemMessageDetailViewController.h"
+#import "RMSeeLogisticsViewController.h"
 
-@interface RMSystemMessageDetailViewController ()
+@interface RMSeeLogisticsViewController ()<UIWebViewDelegate>
 
 @end
 
-@implementation RMSystemMessageDetailViewController
+@implementation RMSeeLogisticsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self setCustomNavTitle:@"消息详情"];
+    [self setCustomNavTitle:@"物流查询"];
     
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
-    
-    [self request];
+
 }
 
-- (void)request{
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidStartLoad:(UIWebView *)webView{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager systemMessageDetailWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Auto_id:self.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
-        if(success){
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            RMPublicModel * model = object;
-            _titleL.text = model.msg_title;
-            [_mwebView loadHTMLString:model.msg_text baseURL:nil];
-            _timeL.text = model.create_time;
-        }else{
-                    [self showHint:object];
-        }
-    }];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-
+    [MBProgressHUD showError:@"加载失败!" toView:self.view];
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{

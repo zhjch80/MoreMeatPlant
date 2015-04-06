@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface RMOrderBottomTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *totalNumL;
+@property (weak, nonatomic) IBOutlet UILabel *totalMoneyL;
+@property (weak, nonatomic) IBOutlet UILabel *content_realpayL;
+@property (weak, nonatomic) IBOutlet UILabel *express_price;
+@property (weak, nonatomic) IBOutlet UIButton *rightBtn;
+@property (weak, nonatomic) IBOutlet UIButton *leftBtn;
 
 @end

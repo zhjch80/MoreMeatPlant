@@ -10,7 +10,9 @@
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
 #import "UIViewController+HUD.h"
-@interface RMPlantCollectionViewController ()<RefreshControlDelegate>{
+#import "RMPlantWithSaleCell.h"
+#import "RMPlantWithSaleDetailsViewController.h"
+@interface RMPlantCollectionViewController ()<RefreshControlDelegate,JumpPlantDetailsDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
     BOOL isLoadComplete;
@@ -27,7 +29,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    dataArr = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", @"", nil];
+    self.mainTableView.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
+    dataArr = [[NSMutableArray alloc] init];
     
     refreshControl=[[RefreshControl alloc] initWithScrollView:_mainTableView delegate:self];
     refreshControl.topEnabled = YES;
@@ -35,9 +38,12 @@
     [refreshControl registerClassForTopView:[CustomRefreshView class]];
     pageCount = 1;
     isRefresh = YES;
+    
+    [self requestDataWithPageCount];
 
 }
 
+#pragma mark -
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([dataArr count]%3 == 0){
@@ -50,52 +56,77 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * identifierStr = @"DaqoidentifierStr";
-    RMDaqoCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+    static NSString * identifierStr = @"plantWithSaleIdentifier";
+    RMPlantWithSaleCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     if (!cell){
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell" owner:self options:nil] lastObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell" owner:self options:nil] lastObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
         cell.delegate = self;
     }
-    cell.leftTitle.text = @"雪莲";
-    cell.leftImg.identifierString = cell.leftTitle.text;
     
-    cell.centerTitle.text = @"桃美人";
-    cell.centerImg.identifierString = cell.centerTitle.text;
-    
-    cell.rightTitle.text = @"绿熊";
-    cell.rightImg.identifierString = cell.rightTitle.text;
-    
+    if(indexPath.row*3 < dataArr.count){
+        cell.leftPrice.hidden = NO;
+        cell.leftImg.hidden = NO;
+        cell.leftName.hidden = NO;
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
+        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
+        cell.leftPrice.attributedText = oneAttributeStr;
+        cell.leftName.text = model.content_name;
+        cell.leftImg.identifierString = model.auto_id;
+        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+    }else{
+        cell.leftPrice.hidden = YES;
+        cell.leftImg.hidden = YES;
+        cell.leftName.hidden = YES;
+    }
+    if(indexPath.row*3+1 < dataArr.count){
+        cell.centerPrice.hidden = NO;
+        cell.centerImg.hidden = NO;
+        cell.centerName.hidden = NO;
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
+        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
+        cell.centerPrice.attributedText = oneAttributeStr;
+        cell.centerName.text = model.content_name;
+        cell.centerImg.identifierString = model.auto_id;
+        [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+    }else{
+        cell.centerPrice.hidden = YES;
+        cell.centerImg.hidden = YES;
+        cell.centerName.hidden = YES;
+    }
+    if(indexPath.row*3+2 < dataArr.count){
+        cell.rightPrice.hidden = NO;
+        cell.rightImg.hidden = NO;
+        cell.rightName.hidden = NO;
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
+        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
+        cell.rightPrice.attributedText = oneAttributeStr;
+        cell.rightName.text = model.content_name;
+        cell.rightImg.identifierString = model.auto_id;
+        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+    }else{
+        cell.rightPrice.hidden = YES;
+        cell.rightImg.hidden = YES;
+        cell.rightName.hidden = YES;
+    }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 132.0;
+    return 150.0;
 }
 
-- (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
-    switch (sender.tag) {
-        case 1:{
-            
-            break;
-        }
-        case 2:{
-            
-            break;
-        }
-            
-        default:
-            break;
+- (void)jumpPlantDetailsWithImage:(RMImageView *)image {
+    if(self.detailcall_back){
+        self.detailcall_back (image.identifierString);
     }
-}
-
-
-
-- (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
-    NSLog(@"image type:%@",image.identifierString);
-    RMDaqoDetailsViewController * daqoDetailsCtl = [[RMDaqoDetailsViewController alloc] init];
-    [self.navigationController pushViewController:daqoDetailsCtl animated:YES];
 }
 
 #pragma mark 刷新代理
@@ -105,7 +136,7 @@
         pageCount = 1;
         isRefresh = YES;
         isLoadComplete = NO;
-        //        [self requestDataWithPageCount:1];
+        [self requestDataWithPageCount];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
@@ -116,12 +147,43 @@
         }else{
             pageCount ++;
             isRefresh = NO;
-            //            [self requestDataWithPageCount:pageCount];
+        [self requestDataWithPageCount];
         }
         
     }
 }
 
+- (void)requestDataWithPageCount{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager myCollectionRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:@"3" Page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            if(pageCount == 1){
+                [dataArr removeAllObjects];
+                [dataArr addObjectsFromArray:object];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+                if([object count] == 0){
+                    [self showHint:@"暂无收藏"];                    
+                    
+                }
+            }else{
+                [dataArr addObjectsFromArray:object];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                if([object count] == 0){
+                    [self showHint:@"没有更多收藏了"];
+                    pageCount--;
+                }
+            }
+            
+            
+        }else{
+                    [self showHint:object];
+        }
+        
+        [_mainTableView reloadData];
+    }];
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -18,6 +18,7 @@
 #import "RMMyCorpViewController.h"
 #import "UIView+Expland.h"
 #import "UIAlertView+Expland.h"
+#import "RMAliPayViewController.h"
 @interface RMShopCarViewController ()<RMAddressEditViewCompletedDelegate>{
     BOOL isShow;
     __block RMSettlementViewController * settle;
@@ -364,9 +365,10 @@
 
 #pragma mark - 提交订单
 - (void)commitOrderAction{
-    NSString * auto_id = nil;
-    NSString * num = nil;
-    NSString * express = nil;
+    NSString * auto_id = @"";
+    NSString * num = @"";
+    NSString * express = @"";
+    
     for(NSDictionary *dic in dataArray){
         for(RMProductModel * model in [dic objectForKey:@"products"]){
             auto_id = [auto_id stringByAppendingString:[NSString stringWithFormat:@",%@",model.auto_id]];
@@ -392,7 +394,12 @@
         if(success){
             RMPublicModel * model = object;
             if(model.status){
-                
+                if([parameterModel.payment_id isEqualToString:@"2"]){
+                    RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
+                    alipay.is_direct = NO;
+                    alipay.order_id = @"";//支付宝支付的订单号
+                    [self.navigationController pushViewController:alipay animated:YES];
+                }
             }else{
             
             }

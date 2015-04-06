@@ -7,7 +7,9 @@
 //
 
 #import "RMMyCollectionViewController.h"
-
+#import "RMReleasePoisonDetailsViewController.h"
+#import "RMPlantWithSaleDetailsViewController.h"
+#import "RMMyCorpViewController.h"
 @interface RMMyCollectionViewController ()
 
 @end
@@ -26,19 +28,36 @@
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
 
     
+    __block RMMyCollectionViewController * SELF = self;
+    
     current_index = 0;
     postCollectionController = [[RMPostCollectionViewController alloc]initWithNibName:@"RMPostCollectionViewController" bundle:nil];
     postCollectionController.view.frame = CGRectMake(0, _operationView.frame.origin.y+_operationView.frame.size.height, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
     postCollectionController.mainTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
+    postCollectionController.detailcall_back = ^ (NSString * auto_id){
+        RMReleasePoisonDetailsViewController * releasePoisonDetailsCtl = [[RMReleasePoisonDetailsViewController alloc] init];
+        releasePoisonDetailsCtl.auto_id = auto_id;
+        [SELF.navigationController pushViewController:releasePoisonDetailsCtl animated:YES];
+    };
     
     
     plantCollectionController = [[RMPlantCollectionViewController alloc]initWithNibName:@"RMPlantCollectionViewController" bundle:nil];
     plantCollectionController.view.frame = CGRectMake(0, _operationView.frame.origin.y+_operationView.frame.size.height, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
     plantCollectionController.mainTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
+    plantCollectionController.detailcall_back = ^(NSString * auto_id){
+        RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
+        plantWithSaleDetailsCtl.auto_id = auto_id;
+        [SELF.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
+    };
     
     corpCollectionController = [[RMCorpCollectionViewController alloc]initWithNibName:@"RMCorpCollectionViewController" bundle:nil];
     corpCollectionController.view.frame = CGRectMake(0, _operationView.frame.origin.y+_operationView.frame.size.height, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
     corpCollectionController.mainTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
+    corpCollectionController.detailcall_back = ^ (NSString * auto_id){
+        RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
+        corp.auto_id = auto_id;
+        [SELF.navigationController pushViewController:corp animated:YES];
+    };
     
     [self.view addSubview:corpCollectionController.view];
     [self.view addSubview:postCollectionController.view];
@@ -58,6 +77,13 @@
 
 
 - (void)selectedAction:(UIButton *)sender{
+    
+    [_postBtn setTitleColor:UIColorFromRGB(0xef93aa) forState:UIControlStateNormal];
+    [_plantBtn setTitleColor:UIColorFromRGB(0xef93aa) forState:UIControlStateNormal];
+    [_corpBtn setTitleColor:UIColorFromRGB(0xef93aa) forState:UIControlStateNormal];
+    
+    [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+
     
     [UIView animateWithDuration:0.3 animations:^{
         switch (sender.tag-100) {

@@ -25,22 +25,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.h"
-            timestampString = "449312881.172599"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
-            landmarkName = "@interface RMAFNRequestManager"
-            landmarkType = "2">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x53d1;&#x5e03;&#x5e7f;&#x544a;/RMAdvertisingViewController.m"
             timestampString = "449686967.544"
             startingColumnNumber = "9223372036854775807"
@@ -122,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
-            timestampString = "449851482.852218"
+            timestampString = "449998982.739957"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1186"
-            endingLineNumber = "1186"
+            startingLineNumber = "1189"
+            endingLineNumber = "1189"
             landmarkName = "+babyPublishWithUser:Pwd:Auto_id:newPhotoDic:modifyPhotoDic:otherDic:andCallBack:"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
-            timestampString = "449949844.430584"
+            timestampString = "449998982.739957"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1206"
-            endingLineNumber = "1206"
+            startingLineNumber = "1209"
+            endingLineNumber = "1209"
             landmarkName = "+babyPublishWithUser:Pwd:Auto_id:newPhotoDic:modifyPhotoDic:otherDic:andCallBack:"
             landmarkType = "5">
          </BreakpointContent>
@@ -240,38 +224,6 @@
             startingLineNumber = "539"
             endingLineNumber = "539"
             landmarkName = "-RMimageCropper:didFinished:andfilePath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x8d2d;&#x7269;&#x8f66;/RMShopCarViewController.m"
-            timestampString = "449992970.830665"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
-            landmarkName = "-commitOrderAction"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x8d2d;&#x7269;&#x8f66;/RMShopCarViewController.m"
-            timestampString = "449992981.383632"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "376"
-            endingLineNumber = "376"
-            landmarkName = "-commitOrderAction"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

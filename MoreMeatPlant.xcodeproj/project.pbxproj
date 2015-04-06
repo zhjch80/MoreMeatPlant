@@ -644,6 +644,8 @@
 		5157DE6D1AB9DA95005E9FA5 /* RMPublishPhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5157DE6B1AB9DA95005E9FA5 /* RMPublishPhotoTableViewCell.xib */; };
 		5157DE711AB9DABB005E9FA5 /* RMPublishSureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5157DE6F1AB9DABB005E9FA5 /* RMPublishSureTableViewCell.m */; };
 		5157DE721AB9DABB005E9FA5 /* RMPublishSureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5157DE701AB9DABB005E9FA5 /* RMPublishSureTableViewCell.xib */; };
+		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
+		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		519927341AB5682700B0F83F /* RMMyCorpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519927321AB5682700B0F83F /* RMMyCorpViewController.m */; };
 		519927351AB5682700B0F83F /* RMMyCorpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 519927331AB5682700B0F83F /* RMMyCorpViewController.xib */; };
 		519927461AB572AA00B0F83F /* RMCorpClassesButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 519927451AB572AA00B0F83F /* RMCorpClassesButton.m */; };
@@ -765,6 +767,8 @@
 		51DB4E651AD1B8CA00A6064D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 51DB4E641AD1B8CA00A6064D /* libicucore.dylib */; };
 		51DB4E671AD1B94300A6064D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51DB4E661AD1B94300A6064D /* MessageUI.framework */; };
 		51DB4E691AD1B95700A6064D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 51DB4E681AD1B95700A6064D /* libstdc++.dylib */; };
+		51DB4E6D1AD268FA00A6064D /* RMAliPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DB4E6B1AD268FA00A6064D /* RMAliPayViewController.m */; };
+		51DB4E6E1AD268FA00A6064D /* RMAliPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4E6C1AD268FA00A6064D /* RMAliPayViewController.xib */; };
 		51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E267DF1A9F5A3500252DEF /* RMAccountView.m */; };
 		51E268081AADDFFE00252DEF /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268051AADDFFE00252DEF /* UIViewController+ENPopUp.m */; };
 		51E268091AADDFFE00252DEF /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E268071AADDFFE00252DEF /* JWBlurView.m */; };
@@ -1833,6 +1837,9 @@
 		5157DE6E1AB9DABB005E9FA5 /* RMPublishSureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPublishSureTableViewCell.h; sourceTree = "<group>"; };
 		5157DE6F1AB9DABB005E9FA5 /* RMPublishSureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPublishSureTableViewCell.m; sourceTree = "<group>"; };
 		5157DE701AB9DABB005E9FA5 /* RMPublishSureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMPublishSureTableViewCell.xib; sourceTree = "<group>"; };
+		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
+		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
+		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
 		519927311AB5682700B0F83F /* RMMyCorpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyCorpViewController.h; sourceTree = "<group>"; };
 		519927321AB5682700B0F83F /* RMMyCorpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMyCorpViewController.m; sourceTree = "<group>"; };
 		519927331AB5682700B0F83F /* RMMyCorpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMyCorpViewController.xib; sourceTree = "<group>"; };
@@ -2012,6 +2019,9 @@
 		51DB4E641AD1B8CA00A6064D /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		51DB4E661AD1B94300A6064D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		51DB4E681AD1B95700A6064D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		51DB4E6A1AD268FA00A6064D /* RMAliPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAliPayViewController.h; sourceTree = "<group>"; };
+		51DB4E6B1AD268FA00A6064D /* RMAliPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAliPayViewController.m; sourceTree = "<group>"; };
+		51DB4E6C1AD268FA00A6064D /* RMAliPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMAliPayViewController.xib; sourceTree = "<group>"; };
 		51E267DE1A9F5A3500252DEF /* RMAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAccountView.h; sourceTree = "<group>"; };
 		51E267DF1A9F5A3500252DEF /* RMAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAccountView.m; sourceTree = "<group>"; };
 		51E268041AADDFFE00252DEF /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
@@ -3438,9 +3448,9 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1D64F50D1A90CD150073EB98 /* CONST.h */,
 				51DB4E1C1AD1B3F000A6064D /* ShareSDK */,
 				51DB4E181AD1525000A6064D /* UIAlerView+Expland */,
-				1D64F50D1A90CD150073EB98 /* CONST.h */,
 				1D1DAE301ACBDF8B00FC4C4C /* UtilityFunc */,
 				51DB4CC81AC9BC9600A6064D /* VPImageCropper */,
 				51DB4CC41AC86BF000A6064D /* UIView+DrawCorner */,
@@ -4079,6 +4089,9 @@
 				51D884541ABE6C6F00F7A3BD /* RMOederDetailOperationTableViewCell.h */,
 				51D884551ABE6C6F00F7A3BD /* RMOederDetailOperationTableViewCell.m */,
 				51D884561ABE6C6F00F7A3BD /* RMOederDetailOperationTableViewCell.xib */,
+				5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */,
+				5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */,
+				5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */,
 			);
 			path = "我的订单";
 			sourceTree = "<group>";
@@ -4604,6 +4617,9 @@
 				51E2685D1AAF448E00252DEF /* RMSettlementTableViewCell.h */,
 				51E2685E1AAF448E00252DEF /* RMSettlementTableViewCell.m */,
 				51E2685F1AAF448E00252DEF /* RMSettlementTableViewCell.xib */,
+				51DB4E6A1AD268FA00A6064D /* RMAliPayViewController.h */,
+				51DB4E6B1AD268FA00A6064D /* RMAliPayViewController.m */,
+				51DB4E6C1AD268FA00A6064D /* RMAliPayViewController.xib */,
 			);
 			path = "购物车";
 			sourceTree = "<group>";
@@ -4843,6 +4859,7 @@
 				0A41063F1ABABBF60060FBD5 /* chatFire_audioPlaying1@2x.png in Resources */,
 				1DEB75081AB9D67A00EA1FA7 /* login_s_line.png in Resources */,
 				1D9EFA371AB9B29F006F6DD8 /* RMDaqoRightViewController.xib in Resources */,
+				5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */,
 				0A4106971ABABBF60060FBD5 /* chatBar_moreSelected@2x.png in Resources */,
 				0A41069F1ABABBF60060FBD5 /* chatBar_recordSelectedBg@2x.png in Resources */,
 				1DEB75191AB9D67A00EA1FA7 /* order_list_btn_bg.png in Resources */,
@@ -4888,6 +4905,7 @@
 				0A41067D1ABABBF60060FBD5 /* chatBar_more_faceSelected@2x.png in Resources */,
 				0A41064F1ABABBF60060FBD5 /* VoiceSearchFeedback006@2x.png in Resources */,
 				0A4106521ABABBF60060FBD5 /* VoiceSearchFeedback008.png in Resources */,
+				51DB4E6E1AD268FA00A6064D /* RMAliPayViewController.xib in Resources */,
 				1D4DA33A1A9217D4006A9EBA /* RMUpgradeSuggestViewController.xib in Resources */,
 				1D7AC4391AB979E1002204F6 /* 方正正纤黑简体.TTF in Resources */,
 				9538F3D41AB0A5DF00608FAD /* RMTableHeadView.xib in Resources */,
@@ -5383,6 +5401,7 @@
 				1D191ACC1ABD4B7E00FC8623 /* RMDaqoDetailsCell.m in Sources */,
 				512D751A1AB1E1190027B7C7 /* RMUserInfoViewController.m in Sources */,
 				1DEB73FE1AB9CE2600EA1FA7 /* RMBottomView.m in Sources */,
+				5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */,
 				1DD699321AC10F02009A9327 /* SDWebImageDownloaderOperation.m in Sources */,
 				0A4104EB1ABAB1CB0060FBD5 /* UIViewController+HUD.m in Sources */,
 				5120FDE61AB718B1000E9BE1 /* RMOrderHeadTableViewCell.m in Sources */,
@@ -5461,6 +5480,7 @@
 				0A4105911ABAB43E0060FBD5 /* UIResponder+Router.m in Sources */,
 				1DD6993A1AC10F02009A9327 /* UIImageView+WebCache.m in Sources */,
 				1D75E93B1ACAABCA008BC5FE /* NSString+TimeInterval.m in Sources */,
+				51DB4E6D1AD268FA00A6064D /* RMAliPayViewController.m in Sources */,
 				51DB4CB81AC7CB0800A6064D /* IQNSArray+Sort.m in Sources */,
 				5157DE4B1AB9CADB005E9FA5 /* KxMenu.m in Sources */,
 				0A41057B1ABAB3C70060FBD5 /* UIImageView+EMHighlightedWebCache.m in Sources */,

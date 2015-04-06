@@ -26,6 +26,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.mainTableview.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
+    
     [self setCustomNavTitle:@"我的店铺"];
     
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
