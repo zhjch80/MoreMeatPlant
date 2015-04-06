@@ -254,7 +254,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param gps   位置信息，经纬度
  *  @param block 回调
  */
-+ (void)registerRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code Nick:(NSString *)nick Type:(NSString *)type Gps:(NSString *)gps andCallBack:(RMAFNRequestManagerCallBack)block;
++ (void)registerRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code Nick:(NSString *)nick Type:(NSString *)type Gps:(NSString *)gps YPWD:(NSString *)ypwd andCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  注册发送验证码

@@ -15,6 +15,7 @@ static RMUserLoginInfoManager * manager;
 @synthesize state;
 @synthesize coorStr;
 @synthesize isCorp;
+@synthesize ypwd;
 
 - (id)init
 {

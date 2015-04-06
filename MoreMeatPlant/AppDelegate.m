@@ -89,15 +89,17 @@
     [self registerRemoteNotification];
     
 #warning 修改二 登录环信账号，该部分代码需要移到登录界面登录自己本身的账号成功后
-    //登录时候的账号和密码是在环信后台设置好的，以后需要自己的服务器在接口返回 密码都是111111 
-    [self loginEaseMobWithUserName:@"zhangbeibei"
-                          passWord:@"111111"
-                           success:^(id arg) {
-                               //登录成功s
-                           }
-                           failure:^(id arg) {
-                               //登录失败
-                           }];
+    //登录时候的账号和密码是在环信后台设置好的，以后需要自己的服务器在接口返回 密码都是111111 zhangbeibei
+    if([[RMUserLoginInfoManager loginmanager] state]){
+        [self loginEaseMobWithUserName:[[RMUserLoginInfoManager loginmanager]user]
+                              passWord:[[RMUserLoginInfoManager loginmanager] ypwd]
+                               success:^(id arg) {
+                                   //登录成功s
+                               }
+                               failure:^(id arg) {
+                                   //登录失败
+                               }];
+    }
     
     return YES;
 }
@@ -110,12 +112,15 @@
         NSString * pwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserPwd];
         NSString * iscorp = [[NSUserDefaults standardUserDefaults] objectForKey:UserType];
         NSString * coorstr = [[NSUserDefaults standardUserDefaults] objectForKey:UserCoor];
+        NSString * ypwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserYPWD];
         NSLog(@"appdelegate用户类型：%@",iscorp);
         [[RMUserLoginInfoManager loginmanager] setState:YES];
         [[RMUserLoginInfoManager loginmanager] setUser:user];
         [[RMUserLoginInfoManager loginmanager] setPwd:pwd];
         [[RMUserLoginInfoManager loginmanager] setIsCorp:iscorp];
         [[RMUserLoginInfoManager loginmanager] setCoorStr:coorstr];
+        [[RMUserLoginInfoManager loginmanager] setYpwd:ypwd];
+
     }else{
         
     }

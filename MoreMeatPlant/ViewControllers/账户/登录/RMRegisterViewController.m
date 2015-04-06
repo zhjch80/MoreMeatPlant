@@ -71,7 +71,7 @@
         type = @"personal";
     }
     
-    [RMAFNRequestManager registerRequestWithUser:_mobileTextField.text Pwd:[FileMangerObject md5:_passTextField.text] Code:_codeTextField.text Nick:_nickTextField.text Type:type Gps:[[RMUserLoginInfoManager loginmanager] coorStr] andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager registerRequestWithUser:_mobileTextField.text Pwd:[FileMangerObject md5:_passTextField.text] Code:_codeTextField.text Nick:_nickTextField.text Type:type Gps:[[RMUserLoginInfoManager loginmanager] coorStr] YPWD:_passTextField.text andCallBack:^(NSError *error, BOOL success, id object) {
         RMPublicModel * model = (RMPublicModel *)object;
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(error){
@@ -81,6 +81,7 @@
             [[NSUserDefaults standardUserDefaults] setValue:_mobileTextField.text forKey:UserName];
             [[NSUserDefaults standardUserDefaults] setValue:[FileMangerObject md5:_passTextField.text] forKey:UserPwd];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LoginState];
+            [[NSUserDefaults standardUserDefaults] setValue:_passTextField.text forKey:UserYPWD];
             if(isCorp){//商家会员
                 [[NSUserDefaults standardUserDefaults] setValue:@"2" forKey:UserType];
             }else{//用户会员
@@ -92,6 +93,8 @@
             NSString * pwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserPwd];
             NSString * iscorp = [[NSUserDefaults standardUserDefaults] objectForKey:UserType];
             NSString * coorstr = [[NSUserDefaults standardUserDefaults] objectForKey:UserCoor];
+            NSString * ypwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserYPWD];
+
             NSLog(@"登录用户类型：%@",iscorp);
             
             [[RMUserLoginInfoManager loginmanager] setState:YES];
@@ -99,6 +102,7 @@
             [[RMUserLoginInfoManager loginmanager] setPwd:pwd];
             [[RMUserLoginInfoManager loginmanager] setIsCorp:iscorp];
             [[RMUserLoginInfoManager loginmanager] setCoorStr:coorstr];
+            [[RMUserLoginInfoManager loginmanager] setYpwd:ypwd];
             
             AppDelegate * delegate = [[UIApplication sharedApplication] delegate];
             

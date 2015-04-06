@@ -561,8 +561,8 @@
 /**
  *  @method     注册
  */
-+ (void)registerRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code Nick:(NSString *)nick Type:(NSString *)type Gps:(NSString *)gps andCallBack:(RMAFNRequestManagerCallBack)block{
-    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&frm[content_name]=%@&content_code=%@&GPS=%@&type=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_register",user,pwd,nick,code,gps,type];
++ (void)registerRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code Nick:(NSString *)nick Type:(NSString *)type Gps:(NSString *)gps YPWD:(NSString *)ypwd andCallBack:(RMAFNRequestManagerCallBack)block{
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&frm[content_name]=%@&content_code=%@&GPS=%@&type=%@&YPWD=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_register",user,pwd,nick,code,gps,type,ypwd];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         RMPublicModel * model = [[RMPublicModel alloc]init];

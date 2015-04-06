@@ -70,11 +70,13 @@
             [[NSUserDefaults standardUserDefaults] setValue:[FileMangerObject md5:_passTextField.text] forKey:UserPwd];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LoginState];
             [[NSUserDefaults standardUserDefaults] setValue:model.s_type forKey:UserType];
+            [[NSUserDefaults standardUserDefaults] setValue:_passTextField.text forKey:UserYPWD];
             
             NSString * user = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
             NSString * pwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserPwd];
             NSString * iscorp = [[NSUserDefaults standardUserDefaults] objectForKey:UserType];
             NSString * coorstr = [[NSUserDefaults standardUserDefaults] objectForKey:UserCoor];
+            NSString * ypwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserYPWD];
             NSLog(@"登录用户类型：%@",iscorp);
             
             [[RMUserLoginInfoManager loginmanager] setState:YES];
@@ -82,6 +84,8 @@
             [[RMUserLoginInfoManager loginmanager] setPwd:pwd];
             [[RMUserLoginInfoManager loginmanager] setIsCorp:iscorp];
             [[RMUserLoginInfoManager loginmanager] setCoorStr:coorstr];
+            [[RMUserLoginInfoManager loginmanager] setYpwd:ypwd];
+
             
             AppDelegate * delegate = [[UIApplication sharedApplication] delegate];
             
