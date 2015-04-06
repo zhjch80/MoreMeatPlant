@@ -23,6 +23,7 @@
     __block RMSettlementViewController * settle;
     NSMutableArray * dataArray;
     NSString * defaultNumber;//用户点击textfield输入前的值
+    RMPublicModel * parameterModel;//提交订单
 }
 
 @end
@@ -48,6 +49,10 @@
 
 - (void)initPlat{
     [self setCustomNavTitle:@"购物篮"];
+    
+    parameterModel = [[RMPublicModel alloc]init];
+    parameterModel.payment_id = @"1";
+    
     
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
@@ -317,6 +322,11 @@
 #pragma mark - 结算
 - (void)settlementAction:(UIButton *)sender{
     
+    if([dataArray count]== 0){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"购物篮空空如也！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
+        return;
+    }
     __block RMShopCarViewController * SELF = self;
     settle = [[RMSettlementViewController alloc]initWithNibName:@"RMSettlementViewController" bundle:nil];
     
@@ -326,7 +336,7 @@
         [SELF dismissPopUpViewControllerWithcompletion:nil];
     };
     settle.settle_callback = ^(void){//支付宝网站支付
-       
+        [SELF commitOrderAction];
     };
     settle.editAddress_callback = ^(RMPublicModel * model_){
         RMAddressEditViewController * address_edit = [[RMAddressEditViewController alloc]initWithNibName:@"RMAddressEditViewController" bundle:nil];
@@ -341,10 +351,59 @@
         address_edit.delegate = SELF;
         [SELF.navigationController pushViewController:address_edit animated:YES];
     };
-    
+    settle.payment_callback = ^(NSString * payment_id){
+        SELF->parameterModel.payment_id = payment_id;
+    };
+    settle.selectAddress_callback = ^ (RMPublicModel * model){
+        SELF->parameterModel.content_linkname = model.contentName;
+        SELF->parameterModel.content_mobile = model.contentMobile;
+        SELF->parameterModel.content_address = model.contentAddress;
+    };
     [self presentPopUpViewController:settle overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
 }
 
+#pragma mark - 提交订单
+- (void)commitOrderAction{
+    NSString * auto_id = nil;
+    NSString * num = nil;
+    NSString * express = nil;
+    for(NSDictionary *dic in dataArray){
+        for(RMProductModel * model in [dic objectForKey:@"products"]){
+            auto_id = [auto_id stringByAppendingString:[NSString stringWithFormat:@",%@",model.auto_id]];
+            num = [num stringByAppendingString:[NSString stringWithFormat:@",%@",model.auto_id]];
+            express = [express stringByAppendingString:[NSString stringWithFormat:@",%@",model.express]];
+        }
+        auto_id = [auto_id substringFromIndex:1];
+        num = [num substringFromIndex:1];
+        express = [express substringFromIndex:1];
+    }
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
+    [dict setValue:auto_id forKey:@"auto_id"];
+    [dict setValue:num forKey:@"num"];
+    [dict setValue:parameterModel.payment_id forKey:@"frm[payment_id]"];
+    [dict setValue:express forKey:@"express"];
+    [dict setValue:parameterModel.content_linkname forKey:@"frm[content_linkname]"];
+    [dict setValue:parameterModel.content_mobile forKey:@"frm[content_mobile]"];
+    [dict setValue:parameterModel.content_address forKey:@"frm[content_address]"];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager commitOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] withDic:dict andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                
+            }else{
+            
+            }
+            [self showHint:model.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
+}
+
+#pragma mark - RMAddressEditDelegate
 - (void)RMAddressEditViewCompleted{
     
     [settle requestAddresslist];

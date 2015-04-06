@@ -101,5 +101,14 @@
 @property (nonatomic, copy) NSString * series;
 
 
+@property (nonatomic, retain) NSString * express;//提交订单，快递类型1，2，2，2，1
+@property (nonatomic, retain) NSString * payment_id;//支付方式
+
+@property (retain, nonatomic) NSString * content_linkname;
+@property (retain, nonatomic) NSString * content_mobile;
+@property (retain, nonatomic) NSString * content_address;
+
+
+
 
 @end

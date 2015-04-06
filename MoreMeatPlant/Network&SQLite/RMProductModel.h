@@ -18,5 +18,6 @@
 @property (retain, nonatomic) NSString * auto_id;
 @property (retain, nonatomic) NSString * content_express;
 @property (retain, nonatomic) NSString * express_price;
+@property (retain, nonatomic) NSString * express;
 
 @end

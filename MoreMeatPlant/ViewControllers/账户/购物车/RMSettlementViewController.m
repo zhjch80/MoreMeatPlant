@@ -174,6 +174,9 @@
         self.paymentType = @"2";
     }
     [_mainTableView reloadData];
+    if(self.payment_callback){
+        self.payment_callback (self.paymentType);
+    }
 }
 
 - (void)settlementAction:(UIButton *)sender{

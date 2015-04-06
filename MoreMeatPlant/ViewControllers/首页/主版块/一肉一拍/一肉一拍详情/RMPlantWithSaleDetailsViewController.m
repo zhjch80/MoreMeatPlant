@@ -343,6 +343,7 @@
     product.content_price = dataModel.content_price;
     product.content_express = dataModel.content_express;
     product.express_price = dataModel.express_price;
+    product.express = [dataModel.is_sf boolValue]?@"1":@"2";
     product.corp_id = dataModel.member_id;
     product.content_num = 1;
     
