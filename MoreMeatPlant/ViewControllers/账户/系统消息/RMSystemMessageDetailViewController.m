@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    
     [self setCustomNavTitle:@"消息详情"];
     
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
@@ -36,7 +38,7 @@
             [_mwebView loadHTMLString:model.msg_text baseURL:nil];
             _timeL.text = model.create_time;
         }else{
-                    [self showHint:object];
+            [self showHint:object];
         }
     }];
 }

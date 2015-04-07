@@ -410,6 +410,8 @@
 		1DAE81CB1AD3AE2A003BDB85 /* RMPlantWithSaleHeaderView_6p.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE81CA1AD3AE2A003BDB85 /* RMPlantWithSaleHeaderView_6p.xib */; };
 		1DAE81CD1AD3AEA7003BDB85 /* RMPlantWithSaleDetailsCell_6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE81CC1AD3AEA7003BDB85 /* RMPlantWithSaleDetailsCell_6.xib */; };
 		1DAE81CF1AD3AFF8003BDB85 /* RMPlantWithSaleDetailsCell_6p.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE81CE1AD3AFF8003BDB85 /* RMPlantWithSaleDetailsCell_6p.xib */; };
+		1DAE81D61AD40BE5003BDB85 /* RMDaqoCell_6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE81D41AD40BE5003BDB85 /* RMDaqoCell_6.xib */; };
+		1DAE81D71AD40BE5003BDB85 /* RMDaqoCell_6p.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE81D51AD40BE5003BDB85 /* RMDaqoCell_6p.xib */; };
 		1DCD99461A95A41500F0DEB6 /* RMPlantWithSaleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCD99441A95A41500F0DEB6 /* RMPlantWithSaleCell.m */; };
 		1DCD99471A95A41500F0DEB6 /* RMPlantWithSaleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DCD99451A95A41500F0DEB6 /* RMPlantWithSaleCell.xib */; };
 		1DD3265A1ABBEA1D006CD1A8 /* img_RightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DD326591ABBEA1D006CD1A8 /* img_RightArrow@2x.png */; };
@@ -1500,6 +1502,8 @@
 		1DAE81CA1AD3AE2A003BDB85 /* RMPlantWithSaleHeaderView_6p.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMPlantWithSaleHeaderView_6p.xib; sourceTree = "<group>"; };
 		1DAE81CC1AD3AEA7003BDB85 /* RMPlantWithSaleDetailsCell_6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMPlantWithSaleDetailsCell_6.xib; sourceTree = "<group>"; };
 		1DAE81CE1AD3AFF8003BDB85 /* RMPlantWithSaleDetailsCell_6p.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMPlantWithSaleDetailsCell_6p.xib; sourceTree = "<group>"; };
+		1DAE81D41AD40BE5003BDB85 /* RMDaqoCell_6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaqoCell_6.xib; sourceTree = "<group>"; };
+		1DAE81D51AD40BE5003BDB85 /* RMDaqoCell_6p.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaqoCell_6p.xib; sourceTree = "<group>"; };
 		1DCD99431A95A41500F0DEB6 /* RMPlantWithSaleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPlantWithSaleCell.h; sourceTree = "<group>"; };
 		1DCD99441A95A41500F0DEB6 /* RMPlantWithSaleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPlantWithSaleCell.m; sourceTree = "<group>"; };
 		1DCD99451A95A41500F0DEB6 /* RMPlantWithSaleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMPlantWithSaleCell.xib; sourceTree = "<group>"; };
@@ -3372,6 +3376,8 @@
 				1D4DA3441A93090D006A9EBA /* RMDaqoCell.h */,
 				1D4DA3451A93090D006A9EBA /* RMDaqoCell.m */,
 				1D4DA3461A93090D006A9EBA /* RMDaqoCell.xib */,
+				1DAE81D41AD40BE5003BDB85 /* RMDaqoCell_6.xib */,
+				1DAE81D51AD40BE5003BDB85 /* RMDaqoCell_6p.xib */,
 				1D4DA3411A93044C006A9EBA /* RMPlantTypeView.h */,
 				1D4DA3421A93044C006A9EBA /* RMPlantTypeView.m */,
 			);
@@ -5132,6 +5138,7 @@
 				1DDBBD521ABBB14700E35CD5 /* home_z.png in Resources */,
 				1D386C811AC1690B000B9686 /* RMNearFriendTableViewCell.xib in Resources */,
 				1D9336FF1A8E3DFA00BA4FA7 /* Images.xcassets in Resources */,
+				1DAE81D71AD40BE5003BDB85 /* RMDaqoCell_6p.xib in Resources */,
 				1DCD99471A95A41500F0DEB6 /* RMPlantWithSaleCell.xib in Resources */,
 				1DEB74571AB9D66800EA1FA7 /* btn_add_photo_n@2x.png in Resources */,
 				1D4DA3481A93090D006A9EBA /* RMDaqoCell.xib in Resources */,
@@ -5232,6 +5239,7 @@
 				51D8842A1ABE61AA00F7A3BD /* RMOrderDetailViewController.xib in Resources */,
 				0A4106651ABABBF60060FBD5 /* VoiceSearchFeedback017@2x.png in Resources */,
 				0A4106BB1ABABBF60060FBD5 /* chat_receiver_audio_playing002.png in Resources */,
+				1DAE81D61AD40BE5003BDB85 /* RMDaqoCell_6.xib in Resources */,
 				1DEB750F1AB9D67A00EA1FA7 /* member_collection_type_line.png in Resources */,
 				1D88DB921AC40AEC00EC4295 /* RMDaqoRightCell.xib in Resources */,
 				1DEB751A1AB9D67A00EA1FA7 /* order_list_set_btn.png in Resources */,

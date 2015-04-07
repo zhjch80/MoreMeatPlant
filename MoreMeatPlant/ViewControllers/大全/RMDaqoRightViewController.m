@@ -31,7 +31,7 @@
     
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(kScreenWidth - kSlideWidth, 20, kSlideWidth, kScreenHeight - 20 - 49) style:UITableViewStyleGrouped];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(kScreenWidth - kSlideWidth + 20, 20, kSlideWidth, kScreenHeight - 20 - 49) style:UITableViewStyleGrouped];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.backgroundColor = [UIColor clearColor];

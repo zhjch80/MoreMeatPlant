@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z45-BV-nBk">
-                        <rect key="frame" x="8" y="8" width="304" height="30"/>
+                        <rect key="frame" x="8" y="10" width="304" height="30"/>
                         <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="19"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -34,7 +34,7 @@
             <connections>
                 <outlet property="mTitle" destination="z45-BV-nBk" id="YAb-hd-CeV"/>
             </connections>
-            <point key="canvasLocation" x="194" y="260"/>
+            <point key="canvasLocation" x="194" y="258"/>
         </tableViewCell>
     </objects>
 </document>

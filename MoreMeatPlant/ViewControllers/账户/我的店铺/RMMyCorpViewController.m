@@ -338,7 +338,21 @@
     
 }
 
-
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
+    switch (sender.tag) {
+        case 1:{
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
+        }
+        case 2:{
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

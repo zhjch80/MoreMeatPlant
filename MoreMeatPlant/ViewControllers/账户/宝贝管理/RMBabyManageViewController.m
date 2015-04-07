@@ -29,9 +29,9 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
-    all_Ctl = [[RMBabyListViewController alloc]initWithNibName:@"RMBabyListViewController" bundle:nil];
-    all_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-44);
-    all_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-44);
+    all_Ctl = [[RMBabyListViewController alloc] initWithNibName:@"RMBabyListViewController" bundle:nil];
+    all_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight);
+    all_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-40);
     [self.view addSubview:all_Ctl.view];
     
     

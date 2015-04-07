@@ -127,6 +127,12 @@
         }
         [UIView commitAnimations];
     }else{
+        CALayer * layer = [centerCtl.view layer];
+        layer.shadowColor = [UIColor blackColor].CGColor;
+        layer.shadowOffset = CGSizeMake(1, 1);
+        layer.shadowOpacity = 1;
+        layer.shadowRadius = 20.0;
+        
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         [UIView setAnimationDidStopSelector:@selector(stopRightAnimation)];

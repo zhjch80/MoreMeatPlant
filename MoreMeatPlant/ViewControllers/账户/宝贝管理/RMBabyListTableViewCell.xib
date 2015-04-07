@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -52,7 +52,7 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥ 299" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wav-c9-3Zk">
-                        <rect key="frame" x="78" y="44" width="36.5" height="17"/>
+                        <rect key="frame" x="78" y="43" width="37" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.3411764706" green="0.3411764706" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -74,8 +74,8 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2号晚霞之舞老庄" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BZ-Gh-v5D">
-                        <rect key="frame" x="78" y="8" width="107" height="17.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2号晚霞之舞老庄" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BZ-Gh-v5D">
+                        <rect key="frame" x="78" y="8" width="107" height="18"/>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -87,6 +87,7 @@
                     <constraint firstItem="wav-c9-3Zk" firstAttribute="leading" secondItem="LkG-PX-0GL" secondAttribute="trailing" constant="8" id="EeY-vM-Mbb"/>
                     <constraint firstItem="hKm-NP-rFI" firstAttribute="centerY" secondItem="LkG-PX-0GL" secondAttribute="centerY" id="FKN-wa-JUg"/>
                     <constraint firstItem="hKm-NP-rFI" firstAttribute="centerY" secondItem="BIu-ge-Aqo" secondAttribute="centerY" id="GTj-uW-J6d"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xcN-qF-BHh" secondAttribute="trailing" constant="10" id="KAQ-jQ-vJ0"/>
                     <constraint firstAttribute="bottom" secondItem="IyO-qY-jFy" secondAttribute="bottom" id="OqS-nH-P6Z"/>
                     <constraint firstAttribute="bottom" secondItem="wav-c9-3Zk" secondAttribute="bottom" constant="9" id="U8w-6z-jp4"/>
                     <constraint firstAttribute="trailing" secondItem="xcN-qF-BHh" secondAttribute="trailing" constant="10" id="VN6-bV-5H2"/>
