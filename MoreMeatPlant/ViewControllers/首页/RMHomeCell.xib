@@ -29,6 +29,9 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8q-TY-MQh">
                         <rect key="frame" x="0.0" y="59" width="320" height="1"/>
                         <color key="backgroundColor" red="0.87376767113095233" green="0.87376767113095233" blue="0.87376767113095233" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="aRN-s5-L2V"/>
+                        </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWv-Ts-6EB">
                         <rect key="frame" x="67" y="15" width="245" height="30"/>

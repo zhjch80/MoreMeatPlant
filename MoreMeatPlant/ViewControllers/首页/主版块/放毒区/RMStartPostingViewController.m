@@ -7,7 +7,6 @@
 //
 
 #import "RMStartPostingViewController.h"
-#import "RMStartPostingHeaderView.h"
 #import "UITextField+LimitLength.h"
 #import "AssetHelper.h"
 #import "DoImagePickerController.h"
@@ -15,19 +14,18 @@
 
 #define kMaxLength 18
 
-@interface RMStartPostingViewController ()<UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,StartPostingHeaderDelegate,DoImagePickerControllerDelegate>{
+@interface RMStartPostingViewController ()<UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,DoImagePickerControllerDelegate>{
     NSInteger uploadImageCount;         //纪录已选照片数量
     NSInteger uploadImageValue;         //标记要重置的位置
     NSInteger cameraType;               //取照类型  1 点击直接拍照    2 点击某一张图片
     
 }
-@property (nonatomic, strong) RMStartPostingHeaderView * headerView;
 @property (strong, nonatomic) NSMutableArray * uploadImageArr;
 
 @end
 
 @implementation RMStartPostingViewController
-@synthesize headerView, uploadImageArr;
+@synthesize uploadImageArr;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -53,13 +51,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    
     uploadImageArr = [[NSMutableArray alloc] init];
     uploadImageCount = 0;
     
-    [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
+    [self setCustomNavBackgroundColor:[UIColor colorWithRed:0.87 green:0.87 blue:0.87 alpha:1] withStatusViewBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:1]];
+    [self setCustomNavTitle:[NSString stringWithFormat:@"发帖(%@)",self.subTitle]];
+    [self setRightBarButtonNumber:1];
     
-    [self loadHeaderViewWithTitle:self.subTitle];
-    
+    [leftBarButton setTitle:@"取消" forState:UIControlStateNormal];
+    leftBarButton.frame = CGRectMake(10, 0, 50, 44);
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] forState:UIControlStateNormal];
+    [rightOneBarButton setTitle:@"发布" forState:UIControlStateNormal];
+    rightOneBarButton.frame = CGRectMake(kScreenWidth - 60, 0, 50, 44);
+    [rightOneBarButton setTitleColor:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] forState:UIControlStateNormal];
+
+    self.line.frame = CGRectMake(0, 99, kScreenWidth, 1);
+    self.mTextField.frame = CGRectMake(0, 64, kScreenWidth, 35);
     [self.mTextField limitTextLength:kMaxLength];
     [self.mTextField setValue:[UIColor colorWithRed:0.58 green:0.58 blue:0.58 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
     [[UITextField appearance] setTintColor:[UIColor colorWithRed:0 green:0.67 blue:0.65 alpha:1]];
@@ -90,11 +100,38 @@
 
 }
 
-- (void)loadHeaderViewWithTitle:(NSString *)title {
-    headerView = [[[NSBundle mainBundle] loadNibNamed:@"RMStartPostingHeaderView" owner:nil options:nil] objectAtIndex:0];
-    headerView.mTitle.text = [NSString stringWithFormat:@"发帖(%@)",title];
-    headerView.delegate = self;
-    [self.view addSubview:headerView];
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
+    switch (sender.tag) {
+        case 1:{
+            [self dismissViewControllerAnimated:YES completion:nil];
+            break;
+        }
+        case 2:{
+            NSLog(@"-----------");
+            
+            [self.mTextField resignFirstResponder];
+            [self.mTextView resignFirstResponder];
+            
+            if ([self isBlankString:self.mTextField.text]){
+                [self showHint:@"标题不能为空"];
+                return;
+            }
+            
+            for (NSInteger i=0; i<8; i++) {
+                RMImageView * image = (RMImageView *)[self.view viewWithTag:101+i];
+                NSLog(@"第 %@ 个 state:%ld",image.identifierString,(long)i);
+            }
+            
+            NSLog(@"title:%@",self.mTextField.text);
+            NSLog(@"content:%@",self.mTextView.text);
+            
+            [self requestSendPosts];
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 - (void)headerNavMethodWithTag:(NSInteger)tag {
@@ -104,13 +141,44 @@
             break;
         }
         case 2:{
-            NSLog(@"发布");
+            NSLog(@"-----------");
+            
+            [self.mTextField resignFirstResponder];
+            [self.mTextView resignFirstResponder];
+            
+            if ([self isBlankString:self.mTextField.text]){
+                [self showHint:@"标题不能为空"];
+                return;
+            }
+
+            for (NSInteger i=0; i<8; i++) {
+                RMImageView * image = (RMImageView *)[self.view viewWithTag:101+i];
+                NSLog(@"第 %@ 个 state:%ld",image.identifierString,(long)i);
+            }
+            
+            NSLog(@"title:%@",self.mTextField.text);
+            NSLog(@"content:%@",self.mTextView.text);
+            
+            [self requestSendPosts];
             break;
         }
             
         default:
             break;
     }
+}
+
+- (BOOL)isBlankString:(NSString *)string {
+    if (string == nil || string == NULL) {
+        return YES;
+    }
+    if ([string isKindOfClass:[NSNull class]]) {
+        return YES;
+    }
+    if ([[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0) {
+        return YES;
+    }
+    return NO;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -129,6 +197,8 @@
 
 - (void)keyboardWillShow:(NSNotification *)noti {
     CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    self.line_1.frame = CGRectMake(0, 0, kScreenWidth, 1);
+    self.line_2.frame = CGRectMake(0, 34, kScreenWidth, 1);
     self.mTextView.frame = CGRectMake(0, 100, kScreenWidth, kScreenHeight - 100 - 35 - size.height);
     self.mView.frame = CGRectMake(0, 100 + self.mTextView.frame.size.height, kScreenWidth, 35);
     self.mScrollView.frame = CGRectMake(0, self.mView.frame.size.height + self.mView.frame.origin.y, kScreenWidth, kScreenHeight - self.mView.frame.size.height - self.mView.frame.origin.y);
@@ -438,6 +508,16 @@
         }
         [ASSETHELPER clearData];
     }
+}
+
+#pragma mark - 数据请求
+
+/*
+ *    @method       发布帖子
+ */
+- (void)requestSendPosts{
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [RMAFNRequestManager postSendPostsWithAuto_id:<#(NSString *)#> withContentName:<#(NSString *)#> withContentType:<#(NSString *)#> withContentClass:<#(NSString *)#> withContentCourse:<#(NSString *)#> withContentBody:<#(NSString *)#> withContentImg:<#(NSString *)#> withBodyAuto_id:<#(NSString *)#> withID:<#(NSString *)#> withPWD:<#(NSString *)#> callBack:<#^(NSError *error, BOOL success, id object)block#>]
 }
 
 - (void)didReceiveMemoryWarning {

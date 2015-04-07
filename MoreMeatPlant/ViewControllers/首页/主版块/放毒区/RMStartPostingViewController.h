@@ -16,7 +16,10 @@
 
 @property (weak, nonatomic) IBOutlet RMBaseTextField *mTextField;
 @property (weak, nonatomic) IBOutlet RMBaseTextView *mTextView;
+@property (weak, nonatomic) IBOutlet UIView *line;
+@property (weak, nonatomic) IBOutlet UIView *line_1;
 @property (weak, nonatomic) IBOutlet UIView *mView;
+@property (weak, nonatomic) IBOutlet UIView *line_2;
 @property (weak, nonatomic) IBOutlet UIButton *photoBtn;
 @property (weak, nonatomic) IBOutlet UIButton *takingPicturesBtn;
 @property (weak, nonatomic) IBOutlet UIButton *keyboardBtn;

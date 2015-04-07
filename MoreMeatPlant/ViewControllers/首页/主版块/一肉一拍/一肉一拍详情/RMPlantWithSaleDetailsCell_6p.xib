@@ -21,28 +21,28 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="RMPlantWithSaleDetailsCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="165"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="165"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dtu-Wd-oLX">
-                        <rect key="frame" x="10" y="5" width="300" height="40"/>
+                        <rect key="frame" x="10" y="5" width="401" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G0Y-ei-8mI">
-                        <rect key="frame" x="10" y="5" width="300" height="40"/>
+                        <rect key="frame" x="10" y="5" width="393" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_pointLine.png" id="e7l-r4-quy">
-                        <rect key="frame" x="10" y="37" width="300" height="1"/>
+                        <rect key="frame" x="10" y="37" width="395" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
@@ -54,12 +54,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_pointLine.png" id="JsP-iI-Jlz">
-                        <rect key="frame" x="10" y="85" width="170" height="1"/>
+                        <rect key="frame" x="10" y="85" width="272" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                     <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="md6-0H-7ik">
-                        <rect key="frame" x="200" y="78" width="110" height="20"/>
+                        <rect key="frame" x="293" y="78" width="110" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.8666666666666667" green="0.0" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="FZZZHONGJW--GB1-0" family="FZZhengHeiS-DB-GB" pointSize="12"/>
@@ -73,7 +73,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RWb-9N-acD">
-                        <rect key="frame" x="200" y="106" width="110" height="20"/>
+                        <rect key="frame" x="293" y="106" width="110" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.86666666670000003" green="0.0" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="FZZZHONGJW--GB1-0" family="FZZhengHeiS-DB-GB" pointSize="12"/>
@@ -87,7 +87,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Esj-0f-Jw8">
-                        <rect key="frame" x="200" y="134" width="110" height="20"/>
+                        <rect key="frame" x="293" y="134" width="110" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.86666666670000003" green="0.0" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="FZZZHONGJW--GB1-0" family="FZZhengHeiS-DB-GB" pointSize="12"/>
@@ -100,8 +100,15 @@
                             <action selector="plantWithSlaeCellBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5QG-LK-mFV"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tc7-qm-dii">
+                        <rect key="frame" x="8" y="90" width="277" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FC7-NS-Cxg">
-                        <rect key="frame" x="283" y="44" width="26" height="26"/>
+                        <rect key="frame" x="377" y="44" width="26" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" image="jia_img.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -111,7 +118,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T1X-RV-9Ze">
-                        <rect key="frame" x="225" y="44" width="58" height="26"/>
+                        <rect key="frame" x="319" y="44" width="58" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="FZZZHONGJW--GB1-0" family="FZZhengHeiS-DB-GB" pointSize="11"/>
@@ -119,7 +126,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YG4-dx-g84">
-                        <rect key="frame" x="199" y="44" width="26" height="26"/>
+                        <rect key="frame" x="293" y="44" width="26" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" image="jian_img.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -128,13 +135,6 @@
                             <action selector="plantWithSlaeCellBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ce8-kL-UWJ"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tc7-qm-dii">
-                        <rect key="frame" x="8" y="90" width="170" height="64"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="13"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -151,7 +151,7 @@
                 <outlet property="productName" destination="PDk-bf-WcF" id="h6q-8O-FPD"/>
                 <outlet property="showNum" destination="T1X-RV-9Ze" id="38R-Xm-ePK"/>
             </connections>
-            <point key="canvasLocation" x="200" y="249.5"/>
+            <point key="canvasLocation" x="199" y="249.5"/>
         </tableViewCell>
     </objects>
     <resources>

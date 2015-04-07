@@ -150,6 +150,9 @@
 
 - (void)loadTableHeadView {
     tableHeadView = [[[NSBundle mainBundle] loadNibNamed:@"RMTableHeadView" owner:nil options:nil] objectAtIndex:0];
+    tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, 120);
+    tableHeadView.detailsPointLine.frame = CGRectMake(10, 60, kScreenWidth - 20, 1);
+    tableHeadView.detailsReportBtn.frame = CGRectMake(kScreenWidth - 50, 50, 40, 21);
     [tableHeadView.detailsReportBtn.layer setCornerRadius:8.0f];
     [tableHeadView.detailsUserHead.layer setCornerRadius:20.0f];
     tableHeadView.detailsUserHead.clipsToBounds = YES;
@@ -268,7 +271,13 @@
         static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_1";
         RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         if (!cell){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_1" owner:self options:nil] lastObject];
+            if (IS_IPHONE_6p_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_1_6p" owner:self options:nil] lastObject];
+            }else if (IS_IPHONE_6_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_1_6" owner:self options:nil] lastObject];
+            }else{
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_1" owner:self options:nil] lastObject];
+            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
         }
@@ -278,7 +287,13 @@
         static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_2";
         RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         if (!cell){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_2" owner:self options:nil] lastObject];
+            if (IS_IPHONE_6p_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_2_6p" owner:self options:nil] lastObject];
+            }else if (IS_IPHONE_6_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_2_6" owner:self options:nil] lastObject];
+            }else{
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_2" owner:self options:nil] lastObject];
+            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
             cell.delegate = self;
@@ -327,7 +342,7 @@
         return 50.0;
     }else if (indexPath.row < 6){
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return 100.0;//cell.frame.size.height;
+        return cell.frame.size.height;
     }else{
         return 140.0;
     }

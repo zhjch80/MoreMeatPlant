@@ -114,6 +114,28 @@
     statusView.hidden = statusBar;
 }
 
+- (void)setCustomNavBackgroundColor:(UIColor *)navColor withStatusViewBackgroundColor:(UIColor *)statusColor {
+    if ([navColor isKindOfClass:[UIColor class]]){
+        customNav.backgroundColor = navColor;
+        
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient.frame = CGRectMake(0, 0, customNav.frame.size.width, customNav.frame.size.height);
+        gradient.colors = [NSArray arrayWithObjects:
+                           (id)navColor.CGColor,
+                           (id)navColor.CGColor,
+                           nil];
+        CGPoint startPoint = CGPointMake(0, 0);
+        CGPoint endPoint = CGPointMake(0, 1);
+        gradient.startPoint = startPoint;
+        gradient.endPoint = endPoint;
+        [customNav.layer insertSublayer:gradient atIndex:0];
+    }
+    
+    if ([statusColor isKindOfClass:[UIColor class]]){
+        statusView.backgroundColor = statusColor;
+    }
+}
+
 - (void)setCustomNavTitle:(NSString *)title {
     titleLabel.text = title;
 }

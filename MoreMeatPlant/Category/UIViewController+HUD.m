@@ -13,6 +13,7 @@
 #import "UIViewController+HUD.h"
 #import "MBProgressHUD.h"
 #import <objc/runtime.h>
+#import "CONST.h"
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
@@ -46,7 +47,17 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     hud.mode = MBProgressHUDModeText;
     hud.labelText = hint;
     hud.margin = 10.f;
-    hud.yOffset = IS_IPHONE_5?200.f:150.f;
+    CGFloat offsetY = 0;
+    if (IS_IPHONE_5){
+        offsetY = 200.f;
+    }else if (IS_IPHONE_6_SCREEN){
+        offsetY = 240.f;
+    }else if (IS_IPHONE_6p_SCREEN){
+        offsetY = 270.f;
+    }else{
+        offsetY = 150.f;
+    }
+    hud.yOffset = offsetY;
     hud.removeFromSuperViewOnHide = YES;
     [hud hide:YES afterDelay:2];
 }
@@ -60,7 +71,17 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     hud.mode = MBProgressHUDModeText;
     hud.labelText = hint;
     hud.margin = 10.f;
-    hud.yOffset = IS_IPHONE_5?200.f:150.f;
+    CGFloat offsetY = 0;
+    if (IS_IPHONE_5){
+        offsetY = 200.f;
+    }else if (IS_IPHONE_6_SCREEN){
+        offsetY = 240.f;
+    }else if (IS_IPHONE_6p_SCREEN){
+        offsetY = 270.f;
+    }else{
+        offsetY = 150.f;
+    }
+    hud.yOffset = offsetY;
     hud.yOffset += yOffset;
     hud.removeFromSuperViewOnHide = YES;
     [hud hide:YES afterDelay:2];

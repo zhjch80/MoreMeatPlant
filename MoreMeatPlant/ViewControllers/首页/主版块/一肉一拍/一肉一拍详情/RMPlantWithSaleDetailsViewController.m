@@ -161,7 +161,13 @@
 #pragma mark -
 
 - (void)loadHeaderView {
-    headerView = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleHeaderView" owner:nil options:nil] objectAtIndex:0];
+    if (IS_IPHONE_6p_SCREEN){
+        headerView = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleHeaderView_6p" owner:nil options:nil] objectAtIndex:0];
+    }else if (IS_IPHONE_6_SCREEN){
+        headerView = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleHeaderView_6" owner:nil options:nil] objectAtIndex:0];
+    }else{
+        headerView = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleHeaderView" owner:nil options:nil] objectAtIndex:0];
+    }
     headerView.delegate = self;
     [headerView.userHeader.layer setCornerRadius:20.0f];
     headerView.userHeader.clipsToBounds = YES;
@@ -236,7 +242,13 @@
     static NSString * identifierStr = @"plantWithSaleDetailsIdentifier";
     RMPlantWithSaleDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     if (!cell){
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleDetailsCell" owner:self options:nil] lastObject];
+        if (IS_IPHONE_6p_SCREEN){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleDetailsCell_6p" owner:self options:nil] lastObject];
+        }else if (IS_IPHONE_6_SCREEN){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleDetailsCell_6" owner:self options:nil] lastObject];
+        }else{
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleDetailsCell" owner:self options:nil] lastObject];
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         cell.delegate = self;

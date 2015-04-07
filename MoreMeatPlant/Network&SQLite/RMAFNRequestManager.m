@@ -530,6 +530,59 @@
     }];
 }
 
+/*
+ *  @method             发布帖子
+ *  @param          auto_id             如果是编辑传 帖子标识字段,不传代表新建
+ *  @param          content_name        帖子标题
+ *  @param          content_type        帖子分类1：放毒区，2:肉肉交换
+ *  @param          content_class       植物分类
+ *  @param          content_course      植物科目
+ *  @param          content_body        帖子内容文字,多个重复传此值
+ *  @param          content_img         帖子内容图片,多个重复传此值
+ *  @param          bodyAuto_id         帖子内容标识字段,不传代表新建，多个重复传此值
+ *  @param          user_id             会员用户名
+ *  @param          user_password       会员密码
+ */
++ (void)postSendPostsWithAuto_id:(NSString *)auto_id
+                 withContentName:(NSString *)content_name
+                 withContentType:(NSString *)content_type
+                withContentClass:(NSString *)content_class
+               withContentCourse:(NSString *)content_course
+                 withContentBody:(NSString *)content_body
+                  withContentImg:(NSString *)content_img
+                 withBodyAuto_id:(NSString *)bodyAuto_id
+                          withID:(NSString *)user_id
+                         withPWD:(NSString *)user_password
+                        callBack:(RMAFNRequestManagerCallBack)block {
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_center&task=updateNote&frm[content_name]=111&frm[content_type]=1&frm[content_class]=1&frm[content_course]=1000&frm[body][][content_body]=11&ID=test&PWD=202cb962ac59075b964b07152d234b70
+    NSString *url = @"http://218.240.30.6/drzw/index.php";
+    NSDictionary * parameter = @{
+                                 @"com": @"com_appService",
+                                 @"method": @"save",
+                                 @"app_com": @"com_center",
+                                 @"task": @"updateNote",
+                                 @"auto_id" : @"",
+                                 @"frm[content_name]": @"",
+                                 @"frm[content_type]": @"",
+                                 @"frm[content_class]": @"",
+                                 @"frm[content_course]": @"",
+                                 @"frm[body][][content_body]": @"",
+                                 @"frm[body][][content_img]": @"",
+                                 @"frm[body][auto_id][]": @"",
+                                 @"ID": @"",
+                                 @"PWD": @"",
+                                 };
+    [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        if (block){
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
 /*************************************************************************/
 
 /**

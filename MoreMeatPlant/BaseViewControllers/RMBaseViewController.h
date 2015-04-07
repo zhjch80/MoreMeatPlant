@@ -40,6 +40,12 @@
 - (void)setHideCustomNavigationBar:(BOOL)navigationBar withHideCustomStatusBar:(BOOL)statusBar;
 
 /**
+ *  @param navColor             自定义的CustomNav的背景色
+ *  @param statusColor          自定义的StatusView的背景色
+ */
+- (void)setCustomNavBackgroundColor:(UIColor *)navColor withStatusViewBackgroundColor:(UIColor *)statusColor;
+
+/**
  *  @param  number          设置右边barbutton的数量 最多两个
  */
 - (void)setRightBarButtonNumber:(NSInteger)number;

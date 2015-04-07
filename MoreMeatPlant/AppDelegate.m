@@ -120,9 +120,11 @@
         [[RMUserLoginInfoManager loginmanager] setIsCorp:iscorp];
         [[RMUserLoginInfoManager loginmanager] setCoorStr:coorstr];
         [[RMUserLoginInfoManager loginmanager] setYpwd:ypwd];
-
     }else{
-        
+        [[RMUserLoginInfoManager loginmanager] setState:NO];
+        [[RMUserLoginInfoManager loginmanager] setUser:@""];
+        [[RMUserLoginInfoManager loginmanager] setPwd:@""];
+        [[RMUserLoginInfoManager loginmanager] setYpwd:@""];
     }
 }
 /**

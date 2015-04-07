@@ -13,6 +13,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RMStartPostingViewController">
             <connections>
                 <outlet property="keyboardBtn" destination="2Y1-bw-6Ec" id="WpK-gl-BCp"/>
+                <outlet property="line" destination="cm4-4e-3WM" id="VkP-Kz-7ss"/>
+                <outlet property="line_1" destination="Dl4-0j-qdl" id="jfO-TV-hgC"/>
+                <outlet property="line_2" destination="aud-Zv-qhI" id="aFI-qQ-lmK"/>
                 <outlet property="mScrollView" destination="QjD-0u-Onv" id="kYY-zX-MXd"/>
                 <outlet property="mTextField" destination="deu-SW-ewe" id="lM1-0s-Tle"/>
                 <outlet property="mTextView" destination="HqT-QO-2w7" id="nUg-30-pIg"/>

@@ -10,7 +10,7 @@
 #import "RMBaseViewController.h"
 
 @interface RMBaseWebViewController : RMBaseViewController
-@property (weak, nonatomic) IBOutlet UIWebView *mWebView;
+@property (strong, nonatomic) UIWebView *mWebView;
 
 - (void)loadRequestWithUrl:(NSString *)url withTitle:(NSString *)title;
 
