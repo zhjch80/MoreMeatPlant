@@ -36,7 +36,7 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
 
-    NSString * urlstr = [RMAFNRequestManager alipayWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isDirectPurchase:_is_direct Order_sn:order_id];
+    NSString * urlstr = [RMAFNRequestManager alipayWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] content_type:@"0" isDirectPurchase:_is_direct Order_sn:order_id content_money:nil];
     
     [_mwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlstr]]];
     

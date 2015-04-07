@@ -58,6 +58,7 @@ _Pragma("clang diagnostic pop") \
 #define UserType @"is_corp"
 #define UserCoor @"coor"
 #define UserYPWD @"HX_PWD"//环信密码
+#define UserS_id @"s_id" //会员唯一标示
 
 
 #import "RMProductModel.h"

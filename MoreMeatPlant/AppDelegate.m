@@ -113,6 +113,7 @@
         NSString * iscorp = [[NSUserDefaults standardUserDefaults] objectForKey:UserType];
         NSString * coorstr = [[NSUserDefaults standardUserDefaults] objectForKey:UserCoor];
         NSString * ypwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserYPWD];
+        NSString * s_id = [[NSUserDefaults standardUserDefaults] objectForKey:UserS_id];
         NSLog(@"appdelegate用户类型：%@",iscorp);
         [[RMUserLoginInfoManager loginmanager] setState:YES];
         [[RMUserLoginInfoManager loginmanager] setUser:user];
@@ -120,6 +121,7 @@
         [[RMUserLoginInfoManager loginmanager] setIsCorp:iscorp];
         [[RMUserLoginInfoManager loginmanager] setCoorStr:coorstr];
         [[RMUserLoginInfoManager loginmanager] setYpwd:ypwd];
+        [[RMUserLoginInfoManager loginmanager] setS_id:s_id];
     }else{
         [[RMUserLoginInfoManager loginmanager] setState:NO];
         [[RMUserLoginInfoManager loginmanager] setUser:@""];

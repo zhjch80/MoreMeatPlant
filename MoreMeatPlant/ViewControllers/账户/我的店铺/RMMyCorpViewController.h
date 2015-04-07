@@ -16,6 +16,7 @@
     JSBadgeView * badge;
     JSBadgeView * car_badge;
     JSBadgeView * chat_badge;
+    RMPublicModel * classsModel;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *bannerImgV;
 @property (weak, nonatomic) IBOutlet UIImageView *corp_headImgV;
@@ -30,4 +31,5 @@
 @property (weak, nonatomic) IBOutlet UIView *classesView;
 @property (weak, nonatomic) IBOutlet UITableView *mainTableview;
 @property (retain, nonatomic) NSString * auto_id;
+@property (retain, nonatomic) NSString * member_class;
 @end

@@ -27,5 +27,6 @@ typedef void (^RMMyHomeViewCtlDetailCallBack) (NSString * auto_id);
 @property (weak, nonatomic) IBOutlet UIButton *sendPrivateMsgBtn;
 @property (weak, nonatomic) IBOutlet UIButton *attentionHeBtn;
 @property (copy, nonatomic) RMMyHomeViewCtlDetailCallBack detailcall_back;
+@property (retain, nonatomic) NSString * auto_id;
 
 @end

@@ -14,6 +14,7 @@
     if(self == [super init]){
         _imgs = [[NSMutableArray alloc]init];
         _body = [[NSMutableArray alloc]init];
+        _classs = [[NSMutableArray alloc]init];
     }
     return self;
 }

@@ -126,4 +126,6 @@
 @property (retain, nonatomic) NSArray * pros;    //商品信息
 @property (retain, nonatomic) NSString * order_message;  //订单备注,暂不用
 
+@property (retain, nonatomic) NSMutableArray * classs;  //商家店铺分类
+
 @end

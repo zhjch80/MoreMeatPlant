@@ -31,6 +31,9 @@
     
     [self setCustomNavTitle:@"我的店铺"];
     
+    if(self.auto_id == nil){
+        self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
+    }
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
@@ -65,39 +68,24 @@
     isRefresh = YES;
     
     
-    NSArray * titles = [NSArray arrayWithObjects:@"全部宝贝",@"一肉一拍",@"进口肉肉",@"老桩专区", nil];
+    classsModel = [[RMPublicModel alloc]init];
+    
+    [self requestCorpid];
+    
+}
+
+- (void)createClassView{
     float width = (kScreenWidth-10*2-3)/4.0;
-    for(NSInteger i = 0; i<4; i ++ ){
+    for(NSInteger i = 0; i<([classsModel.classs count]>4?4:[classsModel.classs count]); i ++ ){
         RMCorpClassesButton * btn = [[RMCorpClassesButton alloc]initWithFrame:CGRectMake(10+(width+1)*(i%4), 0, width, 40)];
         btn.tag = 100+i;
-        btn.classesNameL.text = [titles objectAtIndex:i];
+        btn.classesNameL.text = [[classsModel.classs objectAtIndex:i] objectForKey:@"content_name"];
         btn.classesNameL.font = FONT_0(13);
         btn.callback = ^(RMCorpClassesButton *sender){
-        
-            switch (sender.tag-100) {
-                case 0:{
-                
-                }
-                    break;
-                case 1:{
-                    
-                }
-                    break;
-                case 2:{
-                    
-                }
-                    break;
-                case 3:{
-                    
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
-            
+            pageCount = 1;
+            self.member_class = [[classsModel.classs objectAtIndex:i] objectForKey:@"auto_id"];
+            [self requestListWithPlant];
         };
-        
         
         [_classesView addSubview:btn];
         
@@ -112,7 +100,6 @@
             [_classesView addSubview:img_line];
         }
     }
-    
 }
 
 #pragma mark - bottomViewDelegate
@@ -210,7 +197,13 @@
     static NSString * identifierStr = @"plantWithSaleIdentifier";
     RMPlantWithSaleCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     if (!cell){
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell" owner:self options:nil] lastObject];
+        if (IS_IPHONE_6p_SCREEN){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell_6p" owner:self options:nil] lastObject];
+        }else if (IS_IPHONE_6_SCREEN){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell_6" owner:self options:nil] lastObject];
+        }else{
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell" owner:self options:nil] lastObject];
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
         cell.delegate = self;
@@ -271,13 +264,73 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 150.0;
+    UITableViewCell * cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
-
 - (void)jumpPlantDetailsWithImage:(RMImageView *)image {
     RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
     plantWithSaleDetailsCtl.auto_id = image.identifierString;
     [self.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
+}
+
+#pragma mark - 请求
+- (void)requestListWithPlant {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getBabyListWithPlantClassWith:1 withCourse:0 withMemerClass:self.member_class withCorpid:self.auto_id withCount:pageCount callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_price = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_price"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    [dataArr addObject:model];
+                }
+                [_mainTableview reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+            }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
+                if ([[object objectForKey:@"data"] count] == 0){
+                    [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    isLoadComplete = YES;
+                    return;
+                }
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_price = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_price"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    [dataArr addObject:model];
+                }
+                [_mainTableview reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            }
+            
+            if (isRefresh){
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_price = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_price"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    [dataArr addObject:model];
+                }
+                [_mainTableview reloadData];
+            }
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
 
 #pragma mark 刷新代理
@@ -287,55 +340,46 @@
         pageCount = 1;
         isRefresh = YES;
         isLoadComplete = NO;
-        [self requestDataWithPageCount];
+        
+        [self requestListWithPlant];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self showHint:@"没有更多肉肉啦"];
+                [self showHint:@"没有更多宝贝啦"];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
             });
         }else{
             pageCount ++;
             isRefresh = NO;
-            [self requestDataWithPageCount];
+            [self requestListWithPlant];
         }
-        
     }
 }
 
-- (void)requestDataWithPageCount{
+#pragma mark - 获取店铺标示
+- (void)requestCorpid{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-//这里有问题，需要修改
-    [RMAFNRequestManager myCollectionRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:@"3" Page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getCorpHomeInfoWithAuto_id:self.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
-            if(pageCount == 1){
-                [dataArr removeAllObjects];
-                [dataArr addObjectsFromArray:object];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
-                if([object count] == 0){
-                    [self showHint:@"暂无宝贝"];
-                    
-                }
-            }else{
-                [dataArr addObjectsFromArray:object];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-                if([object count] == 0){
-                    [self showHint:@"没有更多宝贝了"];
-                    pageCount--;
-                }
-            }
+            RMPublicModel * model = object;
+            classsModel = model;
+
+            [_corp_headImgV sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
+            _corp_nameL.text = classsModel.content_name;
+            _signatureL.text = classsModel.contentQm;
+            _corp_regionL.text = classsModel.content_gps;
+            [_corp_level setTitle:classsModel.levelId forState:UIControlStateNormal];
+            [self createClassView];
             
+            self.member_class = [[classsModel.classs objectAtIndex:0] objectForKey:@"auto_id"];
             
+            [self requestListWithPlant];
         }else{
             [self showHint:object];
         }
-        
-        [_mainTableview reloadData];
     }];
-    
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {

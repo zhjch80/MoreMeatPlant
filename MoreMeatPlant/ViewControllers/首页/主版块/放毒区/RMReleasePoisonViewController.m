@@ -708,7 +708,7 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getPostsListWithPostsType:@"1" withPlantType:plantType withPlantSubjects:subjectsType withPageCount:pc withUser_id:OBJC([RMUserLoginInfoManager loginmanager].user) withUser_password:OBJC([RMUserLoginInfoManager loginmanager].pwd) callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getPostsListWithPostsType:@"1" withPlantType:plantType withPlantSubjects:subjectsType withPageCount:pc withUser_id:OBJC([RMUserLoginInfoManager loginmanager].user) withUser_password:OBJC([RMUserLoginInfoManager loginmanager].pwd) withMemberId:nil callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

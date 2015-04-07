@@ -40,8 +40,8 @@
 }
 
 - (void)addAction{
-    _numberL.userInteractionEnabled = YES;
-    _classesNameL.userInteractionEnabled = YES;
+    _numberL.userInteractionEnabled = NO;
+    _classesNameL.userInteractionEnabled = NO;
     [self addTarget:self action:@selector(didSelectBtn:) forControlEvents:UIControlEventTouchDown];
     
 }

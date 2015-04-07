@@ -12,7 +12,7 @@
 
 #define baseUrl             @"http://218.240.30.6/drzw/index.php?com=com_appService"
 
-#define PayHttp @"http://http://218.240.30.6/drzw/pay/app_js/alipayapi.php?"
+#define PayHttp @"http://218.240.30.6/drzw/pay/app_js/alipayapi.php?"
 
 
 #define kMSGSuccess         @"1"
@@ -233,9 +233,17 @@
  */
 + (void)getBabyListWithPlantClassWith:(NSInteger)plantClass
                            withCourse:(NSInteger)plantCourse
+                       withMemerClass:(NSString *)memberClass
+                           withCorpid:(NSString *)corp_id
                             withCount:(NSInteger)pageCount
                              callBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%ld&course=%ld&per=1&row=10&page=%ld",baseUrl,(long)plantClass,(long)plantCourse,(long)pageCount];
+    NSString * url = nil;
+    if(corp_id == nil){
+        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%ld&course=%ld&per=1&row=10&page=%ld",baseUrl,(long)plantClass,(long)plantCourse,(long)pageCount];
+    }else{
+        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&per=1&row=10&page=%ld&memberclass=%@&corp_id=%@",baseUrl,(long)pageCount,memberClass,corp_id];
+    }
+    
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
@@ -281,8 +289,15 @@
                     withPageCount:(NSInteger)pageCount
                       withUser_id:(NSString *)user_id
                 withUser_password:(NSString *)user_password
+                     withMemberId:(NSString *)member_id
                          callBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&type=%@&class=%@&course=%@&per=1&row=10&page=%ld&ID=%@&PWD=%@",baseUrl,postsType,plantType,plantSubjects,(long)pageCount,user_id,user_password];
+    NSString * url = nil;
+    if(member_id == nil){
+        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&type=%@&class=%@&course=%@&per=1&row=10&page=%ld&ID=%@&PWD=%@",baseUrl,postsType,plantType,plantSubjects,(long)pageCount,user_id,user_password];
+    }else{
+        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&per=1&row=10&page=%ld&ID=%@&PWD=%@&member_id=%@",baseUrl,(long)pageCount,user_id,user_password,member_id];
+    }
+    
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
@@ -599,6 +614,7 @@
         
         }else{
             model.s_type = [OBJC([dic objectForKey:@"data"]) objectForKey:@"s_type"];
+            model.auto_id = [OBJC([dic objectForKey:@"data"]) objectForKey:@"s_id"];
         }
         if(block){
             block(nil,YES,model);
@@ -1628,8 +1644,78 @@
 }
 
 #pragma mark - 支付宝支付界面
-+ (NSString *)alipayWithUser:(NSString *)user Pwd:(NSString *)pwd isDirectPurchase:(BOOL)isdirect Order_sn:(NSString *)order_sn{
-     NSString * url = [NSString stringWithFormat:@"%@&order_sn=%@&ID=%@&PWD=%@",PayHttp,order_sn,user,pwd];
++ (NSString *)alipayWithUser:(NSString *)user Pwd:(NSString *)pwd content_type:(NSString *)type isDirectPurchase:(BOOL)isdirect Order_sn:(NSString *)order_sn content_money:(NSString *)content_money{
+    //218.240.30.6/drzw/pay/app_js/alipayapi.php?content_type=0&order_sn=1399970291&ID=18513217781&PWD=e10adc3949ba59abbe56e057f20f883e
+    NSString * url = nil;
+    if(![type boolValue]){//订单付款
+        url = [NSString stringWithFormat:@"%@&content_type=%@&order_sn=%@&ID=%@&PWD=%@",PayHttp,type,order_sn,user,pwd];
+    }else{//充值
+        url = [NSString stringWithFormat:@"%@&content_type=%@&content_money=%@&ID=%@&PWD=%@",PayHttp,type,content_money,user,pwd];
+    }
+    
+    return url;
+}
+
+#pragma mark - 获取商家店铺头部信息
++ (void)getCorpHomeInfoWithAuto_id:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_shop&task=corpIndex&auto_id=8
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=corpIndex&auto_id=%@",baseUrl,auto_id];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        NSDictionary * dataDic = OBJC_Nil([dic objectForKey:@"data"]);
+        model.levelId = OBJC_Nil([dataDic objectForKey:@"level_id"]);
+        model.content_gps = OBJC_Nil([dataDic objectForKey:@"content_gps"]);
+        model.content_face = OBJC_Nil([dataDic objectForKey:@"content_face"]);
+        model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
+        model.contentQm = OBJC_Nil([dataDic objectForKey:@"content_qm"]);
+        for(NSDictionary * dict in [dataDic objectForKey:@"class"]){
+            [model.classs addObject:dict];
+        }
+        if(block){
+            block(nil,YES,model);
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+}
+
+#pragma mark - 用户会员主页头部信息
++ (void)getUserHomeInfoWithAuto_id:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_shop&task=memIndex&auto_id=1
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=memIndex&auto_id=%@",baseUrl,auto_id];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        NSDictionary * dataDic = OBJC_Nil([dic objectForKey:@"data"]);
+        model.content_gps = OBJC_Nil([dataDic objectForKey:@"content_gps"]);
+        model.content_face = OBJC_Nil([dataDic objectForKey:@"content_face"]);
+        model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
+        model.contentQm = OBJC_Nil([dataDic objectForKey:@"content_qm"]);
+        model.spendmoney = [OBJC_Nil([dataDic objectForKey:@"spendmoney"]) integerValue];
+        
+        if(block){
+            block(nil,YES,model);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+
+}
+#pragma mark - 查看物流
++ (NSString *)getWuliuUrlWithExpressName:(NSString *)name no:(NSString *)no{
+    //m.kuaidi100.com/index_all.html?type=[快递公司]&postid=[快递单号]
+    NSString * url = [NSString stringWithFormat:@"m.kuaidi100.com/index_all.html?type=%@&postid=%@",name,no];
     return url;
 }
 

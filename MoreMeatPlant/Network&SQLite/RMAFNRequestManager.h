@@ -115,7 +115,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      pageCount       页数
  *  @param      user_id         会员用户名
  *  @param      user_password   会员密码
- 
+ *  @param      member_id       会员标示
  */
 + (void)getPostsListWithPostsType:(NSString *)postsType
                     withPlantType:(NSString *)plantType
@@ -123,6 +123,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                     withPageCount:(NSInteger)pageCount
                       withUser_id:(NSString *)user_id
                 withUser_password:(NSString *)user_password
+                     withMemberId:(NSString *)member_id
                          callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
@@ -139,10 +140,14 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @method     宝贝列表
  *  @param      plantClass      宝贝分类    1、为一肉一拍 2、鲜肉市场
  *  @param      plantCourse     植物科目
+ *  @param      corp_id         商家标示
+ *  @param      memberClass     商家分类标示
  *  @param      pageCount       分页
  */
 + (void)getBabyListWithPlantClassWith:(NSInteger)plantClass
                            withCourse:(NSInteger)plantCourse
+                       withMemerClass:(NSString *)memberClass
+                           withCorpid:(NSString *)corp_id
                             withCount:(NSInteger)pageCount
                              callBack:(RMAFNRequestManagerCallBack)block;
 
@@ -627,6 +632,32 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param pwd
  *  @param isdirect 是否直接购买
  *  @param order_sn 订单号
+ *  @param type 充值还是付款
+ *  @param content_money 充值金额
  */
-+ (NSString *)alipayWithUser:(NSString *)user Pwd:(NSString *)pwd isDirectPurchase:(BOOL)isdirect Order_sn:(NSString *)order_sn;
++ (NSString *)alipayWithUser:(NSString *)user Pwd:(NSString *)pwd content_type:(NSString *)type isDirectPurchase:(BOOL)isdirect Order_sn:(NSString *)order_sn content_money:(NSString *)content_money;
+
+/**
+ *  获取店铺主页头部信息
+ *
+ *  @param auto_id 商家会员唯一标示
+ */
++ (void)getCorpHomeInfoWithAuto_id:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block;
+/**
+ *  获取我的帖子主页
+ *
+ *  @param auto_id 用户会员唯一标示
+ */
++ (void)getUserHomeInfoWithAuto_id:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block;
+
+/**
+ *  获取物流信息
+ *
+ *  @param name 快递名称
+ *  @param no   快递单号
+ *
+ *  @return url
+ */
++ (NSString *)getWuliuUrlWithExpressName:(NSString *)name no:(NSString *)no;
+
 @end

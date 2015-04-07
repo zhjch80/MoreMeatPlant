@@ -49,6 +49,11 @@
     isRefresh = YES;
     
     dataArr = [[NSMutableArray alloc] init];
+    
+    if (self.auto_id == nil){
+        self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
+    }
+    
     [self loadBottomView];
 }
 
@@ -66,26 +71,26 @@
     badge.badgeTextFont = FONT(10.0);
     badge.badgeText = @"99";
     
-    [self requestDataWithPageCount];
-    
     [self requestMemberInfo];
 }
 
 - (void)requestMemberInfo{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager myInfoRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getUserHomeInfoWithAuto_id:self.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
         RMPublicModel * model = object;
         _model = model;
         if(success && model.status){
-            [self.content_img sd_setImageWithURL:[NSURL URLWithString:model.contentFace] placeholderImage:[UIImage imageNamed:@"nophote"]];
+            [self.content_img sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
             self.content_name.text = model.contentName;
             self.content_signature.text = model.contentQm;
-            self.city.text = model.contentGps;
-            self.yu_e.text = [NSString stringWithFormat:@"余额:%.0f",model.balance];
+            self.city.text = model.content_gps;
+//            self.yu_e.text = [NSString stringWithFormat:@"余额:%.0f",model.spendmoney];
             self.hua_bi.text = [NSString stringWithFormat:@"花币:%.0f",model.spendmoney];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        }else{
             
+            [self requestListWithPageCount];
+        }else{
+            [self showHint:object];
         }
     }];
 }
@@ -115,7 +120,13 @@
         RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         
         if (!cell){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_2" owner:self options:nil] lastObject];
+            if (IS_IPHONE_6_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_2_6" owner:self options:nil] lastObject];
+            }else if (IS_IPHONE_6p_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_2_6p" owner:self options:nil] lastObject];
+            }else{
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_2" owner:self options:nil] lastObject];
+            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
             cell.delegate = self;
@@ -126,14 +137,14 @@
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.59 green:0.59 blue:0.59 alpha:1] range:NSMakeRange(0, 2)];
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
         cell.plantTitle.attributedText = oneAttributeStr;
-        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:nil];
+        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
         
         NSString * _name;
-        if ([model.member_name length] > 5){
-            _name = [model.member_name substringToIndex:5];
+        if ([[model.members objectForKey:@"member_name"] length] > 5){
+            _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
             _name = [NSString stringWithFormat:@"%@...",_name];
         }else{
-            _name = model.member_name;
+            _name = [model.members objectForKey:@"member_name"];
         }
         
         cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
@@ -163,7 +174,13 @@
         RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         
         if (!cell){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1" owner:self options:nil] lastObject];
+            if (IS_IPHONE_6_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1_6" owner:self options:nil] lastObject];
+            }else if (IS_IPHONE_6p_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1_6p" owner:self options:nil] lastObject];
+            }else{
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1" owner:self options:nil] lastObject];
+            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
             cell.delegate = self;
@@ -174,14 +191,14 @@
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
         cell.plantTitle.attributedText = oneAttributeStr;
-        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:nil];
+        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
         
         NSString * _name;
-        if ([model.member_name length] > 5){
-            _name = [model.member_name substringToIndex:5];
+        if ([[model.members objectForKey:@"member_name"] length] > 5){
+            _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
             _name = [NSString stringWithFormat:@"%@...",_name];
         }else{
-            _name = model.member_name;
+            _name = [model.members objectForKey:@"member_name"];
         }
         
         cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
@@ -208,7 +225,13 @@
         RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         
         if (!cell){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_3" owner:self options:nil] lastObject];
+            if (IS_IPHONE_6p_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_3_6p" owner:self options:nil] lastObject];
+            }else if (IS_IPHONE_6_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_3_6" owner:self options:nil] lastObject];
+            }else{
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_3" owner:self options:nil] lastObject];
+            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
             cell.delegate = self;
@@ -219,14 +242,14 @@
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
         [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
         cell.plantTitle.attributedText = oneAttributeStr;
-        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:nil];
+        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
         
         NSString * _name;
-        if ([model.member_name length] > 5){
-            _name = [model.member_name  substringToIndex:5];
+        if ([[model.members objectForKey:@"member_name"] length] > 5){
+            _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
             _name = [NSString stringWithFormat:@"%@...",_name];
         }else{
-            _name = model.member_name;
+            _name = [model.members objectForKey:@"member_name"];
         }
         
         cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
@@ -254,9 +277,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 180.0;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
-
 #pragma mark - 添加喜欢 赞 评论
 
 - (void)addLikeWithImage:(RMImageView *)image {
@@ -279,6 +302,91 @@
     }
 }
 
+/**
+ *  请求List数据
+ */
+- (void)requestListWithPageCount {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getPostsListWithPostsType:@"1" withPlantType:nil withPlantSubjects:nil withPageCount:pageCount withUser_id:OBJC([RMUserLoginInfoManager loginmanager].user) withUser_password:OBJC([RMUserLoginInfoManager loginmanager].pwd) withMemberId:self.auto_id callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_type = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_type"]);
+                    model.content_class = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_class"]);
+                    model.content_course = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_course"]);
+                    model.content_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_top"]);
+                    model.content_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_collect"]);
+                    model.content_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_review"]);
+                    model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                    model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
+                    model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    [dataArr addObject:model];
+                }
+                [_mainTableView reloadData];
+                
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+            }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
+                if ([[object objectForKey:@"data"] count] == 0){
+                    [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    isLoadComplete = YES;
+                    return;
+                }
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_type = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_type"]);
+                    model.content_class = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_class"]);
+                    model.content_course = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_course"]);
+                    model.content_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_top"]);
+                    model.content_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_collect"]);
+                    model.content_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_review"]);
+                    model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                    model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
+                    model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    [dataArr addObject:model];
+                }
+                [_mainTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            }
+            
+            if (isRefresh){
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_type = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_type"]);
+                    model.content_class = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_class"]);
+                    model.content_course = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_course"]);
+                    model.content_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_top"]);
+                    model.content_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_collect"]);
+                    model.content_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_review"]);
+                    model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                    model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
+                    model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    [dataArr addObject:model];
+                }
+                
+                [_mainTableView reloadData];
+            }
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
 #pragma mark 刷新代理
 
 - (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
@@ -286,57 +394,31 @@
         pageCount = 1;
         isRefresh = YES;
         isLoadComplete = NO;
-        [self requestDataWithPageCount];
+        [self requestListWithPageCount];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self showHint:@"没有更多肉肉啦"];
+                [self showHint:@"没有更多帖子啦"];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
             });
         }else{
             pageCount ++;
             isRefresh = NO;
-        [self requestDataWithPageCount];
+            [self requestListWithPageCount];
         }
-        
     }
 }
 
+#pragma mark - 工具
 
-/**
- *  请求List数据
- */
-- (void)requestDataWithPageCount {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager myCollectionRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:@"1" Page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if(success){
-            if(pageCount == 1){
-                [dataArr removeAllObjects];
-                [dataArr addObjectsFromArray:object];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
-                if([object count] == 0){
-                    [self showHint:@"暂无收藏"];                    
-                }
-            }else{
-                [dataArr addObjectsFromArray:object];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-                if([object count] == 0){
-                    [self showHint:@"没有更多收藏了"];
-                    pageCount--;
-                }
-            }
-            
-            
-        }else{
-                    [self showHint:object];
-        }
-        
-        [_mainTableView reloadData];
-    }];
+- (NSString *)getLargeNumbersToSpecificStr:(NSString *)str {
+    if (str.length >= 3){
+        return @"99+";
+    }else{
+        return str;
+    }
 }
-
 
 
 #pragma mark - 底部栏回调方法
@@ -376,41 +458,6 @@
     }
 }
 
-/**
- *  请求List数据
- */
-- (void)requestListWithPageCount {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager myCollectionRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:@"1" Page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if(success){
-            if(pageCount == 1){
-                [dataArr removeAllObjects];
-                [dataArr addObjectsFromArray:object];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
-                if([object count] == 0){
-                    [self showHint:@"暂无收藏"];
-                    
-                }
-            }else{
-                [dataArr addObjectsFromArray:object];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-                if([object count] == 0){
-                    [self showHint:@"没有更多收藏了"];
-                    pageCount--;
-                }
-            }
-            
-            
-        }else{
-                    [self showHint:object];
-        }
-        
-        [_mainTableView reloadData];
-    }];
-}
-
-
 #pragma mark - 菜单选择
 - (void)menuSelected:(id)sender{
     KxMenuItem * item = (KxMenuItem *)sender;
@@ -420,15 +467,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - 工具
-
-- (NSString *)getLargeNumbersToSpecificStr:(NSString *)str {
-    if (str.length >= 3){
-        return @"99+";
-    }else{
-        return str;
-    }
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

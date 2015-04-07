@@ -427,7 +427,7 @@
  */
 - (void)requestListWithPlantCourse:(NSInteger)plantCourse withPageCount:(NSInteger)pc {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getBabyListWithPlantClassWith:1 withCourse:plantCourse withCount:pc callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getBabyListWithPlantClassWith:1 withCourse:plantCourse withMemerClass:nil withCorpid:nil withCount:pc callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
