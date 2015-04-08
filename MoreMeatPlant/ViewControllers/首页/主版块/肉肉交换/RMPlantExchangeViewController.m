@@ -430,6 +430,7 @@
     animator.direction = ZFModalTransitonDirectionBottom;
     startPostingCtl.transitioningDelegate = animator;
     startPostingCtl.subTitle = model.label;
+    startPostingCtl.plantClassification = model.value;
     [self presentViewController:startPostingCtl animated:YES completion:nil];
 }
 

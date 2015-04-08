@@ -11,6 +11,8 @@
 #import "AssetHelper.h"
 #import "DoImagePickerController.h"
 #import "RMImageView.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "RMVPImageCropper.h"
 
 #define kMaxLength 18
 
@@ -107,25 +109,33 @@
             break;
         }
         case 2:{
-            NSLog(@"-----------");
-            
             [self.mTextField resignFirstResponder];
             [self.mTextView resignFirstResponder];
+            
+            if (![RMUserLoginInfoManager loginmanager].state){
+                [self showHint:@"您没有登录，请登录"];
+                return;
+            }
             
             if ([self isBlankString:self.mTextField.text]){
                 [self showHint:@"标题不能为空"];
                 return;
             }
+            NSMutableDictionary * imageDic = [[NSMutableDictionary alloc] init];
             
             for (NSInteger i=0; i<8; i++) {
                 RMImageView * image = (RMImageView *)[self.view viewWithTag:101+i];
-                NSLog(@"第 %@ 个 state:%ld",image.identifierString,(long)i);
+                if ([image.identifierString isEqualToString:@"full"]){
+                    
+                    [self saveImage:image.image withName:[NSString stringWithFormat:@"uploadImage_%ld.png",(long)i]];
+                    
+                    NSString *fullPath = [[FileUtil getCachePathFor:@"uploadImageCache"] stringByAppendingPathComponent:[NSString stringWithFormat:@"uploadImage_%ld.png",(long)i]];
+                    
+                    [imageDic setObject:fullPath forKey:[NSString stringWithFormat:@"frm[body][%ld][content_img]",(long)i]];
+                }
             }
             
-            NSLog(@"title:%@",self.mTextField.text);
-            NSLog(@"content:%@",self.mTextView.text);
-            
-            [self requestSendPosts];
+            [self requestSendPostsWithAuto_id:@"" withName:[self.mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withContent:[self.mTextView.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withType:@"1" withClass:self.subTitle withCourse:self.plantClassification withBody:@"" withImg:imageDic withBodyAuto_id:@""];
             break;
         }
             
@@ -134,38 +144,13 @@
     }
 }
 
-- (void)headerNavMethodWithTag:(NSInteger)tag {
-    switch (tag) {
-        case 1:{
-            [self dismissViewControllerAnimated:YES completion:nil];
-            break;
-        }
-        case 2:{
-            NSLog(@"-----------");
-            
-            [self.mTextField resignFirstResponder];
-            [self.mTextView resignFirstResponder];
-            
-            if ([self isBlankString:self.mTextField.text]){
-                [self showHint:@"标题不能为空"];
-                return;
-            }
-
-            for (NSInteger i=0; i<8; i++) {
-                RMImageView * image = (RMImageView *)[self.view viewWithTag:101+i];
-                NSLog(@"第 %@ 个 state:%ld",image.identifierString,(long)i);
-            }
-            
-            NSLog(@"title:%@",self.mTextField.text);
-            NSLog(@"content:%@",self.mTextView.text);
-            
-            [self requestSendPosts];
-            break;
-        }
-            
-        default:
-            break;
-    }
+- (void)saveImage:(UIImage *)currentImage withName:(NSString *)imageName {
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    NSString *path = [[FileUtil getCachePathFor:@"uploadImageCache"] stringByAppendingPathComponent:imageName];
+    // 将图片写入文件
+    [imageData writeToFile:path atomically:NO];
+//    NSLog(@"写入路径 path:%@",path);
 }
 
 - (BOOL)isBlankString:(NSString *)string {
@@ -405,35 +390,6 @@
         default:
             break;
     }
- 
-    
-    
-    /*
-    [self saveImage:image withName:@"image.png"];
-    NSString *fullPath = [[FileUtil getCachePathFor:@"imagecache"] stringByAppendingPathComponent:@"image.png"];
-    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-    
-    UIImage * scaleImage = [self scaleFromImage:savedImage scaledToSize:CGSizeMake(100, 150)];
-    
-//    UIButton * photoBtn = (UIButton *)[self.view viewWithTag:PHOTO_TAG];
-//    [photoBtn setBackgroundImage:scaleImage forState:UIControlStateNormal];
-//    
-
-         NSData * data = nil;
-         
-//         if (UIImagePNGRepresentation(scaleImage) == nil) {
-//             //将图片转换为JPG格式的二进制数据
-         data = UIImageJPEGRepresentation(scaleImage, 0.1);
-//         } else {
-//             //将图片转换为PNG格式的二进制数据
-//             data = UIImagePNGRepresentation(scaleImage);
-//         }
-         
-//         NSData *imageData = [NSData dataWithContentsOfFile: fullPath];
-         
-         [DSUtilPlist setData:kImageBinary pramaValue:[DSBaseSwitch base64Encode:data] pramaKey:kImageBlinarykey];
-         */
-
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -515,9 +471,21 @@
 /*
  *    @method       发布帖子
  */
-- (void)requestSendPosts{
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [RMAFNRequestManager postSendPostsWithAuto_id:<#(NSString *)#> withContentName:<#(NSString *)#> withContentType:<#(NSString *)#> withContentClass:<#(NSString *)#> withContentCourse:<#(NSString *)#> withContentBody:<#(NSString *)#> withContentImg:<#(NSString *)#> withBodyAuto_id:<#(NSString *)#> withID:<#(NSString *)#> withPWD:<#(NSString *)#> callBack:<#^(NSError *error, BOOL success, id object)block#>]
+- (void)requestSendPostsWithAuto_id:(NSString *)auto_id withName:(NSString *)name withContent:(NSString *)content withType:(NSString *)type withClass:(NSString *)class withCourse:(NSString *)course withBody:(NSString *)body withImg:(NSDictionary *)dicImg withBodyAuto_id:(NSString *)bodyAuto_id {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager postSendPostsWithAuto_id:auto_id withContentName:name withContentType:type withContentClass:class withContentCourse:course withContentBody:content withContentImg:dicImg withBodyAuto_id:bodyAuto_id withID:OBJC([RMUserLoginInfoManager loginmanager].user) withPWD:OBJC([RMUserLoginInfoManager loginmanager].pwd) callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [self showHint:[object objectForKey:@"msg"]];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            [self showHint:[object objectForKey:@"msg"]];
+        }
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

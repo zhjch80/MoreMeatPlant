@@ -18,7 +18,6 @@
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
 
-
 @end
 
 @implementation RMDaqoRightViewController
@@ -31,11 +30,11 @@
     
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(kScreenWidth - kSlideWidth + 20, 20, kSlideWidth, kScreenHeight - 20 - 49) style:UITableViewStyleGrouped];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(kScreenWidth - kSlideWidth, 20, kSlideWidth, kScreenHeight - 20 - 47) style:UITableViewStyleGrouped];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.backgroundColor = [UIColor clearColor];
-//    mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
 }
 
@@ -65,7 +64,7 @@
     title.userInteractionEnabled = YES;
     title.multipleTouchEnabled = YES;
     title.frame = CGRectMake(0, 0, kScreenWidth - kSlideWidth, 44);
-    title.text = model.modules_name;
+    title.text = [NSString stringWithFormat:@"    %@",model.modules_name];
     [headerView addSubview:title];
     
     return headerView;
@@ -96,7 +95,7 @@
         cell.backgroundColor = [UIColor clearColor];
     }
     RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
-    cell.mTitle.text = [NSString stringWithFormat:@"%@",[[model.sub objectAtIndex:indexPath.row] objectForKey:@"modules_name"]];
+    cell.mTitle.text = [NSString stringWithFormat:@"    %@",[[model.sub objectAtIndex:indexPath.row] objectForKey:@"modules_name"]];
     return cell;
 }
 

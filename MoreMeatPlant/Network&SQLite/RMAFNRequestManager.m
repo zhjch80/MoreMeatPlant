@@ -81,10 +81,13 @@
 }
 
 /**
- *  @method     植物大全列表          少一个auto_id 字段
- *  @param      pageCount       分页
+ *  @method     植物大全列表
+ *  @param      pageCount           分页
+ *  @param      classification      植物科目
  */
-+ (void)getPlantDaqoListWithPageCount:(NSInteger)pageCount callBack:(RMAFNRequestManagerCallBack)block {
++ (void)getPlantDaqoListWithSubPlantClassification:(NSString *)classification
+                                     withPageCount:(NSInteger)pageCount
+                                          callBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAll&data=series&order=asc&per=1&row=10&page=%ld",baseUrl,(long)pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
@@ -564,30 +567,22 @@
                 withContentClass:(NSString *)content_class
                withContentCourse:(NSString *)content_course
                  withContentBody:(NSString *)content_body
-                  withContentImg:(NSString *)content_img
+                  withContentImg:(NSDictionary *)content_img
                  withBodyAuto_id:(NSString *)bodyAuto_id
                           withID:(NSString *)user_id
                          withPWD:(NSString *)user_password
                         callBack:(RMAFNRequestManagerCallBack)block {
-    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_center&task=updateNote&frm[content_name]=111&frm[content_type]=1&frm[content_class]=1&frm[content_course]=1000&frm[body][][content_body]=11&ID=test&PWD=202cb962ac59075b964b07152d234b70
-    NSString *url = @"http://218.240.30.6/drzw/index.php";
-    NSDictionary * parameter = @{
-                                 @"com": @"com_appService",
-                                 @"method": @"save",
-                                 @"app_com": @"com_center",
-                                 @"task": @"updateNote",
-                                 @"auto_id" : @"",
-                                 @"frm[content_name]": @"",
-                                 @"frm[content_type]": @"",
-                                 @"frm[content_class]": @"",
-                                 @"frm[content_course]": @"",
-                                 @"frm[body][][content_body]": @"",
-                                 @"frm[body][][content_img]": @"",
-                                 @"frm[body][auto_id][]": @"",
-                                 @"ID": @"",
-                                 @"PWD": @"",
-                                 };
-    [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    //TODO:content_course
+    NSString * url = [NSString stringWithFormat:@"%@&method=save&app_com=com_center&task=updateNote&frm[content_name]=%@&frm[content_type]=%@&frm[content_class]=%@&frm[content_course]=%@&frm[body][0][content_body]=%@&ID=%@&PWD=%@",baseUrl,content_name,content_type,@"1000",content_course,content_body,user_id,user_password];
+    
+    [[RMHttpOperationShared sharedClient] POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSArray * keys = [content_img allKeys];
+        for (NSInteger i=0; i< [keys count]; i++){
+            NSURL * path = [NSURL fileURLWithPath:[content_img objectForKey:[keys objectAtIndex:i]]];
+            NSLog(@"\npath:%ld key:%@\nvalue:%@\n",(long)i,[keys objectAtIndex:i],path);
+            [formData appendPartWithFileURL:path name:[keys objectAtIndex:i] error:nil];
+        }
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }

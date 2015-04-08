@@ -71,18 +71,23 @@
     static NSString * identifierStr = @"ReSearchIdentifier";
     RMDaqoCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     if (!cell){
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell" owner:self options:nil] lastObject];
+        if (IS_IPHONE_6p_SCREEN) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell_6p" owner:self options:nil] lastObject];
+        }else if (IS_IPHONE_6_SCREEN){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell_6" owner:self options:nil] lastObject];
+        }else{
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell" owner:self options:nil] lastObject];
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         cell.delegate = self;
     }
-    
     return cell;
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 132.0f;
+    UITableViewCell * cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
 
 - (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {

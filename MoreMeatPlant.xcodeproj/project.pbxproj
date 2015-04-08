@@ -286,6 +286,7 @@
 		1D4EE43E1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4EE43C1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.xib */; };
 		1D55762A1A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5576281A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.m */; };
 		1D55762B1A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D5576291A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.xib */; };
+		1D56467C1AD500820039A586 /* RequestPostUploadHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D56467B1AD500820039A586 /* RequestPostUploadHelper.m */; };
 		1D64F4F41A904E180073EB98 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D64F4DA1A904E180073EB98 /* Default-568h@2x.png */; };
 		1D64F4F51A904E180073EB98 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D64F4DB1A904E180073EB98 /* Default@2x.png */; };
 		1D64F4F61A904E180073EB98 /* Default_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D64F4DC1A904E180073EB98 /* Default_6.png */; };
@@ -1318,6 +1319,8 @@
 		1D5576271A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPlantWithSaleDetailsViewController.h; sourceTree = "<group>"; };
 		1D5576281A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPlantWithSaleDetailsViewController.m; sourceTree = "<group>"; };
 		1D5576291A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMPlantWithSaleDetailsViewController.xib; sourceTree = "<group>"; };
+		1D56467A1AD500820039A586 /* RequestPostUploadHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestPostUploadHelper.h; sourceTree = "<group>"; };
+		1D56467B1AD500820039A586 /* RequestPostUploadHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestPostUploadHelper.m; sourceTree = "<group>"; };
 		1D64F4DA1A904E180073EB98 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1D64F4DB1A904E180073EB98 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		1D64F4DC1A904E180073EB98 /* Default_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default_6.png; sourceTree = "<group>"; };
@@ -3161,6 +3164,8 @@
 				1D8397221AB2C8E200DA190A /* RMStartPostingViewController.h */,
 				1D8397231AB2C8E200DA190A /* RMStartPostingViewController.m */,
 				1D8397241AB2C8E200DA190A /* RMStartPostingViewController.xib */,
+				1D56467A1AD500820039A586 /* RequestPostUploadHelper.h */,
+				1D56467B1AD500820039A586 /* RequestPostUploadHelper.m */,
 			);
 			path = "放毒区";
 			sourceTree = "<group>";
@@ -5434,6 +5439,7 @@
 				51DB4DDE1ACFBA3400A6064D /* RMPublishCourseTableViewCell.m in Sources */,
 				0A4104EE1ABAB1D70060FBD5 /* NSDate+Category.m in Sources */,
 				0A4104E21ABAB0770060FBD5 /* MessageModel.m in Sources */,
+				1D56467C1AD500820039A586 /* RequestPostUploadHelper.m in Sources */,
 				1D9CB15A1AAE9EA000BD5A7D /* RMPublicModel.m in Sources */,
 				0A4105851ABAB3C70060FBD5 /* PSTCollectionViewLayout.m in Sources */,
 				0A4105821ABAB3C70060FBD5 /* PSTCollectionViewData.m in Sources */,

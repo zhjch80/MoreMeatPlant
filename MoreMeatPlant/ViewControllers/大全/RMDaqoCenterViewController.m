@@ -26,16 +26,19 @@
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) RefreshControl * refreshControl;
 @property (nonatomic, strong) RMPlantTypeView * plantTypeView;
+@property (nonatomic, copy) NSString * plantClassification;         //选择植物分类
 
 @end
 
 @implementation RMDaqoCenterViewController
-@synthesize mTableView, dataArr, refreshControl, subsPlantArr, plantTypeView;
+@synthesize mTableView, dataArr, refreshControl, subsPlantArr, plantTypeView, plantClassification;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
+    plantClassification = @"";
+    
     [self setRightBarButtonNumber:1];
     leftBarButton.frame = CGRectMake(5, 1, 43, 43);
     [leftBarButton setImage:[UIImage imageNamed:@"img_search"] forState:UIControlStateNormal];
@@ -125,7 +128,13 @@
     static NSString * identifierStr = @"DaqoidentifierStr";
     RMDaqoCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     if (!cell){
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell" owner:self options:nil] lastObject];
+        if (IS_IPHONE_6p_SCREEN){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell_6p" owner:self options:nil] lastObject];
+        }else if (IS_IPHONE_6_SCREEN){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell_6" owner:self options:nil] lastObject];
+        }else{
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell" owner:self options:nil] lastObject];
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         cell.delegate = self;
@@ -162,7 +171,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 132.0;
+    UITableViewCell * cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
@@ -185,7 +195,9 @@
 }
 
 - (void)selectedPlantWithType:(NSString *)type {
-    NSLog(@"type:%@",type);
+    plantClassification = type;
+    isRefresh = YES;
+    [self requestDataWithPageCount:1];
 }
 
 - (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
@@ -243,7 +255,14 @@
  */
 - (void)requestDataWithPageCount:(NSInteger)pc {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getPlantDaqoListWithPageCount:pc callBack:^(NSError *error, BOOL success, id object) {
+    //TODO: 缺少一个植物科目的字段
+    NSString * plantType = @"";
+    
+    RMPublicModel * model_1 = [subsPlantArr objectAtIndex:plantClassification.integerValue];
+    plantType = model_1.value;
+
+    
+    [RMAFNRequestManager getPlantDaqoListWithSubPlantClassification:plantType withPageCount:pc callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideHUDForView:self.view animated:YES];

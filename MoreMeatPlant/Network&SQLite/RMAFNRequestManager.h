@@ -70,10 +70,12 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                          callBack:(RMAFNRequestManagerCallBack)block;
 /**
  *  @method     植物大全列表
- *  @param      pageCount       分页
+ *  @param      pageCount           分页
+ *  @param      classification      植物科目
  */
-+ (void)getPlantDaqoListWithPageCount:(NSInteger)pageCount
-                             callBack:(RMAFNRequestManagerCallBack)block;
++ (void)getPlantDaqoListWithSubPlantClassification:(NSString *)classification
+                                     withPageCount:(NSInteger)pageCount
+                                          callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  @method     植物大全详情页面
@@ -258,7 +260,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                 withContentClass:(NSString *)content_class
                withContentCourse:(NSString *)content_course
                  withContentBody:(NSString *)content_body
-                  withContentImg:(NSString *)content_img
+                  withContentImg:(NSDictionary *)content_img
                  withBodyAuto_id:(NSString *)bodyAuto_id
                           withID:(NSString *)user_id
                          withPWD:(NSString *)user_password

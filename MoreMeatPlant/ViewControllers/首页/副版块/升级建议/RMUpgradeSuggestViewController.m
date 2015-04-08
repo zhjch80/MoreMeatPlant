@@ -30,6 +30,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"升级建议"];
+    self.mScro.frame = CGRectMake(0, 64, kScreenWidth, 200);
+    self.mTextField.frame = CGRectMake(5, 5, kScreenWidth - 10, 30);
+    self.mTextView.frame = CGRectMake(5, 45, kScreenWidth - 10, 180);
     
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[RMUpgradeSuggestViewController class]];
     
