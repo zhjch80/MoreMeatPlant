@@ -661,6 +661,10 @@
 		5157DE721AB9DABB005E9FA5 /* RMPublishSureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5157DE701AB9DABB005E9FA5 /* RMPublishSureTableViewCell.xib */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
+		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
+		5191D4BC1AD551980011AFCC /* RMTransactionRecordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4BA1AD551980011AFCC /* RMTransactionRecordsViewController.xib */; };
+		5191D4C01AD55B7A0011AFCC /* RMRecordsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4BE1AD55B7A0011AFCC /* RMRecordsTableViewCell.m */; };
+		5191D4C11AD55B7A0011AFCC /* RMRecordsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4BF1AD55B7A0011AFCC /* RMRecordsTableViewCell.xib */; };
 		519927341AB5682700B0F83F /* RMMyCorpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519927321AB5682700B0F83F /* RMMyCorpViewController.m */; };
 		519927351AB5682700B0F83F /* RMMyCorpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 519927331AB5682700B0F83F /* RMMyCorpViewController.xib */; };
 		519927461AB572AA00B0F83F /* RMCorpClassesButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 519927451AB572AA00B0F83F /* RMCorpClassesButton.m */; };
@@ -1869,6 +1873,12 @@
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
+		5191D4B81AD551980011AFCC /* RMTransactionRecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMTransactionRecordsViewController.h; sourceTree = "<group>"; };
+		5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMTransactionRecordsViewController.m; sourceTree = "<group>"; };
+		5191D4BA1AD551980011AFCC /* RMTransactionRecordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMTransactionRecordsViewController.xib; sourceTree = "<group>"; };
+		5191D4BD1AD55B7A0011AFCC /* RMRecordsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMRecordsTableViewCell.h; sourceTree = "<group>"; };
+		5191D4BE1AD55B7A0011AFCC /* RMRecordsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMRecordsTableViewCell.m; sourceTree = "<group>"; };
+		5191D4BF1AD55B7A0011AFCC /* RMRecordsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMRecordsTableViewCell.xib; sourceTree = "<group>"; };
 		519927311AB5682700B0F83F /* RMMyCorpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyCorpViewController.h; sourceTree = "<group>"; };
 		519927321AB5682700B0F83F /* RMMyCorpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMyCorpViewController.m; sourceTree = "<group>"; };
 		519927331AB5682700B0F83F /* RMMyCorpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMyCorpViewController.xib; sourceTree = "<group>"; };
@@ -4151,6 +4161,12 @@
 				512D752E1AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.h */,
 				512D752F1AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.m */,
 				512D75301AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib */,
+				5191D4B81AD551980011AFCC /* RMTransactionRecordsViewController.h */,
+				5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */,
+				5191D4BA1AD551980011AFCC /* RMTransactionRecordsViewController.xib */,
+				5191D4BD1AD55B7A0011AFCC /* RMRecordsTableViewCell.h */,
+				5191D4BE1AD55B7A0011AFCC /* RMRecordsTableViewCell.m */,
+				5191D4BF1AD55B7A0011AFCC /* RMRecordsTableViewCell.xib */,
 			);
 			path = "我的钱包";
 			sourceTree = "<group>";
@@ -5075,6 +5091,7 @@
 				0A41063E1ABABBF60060FBD5 /* chatFire_audioPlaying1.png in Resources */,
 				1DEB74711AB9D66800EA1FA7 /* img_collectiom.png in Resources */,
 				0A4106AB1ABABBF60060FBD5 /* chatBar_more_camera@2x.png in Resources */,
+				5191D4BC1AD551980011AFCC /* RMTransactionRecordsViewController.xib in Resources */,
 				0A4106BD1ABABBF60060FBD5 /* chat_receiver_audio_playing003.png in Resources */,
 				51E4B1931AC6534600714F3E /* login_no_select_bg.png in Resources */,
 				0A4106AA1ABABBF60060FBD5 /* chatBar_more_camera.png in Resources */,
@@ -5283,6 +5300,7 @@
 				0A4106C21ABABBF60060FBD5 /* chat_receiver_bg@2x.png in Resources */,
 				1D7090D31AC25DE600AE47BF /* img_tzArrowed_7.png in Resources */,
 				1DEB749A1AB9D66800EA1FA7 /* ToolViewKeyboard_ios7@2x.png in Resources */,
+				5191D4C11AD55B7A0011AFCC /* RMRecordsTableViewCell.xib in Resources */,
 				0A4106A01ABABBF60060FBD5 /* chatBar_colorMore_audioCall@2x.png in Resources */,
 				1D64F4FF1A904E180073EB98 /* RMHomeViewController.xib in Resources */,
 				1DEB74E71AB9D67A00EA1FA7 /* detail_arrow_red.png in Resources */,
@@ -5447,6 +5465,7 @@
 				51DB4CBB1AC7CB0800A6064D /* IQKeyboardManager.m in Sources */,
 				1D7AC4261AB979A0002204F6 /* CustomRefreshView.m in Sources */,
 				519927501AB5846100B0F83F /* RMPlantCollectionViewController.m in Sources */,
+				5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */,
 				0A4105711ABAB3C70060FBD5 /* EMSDWebImageDownloader.m in Sources */,
 				51E268601AAF448E00252DEF /* RMSettlementTableViewCell.m in Sources */,
 				5157DE671AB9DA78005E9FA5 /* RMPublishNumberTableViewCell.m in Sources */,
@@ -5612,6 +5631,7 @@
 				0A4104E31ABAB0770060FBD5 /* MessageModelManager.m in Sources */,
 				519927461AB572AA00B0F83F /* RMCorpClassesButton.m in Sources */,
 				51D883EC1ABB318D00F7A3BD /* RMHadbabyTableViewCell.m in Sources */,
+				5191D4C01AD55B7A0011AFCC /* RMRecordsTableViewCell.m in Sources */,
 				95AA6F4A1ABF8CD2007F4C9E /* UIImageView+XHURLDownload.m in Sources */,
 				957A38F61AB4519E00A335F7 /* RMPlantWithSaleHeaderView.m in Sources */,
 				0A41049E1ABAADE90060FBD5 /* ChatViewController.m in Sources */,

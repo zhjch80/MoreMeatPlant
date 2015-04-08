@@ -36,7 +36,13 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
 
-    NSString * urlstr = [RMAFNRequestManager alipayWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] content_type:@"0" isDirectPurchase:_is_direct Order_sn:order_id content_money:nil];
+    NSString * urlstr = nil;
+    if([self.content_type isEqualToString:@"0"]){//订单付款
+     urlstr = [RMAFNRequestManager alipayWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] content_type:self.content_type isDirectPurchase:_is_direct Order_sn:order_id content_money:nil];
+    }else{//充值
+     urlstr = [RMAFNRequestManager alipayWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] content_type:self.content_type isDirectPurchase:_is_direct Order_sn:order_id content_money:self.content_money];
+    }
+   
     
     [_mwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlstr]]];
     
@@ -62,7 +68,7 @@
         
         NSMutableDictionary * dic = [[NSMutableDictionary alloc] init];
         [dic setValue:@"1" forKey:@"pay_success"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"PaymentCompletedNotification" object:self userInfo:dic];
+        [[NSNotificationCenter defaultCenter] postNotificationName:PaymentCompletedNotification object:self userInfo:dic];
             
         [self animationToOrderlist];
         return NO;
@@ -78,32 +84,34 @@
 #pragma mark -  返回
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender
 {
-    if(_is_direct){
-        NSMutableArray * arr = [[NSMutableArray alloc] init];
-        for(UIViewController * vc in self.navigationController.viewControllers)
-        {
-            if([vc isKindOfClass:[RMPlantWithSaleDetailsViewController class]])
+    if([self.content_type isEqualToString:@"0"]){
+        if(_is_direct){
+            NSMutableArray * arr = [[NSMutableArray alloc] init];
+            for(UIViewController * vc in self.navigationController.viewControllers)
             {
-                continue;
+                if([vc isKindOfClass:[RMPlantWithSaleDetailsViewController class]])
+                {
+                    continue;
+                }
+                [arr addObject:vc];
+                
             }
-            [arr addObject:vc];
-            
-        }
-        self.navigationController.viewControllers = arr;
-    }else{
-        NSMutableArray * arr = [[NSMutableArray alloc] init];
-        for(UIViewController * vc in self.navigationController.viewControllers)
-        {
-            if([vc isKindOfClass:[RMShopCarViewController class]])
+            self.navigationController.viewControllers = arr;
+        }else{
+            NSMutableArray * arr = [[NSMutableArray alloc] init];
+            for(UIViewController * vc in self.navigationController.viewControllers)
             {
-                continue;
+                if([vc isKindOfClass:[RMShopCarViewController class]])
+                {
+                    continue;
+                }
+                [arr addObject:vc];
+                
             }
-            [arr addObject:vc];
-            
+            self.navigationController.viewControllers = arr;
         }
-        self.navigationController.viewControllers = arr;
+
     }
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

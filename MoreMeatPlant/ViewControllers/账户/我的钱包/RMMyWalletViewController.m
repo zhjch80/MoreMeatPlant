@@ -10,13 +10,20 @@
 #import "RMMyWalletTransferTableViewCell.h"
 #import "RMMyWalletYueTableViewCell.h"
 #import "UIView+Expland.h"
+#import "RMAliPayViewController.h"
 @interface RMMyWalletViewController (){
     BOOL isShow;
+    NSString * yu_e;
+    NSString * hua_b;
 }
 
 @end
 
 @implementation RMMyWalletViewController
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
@@ -25,7 +32,28 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+    [self requestAccountInfo];
+}
+
+
+- (void)requestAccountInfo{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager mywalletInfoRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        RMPublicModel * model = object;
+        if(success){
+            if(model.status){
+                yu_e = [NSString stringWithFormat:@"%.0f米",model.balance];
+                hua_b = [NSString stringWithFormat:@"%.0f",model.spendmoney];
+                [_mTableView reloadData];
+            }else{
+                
+            }
+            [self showHint:model.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
 }
 
 - (void)viewDidLoad {
@@ -38,6 +66,13 @@
     [_billBtn addTarget:self action:@selector(billAction:) forControlEvents:UIControlEventTouchDown];
     [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recevierAction:) name:PaymentCompletedNotification object:nil];
+}
+
+- (void)recevierAction:(NSNotification *)noti{
+    if([noti.name isEqualToString:PaymentCompletedNotification]){
+        [self requestAccountInfo];
+    }
 }
 
 
@@ -54,7 +89,8 @@
             [cell.chargeBtn addTarget:self action:@selector(chargeAction:) forControlEvents:UIControlEventTouchDown];
             [cell.turnBtn addTarget:self action:@selector(sureTurnAction:) forControlEvents:UIControlEventTouchDown];
         }
-       
+        cell.yu_eL.text = yu_e;
+        cell.hua_biL.text = hua_b;
         return cell;
     }
     else{
@@ -107,12 +143,12 @@
         [RMAFNRequestManager memberTransforWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] ToOtherMember:cell.otherAccountField.text Number:cell.moneyField.text andCallBack:^(NSError *error, BOOL success, id object) {
             RMPublicModel * model = object;
             if(success && model.status){
-                
+                [self requestAccountInfo];
             }else{
                 
             }
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [MBProgressHUD showSuccess:model.msg toView:self.view];
+            [self showHint:model.msg];
         }];
     }else if ([cell.otherAccountField.text length]==0){
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入对方账号！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
@@ -132,12 +168,12 @@
         [RMAFNRequestManager memberWithdrawalWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Code:cell.codeField.text Number:cell.withdrawalField.text andCallBack:^(NSError *error, BOOL success, id object) {
             RMPublicModel * model = object;
             if(success && model.status){
-            
+                [self requestAccountInfo];
             }else{
                 
             }
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [MBProgressHUD showMessag:model.msg toView:self.view];
+            [self showHint:model.msg];
         }];
     }else if ([cell.withdrawalField.text length]==0){
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入提现金额！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
@@ -162,6 +198,9 @@
         
         UITextField *tf=[alertView textFieldAtIndex:0];
         NSLog(@"确认充值%@",tf.text);
+        if(self.top_upcallback){
+            _top_upcallback (tf.text);
+        }
     }
 }
 

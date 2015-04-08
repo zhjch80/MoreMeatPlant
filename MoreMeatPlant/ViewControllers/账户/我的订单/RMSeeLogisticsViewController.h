@@ -10,5 +10,6 @@
 
 @interface RMSeeLogisticsViewController : RMBaseViewController
 @property (weak, nonatomic) IBOutlet UIWebView *mainWebView;
-
+@property (retain, nonatomic) NSString * express_no;//快递单号
+@property (retain, nonatomic) NSString * express_name;//快递名称
 @end

@@ -303,6 +303,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  */
 + (void)forgotPwdSendCodeWith:(NSString *)mobile andCallBack:(RMAFNRequestManagerCallBack)block;
 
+#pragma mark - 重设密码
 /**
  *  重设密码
  *
@@ -313,6 +314,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  */
 + (void)resetPwdRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code andCallBack:(RMAFNRequestManagerCallBack)block;
 
+#pragma mark - 资料修改
 /**
  *  资料修改（支付宝账户、签名修改）
  *
@@ -323,7 +325,8 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param signature 签名
  *  @param dic 头像图片上传
  */
-+ (void)myInfoModifyRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Type:(NSString *)type AlipayNo:(NSString *)alipayno Signature:(NSString *)signature Dic:(NSDictionary *)dic andCallBack:(RMAFNRequestManagerCallBack)block;;
++ (void)myInfoModifyRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Type:(NSString *)type AlipayNo:(NSString *)alipayno Signature:(NSString *)signature Dic:(NSDictionary *)dic andCallBack:(RMAFNRequestManagerCallBack)block;
+
 /**
  *  获取个人信息
  *

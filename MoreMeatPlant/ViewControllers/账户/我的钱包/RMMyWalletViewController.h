@@ -10,7 +10,7 @@
 
 typedef void (^RMMyWalletViewCloseCallBack)(id sender);
 typedef void (^RMMyWalletViewBillCallBack)(id sender);
-
+typedef void (^RMMyWalletViewTopUpCallBack)(NSString * content_modey);
 
 @interface RMMyWalletViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
@@ -20,6 +20,7 @@ typedef void (^RMMyWalletViewBillCallBack)(id sender);
 
 @property (copy, nonatomic) RMMyWalletViewBillCallBack billcallback;
 @property (copy, nonatomic) RMMyWalletViewCloseCallBack closecallback;
+@property (copy, nonatomic) RMMyWalletViewTopUpCallBack top_upcallback;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (retain, nonatomic) NSString * zfb_no;
 @property (retain, nonatomic) NSString * content_mobile;

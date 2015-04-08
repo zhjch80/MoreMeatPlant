@@ -106,13 +106,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
-            timestampString = "450113747.725799"
+            timestampString = "450191228.714709"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1205"
-            endingLineNumber = "1205"
-            landmarkName = "+corpbabyAddClassWithUser:Pwd:className:andCallBack:"
-            landmarkType = "5">
+            startingLineNumber = "1207"
+            endingLineNumber = "1207"
+            landmarkName = "@implementation RMAFNRequestManager"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

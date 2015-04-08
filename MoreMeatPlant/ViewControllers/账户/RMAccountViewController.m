@@ -34,6 +34,9 @@
 #import "UIView+Expland.h"
 #import "RMVPImageCropper.h"
 #import "RMSystemMessageDetailViewController.h"
+
+#import "RMAliPayViewController.h"
+#import "RMTransactionRecordsViewController.h"
 #define GeneralMember @"1"
 @interface RMAccountViewController ()<RMVPImageCropperDelegate>
 
@@ -97,7 +100,7 @@
         if(success && model.status){
             [self.headerImgV sd_setImageWithURL:[NSURL URLWithString:model.contentFace] placeholderImage:[UIImage imageNamed:@"nophote"]];
             self.userNameL.text = model.contentName;
-            self.userDescL.text = model.contentQm;
+            self.userDescL.text = model.contentQm?model.contentQm:@"暂无";
             self.regionL.text = model.contentGps;
             self.yu_eL.text = [NSString stringWithFormat:@"余额:%.0f",model.balance];
             self.hua_biL.text = [NSString stringWithFormat:@"花币:%.0f",model.spendmoney];
@@ -165,8 +168,16 @@
                         };
                         mywallet.billcallback = ^(UIButton * sender){
                             //跳转到账单界面push
-                            
+                            RMTransactionRecordsViewController * record = [[RMTransactionRecordsViewController alloc]initWithNibName:@"RMTransactionRecordsViewController" bundle:nil];
+                            [self.navigationController pushViewController:record animated:YES];
                         };
+                        mywallet.top_upcallback = ^(NSString * content_money){
+                            RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
+                            alipay.content_type = @"1";
+                            alipay.content_money = content_money;
+                            [self.navigationController pushViewController:alipay animated:YES];
+                        };
+                        
                         [self presentPopUpViewController:mywallet overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-108)];
                     }
                         break;
@@ -276,9 +287,16 @@
                         };
                         mywallet.billcallback = ^(UIButton * sender){
                             //跳转到账单界面push
-                            
+                            RMTransactionRecordsViewController * record = [[RMTransactionRecordsViewController alloc]initWithNibName:@"RMTransactionRecordsViewController" bundle:nil];
+                            [self.navigationController pushViewController:record animated:YES];
                         };
 
+                        mywallet.top_upcallback = ^(NSString * content_money){
+                            RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
+                            alipay.content_type = @"1";
+                            alipay.content_money = content_money;
+                            [self.navigationController pushViewController:alipay animated:YES];
+                        };
                         [self presentPopUpViewController:mywallet overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-108)];
                     }
                         break;

@@ -537,7 +537,7 @@
 - (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage andfilePath:(NSURL *)filePath{
     
     if((img_tag/300-5)*5+img_tag%300<=[current_Model.body count]){
-        [modifyImageDic setObject:editedImage forKey:[NSString stringWithFormat:@"%ld",img_tag]];
+        [modifyImageDic setObject:editedImage forKey:[NSString stringWithFormat:@"%ld",(long)img_tag]];
         
         [modifyPhotoDic setObject:filePath forKey:[NSString stringWithFormat:@"%ld",(img_tag/300-5)*5+img_tag%300-1]];
     }else{

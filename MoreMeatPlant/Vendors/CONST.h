@@ -63,3 +63,5 @@ _Pragma("clang diagnostic pop") \
 
 #import "RMProductModel.h"
 #import "RMCorpModel.h"
+
+#define PaymentCompletedNotification @"PaymentCompletedNotification"

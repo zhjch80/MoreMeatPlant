@@ -940,7 +940,8 @@
  *  @method     提现
  */
 + (void)memberWithdrawalWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code Number:(NSString *)num andCallBack:(RMAFNRequestManagerCallBack)block{
-    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_center&task=addmemCash&&frm[money]=1&content_code=798922&ID=18513217781&PWD=202cb962ac59075b964b07152d234b70
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_center&task=addmemCash&frm[money]=1&content_code=798922&ID=18513217781&PWD=e10adc3949ba59abbe56e057f20f883e
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_center&task=addmemCash&ID=demoker&PWD=E10ADC3949BA59ABBE56E057F20F883E&frm[money]=1&content_code=310482
     NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&frm[money]=%@&content_code=%@",baseUrl,@"&method=save&app_com=com_center&task=addmemCash",user,pwd,num,code];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
@@ -961,8 +962,8 @@
  *  @method     提现发送验证码
  */
 + (void)withdrawalSendCode:(NSString *)mobile andCallBack:(RMAFNRequestManagerCallBack)block{
-    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_passport&task=registerCode&ID=18513217784
-    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_pwdCode",mobile];
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_center&task=cashCode&ID=18513217781&PWD=e10adc3949ba59abbe56e057f20f883e
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@",baseUrl,@"&method=save&app_com=com_center&task=cashCode",mobile];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         RMPublicModel * model = [[RMPublicModel alloc]init];
@@ -997,6 +998,7 @@
             model.content_value = OBJC_Nil([dataDic objectForKey:@"content_value"]);
             model.content_status = OBJC_Nil([dataDic objectForKey:@"content_status"]);
             model.content_item = OBJC_Nil([dataDic objectForKey:@"content_item"]);
+            model.create_time = OBJC_Nil([dataDic objectForKey:@"create_time"]);
             [Array addObject:model];
         }
         if(block){

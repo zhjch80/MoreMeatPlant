@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="方正正黑简体.TTF">
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RMRecordsTableViewCell" rowHeight="68" id="KGk-i7-Jjw" customClass="RMRecordsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提现到银行卡" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3z7-HN-Lvd">
+                        <rect key="frame" x="15" y="15" width="78" height="16"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04-23" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6RE-bu-HAD">
+                        <rect key="frame" x="15" y="39" width="42" height="16"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMi-le-hSY">
+                        <rect key="frame" x="258" y="15" width="32" height="16"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收入" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHn-SF-L0f">
+                        <rect key="frame" x="264" y="39" width="26" height="16"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
+                        <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="k7j-Zr-SFL">
+                        <rect key="frame" x="15" y="66" width="290" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="lpu-KP-pf6"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="6RE-bu-HAD" firstAttribute="top" secondItem="kHn-SF-L0f" secondAttribute="top" id="6Mh-rH-E6R"/>
+                    <constraint firstItem="EMi-le-hSY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3z7-HN-Lvd" secondAttribute="trailing" constant="20" id="KVI-DW-b3i"/>
+                    <constraint firstAttribute="bottom" secondItem="k7j-Zr-SFL" secondAttribute="bottom" id="LfR-7U-fjr"/>
+                    <constraint firstItem="EMi-le-hSY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="OFm-OY-RV1"/>
+                    <constraint firstItem="k7j-Zr-SFL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="R8y-aE-hil"/>
+                    <constraint firstAttribute="trailing" secondItem="EMi-le-hSY" secondAttribute="trailing" constant="30" id="aMp-4c-Vng"/>
+                    <constraint firstAttribute="trailing" secondItem="k7j-Zr-SFL" secondAttribute="trailing" constant="15" id="akd-H9-GA7"/>
+                    <constraint firstItem="EMi-le-hSY" firstAttribute="trailing" secondItem="kHn-SF-L0f" secondAttribute="trailing" id="gP1-ep-HfK"/>
+                    <constraint firstItem="6RE-bu-HAD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="jVq-QC-biV"/>
+                    <constraint firstItem="3z7-HN-Lvd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="mgi-nP-Amo"/>
+                    <constraint firstItem="3z7-HN-Lvd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="qp5-JQ-wVa"/>
+                    <constraint firstItem="6RE-bu-HAD" firstAttribute="top" secondItem="3z7-HN-Lvd" secondAttribute="bottom" constant="8" id="rDQ-xy-0mV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="content_desc" destination="3z7-HN-Lvd" id="P56-P0-O4B"/>
+                <outlet property="content_money" destination="EMi-le-hSY" id="3Oa-Z7-QVN"/>
+                <outlet property="content_status" destination="kHn-SF-L0f" id="Bkm-8b-7Pm"/>
+                <outlet property="content_time" destination="6RE-bu-HAD" id="gE8-fu-kzU"/>
+            </connections>
+            <point key="canvasLocation" x="262" y="155"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="gwc_point_line.png" width="1134" height="1"/>
+    </resources>
+</document>
