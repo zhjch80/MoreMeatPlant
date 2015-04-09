@@ -127,9 +127,16 @@
                 RMImageView * image = (RMImageView *)[self.view viewWithTag:101+i];
                 if ([image.identifierString isEqualToString:@"full"]){
                     
-                    [self saveImage:image.image withName:[NSString stringWithFormat:@"uploadImage_%ld.png",(long)i]];
+                    NSData *data;
+//                    if (UIImagePNGRepresentation(image.image) == nil) {
+                        data = UIImageJPEGRepresentation(image.image, 0.1);
+//                    } else {
+//                        data = UIImagePNGRepresentation(image.image);
+//                    }
                     
-                    NSString *fullPath = [[FileUtil getCachePathFor:@"uploadImageCache"] stringByAppendingPathComponent:[NSString stringWithFormat:@"uploadImage_%ld.png",(long)i]];
+                    [self saveImage:[UIImage imageWithData:data] withName:[NSString stringWithFormat:@"uploadImage_%ld.jpg",(long)i]];
+                    
+                    NSString *fullPath = [[FileUtil getCachePathFor:@"uploadImageCache"] stringByAppendingPathComponent:[NSString stringWithFormat:@"uploadImage_%ld.jpg",(long)i]];
                     
                     [imageDic setObject:fullPath forKey:[NSString stringWithFormat:@"frm[body][%ld][content_img]",(long)i]];
                 }
@@ -150,7 +157,6 @@
     NSString *path = [[FileUtil getCachePathFor:@"uploadImageCache"] stringByAppendingPathComponent:imageName];
     // 将图片写入文件
     [imageData writeToFile:path atomically:NO];
-//    NSLog(@"写入路径 path:%@",path);
 }
 
 - (BOOL)isBlankString:(NSString *)string {
@@ -476,13 +482,30 @@
     [RMAFNRequestManager postSendPostsWithAuto_id:auto_id withContentName:name withContentType:type withContentClass:class withContentCourse:course withContentBody:content withContentImg:dicImg withBodyAuto_id:bodyAuto_id withID:OBJC([RMUserLoginInfoManager loginmanager].user) withPWD:OBJC([RMUserLoginInfoManager loginmanager].pwd) callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
-            [self showHint:[object objectForKey:@"msg"]];
+            [self showHint:@"发帖失败！请重新发送"];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             return ;
         }
         
         if (success){
             [self showHint:[object objectForKey:@"msg"]];
+            
+            self.mTextField.text = @"";
+            self.mTextView.text = @"";
+            
+            for (NSInteger i=0; i<8; i++) {
+                RMImageView * image = (RMImageView *)[self.view viewWithTag:101+i];
+                RMImageView * deleteImg = (RMImageView *)[self.view viewWithTag:201+i];
+                image.identifierString = @"empty";
+                image.image = nil;
+                deleteImg.identifierString = @"empty";
+                deleteImg.image = nil;
+            }
+            
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self dismissViewControllerAnimated:YES completion:nil];
+            });
         }
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];

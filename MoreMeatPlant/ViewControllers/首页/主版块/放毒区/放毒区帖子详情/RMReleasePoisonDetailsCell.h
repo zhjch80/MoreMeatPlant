@@ -56,5 +56,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *replyBtn_2;
 @property (weak, nonatomic) IBOutlet UIView *line_2;
 
+- (CGRect)boundingRectCommentWith:(NSString *)str;
 
 @end

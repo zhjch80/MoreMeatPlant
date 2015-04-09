@@ -99,7 +99,7 @@
 @property (nonatomic, copy) NSString * content_grow;
 @property (nonatomic, copy) NSString * create_user;
 @property (nonatomic, copy) NSString * series;
-
+@property (nonatomic, copy) NSArray * returns;          //回复list
 
 @property (nonatomic, retain) NSString * express;//提交订单，快递类型1，2，2，2，1
 @property (nonatomic, retain) NSString * payment_id;//支付方式
@@ -107,7 +107,6 @@
 @property (retain, nonatomic) NSString * content_linkname;
 @property (retain, nonatomic) NSString * content_mobile;
 @property (retain, nonatomic) NSString * content_address;
-
 
 @property (retain, nonatomic) NSString * content_sn;    //订单编号
 @property (retain, nonatomic) NSString * is_pay;        //支付状态

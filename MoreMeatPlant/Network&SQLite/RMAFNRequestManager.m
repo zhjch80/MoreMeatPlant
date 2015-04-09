@@ -321,7 +321,7 @@
 + (void)getPostsListDetailsWithAuto_id:(NSString *)auto_id
                            withUser_id:(NSString *)user_id
                      withUser_password:(NSString *)user_password callBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&auto_id=%@&ID=%@&PWD=%@",baseUrl,auto_id,user_id,user_password];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNoteview&auto_id=%@&ID=%@&PWD=%@",baseUrl,auto_id,user_id,user_password];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
@@ -572,12 +572,11 @@
                           withID:(NSString *)user_id
                          withPWD:(NSString *)user_password
                         callBack:(RMAFNRequestManagerCallBack)block {
-    //TODO:content_course
-    NSString * url = [NSString stringWithFormat:@"%@&method=save&app_com=com_center&task=updateNote&frm[content_name]=%@&frm[content_type]=%@&frm[content_class]=%@&frm[content_course]=%@&frm[body][0][content_body]=%@&ID=%@&PWD=%@",baseUrl,content_name,content_type,@"1000",content_course,content_body,user_id,user_password];
+    NSString * url = [NSString stringWithFormat:@"%@&method=save&app_com=com_center&task=updateNote&frm[content_name]=%@&frm[content_type]=%@&frm[content_class]=%@&frm[content_course]=%@&frm[body][0][content_body]=%@&ID=%@&PWD=%@",baseUrl,content_name,content_type,content_course,content_course,content_body,user_id,user_password];
     
     [[RMHttpOperationShared sharedClient] POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSArray * keys = [content_img allKeys];
-        for (NSInteger i=0; i< [keys count]; i++){
+        for (NSInteger i=0; i<[keys count]; i++){
             NSURL * path = [NSURL fileURLWithPath:[content_img objectForKey:[keys objectAtIndex:i]]];
             NSLog(@"\npath:%ld key:%@\nvalue:%@\n",(long)i,[keys objectAtIndex:i],path);
             [formData appendPartWithFileURL:path name:[keys objectAtIndex:i] error:nil];

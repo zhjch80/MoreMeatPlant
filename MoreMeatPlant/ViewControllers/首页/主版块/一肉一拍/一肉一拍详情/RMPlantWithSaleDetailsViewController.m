@@ -17,6 +17,7 @@
 #import "UIView+Expland.h"
 #import "RMAliPayViewController.h"
 #import "RMMyCorpViewController.h"
+#import "UIImage+LK.h"
 
 @interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate,RMAddressEditViewCompletedDelegate>{
     BOOL isFirstViewDidAppear;
@@ -135,25 +136,32 @@
 - (void)loadTableFooterView {
     footerView = [[[NSBundle mainBundle] loadNibNamed:@"RMBaseView" owner:nil options:nil] objectAtIndex:0];
     
-    __block CGFloat offsetY = 0;
+    CGFloat offsetY = 0;
     
     if ([dataModel.body isKindOfClass:[NSNull class]]){
         
     }else{
         for (NSInteger i=0; i<[dataModel.body count]; i++) {
             UIImageView * imageView = [[UIImageView alloc] init];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]]] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            NSRange substr = [[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"] rangeOfString:@".gif"];
+            if (substr.location != NSNotFound) {
+            }else{
+                CGSize size = [UIImage downloadImageSizeWithURL:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]];
+                CGFloat height = size.height/size.width * kScreenWidth;
                 
-                CGFloat height = image.size.height/image.size.width * kScreenWidth;
-
+                [imageView sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil];
+                
                 [imageView setFrame:CGRectMake(0, offsetY + 20, kScreenWidth, height)];
-                
+
                 offsetY = offsetY + imageView.frame.size.height + 30;
-  
+
                 footerView.frame = CGRectMake(0, 0, kScreenWidth, offsetY);
+                
+                [footerView addSubview:imageView];
+
                 mTableView.tableFooterView = footerView;
-            }];
-            [footerView addSubview:imageView];
+            }
         }
     }
 }
