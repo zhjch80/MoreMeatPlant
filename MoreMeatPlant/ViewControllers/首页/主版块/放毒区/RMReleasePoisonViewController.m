@@ -34,6 +34,7 @@
     BOOL isLoadAdver;       //是否已经加载广告
     BOOL isLoadNews;        //是否已经加载置顶
     BOOL isSubsPlant;       //是否已经加载科目
+    
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;         //列表数据
@@ -49,11 +50,11 @@
 @property (nonatomic, strong) RMPostMessageView *action;
 @property (nonatomic, strong) ZFModalTransitionAnimator *animator;
 @property (nonatomic, strong) RefreshControl * refreshControl;
-
+@property (nonatomic, strong) RMPlantTypeView * plantTopTypeView;
 @end
 
 @implementation RMReleasePoisonViewController
-@synthesize mTableView, dataArr, fenleiAction, action, animator, plantTypeArr, advertisingArr, subsPlantArr, newsArr, plantRequestValue, subsPlantRequestValue, refreshControl;
+@synthesize mTableView, dataArr, fenleiAction, action, animator, plantTypeArr, advertisingArr, subsPlantArr, newsArr, plantRequestValue, subsPlantRequestValue, refreshControl,plantTopTypeView;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -160,11 +161,11 @@
         height = height + 30;
     }
     
-    RMPlantTypeView * plantTypeView = [[RMPlantTypeView alloc] init];
-    plantTypeView.frame = CGRectMake(0, height, kScreenWidth, kScreenWidth/7.0 + 8);
-    plantTypeView.delegate = self;
-    [plantTypeView loadPlantTypeWithImageArr:subsPlantArr];
-    [headView addSubview:plantTypeView];
+    plantTopTypeView = [[RMPlantTypeView alloc] init];
+    plantTopTypeView.frame = CGRectMake(0, height, kScreenWidth, kScreenWidth/7.0 + 8);
+    plantTopTypeView.delegate = self;
+    [plantTopTypeView loadPlantTypeWithImageArr:subsPlantArr];
+    [headView addSubview:plantTopTypeView];
     
     height = height + kScreenWidth/7.0 + 5;
     
@@ -193,6 +194,7 @@
     
     if (value >= 3){
         static NSString * identifierStr = @"releasePoisonIdentifier_2";
+        
         RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         
         if (!cell){
@@ -234,12 +236,25 @@
         cell.rightDownTwoImg.identifierString = model.auto_id;
         
         cell.likeImg.identifierString = model.auto_id;
+        cell.likeImg.indexPath = indexPath;
         cell.chatImg.identifierString = model.auto_id;
+        cell.chatImg.indexPath = indexPath;
         cell.praiseImg.identifierString = model.auto_id;
+        cell.praiseImg.indexPath = indexPath;
         
-        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        if ([model.is_collect isEqualToString:@"1"]){
+            cell.likeImg.image = [UIImage imageNamed:@"img_asced.png"];
+        }else{
+            cell.likeImg.image = [UIImage imageNamed:@"img_asc"];
+        }
+        
         cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
-        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        
+        if ([model.is_top isEqualToString:@"1"]){
+            cell.praiseImg.image = [UIImage imageNamed:@"img_zaned"];
+        }else{
+            cell.praiseImg.image = [UIImage imageNamed:@"img_zan"];
+        }
         
         cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
         cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
@@ -247,6 +262,7 @@
         return cell;
     }else if (value == 2){
         static NSString * identifierStr = @"releasePoisonIdentifier_1";
+        
         RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
         
         if (!cell){
@@ -285,12 +301,25 @@
         cell.leftImg.identifierString = model.auto_id;
         cell.rightImg.identifierString = model.auto_id;
         cell.likeImg.identifierString = model.auto_id;
+        cell.likeImg.indexPath = indexPath;
         cell.chatImg.identifierString = model.auto_id;
+        cell.chatImg.indexPath = indexPath;
         cell.praiseImg.identifierString = model.auto_id;
+        cell.praiseImg.indexPath = indexPath;
         
-        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        if ([model.is_collect isEqualToString:@"1"]){
+            cell.likeImg.image = [UIImage imageNamed:@"img_asced"];
+        }else{
+            cell.likeImg.image = [UIImage imageNamed:@"img_asc"];
+        }
+        
         cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
-        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        
+        if ([model.is_top isEqualToString:@"1"]){
+            cell.praiseImg.image = [UIImage imageNamed:@"img_zaned"];
+        }else{
+            cell.praiseImg.image = [UIImage imageNamed:@"img_zan"];
+        }
         
         cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
         cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
@@ -338,12 +367,25 @@
         
         cell.threeImg.identifierString = model.auto_id;
         cell.likeImg.identifierString = model.auto_id;
+        cell.likeImg.indexPath = indexPath;
         cell.chatImg.identifierString = model.auto_id;
+        cell.chatImg.indexPath = indexPath;
         cell.praiseImg.identifierString = model.auto_id;
+        cell.praiseImg.indexPath = indexPath;
         
-        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        if ([model.is_collect isEqualToString:@"1"]){
+            cell.likeImg.image = [UIImage imageNamed:@"img_asced"];
+        }else{
+            cell.likeImg.image = [UIImage imageNamed:@"img_asc"];
+        }
+        
         cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
-        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        
+        if ([model.is_top isEqualToString:@"1"]){
+            cell.praiseImg.image = [UIImage imageNamed:@"img_zaned"];
+        }else{
+            cell.praiseImg.image = [UIImage imageNamed:@"img_zan"];
+        }
         
         cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
         cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
@@ -366,7 +408,7 @@
     }
 
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager postMembersCollectWithCollect_id:image.identifierString withContent_type:@"1" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getMembersCollectWithCollect_id:image.identifierString withContent_type:@"1" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -374,7 +416,76 @@
         }
         
         if (success){
+            [self showHint:[object objectForKey:@"msg"]];
+            //做UI收藏操作
+            RMReleasePoisonCell * cell = (RMReleasePoisonCell *)[mTableView cellForRowAtIndexPath:image.indexPath];
+            cell.likeImg.image = [UIImage imageNamed:@"img_asced"];
             
+            NSString * num = cell.likeTitle.text;
+            NSRange range = [num rangeOfString:@"+"];
+            if (range.location != NSNotFound){
+                for (NSInteger i=0; i<[dataArr count]; i++) {
+                    RMPublicModel * model = [dataArr objectAtIndex:i];
+                    if ([model.auto_id isEqualToString:image.identifierString]){
+                        [dataArr removeObjectAtIndex:i];
+                        
+                        RMPublicModel * newModel = [[RMPublicModel alloc] init];
+                        newModel.auto_id = model.auto_id;
+                        newModel.content_name = model.content_name;
+                        newModel.content_type = model.content_type;
+                        newModel.content_class = model.content_class;
+                        newModel.content_course = model.content_course;
+                        newModel.content_top = model.content_top;
+                        newModel.content_collect = @"99+";
+                        newModel.content_review = model.content_review;
+                        newModel.create_time = model.create_time;
+                        newModel.is_top = model.is_top;
+                        newModel.is_collect = @"1";
+                        newModel.is_review =  model.is_review;
+                        newModel.imgs = model.imgs;
+                        newModel.members = model.members;
+                        [dataArr insertObject:newModel atIndex:i];
+                        break;
+                    }else{
+                        continue;
+                    }
+                }
+            }else{
+                NSInteger _num = num.integerValue;
+                _num ++;
+                cell.likeTitle.text = [self getLargeNumbersToSpecificStr:[NSString stringWithFormat:@"%ld",(long)_num]];
+                
+                for (NSInteger i=0; i<[dataArr count]; i++) {
+                    RMPublicModel * model = [dataArr objectAtIndex:i];
+                    if ([model.auto_id isEqualToString:image.identifierString]){
+                        [dataArr removeObjectAtIndex:i];
+                        
+                        RMPublicModel * newModel = [[RMPublicModel alloc] init];
+                        newModel.auto_id = model.auto_id;
+                        newModel.content_name = model.content_name;
+                        newModel.content_type = model.content_type;
+                        newModel.content_class = model.content_class;
+                        newModel.content_course = model.content_course;
+                        newModel.content_top = model.content_top;
+                        newModel.content_collect = [self getLargeNumbersToSpecificStr:[NSString stringWithFormat:@"%ld",(long)_num]];
+                        newModel.content_review = model.content_review;
+                        newModel.create_time = model.create_time;
+                        newModel.is_top = model.is_top;
+                        newModel.is_collect = @"1";
+                        newModel.is_review =  model.is_review;
+                        newModel.imgs = model.imgs;
+                        newModel.members = model.members;
+                        [dataArr insertObject:newModel atIndex:i];
+                        break;
+                    }else{
+                        continue;
+                    }
+                }
+            }
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }else{
+            //不做UI收藏操作
+            [self showHint:[object objectForKey:@"msg"]];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];
@@ -395,22 +506,93 @@
             commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
             commentsView.requestType = kRMReleasePoisonListComment;
             commentsView.code = image.identifierString;
-            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  评论:%@",[model.members objectForKey:@"member_name"]]];
+            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  评论:%@",[model.members objectForKey:@"member_name"]] withImage:image];
             [self.view addSubview:commentsView];
             break;
         }
     }
 }
 
-//评论成功
-- (void)commentSuccessMethodWithType:(NSInteger)type {
+- (void)commentMethodWithType:(NSInteger)type withError:(NSError *)error withState:(BOOL)success withObject:(id)object withImage:(RMImageView *)image {
+    if (error){
+        NSLog(@"errot%@",error);
+        [self showHint:@"帖子评论失败！"];
+        return;
+    }
     
+    if (success){
+        //做UI上的数据处理
+        RMReleasePoisonCell * cell = (RMReleasePoisonCell *)[mTableView cellForRowAtIndexPath:image.indexPath];
+        NSString * num = cell.chatTitle.text;
+        
+        NSRange range = [num rangeOfString:@"+"];
+        if (range.location != NSNotFound){
+            for (NSInteger i=0; i<[dataArr count]; i++) {
+                RMPublicModel * model = [dataArr objectAtIndex:i];
+                if ([model.auto_id isEqualToString:image.identifierString]){
+                    [dataArr removeObjectAtIndex:i];
+                    
+                    RMPublicModel * newModel = [[RMPublicModel alloc] init];
+                    newModel.auto_id = model.auto_id;
+                    newModel.content_name = model.content_name;
+                    newModel.content_type = model.content_type;
+                    newModel.content_class = model.content_class;
+                    newModel.content_course = model.content_course;
+                    newModel.content_top = model.content_top;
+                    newModel.content_collect = model.content_collect;
+                    newModel.content_review = @"99+";
+                    newModel.create_time = model.create_time;
+                    newModel.is_top = model.is_top;
+                    newModel.is_collect = model.is_collect;
+                    newModel.is_review =  @"1";
+                    newModel.imgs = model.imgs;
+                    newModel.members = model.members;
+                    [dataArr insertObject:newModel atIndex:i];
+                    break;
+                }else{
+                    continue;
+                }
+            }
+        }else{
+            NSInteger _num = num.integerValue;
+            _num ++;
+            cell.chatTitle.text = [self getLargeNumbersToSpecificStr:[NSString stringWithFormat:@"%ld",(long)_num]];
+            
+            for (NSInteger i=0; i<[dataArr count]; i++) {
+                RMPublicModel * model = [dataArr objectAtIndex:i];
+                if ([model.auto_id isEqualToString:image.identifierString]){
+                    [dataArr removeObjectAtIndex:i];
+                    
+                    RMPublicModel * newModel = [[RMPublicModel alloc] init];
+                    newModel.auto_id = model.auto_id;
+                    newModel.content_name = model.content_name;
+                    newModel.content_type = model.content_type;
+                    newModel.content_class = model.content_class;
+                    newModel.content_course = model.content_course;
+                    newModel.content_top = model.content_top;
+                    newModel.content_collect = model.content_collect;
+                    newModel.content_review = [self getLargeNumbersToSpecificStr:[NSString stringWithFormat:@"%ld",(long)_num]];
+                    newModel.create_time = model.create_time;
+                    newModel.is_top = model.is_top;
+                    newModel.is_collect = model.is_collect;
+                    newModel.is_review =  @"1";
+                    newModel.imgs = model.imgs;
+                    newModel.members = model.members;
+                    [dataArr insertObject:newModel atIndex:i];
+                    break;
+                }else{
+                    continue;
+                }
+            }
+        }
+        
+        [self showHint:[object objectForKey:@"msg"]];
+    }else{
+        //不做UI上的数据处理
+        [self showHint:[object objectForKey:@"msg"]];
+    }
 }
 
-//评论失败
-- (void)commentFailureMethodWithType:(NSInteger)type {
-    
-}
 
 - (void)addPraiseWithImage:(RMImageView *)image {
     if (![RMUserLoginInfoManager loginmanager].state){
@@ -419,15 +601,85 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager postPostsAddPraiseWithAuto_id:image.identifierString withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getPostsAddPraiseWithAuto_id:image.identifierString withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             return ;
         }
-        
+
         if (success){
+            //做UI收藏操作
+            RMReleasePoisonCell * cell = (RMReleasePoisonCell *)[mTableView cellForRowAtIndexPath:image.indexPath];
+            cell.praiseImg.image = [UIImage imageNamed:@"img_zaned"];
+
+            NSString * num = cell.praiseTitle.text;
+            NSRange range = [num rangeOfString:@"+"];
+            if (range.location != NSNotFound){
+                for (NSInteger i=0; i<[dataArr count]; i++) {
+                    RMPublicModel * model = [dataArr objectAtIndex:i];
+                    if ([model.auto_id isEqualToString:image.identifierString]){
+                        [dataArr removeObjectAtIndex:i];
+                        
+                        RMPublicModel * newModel = [[RMPublicModel alloc] init];
+                        newModel.auto_id = model.auto_id;
+                        newModel.content_name = model.content_name;
+                        newModel.content_type = model.content_type;
+                        newModel.content_class = model.content_class;
+                        newModel.content_course = model.content_course;
+                        newModel.content_top = @"99+";
+                        newModel.content_collect = model.content_collect;
+                        newModel.content_review = model.content_review;
+                        newModel.create_time = model.create_time;
+                        newModel.is_top = @"1";
+                        newModel.is_collect = model.is_collect;
+                        newModel.is_review =  model.is_review;
+                        newModel.imgs = model.imgs;
+                        newModel.members = model.members;
+                        [dataArr insertObject:newModel atIndex:i];
+                        break;
+                    }else{
+                        continue;
+                    }
+                }
+            }else{
+                NSInteger _num = num.integerValue;
+                _num ++;
+                cell.praiseTitle.text = [self getLargeNumbersToSpecificStr:[NSString stringWithFormat:@"%ld",(long)_num]];
+                
+                for (NSInteger i=0; i<[dataArr count]; i++) {
+                    RMPublicModel * model = [dataArr objectAtIndex:i];
+                    if ([model.auto_id isEqualToString:image.identifierString]){
+                        [dataArr removeObjectAtIndex:i];
+                        
+                        RMPublicModel * newModel = [[RMPublicModel alloc] init];
+                        newModel.auto_id = model.auto_id;
+                        newModel.content_name = model.content_name;
+                        newModel.content_type = model.content_type;
+                        newModel.content_class = model.content_class;
+                        newModel.content_course = model.content_course;
+                        newModel.content_top = [self getLargeNumbersToSpecificStr:[NSString stringWithFormat:@"%ld",(long)_num]];
+                        newModel.content_collect = model.content_collect;
+                        newModel.content_review = model.content_review;
+                        newModel.create_time = model.create_time;
+                        newModel.is_top = @"1";
+                        newModel.is_collect = model.is_collect;
+                        newModel.is_review =  model.is_review;
+                        newModel.imgs = model.imgs;
+                        newModel.members = model.members;
+                        [dataArr insertObject:newModel atIndex:i];
+                        break;
+                    }else{
+                        continue;
+                    }
+                }
+            }
             
+            [self showHint:[object objectForKey:@"msg"]];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }else{
+            //不做UI收藏操作
+            [self showHint:[object objectForKey:@"msg"]];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];
@@ -465,9 +717,18 @@
 #pragma mark - 选择科目
 
 - (void)selectedPlantWithType:(NSString *)type {
-    subsPlantRequestValue = type.integerValue;
-    isRefresh = YES;
-    [self requestListWithPageCount:1];
+    if ([type isEqualToString:@"0"]){
+        //全部
+        subsPlantRequestValue = 10000;
+        isRefresh = YES;
+        [self requestListWithPageCount:1];
+    }else{
+        //分类
+        subsPlantRequestValue = type.integerValue;
+        [fenleiAction updataPlantClassificationSelectStateWith:type.integerValue];
+        isRefresh = YES;
+        [self requestListWithPageCount:1];
+    }
 }
 
 #pragma mark - 选择分类
@@ -477,6 +738,7 @@
         plantRequestValue = type;
     }else{
         subsPlantRequestValue = type-6;
+        [plantTopTypeView updataSelectState:type - 6];
     }
     isRefresh = YES;
     [self requestListWithPageCount:1];
@@ -668,6 +930,10 @@
         
         if (success) {
             subsPlantArr = [[NSMutableArray alloc] init];
+            
+            RMPublicModel * m = [[RMPublicModel alloc] init];
+            [subsPlantArr addObject:m];
+            
             for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
@@ -681,7 +947,15 @@
             [self loadTableHeaderView];
 
             [self requestListWithPageCount:1];
-
+            if (!fenleiAction){
+                fenleiAction = [[RMPostClassificationView alloc] init];
+                fenleiAction.delegate = self;
+                fenleiAction.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+                fenleiAction.backgroundColor = [UIColor clearColor];
+                [fenleiAction initWithPostClassificationViewWithPlantArr:plantTypeArr withSubsPlant:subsPlantArr];
+            }
+   
+            
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];
@@ -701,7 +975,7 @@
         plantType = model_1.value;
     }
     
-    if (subsPlantRequestValue == -9999){
+    if (subsPlantRequestValue == -9999 | subsPlantRequestValue == 10000){
         subjectsType = @"";
     }else{
         RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
@@ -730,6 +1004,9 @@
                     model.content_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_collect"]);
                     model.content_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_review"]);
                     model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                    model.is_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_top"]);
+                    model.is_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_collect"]);
+                    model.is_review =  OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_review"]);
                     model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
                     model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
                     [dataArr addObject:model];
@@ -755,6 +1032,9 @@
                     model.content_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_collect"]);
                     model.content_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_review"]);
                     model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                    model.is_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_top"]);
+                    model.is_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_collect"]);
+                    model.is_review =  OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_review"]);
                     model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
                     model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
                     [dataArr addObject:model];
@@ -778,6 +1058,9 @@
                     model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
                     model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
                     model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    model.is_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_top"]);
+                    model.is_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_collect"]);
+                    model.is_review =  OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_review"]);
                     [dataArr addObject:model];
                 }
 

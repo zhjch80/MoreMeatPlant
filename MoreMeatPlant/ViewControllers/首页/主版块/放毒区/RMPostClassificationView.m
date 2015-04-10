@@ -26,9 +26,9 @@
 @implementation RMPostClassificationView
 @synthesize subView, subHeight, height, width, globPlantArr, globSubsPlantArr;
 
-- (void)initWithPostClassificationViewWithPlantArr:(NSArray *)plantArr withSubsPlant:(NSArray *)subsPlantArr {
-    globPlantArr = [[NSMutableArray alloc] initWithArray:plantArr];
-    globSubsPlantArr = [[NSMutableArray alloc] initWithArray:subsPlantArr];
+- (void)initWithPostClassificationViewWithPlantArr:(NSArray *)plants withSubsPlant:(NSMutableArray *)subs {
+    globPlantArr = [[NSMutableArray alloc] initWithArray:plants];
+    globSubsPlantArr = [[NSMutableArray alloc] initWithArray:subs];
     
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [self addGestureRecognizer:gesture];
@@ -61,8 +61,8 @@
     title.textColor = [UIColor colorWithRed:0.91 green:0.12 blue:0.37 alpha:1];
     [subView addSubview:title];
     
-    for (NSInteger i=0; i<[plantArr count]; i++) {
-        RMPublicModel * model = [plantArr objectAtIndex:i];
+    for (NSInteger i=0; i<[plants count]; i++) {
+        RMPublicModel * model = [plants objectAtIndex:i];
         NSString * befStr = [model.label substringToIndex:2];
         NSString * aftStr = [model.label substringFromIndex:2];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -77,20 +77,20 @@
         [button addTarget:self action:@selector(selectUpdataListType:) forControlEvents:UIControlEventTouchUpInside];
         [subView addSubview:button];
     }
-    
-    for (NSInteger i=0; i<[subsPlantArr count]; i++) {
-        RMPublicModel * model = [subsPlantArr objectAtIndex:i];
+
+    for (NSInteger i=1; i<[subs count]; i++) {
+        RMPublicModel * model = [subs objectAtIndex:i];
         UIImageView * image = [[UIImageView alloc] init];
         image.userInteractionEnabled = YES;
         image.multipleTouchEnabled = YES;
-        image.frame = CGRectMake(16 + i*50, 105, 40, 40);
-        image.tag = 6+i;
+        image.frame = CGRectMake(16 + (i-1)*50, 105, 40, 40);
+        image.tag = 6 + i;
         [image sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         image.backgroundColor = [UIColor clearColor];
         [subView addSubview:image];
         
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(16 + i*50, 105, 40, 40);
+        button.frame = CGRectMake(16 + (i-1)*50, 105, 40, 40);
         button.tag = 6 + i;
         [button addTarget:self action:@selector(selectUpdataListType:) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor clearColor];
@@ -125,9 +125,9 @@
         }
         sender.backgroundColor = [UIColor colorWithRed:0.95 green:0 blue:0.32 alpha:1];
     }else{
-        for (NSInteger i=0; i<[globSubsPlantArr count]; i++) {
+        for (NSInteger i=1; i<[globSubsPlantArr count]; i++) {
             RMPublicModel * model = [globSubsPlantArr objectAtIndex:i];
-            UIImageView * imageView = (UIImageView *)[subView viewWithTag:i+6];
+            UIImageView * imageView = (UIImageView *)[subView viewWithTag:i + 6];
             [imageView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         }
         
@@ -139,6 +139,21 @@
     if ([self.delegate respondsToSelector:@selector(selectedPlantType:)]){
         [self.delegate selectedPlantType:sender.tag];
     }
+}
+
+/**
+ *  更新食物科目选择状态
+ */
+- (void)updataPlantClassificationSelectStateWith:(NSInteger)value {
+    for (NSInteger i=1; i<[globSubsPlantArr count]; i++) {
+        RMPublicModel * model = [globSubsPlantArr objectAtIndex:i];
+        UIImageView * imageView = (UIImageView *)[subView viewWithTag:i+6];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+    }
+    
+    UIImageView * imageView = (UIImageView *)[subView viewWithTag:value+6];
+    RMPublicModel * model = [globSubsPlantArr objectAtIndex:value];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
 }
 
 @end

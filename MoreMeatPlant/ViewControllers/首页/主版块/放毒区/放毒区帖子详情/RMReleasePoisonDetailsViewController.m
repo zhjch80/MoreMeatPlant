@@ -14,11 +14,13 @@
 #import "RMCommentsView.h"
 #import "NSString+TimeInterval.h"
 #import "UIImage+LK.h"
+#import "RefreshControl.h"
+#import "CustomRefreshView.h"
 
 //#import "NJKWebViewProgress.h"
 //#import "NJKWebViewProgressView.h"
 
-@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate,CommentsViewDelegate>{
+@interface RMReleasePoisonDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,ReleasePoisonDetailsDelegate,TableHeadDelegate,CommentsViewDelegate,RefreshControlDelegate>{
     BOOL isCanLoadWeb;
 //    NJKWebViewProgressView *_progressView;
 //    NJKWebViewProgress *_progressProxy;
@@ -35,11 +37,12 @@
 @property (nonatomic, strong) RMTableHeadView * tableHeadView;
 @property (nonatomic, strong) RMPublicModel * dataModel;
 @property (nonatomic, strong) NSMutableArray * advertisingArr;
+@property (nonatomic, strong) RefreshControl * refreshControl;
 
 @end
 
 @implementation RMReleasePoisonDetailsViewController
-@synthesize mTableView, tableHeadView, dataCommentArr, dataModel, advertisingArr;
+@synthesize mTableView, tableHeadView, dataCommentArr, dataModel, advertisingArr,refreshControl;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -82,6 +85,14 @@
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
     
+    refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
+    refreshControl.topEnabled = NO;
+    refreshControl.bottomEnabled = YES;
+    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    
+    pageCount = 1;
+    isRefresh = YES;
+    
     praiseCellCount = 0;
     
     [self loadBottomView];
@@ -110,7 +121,7 @@
             }
             
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [RMAFNRequestManager postMembersCollectWithCollect_id:dataModel.auto_id withContent_type:@"1" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+            [RMAFNRequestManager getMembersCollectWithCollect_id:dataModel.auto_id withContent_type:@"1" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
                 if (error){
                     NSLog(@"error:%@",error);
                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -130,14 +141,14 @@
                 return;
             }
             
-            RMCommentsView * commentsView = [[RMCommentsView alloc] init];
-            commentsView.delegate = self;
-            commentsView.backgroundColor = [UIColor clearColor];
-            commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            commentsView.requestType = kRMReleasePoisonListComment;
-            commentsView.code = dataModel.auto_id;
-            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  评论:%@",[dataModel.members objectForKey:@"member_name"]]];
-            [self.view addSubview:commentsView];
+//            RMCommentsView * commentsView = [[RMCommentsView alloc] init];
+//            commentsView.delegate = self;
+//            commentsView.backgroundColor = [UIColor clearColor];
+//            commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+//            commentsView.requestType = kRMReleasePoisonListComment;
+//            commentsView.code = dataModel.auto_id;
+//            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  评论:%@",[dataModel.members objectForKey:@"member_name"]]];
+//            [self.view addSubview:commentsView];
             break;
         }
         case 3:{
@@ -290,6 +301,12 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
         }
+        if ([dataModel.is_top isEqualToString:@"1"]){
+            cell.addPraiseImg.image = LOADIMAGE(@"img_zaned", kImageTypePNG);
+        }else{
+            cell.addPraiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        }
+        cell.addPraiseImg.indexPath = indexPath;
         return cell;
     }else if (indexPath.row > 0 && indexPath.row <= [advertisingArr count]){
         //广告
@@ -324,6 +341,8 @@
                 cell.backgroundColor = [UIColor clearColor];
                 cell.delegate = self;
             }
+            cell.replyBtn_1.tag = indexPath.row;
+            cell.replyBtn_1.parameter_1 = @"评论";
             cell.userHead_1.image = [UIImage imageNamed:@"user_test.jpg"];
             cell.userName_1.text = model.content_name;
             cell.userLocatiom_1.text = @"正在定位...";
@@ -348,7 +367,8 @@
                 cell.backgroundColor = [UIColor clearColor];
                 cell.delegate = self;
             }
-            
+            cell.replyBtn_2.tag = indexPath.row;
+            cell.replyBtn_2.parameter_1 = @"回复";
             cell.userHead_2.image = [UIImage imageNamed:@"user_test.jpg"];
             cell.userName_2.text = [[[model.returns objectAtIndex:0] objectForKey:@"member"] objectForKey:@"member_name"];
             cell.userLocatiom_2.text = @"正在定位...";
@@ -408,7 +428,7 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager postPostsAddPraiseWithAuto_id:dataModel.auto_id withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getPostsAddPraiseWithAuto_id:dataModel.auto_id withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -416,12 +436,20 @@
         }
         
         if (success){
+            [self showHint:[object objectForKey:@"msg"]];
             
+            RMReleasePoisonDetailsCell * cell = (RMReleasePoisonDetailsCell *)[mTableView cellForRowAtIndexPath:image.indexPath];
+
+            cell.addPraiseImg.image = LOADIMAGE(@"img_zaned", kImageTypePNG);
+            
+            dataModel.is_top = @"1";
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }else{
+            [self showHint:[object objectForKey:@"msg"]];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];
-    
-    NSLog(@"点赞👍");
 }
 
 #pragma mark - 点击评论人的头像
@@ -433,42 +461,60 @@
 #pragma mark - 举报此帖
 
 - (void)reportMethod:(UIButton *)button {
+    if (![[RMUserLoginInfoManager loginmanager] state]){
+        NSLog(@"去登录");
+        return;
+    }
+    
     RMCommentsView * commentsView = [[RMCommentsView alloc] init];
     commentsView.delegate = self;
     commentsView.requestType = kRMReleasePoisonToReport;
     commentsView.code = dataModel.auto_id;
     commentsView.backgroundColor = [UIColor clearColor];
     commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-    [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"   举报:%@",[dataModel.members objectForKey:@"member_name"]]];
+    [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"   举报:%@",[dataModel.members objectForKey:@"member_name"]] withImage:nil];
     [self.view addSubview:commentsView];
 }
 
-- (void)commentSuccessMethodWithType:(NSInteger)type {
-    if (type == 3){
-        //举报
-        
-    }else{
-        
+- (void)commentMethodWithType:(NSInteger)type withError:(NSError *)error withState:(BOOL)success withObject:(id)object withImage:(RMImageView *)image {
+    if (error){
+        NSLog(@"error:%@",error);
+        return;
     }
-}
-
-- (void)commentFailureMethodWithType:(NSInteger)type {
-    if (type == 3){
-        //举报
-        
+    
+    if (success){
+        [self showHint:[object objectForKey:@"msg"]];
     }else{
-        
+        [self showHint:[object objectForKey:@"msg"]];
     }
 }
 
 #pragma mark - 回复帖子
 
-- (void)replyMethod:(UIButton *)button {
+- (void)replyMethod:(RMBaseButton *)button {
+    if (![[RMUserLoginInfoManager loginmanager] state]){
+        NSLog(@"去登录");
+        return;
+    }
+    
+    RMPublicModel * model = [dataCommentArr objectAtIndex:button.tag - 1];
+
+    NSString * name;
+    
     RMCommentsView * commentsView = [[RMCommentsView alloc] init];
     commentsView.delegate = self;
+    commentsView.requestType = kRMReleasePoisonListReplyOrComment;
+    if ([button.parameter_1 isEqualToString:@"评论"]){
+        name = model.content_name;
+        commentsView.code = model.auto_id;
+    }else{
+        name = [[[model.returns objectAtIndex:0] objectForKey:@"member"] objectForKey:@"member_name"];
+        commentsView.code = [[model.returns objectAtIndex:0] objectForKey:@"auto_id"];
+    }
+    commentsView.commentType = button.parameter_1;
     commentsView.backgroundColor = [UIColor clearColor];
     commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-    [commentsView loadCommentsViewWithReceiver:@"   回复:Kucyoung贝贝"];
+    [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"   回复:%@",name] withImage:nil];
     [self.view addSubview:commentsView];
 }
 
@@ -535,23 +581,69 @@
         }
         
         if (success){
-            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
-                model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
-                model.content_body = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_body"]);
-                model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
-                model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
-                model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
-                model.returns = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"return"];
-                [dataCommentArr addObject:model];
+            if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
+            }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
+                if ([[object objectForKey:@"data"] count] == 0){
+                    [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    isLoadComplete = YES;
+                    return;
+                }
+                
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
+                    model.content_body = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_body"]);
+                    model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    model.returns = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"return"];
+                    [dataCommentArr addObject:model];
+                }
+                
+                [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
             }
-
-            [mTableView reloadData];
+            
+            if (isRefresh){
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
+                    model.content_body = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_body"]);
+                    model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    model.returns = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"return"];
+                    [dataCommentArr addObject:model];
+                }
+                
+                [mTableView reloadData];
+            }
             
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];
+}
+
+#pragma mark 刷新代理
+
+- (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
+    if (direction == RefreshDirectionTop) { //下拉刷新
+    }else if(direction == RefreshDirectionBottom) { //上拉加载
+        if (isLoadComplete){
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self showHint:@"没有更多评论啦"];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            });
+        }else{
+            pageCount ++;
+            isRefresh = NO;
+            [self requestCommentListsWithPageCount:pageCount];
+        }
+    }
 }
 
 /**

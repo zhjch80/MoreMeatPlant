@@ -52,7 +52,7 @@
     }
 }
 
-- (IBAction)replyClick:(UIButton *)sender {
+- (IBAction)replyClick:(RMBaseButton *)sender {
     if ([self.delegate respondsToSelector:@selector(replyMethod:)]){
         [self.delegate replyMethod:sender];
     }

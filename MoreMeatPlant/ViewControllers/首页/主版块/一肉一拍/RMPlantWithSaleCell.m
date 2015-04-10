@@ -17,6 +17,13 @@
     [self.centerImg addTarget:self withSelector:@selector(selectedImgJumpPlantDetails:)];
     [self.rightImg addTarget:self withSelector:@selector(selectedImgJumpPlantDetails:)];
     
+    [self.leftImg.layer setCornerRadius:8.0f];
+    self.leftImg.clipsToBounds = YES;
+    [self.centerImg.layer setCornerRadius:8.0f];
+    self.centerImg.clipsToBounds = YES;
+    [self.rightImg.layer setCornerRadius:8.0f];
+    self.rightImg.clipsToBounds = YES;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

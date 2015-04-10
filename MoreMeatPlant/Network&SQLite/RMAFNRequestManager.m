@@ -359,22 +359,13 @@
  *  @param      user_id             用户名
  *  @param      user_password       用户密码
  */
-+ (void)postPostsAddPraiseWithAuto_id:(NSString *)auto_id
++ (void)getPostsAddPraiseWithAuto_id:(NSString *)auto_id
                                withID:(NSString *)user_id
                               withPWD:(NSString *)user_password
                              callBack:(RMAFNRequestManagerCallBack)block {
-    NSString *url = @"http://218.240.30.6/drzw/index.php";
-    NSDictionary * parameter = @{
-                                 @"com": @"com_appService",
-                                 @"method": @"save",
-                                 @"app_com": @"com_center",
-                                 @"task": @"noteTop",
-                                 @"note_id": auto_id,
-                                 @"ID": user_id,
-                                 @"PWD": user_password,
-                                 };
-    [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        if (block){
+    NSString * url = [NSString stringWithFormat:@"%@&method=save&app_com=com_center&task=noteTop&note_id=%@&ID=%@&PWD=%@",baseUrl,auto_id,user_id,user_password];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        if (block) {
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -391,28 +382,19 @@
  *  @param      user_id             会员用户名
  *  @param      user_password       会员密码
  */
-+ (void)postMembersCollectWithCollect_id:(NSString *)collect_id
++ (void)getMembersCollectWithCollect_id:(NSString *)collect_id
                         withContent_type:(NSString *)content_type
                                   withID:(NSString *)user_id
                                  withPWD:(NSString *)user_password
                                 callBack:(RMAFNRequestManagerCallBack)block {
-    NSString *url = @"http://218.240.30.6/drzw/index.php";
-    NSDictionary * parameter = @{
-                                 @"com": @"com_appService",
-                                 @"method": @"save",
-                                 @"app_com": @"com_center",
-                                 @"task": @"addmemberCollect",
-                                 @"collect_id": collect_id,
-                                 @"content_type": content_type,
-                                 @"ID": user_id,
-                                 @"PWD": user_password,
-                                 };
-    [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    NSString * url = [NSString stringWithFormat:@"%@&method=save&app_com=com_center&task=addmemberCollect&collect_id=%@&content_type=%@&ID=%@&PWD=%@",baseUrl,collect_id,content_type,user_id,user_password];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        NSLog(@"responseObject:%@",responseObject);
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (block) {
+        if (block){
             block (error, NO, kMSGFailure);
         }
     }];
@@ -521,23 +503,13 @@
  *  @param          note_id                 帖子标识
  *  @param          note_content            举报内容
  */
-+ (void)postReleasePoisonDetailsToReportWithID:(NSString *)user_id
++ (void)getReleasePoisonDetailsToReportWithID:(NSString *)user_id
                                        withPWD:(NSString *)user_password
                                    wirhNote_id:(NSString *)note_id
                               withNote_content:(NSString *)note_content
                                       callBack:(RMAFNRequestManagerCallBack)block {
-    NSString *url = @"http://218.240.30.6/drzw/index.php";
-    NSDictionary * parameter = @{
-                                 @"com": @"com_appService",
-                                 @"method": @"save",
-                                 @"app_com": @"com_center",
-                                 @"task": @"com_center",
-                                 @"ID": user_id,
-                                 @"PWD": user_password,
-                                 @"frm[note_id]": note_id,
-                                 @"note_id": note_content,
-                                 };
-    [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    NSString * url = [NSString stringWithFormat:@"%@&method=save&app_com=com_center&task=noteReport&ID=%@&PWD=%@&frm[note_id]=%@&frm[content_desc]=%@",baseUrl,user_id,user_password,note_id,note_content];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }

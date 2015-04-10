@@ -19,6 +19,10 @@
 @interface RMPlantTypeView : UIView
 @property (nonatomic, assign) id<SelectedPlantTypeMethodDelegate>delegate;
 
+//初次加载View
 - (void)loadPlantTypeWithImageArr:(NSArray *)imageArr;
+
+//更新选择状态
+- (void)updataSelectState:(NSInteger)value;
 
 @end

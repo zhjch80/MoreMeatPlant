@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RMImageView.h"
+#import "RMBaseButton.h"
 
 @protocol ReleasePoisonDetailsDelegate <NSObject>
 
@@ -41,7 +42,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *userPostTime_1;
 @property (weak, nonatomic) IBOutlet UIImageView *pointLine_1;
 @property (weak, nonatomic) IBOutlet UILabel *comments_1;
-@property (weak, nonatomic) IBOutlet UIButton *replyBtn_1;
+@property (weak, nonatomic) IBOutlet RMBaseButton *replyBtn_1;
 @property (weak, nonatomic) IBOutlet UIView *line_1;
 
 //情况四
@@ -53,7 +54,7 @@
 @property (weak, nonatomic) IBOutlet UIView *comments_2_1_bgView;
 @property (weak, nonatomic) IBOutlet UILabel *comments_2_1;
 @property (weak, nonatomic) IBOutlet UILabel *comments_2_2;
-@property (weak, nonatomic) IBOutlet UIButton *replyBtn_2;
+@property (weak, nonatomic) IBOutlet RMBaseButton *replyBtn_2;
 @property (weak, nonatomic) IBOutlet UIView *line_2;
 
 - (CGRect)boundingRectCommentWith:(NSString *)str;

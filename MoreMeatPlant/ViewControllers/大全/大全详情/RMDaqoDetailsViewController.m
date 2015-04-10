@@ -327,12 +327,12 @@
             break;
         }
         case 2:{
-            RMCommentsView * commentsView = [[RMCommentsView alloc] init];
-            commentsView.delegate = self;
-            commentsView.backgroundColor = [UIColor clearColor];
-            commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  补充:%@",@"补充说明"]];
-            [self.view addSubview:commentsView];
+//            RMCommentsView * commentsView = [[RMCommentsView alloc] init];
+//            commentsView.delegate = self;
+//            commentsView.backgroundColor = [UIColor clearColor];
+//            commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+//            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  补充:%@",@"补充说明"]];
+//            [self.view addSubview:commentsView];
             break;
         }
             

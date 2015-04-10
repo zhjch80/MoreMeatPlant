@@ -413,6 +413,7 @@
 		1DAE81CF1AD3AFF8003BDB85 /* RMPlantWithSaleDetailsCell_6p.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE81CE1AD3AFF8003BDB85 /* RMPlantWithSaleDetailsCell_6p.xib */; };
 		1DAE81D61AD40BE5003BDB85 /* RMDaqoCell_6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE81D41AD40BE5003BDB85 /* RMDaqoCell_6.xib */; };
 		1DAE81D71AD40BE5003BDB85 /* RMDaqoCell_6p.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE81D51AD40BE5003BDB85 /* RMDaqoCell_6p.xib */; };
+		1DB041601AD7A6B500E05DC6 /* RMBaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB0415F1AD7A6B500E05DC6 /* RMBaseButton.m */; };
 		1DCC84DE1AD6488D00B04040 /* UIImage+LK.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCC84DD1AD6488D00B04040 /* UIImage+LK.m */; };
 		1DCC84E01AD662D100B04040 /* user_test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1DCC84DF1AD662D100B04040 /* user_test.jpg */; };
 		1DCD99461A95A41500F0DEB6 /* RMPlantWithSaleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCD99441A95A41500F0DEB6 /* RMPlantWithSaleCell.m */; };
@@ -1516,6 +1517,8 @@
 		1DAE81CE1AD3AFF8003BDB85 /* RMPlantWithSaleDetailsCell_6p.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMPlantWithSaleDetailsCell_6p.xib; sourceTree = "<group>"; };
 		1DAE81D41AD40BE5003BDB85 /* RMDaqoCell_6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaqoCell_6.xib; sourceTree = "<group>"; };
 		1DAE81D51AD40BE5003BDB85 /* RMDaqoCell_6p.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaqoCell_6p.xib; sourceTree = "<group>"; };
+		1DB0415E1AD7A6B500E05DC6 /* RMBaseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMBaseButton.h; sourceTree = "<group>"; };
+		1DB0415F1AD7A6B500E05DC6 /* RMBaseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMBaseButton.m; sourceTree = "<group>"; };
 		1DCC84DC1AD6488D00B04040 /* UIImage+LK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LK.h"; sourceTree = "<group>"; };
 		1DCC84DD1AD6488D00B04040 /* UIImage+LK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LK.m"; sourceTree = "<group>"; };
 		1DCC84DF1AD662D100B04040 /* user_test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = user_test.jpg; sourceTree = "<group>"; };
@@ -3509,6 +3512,8 @@
 				1D64F50F1A91A9C00073EB98 /* UIButton+EnlargeEdge.m */,
 				1DEB73FC1AB9CE2600EA1FA7 /* RMBottomView.h */,
 				1DEB73FD1AB9CE2600EA1FA7 /* RMBottomView.m */,
+				1DB0415E1AD7A6B500E05DC6 /* RMBaseButton.h */,
+				1DB0415F1AD7A6B500E05DC6 /* RMBaseButton.m */,
 			);
 			path = BaseViewControllers;
 			sourceTree = "<group>";
@@ -5472,6 +5477,7 @@
 				1DD699331AC10F02009A9327 /* SDWebImageManager.m in Sources */,
 				1D7AC4141AB9791E002204F6 /* CycleScrollView.m in Sources */,
 				51E268381AAE003000252DEF /* STDbObject.m in Sources */,
+				1DB041601AD7A6B500E05DC6 /* RMBaseButton.m in Sources */,
 				1D55762A1A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.m in Sources */,
 				1D9CB17C1AAE9EE500BD5A7D /* AFURLResponseSerialization.m in Sources */,
 				5157DE461AB9C08E005E9FA5 /* RMBabyListTableViewCell.m in Sources */,

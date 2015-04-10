@@ -14,6 +14,8 @@
 }
 @property (nonatomic, strong) NSString *identifierString;
 
+@property (nonatomic, strong) NSIndexPath * indexPath;
+
 - (void)addTarget:(id)target withSelector:(SEL)sel;
 
 @end

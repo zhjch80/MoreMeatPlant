@@ -20,10 +20,14 @@
 @interface RMPostClassificationView : UIView
 @property (nonatomic, assign) id<PostClassificationDelegate>delegate;
 
-- (void)initWithPostClassificationViewWithPlantArr:(NSArray *)plantArr withSubsPlant:(NSArray *)subsPlantArr;
+- (void)initWithPostClassificationViewWithPlantArr:(NSArray *)plants withSubsPlant:(NSArray *)subs;
 
 - (void)show;
 
 - (void)dismiss;
+
+//更新食物科目选择状态
+- (void)updataPlantClassificationSelectStateWith:(NSInteger)value;
+
 
 @end

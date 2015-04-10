@@ -175,7 +175,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      user_id             用户名
  *  @param      user_password       用户密码
  */
-+ (void)postPostsAddPraiseWithAuto_id:(NSString *)auto_id
++ (void)getPostsAddPraiseWithAuto_id:(NSString *)auto_id
                                withID:(NSString *)user_id
                               withPWD:(NSString *)user_password
                              callBack:(RMAFNRequestManagerCallBack)block;
@@ -187,7 +187,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      user_id             会员用户名
  *  @param      password            会员密码
  */
-+ (void)postMembersCollectWithCollect_id:(NSString *)collect_id
++ (void)getMembersCollectWithCollect_id:(NSString *)collect_id
                         withContent_type:(NSString *)content_type
                                   withID:(NSString *)user_id
                                  withPWD:(NSString *)user_password
@@ -229,13 +229,13 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                                                            callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
- *  @method         放毒区详情举报
+ *  @method         放毒区详情举报帖子
  *  @param          user_id                 会员名
  *  @param          user_password           会员密码
  *  @param          note_id                 帖子标识
  *  @param          note_content            举报内容
  */
-+ (void)postReleasePoisonDetailsToReportWithID:(NSString *)user_id
++ (void)getReleasePoisonDetailsToReportWithID:(NSString *)user_id
                                        withPWD:(NSString *)user_password
                                    wirhNote_id:(NSString *)note_id
                               withNote_content:(NSString *)note_content

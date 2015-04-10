@@ -31,19 +31,9 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     counts = [imageArr count];
     
-    switch (counts) {
-        case 6:{
-            kWidthOffset = 0.0;
-            kHeightChangeOffset = 0.0;
-            kHeightNormalOffset = 0.0;
-            break;
-        }
-        default:
-            kWidthOffset = 10.0;
-            kHeightChangeOffset = 7.0;
-            kHeightNormalOffset = 12.0;
-            break;
-    }
+    kWidthOffset = 0.0;
+    kHeightChangeOffset = 0.0;
+    kHeightNormalOffset = 0.0;
     
     imagesArr = [[NSMutableArray alloc] initWithArray:imageArr];;
     /* 保存的值 model.auto_code model.auto_id model.change_img model.content_img model.modules_name*/
@@ -56,7 +46,8 @@
         rmImg.identifierString = [NSString stringWithFormat:@"%ld",(long)i];
         if (i==0){
             rmImg.frame = CGRectMake(5 + i*(width/counts), 5, 44, 49);
-            [rmImg sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
+            rmImg.image = [UIImage imageNamed:@"img_tzArrowed_1"];
+//            [rmImg sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
         }else{
             rmImg.frame = CGRectMake(5 + i*(width/counts), 5, 44, 44);
             [rmImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
@@ -83,17 +74,59 @@
 
             img.frame = CGRectMake(4 + i*(width/counts), 5, 44, 44);
             if (img.identifierString.integerValue == currentType){
-                [img sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
+                if (i==0){
+                    img.image = [UIImage imageNamed:@"img_tzArrowed_1"];
+                }else{
+                    [img sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
+                }
                 CGFloat x = img.frame.origin.x;
                 CGFloat y = img.frame.origin.y;
                 CGFloat width = img.frame.size.width;
                 CGFloat height = img.frame.size.height;
                 image.frame = CGRectMake(x, y, width, height + 5);
             }else{
+                if (i==0){
+                    img.image = [UIImage imageNamed:@"img_tzArrow_1"];
+                }else{
+                    [img sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+                }
+            }
+        }
+    }
+}
+
+/**
+ 更新选择状态
+ */
+- (void)updataSelectState:(NSInteger)value {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
+    for (NSInteger i=0; i<counts; i++){
+        RMImageView * img = (RMImageView *)[self viewWithTag:400 + i];
+        RMPublicModel * model = [imagesArr objectAtIndex:i];
+        
+        img.frame = CGRectMake(4 + i*(width/counts), 5, 44, 44);
+        
+        if (value == i){
+            if (i==0){
+                img.image = [UIImage imageNamed:@"img_tzArrowed_1"];
+            }else{
+                [img sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
+            }
+            CGFloat x = img.frame.origin.x;
+            CGFloat y = img.frame.origin.y;
+            CGFloat width = img.frame.size.width;
+            CGFloat height = img.frame.size.height;
+            img.frame = CGRectMake(x, y, width, height + 5);
+        }else{
+            if (i==0){
+                img.image = [UIImage imageNamed:@"img_tzArrow_1"];
+            }else{
                 [img sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
             }
         }
     }
+    currentType = value;
 }
 
 @end

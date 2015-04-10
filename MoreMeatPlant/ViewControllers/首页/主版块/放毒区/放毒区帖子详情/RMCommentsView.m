@@ -24,13 +24,21 @@
     UILabel * receiver;
     UIButton * sendBtn;
     BOOL isSendMessages;
+    
+    RMImageView * receiveImg;
 }
 
 @end
 
 @implementation RMCommentsView
 
-- (void)loadCommentsViewWithReceiver:(NSString *)receive {
+- (void)loadCommentsViewWithReceiver:(NSString *)receive withImage:(RMImageView *)image {
+    receiveImg = [[RMImageView alloc] init];
+    if (image){
+        receiveImg.identifierString = image.identifierString;
+        receiveImg.indexPath = image.indexPath;
+    }
+    
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [self addGestureRecognizer:gesture];
     
@@ -88,6 +96,9 @@
             }else if (self.requestType == kRMReleasePoisonToReport){
                 //放毒区详情举报
                 [self requestToReport];
+            }else if (self.requestType == kRMReleasePoisonListReplyOrComment){
+                //放毒区评论list 评论或回复
+                [self reuestReplyOrComment];
             }
         }else{
             NSLog(@"不发送");
@@ -156,46 +167,50 @@
  *  @method     放毒区 评论帖子
  */
 - (void)requestPostsComment {
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
     [RMAFNRequestManager postPostsAddCommentsWithReview_id:self.code withContent_body:commentTextView.text withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
-        if (error){
-            NSLog(@"error:%@",error);
-            if ([self.delegate respondsToSelector:@selector(commentFailureMethodWithType:)]){
-                [self.delegate commentFailureMethodWithType:self.requestType];
-            }
-            return ;
-        }
-       
-        if (success){
-            if ([self.delegate respondsToSelector:@selector(commentSuccessMethodWithType:)]){
-                [self.delegate commentSuccessMethodWithType:self.requestType];
-            }
+        if ([self.delegate respondsToSelector:@selector(commentMethodWithType:withError:withState:withObject:withImage:)]){
+            [self.delegate commentMethodWithType:self.requestType withError:error withState:success withObject:object withImage:receiveImg];
+            [MBProgressHUD hideAllHUDsForView:self animated:YES];
         }
     }];
 }
 
 /**
- *  @method     放毒区详情举报
+ *  @method     放毒区详情举报帖子
  */
 - (void)requestToReport {
     [MBProgressHUD showHUDAddedTo:self animated:YES];
-    [RMAFNRequestManager  postReleasePoisonDetailsToReportWithID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd wirhNote_id:self.code withNote_content:commentTextView.text callBack:^(NSError *error, BOOL success, id object) {
-        if (error){
-            NSLog(@"error:%@",error);
+    [RMAFNRequestManager  getReleasePoisonDetailsToReportWithID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd wirhNote_id:self.code withNote_content:[commentTextView.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] callBack:^(NSError *error, BOOL success, id object) {
+        if ([self.delegate respondsToSelector:@selector(commentMethodWithType:withError:withState:withObject:withImage:)]){
+            [self.delegate commentMethodWithType:self.requestType withError:error withState:success withObject:object withImage:receiveImg];
             [MBProgressHUD hideAllHUDsForView:self animated:YES];
-            if ([self.delegate respondsToSelector:@selector(commentFailureMethodWithType:)]){
-                [self.delegate commentFailureMethodWithType:self.requestType];
-            }
-            return ;
         }
-        
-        if (success){
-            [MBProgressHUD hideAllHUDsForView:self animated:YES];
-            if ([self.delegate respondsToSelector:@selector(commentSuccessMethodWithType:)]){
-                [self.delegate commentSuccessMethodWithType:self.requestType];
-            }
-        }
-        
     }];
+}
+
+/**
+ *  @method     放毒区 评论list 评论或回复
+ */
+- (void)reuestReplyOrComment {
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
+//    if ([self.commentType isEqualToString:@"评论"]){
+//        //评论
+//        [RMAFNRequestManager postPostsAddCommentsWithReview_id:self.code withContent_body:[commentTextView.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+//            if ([self.delegate respondsToSelector:@selector(commentMethodWithType:withError:withState:withObject:withImage:)]){
+//                [self.delegate commentMethodWithType:self.requestType withError:error withState:success withObject:object withImage:receiveImg];
+//                [MBProgressHUD hideAllHUDsForView:self animated:YES];
+//            }
+//        }];
+//    }else{
+//        //回复
+        [RMAFNRequestManager postReplyToPostsCommentWithComment_id:self.code withContent_body:[commentTextView.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+            if ([self.delegate respondsToSelector:@selector(commentMethodWithType:withError:withState:withObject:withImage:)]){
+                [self.delegate commentMethodWithType:self.requestType withError:error withState:success withObject:object withImage:receiveImg];
+                [MBProgressHUD hideAllHUDsForView:self animated:YES];
+            }
+        }];
+//    }
 }
 
 @end
