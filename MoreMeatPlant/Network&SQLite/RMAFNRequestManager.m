@@ -609,6 +609,7 @@
         }else{
             model.s_type = [OBJC([dic objectForKey:@"data"]) objectForKey:@"s_type"];
             model.auto_id = [OBJC([dic objectForKey:@"data"]) objectForKey:@"s_id"];
+            model.m_user = [OBJC([dic objectForKey:@"data"]) objectForKey:@"m_user"];
         }
         if(block){
             block(nil,YES,model);

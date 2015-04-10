@@ -105,28 +105,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
-            timestampString = "450191228.714709"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1207"
-            endingLineNumber = "1207"
-            landmarkName = "@implementation RMAFNRequestManager"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x53d1;&#x5e03;&#x5b9d;&#x8d1d;/RMPublishBabyViewController.m"
-            timestampString = "449910790.838679"
+            timestampString = "450275274.33857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "431"
-            endingLineNumber = "431"
+            startingLineNumber = "455"
+            endingLineNumber = "455"
             landmarkName = "-selectFromPics:"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x53d1;&#x5e03;&#x5b9d;&#x8d1d;/RMPublishBabyViewController.m"
-            timestampString = "449910790.838679"
+            timestampString = "450275274.33857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "435"
-            endingLineNumber = "435"
+            startingLineNumber = "459"
+            endingLineNumber = "459"
             landmarkName = "-selectFromPics:"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x53d1;&#x5e03;&#x5b9d;&#x8d1d;/RMPublishBabyViewController.m"
-            timestampString = "449949187.229004"
+            timestampString = "450275274.33857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "539"
-            endingLineNumber = "539"
+            startingLineNumber = "567"
+            endingLineNumber = "567"
             landmarkName = "-RMimageCropper:didFinished:andfilePath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -192,6 +176,54 @@
             startingLineNumber = "35"
             endingLineNumber = "35"
             landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x53d1;&#x5e03;&#x5b9d;&#x8d1d;/RMPublishBabyViewController.m"
+            timestampString = "450276445.513057"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "641"
+            endingLineNumber = "641"
+            landmarkName = "-pulishAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x53d1;&#x5e03;&#x5b9d;&#x8d1d;/RMPublishBabyViewController.m"
+            timestampString = "450275274.33857"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "543"
+            endingLineNumber = "543"
+            landmarkName = "-RMPublishClassTableViewCellDidSelectCourse:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x53d1;&#x5e03;&#x5b9d;&#x8d1d;/RMPublishBabyViewController.m"
+            timestampString = "450276445.513057"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "636"
+            endingLineNumber = "636"
+            landmarkName = "-pulishAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

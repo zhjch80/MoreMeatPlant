@@ -204,19 +204,30 @@
             isClassFirst = NO;
         }
         NSArray * arr = [current_Model.member_class componentsSeparatedByString:@","];
+        NSMutableArray * iArr = [[NSMutableArray alloc]init];
         for(NSString * auto_id in arr){
             int i = 0;
             for(RMPublicModel * model in classArray){
-                UIButton * btn = (UIButton *)[cell.contentView viewWithTag:100+i];
-                [btn setBackgroundImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
+
+                NSLog(@"%@======%@",model.auto_id,auto_id);
                 if([model.auto_id isEqualToString:auto_id]){
-                    UIButton * btn = (UIButton *)[cell.contentView viewWithTag:100+i];
-                    [btn setBackgroundImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
+                    [iArr addObject:[NSNumber numberWithInt:i]];
                 }else{
-                    
                 }
                 i++;
             }
+        }
+
+        for(int i = 0;i<[classArray count];i++){
+            UIButton * btn = (UIButton *)[cell.contentView viewWithTag:100+i];
+            [btn setBackgroundImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
+        }
+        
+        for(NSNumber * num in iArr){
+            UIButton * btn = (UIButton *)[cell.contentView viewWithTag:100+[num integerValue]];
+            [btn setBackgroundImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
+
+
         }
         return cell;
     }else if (indexPath.row == 4){
@@ -410,10 +421,23 @@
 
 #pragma mark - 拍照
 - (void)selectFromCamera:(UIButton *)sender{
+    img_tag = (sender.tag/200)*300+sender.tag%200;
+
     [[RMVPImageCropper shareImageCropper] setCtl:self];
     [[RMVPImageCropper shareImageCropper] set_scale:1.0];
     [[RMVPImageCropper shareImageCropper] openCamera];
-    img_tag = (sender.tag/200)*300+sender.tag%200;
+    if((img_tag/300-5)*5+img_tag%300<=[current_Model.body count]){
+        
+        NSDictionary * dic = OBJC_Nil([current_Model.body objectAtIndex:(img_tag/300-5)*5+img_tag%300-1]);
+        if(dic){
+            [[RMVPImageCropper shareImageCropper] setFileName:[NSString stringWithFormat:@"frm[body][auto_id][%ld].png",(img_tag/300-5)*5+img_tag%300-1]];
+            NSLog(@"%@",[NSString stringWithFormat:@"frm[body][auto_id][%ld].png",(img_tag/300-5)*5+img_tag%300-1]);
+        }
+    }else{
+        [[RMVPImageCropper shareImageCropper] setFileName:[NSString stringWithFormat:@"frm[body][content_img][%lu].png",(img_tag/300-5)*5+img_tag%300-[current_Model.body count]-1]];
+        NSLog(@"%@",[NSString stringWithFormat:@"frm[body][content_img][%lu].png",(img_tag/300-5)*5+img_tag%300-[current_Model.body count]-1]);
+    }
+
 }
 #pragma mark - 从相册选择图片
 - (void)selectFromPics:(UIButton *)sender{
@@ -504,15 +528,19 @@
             break;
         }
     }
-    NSMutableArray * arr = [NSMutableArray arrayWithArray:[current_Model.member_class componentsSeparatedByString:@","]];
+    NSMutableArray * arr = [[NSMutableArray alloc]initWithArray:[current_Model.member_class componentsSeparatedByString:@","]];
     if([arr containsObject:[(RMPublicModel *)[classArray objectAtIndex:sender.tag-100] auto_id]]){
-        
+        [sender setBackgroundImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
+        [arr removeObject:[(RMPublicModel *)[classArray objectAtIndex:sender.tag-100] auto_id]];
     }else{
+        [sender setBackgroundImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
         [arr addObject:[(RMPublicModel *)[classArray objectAtIndex:sender.tag-100] auto_id]];
     }
     [arr removeObject:@""];
     current_Model.member_class = [arr componentsJoinedByString:@","];
     [_mTableView reloadData];
+    
+    NSLog(@"%@",current_Model.member_class);
 }
 
 #pragma mark - UITextFieldDelegate
@@ -558,6 +586,42 @@
 
 #pragma mark - 发布
 - (void)pulishAction:(UIButton *)sener{
+    
+    if([current_Model.content_name length]==0){
+    
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝名称" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if ([current_Model.content_desc length] == 0){
+    
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝描述" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if ([current_Model.content_price length] == 0){
+    
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝价格" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if (![current_Model.is_sf boolValue]&&([current_Model.content_express length]==0||[current_Model.express_price length] == 0)){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入快递信息" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if (current_Model.content_course.length == 0){
+        
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择科目分类" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if (current_Model.member_class.length == 0){
+    
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择会员分类" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if ([current_Model.content_num length] == 0){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入库存" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
@@ -569,6 +633,12 @@
     [dic setValue:current_Model.express_price forKey:@"frm[express_price]"];
     [dic setValue:current_Model.content_course forKey:@"frm[content_course]"];
     [dic setValue:current_Model.content_class forKey:@"frm[content_class]"];
+    if(![[current_Model.member_class substringToIndex:1] isEqualToString:@","]){
+        current_Model.member_class = [NSString stringWithFormat:@",%@,",current_Model.member_class];
+    }else{
+        
+    }
+    NSLog(@"%@",current_Model.member_class);
     [dic setValue:current_Model.member_class forKey:@"frm[member_class]"];
     [dic setValue:current_Model.content_num forKey:@"frm[content_num]"];
     

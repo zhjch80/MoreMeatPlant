@@ -143,7 +143,18 @@
         }
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success&&model.status){
+            _send_code_btn.enabled = NO;
+            //button type要 设置成custom 否则会闪动
+            [_send_code_btn startWithSecond:60];
             
+            [_send_code_btn didChange:^NSString *(JKCountDownButton *countDownButton,int second) {
+                NSString *title = [NSString stringWithFormat:@"剩余%d秒",second];
+                return title;
+            }];
+            [_send_code_btn didFinished:^NSString *(JKCountDownButton *countDownButton, int second) {
+                countDownButton.enabled = YES;
+                return @"点击重新获取";
+            }];
         }
         [MBProgressHUD showSuccess:model.msg toView:self.view];
     }];

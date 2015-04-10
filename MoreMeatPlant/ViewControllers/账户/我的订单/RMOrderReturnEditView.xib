@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="方正正准黑简体.TTF">
+            <string>FZZZHUNHJW--GB1-0</string>
+            <string>FZZZHUNHJW--GB1-0</string>
+            <string>FZZZHUNHJW--GB1-0</string>
+            <string>FZZZHUNHJW--GB1-0</string>
+            <string>FZZZHUNHJW--GB1-0</string>
+        </mutableArray>
+        <mutableArray key="方正正黑简体.TTF">
+            <string>FZZHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RMOrderReturnEditView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="206"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="填写退货单号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEw-JL-4Nc">
+                    <rect key="frame" x="15" y="20" width="84" height="26"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="84" id="P8h-WQ-Mcl"/>
+                        <constraint firstAttribute="height" constant="26" id="VDb-XL-sev"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="13"/>
+                    <color key="textColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你还有72小时退货时间,过时将视为放弃退货！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqU-En-Ncp">
+                    <rect key="frame" x="104" y="19" width="201" height="27"/>
+                    <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
+                    <color key="textColor" red="0.67843137249999996" green="0.67843137249999996" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Ep-fZ-4RF">
+                    <rect key="frame" x="15" y="55" width="290" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Yo1-zC-MFt"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="246" verticalHuggingPriority="251" text="选择快递公司" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sim-fo-X1I">
+                    <rect key="frame" x="15" y="68" width="82" height="16"/>
+                    <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="13"/>
+                    <color key="textColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="247" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="ISu-Bi-2Wh">
+                    <rect key="frame" x="100" y="62" width="82" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="82" id="7ot-se-wmb"/>
+                        <constraint firstAttribute="height" constant="27" id="GPE-kW-tle"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFn-ff-t8W">
+                    <rect key="frame" x="190" y="68" width="26" height="16"/>
+                    <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="13"/>
+                    <color key="textColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="b6t-cW-Nn7">
+                    <rect key="frame" x="219" y="62" width="86" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="27" id="C2V-qo-B7L"/>
+                        <constraint firstAttribute="width" constant="86" id="kwl-20-kMU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iza-vh-LEv">
+                    <rect key="frame" x="15" y="152" width="290" height="27"/>
+                    <color key="backgroundColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="27" id="JPE-Ec-VbU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="12"/>
+                    <state key="normal" title="查看退货物流">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngd-QY-J0l">
+                    <rect key="frame" x="15" y="115" width="290" height="27"/>
+                    <color key="backgroundColor" red="0.90588235294117647" green="0.21568627450980393" blue="0.41960784313725491" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="27" id="aAF-uW-0aP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="12"/>
+                    <state key="normal" title="提交物流信息">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="2Ep-fZ-4RF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="3O0-qZ-uih"/>
+                <constraint firstItem="iza-vh-LEv" firstAttribute="top" secondItem="Ngd-QY-J0l" secondAttribute="bottom" constant="10" id="5zt-cn-nXm"/>
+                <constraint firstItem="b6t-cW-Nn7" firstAttribute="leading" secondItem="eFn-ff-t8W" secondAttribute="trailing" constant="3" id="6Ka-pK-YrA"/>
+                <constraint firstItem="Sim-fo-X1I" firstAttribute="top" secondItem="2Ep-fZ-4RF" secondAttribute="bottom" constant="12" id="9EN-QF-d2t"/>
+                <constraint firstItem="ISu-Bi-2Wh" firstAttribute="leading" secondItem="Sim-fo-X1I" secondAttribute="trailing" constant="3" id="ADs-R2-zen"/>
+                <constraint firstItem="Sim-fo-X1I" firstAttribute="centerY" secondItem="ISu-Bi-2Wh" secondAttribute="centerY" id="CNO-Fi-cV1"/>
+                <constraint firstAttribute="trailing" secondItem="iza-vh-LEv" secondAttribute="trailing" constant="15" id="D03-5S-T7C"/>
+                <constraint firstItem="Sim-fo-X1I" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="IHF-eQ-yHP"/>
+                <constraint firstItem="Sim-fo-X1I" firstAttribute="centerY" secondItem="b6t-cW-Nn7" secondAttribute="centerY" id="JXk-Wj-odr"/>
+                <constraint firstItem="eFn-ff-t8W" firstAttribute="leading" secondItem="ISu-Bi-2Wh" secondAttribute="trailing" constant="8" id="PiJ-Pk-zqr"/>
+                <constraint firstItem="Ngd-QY-J0l" firstAttribute="top" secondItem="b6t-cW-Nn7" secondAttribute="bottom" constant="26" id="Vcb-C2-cpv"/>
+                <constraint firstItem="iza-vh-LEv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="XFL-Yj-0jX"/>
+                <constraint firstAttribute="trailing" secondItem="2Ep-fZ-4RF" secondAttribute="trailing" constant="15" id="cjV-7Y-ykC"/>
+                <constraint firstAttribute="trailing" secondItem="eqU-En-Ncp" secondAttribute="trailing" constant="15" id="fDv-aO-G8v"/>
+                <constraint firstItem="tEw-JL-4Nc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="hrO-hH-clm"/>
+                <constraint firstItem="tEw-JL-4Nc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="kkw-Bh-Dgn"/>
+                <constraint firstAttribute="trailing" secondItem="b6t-cW-Nn7" secondAttribute="trailing" constant="15" id="lWo-Uz-Tx5"/>
+                <constraint firstItem="Ngd-QY-J0l" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="p2q-gh-DnS"/>
+                <constraint firstItem="2Ep-fZ-4RF" firstAttribute="top" secondItem="eqU-En-Ncp" secondAttribute="bottom" constant="9" id="pqu-Ml-clg"/>
+                <constraint firstItem="eqU-En-Ncp" firstAttribute="leading" secondItem="tEw-JL-4Nc" secondAttribute="trailing" constant="5" id="rd5-uN-3jt"/>
+                <constraint firstAttribute="trailing" secondItem="Ngd-QY-J0l" secondAttribute="trailing" constant="15" id="wYb-7o-54t"/>
+                <constraint firstItem="tEw-JL-4Nc" firstAttribute="centerY" secondItem="eqU-En-Ncp" secondAttribute="centerY" id="xTN-U4-ql4"/>
+                <constraint firstItem="Sim-fo-X1I" firstAttribute="centerY" secondItem="eFn-ff-t8W" secondAttribute="centerY" id="zmL-zE-qRd"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="commitBtn" destination="Ngd-QY-J0l" id="20B-E9-kDm"/>
+                <outlet property="expressName" destination="ISu-Bi-2Wh" id="dDE-ts-mqr"/>
+                <outlet property="express_price" destination="b6t-cW-Nn7" id="wYM-g2-u65"/>
+                <outlet property="seeBtn" destination="iza-vh-LEv" id="94B-hX-nOg"/>
+            </connections>
+            <point key="canvasLocation" x="30" y="137"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="fbbb_field_bg2.png" width="1024" height="144"/>
+        <image name="gwc_point_line.png" width="1134" height="1"/>
+    </resources>
+</document>

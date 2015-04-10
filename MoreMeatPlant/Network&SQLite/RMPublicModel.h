@@ -53,7 +53,7 @@
 
 
 @property (nonatomic, copy) NSString * s_type;              //登录用户类型
-
+@property (nonatomic, copy) NSString * m_user;              //用户名
 
 @property (nonatomic, strong) NSString *contentMobile;      //会员手机号
 @property (nonatomic, strong) NSString *levelId;            //商家店铺级别

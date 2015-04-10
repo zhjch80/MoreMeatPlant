@@ -12,7 +12,10 @@
 #import "RMOrderDetailNumTableViewCell.h"
 #import "RMOrderDetailEvaluateTableViewCell.h"
 #import "RMOederDetailOperationTableViewCell.h"
-@interface RMOrderDetailViewController ()
+#import "RMOrderReturnEditView.h"
+@interface RMOrderDetailViewController (){
+    RMOrderReturnEditView * returnEditView;
+}
 
 @end
 
@@ -28,8 +31,43 @@
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
 //    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.mTableView];
+    [self showReturnEditView];
 }
 
+- (void)showReturnEditView{
+    
+    UIControl * cover = [[UIControl alloc]initWithFrame:_mTableView.frame];
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissAction:)];
+    cover.backgroundColor = [UIColor blackColor];
+    cover.alpha = 0.25;
+    cover.tag = 101311;
+    [cover addGestureRecognizer:tap];
+    [self.view addSubview:cover];
+    
+    if(returnEditView == nil){
+        returnEditView = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderReturnEditView" owner:self options:nil] lastObject];
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 206);
+    }
+
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        
+               returnEditView.frame = CGRectMake(0, kScreenHeight-206, kScreenWidth, 206);
+
+        [self.view addSubview:returnEditView];
+    }];
+}
+
+- (void)dismissAction:(UITapGestureRecognizer *)tap{
+    [UIView animateWithDuration:0.3 animations:^{
+        UIControl * cover = (UIControl *)[self.view viewWithTag:101311];
+        [cover removeFromSuperview];
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 206);
+        returnEditView.expressName.text = nil;
+        returnEditView.express_price.text = nil;//这里实际上是快递单号，不是价格，
+    }];
+    
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 6;
 }
@@ -62,7 +100,9 @@
         RMOrderDetailProTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderDetailProTableViewCell"];
         if(cell == nil){
             cell =[[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailProTableViewCell" owner:self options:nil] lastObject];
+            [cell.returnBtn addTarget:self action:@selector(iWantToReturn:) forControlEvents:UIControlEventTouchDown];
         }
+        
         if(/* DISABLES CODE */ (1)){
             cell.fieldHeght.constant = 0;
         }else{
@@ -102,6 +142,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.view endEditing:YES];
+}
+
+- (void)iWantToReturn:(UIButton *)sender{
+    [self showReturnEditView];
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{

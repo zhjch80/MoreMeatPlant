@@ -59,14 +59,14 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager loginRequestWithUser:_userTextField.text Pwd:[FileMangerObject md5:_passTextField.text] andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager loginRequestWithUser:[_userTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Pwd:[FileMangerObject md5:_passTextField.text] andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         RMPublicModel * model = (RMPublicModel *)object;
         if(error){
             NSLog(@"error:%@",error);
         }
         if(success&&model.status){//登录成功
-            [[NSUserDefaults standardUserDefaults] setValue:_userTextField.text forKey:UserName];
+            [[NSUserDefaults standardUserDefaults] setValue:model.m_user forKey:UserName];
             [[NSUserDefaults standardUserDefaults] setValue:[FileMangerObject md5:_passTextField.text] forKey:UserPwd];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LoginState];
             [[NSUserDefaults standardUserDefaults] setValue:model.s_type forKey:UserType];

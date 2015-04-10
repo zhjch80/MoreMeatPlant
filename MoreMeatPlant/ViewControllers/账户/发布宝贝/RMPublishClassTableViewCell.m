@@ -71,9 +71,9 @@
         x+= 10+20+size.width+10;
         
         index++;
-        NSLog(@"-----------%ld",(long)index);
+//        NSLog(@"-----------%ld",(long)index);
     }
-    NSLog(@"+++++++%@",self.titles);
+//    NSLog(@"+++++++%@",self.titles);
 
 }
 - (void)selectClass:(UIButton *)sender{

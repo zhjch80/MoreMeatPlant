@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "JKCountDownButton.h"
 @interface RMMyWalletTransferTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UITextField *otherAccountField;
 @property (weak, nonatomic) IBOutlet UITextField *moneyField;
@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *withdrawalField;
 @property (weak, nonatomic) IBOutlet UILabel *alipayName;
 @property (weak, nonatomic) IBOutlet UILabel *mobileL;
-@property (weak, nonatomic) IBOutlet UIButton *sendCodeBtn;
+@property (weak, nonatomic) IBOutlet JKCountDownButton *sendCodeBtn;
 @property (weak, nonatomic) IBOutlet UITextField *codeField;
 @property (weak, nonatomic) IBOutlet UIButton *sureWithdrawalBtn;
 

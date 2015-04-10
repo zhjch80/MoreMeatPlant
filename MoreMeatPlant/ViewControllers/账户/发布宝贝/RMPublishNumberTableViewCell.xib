@@ -32,7 +32,7 @@
                             <constraint firstAttribute="height" constant="21" id="v04-hB-swU"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="U75-ss-vSl">
                         <rect key="frame" x="10" y="43" width="300" height="1"/>

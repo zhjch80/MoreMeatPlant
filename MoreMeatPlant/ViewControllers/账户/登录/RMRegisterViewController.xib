@@ -107,23 +107,6 @@
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3o-eK-2iL">
-                    <rect key="frame" x="244" y="164" width="70" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="51" id="64v-ee-OaS"/>
-                        <constraint firstAttribute="height" constant="30" id="XGF-ji-1QC"/>
-                        <constraint firstAttribute="width" constant="70" id="dcL-S5-4WQ"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="12"/>
-                    <state key="normal" title="发送验证码" backgroundImage="login_btn_bg.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="64v-ee-OaS"/>
-                        </mask>
-                    </variation>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NyX-Pa-wAH">
                     <rect key="frame" x="77" y="344" width="166" height="30"/>
                     <constraints>
@@ -151,7 +134,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="昵称或手机号" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="hti-vr-hUs" customClass="RMBaseTextField">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="hti-vr-hUs" customClass="RMBaseTextField">
                     <rect key="frame" x="128" y="164" width="115" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="pAH-Ed-0hX"/>
@@ -199,6 +182,23 @@
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3o-eK-2iL" customClass="JKCountDownButton">
+                    <rect key="frame" x="242" y="164" width="70" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="51" id="64v-ee-OaS"/>
+                        <constraint firstAttribute="height" constant="30" id="XGF-ji-1QC"/>
+                        <constraint firstAttribute="width" constant="70" id="dcL-S5-4WQ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="12"/>
+                    <state key="normal" title="发送验证码" backgroundImage="login_btn_bg.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="64v-ee-OaS"/>
+                        </mask>
+                    </variation>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

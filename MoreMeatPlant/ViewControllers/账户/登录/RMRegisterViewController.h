@@ -7,7 +7,7 @@
 //
 
 #import "RMBaseViewController.h"
-
+#import "JKCountDownButton.h"
 @interface RMRegisterViewController : RMBaseViewController{
     BOOL isCorp;
 }
@@ -19,6 +19,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *passTextField;
 @property (weak, nonatomic) IBOutlet UIButton *sure_btn;
 @property (weak, nonatomic) IBOutlet UIButton *back_login_btn;
-@property (weak, nonatomic) IBOutlet UIButton *send_code_btn;
+@property (weak, nonatomic) IBOutlet JKCountDownButton *send_code_btn;
 
 @end

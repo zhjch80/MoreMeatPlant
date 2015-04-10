@@ -66,7 +66,7 @@
                             <constraint firstAttribute="height" constant="21" id="8y2-QI-7om"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dF0-Nn-RJl">
                         <rect key="frame" x="125" y="116" width="20" height="20"/>
@@ -103,7 +103,7 @@
                             <constraint firstAttribute="height" constant="21" id="FzG-tK-Lfe"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="OcT-85-paE">
                         <rect key="frame" x="10" y="152" width="300" height="1"/>
