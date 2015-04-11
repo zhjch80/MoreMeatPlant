@@ -168,11 +168,11 @@
         cell.leftImg.hidden = NO;
         cell.leftName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
-        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSString * _price = [NSString stringWithFormat:@" ¥%@",model.content_price];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
-        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
         cell.leftPrice.attributedText = oneAttributeStr;
-        cell.leftName.text = model.content_name;
+        cell.leftName.text = [NSString stringWithFormat:@" %@",model.content_name];
         cell.leftImg.identifierString = model.auto_id;
         [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
     }else{
@@ -185,11 +185,11 @@
         cell.centerImg.hidden = NO;
         cell.centerName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
-        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSString * _price = [NSString stringWithFormat:@" ¥%@",model.content_price];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
-        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
         cell.centerPrice.attributedText = oneAttributeStr;
-        cell.centerName.text = model.content_name;
+        cell.centerName.text = [NSString stringWithFormat:@" %@",model.content_name];
         cell.centerImg.identifierString = model.auto_id;
         [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
     }else{
@@ -202,11 +202,11 @@
         cell.rightImg.hidden = NO;
         cell.rightName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
-        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSString * _price = [NSString stringWithFormat:@" ¥%@",model.content_price];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
-        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
         cell.rightPrice.attributedText = oneAttributeStr;
-        cell.rightName.text = model.content_name;
+        cell.rightName.text = [NSString stringWithFormat:@" %@",model.content_name];
         cell.rightImg.identifierString = model.auto_id;
         [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
     }else{
@@ -391,6 +391,10 @@
         
         if (success) {
             subsPlantArr = [[NSMutableArray alloc] init];
+            
+            RMPublicModel * model = [[RMPublicModel alloc] init];
+            [subsPlantArr addObject:model];
+            
             for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);

@@ -626,6 +626,10 @@
         
         if (success) {
             subsPlantArr = [[NSMutableArray alloc] init];
+            
+            RMPublicModel * model = [[RMPublicModel alloc] init];
+            [subsPlantArr addObject:model];
+            
             for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);

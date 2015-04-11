@@ -45,11 +45,11 @@
         rmImg.tag = 400+i;
         rmImg.identifierString = [NSString stringWithFormat:@"%ld",(long)i];
         if (i==0){
-            rmImg.frame = CGRectMake(5 + i*(width/counts), 5, 44, 49);
+            rmImg.frame = CGRectMake(i*(width/counts), 5, 44, 49);
             rmImg.image = [UIImage imageNamed:@"img_tzArrowed_1"];
 //            [rmImg sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
         }else{
-            rmImg.frame = CGRectMake(5 + i*(width/counts), 5, 44, 44);
+            rmImg.frame = CGRectMake(i*(width/counts), 5, 44, 44);
             [rmImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         }
         [rmImg addTarget:self withSelector:@selector(selectedPlantType:)];
@@ -72,7 +72,7 @@
             RMImageView * img = (RMImageView *)[self viewWithTag:400 + i];
             RMPublicModel * model = [imagesArr objectAtIndex:i];
 
-            img.frame = CGRectMake(4 + i*(width/counts), 5, 44, 44);
+            img.frame = CGRectMake(i*(width/counts), 5, 44, 44);
             if (img.identifierString.integerValue == currentType){
                 if (i==0){
                     img.image = [UIImage imageNamed:@"img_tzArrowed_1"];
@@ -105,7 +105,7 @@
         RMImageView * img = (RMImageView *)[self viewWithTag:400 + i];
         RMPublicModel * model = [imagesArr objectAtIndex:i];
         
-        img.frame = CGRectMake(4 + i*(width/counts), 5, 44, 44);
+        img.frame = CGRectMake(i*(width/counts), 5, 44, 44);
         
         if (value == i){
             if (i==0){

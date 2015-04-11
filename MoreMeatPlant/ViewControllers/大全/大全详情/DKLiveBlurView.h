@@ -15,7 +15,7 @@
 @interface DKLiveBlurView : UIImageView
 
 @property (nonatomic, strong) UIImage *originalImage;
-@property (nonatomic, weak) UIScrollView *scrollView;
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, assign) float initialBlurLevel;
 @property (nonatomic, assign) float initialGlassLevel;
 @property (nonatomic, assign) BOOL isGlassEffectOn;

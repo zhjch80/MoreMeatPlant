@@ -909,7 +909,14 @@
                 model.value = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"value"]);
                 [plantTypeArr addObject:model];
             }
-                    
+            
+            fenleiAction = [[RMPostClassificationView alloc] init];
+            fenleiAction.delegate = self;
+            fenleiAction.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            fenleiAction.backgroundColor = [UIColor clearColor];
+            
+            [fenleiAction initWithPostClassificationViewWithPlantArr:plantTypeArr withSubsPlant:subsPlantArr];
+            
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];
@@ -947,14 +954,13 @@
             [self loadTableHeaderView];
 
             [self requestListWithPageCount:1];
-            if (!fenleiAction){
-                fenleiAction = [[RMPostClassificationView alloc] init];
-                fenleiAction.delegate = self;
-                fenleiAction.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-                fenleiAction.backgroundColor = [UIColor clearColor];
-                [fenleiAction initWithPostClassificationViewWithPlantArr:plantTypeArr withSubsPlant:subsPlantArr];
-            }
-   
+            
+            fenleiAction = [[RMPostClassificationView alloc] init];
+            fenleiAction.delegate = self;
+            fenleiAction.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            fenleiAction.backgroundColor = [UIColor clearColor];
+            
+            [fenleiAction initWithPostClassificationViewWithPlantArr:plantTypeArr withSubsPlant:subsPlantArr];
             
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }

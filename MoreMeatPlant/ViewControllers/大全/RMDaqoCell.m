@@ -15,6 +15,10 @@
     [self.leftImg addTarget:self withSelector:@selector(selectedPlantType:)];
     [self.centerImg addTarget:self withSelector:@selector(selectedPlantType:)];
     [self.rightImg addTarget:self withSelector:@selector(selectedPlantType:)];
+    
+    self.leftImg.clipsToBounds = YES;
+    self.centerImg.clipsToBounds = YES;
+    self.rightImg.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

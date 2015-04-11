@@ -12,9 +12,23 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView.layer setCornerRadius:8.0];
+    [self.bgView.layer setCornerRadius:5.0];
     self.userHeadImg.clipsToBounds = YES;
     [self.userHeadImg.layer setCornerRadius:12.0];
+    
+    self.leftImg.clipsToBounds = YES;
+    self.rightImg.clipsToBounds = YES;
+    self.leftTwoImg.clipsToBounds = YES;
+    self.rightUpTwoImg.clipsToBounds = YES;
+    self.rightDownTwoImg.clipsToBounds = YES;
+    self.threeImg.clipsToBounds = YES;
+
+    self.leftImg.contentMode = UIViewContentModeCenter;
+    self.rightImg.contentMode = UIViewContentModeCenter;
+    self.leftTwoImg.contentMode = UIViewContentModeCenter;
+    self.rightUpTwoImg.contentMode = UIViewContentModeCenter;
+    self.rightDownTwoImg.contentMode = UIViewContentModeCenter;
+    self.threeImg.contentMode = UIViewContentModeCenter;
     
     [self.leftImg addTarget:self withSelector:@selector(selectedPostDetatils:)];
     [self.rightImg addTarget:self withSelector:@selector(selectedPostDetatils:)];

@@ -121,8 +121,8 @@
     mTableView.rowHeight = kDKTableViewDefaultCellHeight;
     
     liveBlur = [[DKLiveBlurView alloc] initWithFrame: self.view.bounds];
-    
-    liveBlur.originalImage = [UIImage imageNamed:@"testBG.jpg"];
+    liveBlur.contentMode = UIViewContentModeCenter;
+    //    liveBlur.originalImage = [UIImage imageNamed:@"testBG.jpg"];
     liveBlur.scrollView = mTableView;
     liveBlur.isGlassEffectOn = YES;
     
@@ -136,7 +136,7 @@
     bottomView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 40);
     [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_buy", @"img_share", nil]];
     [self.view addSubview:bottomView];
-    
+
     isFistViewDidAppear = NO;
 }
 
@@ -290,7 +290,7 @@
                    didChangeToImageViewBlock:^(XHImageViewer *imageViewer,
                                                UIImageView *selectedView) {
                        NSInteger index = [imageViewArr indexOfObject:selectedView];
-                       NSLog(@"change:%ld",index);
+//                       NSLog(@"change:%ld",index);
                        
                    }];
     imageViewer.delegate = self;
@@ -298,7 +298,7 @@
     [imageViewer showWithImageViews:imageViewArr selectedView:(RMImageView *)image];
     
     NSInteger index = [imageViewArr indexOfObject:(RMImageView *)image];
-    NSLog(@"select:%ld",index);
+//    NSLog(@"select:%ld",index);
 }
 
 - (void)daqoqMethodWithTag:(NSInteger)tag {
@@ -461,8 +461,6 @@
             dataModel.imgs = [[object objectForKey:@"data"] objectForKey:@"img"];
             
             [liveBlur sd_setImageWithURL:[NSURL URLWithString:dataModel.content_bimg]];
-            
-            liveBlur.originalImage = liveBlur.image;
             
             [mTableView reloadData];
             

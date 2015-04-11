@@ -91,6 +91,7 @@
     inBuffer.width = CGImageGetWidth(img);
     inBuffer.height = CGImageGetHeight(img);
     inBuffer.rowBytes = CGImageGetBytesPerRow(img);
+    
     inBuffer.data = (void*)CFDataGetBytePtr(inBitmapData);
     
     pixelBuffer = malloc(CGImageGetBytesPerRow(img) * CGImageGetHeight(img));

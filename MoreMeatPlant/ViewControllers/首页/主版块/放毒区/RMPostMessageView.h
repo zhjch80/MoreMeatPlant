@@ -17,7 +17,7 @@
 @interface RMPostMessageView : UIView
 @property (nonatomic, assign) id<PostMessageSelectedPlantDelegate>delegate;
 
-- (void)initWithPostMessageViewWithPlantArr:(NSArray *)plantArr withSubsPlant:(NSArray *)subsPlantArr;
+- (void)initWithPostMessageViewWithPlantArr:(NSArray *)plants withSubsPlant:(NSArray *)subs;
 
 - (void)show;
 

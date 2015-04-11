@@ -341,10 +341,12 @@
                 cell.backgroundColor = [UIColor clearColor];
                 cell.delegate = self;
             }
+            
+            [cell.userHead_1 sd_setImageWithURL:[NSURL URLWithString:[dataModel.members objectForKey:@"content_face"]] placeholderImage:nil];
+
             cell.replyBtn_1.tag = indexPath.row;
             cell.replyBtn_1.parameter_1 = @"评论";
-            cell.userHead_1.image = [UIImage imageNamed:@"user_test.jpg"];
-            cell.userName_1.text = model.content_name;
+            cell.userName_1.text = [model.members objectForKey:@"member_name"];
             cell.userLocatiom_1.text = @"正在定位...";
             cell.userPostTime_1.text = model.create_time;
             cell.comments_1.text = model.content_body;
@@ -369,7 +371,7 @@
             }
             cell.replyBtn_2.tag = indexPath.row;
             cell.replyBtn_2.parameter_1 = @"回复";
-            cell.userHead_2.image = [UIImage imageNamed:@"user_test.jpg"];
+            [cell.userHead_2 sd_setImageWithURL:[NSURL URLWithString:[[[model.returns objectAtIndex:0] objectForKey:@"member"] objectForKey:@"content_face"]] placeholderImage:nil];
             cell.userName_2.text = [[[model.returns objectAtIndex:0] objectForKey:@"member"] objectForKey:@"member_name"];
             cell.userLocatiom_2.text = @"正在定位...";
             cell.userPostTime_2.text = model.create_time;

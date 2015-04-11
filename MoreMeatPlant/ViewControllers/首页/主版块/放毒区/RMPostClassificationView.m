@@ -37,7 +37,7 @@
     height = [UIScreen mainScreen].bounds.size.height;
     subHeight = 180;
     
-    subView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -height, width, subHeight)];
+    subView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, width, subHeight)];
     subView.userInteractionEnabled = YES;
     subView.multipleTouchEnabled = YES;
     [self addSubview:self.subView];
@@ -100,7 +100,7 @@
 
 - (void)show {
     self.backgroundColor = [UIColor colorWithRed:0.14 green:0.14 blue:0.14 alpha:0.1];
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.35 animations:^{
         self.subView.frame = CGRectMake(0, 64, width, subHeight);
     } completion:^(BOOL finished) {
         
@@ -108,8 +108,8 @@
 }
 
 - (void)dismiss {
-    [UIView animateWithDuration:0.2 animations:^{
-        self.subView.frame = CGRectMake(0, -height, width, subHeight);
+    [UIView animateWithDuration:0.35 animations:^{
+        self.subView.frame = CGRectMake(0, 64, width, subHeight);
     } completion:^(BOOL finished) {
         self.backgroundColor = [UIColor clearColor];
         [self removeFromSuperview];

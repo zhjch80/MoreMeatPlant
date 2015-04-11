@@ -13,16 +13,17 @@
 - (void)awakeFromNib {
     // Initialization code
     
+    self.leftImg.clipsToBounds = YES;
+    self.centerImg.clipsToBounds = YES;
+    self.rightImg.clipsToBounds = YES;
+
+    self.leftImg.contentMode = UIViewContentModeCenter;
+    self.centerImg.contentMode = UIViewContentModeCenter;
+    self.rightImg.contentMode = UIViewContentModeCenter;
+
     [self.leftImg addTarget:self withSelector:@selector(selectedImgJumpPlantDetails:)];
     [self.centerImg addTarget:self withSelector:@selector(selectedImgJumpPlantDetails:)];
     [self.rightImg addTarget:self withSelector:@selector(selectedImgJumpPlantDetails:)];
-    
-    [self.leftImg.layer setCornerRadius:8.0f];
-    self.leftImg.clipsToBounds = YES;
-    [self.centerImg.layer setCornerRadius:8.0f];
-    self.centerImg.clipsToBounds = YES;
-    [self.rightImg.layer setCornerRadius:8.0f];
-    self.rightImg.clipsToBounds = YES;
 
 }
 
