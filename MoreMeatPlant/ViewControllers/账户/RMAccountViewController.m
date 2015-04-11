@@ -37,6 +37,7 @@
 
 #import "RMAliPayViewController.h"
 #import "RMTransactionRecordsViewController.h"
+#import "RMSeeLogisticsViewController.h"
 #define GeneralMember @"1"
 @interface RMAccountViewController ()<RMVPImageCropperDelegate>
 
@@ -126,10 +127,16 @@
     if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:GeneralMember]){//普通会员
         functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n订单",@"我的\n帖子",@"系统\n通知",@"购物\n篮",@"等待\n升级",@"附近\n肉友",@"我的\n资料" ,nil];
         funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wddd",@"wdtz",@"xttz",@"gwl",@"ddsj",@"fjry",@"wdzl", nil];
+        
+        self.member_right_tag.hidden = YES;
+        self.member_right.hidden = YES;
     }
     else{//商户会员
         functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n资料",@"已出\n宝贝",@"我的\n帖子",@"系统\n通知",@"附近\n肉友",@"宝贝\n管理",@"我的\n店铺",@"发布\n广告",@"等待\n升级",nil];
         funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wdzl",@"wddd",@"wdtz",@"xttz",@"fjry",@"fbbb",@"sqkd",@"fbgg",@"ddsj", nil];
+        
+        self.member_right_tag.hidden = NO;
+        self.member_right.hidden = NO;
     }
     
     [self layoutViews];
@@ -192,10 +199,26 @@
                         order.callback = ^(void){
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
-                        order.didSelectCell_callback = ^(NSIndexPath * indexpath){
+                        order.didSelectCell_callback = ^(RMPublicModel *model){
                             RMOrderDetailViewController * detail = [[RMOrderDetailViewController alloc]initWithNibName:@"RMOrderDetailViewController" bundle:nil];
+                            detail._model = [[RMPublicModel alloc]init];
+                            detail._model = model;
                             [self.navigationController pushViewController:detail animated:YES];
                         };
+                        order.gopay_callback = ^(RMPublicModel *model){
+                            //去付款
+                            RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
+                            alipay.is_direct = NO;
+                            alipay.order_id = model.content_sn;//支付宝支付的订单号
+                            [self.navigationController pushViewController:alipay animated:YES];
+                        };
+                        
+                        order.seeLogistics_callback = ^(RMPublicModel * model){
+                            //查看物流信息
+                            RMSeeLogisticsViewController * see = [[RMSeeLogisticsViewController alloc]initWithNibName:@"RMSeeLogisticsViewController" bundle:nil];
+                            [self.navigationController pushViewController:see animated:YES];
+                        };
+                        
                         order.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
                         [self presentPopUpViewController:order overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
                     }

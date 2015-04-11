@@ -112,6 +112,8 @@
 @property (retain, nonatomic) NSString * is_pay;        //支付状态
 @property (retain, nonatomic) NSString * is_status;     //订单状态（0未处理1待发货2已
                                                         //发货3已签收4已取消5已完成）如果是退货清单（0已退货,等待商家确认1退货已完成）
+@property (retain, nonatomic) NSString * is_comment;    //yes表示已经评论
+@property (retain, nonatomic) NSString * is_return;     //yes表示已经退货
 @property (retain, nonatomic) NSString * is_paystatus;  //支付状态
 @property (retain, nonatomic) NSString * member_user;   //会员用户名
 @property (retain, nonatomic) NSString * content_total; //订单金额

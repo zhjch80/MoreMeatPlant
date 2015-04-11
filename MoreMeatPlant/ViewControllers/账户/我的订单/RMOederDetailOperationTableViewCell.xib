@@ -36,27 +36,18 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzF-uc-sEH">
-                        <rect key="frame" x="105" y="9" width="60" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="22" id="apu-Rf-tU2"/>
-                            <constraint firstAttribute="width" constant="60" id="nGd-ro-NZB"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="查看物流" backgroundImage="order_detail_red_btn.png">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="wzm-81-vhg" secondAttribute="centerY" id="F2P-yZ-Tfx"/>
                     <constraint firstAttribute="centerY" secondItem="9BS-U9-oJE" secondAttribute="centerY" id="Nz6-Mo-tim"/>
                     <constraint firstItem="9BS-U9-oJE" firstAttribute="leading" secondItem="wzm-81-vhg" secondAttribute="trailing" constant="10" id="W9I-9I-4MK"/>
                     <constraint firstAttribute="trailing" secondItem="9BS-U9-oJE" secondAttribute="trailing" constant="15" id="fD4-2c-LXN"/>
-                    <constraint firstAttribute="centerY" secondItem="qzF-uc-sEH" secondAttribute="centerY" id="qDO-9N-0ow"/>
-                    <constraint firstItem="wzm-81-vhg" firstAttribute="leading" secondItem="qzF-uc-sEH" secondAttribute="trailing" constant="10" id="quD-3d-oBP"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="leftBtn" destination="wzm-81-vhg" id="Dq5-nA-Oxk"/>
+                <outlet property="rightBtn" destination="9BS-U9-oJE" id="kpN-7g-oFf"/>
+            </connections>
             <point key="canvasLocation" x="204" y="121"/>
         </tableViewCell>
     </objects>

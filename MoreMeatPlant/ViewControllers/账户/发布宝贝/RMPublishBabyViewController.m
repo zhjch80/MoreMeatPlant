@@ -19,6 +19,7 @@
 @interface RMPublishBabyViewController ()<RMVPImageCropperDelegate,RMPublishCourseTableViewCellDelegate,RMPublishClassTableViewCellDelegate>{
     BOOL isCourseFirst;
     BOOL isClassFirst;
+    BOOL selectQt;//选择其他快递
 }
 
 @end
@@ -29,19 +30,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"发布宝贝"];
-    
-    
-    NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
-    for(int i = 0;i<10;i++){
-        [dic setValue:@"东东" forKey:[NSString stringWithFormat:@"%d",i]];
-    }
-    NSLog(@"%@",dic);
-    NSLog(@"--------------------");
-    NSLog(@"%@",[dic allKeys]);
-
-    
     isCourseFirst = YES;
     isClassFirst = YES;
+    selectQt = NO;
     
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
@@ -73,6 +64,9 @@
             if(model.status){
                 current_Model = model;
                 NSLog(@"%@",current_Model.body);
+                if([current_Model.content_express length]>0&&[current_Model.express_price length]>0){
+                    selectQt = YES;
+                }
             }else{
                 
             }
@@ -147,10 +141,14 @@
         cell.qt_priceField.text  =current_Model.express_price;
         if([current_Model.is_sf boolValue]){
             [cell.select_shunf setBackgroundImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
-            [cell.selectQt setBackgroundImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
         }else{
             [cell.select_shunf setBackgroundImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
+        }
+        
+        if(selectQt){
             [cell.selectQt setBackgroundImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
+        }else{
+            [cell.selectQt setBackgroundImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
         }
         
         return cell;
@@ -389,9 +387,14 @@
 #pragma mark - 选择顺丰
 - (void)selectSfAction:(UIButton *)sender{
     RMPublishTitleTableViewCell * cell = (RMPublishTitleTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [cell.select_shunf setBackgroundImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
-    [cell.selectQt setBackgroundImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
-    current_Model.is_sf = @"1";
+    
+    if([current_Model.is_sf boolValue]){
+        [cell.select_shunf setBackgroundImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
+        current_Model.is_sf = @"0";
+    }else{
+        [cell.select_shunf setBackgroundImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
+        current_Model.is_sf = @"1";
+    }
     [_mTableView reloadData];
 }
 
@@ -400,7 +403,12 @@
     RMPublishTitleTableViewCell * cell = (RMPublishTitleTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [cell.select_shunf setBackgroundImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
     [cell.selectQt setBackgroundImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
-    current_Model.is_sf = @"0";
+    if(selectQt){
+        [cell.selectQt setBackgroundImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
+    }else{
+        [cell.selectQt setBackgroundImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
+    }
+    selectQt = !selectQt;
     [_mTableView reloadData];
 }
 
@@ -551,8 +559,13 @@
     current_Model.content_name = cell.titleTextfield.text;
     current_Model.content_desc = cell.content_descField.text;
     current_Model.content_price = cell.content_price.text;
-    current_Model.content_express = cell.qt_nameField.text;
-    current_Model.express_price = cell.qt_priceField.text;
+    if(selectQt){
+        current_Model.content_express = cell.qt_nameField.text;
+        current_Model.express_price = cell.qt_priceField.text;
+    }else{
+        current_Model.content_express = nil;
+        current_Model.express_price = nil;
+    }
     current_Model.content_num = numcell.numTextfield.text;
 }
 
@@ -609,6 +622,11 @@
     }else if (current_Model.content_course.length == 0){
         
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择科目分类" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if (current_Model.content_class.length == 0){
+        
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择发布市场" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];
         return;
     }else if (current_Model.member_class.length == 0){

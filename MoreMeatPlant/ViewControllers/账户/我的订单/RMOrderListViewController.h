@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RMBaseViewController.h"
-typedef void (^RMOrderListViewDidSelectCallBack)(NSIndexPath * indexpath);
+typedef void (^RMOrderListViewDidSelectCallBack)(RMPublicModel *model);
 typedef void (^RMOrderListViewGoPayCallBack)(RMPublicModel *model);
 typedef void (^RMOrderListViewSeeLogisticsCallBack)(RMPublicModel *model);
 @interface RMOrderListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{

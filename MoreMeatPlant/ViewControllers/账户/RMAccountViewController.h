@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *hua_biL;//花币
 @property (weak, nonatomic) IBOutlet UIButton *member_right;
 @property (weak, nonatomic) IBOutlet UIButton *member_level;
+@property (weak, nonatomic) IBOutlet UIButton *member_right_tag;
 
 @property (assign, nonatomic) BOOL isCorp;
 

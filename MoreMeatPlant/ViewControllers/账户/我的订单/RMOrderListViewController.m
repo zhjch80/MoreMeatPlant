@@ -115,9 +115,16 @@
             [cell.leftBtn setTitle:@"查看物流" forState:UIControlStateNormal];
         }else if ([_order_type isEqualToString:@"okorder"]){
             
-            cell.leftBtn.hidden = YES;
-            cell.rightBtn.hidden = NO;
-            [cell.rightBtn setTitle:@"发表评论" forState:UIControlStateNormal];
+            NSDictionary * prodic = [model.pros objectAtIndex:indexPath.row-1];
+            if([[prodic objectForKey:@"is_commit"] boolValue]){
+                cell.leftBtn.hidden = YES;
+                cell.rightBtn.hidden = YES;
+            }else{
+                cell.leftBtn.hidden = YES;
+                cell.rightBtn.hidden = NO;
+                [cell.rightBtn setTitle:@"发表评论" forState:UIControlStateNormal];
+            }
+
         }
         return cell;
     }else{
@@ -127,9 +134,9 @@
         }
         NSDictionary * prodic = [model.pros objectAtIndex:indexPath.row-1];
         [cell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
-        cell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"]);
+        cell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
         cell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
-        cell.content_num.text = OBJC_Nil([prodic objectForKey:@"content_num"]);
+        cell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
         return cell;
     }
 }
@@ -155,8 +162,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    RMPublicModel * model = [orderlists objectAtIndex:indexPath.section];
     if(self.didSelectCellcallback){
-        _didSelectCellcallback(indexPath);
+        _didSelectCellcallback(model);
     }
 }
 

@@ -39,9 +39,9 @@
     waitDeliveryCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
     waitDeliveryCtl.order_type = @"unorder";
     __block RMMyOrderViewController * Self = self;
-    waitDeliveryCtl.didSelectCellcallback = ^(NSIndexPath * indexpath){
+    waitDeliveryCtl.didSelectCellcallback = ^(RMPublicModel * model){
         if(Self.didSelectCell_callback){
-            Self.didSelectCell_callback(indexpath);
+            Self.didSelectCell_callback(model);
         }
     };
     [waitPayCtl requestData];
@@ -51,17 +51,17 @@
     waitPayCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
     waitPayCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
     waitPayCtl.order_type = @"unpayorder";
-    waitPayCtl.didSelectCellcallback = ^(NSIndexPath * indexpath){
+    waitPayCtl.didSelectCellcallback = ^(RMPublicModel *model){
         if(Self.didSelectCell_callback){
-            Self.didSelectCell_callback(indexpath);
+            Self.didSelectCell_callback(model);
         }
     };
     waitPayCtl.gopay_callback = ^(RMPublicModel *model){
         //去付款
-        RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
-        alipay.is_direct = NO;
-        alipay.order_id = model.content_sn;//支付宝支付的订单号
-        [Self.navigationController pushViewController:alipay animated:YES];
+        if(Self.gopay_callback){
+            Self.gopay_callback(model);
+        }
+
     };
     
     
@@ -73,13 +73,16 @@
     deliveryedCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
     deliveryedCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
     deliveryedCtl.order_type = @"onorder";
-    deliveryedCtl.didSelectCellcallback = ^(NSIndexPath * indexpath){
+    deliveryedCtl.didSelectCellcallback = ^(RMPublicModel *model){
         if(Self.didSelectCell_callback){
-            Self.didSelectCell_callback(indexpath);
+            Self.didSelectCell_callback(model);
         }
     };
     deliveryedCtl.seeLogistics_callback = ^ (RMPublicModel * model){
         //查看物流
+        if(Self.seeLogistics_callback){
+            Self.seeLogistics_callback (model);
+        }
     };
     [deliveryedCtl requestData];
     deliveryedCtl.view.hidden = YES;
@@ -89,9 +92,9 @@
     orderDoneCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
     orderDoneCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
     orderDoneCtl.order_type = @"okorder";
-    orderDoneCtl.didSelectCellcallback = ^(NSIndexPath * indexpath){
+    orderDoneCtl.didSelectCellcallback = ^(RMPublicModel *model){
         if(Self.didSelectCell_callback){
-            Self.didSelectCell_callback(indexpath);
+            Self.didSelectCell_callback(model);
         }
     };
     [orderDoneCtl requestData];

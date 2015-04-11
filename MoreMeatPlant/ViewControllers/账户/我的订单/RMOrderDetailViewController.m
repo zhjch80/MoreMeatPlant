@@ -15,6 +15,7 @@
 #import "RMOrderReturnEditView.h"
 @interface RMOrderDetailViewController (){
     RMOrderReturnEditView * returnEditView;
+    NSString * evaluate_level;
 }
 
 @end
@@ -30,8 +31,9 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
+    evaluate_level = @"3";
+    
 //    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.mTableView];
-    [self showReturnEditView];
 }
 
 - (void)showReturnEditView{
@@ -69,7 +71,7 @@
     
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 6;
+    return [__model.pros count]+4;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
@@ -77,24 +79,128 @@
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderHeadTableViewCell" owner:self options:nil] lastObject];
         }
+        cell.corp_name.text = OBJC_Nil([__model.corp objectForKey:@"content_name"]);
+        cell.create_time.text = __model.create_time;
+        if([__model.is_paystatus boolValue]){
+            if([__model.is_status integerValue] == 1){
+                cell.order_status.text = @"待发货";
+            }else if ([__model.is_status integerValue] == 2){
+                cell.order_status.text = @"已发货";
+            }else if ([__model.is_status integerValue] == 3){
+                cell.order_status.text = @"已签收";
+            }else if ([__model.is_status integerValue] == 4){
+                cell.order_status.text = @"已取消";
+            }else if ([__model.is_status integerValue] == 5){
+                cell.order_status.text = @"已完成";
+            }
+        }else{
+            cell.order_status.text = @"待付款";
+        }
         return cell;
     }else if (indexPath.row == 3){
         RMOrderDetailNumTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderDetailNumTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailNumTableViewCell" owner:self options:nil] lastObject];
         }
+        
+        int num = 0;
+        for(NSDictionary * prodic in [__model pros]){
+            num += [[prodic objectForKey:@"content_num"] integerValue];
+        }
+        cell.totalNumL.text = [NSString stringWithFormat:@"%d",num];
+        cell.totalMoneyL.text = __model.content_total;
+        cell.content_realpayL.text = __model.content_realPay;
+        cell.express_price.text = [NSString stringWithFormat:@"含运费%@",__model.expresspay];
         return cell;
     }else if (indexPath.row == 4){
         RMOrderDetailEvaluateTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderDetailEvaluateTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailEvaluateTableViewCell" owner:self options:nil] lastObject];
+            
+            for(int i = 0;i<4;i++){
+                UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(evaluateAction:)];
+                UILabel * label = (UILabel *)[cell.contentView viewWithTag:100+i];
+                [label addGestureRecognizer:tap];
+            }
         }
+        NSDictionary * prodic = [__model.pros objectAtIndex:0];
+        if([[prodic objectForKey:@"is_commit"] boolValue]){
+            cell.bad.userInteractionEnabled = NO;
+            cell.general.userInteractionEnabled = NO;
+            cell.good.userInteractionEnabled = NO;
+            cell.pefect.userInteractionEnabled = NO;
+        }else{
+            cell.bad.userInteractionEnabled = YES;
+            cell.general.userInteractionEnabled = YES;
+            cell.good.userInteractionEnabled = YES;
+            cell.pefect.userInteractionEnabled = YES;
+        }
+        //order_yellow_sun
+        [cell.banImg setImage:[UIImage imageNamed:@"order_gray_sun"] forState:UIControlStateNormal];
+        [cell.generalImg setImage:[UIImage imageNamed:@"order_gray_sun"] forState:UIControlStateNormal];
+        [cell.goodImg setImage:[UIImage imageNamed:@"order_gray_sun"] forState:UIControlStateNormal];
+        [cell.pefectImg setImage:[UIImage imageNamed:@"order_gray_sun"] forState:UIControlStateNormal];
+        switch ([evaluate_level integerValue]) {
+            case 0:
+            {
+                [cell.banImg setImage:[UIImage imageNamed:@"order_yellow_sun"] forState:UIControlStateNormal];
+            }
+                break;
+            case 1:
+            {
+                [cell.generalImg setImage:[UIImage imageNamed:@"order_yellow_sun"] forState:UIControlStateNormal];
+            }
+                break;
+            case 2:
+            {
+                [cell.goodImg setImage:[UIImage imageNamed:@"order_yellow_sun"] forState:UIControlStateNormal];
+            }
+                break;
+            case 3:
+            {
+                [cell.pefectImg setImage:[UIImage imageNamed:@"order_yellow_sun"] forState:UIControlStateNormal];
+            }
+                break;
+                
+            default:
+                break;
+        }
+        
         return cell;
     }else if (indexPath.row == 5){
         RMOederDetailOperationTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMOederDetailOperationTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMOederDetailOperationTableViewCell" owner:self options:nil] lastObject];
+            }
+       
+        if([_order_type isEqualToString:@"unorder"]){
+            cell.leftBtn.hidden = YES;
+            cell.rightBtn.hidden = NO;
+            [cell.rightBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+            
+        }else if ([_order_type isEqualToString:@"unpayorder"]){
+            cell.leftBtn.hidden = NO;
+            cell.rightBtn.hidden = NO;
+            [cell.leftBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+            [cell.rightBtn setTitle:@"去付款" forState:UIControlStateNormal];
+        }else if ([_order_type isEqualToString:@"onorder"]){
+            cell.leftBtn.hidden = NO;
+            cell.rightBtn.hidden = NO;
+            [cell.rightBtn setTitle:@"确认收货" forState:UIControlStateNormal];
+            [cell.leftBtn setTitle:@"查看物流" forState:UIControlStateNormal];
+        }else if ([_order_type isEqualToString:@"okorder"]){
+            NSDictionary * prodic = [__model.pros objectAtIndex:0];
+            if([[prodic objectForKey:@"is_commit"] boolValue]){
+                cell.leftBtn.hidden = YES;
+                cell.rightBtn.hidden = YES;
+            }else{
+                cell.leftBtn.hidden = YES;
+                cell.rightBtn.hidden = NO;
+                [cell.rightBtn setTitle:@"发表评论" forState:UIControlStateNormal];
+            }
+            
         }
+
         return cell;
     }else{
         RMOrderDetailProTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderDetailProTableViewCell"];
@@ -102,7 +208,11 @@
             cell =[[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailProTableViewCell" owner:self options:nil] lastObject];
             [cell.returnBtn addTarget:self action:@selector(iWantToReturn:) forControlEvents:UIControlEventTouchDown];
         }
-        
+        NSDictionary * prodic = [__model.pros objectAtIndex:indexPath.row-1];
+        [cell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
+        cell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
+        cell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
+        cell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
         if(/* DISABLES CODE */ (1)){
             cell.fieldHeght.constant = 0;
         }else{
@@ -142,6 +252,97 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.view endEditing:YES];
+}
+
+
+#pragma mark - 订单操作
+- (void)rightAction:(UIButton *)sender{
+    if([_order_type isEqualToString:@"unorder"]){
+        //取消订单
+        [self cancelOrder:__model];
+    }else if ([_order_type isEqualToString:@"unpayorder"]){
+        //去付款
+        [self goPay:__model];
+    }else if ([_order_type isEqualToString:@"onorder"]){
+        //确认签收
+        [self sureReceiver:__model];
+    }else if ([_order_type isEqualToString:@"okorder"]){
+        //发表评价
+        [self publishEvaluate:__model];
+    }
+}
+
+- (void)leftAction:(UIButton *)sender{
+    if([_order_type isEqualToString:@"unorder"]){
+        
+    }else if ([_order_type isEqualToString:@"unpayorder"]){
+        //取消订单
+        [self cancelOrder:__model];
+    }else if ([_order_type isEqualToString:@"onorder"]){
+        //查看物流
+        [self seeLogistics:__model];
+    }else if ([_order_type isEqualToString:@"okorder"]){
+        
+    }
+}
+
+#pragma mark - 取消订单
+- (void)cancelOrder:(RMPublicModel *)model{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:YES orderId:model.content_sn andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * _model = object;
+            if(_model.status){
+                //刷新界面，然后发送完成通知
+            }else{
+                
+            }
+            [self showHint:_model.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
+}
+
+#pragma mark - 去付款
+- (void)goPay:(RMPublicModel *)model{
+    //去付款
+}
+
+#pragma mark - 查看物流
+- (void)seeLogistics:(RMPublicModel *)model{
+    //查看物流
+}
+
+#pragma mark - 发表评论
+- (void)publishEvaluate:(RMPublicModel *)model{
+    //这里应该是调用接口
+}
+
+#pragma mark -确认签收
+- (void)sureReceiver:(RMPublicModel *)model{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:NO orderId:model.content_sn andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * _model = object;
+            if(_model.status){
+                
+            }else{
+                
+            }
+            [self showHint:_model.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
+}
+
+- (void)evaluateAction:(UITapGestureRecognizer *)tap{
+    NSInteger tag = tap.view.tag;
+    evaluate_level = [NSString stringWithFormat:@"%ld",(long)tag];
+    [_mTableView reloadData];
 }
 
 - (void)iWantToReturn:(UIButton *)sender{

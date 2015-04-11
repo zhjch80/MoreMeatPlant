@@ -149,7 +149,7 @@
                 <outlet property="totalMoneyL" destination="8Ww-he-c45" id="AaR-N0-6XQ"/>
                 <outlet property="totalNumL" destination="6XY-bs-pPp" id="gwp-nU-yFE"/>
             </connections>
-            <point key="canvasLocation" x="412" y="118"/>
+            <point key="canvasLocation" x="72" y="120"/>
         </tableViewCell>
     </objects>
     <resources>

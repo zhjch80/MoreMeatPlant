@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RMOederDetailOperationTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *leftBtn;
+@property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 
 @end

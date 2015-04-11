@@ -10,5 +10,6 @@
 
 @interface RMOrderDetailViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
-
+@property (retain, nonatomic) RMPublicModel * _model;
+@property (retain, nonatomic) NSString * order_type;
 @end

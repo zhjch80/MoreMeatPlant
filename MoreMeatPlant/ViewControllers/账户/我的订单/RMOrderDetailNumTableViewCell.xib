@@ -104,7 +104,13 @@
                     <constraint firstItem="2hI-wU-mV0" firstAttribute="top" secondItem="Z9e-8r-hdk" secondAttribute="bottom" constant="5" id="yiY-Ai-6tn"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="196" y="253"/>
+            <connections>
+                <outlet property="content_realpayL" destination="Z9e-8r-hdk" id="CaD-SM-jHM"/>
+                <outlet property="express_price" destination="Fmq-7z-QCO" id="oIr-QO-jes"/>
+                <outlet property="totalMoneyL" destination="5aX-qG-2Vt" id="VUy-LW-9xI"/>
+                <outlet property="totalNumL" destination="kCH-Vm-4c3" id="4Ax-Ct-c7V"/>
+            </connections>
+            <point key="canvasLocation" x="53" y="272"/>
         </tableViewCell>
     </objects>
     <resources>

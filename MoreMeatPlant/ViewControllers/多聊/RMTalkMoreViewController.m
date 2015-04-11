@@ -9,10 +9,12 @@
 #import "RMTalkMoreViewController.h"
 #import "ChatViewController.h"
 
+
 @interface RMTalkMoreViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;//好友列表
     NSMutableArray *_dataArray;//数据源
+    
 }
 @end
 

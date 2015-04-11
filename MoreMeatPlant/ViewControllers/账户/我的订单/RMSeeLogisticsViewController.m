@@ -38,7 +38,8 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-    [MBProgressHUD showError:@"加载失败!" toView:self.view];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [self showHint:@"加载失败!"];
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
