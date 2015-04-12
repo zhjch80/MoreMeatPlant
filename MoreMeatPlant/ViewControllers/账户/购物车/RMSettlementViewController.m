@@ -181,8 +181,9 @@
 
 - (void)settlementAction:(UIButton *)sender{
     //结算
+    RMPublicModel * model = [[RMPublicModel alloc]init];
     if(_settle_callback){
-        _settle_callback();
+        _settle_callback(model);
     }
 }
 

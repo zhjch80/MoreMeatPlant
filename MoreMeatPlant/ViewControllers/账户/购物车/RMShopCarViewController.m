@@ -336,7 +336,7 @@
     settle.callback = ^(void){
         [SELF dismissPopUpViewControllerWithcompletion:nil];
     };
-    settle.settle_callback = ^(void){//支付宝网站支付
+    settle.settle_callback = ^(RMPublicModel * model){//支付宝网站支付
         [SELF commitOrderAction];
     };
     settle.editAddress_callback = ^(RMPublicModel * model_){

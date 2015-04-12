@@ -203,6 +203,7 @@
                             RMOrderDetailViewController * detail = [[RMOrderDetailViewController alloc]initWithNibName:@"RMOrderDetailViewController" bundle:nil];
                             detail._model = [[RMPublicModel alloc]init];
                             detail._model = model;
+                            detail.order_type = model.content_type;
                             [self.navigationController pushViewController:detail animated:YES];
                         };
                         order.gopay_callback = ^(RMPublicModel *model){
@@ -216,7 +217,14 @@
                         order.seeLogistics_callback = ^(RMPublicModel * model){
                             //查看物流信息
                             RMSeeLogisticsViewController * see = [[RMSeeLogisticsViewController alloc]initWithNibName:@"RMSeeLogisticsViewController" bundle:nil];
+                            see.express_name = model.express_name;
+                            see.express_no = model.express_no;
                             [self.navigationController pushViewController:see animated:YES];
+                        };
+                        order.gopay_callback = ^(RMPublicModel * model){
+                            RMMyCorpViewController * corp = [[RMMyCorpViewController alloc] initWithNibName:@"RMMyCorpViewController" bundle:nil];
+                            corp.auto_id = [[model.pros lastObject] objectForKey:@"corp_id"];
+                            [self.navigationController pushViewController:corp animated:YES];
                         };
                         
                         order.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);

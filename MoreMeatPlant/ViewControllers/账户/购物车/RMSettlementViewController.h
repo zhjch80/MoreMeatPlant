@@ -14,7 +14,7 @@ typedef void (^RMSettlementViewSelectAddress) (RMPublicModel * model_);
 typedef void (^RMSettlementViewEditAddress) (RMPublicModel * model_);
 typedef void (^RMSettlementViewAddAddress) (void);
 typedef void (^RMSettlementViewSelectPayment) (NSString * payment_id);
-typedef void (^RMSettlementViewSettle) (void);
+typedef void (^RMSettlementViewSettle) (RMPublicModel * model_);
 
 @interface RMSettlementViewController : RMBaseViewController<UITableViewDataSource,UITableViewDelegate>
 {

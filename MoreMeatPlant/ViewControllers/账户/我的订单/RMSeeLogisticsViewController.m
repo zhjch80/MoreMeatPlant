@@ -16,8 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"物流查询"];
+    self.mainWebView.scalesPageToFit = NO;
     
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];

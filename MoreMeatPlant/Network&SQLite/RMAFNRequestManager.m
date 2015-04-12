@@ -1455,6 +1455,10 @@
             model.is_status = OBJC_Nil([dataDic objectForKey:@"is_status"]);
             model.is_paystatus = OBJC_Nil([dataDic objectForKey:@"is_paystatus"]);
             model.create_time = OBJC_Nil([dataDic objectForKey:@"create_time"]);
+            
+            model.express_name = OBJC_Nil([dataDic objectForKey:@"express_name"]);
+            model.express_no = OBJC_Nil([dataDic objectForKey:@"express_no"]);
+            model.expresspay = OBJC([dataDic objectForKey:@"expresspay"]);
             [Array addObject:model];
         }
         if(block){

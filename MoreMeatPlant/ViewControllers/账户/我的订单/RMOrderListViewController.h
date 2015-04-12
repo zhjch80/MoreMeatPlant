@@ -10,6 +10,7 @@
 #import "RMBaseViewController.h"
 typedef void (^RMOrderListViewDidSelectCallBack)(RMPublicModel *model);
 typedef void (^RMOrderListViewGoPayCallBack)(RMPublicModel *model);
+typedef void (^RMOrderListViewGoCorpCallBack)(RMPublicModel *model);
 typedef void (^RMOrderListViewSeeLogisticsCallBack)(RMPublicModel *model);
 @interface RMOrderListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
     NSMutableArray * orderlists;
@@ -20,5 +21,6 @@ typedef void (^RMOrderListViewSeeLogisticsCallBack)(RMPublicModel *model);
 @property (copy, nonatomic) RMOrderListViewDidSelectCallBack  didSelectCellcallback;
 @property (copy, nonatomic) RMOrderListViewGoPayCallBack gopay_callback;
 @property (copy, nonatomic) RMOrderListViewSeeLogisticsCallBack seeLogistics_callback;
+@property (copy, nonatomic) RMOrderListViewGoCorpCallBack goCorp_callback;
 - (void)requestData;
 @end

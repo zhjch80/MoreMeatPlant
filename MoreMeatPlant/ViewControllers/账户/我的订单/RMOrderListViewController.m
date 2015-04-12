@@ -60,7 +60,11 @@
         RMOrderHeadTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderHeadTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderHeadTableViewCell" owner:self options:nil] lastObject];
+            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goCorp:)];
+            cell.corp_name.userInteractionEnabled = YES;
+            [cell.corp_name addGestureRecognizer:tap];
         }
+        cell.corp_name.tag = indexPath.section+100;
         cell.corp_name.text = OBJC_Nil([model.corp objectForKey:@"content_name"]);
         cell.create_time.text = model.create_time;
         if([model.is_paystatus boolValue]){
@@ -163,8 +167,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     RMPublicModel * model = [orderlists objectAtIndex:indexPath.section];
+    model.content_type = self.order_type;
     if(self.didSelectCellcallback){
         _didSelectCellcallback(model);
+    }
+}
+
+#pragma mark - 进入店铺
+- (void)goCorp:(UITapGestureRecognizer *)tap{
+    NSInteger tag = tap.view.tag-100;
+    
+    if(self.goCorp_callback){
+        self.goCorp_callback ([orderlists objectAtIndex:tag]);
     }
 }
 
@@ -204,7 +218,7 @@
 #pragma mark - 取消订单
 - (void)cancelOrder:(RMPublicModel *)model{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:YES orderId:model.content_sn andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:YES orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
             RMPublicModel * _model = object;
@@ -242,7 +256,7 @@
 #pragma mark -确认签收
 - (void)sureReceiver:(RMPublicModel *)model{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:NO orderId:model.content_sn andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:NO orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
             RMPublicModel * _model = object;

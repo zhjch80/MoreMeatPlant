@@ -399,6 +399,8 @@
 
 #pragma mark -立即购买
 - (void)buyNow{
+    
+    parameterModel.payment_id = @"2";
     __block RMPlantWithSaleDetailsViewController * SELF = self;
     settle = [[RMSettlementViewController alloc]initWithNibName:@"RMSettlementViewController" bundle:nil];
     
@@ -407,15 +409,15 @@
     settle.callback = ^(void){
         [SELF dismissPopUpViewControllerWithcompletion:nil];
     };
-    settle.settle_callback = ^(void){//支付宝网站支付
-        
+    settle.settle_callback = ^(RMPublicModel * model){//支付宝网站支付
+        [SELF commitOrderAction];
+
     };
     settle.editAddress_callback = ^(RMPublicModel * model_){
         RMAddressEditViewController * address_edit = [[RMAddressEditViewController alloc]initWithNibName:@"RMAddressEditViewController" bundle:nil];
         address_edit._model = [[RMPublicModel alloc]init];
         address_edit._model = model_;
         address_edit.delegate = SELF;
-        
         [SELF.navigationController pushViewController:address_edit animated:YES];
     };
     settle.addAddress_callback = ^(void){
@@ -459,7 +461,7 @@
                 if([parameterModel.payment_id isEqualToString:@"2"]){
                     RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
                     alipay.is_direct = YES;
-                    alipay.order_id = @"";//支付宝支付的订单号
+                    alipay.order_id = model.content_sn;//支付宝支付的订单号
                     [self.navigationController pushViewController:alipay animated:YES];
                 }
             }else{

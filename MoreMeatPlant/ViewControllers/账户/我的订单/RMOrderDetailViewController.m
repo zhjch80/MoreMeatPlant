@@ -13,6 +13,9 @@
 #import "RMOrderDetailEvaluateTableViewCell.h"
 #import "RMOederDetailOperationTableViewCell.h"
 #import "RMOrderReturnEditView.h"
+#import "RMAliPayViewController.h"
+#import "RMSeeLogisticsViewController.h"
+#import "RMMyCorpViewController.h"
 @interface RMOrderDetailViewController (){
     RMOrderReturnEditView * returnEditView;
     NSString * evaluate_level;
@@ -78,7 +81,12 @@
         RMOrderHeadTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderHeadTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderHeadTableViewCell" owner:self options:nil] lastObject];
+            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goCorp:)];
+            cell.corp_name.userInteractionEnabled = YES;
+            [cell.corp_name addGestureRecognizer:tap];
+
         }
+        cell.corp_name.tag = indexPath.section+100;
         cell.corp_name.text = OBJC_Nil([__model.corp objectForKey:@"content_name"]);
         cell.create_time.text = __model.create_time;
         if([__model.is_paystatus boolValue]){
@@ -97,7 +105,7 @@
             cell.order_status.text = @"待付款";
         }
         return cell;
-    }else if (indexPath.row == 3){
+    }else if (indexPath.row == [__model.pros count]+4-3){
         RMOrderDetailNumTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderDetailNumTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailNumTableViewCell" owner:self options:nil] lastObject];
@@ -112,7 +120,7 @@
         cell.content_realpayL.text = __model.content_realPay;
         cell.express_price.text = [NSString stringWithFormat:@"含运费%@",__model.expresspay];
         return cell;
-    }else if (indexPath.row == 4){
+    }else if (indexPath.row == [__model.pros count]+4-2){
         RMOrderDetailEvaluateTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderDetailEvaluateTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailEvaluateTableViewCell" owner:self options:nil] lastObject];
@@ -167,10 +175,12 @@
         }
         
         return cell;
-    }else if (indexPath.row == 5){
+    }else if (indexPath.row == [__model.pros count]+4-1){
         RMOederDetailOperationTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMOederDetailOperationTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMOederDetailOperationTableViewCell" owner:self options:nil] lastObject];
+            [cell.rightBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchDown];
+            [cell.leftBtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchDown];
             }
        
         if([_order_type isEqualToString:@"unorder"]){
@@ -208,11 +218,17 @@
             cell =[[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailProTableViewCell" owner:self options:nil] lastObject];
             [cell.returnBtn addTarget:self action:@selector(iWantToReturn:) forControlEvents:UIControlEventTouchDown];
         }
+        NSLog(@"%@,%ld",__model.pros,(long)indexPath.row);
         NSDictionary * prodic = [__model.pros objectAtIndex:indexPath.row-1];
         [cell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
         cell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
         cell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
         cell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
+        if([[prodic objectForKey:@"is_status"] integerValue] == 5){
+            cell.returnBtn.hidden = NO;
+        }else{
+            cell.returnBtn.hidden = YES;
+        }
         if(/* DISABLES CODE */ (1)){
             cell.fieldHeght.constant = 0;
         }else{
@@ -225,11 +241,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
         return 30;
-    }else if (indexPath.row == 3){
+    }else if (indexPath.row == [__model.pros count]+4-3){
         return 38;
-    }else if (indexPath.row == 4){
+    }else if (indexPath.row == [__model.pros count]+4-2){
         return 36;
-    }else if (indexPath.row == 5){
+    }else if (indexPath.row == [__model.pros count]+4-1){
         return 40;
     }else{
         if(1){
@@ -252,6 +268,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.view endEditing:YES];
+}
+
+
+#pragma mark - 进入店铺
+- (void)goCorp:(UITapGestureRecognizer *)tap{
+    NSInteger tag = tap.view.tag-100;
+    
+    RMMyCorpViewController * corp = [[RMMyCorpViewController alloc] initWithNibName:@"RMMyCorpViewController" bundle:nil];
+    corp.auto_id = [[__model.pros lastObject] objectForKey:@"corp_id"];
+    [self.navigationController pushViewController:corp animated:YES];
 }
 
 
@@ -289,7 +315,7 @@
 #pragma mark - 取消订单
 - (void)cancelOrder:(RMPublicModel *)model{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:YES orderId:model.content_sn andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:YES orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
             RMPublicModel * _model = object;
@@ -308,11 +334,20 @@
 #pragma mark - 去付款
 - (void)goPay:(RMPublicModel *)model{
     //去付款
+    RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
+    alipay.is_direct = NO;
+    alipay.order_id = model.content_sn;//支付宝支付的订单号
+    [self.navigationController pushViewController:alipay animated:YES];
 }
 
 #pragma mark - 查看物流
 - (void)seeLogistics:(RMPublicModel *)model{
     //查看物流
+    //查看物流信息
+    RMSeeLogisticsViewController * see = [[RMSeeLogisticsViewController alloc]initWithNibName:@"RMSeeLogisticsViewController" bundle:nil];
+    see.express_name = model.express_name;
+    see.express_no = model.express_no;
+    [self.navigationController pushViewController:see animated:YES];
 }
 
 #pragma mark - 发表评论
@@ -323,7 +358,7 @@
 #pragma mark -确认签收
 - (void)sureReceiver:(RMPublicModel *)model{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:NO orderId:model.content_sn andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:NO orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
             RMPublicModel * _model = object;
@@ -341,7 +376,7 @@
 
 - (void)evaluateAction:(UITapGestureRecognizer *)tap{
     NSInteger tag = tap.view.tag;
-    evaluate_level = [NSString stringWithFormat:@"%ld",(long)tag];
+    evaluate_level = [NSString stringWithFormat:@"%ld",(long)tag-100];
     [_mTableView reloadData];
 }
 

@@ -133,7 +133,7 @@
 - (void)delete_btnAction:(UIButton *)sender{
 //    RMPublicModel * model = [babyArray objectAtIndex:sender.tag
 //                             /100];
-    
+    [self showHint:@"暂未开通，敬请期待!"];
 }
 #pragma mark - 上下架宝贝
 - (void)shelves_btnAction:(UIButton *)sender{
