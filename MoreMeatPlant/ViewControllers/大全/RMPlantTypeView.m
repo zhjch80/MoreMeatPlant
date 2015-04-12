@@ -15,7 +15,9 @@
 @interface RMPlantTypeView (){
     NSInteger currentType;
     NSInteger counts;
+    CGFloat kHeightY;
     CGFloat kWidthOffset;
+    CGFloat kHeightOffset;
     CGFloat kHeightChangeOffset;
     CGFloat kHeightNormalOffset;
     
@@ -31,9 +33,25 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     counts = [imageArr count];
     
-    kWidthOffset = 0.0;
-    kHeightChangeOffset = 0.0;
-    kHeightNormalOffset = 0.0;
+    if (IS_IPHONE_6p_SCREEN){
+        kWidthOffset = 0.0;
+        kHeightY = 0.0;
+        kHeightOffset = 0.0;
+        kHeightChangeOffset = 0.0;
+        kHeightNormalOffset = 0.0;
+    }else if (IS_IPHONE_6_SCREEN){
+        kWidthOffset = 8.0;
+        kHeightOffset = 4.0;
+        kHeightY = 3.0;
+        kHeightChangeOffset = 0.0;
+        kHeightNormalOffset = 0.0;
+    }else{
+        kWidthOffset = 0.0;
+        kHeightOffset = 0.0;
+        kHeightY = 0.0;
+        kHeightChangeOffset = 0.0;
+        kHeightNormalOffset = 0.0;
+    }
     
     imagesArr = [[NSMutableArray alloc] initWithArray:imageArr];;
     /* 保存的值 model.auto_code model.auto_id model.change_img model.content_img model.modules_name*/
@@ -45,11 +63,11 @@
         rmImg.tag = 400+i;
         rmImg.identifierString = [NSString stringWithFormat:@"%ld",(long)i];
         if (i==0){
-            rmImg.frame = CGRectMake(i*(width/counts), 5, 44, 49);
+            rmImg.frame = CGRectMake(i*(width/counts), 5 + kHeightY, 44+kWidthOffset, 49 + kHeightOffset);
             rmImg.image = [UIImage imageNamed:@"img_tzArrowed_1"];
 //            [rmImg sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
         }else{
-            rmImg.frame = CGRectMake(i*(width/counts), 5, 44, 44);
+            rmImg.frame = CGRectMake(i*(width/counts), 5 + kHeightY, 44+kWidthOffset, 44 + kHeightOffset);
             [rmImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         }
         [rmImg addTarget:self withSelector:@selector(selectedPlantType:)];
@@ -72,7 +90,7 @@
             RMImageView * img = (RMImageView *)[self viewWithTag:400 + i];
             RMPublicModel * model = [imagesArr objectAtIndex:i];
 
-            img.frame = CGRectMake(i*(width/counts), 5, 44, 44);
+            img.frame = CGRectMake(i*(width/counts), 5 + kHeightY, 44+kWidthOffset, 44 + kHeightOffset);
             if (img.identifierString.integerValue == currentType){
                 if (i==0){
                     img.image = [UIImage imageNamed:@"img_tzArrowed_1"];
@@ -105,7 +123,7 @@
         RMImageView * img = (RMImageView *)[self viewWithTag:400 + i];
         RMPublicModel * model = [imagesArr objectAtIndex:i];
         
-        img.frame = CGRectMake(i*(width/counts), 5, 44, 44);
+        img.frame = CGRectMake(i*(width/counts), 5 + kHeightY, 44+kWidthOffset, 44 + kHeightOffset);
         
         if (value == i){
             if (i==0){

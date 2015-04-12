@@ -12,7 +12,11 @@
 #import "RMPublicModel.h"
 #import "UIImageView+WebCache.h"
 
-@interface RMPostClassificationView ()
+@interface RMPostClassificationView (){
+    CGFloat kHeightX;
+    CGFloat kHeightY;
+
+}
 @property (nonatomic, strong) UIImageView * subView;
 @property (nonatomic, assign) CGFloat subHeight;
 @property (nonatomic, assign) CGFloat height;
@@ -42,6 +46,14 @@
     subView.multipleTouchEnabled = YES;
     [self addSubview:self.subView];
     
+    if (IS_IPHONE_6p_SCREEN){
+        kHeightX = 0.0;
+    }else if (IS_IPHONE_6_SCREEN){
+        kHeightX = 11.0;
+    }else{
+        kHeightX = 8.0;
+    }
+    
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = CGRectMake(0, 0, subView.frame.size.width, subView.frame.size.height);
     gradient.colors = [NSArray arrayWithObjects:
@@ -67,7 +79,7 @@
         NSString * aftStr = [model.label substringFromIndex:2];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.backgroundColor = [UIColor colorWithRed:0.58 green:0.58 blue:0.58 alpha:1];
-        button.frame = CGRectMake(16 + i*50, 55, 40, 40);
+        button.frame = CGRectMake(16 + i*((width - 32)/[plants count] + kHeightX), 55, 44, 44);
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         button.titleLabel.font = FONT_1(12.0);
         button.titleLabel.numberOfLines = 2;
@@ -83,14 +95,14 @@
         UIImageView * image = [[UIImageView alloc] init];
         image.userInteractionEnabled = YES;
         image.multipleTouchEnabled = YES;
-        image.frame = CGRectMake(16 + (i-1)*50, 105, 40, 40);
+        image.frame = CGRectMake(16 + (i-1)*((width - 32)/[subs count] + kHeightX), 105, 44, 44);
         image.tag = 6 + i;
         [image sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         image.backgroundColor = [UIColor clearColor];
         [subView addSubview:image];
         
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(16 + (i-1)*50, 105, 40, 40);
+        button.frame = CGRectMake(16 + (i-1)*((width - 32)/[subs count] + kHeightX), 105, 44, 44);
         button.tag = 6 + i;
         [button addTarget:self action:@selector(selectUpdataListType:) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor clearColor];
