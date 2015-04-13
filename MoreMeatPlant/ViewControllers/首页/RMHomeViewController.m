@@ -169,6 +169,8 @@ typedef enum{
         
         if (indexPath.row == [columnsArr count]-1){
             cell.titleName.text = model.modules_name;
+        }else if (indexPath.row == [columnsArr count] - 4){
+            cell.titleName.text = model.modules_name;
         }else{
             if (indexPath.row == 0 || indexPath.row == 6){
                 
@@ -195,11 +197,13 @@ typedef enum{
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0 || indexPath.row == 6){
-        return 25;
-    }else{
-        return 60;
-    }
+    UITableViewCell * cell = [self tableView:mTableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
+//    if (indexPath.row == 0 || indexPath.row == 6){
+//        return 25;
+//    }else{
+//        return 60;
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -211,6 +215,11 @@ typedef enum{
     if (className && className.length > 0) {
         Class class = NSClassFromString(className);
         controller = [[class alloc] init];
+    }
+    if (indexPath.row == 5){
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"敬请期待！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
     }
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -260,7 +269,7 @@ typedef enum{
     NSLog(@"会员标识:%@",image.identifierString);
 
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
+    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置" withisloadRequest:YES];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 

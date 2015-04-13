@@ -26,9 +26,35 @@
 - (void)setTotalPagesCount:(NSInteger (^)(void))totalPagesCount
 {
     _totalPageCount = totalPagesCount();
+    
+    if(self.pageControl == nil && _totalPageCount > 1){
+        self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.bounds.size.height - 20, [UIScreen mainScreen].bounds.size.width, 20)];
+        [self.pageControl setBackgroundColor:[UIColor clearColor]];
+        self.pageControl.currentPage = 0;
+        [self.pageControl addTarget:self action:@selector(clickPageControl:) forControlEvents:UIControlEventValueChanged];
+        self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+        if(_totalPageCount > 1){
+            self.scrollView.contentSize = CGSizeMake(3 * CGRectGetWidth(self.scrollView.frame), CGRectGetHeight(self.scrollView.frame));
+        }else{
+            self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.scrollView.frame)*_totalPageCount, CGRectGetHeight(self.scrollView.frame));
+        }
+        [self addSubview:self.pageControl];
+    }
+    
+    self.pageControl.numberOfPages = _totalPageCount;
+    
     if (_totalPageCount > 0) {
         [self configContentViews];
         [self.animationTimer resumeTimerAfterTimeInterval:self.animationDuration];
+    }
+}
+
+- (void)clickPageControl:(UIPageControl *)pageControl {
+    if(_totalPageCount > 1){
+        [self.animationTimer pauseTimer];
+        CGPoint newOffset = CGPointMake(self.scrollView.contentOffset.x + CGRectGetWidth(self.scrollView.frame)*pageControl.currentPage, self.scrollView.contentOffset.y);
+        [self.scrollView setContentOffset:newOffset animated:YES];
+        [self.animationTimer resumeTimer];
     }
 }
 
@@ -129,12 +155,16 @@
     NSInteger contentOffsetX = scrollView.contentOffset.x;
     if(contentOffsetX >= (2 * CGRectGetWidth(scrollView.frame))) {
         self.currentPageIndex = [self getValidNextPageIndexWithPageIndex:self.currentPageIndex + 1];
-        NSLog(@"next，当前页:%ld",self.currentPageIndex);
+        if(_totalPageCount > 1){
+            [self.pageControl setCurrentPage:self.currentPageIndex];
+        }
         [self configContentViews];
     }
     if(contentOffsetX <= 0) {
         self.currentPageIndex = [self getValidNextPageIndexWithPageIndex:self.currentPageIndex - 1];
-        NSLog(@"previous，当前页:%ld",self.currentPageIndex);
+        if(_totalPageCount > 1){
+            [self.pageControl setCurrentPage:self.currentPageIndex];
+        }
         [self configContentViews];
     }
 }

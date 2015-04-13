@@ -11,6 +11,9 @@
 @interface CycleScrollView : UIView
 
 @property (nonatomic , readonly) UIScrollView *scrollView;
+
+@property (nonatomic ,retain)UIPageControl *pageControl;
+
 /**
  *  初始化
  *

@@ -72,7 +72,7 @@
 
 - (void)requestUpgradeSuggestionsWithTitle:(NSString *)title withContent:(NSString *)content {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager postAnonymousSubmissionsUpgradeSuggestionsWithContent_title:title withContent_body:content callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager postAnonymousSubmissionsUpgradeSuggestionsWithContent_title:[title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withContent_body:[content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -80,7 +80,18 @@
         }
         
         if (success){
+            [self showHint:[object objectForKey:@"msg"]];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
+            [self.mTextField resignFirstResponder];
+            [self.mTextView resignFirstResponder];
+            
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        }else{
+            [self showHint:[object objectForKey:@"msg"]];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];

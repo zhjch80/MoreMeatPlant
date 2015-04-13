@@ -188,33 +188,44 @@
         
         for (NSInteger i=0; i<count; i++) {
             UILabel * bodyStr = [[UILabel alloc] init];
-            CGFloat bodyHeight = [UtilityFunc boundingRectWithSize:CGSizeMake(kScreenWidth - 20, 0) font:[UIFont systemFontOfSize:15.0] text:[[dataModel.body objectAtIndex:i] objectForKey:@"content_body"]].height;
-            bodyStr.text = [[dataModel.body objectAtIndex:i] objectForKey:@"content_body"];
-            bodyStr.numberOfLines = 0;
-            bodyStr.font = [UIFont systemFontOfSize:15.0];
-            bodyStr.frame = CGRectMake(10, offsetY, kScreenWidth - 20, bodyHeight);
-            [tableHeadView addSubview:bodyStr];
+            CGFloat bodyHeight = 0;
+            
+            if ([[[dataModel.body objectAtIndex:i] objectForKey:@"content_body"] isEqualToString:@""]){
+                bodyStr.frame = CGRectMake(0, 0, 0, 0);
+            }else{
+                bodyHeight = [UtilityFunc boundingRectWithSize:CGSizeMake(kScreenWidth - 20, 0) font:[UIFont systemFontOfSize:15.0] text:[[dataModel.body objectAtIndex:i] objectForKey:@"content_body"]].height;
+                
+                bodyStr.backgroundColor = [UIColor clearColor];
+                bodyStr.text = [[dataModel.body objectAtIndex:i] objectForKey:@"content_body"];
+                bodyStr.numberOfLines = 0;
+                bodyStr.font = [UIFont systemFontOfSize:15.0];
+                bodyStr.frame = CGRectMake(10, offsetY + 10, kScreenWidth - 20, bodyHeight);
+                [tableHeadView addSubview:bodyStr];
+            }
+         
+            offsetY = offsetY + bodyStr.frame.size.height + 10;
             
             UIImageView * imageView = [[UIImageView alloc] init];
             
             NSRange substr = [[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"] rangeOfString:@".gif"];
             if (substr.location != NSNotFound) {
+
             }else{
                 CGSize size = [UIImage downloadImageSizeWithURL:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]];
                 CGFloat height = size.height/size.width * kScreenWidth;
                 
                 [imageView sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil];
                 
-                [imageView setFrame:CGRectMake(0, bodyStr.frame.size.height + bodyStr.frame.origin.y + 25, kScreenWidth, height)];
+                [imageView setFrame:CGRectMake(0, 10 + offsetY, kScreenWidth, height)];
                 
                 [tableHeadView addSubview:imageView];
                 
-                offsetY = offsetY + bodyHeight + imageView.frame.size.height;
+                offsetY = offsetY + imageView.frame.size.height + 10;
             }
         }
     }
 
-    tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, offsetY + 50);
+    tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, offsetY);
     mTableView.tableHeaderView = tableHeadView;
     
     praiseCellCount = 1;
@@ -417,7 +428,7 @@
 - (void)jumpPromoteMethod:(RMImageView *)image {
     NSLog(@"member_id:%@",image.identifierString);
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
+    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置" withisloadRequest:YES];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
@@ -575,7 +586,7 @@
  */
 - (void)requestCommentListsWithPageCount:(NSInteger)pc {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getPostsCommentsListWithReview_id:OBJC(dataModel.is_review) withPageCount:pc callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getPostsCommentsListWithReview_id:OBJC(dataModel.auto_id) withPageCount:pc callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

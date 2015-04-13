@@ -87,8 +87,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
     RMBaseWebViewController * baseWebView = [[RMBaseWebViewController alloc] init];
-    [baseWebView loadRequestWithUrl:model.view_link withTitle:model.content_name];
     [self.navigationController pushViewController:baseWebView animated:YES];
+    [baseWebView loadHtmlWithAuto_id:model.auto_id withTitle:@"详情" withisloadRequest:NO];
 }
 
 #pragma mark -

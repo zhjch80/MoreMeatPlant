@@ -411,7 +411,9 @@
 
 - (void)selectedPostMessageWithPostsType:(NSInteger)type_1 withPlantType:(NSInteger)type_2 {
     [action dismiss];
-    RMPublicModel * model = [plantTypeArr objectAtIndex:type_1-401];
+    RMPublicModel * model_1 = [plantTypeArr objectAtIndex:type_1-401];
+    RMPublicModel * model_2 = [plantTypeArr objectAtIndex:type_2-407+1];
+
     RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
     startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
     
@@ -423,7 +425,8 @@
     animator.transitionDuration = 0.7f;
     animator.direction = ZFModalTransitonDirectionBottom;
     startPostingCtl.transitioningDelegate = animator;
-    startPostingCtl.subTitle = model.label;
+    startPostingCtl.model_1 = model_1;
+    startPostingCtl.model_2 = model_2;
     [self presentViewController:startPostingCtl animated:YES completion:nil];
 }
 
@@ -452,7 +455,7 @@
 - (void)stickJumpDetailsWithOrder:(NSInteger)order {
     RMPublicModel * model = [newsArr objectAtIndex:order];
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:model.view_link withTitle:[NSString stringWithFormat:@"置顶 %@",model.content_name]];
+    [baseWebCtl loadRequestWithUrl:model.view_link withTitle:[NSString stringWithFormat:@"置顶 %@",model.content_name] withisloadRequest:YES];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
@@ -468,7 +471,7 @@
 - (void)jumpPopularize:(RMImageView *)image {
     NSLog(@"member_id:%@",image.identifierString);
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置"];
+    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置" withisloadRequest:YES];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 

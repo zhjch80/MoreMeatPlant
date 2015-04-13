@@ -53,14 +53,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+
     self.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
     
     uploadImageArr = [[NSMutableArray alloc] init];
     uploadImageCount = 0;
     
     [self setCustomNavBackgroundColor:[UIColor colorWithRed:0.87 green:0.87 blue:0.87 alpha:1] withStatusViewBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:1]];
-    [self setCustomNavTitle:[NSString stringWithFormat:@"发帖(%@)",self.subTitle]];
+    [self setCustomNavTitle:[NSString stringWithFormat:@"发帖(%@)",self.model_1.label]];
     [self setRightBarButtonNumber:1];
     
     [leftBarButton setTitle:@"取消" forState:UIControlStateNormal];
@@ -142,7 +142,38 @@
                 }
             }
             
-            [self requestSendPostsWithAuto_id:@"" withName:[self.mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withContent:[self.mTextView.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withType:@"1" withClass:self.subTitle withCourse:self.plantClassification withBody:@"" withImg:imageDic withBodyAuto_id:@""];
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [RMAFNRequestManager postSendPostsWithAuto_id:@"" withContentName:[self.mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withContentType:@"1" withContentClass:self.model_1.value withContentCourse:self.model_2.auto_code withContentBody:[self.mTextView.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withContentImg:imageDic withBodyAuto_id:@"" withID:OBJC([RMUserLoginInfoManager loginmanager].user) withPWD:OBJC([RMUserLoginInfoManager loginmanager].pwd) callBack:^(NSError *error, BOOL success, id object) {
+                if (error){
+                    NSLog(@"error:%@",error);
+                    [self showHint:@"发帖失败！请重新发送"];
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    return ;
+                }
+                
+                if (success){
+                    [self showHint:[object objectForKey:@"msg"]];
+                    
+                    self.mTextField.text = @"";
+                    self.mTextView.text = @"";
+                    
+                    for (NSInteger i=0; i<8; i++) {
+                        RMImageView * image = (RMImageView *)[self.view viewWithTag:101+i];
+                        RMImageView * deleteImg = (RMImageView *)[self.view viewWithTag:201+i];
+                        image.identifierString = @"empty";
+                        image.image = nil;
+                        deleteImg.identifierString = @"empty";
+                        deleteImg.image = nil;
+                    }
+                    
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    });
+                }
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            }];
+            
             break;
         }
             
@@ -470,45 +501,6 @@
         }
         [ASSETHELPER clearData];
     }
-}
-
-#pragma mark - 数据请求
-
-/*
- *    @method       发布帖子
- */
-- (void)requestSendPostsWithAuto_id:(NSString *)auto_id withName:(NSString *)name withContent:(NSString *)content withType:(NSString *)type withClass:(NSString *)class withCourse:(NSString *)course withBody:(NSString *)body withImg:(NSDictionary *)dicImg withBodyAuto_id:(NSString *)bodyAuto_id {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager postSendPostsWithAuto_id:auto_id withContentName:name withContentType:type withContentClass:class withContentCourse:course withContentBody:content withContentImg:dicImg withBodyAuto_id:bodyAuto_id withID:OBJC([RMUserLoginInfoManager loginmanager].user) withPWD:OBJC([RMUserLoginInfoManager loginmanager].pwd) callBack:^(NSError *error, BOOL success, id object) {
-        if (error){
-            NSLog(@"error:%@",error);
-            [self showHint:@"发帖失败！请重新发送"];
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            return ;
-        }
-        
-        if (success){
-            [self showHint:[object objectForKey:@"msg"]];
-            
-            self.mTextField.text = @"";
-            self.mTextView.text = @"";
-            
-            for (NSInteger i=0; i<8; i++) {
-                RMImageView * image = (RMImageView *)[self.view viewWithTag:101+i];
-                RMImageView * deleteImg = (RMImageView *)[self.view viewWithTag:201+i];
-                image.identifierString = @"empty";
-                image.image = nil;
-                deleteImg.identifierString = @"empty";
-                deleteImg.image = nil;
-            }
-            
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self dismissViewControllerAnimated:YES completion:nil];
-            });
-        }
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

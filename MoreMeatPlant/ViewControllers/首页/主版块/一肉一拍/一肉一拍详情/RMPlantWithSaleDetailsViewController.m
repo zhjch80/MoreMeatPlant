@@ -74,6 +74,8 @@
             UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
             image.userInteractionEnabled = YES;
             image.backgroundColor = [UIColor clearColor];
+            image.contentMode = UIViewContentModeCenter;
+            image.clipsToBounds = YES;
             [image sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
             
 //            UILabel * title = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];
@@ -98,6 +100,8 @@
                 UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
                 image.userInteractionEnabled = YES;
                 image.backgroundColor = [UIColor clearColor];
+                image.contentMode = UIViewContentModeCenter;
+                image.clipsToBounds = YES;
                 [image sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil];
                 
 //                UILabel * title = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];

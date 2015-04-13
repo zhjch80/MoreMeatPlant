@@ -57,9 +57,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    [self setRightBarButtonNumber:2];
-//    [rightOneBarButton setImage:[UIImage imageNamed:@"img_search"] forState:UIControlStateNormal];
-//    [rightTwoBarButton setImage:[UIImage imageNamed:@"img_postMessage"] forState:UIControlStateNormal];
+    [self setRightBarButtonNumber:1];
+    [rightOneBarButton setImage:[UIImage imageNamed:@"img_search"] forState:UIControlStateNormal];
+
     [self setCustomNavTitle:@"一肉一拍"];
     
     newsArr = [[NSMutableArray alloc] init];
@@ -168,9 +168,9 @@
         cell.leftImg.hidden = NO;
         cell.leftName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
-        NSString * _price = [NSString stringWithFormat:@" ¥%@",model.content_price];
+        NSString * _price = [NSString stringWithFormat:@"  ¥%@",model.content_price];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
-        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
         cell.leftPrice.attributedText = oneAttributeStr;
         cell.leftName.text = [NSString stringWithFormat:@" %@",model.content_name];
         cell.leftImg.identifierString = model.auto_id;
@@ -185,9 +185,9 @@
         cell.centerImg.hidden = NO;
         cell.centerName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
-        NSString * _price = [NSString stringWithFormat:@" ¥%@",model.content_price];
+        NSString * _price = [NSString stringWithFormat:@"  ¥%@",model.content_price];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
-        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
         cell.centerPrice.attributedText = oneAttributeStr;
         cell.centerName.text = [NSString stringWithFormat:@" %@",model.content_name];
         cell.centerImg.identifierString = model.auto_id;
@@ -202,9 +202,9 @@
         cell.rightImg.hidden = NO;
         cell.rightName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
-        NSString * _price = [NSString stringWithFormat:@" ¥%@",model.content_price];
+        NSString * _price = [NSString stringWithFormat:@"  ¥%@",model.content_price];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
-        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
         cell.rightPrice.attributedText = oneAttributeStr;
         cell.rightName.text = [NSString stringWithFormat:@" %@",model.content_name];
         cell.rightImg.identifierString = model.auto_id;
@@ -254,7 +254,7 @@
 - (void)stickJumpDetailsWithOrder:(NSInteger)order {
     RMPublicModel * model = [newsArr objectAtIndex:order];
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:model.view_link withTitle:[NSString stringWithFormat:@"置顶 %@",model.content_name]];
+    [baseWebCtl loadHtmlWithAuto_id:model.auto_id withTitle:@"详情" withisloadRequest:NO];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
@@ -265,7 +265,6 @@
     [self.navigationController pushViewController:nearbyMerchantCtl animated:YES];
 }
 
-/*
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
@@ -277,23 +276,11 @@
             [self.navigationController pushViewController:searchCtl animated:YES];
             break;
         }
-        case 3:{
-            action = [[RMPostMessageView alloc] init];
-            action.delegate = self;
-            action.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            action.backgroundColor = [UIColor clearColor];
-            [action initWithPostMessageView];
-            [self.view addSubview:action];
-            [action show];
-            
-            break;
-        }
             
         default:
             break;
     }
 }
-*/
 
 - (void)selectedPostMessageWithPlantType:(NSString *)type {
     [action dismiss];
