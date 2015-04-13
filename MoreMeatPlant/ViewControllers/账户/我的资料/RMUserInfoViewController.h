@@ -30,5 +30,6 @@ typedef void (^RMUserInfoModifyAction) (RMUserInfoViewController *controller);
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *modifyBtn;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (retain, nonatomic) RMPublicModel * _model;
 
 @end

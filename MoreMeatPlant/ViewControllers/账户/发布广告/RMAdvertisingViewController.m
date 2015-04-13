@@ -76,8 +76,8 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMSectionFooterTableViewCell" owner:self options:nil] lastObject];
             [cell.surePublish addTarget:self action:@selector(surePublishAction:) forControlEvents:UIControlEventTouchDown];
         }
-        cell.balanceL.text = [NSString stringWithFormat:@"%.0f",[(RMPublicModel *)[planteArray lastObject] balance]];
-        cell.totalL.text = [NSString stringWithFormat:@"共计: %ld (%.0f米)",num_total,money_total];
+        cell.balanceL.text = [NSString stringWithFormat:@"余额:%.0f米",[(RMPublicModel *)[planteArray lastObject] balance]];
+        cell.totalL.text = [NSString stringWithFormat:@"共计: %ld天 (%.0f米)",(long)num_total,money_total];
         return cell;
     }
     else {
@@ -91,14 +91,15 @@
             [cell.addBtn addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchDown];
             cell.numTextField.delegate = self;
         }
+        cell.numTextField.tag = 1000+indexPath.row;
         cell.selectBtn.tag = indexPath.row*100;
         cell.subBtn.tag = indexPath.row*100+1;
         cell.addBtn.tag = indexPath.row*100+2;
         RMPublicModel * model = [planteArray objectAtIndex:indexPath.row-2];
         cell.planteName.text = model.content_name;
-//        cell.numTextField.text = [NSString stringWithFormat:@"%ld",model.textField_value];
+        cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)model.textField_value];
         cell.priceL.text = [NSString stringWithFormat:@"%@米/天",model.content_price];
-        cell.yu_weiL.text = [NSString stringWithFormat:@"余位 %ld",model.num];
+        cell.yu_weiL.text = [NSString stringWithFormat:@"余位 %ld",(long)model.num];
         return cell;
     }
 }
@@ -141,9 +142,9 @@
     NSInteger num = [cell.numTextField.text integerValue];
     num--;
     if(num>0){
-        cell.numTextField.text = [NSString stringWithFormat:@"%ld",num];
+        cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
     }else{
-        cell.numTextField.text = [NSString stringWithFormat:@"%ld",++num];
+        cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)++num];
     }
     RMPublicModel * model = [planteArray objectAtIndex:sender.tag/100-2];
     model.textField_value = num;
@@ -155,9 +156,16 @@
 - (void)addAction:(UIButton *)sender{
     RMAdvertisingSectionTableViewCell * cell =  (RMAdvertisingSectionTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag/100 inSection:0]];
     NSInteger num = [cell.numTextField.text integerValue];
-    num++;
-    cell.numTextField.text = [NSString stringWithFormat:@"%ld",num];
+   
+    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
     RMPublicModel * model = [planteArray objectAtIndex:sender.tag/100-2];
+    
+     num++;
+    if(num>model.num){
+        num--;
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"没有余位了！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
+    }
     model.textField_value = num;
     [self caculateDays];
 }
@@ -165,8 +173,14 @@
 
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField{
+    RMPublicModel * model = [planteArray objectAtIndex:textField.tag-1000-2];
     if([textField.text length] == 0 ){
         textField.text = 0;
+    }
+    if([textField.text integerValue]>model.num){
+        textField.text = [NSString stringWithFormat:@"%ld",(long)model.num];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"没有余位了！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
     }
     [self caculateDays];
 }

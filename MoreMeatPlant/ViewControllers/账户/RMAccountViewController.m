@@ -288,6 +288,10 @@
                             [self.navigationController pushViewController:edit animated:YES];
                             
                         };
+                        userinfo._model = [[RMPublicModel alloc]init];
+                        userinfo._model = _model;
+                        
+                        
                         userinfo.view.frame = CGRectMake(20, 0, kScreenWidth-20*2, kScreenHeight/3*2);
                         
                         [userinfo.titleLabel drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, userinfo.titleLabel.frame.size.height)];

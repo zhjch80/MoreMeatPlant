@@ -25,7 +25,12 @@
     [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];
     [_modifyBtn addTarget:self action:@selector(modifyAction:) forControlEvents:UIControlEventTouchDown];
     
-   
+
+    _nickL.text = __model.contentName;
+    _passwordL.text = @"******";
+    _signatureL.text = __model.contentQm?__model.contentQm:@"暂无";
+    _mobileL.text = __model.contentMobile;
+    _apliyL.text = __model.zfbNo;
     
 }
 
