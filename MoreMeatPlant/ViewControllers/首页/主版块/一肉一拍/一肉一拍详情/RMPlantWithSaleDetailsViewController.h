@@ -11,5 +11,6 @@
 @interface RMPlantWithSaleDetailsViewController : RMBaseViewController
 
 @property (nonatomic, copy) NSString * auto_id;
+@property (nonatomic, copy) NSString * mTitle;
 
 @end

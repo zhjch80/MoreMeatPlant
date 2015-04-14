@@ -19,6 +19,10 @@
     self.leftImg.clipsToBounds = YES;
     self.centerImg.clipsToBounds = YES;
     self.rightImg.clipsToBounds = YES;
+    self.leftImg.contentMode = UIViewContentModeCenter;
+    self.centerImg.contentMode = UIViewContentModeCenter;
+    self.rightImg.contentMode = UIViewContentModeCenter;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -57,7 +57,7 @@
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     mTableView.delegate = self;
     mTableView.dataSource = self;
-    mTableView.backgroundColor = [UIColor clearColor];
+    mTableView.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.62 alpha:1];
     [self.view addSubview:mTableView];
     
     refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
@@ -223,6 +223,10 @@
         
         if (success){
             subsPlantArr = [[NSMutableArray alloc] init];
+            
+            RMPublicModel * model = [[RMPublicModel alloc] init];
+            [subsPlantArr addObject:model];
+            
             for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
@@ -237,8 +241,8 @@
             plantTypeView.frame = CGRectMake(0, 64, kScreenWidth, 54);
             plantTypeView.delegate = self;
             [plantTypeView loadPlantTypeWithImageArr:subsPlantArr];
-            [self.view addSubview:plantTypeView];
-            
+            [self.view insertSubview:plantTypeView belowSubview:self.recognizerView];
+
             [UIView animateWithDuration:0.3 animations:^{
                 mTableView.frame = CGRectMake(0, plantTypeView.frame.size.height + 64, kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 44);
             } completion:^(BOOL finished) {

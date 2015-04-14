@@ -59,7 +59,7 @@
     
     [self loadBottomView];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 40) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 37) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -181,6 +181,7 @@
         headerView = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleHeaderView" owner:nil options:nil] objectAtIndex:0];
     }
     headerView.delegate = self;
+    headerView.mTitle.text = self.mTitle;
     [headerView.userHeader.layer setCornerRadius:20.0f];
     headerView.userHeader.clipsToBounds = YES;
     [headerView.userHeader sd_setImageWithURL:[NSURL URLWithString:[dataModel.members objectForKey:@"content_face"]] placeholderImage:nil];
@@ -268,7 +269,8 @@
     
     NSString * _price = [NSString stringWithFormat:@"¥%@",dataModel.content_price];
     NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
-    [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
+    [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 1)];
+    cell.price.textColor = [UIColor colorWithRed:0.94 green:0 blue:0.3 alpha:1];
     cell.price.attributedText = oneAttributeStr;
 
     if ([dataModel.is_sf isEqualToString:@"1"]){
@@ -278,7 +280,11 @@
     }
     
     cell.productName.text = dataModel.content_name;
-    cell.plantIntro.text = dataModel.content_desc;
+    cell.plantIntro.text = [NSString stringWithFormat:@"肉肉介绍:%@",dataModel.content_desc];
+    cell.plantIntro.backgroundColor = [UIColor clearColor];
+    NSMutableAttributedString *twoAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"肉肉介绍:%@",dataModel.content_desc]];
+    [twoAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.52 green:0.52 blue:0.52 alpha:1] range:NSMakeRange(0, 5)];
+    cell.plantIntro.attributedText = twoAttributeStr;
     
     CGFloat offsetY = [UtilityFunc boundingRectWithSize:CGSizeMake(kScreenWidth - 150, 0) font:FONT(13.0) text:dataModel.content_desc].height;
     
@@ -309,7 +315,7 @@
             NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
             RMPlantWithSaleDetailsCell * cell = (RMPlantWithSaleDetailsCell *)[mTableView cellForRowAtIndexPath:indexPath];
             NSInteger num = [[NSString stringWithFormat:@"%@",cell.showNum.text] integerValue];
-            if (num > 9){
+            if (num > 0){
             }else{
                 num++;
             }

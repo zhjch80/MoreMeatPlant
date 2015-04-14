@@ -235,16 +235,16 @@
  *  @param      pageCount       分页
  */
 + (void)getBabyListWithPlantClassWith:(NSInteger)plantClass
-                           withCourse:(NSInteger)plantCourse
+                           withCourse:(NSString *)plantCourse
                        withMemerClass:(NSString *)memberClass
                            withCorpid:(NSString *)corp_id
                             withCount:(NSInteger)pageCount
                              callBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = nil;
     if(corp_id == nil){
-        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%ld&course=%ld&per=1&row=10&page=%ld",baseUrl,(long)plantClass,(long)plantCourse,(long)pageCount];
+        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%ld&course=%@&per=1&row=12&page=%ld",baseUrl,(long)plantClass,plantCourse,(long)pageCount];
     }else{
-        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&per=1&row=10&page=%ld&memberclass=%@&corp_id=%@",baseUrl,(long)pageCount,memberClass,corp_id];
+        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&per=1&row=12&page=%ld&memberclass=%@&corp_id=%@",baseUrl,(long)pageCount,memberClass,corp_id];
     }
     
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {

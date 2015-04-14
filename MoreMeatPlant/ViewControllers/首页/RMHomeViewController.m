@@ -199,11 +199,6 @@ typedef enum{
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell = [self tableView:mTableView cellForRowAtIndexPath:indexPath];
     return cell.frame.size.height;
-//    if (indexPath.row == 0 || indexPath.row == 6){
-//        return 25;
-//    }else{
-//        return 60;
-//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

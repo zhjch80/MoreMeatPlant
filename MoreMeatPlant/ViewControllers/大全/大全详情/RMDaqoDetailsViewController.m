@@ -173,6 +173,8 @@
     
     RMDaqoDetailsFooterView * tableFooterView = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoDetailsFooterView" owner:nil options:nil] objectAtIndex:0];
     tableFooterView.delegate = self;
+    [tableFooterView.addImageBtn.layer setCornerRadius:5.0];
+    [tableFooterView.addedAndCorrectedBtn.layer setCornerRadius:5.0];
     
     tableFooterView.frame = CGRectMake(tableFooterView.frame.origin.x, tableFooterView.frame.origin.y, tableFooterView.frame.size.width, tableFooterView.frame.size.height + offsetY);
     
@@ -289,7 +291,7 @@
                    }
                    didChangeToImageViewBlock:^(XHImageViewer *imageViewer,
                                                UIImageView *selectedView) {
-                       NSInteger index = [imageViewArr indexOfObject:selectedView];
+//                       NSInteger index = [imageViewArr indexOfObject:selectedView];
 //                       NSLog(@"change:%ld",index);
                        
                    }];
@@ -297,7 +299,7 @@
     imageViewer.disableTouchDismiss = NO;
     [imageViewer showWithImageViews:imageViewArr selectedView:(RMImageView *)image];
     
-    NSInteger index = [imageViewArr indexOfObject:(RMImageView *)image];
+//    NSInteger index = [imageViewArr indexOfObject:(RMImageView *)image];
 //    NSLog(@"select:%ld",index);
 }
 

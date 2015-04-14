@@ -15,14 +15,12 @@
 #import "RMPlantWithSaleCell.h"
 #import "RMBaseWebViewController.h"
 #import "RMSearchViewController.h"
-#import "RMPostMessageView.h"
-#import "RMStartPostingViewController.h"
 #import "ZFModalTransitionAnimator.h"
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
 #import "RMPlantWithSaleDetailsViewController.h"
 
-@interface RMFreshPlantMarketViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,BottomDelegate,JumpPlantDetailsDelegate,PostMessageSelectedPlantDelegate,RefreshControlDelegate>{
+@interface RMFreshPlantMarketViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,BottomDelegate,JumpPlantDetailsDelegate,RefreshControlDelegate>{
     BOOL isFirstViewDidAppear;
     BOOL isRefresh;
     NSInteger pageCount;
@@ -33,7 +31,6 @@
 @property (nonatomic, strong) NSMutableArray * newsArr;         //置顶数据
 @property (nonatomic, strong) NSMutableArray * subsPlantArr;    //植物科目
 
-@property (nonatomic, strong) RMPostMessageView * action;
 @property (nonatomic, strong) ZFModalTransitionAnimator * animator;
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
@@ -42,7 +39,7 @@
 @end
 
 @implementation RMFreshPlantMarketViewController
-@synthesize mTableView, dataArr, action, animator, newsArr, subsPlantArr, refreshControl, subsPlantRequestValue;
+@synthesize mTableView, dataArr, animator, newsArr, subsPlantArr, refreshControl, subsPlantRequestValue;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -57,9 +54,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    [self setRightBarButtonNumber:2];
-//    [rightOneBarButton setImage:[UIImage imageNamed:@"img_search"] forState:UIControlStateNormal];
-//    [rightTwoBarButton setImage:[UIImage imageNamed:@"img_postMessage"] forState:UIControlStateNormal];
+    [self setRightBarButtonNumber:1];
+    [rightOneBarButton setImage:[UIImage imageNamed:@"img_search"] forState:UIControlStateNormal];
     [self setCustomNavTitle:@"鲜肉市场"];
 
     newsArr = [[NSMutableArray alloc] init];
@@ -164,28 +160,25 @@
 - (void)jumpPlantDetailsWithImage:(RMImageView *)image {
     RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
     plantWithSaleDetailsCtl.auto_id = image.identifierString;
+    plantWithSaleDetailsCtl.mTitle = @"鲜肉市场";
     [self.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
 }
 
 #pragma mark - 选择肉肉类型
 
 - (void)selectedPlantWithType:(NSString *)type {
-    subsPlantRequestValue = type.integerValue;
-    isRefresh = YES;
-    NSString * subjectsType = @"";
-    
-    if (subsPlantRequestValue == -9999){
-        subjectsType = @"";
+    if ([type isEqualToString:@"0"]){
+        //全部
+        subsPlantRequestValue = 10000;
+        isRefresh = YES;
+        [self requestListWithPlantCourse:@"" withPageCount:1];
     }else{
+        //分类
+        subsPlantRequestValue = type.integerValue;
+        isRefresh = YES;
         RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
-        subjectsType = model_2.auto_code;
+        [self requestListWithPlantCourse:model_2.auto_code withPageCount:1];
     }
-    
-    [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
-}
-
-- (void)selectedPostMessageWithPostsType:(NSInteger)type_1 withPlantType:(NSInteger)type_2 {
-    
 }
 
 #pragma mark - 加载底部View
@@ -277,7 +270,6 @@
     }
 }
 
-/*
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
@@ -289,38 +281,10 @@
             [self.navigationController pushViewController:searchCtl animated:YES];
             break;
         }
-        case 3:{
-            action = [[RMPostMessageView alloc] init];
-            action.delegate = self;
-            action.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            action.backgroundColor = [UIColor clearColor];
-            [action initWithPostMessageView];
-            [self.view addSubview:action];
-            [action show];
-            
-            break;
-        }
             
         default:
             break;
     }
-}
-*/
-
-- (void)selectedPostMessageWithPlantType:(NSString *)type {
-    [action dismiss];
-    RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
-    startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
-    
-    animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:startPostingCtl];
-    animator.dragable = NO;
-    animator.bounces = NO;
-    animator.behindViewAlpha = 0.5f;
-    animator.behindViewScale = 0.5f;
-    animator.transitionDuration = 0.7f;
-    animator.direction = ZFModalTransitonDirectionBottom;
-    startPostingCtl.transitioningDelegate = animator;
-    [self presentViewController:startPostingCtl animated:YES completion:nil];
 }
 
 #pragma mark - 数据请求
@@ -364,14 +328,14 @@
             NSLog(@"植物科目error:%@",error);
             NSString * subjectsType = @"";
             
-            if (subsPlantRequestValue == -9999){
+            if (subsPlantRequestValue == -9999 | subsPlantRequestValue == 10000){
                 subjectsType = @"";
             }else{
                 RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
                 subjectsType = model_2.auto_code;
             }
             
-            [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
+            [self requestListWithPlantCourse:subjectsType withPageCount:1];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             return ;
         }
@@ -396,14 +360,14 @@
             
             NSString * subjectsType = @"";
             
-            if (subsPlantRequestValue == -9999){
+            if (subsPlantRequestValue == -9999 | subsPlantRequestValue == 10000){
                 subjectsType = @"";
             }else{
                 RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
                 subjectsType = model_2.auto_code;
             }
             
-            [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
+            [self requestListWithPlantCourse:subjectsType withPageCount:1];
             
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
@@ -416,7 +380,7 @@
  *  @param      plantCourse     植物科目
  *  @param      pageCount       分页
  */
-- (void)requestListWithPlantCourse:(NSInteger)plantCourse withPageCount:(NSInteger)pc {
+- (void)requestListWithPlantCourse:(NSString *)plantCourse withPageCount:(NSInteger)pc {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager getBabyListWithPlantClassWith:2 withCourse:plantCourse withMemerClass:nil withCorpid:nil withCount:pc callBack:^(NSError *error, BOOL success, id object) {
         if (error){
@@ -484,14 +448,14 @@
         isLoadComplete = NO;
         NSString * subjectsType = @"";
         
-        if (subsPlantRequestValue == -9999){
+        if (subsPlantRequestValue == -9999 | subsPlantRequestValue == 10000){
             subjectsType = @"";
         }else{
             RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
             subjectsType = model_2.auto_code;
         }
         
-        [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:1];
+        [self requestListWithPlantCourse:subjectsType withPageCount:1];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
@@ -505,14 +469,14 @@
             
             NSString * subjectsType = @"";
             
-            if (subsPlantRequestValue == -9999){
+            if (subsPlantRequestValue == -9999 | subsPlantRequestValue == 10000){
                 subjectsType = @"";
             }else{
                 RMPublicModel * model_2 = [subsPlantArr objectAtIndex:subsPlantRequestValue];
                 subjectsType = model_2.auto_code;
             }
             
-            [self requestListWithPlantCourse:subjectsType.integerValue withPageCount:pageCount];
+            [self requestListWithPlantCourse:subjectsType withPageCount:pageCount];
         }
     }
 }

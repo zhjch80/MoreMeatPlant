@@ -11,6 +11,7 @@
 #import "RMDaqoViewController.h"
 #import "RMDaqoRightCell.h"
 #import "RMBaseView.h"
+#import "RMImageView.h"
 
 @interface RMDaqoRightViewController ()<UITableViewDataSource,UITableViewDelegate>{
     
@@ -36,6 +37,35 @@
     mTableView.backgroundColor = [UIColor clearColor];
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
+    
+    [self loadTableViewheader];
+}
+
+- (void)loadTableViewheader {
+    RMImageView * header = [[RMImageView alloc] init];
+    header.frame = CGRectMake(kScreenWidth - kSlideWidth, 0, kSlideWidth, 30);
+    [header addTarget:self withSelector:@selector(allOfTheMeatMethod)];
+    header.backgroundColor = [UIColor clearColor];
+    
+    UILabel * allMeat = [[UILabel alloc] init];
+    allMeat.frame = CGRectMake(0, 0, kSlideWidth, 30);
+    allMeat.text = @"    全部肉肉";
+    allMeat.backgroundColor = [UIColor clearColor];
+    allMeat.font = FONT_1(15.0);
+    allMeat.userInteractionEnabled = YES;
+    allMeat.multipleTouchEnabled = YES;
+    [header addSubview:allMeat];
+    
+    mTableView.tableHeaderView = header;
+}
+
+- (void)allOfTheMeatMethod {
+    NSLog(@"刷新全部肉肉");
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        RMDaqoViewController * daqoCtl = self.DaqoDelegate;
+        [daqoCtl updateSlideSwitchState];
+    });
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -55,7 +85,7 @@
     RMPublicModel * model = [dataArr objectAtIndex:section];
 
     RMBaseView * headerView = [[RMBaseView alloc] init];
-    headerView.frame = CGRectMake(0, 0, kScreenWidth - kSlideWidth, 44);
+    headerView.frame = CGRectMake(kScreenWidth - kSlideWidth, 0, kSlideWidth, 44);
     headerView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
     headerView.identifierString = model.modules_name;
     [headerView addTarget:self withSelector:@selector(cellHeaderMethod:)];
@@ -63,15 +93,23 @@
     UILabel * title = [[UILabel alloc] init];
     title.userInteractionEnabled = YES;
     title.multipleTouchEnabled = YES;
-    title.frame = CGRectMake(0, 0, kScreenWidth - kSlideWidth, 44);
+    title.font = FONT_1(14.0);
+    title.backgroundColor = [UIColor clearColor];
+    title.frame = CGRectMake(0, 0, kSlideWidth, 44);
     title.text = [NSString stringWithFormat:@"    %@",model.modules_name];
     [headerView addSubview:title];
+    [title adjustsFontSizeToFitWidth];
     
     return headerView;
 }
 
 - (void)cellHeaderMethod:(RMBaseView *)view {
     NSLog(@"header 标识:%@",view.identifierString);
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        RMDaqoViewController * daqoCtl = self.DaqoDelegate;
+        [daqoCtl updateSlideSwitchState];
+    });
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -96,6 +134,7 @@
     }
     RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
     cell.mTitle.text = [NSString stringWithFormat:@"    %@",[[model.sub objectAtIndex:indexPath.row] objectForKey:@"modules_name"]];
+    cell.mTitle.font = FONT_1(16.0);
     return cell;
 }
 

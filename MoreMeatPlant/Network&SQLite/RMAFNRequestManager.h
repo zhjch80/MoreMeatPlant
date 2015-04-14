@@ -147,7 +147,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      pageCount       分页
  */
 + (void)getBabyListWithPlantClassWith:(NSInteger)plantClass
-                           withCourse:(NSInteger)plantCourse
+                           withCourse:(NSString *)plantCourse
                        withMemerClass:(NSString *)memberClass
                            withCorpid:(NSString *)corp_id
                             withCount:(NSInteger)pageCount
