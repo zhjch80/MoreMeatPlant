@@ -15,6 +15,8 @@
 @property (retain, nonatomic) NSString * isCorp;//YES 表示商家会员   NO 表示用户会员
 @property (retain, nonatomic) NSString * s_id;//会员的唯一标示
 @property (retain, nonatomic) NSString * ypwd;//环信密码,明文
+
+@property (retain, nonatomic) NSString * current_address;
 + (RMUserLoginInfoManager *)loginmanager;
 
 @end

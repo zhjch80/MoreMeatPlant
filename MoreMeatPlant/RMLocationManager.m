@@ -69,5 +69,55 @@
     NSLog(@"location error");
 }
 
+- (void)ReverseGeoAction:(CLLocationCoordinate2D)coor{
+    
+    if(userSearch == nil)
+    {
+        userSearch = [[BMKGeoCodeSearch alloc]init];
+        userSearch.delegate = self;
+    }
+
+    
+    BMKReverseGeoCodeOption *reverseGeoCodeSearchOption =[[BMKReverseGeoCodeOption alloc]init];
+    reverseGeoCodeSearchOption.reverseGeoPoint = coor;
+    //    reverseGeoCodeSearchOption.reverseGeoPoint = CLLocationCoordinate2DMake(25.09, 121.44);
+    BOOL flag = [userSearch reverseGeoCode:reverseGeoCodeSearchOption];
+    if(flag)
+    {
+        NSLog(@"反geo检索发送成功");
+    }
+    else
+    {
+        NSLog(@"反geo检索发送失败");
+    }
+}
+
+- (void)onGetGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
+    if (error == BMK_SEARCH_NO_ERROR) {
+        //在此处理正常结果
+        NSLog(@"%@",result.address);
+        if(self.gccallback){
+            self.gccallback (result.address);
+        }
+    }
+    else {
+        NSLog(@"抱歉，未找到结果");
+    }
+}
+
+- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
+    if (error == BMK_SEARCH_NO_ERROR) {
+        //在此处理正常结果
+        NSLog(@"%@",result.address);
+        if(self.gccallback){
+            self.gccallback (result.address);
+        }
+    }
+    else {
+        NSLog(@"抱歉，未找到结果");
+    }
+
+}
+
 @end
 

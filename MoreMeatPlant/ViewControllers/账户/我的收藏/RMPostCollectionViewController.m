@@ -15,8 +15,6 @@
 
 @interface RMPostCollectionViewController ()<RefreshControlDelegate>{
     NSInteger pageCount;
-    BOOL isRefresh;
-    BOOL isLoadComplete;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
@@ -40,7 +38,6 @@
     refreshControl.bottomEnabled = YES;
     [refreshControl registerClassForTopView:[CustomRefreshView class]];
     pageCount = 1;
-    isRefresh = YES;
     
     [self requestListWithPageCount];
 }
@@ -106,12 +103,23 @@
         cell.rightDownTwoImg.identifierString = model.auto_id;
         
         cell.likeImg.identifierString = model.auto_id;
+        cell.likeImg.indexPath = indexPath;
         cell.chatImg.identifierString = model.auto_id;
+        cell.chatImg.indexPath = indexPath;
         cell.praiseImg.identifierString = model.auto_id;
+        cell.praiseImg.indexPath = indexPath;
         
-        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        if (model.is_collect){
+            cell.likeImg.image = LOADIMAGE(@"img_asced", kImageTypePNG);
+        }else{
+            cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        }
         cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
-        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        if (model.is_top){
+            cell.praiseImg.image = LOADIMAGE(@"img_zaned", kImageTypePNG);
+        }else{
+            cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        }
         
         cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
         cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
@@ -157,12 +165,23 @@
         cell.leftImg.identifierString = model.auto_id;
         cell.rightImg.identifierString = model.auto_id;
         cell.likeImg.identifierString = model.auto_id;
+        cell.likeImg.indexPath = indexPath;
         cell.chatImg.identifierString = model.auto_id;
+        cell.chatImg.indexPath = indexPath;
         cell.praiseImg.identifierString = model.auto_id;
+        cell.praiseImg.indexPath = indexPath;
         
-        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        if (model.is_collect){
+            cell.likeImg.image = LOADIMAGE(@"img_asced", kImageTypePNG);
+        }else{
+            cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        }
         cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
-        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        if (model.is_top){
+            cell.praiseImg.image = LOADIMAGE(@"img_zaned", kImageTypePNG);
+        }else{
+            cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        }
         
         cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
         cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
@@ -202,20 +221,32 @@
         
         cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
         
+        
         if ([model.imgs isKindOfClass:[NSNull class]]){
             cell.threeImg.image = [UIImage imageNamed:@"img_default.jpg"];
         }else{
-            [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
+            [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
         }
         
         cell.threeImg.identifierString = model.auto_id;
         cell.likeImg.identifierString = model.auto_id;
+        cell.likeImg.indexPath = indexPath;
         cell.chatImg.identifierString = model.auto_id;
+        cell.chatImg.indexPath = indexPath;
         cell.praiseImg.identifierString = model.auto_id;
+        cell.praiseImg.indexPath = indexPath;
         
-        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        if (model.is_collect){
+            cell.likeImg.image = LOADIMAGE(@"img_asced", kImageTypePNG);
+        }else{
+            cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+        }
         cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
-        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        if (model.is_top){
+            cell.praiseImg.image = LOADIMAGE(@"img_zaned", kImageTypePNG);
+        }else{
+            cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+        }
         
         cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
         cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
@@ -255,23 +286,11 @@
 
 - (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
     if (direction == RefreshDirectionTop) { //下拉刷新
-        pageCount = 1;
-        isRefresh = YES;
-        isLoadComplete = NO;
-        //        [self requestDataWithPageCount:1];
+            pageCount = 1;
+            [self requestListWithPageCount];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
-        if (isLoadComplete){
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self showHint:@"没有更多肉肉啦"];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-            });
-        }else{
             pageCount ++;
-            isRefresh = NO;
-            //            [self requestDataWithPageCount:pageCount];
-        }
-        
+            [self requestListWithPageCount];
     }
 }
 
@@ -303,7 +322,7 @@
             
             
         }else{
-                    [self showHint:object];
+            [self showHint:object];
         }
         
         [_mainTableView reloadData];

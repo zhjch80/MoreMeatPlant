@@ -420,10 +420,9 @@
                         break;
                     case 8:{//发布宝贝
                         
-//                        RMBabyManageViewController * babymanage = [[RMBabyManageViewController alloc]initWithNibName:@"RMBabyManageViewController" bundle:nil];
-//                        [self.navigationController pushViewController:babymanage animated:YES];
-                        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"敬请期待!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
-                        [alert show];
+                        RMBabyManageViewController * babymanage = [[RMBabyManageViewController alloc]initWithNibName:@"RMBabyManageViewController" bundle:nil];
+                        [self.navigationController pushViewController:babymanage animated:YES];
+                        
                        
                     }
                         break;
@@ -438,7 +437,8 @@
                     }
                         break;
                     case 11:{//等待升级
-                        
+                        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"敬请期待!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                        [alert show];
                     }
                         break;
                     default:

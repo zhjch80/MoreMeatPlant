@@ -252,7 +252,6 @@
         }else{
             url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&per=1&row=12&page=%ld&corp_id=%@",baseUrl,(long)pageCount,corp_id];
         }
-        
     }
     
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -1336,9 +1335,7 @@
                 model.content_face = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"content_face"]);
                 model.content_gps = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"content_gps"]);
                 
-                for (NSDictionary * dict in OBJC_Nil([diction objectForKey:@"imgs"])){
-                    [model.imgs addObject:dict];
-                }
+                model.imgs = [diction objectForKey:@"imgs"];
                 
             }else if ([type isEqualToString:@"2"]){//店铺
                 model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
@@ -1346,11 +1343,14 @@
                 model.content_name = OBJC_Nil([OBJC_Nil([dataDic objectForKey:@"corp"]) objectForKey:@"content_name"]);
                 model.content_face = OBJC_Nil([OBJC_Nil([dataDic objectForKey:@"corp"]) objectForKey:@"content_face"]);
             }else if ([type isEqualToString:@"3"]){//宝贝
-                NSDictionary * diction = OBJC_Nil([dataDic objectForKey:@"product"]);
-                model.auto_id = OBJC_Nil([diction objectForKey:@"auto_id"]);
-                model.content_name = OBJC_Nil([diction objectForKey:@"member_id"]);
-                model.content_price = OBJC_Nil([diction objectForKey:@"content_price"]) ;
-                model.content_img = OBJC_Nil([diction objectForKey:@"content_img"]) ;
+                if (![[dataDic objectForKey:@"product"] isKindOfClass:[NSDictionary class]]){
+                }else{
+                    NSDictionary * diction = OBJC_Nil([dataDic objectForKey:@"product"]);
+                    model.auto_id = OBJC_Nil([diction objectForKey:@"auto_id"]);
+                    model.content_name = OBJC_Nil([diction objectForKey:@"member_id"]);
+                    model.content_price = OBJC_Nil([diction objectForKey:@"content_price"]) ;
+                    model.content_img = OBJC_Nil([diction objectForKey:@"content_img"]) ;
+                }
             }
             
             [Array addObject:model];
@@ -1700,6 +1700,65 @@
     //m.kuaidi100.com/index_all.html?type=[快递公司]&postid=[快递单号]
     NSString * url = [NSString stringWithFormat:@"m.kuaidi100.com/index_all.html?type=%@&postid=%@",name,no];
     return url;
+}
+
+#pragma mark - 附近店铺
++ (void)nearCorpRequestwithCoor:(NSString *)coor andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_shop&task=nearCorp&gps=39.75715,116.218574
+    NSString * url = [NSString stringWithFormat:@"%@%@&gps=%@",baseUrl,@"&method=appSev&app_com=com_shop&task=nearCorp",coor];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        NSMutableArray * Array = [[NSMutableArray alloc]init];
+        for(NSDictionary * dataDic in OBJC_Nil([dic objectForKey:@"data"])){
+            RMPublicModel * model = [[RMPublicModel alloc]init];
+            model.status = [[dic objectForKey:@"status"] boolValue];
+            model.msg = [dic objectForKey:@"msg"];
+            model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
+            model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
+            model.content_face = OBJC_Nil([dataDic objectForKey:@"content_face"]);
+            model.content_linkname = OBJC_Nil([dataDic objectForKey:@"content_linkname"]);
+            model.content_mobile = OBJC_Nil([dataDic objectForKey:@"content_contact"]);
+            model.content_address = OBJC_Nil([dataDic objectForKey:@"content_address"]);
+            model.levelId = OBJC_Nil([dataDic objectForKey:@"level_id"]);
+            [Array addObject:model];
+        }
+        if(block){
+            block(nil,YES,Array);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+
+}
+
+
+#pragma mark - 附近肉友
++ (void)nearMemberRequestwithCoor:(NSString *)coor andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_shop&task=nearMem&gps=39.75715,116.218574
+    NSString * url = [NSString stringWithFormat:@"%@%@&gps=%@",baseUrl,@"&method=appSev&app_com=com_shop&task=nearMem",coor];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        NSMutableArray * Array = [[NSMutableArray alloc]init];
+        for(NSDictionary * dataDic in OBJC_Nil([dic objectForKey:@"data"])){
+            RMPublicModel * model = [[RMPublicModel alloc]init];
+            model.status = [[dic objectForKey:@"status"] boolValue];
+            model.msg = [dic objectForKey:@"msg"];
+            model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
+            model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
+            model.content_img = OBJC_Nil([dataDic objectForKey:@"content_img"]);
+            [Array addObject:model];
+        }
+        if(block){
+            block(nil,YES,Array);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+    
 }
 
 @end

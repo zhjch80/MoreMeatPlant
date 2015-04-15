@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self setCustomNavTitle:@"我的帖子"];
+    
     
     self.mainTableView.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
     
@@ -58,10 +58,11 @@
     
     if (self.auto_id == nil){
         self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
+        self.titleName = @"我的帖子";
     }else{
-        
+        self.titleName = @"肉友主页";
     }
-    
+    [self setCustomNavTitle:self.titleName];
     [self loadBottomView];
 }
 

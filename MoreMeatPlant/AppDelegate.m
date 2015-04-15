@@ -16,7 +16,7 @@
 #import "RMUserLoginInfoManager.h"
 #import "EaseMob.h"
 #import "BMapKit.h"
-#import "RMLocationManager.h"
+
 
 
 #import <ShareSDK/ShareSDK.h>
@@ -35,7 +35,6 @@
     RMLoginViewController * loginCtl;
     RMCustomTabBarController * customTabBarCtl;
     BMKMapManager* _mapManager;
-    RMLocationManager * locationManager;
 }
 
 @end
@@ -43,7 +42,7 @@
 
 @implementation AppDelegate
 @synthesize cusNav;
-
+@synthesize locationManager;
 - (id)init
 {
     self = [super init];

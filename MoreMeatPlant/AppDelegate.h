@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "RMCustomNavController.h"
 #import "RMShareViewDelegate.h"
+#import "RMLocationManager.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) RMCustomNavController *cusNav;
 @property (retain, nonatomic) RMShareViewDelegate * viewdelegate;
-
+@property (retain, nonatomic) RMLocationManager * locationManager;
 /**
  *  @method
  *  @param      type        0没有登录       1已经登录

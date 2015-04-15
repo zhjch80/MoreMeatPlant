@@ -30,5 +30,6 @@ typedef void (^RMMyHomeViewCtlDetailCallBack) (NSString * auto_id);
 @property (copy, nonatomic) RMMyHomeViewCtlDetailCallBack detailcall_back;
 @property (retain, nonatomic) NSString * auto_id;
 @property (assign, nonatomic) BOOL isSelf;
+@property (retain, nonatomic) NSString * titleName;
 
 @end

@@ -10,12 +10,16 @@
 #import "BMapKit.h"
 
 typedef void (^RMLocationManagerCallBack) (BMKUserLocation *);
+typedef void (^RMLocationManagerGCCallBack) (NSString *);
 
-@interface RMLocationManager : NSObject<BMKLocationServiceDelegate>{
+@interface RMLocationManager : NSObject<BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>{
     BMKLocationService * _locService;
+    BMKGeoCodeSearch * userSearch;
 }
 
 @property (copy, nonatomic)  RMLocationManagerCallBack callback;
+@property (copy, nonatomic) RMLocationManagerGCCallBack gccallback;
 - (void)startLocation;
 - (void)stopLocation;
+- (void)ReverseGeoAction:(CLLocationCoordinate2D)coor;
 @end

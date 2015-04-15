@@ -31,7 +31,6 @@
     
     self.mainTableview.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
     
-    [self setCustomNavTitle:@"我的店铺"];
     
    
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
@@ -43,10 +42,18 @@
     headView.corp_headImgV.layer.cornerRadius = 5;
     headView.corp_headImgV.clipsToBounds = YES;
     
+    [headView.collection addTarget:self action:@selector(collectionAction:) forControlEvents:UIControlEventTouchDown];
+    
     if(self.auto_id == nil){
         headView.collection.hidden = YES;
         self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
+        self.titleName = @"我的店铺";
+    }else{
+        self.titleName = @"店铺主页";
     }
+    
+    [self setCustomNavTitle:self.titleName];
+
     
     bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
@@ -389,6 +396,26 @@
         }else{
             [self showHint:object];
         }
+    }];
+}
+
+#pragma mark - 收藏
+- (void)collectionAction:(UIButton *)sender{
+    //收藏
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getMembersCollectWithCollect_id:self.auto_id withContent_type:@"2" withID:[[RMUserLoginInfoManager loginmanager] user] withPWD:[[RMUserLoginInfoManager loginmanager] pwd] callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self showHint:[object objectForKey:@"msg"]];
+        }
+
     }];
 }
 

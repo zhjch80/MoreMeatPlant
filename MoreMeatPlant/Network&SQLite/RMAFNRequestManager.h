@@ -665,4 +665,15 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  */
 + (NSString *)getWuliuUrlWithExpressName:(NSString *)name no:(NSString *)no;
 
+/**
+ *  获取附近店铺
+ *
+ */
++ (void)nearCorpRequestwithCoor:(NSString *)coor andCallBack:(RMAFNRequestManagerCallBack)block;
+/**
+ *  获取附近肉友
+ *
+ */
++ (void)nearMemberRequestwithCoor:(NSString *)coor andCallBack:(RMAFNRequestManagerCallBack)block;
+
 @end

@@ -666,6 +666,9 @@
 		516F471A1ADE38DC0017879A /* RMHomeHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F47191ADE38DC0017879A /* RMHomeHeadView.xib */; };
 		516F471D1ADE416F0017879A /* RMCorpHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F471C1ADE416F0017879A /* RMCorpHeadView.m */; };
 		516F471F1ADE41880017879A /* RMCorpHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F471E1ADE41880017879A /* RMCorpHeadView.xib */; };
+		516F47221ADE5E2E0017879A /* RMPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47211ADE5E2E0017879A /* RMPointAnnotation.m */; };
+		516F47251ADE5ED90017879A /* RMActionPaopaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47241ADE5ED90017879A /* RMActionPaopaoView.m */; };
+		516F47271ADE5EE90017879A /* RMActionPaopaoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
@@ -683,6 +686,8 @@
 		519927561AB5870100B0F83F /* RMCorpCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 519927541AB5870100B0F83F /* RMCorpCollectionViewController.xib */; };
 		5199275A1AB5876500B0F83F /* RMMyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519927581AB5876500B0F83F /* RMMyCollectionViewController.m */; };
 		5199275B1AB5876500B0F83F /* RMMyCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 519927591AB5876500B0F83F /* RMMyCollectionViewController.xib */; };
+		51A9BAE91ADEA8F400B486A6 /* RMMoreChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9BAE71ADEA8F400B486A6 /* RMMoreChatViewController.m */; };
+		51A9BAEA1ADEA8F400B486A6 /* RMMoreChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51A9BAE81ADEA8F400B486A6 /* RMMoreChatViewController.xib */; };
 		51CE2B761AD6996800E9E43F /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 51CE2B751AD6996800E9E43F /* JKCountDownButton.m */; };
 		51CE2B791AD6ADB900E9E43F /* RMOrderReturnEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51CE2B781AD6ADB900E9E43F /* RMOrderReturnEditView.m */; };
 		51CE2B7B1AD6ADC700E9E43F /* RMOrderReturnEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51CE2B7A1AD6ADC700E9E43F /* RMOrderReturnEditView.xib */; };
@@ -1891,6 +1896,11 @@
 		516F471B1ADE416F0017879A /* RMCorpHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCorpHeadView.h; sourceTree = "<group>"; };
 		516F471C1ADE416F0017879A /* RMCorpHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCorpHeadView.m; sourceTree = "<group>"; };
 		516F471E1ADE41880017879A /* RMCorpHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMCorpHeadView.xib; sourceTree = "<group>"; };
+		516F47201ADE5E2E0017879A /* RMPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPointAnnotation.h; sourceTree = "<group>"; };
+		516F47211ADE5E2E0017879A /* RMPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPointAnnotation.m; sourceTree = "<group>"; };
+		516F47231ADE5ED90017879A /* RMActionPaopaoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMActionPaopaoView.h; sourceTree = "<group>"; };
+		516F47241ADE5ED90017879A /* RMActionPaopaoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMActionPaopaoView.m; sourceTree = "<group>"; };
+		516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMActionPaopaoView.xib; sourceTree = "<group>"; };
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
@@ -1917,6 +1927,9 @@
 		519927571AB5876500B0F83F /* RMMyCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyCollectionViewController.h; sourceTree = "<group>"; };
 		519927581AB5876500B0F83F /* RMMyCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMyCollectionViewController.m; sourceTree = "<group>"; };
 		519927591AB5876500B0F83F /* RMMyCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMyCollectionViewController.xib; sourceTree = "<group>"; };
+		51A9BAE61ADEA8F400B486A6 /* RMMoreChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMoreChatViewController.h; sourceTree = "<group>"; };
+		51A9BAE71ADEA8F400B486A6 /* RMMoreChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMoreChatViewController.m; sourceTree = "<group>"; };
+		51A9BAE81ADEA8F400B486A6 /* RMMoreChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMoreChatViewController.xib; sourceTree = "<group>"; };
 		51CE2B741AD6996800E9E43F /* JKCountDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownButton.h; sourceTree = "<group>"; };
 		51CE2B751AD6996800E9E43F /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
 		51CE2B771AD6ADB900E9E43F /* RMOrderReturnEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMOrderReturnEditView.h; sourceTree = "<group>"; };
@@ -3395,6 +3408,9 @@
 				0A4104D81ABAB03C0060FBD5 /* ChatSendHelper.h */,
 				0A4104D91ABAB03C0060FBD5 /* ChatSendHelper.m */,
 				0A41049F1ABAAE340060FBD5 /* ChatView */,
+				51A9BAE61ADEA8F400B486A6 /* RMMoreChatViewController.h */,
+				51A9BAE71ADEA8F400B486A6 /* RMMoreChatViewController.m */,
+				51A9BAE81ADEA8F400B486A6 /* RMMoreChatViewController.xib */,
 			);
 			path = "多聊";
 			sourceTree = "<group>";
@@ -3565,6 +3581,11 @@
 				1D64F5231A91B72C0073EB98 /* RMNearbyMerchantViewController.h */,
 				1D64F5241A91B72C0073EB98 /* RMNearbyMerchantViewController.m */,
 				1D64F5251A91B72C0073EB98 /* RMNearbyMerchantViewController.xib */,
+				516F47201ADE5E2E0017879A /* RMPointAnnotation.h */,
+				516F47211ADE5E2E0017879A /* RMPointAnnotation.m */,
+				516F47231ADE5ED90017879A /* RMActionPaopaoView.h */,
+				516F47241ADE5ED90017879A /* RMActionPaopaoView.m */,
+				516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */,
 			);
 			path = "附近商家";
 			sourceTree = "<group>";
@@ -4984,6 +5005,7 @@
 				1DDBBD531ABBB14700E35CD5 /* home_z@2x.png in Resources */,
 				1DEB75161AB9D67A00EA1FA7 /* member_region_icon.png in Resources */,
 				0A4106B61ABABBF60060FBD5 /* messageToolbarBg@2x.png in Resources */,
+				516F47271ADE5EE90017879A /* RMActionPaopaoView.xib in Resources */,
 				51E268201AADE92300252DEF /* RMShopLeaveMsTableViewCell.xib in Resources */,
 				51E2681B1AADE77700252DEF /* RMSopCarHeadTableViewCell.xib in Resources */,
 				5157DE591AB9DA0E005E9FA5 /* RMPublishTitleTableViewCell.xib in Resources */,
@@ -5089,6 +5111,7 @@
 				1DEB74F31AB9D67A00EA1FA7 /* fbbb_no_select.png in Resources */,
 				1DEB74F01AB9D67A00EA1FA7 /* fbbb_img_06.png in Resources */,
 				0A41064A1ABABBF60060FBD5 /* VoiceSearchFeedback004.png in Resources */,
+				51A9BAEA1ADEA8F400B486A6 /* RMMoreChatViewController.xib in Resources */,
 				51D8841C1ABDCFD400F7A3BD /* RMForgotWordViewController.xib in Resources */,
 				0A4106C51ABABBF60060FBD5 /* chat_sender_audio_playing_001.png in Resources */,
 				1D7090C61AC25DE600AE47BF /* img_tzArrow_1.png in Resources */,
@@ -5509,6 +5532,7 @@
 				0A41056D1ABAB3C70060FBD5 /* DACircularProgressView.m in Sources */,
 				51DB4CBF1AC7CB0800A6064D /* IQBarButtonItem.m in Sources */,
 				0A4105941ABAB54A0060FBD5 /* NSDateFormatter+Category.m in Sources */,
+				516F47221ADE5E2E0017879A /* RMPointAnnotation.m in Sources */,
 				51DB4DDE1ACFBA3400A6064D /* RMPublishCourseTableViewCell.m in Sources */,
 				0A4104EE1ABAB1D70060FBD5 /* NSDate+Category.m in Sources */,
 				0A4104E21ABAB0770060FBD5 /* MessageModel.m in Sources */,
@@ -5634,6 +5658,7 @@
 				0A41057F1ABAB3C70060FBD5 /* PSTCollectionView.m in Sources */,
 				1D8397491AB3F72D00DA190A /* DoImagePickerController.m in Sources */,
 				51DB4E171AD130DA00A6064D /* RMCorpModel.m in Sources */,
+				51A9BAE91ADEA8F400B486A6 /* RMMoreChatViewController.m in Sources */,
 				5157DE531AB9CC5D005E9FA5 /* RMPublishBabyViewController.m in Sources */,
 				0A4105741ABAB3C70060FBD5 /* EMSDWebImagePrefetcher.m in Sources */,
 				51D883C61ABB179400F7A3BD /* RMAdvertisingViewController.m in Sources */,
@@ -5667,6 +5692,7 @@
 				1D64F50C1A90CC2E0073EB98 /* RMCustomTabBarController.m in Sources */,
 				51D883E21ABB304800F7A3BD /* RMHadBabyViewController.m in Sources */,
 				9538F3DC1AB1C83F00608FAD /* RMCommentsView.m in Sources */,
+				516F47251ADE5ED90017879A /* RMActionPaopaoView.m in Sources */,
 				1D64F4FE1A904E180073EB98 /* RMHomeViewController.m in Sources */,
 				95AA6F4D1ABF8CD2007F4C9E /* XHImageViewer.m in Sources */,
 				51D883E71ABB30D600F7A3BD /* RMHadBabyListViewController.m in Sources */,

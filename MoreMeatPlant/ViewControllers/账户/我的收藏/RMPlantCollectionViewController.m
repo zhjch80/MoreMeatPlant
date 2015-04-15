@@ -76,7 +76,7 @@
         cell.leftImg.hidden = NO;
         cell.leftName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
-        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSString * _price = [NSString stringWithFormat:@"¥%@",OBJC(model.content_price)];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
         [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
         cell.leftPrice.attributedText = oneAttributeStr;
@@ -93,7 +93,7 @@
         cell.centerImg.hidden = NO;
         cell.centerName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
-        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSString * _price = [NSString stringWithFormat:@"¥%@",OBJC(model.content_price)];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
         [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
         cell.centerPrice.attributedText = oneAttributeStr;
@@ -110,7 +110,7 @@
         cell.rightImg.hidden = NO;
         cell.rightName.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
-        NSString * _price = [NSString stringWithFormat:@"¥%@",model.content_price];
+        NSString * _price = [NSString stringWithFormat:@"¥%@",OBJC(model.content_price)];
         NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
         [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, 1)];
         cell.rightPrice.attributedText = oneAttributeStr;

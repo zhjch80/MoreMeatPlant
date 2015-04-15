@@ -22,4 +22,5 @@
 @property (weak, nonatomic) IBOutlet UITableView *mainTableview;
 @property (retain, nonatomic) NSString * auto_id;
 @property (retain, nonatomic) NSString * member_class;
+@property (retain, nonatomic) NSString * titleName;
 @end

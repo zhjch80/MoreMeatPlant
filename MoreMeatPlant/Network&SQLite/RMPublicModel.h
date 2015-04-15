@@ -129,4 +129,7 @@
 
 @property (retain, nonatomic) NSMutableArray * classs;  //商家店铺分类
 
+
+@property (retain, nonatomic) NSString * content_x;//
+@property (retain, nonatomic) NSString * content_y;
 @end

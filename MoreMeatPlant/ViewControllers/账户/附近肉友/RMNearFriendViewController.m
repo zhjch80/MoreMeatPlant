@@ -8,7 +8,9 @@
 
 #import "RMNearFriendViewController.h"
 #import "RMNearFriendTableViewCell.h"
-@interface RMNearFriendViewController ()<RefreshControlDelegate>{
+#import "RMMyHomeViewController.h"
+#import "RMDaqoCell.h"
+@interface RMNearFriendViewController ()<RefreshControlDelegate,DaqpSelectedPlantTypeDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
     BOOL isLoadComplete;
@@ -37,6 +39,8 @@
     
     
     [self initPlat];
+    
+    [self requestNearMember];
 }
 #pragma mark - 初始化方法
 - (void)initPlat{
@@ -48,16 +52,63 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    RMNearFriendTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMNearFriendTableViewCell"];
-    if(cell == nil){
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RMNearFriendTableViewCell" owner:self options:nil] lastObject];
+    static NSString * identifierStr = @"DaqoidentifierStr";
+    RMDaqoCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+    if (!cell){
+        if (IS_IPHONE_6p_SCREEN){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell_6p" owner:self options:nil] lastObject];
+        }else if (IS_IPHONE_6_SCREEN){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell_6" owner:self options:nil] lastObject];
+        }else{
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell" owner:self options:nil] lastObject];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.delegate = self;
+    }
+    
+    if(indexPath.row*3 < friendsArray.count){
+        RMPublicModel *model = [friendsArray objectAtIndex:indexPath.row*3];
+        cell.leftTitle.text = model.content_name;
+        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        cell.leftImg.identifierString = model.auto_id;
+    }else{
+        cell.leftTitle.hidden = YES;
+        cell.leftImg.hidden = YES;
+    }
+    if(indexPath.row*3+1 < friendsArray.count){
+        RMPublicModel *model = [friendsArray objectAtIndex:indexPath.row*3+1];
+        cell.centerTitle.text = model.content_name;
+        [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        cell.centerImg.identifierString = model.auto_id;
+    }else{
+        cell.centerTitle.hidden = YES;
+        cell.centerImg.hidden = YES;
+    }
+    if(indexPath.row*3+2 < friendsArray.count){
+        RMPublicModel *model = [friendsArray objectAtIndex:indexPath.row*3+2];
+        cell.rightTitle.text = model.content_name;
+        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        cell.rightImg.identifierString = model.auto_id;
+    }else{
+        cell.rightTitle.hidden = YES;
+        cell.rightImg.hidden = YES;
     }
     return cell;
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 103.f;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
+
+- (void)daqoSelectedPlantTypeMethod:(RMImageView *)image{
+    RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+    home.auto_id = image.identifierString;
+    [self.navigationController pushViewController:home animated:YES];
+}
+
 
 #pragma mark - 返回
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
@@ -76,26 +127,48 @@
     }
 }
 
+- (void)requestNearMember{
+    NSLog(@"%@",[[RMUserLoginInfoManager loginmanager] coorStr]);
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager nearMemberRequestwithCoor:[[RMUserLoginInfoManager loginmanager] coorStr] andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            if([object isKindOfClass:[RMPublicModel class]]){//模型类
+                RMPublicModel * model = object;
+                if(model.status){
+                    if(pageCount == 1){
+                        [refreshControl finishRefreshingDirection:RefreshDirectionTop];
+                    }else{
+                        [self showHint:@"没有更多肉友啦！"];
+                        [refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                    }
+                }else{
+                    [self showHint:model.msg];
+                }
+            }else{//数组
+                [friendsArray addObjectsFromArray:object];
+                if(pageCount == 1){
+                    [refreshControl finishRefreshingDirection:RefreshDirectionTop];
+                }else{
+                    [refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                }
+            }
+        }else{
+            [self showHint:object];
+        }
+        [_mainTableView reloadData];
+    }];
+}
+
 #pragma mark 刷新代理
 - (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
     if (direction == RefreshDirectionTop) { //下拉刷新
         pageCount = 1;
-        isRefresh = YES;
-        isLoadComplete = NO;
-        //        [self requestDataWithPageCount:1];
+            [self requestNearMember];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
-        if (isLoadComplete){
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self showHint:@"没有更多肉肉啦"];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-            });
-        }else{
+       
             pageCount ++;
-            isRefresh = NO;
-            //            [self requestDataWithPageCount:pageCount];
-        }
-        
+            [self requestNearMember];
     }
 }
 
