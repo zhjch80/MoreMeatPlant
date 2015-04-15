@@ -15,6 +15,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "RMDaqoDetailsFooterView.h"
 #import "RMCommentsView.h"
+#import "FileUtil.h"
 
 #define kDKTableViewMainBackgroundImageFileName @"DaQuanBackground.jpg"
 #define kDKTableViewDefaultCellHeight 50.0f
@@ -415,18 +416,46 @@
     isTakingPictures = NO;
     [picker dismissViewControllerAnimated:YES completion:^{
     }];
+    
+//    NSData *data = UIImageJPEGRepresentation(image, 0.5);
+//    
+//    [self saveImage:[UIImage imageWithData:data] withName:@"uploadSingleImage.jpg"];
+//    
+//    NSString *path = [[FileUtil getCachePathFor:@"uploadImageCache"] stringByAppendingPathComponent:@"uploadSingleImage.jpg"];
+//
+//    [self requestAddImageViewWithImgPath:path];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     isTakingPictures = NO;
     [picker dismissViewControllerAnimated:YES completion:^{
     }];
+    
+    //获得用户编辑过的图片
+    UIImage* image = [info objectForKey: @"UIImagePickerControllerEditedImage"];
+//    UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
+
+    NSData *data = UIImageJPEGRepresentation(image, 0.5);
+ 
+    [self saveImage:[UIImage imageWithData:data] withName:@"uploadSingleImage.jpg"];
+    
+    NSString *path = [[FileUtil getCachePathFor:@"uploadImageCache"] stringByAppendingPathComponent:@"uploadSingleImage.jpg"];
+    
+    [self requestAddImageViewWithImgPath:path];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     isTakingPictures = NO;
     [picker dismissViewControllerAnimated:YES completion:^{
     }];
+}
+
+- (void)saveImage:(UIImage *)currentImage withName:(NSString *)imageName {
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    NSString *path = [[FileUtil getCachePathFor:@"uploadImageCache"] stringByAppendingPathComponent:imageName];
+    // 将图片写入文件
+    [imageData writeToFile:path atomically:NO];
 }
 
 #pragma mark -
@@ -509,17 +538,21 @@
 /**
  *   @method     添加图片
  */
-- (void)requestAddImageView {
+- (void)requestAddImageViewWithImgPath:(NSString *)imgPath {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager postPlantDaqoAddImageWithAll_id:dataModel.auto_id withContent_img:@"" withID:@"" withPWD:@"" callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager postPlantDaqoAddImageWithAll_id:dataModel.auto_id withContent_img:imgPath withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
         if (error){
-            
+            NSLog(@"error:%@",error);
+            [self showHint:@"添加失败，请重新添加"];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             return ;
         }
         
         if (success){
-            
+            [self showHint:[object objectForKey:@"msg"]];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }else{
+            [self showHint:[object objectForKey:@"msg"]];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];

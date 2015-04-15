@@ -38,11 +38,12 @@
 @property (nonatomic, strong) RMPublicModel * dataModel;
 @property (nonatomic, strong) NSMutableArray * advertisingArr;
 @property (nonatomic, strong) RefreshControl * refreshControl;
+@property (nonatomic, strong) RMBottomView * bottomView;
 
 @end
 
 @implementation RMReleasePoisonDetailsViewController
-@synthesize mTableView, tableHeadView, dataCommentArr, dataModel, advertisingArr,refreshControl;
+@synthesize mTableView, tableHeadView, dataCommentArr, dataModel, advertisingArr,refreshControl, bottomView;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -101,10 +102,10 @@
 #pragma mark - 加载底部View
 
 - (void)loadBottomView {
-    RMBottomView * bottomView = [[RMBottomView alloc] init];
+    bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
     bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_postMessage@2x", @"img_share", nil]];
+    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_postMessage@2x", nil]];
     [self.view addSubview:bottomView];
 }
 
@@ -141,18 +142,14 @@
                 return;
             }
             
-//            RMCommentsView * commentsView = [[RMCommentsView alloc] init];
-//            commentsView.delegate = self;
-//            commentsView.backgroundColor = [UIColor clearColor];
-//            commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-//            commentsView.requestType = kRMReleasePoisonListComment;
-//            commentsView.code = dataModel.auto_id;
-//            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  评论:%@",[dataModel.members objectForKey:@"member_name"]]];
-//            [self.view addSubview:commentsView];
-            break;
-        }
-        case 3:{
-            NSLog(@"分享");
+            RMCommentsView * commentsView = [[RMCommentsView alloc] init];
+            commentsView.delegate = self;
+            commentsView.backgroundColor = [UIColor clearColor];
+            commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            commentsView.requestType = kRMReleasePoisonListComment;
+            commentsView.code = dataModel.auto_id;
+            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  评论:%@",[dataModel.members objectForKey:@"member_name"]] withImage:nil];
+            [self.view addSubview:commentsView];
             break;
         }
             

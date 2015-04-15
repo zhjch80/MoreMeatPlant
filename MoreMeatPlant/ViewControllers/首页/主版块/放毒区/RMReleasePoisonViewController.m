@@ -24,6 +24,8 @@
 #import "CustomRefreshView.h"
 #import "NSString+TimeInterval.h"
 #import "RMCommentsView.h"
+#import "KxMenu.h"
+#import "JSBadgeView.h"
 
 @interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate,CommentsViewDelegate>{
     BOOL isFirstViewDidAppear;
@@ -34,7 +36,7 @@
     BOOL isLoadAdver;       //是否已经加载广告
     BOOL isLoadNews;        //是否已经加载置顶
     BOOL isSubsPlant;       //是否已经加载科目
-    
+    JSBadgeView * chat_badge;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;         //列表数据
@@ -51,10 +53,12 @@
 @property (nonatomic, strong) ZFModalTransitionAnimator *animator;
 @property (nonatomic, strong) RefreshControl * refreshControl;
 @property (nonatomic, strong) RMPlantTypeView * plantTopTypeView;
+@property (nonatomic, strong) RMBottomView * bottomView;
+
 @end
 
 @implementation RMReleasePoisonViewController
-@synthesize mTableView, dataArr, fenleiAction, action, animator, plantTypeArr, advertisingArr, subsPlantArr, newsArr, plantRequestValue, subsPlantRequestValue, refreshControl,plantTopTypeView;
+@synthesize mTableView, dataArr, fenleiAction, action, animator, plantTypeArr, advertisingArr, subsPlantArr, newsArr, plantRequestValue, subsPlantRequestValue, refreshControl,plantTopTypeView, bottomView;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -114,7 +118,7 @@
 #pragma mark - 加载底部View
 
 - (void)loadBottomView {
-    RMBottomView * bottomView = [[RMBottomView alloc] init];
+    bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
     bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
     [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_up", @"img_moreChat", nil]];
@@ -824,8 +828,38 @@
             break;
         }
         case 2:{
-            //多聊
-            NSLog(@"多聊");
+            KxMenuItem * item1 = [KxMenuItem menuItem:@"多聊消息" image:nil target:self action:@selector(menuSelected:) index:201];
+            item1.foreColor = UIColorFromRGB(0x585858);
+            KxMenuItem * item2 = [KxMenuItem menuItem:@"一肉一拍" image:nil target:self action:@selector(menuSelected:) index:202];
+            item2.foreColor = UIColorFromRGB(0x585858);
+            KxMenuItem * item3 = [KxMenuItem menuItem:@"鲜肉市场" image:nil target:self action:@selector(menuSelected:) index:203];
+            item3.foreColor = UIColorFromRGB(0x585858);
+            NSArray * arr = [[NSArray alloc]initWithObjects:item1,item2,item3, nil];
+            
+            [KxMenu setTintColor:[UIColor whiteColor]];
+            
+            [KxMenu showMenuInView:self.view fromRect:CGRectMake(kScreenWidth - 100, bottomView.frame.origin.y, 100, 100) menuItems:arr];
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+- (void)menuSelected:(KxMenuItem *)sender {
+    switch (sender.tag) {
+        case 201:{
+            NSLog(@"多聊消息");
+            break;
+        }
+        case 202:{
+            NSLog(@"一肉一拍");
+            break;
+        }
+        case 203:{
+            NSLog(@"鲜肉市场");
             break;
         }
             

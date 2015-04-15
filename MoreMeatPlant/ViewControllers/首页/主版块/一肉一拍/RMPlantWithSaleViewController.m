@@ -19,6 +19,7 @@
 #import "ZFModalTransitionAnimator.h"
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
+#import "KxMenu.h"
 
 @interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,BottomDelegate,RefreshControlDelegate>{
     BOOL isFirstViewDidAppear;
@@ -35,11 +36,12 @@
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
 @property (nonatomic, assign) NSInteger subsPlantRequestValue;   //请求list数据 默认传空 用户可以选择科目
+@property (nonatomic, strong) RMBottomView * bottomView;
 
 @end
 
 @implementation RMPlantWithSaleViewController
-@synthesize mTableView, dataArr, animator, refreshControl, newsArr, subsPlantArr, subsPlantRequestValue;
+@synthesize mTableView, dataArr, animator, refreshControl, newsArr, subsPlantArr, subsPlantRequestValue, bottomView;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -85,9 +87,9 @@
 #pragma mark - 加载底部View
 
 - (void)loadBottomView {
-    RMBottomView * bottomView = [[RMBottomView alloc] init];
+    bottomView = [[RMBottomView alloc] init];
     bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_up", @"img_moreChat", nil]];
+    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_up", @"img_buy", @"img_moreChat", nil]];
     bottomView.delegate = self;
     [self.view addSubview:bottomView];
 }
@@ -291,8 +293,40 @@
             break;
         }
         case 2:{
-            //多聊
+            NSLog(@"购买");
+            break;
+        }
+        case 3:{
+            KxMenuItem * item1 = [KxMenuItem menuItem:@"多聊消息" image:nil target:self action:@selector(menuSelected:) index:201];
+            item1.foreColor = UIColorFromRGB(0x585858);
+            KxMenuItem * item2 = [KxMenuItem menuItem:@"我的收藏" image:nil target:self action:@selector(menuSelected:) index:202];
+            item2.foreColor = UIColorFromRGB(0x585858);
+            KxMenuItem * item3 = [KxMenuItem menuItem:@"我的账户" image:nil target:self action:@selector(menuSelected:) index:203];
+            item3.foreColor = UIColorFromRGB(0x585858);
+            NSArray * arr = [[NSArray alloc]initWithObjects:item1,item2,item3, nil];
             
+            [KxMenu setTintColor:[UIColor whiteColor]];
+            
+            [KxMenu showMenuInView:self.view fromRect:CGRectMake(kScreenWidth - 100, bottomView.frame.origin.y, 100, 100) menuItems:arr];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void)menuSelected:(KxMenuItem *)sender {
+    switch (sender.tag) {
+        case 201:{
+            NSLog(@"多聊消息");
+            break;
+        }
+        case 202:{
+            NSLog(@"我的收藏");
+            break;
+        }
+        case 203:{
+            NSLog(@"我的账户");
             break;
         }
             

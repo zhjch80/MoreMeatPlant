@@ -178,6 +178,8 @@ typedef enum {
 - (void) setupFrameInView:(UIView *)view
                  fromRect:(CGRect)fromRect
 {
+    [_contentView.layer setCornerRadius:5.0];
+
     const CGSize contentSize = _contentView.frame.size;
     
     const CGFloat outerWidth = view.bounds.size.width;
@@ -407,7 +409,6 @@ typedef enum {
     }
     
     for (KxMenuItem *menuItem in _menuItems) {
-        
         const CGSize titleSize = [menuItem.title sizeWithFont:titleFont];
         const CGSize imageSize = menuItem.image.size;
         
@@ -636,7 +637,7 @@ typedef enum {
     CGFloat X1 = frame.origin.x + frame.size.width;
     CGFloat Y0 = frame.origin.y;
     CGFloat Y1 = frame.origin.y + frame.size.height;
-    
+    /*
     // render arrow
     
     UIBezierPath *arrowPath = [UIBezierPath bezierPath];
@@ -714,7 +715,7 @@ typedef enum {
     }
     
     [arrowPath fill];
-    
+    */
     // render body
     
     const CGRect bodyFrame = {X0, Y0, X1 - X0, Y1 - Y0};

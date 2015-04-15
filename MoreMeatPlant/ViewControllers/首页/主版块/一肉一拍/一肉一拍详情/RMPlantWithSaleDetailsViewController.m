@@ -18,6 +18,7 @@
 #import "RMAliPayViewController.h"
 #import "RMMyCorpViewController.h"
 #import "UIImage+LK.h"
+#import "RMShopCarViewController.h"
 
 @interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate,RMAddressEditViewCompletedDelegate>{
     BOOL isFirstViewDidAppear;
@@ -35,11 +36,12 @@
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @property (nonatomic, strong) RMBaseView * footerView;
 @property (nonatomic, strong) RMPublicModel * dataModel;
+@property (nonatomic, strong) RMBottomView * bottomView;
 
 @end
 
 @implementation RMPlantWithSaleDetailsViewController
-@synthesize headerView, mTableView, dataArr, cycleView, footerView, auto_id, dataModel;
+@synthesize headerView, mTableView, dataArr, cycleView, footerView, auto_id, dataModel,bottomView;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -197,10 +199,10 @@
 }
 
 - (void)loadBottomView {
-    RMBottomView * bottomView = [[RMBottomView alloc] init];
+    bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
     bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_buy", @"img_share", nil]];
+    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_buy", nil]];
     [self.view addSubview:bottomView];
 }
 
@@ -232,10 +234,6 @@
             break;
         }
         case 2:{
-            
-            break;
-        }
-        case 3:{
             
             break;
         }
@@ -304,7 +302,7 @@
             NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
             RMPlantWithSaleDetailsCell * cell = (RMPlantWithSaleDetailsCell *)[mTableView cellForRowAtIndexPath:indexPath];
             NSInteger num = [[NSString stringWithFormat:@"%@",cell.showNum.text] integerValue];
-            if (num <= 0){
+            if (num <= 1){
             }else{
                 num--;
             }
@@ -409,7 +407,10 @@
 
 #pragma mark -立即购买
 - (void)buyNow{
-    
+#if 1
+    RMShopCarViewController * shopcar = [[RMShopCarViewController alloc]initWithNibName:@"RMShopCarViewController" bundle:nil];
+    [self.navigationController pushViewController:shopcar animated:YES];
+#else
     parameterModel.payment_id = @"2";
     __block RMPlantWithSaleDetailsViewController * SELF = self;
     settle = [[RMSettlementViewController alloc]initWithNibName:@"RMSettlementViewController" bundle:nil];
@@ -446,6 +447,8 @@
     };
     
     [self presentPopUpViewController:settle overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+#endif
+
 }
 
 #pragma mark - 提交订单

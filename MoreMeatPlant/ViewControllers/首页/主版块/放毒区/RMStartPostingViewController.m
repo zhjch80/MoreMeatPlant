@@ -129,7 +129,7 @@
                     
                     NSData *data;
 //                    if (UIImagePNGRepresentation(image.image) == nil) {
-                        data = UIImageJPEGRepresentation(image.image, 0.1);
+                        data = UIImageJPEGRepresentation(image.image, 0.5);
 //                    } else {
 //                        data = UIImagePNGRepresentation(image.image);
 //                    }
@@ -389,8 +389,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:^{
     }];
-    UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
+//    UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage* image = [info objectForKey: @"UIImagePickerControllerEditedImage"];
+
     switch (cameraType) {
         case 1:{
             for (NSInteger i=0; i<8; i++) {

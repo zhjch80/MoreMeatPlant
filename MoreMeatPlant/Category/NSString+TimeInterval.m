@@ -46,7 +46,7 @@
         timeString = [timeString substringToIndex:timeString.length-7];
         timeString=[NSString stringWithFormat:@"%@小时前", timeString];
     }
-    if (cha/86400>1 && cha/86400<30)
+    if (cha/86400>1 && cha/86400<300)
     {
         timeString = [NSString stringWithFormat:@"%f", cha/86400];
         timeString = [timeString substringToIndex:timeString.length-7];
@@ -54,7 +54,7 @@
         
     }
     
-    if(cha/86400 >= 30)
+    if(cha/86400 >= 300)
     {
         NSArray* array = [self componentsSeparatedByString:@" "];
         if([array count] > 0)
