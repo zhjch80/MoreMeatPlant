@@ -7,7 +7,7 @@
 //
 
 #import "RMUserInfoEditViewController.h"
-
+#import "UIAlertView+Expland.h"
 @interface RMUserInfoEditViewController ()
 
 @end
@@ -26,14 +26,41 @@
     _signatureT.text = __model.contentQm?__model.contentQm:@"暂无";
     _mobileT.text = __model.contentMobile;
     _apliyT.text = __model.zfbNo;
+    [_sureModifyBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
 }
 //修改资料请求有问题
 - (void)commit{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:_apliyT.text Signature:[_signatureT.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Dic:nil andCallBack:^(NSError *error, BOOL success, id object) {
-        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                __model.contentQm = _signatureT.text;
+                __model.zfbNo = _apliyT.text;
+                [[NSNotificationCenter defaultCenter] postNotificationName:RMRequestMemberInfoAgainNotification object:__model];
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"返回", nil];
+                [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+                    [self navgationBarButtonClick:nil];
+                }];
+                [alert show];
+
+            }else{
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+
+            }
+            
+        }else{
+            [self showHint:object];
+        }
     }];
 }
 
+
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -7,7 +7,11 @@
 //
 
 #import "RMBaseViewController.h"
-
+#import "RMBaseTextField.h"
 @interface RMModifyPassWordViewController : RMBaseViewController
+@property (weak, nonatomic) IBOutlet RMBaseTextField *oldTextField;
+@property (weak, nonatomic) IBOutlet RMBaseTextField *twoTextField;
+@property (weak, nonatomic) IBOutlet UIButton *sureModifyBtn;
 
+@property (weak, nonatomic) IBOutlet RMBaseTextField *sureTextField;
 @end

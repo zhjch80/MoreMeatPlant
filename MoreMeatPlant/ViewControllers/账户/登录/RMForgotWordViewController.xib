@@ -98,7 +98,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="昵称或手机号" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="KUU-2K-lNI" customClass="RMBaseTextField">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号" minimumFontSize="17" background="login_vaule_bg1.png" translatesAutoresizingMaskIntoConstraints="NO" id="KUU-2K-lNI" customClass="RMBaseTextField">
                     <rect key="frame" x="128" y="164" width="115" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="BDz-2u-eLy"/>

@@ -171,6 +171,7 @@
                         mywallet.closecallback = ^(UIButton * sender){
                             rightTwoBarButton.enabled = YES;
                             isShow = NO;
+                            [self loadInfo];
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
                         mywallet.billcallback = ^(UIButton * sender){
@@ -197,6 +198,7 @@
                     case 3:{//我的订单
                         RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
                         order.callback = ^(void){
+                        
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
                         order.didSelectCell_callback = ^(RMPublicModel *model){
@@ -285,6 +287,8 @@
                         userinfo.callback = ^(RMUserInfoViewController * controller){
                             
                             RMUserInfoEditViewController * edit = [[RMUserInfoEditViewController alloc]initWithNibName:@"RMUserInfoEditViewController" bundle:nil];
+                            edit._model = [[RMPublicModel alloc]init];
+                            edit._model = _model;
                             [self.navigationController pushViewController:edit animated:YES];
                             
                         };
@@ -315,9 +319,12 @@
                         mywallet.zfb_no = _model.zfbNo;
                         mywallet.content_mobile = _model.contentMobile;
                         mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
+                        [mywallet.titleLabel drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, mywallet.titleLabel.frame.size.height)];
+                        
                         mywallet.closecallback = ^(UIButton * sender){
                             rightTwoBarButton.enabled = YES;
                             isShow = NO;
+                            [self loadInfo];
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
                         mywallet.billcallback = ^(UIButton * sender){
@@ -325,13 +332,13 @@
                             RMTransactionRecordsViewController * record = [[RMTransactionRecordsViewController alloc]initWithNibName:@"RMTransactionRecordsViewController" bundle:nil];
                             [self.navigationController pushViewController:record animated:YES];
                         };
-
                         mywallet.top_upcallback = ^(NSString * content_money){
                             RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
                             alipay.content_type = @"1";
                             alipay.content_money = content_money;
                             [self.navigationController pushViewController:alipay animated:YES];
                         };
+                        
                         [self presentPopUpViewController:mywallet overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-108)];
                     }
                         break;
@@ -341,21 +348,32 @@
                     }
                         break;
                     case 3:{//我的资料
-                        isShow = YES;
                         RMUserInfoViewController * userinfo = [[RMUserInfoViewController alloc]initWithNibName:@"RMUserInfoViewController" bundle:nil];
                         
                         userinfo.close_action = ^(RMUserInfoViewController * controller){
-                            isShow = NO;
                             [self dismissPopUpViewControllerWithcompletion:nil];
+                        };
+                        userinfo.modify_callback = ^(RMUserInfoViewController *controller){
+                            //跳转到修改密码
+                            RMModifyPassWordViewController * modify = [[RMModifyPassWordViewController alloc]initWithNibName:@"RMModifyPassWordViewController" bundle:nil];
+                            [self.navigationController pushViewController:modify animated:YES];
                         };
                         
                         userinfo.callback = ^(RMUserInfoViewController * controller){
                             
                             RMUserInfoEditViewController * edit = [[RMUserInfoEditViewController alloc]initWithNibName:@"RMUserInfoEditViewController" bundle:nil];
+                            edit._model = [[RMPublicModel alloc]init];
+                            edit._model = _model;
                             [self.navigationController pushViewController:edit animated:YES];
                             
                         };
+                        userinfo._model = [[RMPublicModel alloc]init];
+                        userinfo._model = _model;
+                        
+                        
                         userinfo.view.frame = CGRectMake(20, 0, kScreenWidth-20*2, kScreenHeight/3*2);
+                        
+                        [userinfo.titleLabel drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, userinfo.titleLabel.frame.size.height)];
                         [self presentPopUpViewController:userinfo overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-44-64)];
 
                     }
@@ -402,8 +420,10 @@
                         break;
                     case 8:{//发布宝贝
                         
-                        RMBabyManageViewController * babymanage = [[RMBabyManageViewController alloc]initWithNibName:@"RMBabyManageViewController" bundle:nil];
-                        [self.navigationController pushViewController:babymanage animated:YES];
+//                        RMBabyManageViewController * babymanage = [[RMBabyManageViewController alloc]initWithNibName:@"RMBabyManageViewController" bundle:nil];
+//                        [self.navigationController pushViewController:babymanage animated:YES];
+                        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"敬请期待!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                        [alert show];
                        
                     }
                         break;

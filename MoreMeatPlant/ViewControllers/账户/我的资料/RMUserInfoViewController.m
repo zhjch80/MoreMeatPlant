@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recevierNotification:) name:RMRequestMemberInfoAgainNotification object:nil];
+    
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
     self.view.backgroundColor = [UIColor clearColor];
@@ -32,6 +35,16 @@
     _mobileL.text = __model.contentMobile;
     _apliyL.text = __model.zfbNo;
     
+}
+
+- (void)recevierNotification:(NSNotification *)noti{
+    if([noti.name isEqualToString:RMRequestMemberInfoAgainNotification]){
+        _nickL.text = __model.contentName;
+        _passwordL.text = @"******";
+        _signatureL.text = __model.contentQm?__model.contentQm:@"暂无";
+        _mobileL.text = __model.contentMobile;
+        _apliyL.text = __model.zfbNo;
+    }
 }
 
 #pragma mark - 修改密码

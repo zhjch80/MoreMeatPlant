@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *mobileT;
 @property (weak, nonatomic) IBOutlet UITextField *apliyT;
 @property (retain, nonatomic) RMPublicModel * _model;
+@property (weak, nonatomic) IBOutlet UIButton *sureModifyBtn;
 
 @end

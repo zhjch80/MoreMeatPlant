@@ -7,7 +7,8 @@
 //
 
 #import "RMModifyPassWordViewController.h"
-
+#import "AppDelegate.h"
+#import "FileMangerObject.h"
 @interface RMModifyPassWordViewController ()
 
 @end
@@ -21,6 +22,38 @@
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    [_sureModifyBtn addTarget:self action:@selector(passwordModify) forControlEvents:UIControlEventTouchDown];
+}
+
+- (void)passwordModify{
+    if([_oldTextField.text length] == 0||![[FileMangerObject md5:_oldTextField.text] isEqualToString:[[RMUserLoginInfoManager loginmanager] pwd]]){
+        [self showHint:@"请输入正确的旧密码"];
+        return;
+    }else if ([_twoTextField.text length] == 0){
+        [self showHint:_twoTextField.placeholder];
+        return;
+    }else if ([_sureTextField.text length] == 0){
+        [self showHint:_sureTextField.placeholder];
+        return;
+    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager passwordModifyWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] NewPass:[FileMangerObject md5:_twoTextField.text] andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * mdoel = object;
+            if(mdoel.status){
+                AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+                [dele loadMainViewControllersWithType:0];
+                [dele tabSelectController:2];
+                [self navgationBarButtonClick:nil];
+            }else{
+                
+            }
+            [self showHint:mdoel.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{

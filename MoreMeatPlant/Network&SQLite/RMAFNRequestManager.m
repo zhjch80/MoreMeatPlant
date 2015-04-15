@@ -661,7 +661,7 @@
  *  @method     重设密码
  */
 + (void)resetPwdRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code andCallBack:(RMAFNRequestManagerCallBack)block{
-    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&content_code=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_register",user,pwd,code];
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&content_code=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_resetPwd",user,pwd,code];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         RMPublicModel * model = [[RMPublicModel alloc]init];
@@ -683,12 +683,14 @@
 + (void)myInfoModifyRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Type:(NSString *)type AlipayNo:(NSString *)alipayno Signature:(NSString *)signature Dic:(NSDictionary *)dic andCallBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&frm[zfb_no]=%@&frm[content_qm]=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_editInfo",user,pwd,alipayno,signature];
     [[RMHttpOperationShared sharedClient] POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-//        [formData appendPartWithFileURL:filePath name:@"content_face" error:nil];
+        if(dic != nil){
+            [formData appendPartWithFileURL:[dic objectForKey:@"content_face"] name:@"content_face" error:nil];
+        }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        NSDictionary * dict = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         RMPublicModel * model = [[RMPublicModel alloc]init];
-        model.status = [[dic objectForKey:@"status"] boolValue];
-        model.msg = [dic objectForKey:@"msg"];
+        model.status = [[dict objectForKey:@"status"] boolValue];
+        model.msg = [dict objectForKey:@"msg"];
         if(block){
             block(nil,YES,model);
         }

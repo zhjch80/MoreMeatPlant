@@ -118,10 +118,11 @@
             }];
             [_sendCodeBtn didFinished:^NSString *(JKCountDownButton *countDownButton, int second) {
                 countDownButton.enabled = YES;
-                return @"点击重新获取";
+                return @"重新获取";
             }];
+            [MBProgressHUD showSuccess:model.msg toView:self.view];
         }
-        [MBProgressHUD showSuccess:model.msg toView:self.view];
+        
     }];
 
 }
