@@ -10,11 +10,13 @@
 #import "RMReleasePoisonDetailsViewController.h"
 #import "KxMenu.h"
 #import "NSString+TimeInterval.h"
+#import "RMHomeHeadView.h"
 @interface RMMyHomeViewController ()<RefreshControlDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
     BOOL isLoadComplete;
     RMPublicModel * _model;
+    RMHomeHeadView * headView;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
@@ -36,8 +38,12 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
-    _content_img.layer.cornerRadius = 5;
-    _content_img.clipsToBounds = YES;
+    headView = [[[NSBundle mainBundle] loadNibNamed:@"RMHomeHeadView" owner:self options:nil] lastObject];
+    [_mainTableView setTableHeaderView:headView];
+    
+    
+    headView.content_img.layer.cornerRadius = 5;
+    headView.content_img.clipsToBounds = YES;
     
     _model = [[RMPublicModel alloc]init];
     
@@ -52,6 +58,8 @@
     
     if (self.auto_id == nil){
         self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
+    }else{
+        
     }
     
     [self loadBottomView];
@@ -80,12 +88,12 @@
         RMPublicModel * model = object;
         _model = model;
         if(success && model.status){
-            [self.content_img sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
-            self.content_name.text = model.contentName;
-            self.content_signature.text = model.contentQm;
-            self.city.text = model.content_gps;
+            [headView.content_img sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
+            headView.content_name.text = model.content_name;
+            headView.content_signature.text = model.contentQm;
+            headView.city.text = model.content_gps;
 //            self.yu_e.text = [NSString stringWithFormat:@"余额:%.0f",model.spendmoney];
-            self.hua_bi.text = [NSString stringWithFormat:@"花币:%.0f",model.spendmoney];
+            headView.hua_bi.text = [NSString stringWithFormat:@"花币:%.0f",model.spendmoney];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
             [self requestListWithPageCount];
@@ -97,6 +105,7 @@
 
 
 #pragma mark -
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [dataArr count];
@@ -297,9 +306,12 @@
 #pragma mark - 帖子详情
 
 - (void)jumpPostDetailsWithImage:(RMImageView *)image {
-    if(self.detailcall_back){
-        _detailcall_back (image.identifierString);
-    }
+//    if(self.detailcall_back){
+//        _detailcall_back (image.identifierString);
+//    }
+    RMReleasePoisonDetailsViewController * releasePoisonDetailsCtl = [[RMReleasePoisonDetailsViewController alloc] init];
+    releasePoisonDetailsCtl.auto_id = image.identifierString;
+    [self.navigationController pushViewController:releasePoisonDetailsCtl animated:YES];
 }
 
 /**

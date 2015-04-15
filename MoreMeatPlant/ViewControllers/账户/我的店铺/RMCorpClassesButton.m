@@ -7,7 +7,6 @@
 //
 
 #import "RMCorpClassesButton.h"
-
 @implementation RMCorpClassesButton
 
 /*
@@ -27,12 +26,17 @@
 
 
 - (void)initPlat{
-    _numberL = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 20)];
-    _numberL.text = @"1200";
-    _numberL.textAlignment = NSTextAlignmentCenter;
+//    _numberL = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 20)];
+//    _numberL.text = @"1200";
+//    _numberL.textAlignment = NSTextAlignmentCenter;
+//    
+//    _classesNameL = [[UILabel alloc]initWithFrame:CGRectMake(0, _numberL.frame.size.height+_numberL.frame.origin.y, _numberL.frame.size.width, _numberL.frame.size.height)];
+//    _classesNameL.textAlignment = NSTextAlignmentCenter;
+//    _classesNameL.text = @"全部宝贝";
     
-    _classesNameL = [[UILabel alloc]initWithFrame:CGRectMake(0, _numberL.frame.size.height+_numberL.frame.origin.y, _numberL.frame.size.width, _numberL.frame.size.height)];
+    _classesNameL = [[UILabel alloc]initWithFrame:CGRectMake(0, _numberL.frame.size.height+_numberL.frame.origin.y, self.frame.size.width, 20)];
     _classesNameL.textAlignment = NSTextAlignmentCenter;
+    _classesNameL.center = CGPointMake(_classesNameL.center.x, self.frame.size.height/2);
     _classesNameL.text = @"全部宝贝";
     
     [self addSubview:_numberL];

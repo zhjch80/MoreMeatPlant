@@ -247,7 +247,12 @@
     if(corp_id == nil){
         url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%ld&course=%@&per=1&row=12&page=%ld",baseUrl,(long)plantClass,plantCourse,(long)pageCount];
     }else{
-        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&per=1&row=12&page=%ld&memberclass=%@&corp_id=%@",baseUrl,(long)pageCount,memberClass,corp_id];
+        if(![memberClass isEqualToString:[@"全部" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]){
+            url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&per=1&row=12&page=%ld&memberclass=%@&corp_id=%@",baseUrl,(long)pageCount,memberClass,corp_id];
+        }else{
+            url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&per=1&row=12&page=%ld&corp_id=%@",baseUrl,(long)pageCount,corp_id];
+        }
+        
     }
     
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {

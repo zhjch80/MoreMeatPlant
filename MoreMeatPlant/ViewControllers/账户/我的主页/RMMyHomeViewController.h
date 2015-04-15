@@ -11,6 +11,7 @@
 #import "RMBottomView.h"
 #import "JSBadgeView.h"
 #import "KxMenu.h"
+
 typedef void (^RMMyHomeViewCtlDetailCallBack) (NSString * auto_id);
 @interface RMMyHomeViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource,PostDetatilsDelegate,BottomDelegate>{
     RMBottomView * bottomView;
@@ -18,15 +19,16 @@ typedef void (^RMMyHomeViewCtlDetailCallBack) (NSString * auto_id);
 }
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
-@property (weak, nonatomic) IBOutlet UIImageView *content_img;
-@property (weak, nonatomic) IBOutlet UILabel *content_name;
-@property (weak, nonatomic) IBOutlet UILabel *content_signature;
-@property (weak, nonatomic) IBOutlet UILabel *city;
-@property (weak, nonatomic) IBOutlet UILabel *yu_e;
-@property (weak, nonatomic) IBOutlet UILabel *hua_bi;
-@property (weak, nonatomic) IBOutlet UIButton *sendPrivateMsgBtn;
-@property (weak, nonatomic) IBOutlet UIButton *attentionHeBtn;
+//@property (weak, nonatomic) IBOutlet UIImageView *content_img;
+//@property (weak, nonatomic) IBOutlet UILabel *content_name;
+//@property (weak, nonatomic) IBOutlet UILabel *content_signature;
+//@property (weak, nonatomic) IBOutlet UILabel *city;
+//@property (weak, nonatomic) IBOutlet UILabel *yu_e;
+//@property (weak, nonatomic) IBOutlet UILabel *hua_bi;
+//@property (weak, nonatomic) IBOutlet UIButton *sendPrivateMsgBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *attentionHeBtn;
 @property (copy, nonatomic) RMMyHomeViewCtlDetailCallBack detailcall_back;
 @property (retain, nonatomic) NSString * auto_id;
+@property (assign, nonatomic) BOOL isSelf;
 
 @end

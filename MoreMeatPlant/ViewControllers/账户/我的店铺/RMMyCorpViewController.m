@@ -10,11 +10,13 @@
 #import "RMCorpClassesButton.h"
 #import "RMPlantWithSaleDetailsViewController.h"
 #import "RMShopCarViewController.h"
+#import "RMCorpHeadView.h"
 @interface RMMyCorpViewController ()<RefreshControlDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
     BOOL isLoadComplete;
     NSMutableArray * dataArr;
+    RMCorpHeadView * headView;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
@@ -31,15 +33,20 @@
     
     [self setCustomNavTitle:@"我的店铺"];
     
-    if(self.auto_id == nil){
-        self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
-    }
+   
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
-    _corp_headImgV.layer.cornerRadius = 5;
-    _corp_headImgV.clipsToBounds = YES;
+    headView = [[[NSBundle mainBundle] loadNibNamed:@"RMCorpHeadView" owner:self options:nil] lastObject];
+    [_mainTableview setTableHeaderView:headView];
+    headView.corp_headImgV.layer.cornerRadius = 5;
+    headView.corp_headImgV.clipsToBounds = YES;
+    
+    if(self.auto_id == nil){
+        headView.collection.hidden = YES;
+        self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
+    }
     
     bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
@@ -80,14 +87,14 @@
         RMCorpClassesButton * btn = [[RMCorpClassesButton alloc]initWithFrame:CGRectMake(10+(width+1)*(i%4), 0, width, 40)];
         btn.tag = 100+i;
         btn.classesNameL.text = [[classsModel.classs objectAtIndex:i] objectForKey:@"content_name"];
-        btn.classesNameL.font = FONT_0(13);
+        btn.classesNameL.font = FONT_1(14);
         btn.callback = ^(RMCorpClassesButton *sender){
             pageCount = 1;
             self.member_class = [[classsModel.classs objectAtIndex:i] objectForKey:@"auto_id"];
             [self requestListWithPlant];
         };
         
-        [_classesView addSubview:btn];
+        [headView.classesView addSubview:btn];
         
         
         if(i == 3){
@@ -95,9 +102,10 @@
         }else{
             UIImageView * img_line = [[UIImageView alloc]initWithFrame:CGRectMake(btn.frame.origin.x+btn.frame.size.width,btn.frame.origin.y+1 , 1, btn.frame.size.height-2)];
             img_line.backgroundColor = UIColorFromRGB(0xadadad);
+            img_line.alpha = 0.8;
             [img_line setImage:[UIImage imageNamed:@""]];
             
-            [_classesView addSubview:img_line];
+            [headView.classesView addSubview:img_line];
         }
     }
 }
@@ -276,7 +284,7 @@
 #pragma mark - 请求
 - (void)requestListWithPlant {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getBabyListWithPlantClassWith:1 withCourse:0 withMemerClass:self.member_class withCorpid:self.auto_id withCount:pageCount callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getBabyListWithPlantClassWith:1 withCourse:0 withMemerClass:[self.member_class stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withCorpid:self.auto_id withCount:pageCount callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -366,15 +374,17 @@
             RMPublicModel * model = object;
             classsModel = model;
 
-            [_corp_headImgV sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
-            _corp_nameL.text = classsModel.content_name;
-            _signatureL.text = classsModel.contentQm;
-            _corp_regionL.text = classsModel.content_gps;
-            [_corp_level setTitle:classsModel.levelId forState:UIControlStateNormal];
-            [self createClassView];
+            [headView.corp_headImgV sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
+            headView.corp_nameL.text = classsModel.content_name;
+            headView.signatureL.text = classsModel.contentQm;
+            headView.corp_regionL.text = classsModel.content_gps;
+            [headView.corp_level setTitle:classsModel.levelId forState:UIControlStateNormal];
             
+            
+            NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:@"全部",@"auto_id",@"全部宝贝",@"content_name", nil];
+            [classsModel.classs insertObject:dic atIndex:0];
             self.member_class = [[classsModel.classs objectAtIndex:0] objectForKey:@"auto_id"];
-            
+            [self createClassView];
             [self requestListWithPlant];
         }else{
             [self showHint:object];

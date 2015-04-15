@@ -662,6 +662,10 @@
 		5157DE6D1AB9DA95005E9FA5 /* RMPublishPhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5157DE6B1AB9DA95005E9FA5 /* RMPublishPhotoTableViewCell.xib */; };
 		5157DE711AB9DABB005E9FA5 /* RMPublishSureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5157DE6F1AB9DABB005E9FA5 /* RMPublishSureTableViewCell.m */; };
 		5157DE721AB9DABB005E9FA5 /* RMPublishSureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5157DE701AB9DABB005E9FA5 /* RMPublishSureTableViewCell.xib */; };
+		516F47181ADE38D00017879A /* RMHomeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47171ADE38D00017879A /* RMHomeHeadView.m */; };
+		516F471A1ADE38DC0017879A /* RMHomeHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F47191ADE38DC0017879A /* RMHomeHeadView.xib */; };
+		516F471D1ADE416F0017879A /* RMCorpHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F471C1ADE416F0017879A /* RMCorpHeadView.m */; };
+		516F471F1ADE41880017879A /* RMCorpHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F471E1ADE41880017879A /* RMCorpHeadView.xib */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
@@ -1881,6 +1885,12 @@
 		5157DE6E1AB9DABB005E9FA5 /* RMPublishSureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPublishSureTableViewCell.h; sourceTree = "<group>"; };
 		5157DE6F1AB9DABB005E9FA5 /* RMPublishSureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPublishSureTableViewCell.m; sourceTree = "<group>"; };
 		5157DE701AB9DABB005E9FA5 /* RMPublishSureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMPublishSureTableViewCell.xib; sourceTree = "<group>"; };
+		516F47161ADE38D00017879A /* RMHomeHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMHomeHeadView.h; sourceTree = "<group>"; };
+		516F47171ADE38D00017879A /* RMHomeHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMHomeHeadView.m; sourceTree = "<group>"; };
+		516F47191ADE38DC0017879A /* RMHomeHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMHomeHeadView.xib; sourceTree = "<group>"; };
+		516F471B1ADE416F0017879A /* RMCorpHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCorpHeadView.h; sourceTree = "<group>"; };
+		516F471C1ADE416F0017879A /* RMCorpHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCorpHeadView.m; sourceTree = "<group>"; };
+		516F471E1ADE41880017879A /* RMCorpHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMCorpHeadView.xib; sourceTree = "<group>"; };
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
@@ -4127,6 +4137,9 @@
 				5120FDC51AB5D9E3000E9BE1 /* RMMyHomeViewController.h */,
 				5120FDC61AB5D9E3000E9BE1 /* RMMyHomeViewController.m */,
 				5120FDC71AB5D9E3000E9BE1 /* RMMyHomeViewController.xib */,
+				516F47161ADE38D00017879A /* RMHomeHeadView.h */,
+				516F47171ADE38D00017879A /* RMHomeHeadView.m */,
+				516F47191ADE38DC0017879A /* RMHomeHeadView.xib */,
 			);
 			path = "我的主页";
 			sourceTree = "<group>";
@@ -4348,6 +4361,9 @@
 				519927331AB5682700B0F83F /* RMMyCorpViewController.xib */,
 				519927441AB572AA00B0F83F /* RMCorpClassesButton.h */,
 				519927451AB572AA00B0F83F /* RMCorpClassesButton.m */,
+				516F471B1ADE416F0017879A /* RMCorpHeadView.h */,
+				516F471C1ADE416F0017879A /* RMCorpHeadView.m */,
+				516F471E1ADE41880017879A /* RMCorpHeadView.xib */,
 			);
 			path = "我的店铺";
 			sourceTree = "<group>";
@@ -5093,6 +5109,7 @@
 				1D4DA3351A921799006A9EBA /* RMPlantWithSaleViewController.xib in Resources */,
 				51D883F41ABB321E00F7A3BD /* had_baby_input.png in Resources */,
 				0A41058B1ABAB3C70060FBD5 /* MWPhotoBrowser.bundle in Resources */,
+				516F471A1ADE38DC0017879A /* RMHomeHeadView.xib in Resources */,
 				1DEB74F11AB9D67A00EA1FA7 /* fbbb_img_28.png in Resources */,
 				1D7AC43A1AB979E1002204F6 /* 方正正黑简体.TTF in Resources */,
 				0A4106501ABABBF60060FBD5 /* VoiceSearchFeedback007.png in Resources */,
@@ -5383,6 +5400,7 @@
 				51DB4E4C1AD1B3F000A6064D /* Resource.bundle in Resources */,
 				1DEB74F21AB9D67A00EA1FA7 /* fbbb_img_32.png in Resources */,
 				51E268391AAE003000252DEF /* STDbKit-Info.plist in Resources */,
+				516F471F1ADE41880017879A /* RMCorpHeadView.xib in Resources */,
 				1D93AB891AB13A290034574C /* RMReleasePoisonDetailsCell_4.xib in Resources */,
 				1DEB74561AB9D66800EA1FA7 /* btn_add_photo_n.png in Resources */,
 				5157DE5E1AB9DA3E005E9FA5 /* RMPublishPlateTableViewCell.xib in Resources */,
@@ -5527,6 +5545,7 @@
 				5157DE581AB9DA0E005E9FA5 /* RMPublishTitleTableViewCell.m in Sources */,
 				1D4EE43D1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.m in Sources */,
 				51E268361AAE003000252DEF /* STDb.m in Sources */,
+				516F47181ADE38D00017879A /* RMHomeHeadView.m in Sources */,
 				0A41058C1ABAB3C70060FBD5 /* THProgressView.m in Sources */,
 				51DB4E141AD130C100A6064D /* RMProductModel.m in Sources */,
 				1DD699391AC10F02009A9327 /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -5654,6 +5673,7 @@
 				0A41057C1ABAB3C70060FBD5 /* UIImageView+EMWebCache.m in Sources */,
 				0A4104D71ABAAF630060FBD5 /* EMChatViewCell.m in Sources */,
 				1DD326701ABC1132006CD1A8 /* NJKWebViewProgress.m in Sources */,
+				516F471D1ADE416F0017879A /* RMCorpHeadView.m in Sources */,
 				51E268661AAF4D8100252DEF /* RMAddressEditViewController.m in Sources */,
 				1DD6992C1AC10F02009A9327 /* MKAnnotationView+WebCache.m in Sources */,
 				0A4104AB1ABAAE9B0060FBD5 /* SRSlimeView.m in Sources */,

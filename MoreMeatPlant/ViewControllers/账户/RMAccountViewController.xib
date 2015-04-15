@@ -61,20 +61,20 @@
                                 <constraint firstAttribute="width" constant="18" id="wwh-3K-zJq"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="北京北京北京北京" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBC-Zu-kd9">
-                            <rect key="frame" x="147" y="78.5" width="22" height="13.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="北京北京北京北京" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBC-Zu-kd9">
+                            <rect key="frame" x="147" y="78" width="35" height="13.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="余额：2600" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0Y-OV-twF">
-                            <rect key="frame" x="188" y="77.5" width="58.5" height="13.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="余额：2600" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0Y-OV-twF">
+                            <rect key="frame" x="188" y="78" width="58.5" height="13.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="花币：2600" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7e-oX-CtK">
-                            <rect key="frame" x="252" y="77.5" width="58.5" height="13.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="花币：2600" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7e-oX-CtK">
+                            <rect key="frame" x="252" y="78" width="58.5" height="13.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -144,7 +144,7 @@
                         <constraint firstItem="Vmx-kb-uIz" firstAttribute="top" secondItem="Vnu-Gk-Fhe" secondAttribute="top" id="LKZ-Sp-gNU"/>
                         <constraint firstItem="y1y-cj-YgV" firstAttribute="centerY" secondItem="a7e-oX-CtK" secondAttribute="centerY" id="LkR-Jq-qx6"/>
                         <constraint firstItem="bHq-2u-d7j" firstAttribute="leading" secondItem="z0o-UZ-9VZ" secondAttribute="trailing" id="My8-Kn-91y"/>
-                        <constraint firstItem="I0Y-OV-twF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fBC-Zu-kd9" secondAttribute="trailing" constant="6" id="NVa-dJ-BBl"/>
+                        <constraint firstItem="I0Y-OV-twF" firstAttribute="leading" secondItem="fBC-Zu-kd9" secondAttribute="trailing" constant="6" id="NVa-dJ-BBl"/>
                         <constraint firstAttribute="height" constant="100" id="OcF-lS-tqe"/>
                         <constraint firstItem="I0Y-OV-twF" firstAttribute="top" secondItem="uUd-B3-lqB" secondAttribute="bottom" constant="6" id="Owp-1Y-Rdh"/>
                         <constraint firstItem="Vmx-kb-uIz" firstAttribute="leading" secondItem="Vnu-Gk-Fhe" secondAttribute="leading" constant="20" id="PdL-0p-o8C"/>

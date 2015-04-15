@@ -86,7 +86,7 @@
         for(RMProductModel * p in [RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",shop.corp_id] orderby:@"corp_id"])
         {
             [arr addObject:p];
-                n+= [p.content_price floatValue];
+                n+= [p.content_price floatValue]*p.content_num;
             _all_total_moneyL.text = [NSString stringWithFormat:@"¥%.2f",n];
         }
         

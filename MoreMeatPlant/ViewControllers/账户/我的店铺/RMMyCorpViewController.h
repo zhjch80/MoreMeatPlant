@@ -18,17 +18,7 @@
     JSBadgeView * chat_badge;
     RMPublicModel * classsModel;
 }
-@property (weak, nonatomic) IBOutlet UIImageView *bannerImgV;
-@property (weak, nonatomic) IBOutlet UIImageView *corp_headImgV;
-@property (weak, nonatomic) IBOutlet UILabel *corp_nameL;
-@property (weak, nonatomic) IBOutlet UILabel *signatureL;
-@property (weak, nonatomic) IBOutlet UILabel *corp_regionL;
-@property (weak, nonatomic) IBOutlet UIButton *corp_level;
-@property (weak, nonatomic) IBOutlet UIButton *corp_renzheng;
-@property (weak, nonatomic) IBOutlet UIButton *corp_sun;
-@property (weak, nonatomic) IBOutlet UIButton *collection;
-@property (weak, nonatomic) IBOutlet UIView *headbackView;
-@property (weak, nonatomic) IBOutlet UIView *classesView;
+
 @property (weak, nonatomic) IBOutlet UITableView *mainTableview;
 @property (retain, nonatomic) NSString * auto_id;
 @property (retain, nonatomic) NSString * member_class;
