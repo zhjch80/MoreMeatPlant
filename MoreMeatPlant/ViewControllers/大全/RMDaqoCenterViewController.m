@@ -195,9 +195,23 @@
 }
 
 - (void)selectedPlantWithType:(NSString *)type {
-    plantClassification = type;
+    NSString * plantType;
+
+    if ([type isEqualToString:@"0"]){
+        plantClassification = @"10000";
+    }else{
+        plantClassification = type;
+    }
+    
+    if ([plantClassification isEqualToString:@"10000"] | [plantClassification isEqualToString:@""]){
+        plantType = @"";
+    }else{
+        RMPublicModel * model_1 = [subsPlantArr objectAtIndex:plantClassification.integerValue];
+        plantType = model_1.auto_code;
+    }
+    
     isRefresh = YES;
-    [self requestDataWithPageCount:1];
+    [self requestDataWithPageCount:1 withPlantType:plantType];
 }
 
 - (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
@@ -205,6 +219,21 @@
     RMDaqoDetailsViewController * daqoDetailsCtl = [[RMDaqoDetailsViewController alloc] init];
     daqoDetailsCtl.auto_id = image.identifierString;
     [daqoCtl.navigationController pushViewController:daqoDetailsCtl animated:YES];
+}
+
+- (void)updateCurrentList:(RMPublicModel *)model withRow:(NSInteger)row {
+    if (row == -1){
+        NSLog(@"header 标识:%@",model.modules_name);
+    }else if (row == -2){
+        NSLog(@"刷新全部当前肉肉");
+    }else{
+        NSLog(@"sub name:%@",[[model.sub objectAtIndex:row] objectForKey:@"modules_name"]);
+    }
+    
+    //TODO:操作
+    
+    isRefresh = YES;
+    [self requestDataWithPageCount:1 withPlantType:@""];
 }
 
 #pragma mark -  数据请求
@@ -224,8 +253,8 @@
         if (success){
             subsPlantArr = [[NSMutableArray alloc] init];
             
-            RMPublicModel * model = [[RMPublicModel alloc] init];
-            [subsPlantArr addObject:model];
+            RMPublicModel * _model = [[RMPublicModel alloc] init];
+            [subsPlantArr addObject:_model];
             
             for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
@@ -257,15 +286,8 @@
  *  @method     获取list数据
  *  @param      pc          分页
  */
-- (void)requestDataWithPageCount:(NSInteger)pc {
+- (void)requestDataWithPageCount:(NSInteger)pc withPlantType:(NSString *)plantType{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //TODO: 缺少一个植物科目的字段
-    NSString * plantType = @"";
-    
-    RMPublicModel * model_1 = [subsPlantArr objectAtIndex:plantClassification.integerValue];
-    plantType = model_1.value;
-
-    
     [RMAFNRequestManager getPlantDaqoListWithSubPlantClassification:plantType withPageCount:pc callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
@@ -326,7 +348,17 @@
         pageCount = 1;
         isRefresh = YES;
         isLoadComplete = NO;
-        [self requestDataWithPageCount:1];
+        
+        NSString * plantType;
+        
+        if ([plantClassification isEqualToString:@"10000"] | [plantClassification isEqualToString:@""]){
+            plantType = @"";
+        }else{
+            RMPublicModel * model_1 = [subsPlantArr objectAtIndex:plantClassification.integerValue];
+            plantType = model_1.auto_code;
+        }
+        
+        [self requestDataWithPageCount:1 withPlantType:plantType];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
@@ -337,7 +369,17 @@
         }else{
             pageCount ++;
             isRefresh = NO;
-            [self requestDataWithPageCount:pageCount];
+            
+            NSString * plantType;
+            
+            if ([plantClassification isEqualToString:@"10000"] | [plantClassification isEqualToString:@""]){
+                plantType = @"";
+            }else{
+                RMPublicModel * model_1 = [subsPlantArr objectAtIndex:plantClassification.integerValue];
+                plantType = model_1.auto_code;
+            }
+            
+            [self requestDataWithPageCount:pageCount withPlantType:plantType];
         }
     }
 }

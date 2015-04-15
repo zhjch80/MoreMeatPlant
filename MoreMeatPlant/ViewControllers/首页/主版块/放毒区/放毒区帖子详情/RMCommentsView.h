@@ -13,7 +13,8 @@ typedef enum{
     kRMReleasePoisonListComment = 1,                //放毒区列表评论
     kRMReleasePoisonListReplyComment = 2,           //放毒区回复
     kRMReleasePoisonToReport = 3,                   //放毒区详情举报
-    kRMReleasePoisonListReplyOrComment = 4          //放毒区评论列表 评论或回复
+    kRMReleasePoisonListReplyOrComment = 4,         //放毒区评论列表 评论或回复
+    kRMDaqoAdded = 5                                //大全详情 纠正补充说明
 }RequestType;
 
 @protocol CommentsViewDelegate <NSObject>

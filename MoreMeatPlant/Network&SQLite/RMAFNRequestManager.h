@@ -87,10 +87,10 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
 /**
  *  @method     植物大全添加图片
  *  @param      all_id          植物标识
- *  @param      content_img     图片字段
+ *  @param      content_img     图片路径字符串
  *  @param      user_id         会员用户名
  *  @param      user_password   会员密码
-*/
+ */
 + (void)postPlantDaqoAddImageWithAll_id:(NSString *)all_id
                      withContent_img:(NSString *)content_img
                               withID:(NSString *)user_id

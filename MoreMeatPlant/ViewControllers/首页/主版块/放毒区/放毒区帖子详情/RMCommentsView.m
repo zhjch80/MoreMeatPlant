@@ -99,6 +99,9 @@
             }else if (self.requestType == kRMReleasePoisonListReplyOrComment){
                 //放毒区评论list 评论或回复
                 [self reuestReplyOrComment];
+            }else if (self.requestType == kRMDaqoAdded){
+                //大全详情 纠正补充说明
+                [self requestDaqoAdded];
             }
         }else{
             NSLog(@"不发送");
@@ -211,6 +214,18 @@
             }
         }];
 //    }
+}
+
+/**
+ *  @method     大全详情 纠正与补充
+ */
+- (void)requestDaqoAdded {
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
+    [RMAFNRequestManager getPlantDaqoDetailsAddTheCorrectAddWithPlantAll_id:self.code withCorrectInstructions:[commentTextView.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withUser_id:[RMUserLoginInfoManager loginmanager].user withUserPassword:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+        if ([self.delegate respondsToSelector:@selector(commentMethodWithType:withError:withState:withObject:withImage:)]){
+            [self.delegate commentMethodWithType:self.requestType withError:error withState:success withObject:object withImage:nil];
+        }
+    }];
 }
 
 @end

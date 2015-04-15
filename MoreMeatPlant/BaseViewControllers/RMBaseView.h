@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RMPublicModel.h"
 
 @interface RMBaseView : UIView {
     id _target;
     SEL _sel;
 }
 @property (nonatomic, strong) NSString *identifierString;
+
+@property (nonatomic, strong) RMPublicModel * model;
 
 - (void)addTarget:(id)target withSelector:(SEL)sel;
 

@@ -174,7 +174,7 @@
 /**
  *  @method     植物大全添加图片
  *  @param      all_id          植物标识
- *  @param      content_img     图片字段
+ *  @param      content_img     图片路径字符串
  *  @param      user_id         会员用户名
  *  @param      user_password   会员密码
  */
@@ -190,11 +190,14 @@
                                  @"app_com": @"com_center",
                                  @"task": @"addAllimg",
                                  @"frm[all_id]": all_id,
-                                 @"content_img": content_img,
                                  @"ID": user_id,
                                  @"PWD": user_password
                                  };
-    [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    
+    [[RMHttpOperationShared sharedClient] POST:url parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSURL * imgPath = [NSURL fileURLWithPath:content_img];
+        [formData appendPartWithFileURL:imgPath name:@"content_img" error:nil];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block) {
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
         }

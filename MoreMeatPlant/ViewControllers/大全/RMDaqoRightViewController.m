@@ -60,10 +60,12 @@
 }
 
 - (void)allOfTheMeatMethod {
-    NSLog(@"刷新全部肉肉");
+    RMDaqoViewController * daqoCtl = self.DaqoDelegate;
+
+    [daqoCtl updateCenterListWithModel:nil withRow:-2];
+    
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        RMDaqoViewController * daqoCtl = self.DaqoDelegate;
         [daqoCtl updateSlideSwitchState];
     });
 }
@@ -87,7 +89,7 @@
     RMBaseView * headerView = [[RMBaseView alloc] init];
     headerView.frame = CGRectMake(kScreenWidth - kSlideWidth, 0, kSlideWidth, 44);
     headerView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
-    headerView.identifierString = model.modules_name;
+    headerView.model = model;
     [headerView addTarget:self withSelector:@selector(cellHeaderMethod:)];
 
     UILabel * title = [[UILabel alloc] init];
@@ -104,10 +106,12 @@
 }
 
 - (void)cellHeaderMethod:(RMBaseView *)view {
-    NSLog(@"header 标识:%@",view.identifierString);
+    RMDaqoViewController * daqoCtl = self.DaqoDelegate;
+
+    [daqoCtl updateCenterListWithModel:view.model withRow:-1];
+    
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        RMDaqoViewController * daqoCtl = self.DaqoDelegate;
         [daqoCtl updateSlideSwitchState];
     });
 }
@@ -139,11 +143,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    RMDaqoViewController * daqoCtl = self.DaqoDelegate;
+
     RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
-    NSLog(@"子分类 name:%@",[[model.sub objectAtIndex:indexPath.row] objectForKey:@"modules_name"]);
+
+    [daqoCtl updateCenterListWithModel:model withRow:indexPath.row];
+
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        RMDaqoViewController * daqoCtl = self.DaqoDelegate;
         [daqoCtl updateSlideSwitchState];
     });
 }

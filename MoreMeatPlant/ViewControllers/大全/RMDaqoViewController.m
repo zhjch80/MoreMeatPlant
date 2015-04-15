@@ -26,7 +26,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!isFirstViewDidAppear){
-        [centerCtl requestDataWithPageCount:1];
+        [centerCtl requestDataWithPageCount:1 withPlantType:@""];
         [centerCtl requestPlantSubjects];
         [rightCtl requestPlantSubs];
         isFirstViewDidAppear = YES;
@@ -163,6 +163,10 @@
         [centerCtl.view setFrame:CGRectMake(centerCtl.view.frame.origin.x + kSlideWidth, centerCtl.view.frame.origin.y, centerCtl.view.frame.size.width, centerCtl.view.frame.size.height)];
     }
     [UIView commitAnimations];
+}
+
+- (void)updateCenterListWithModel:(RMPublicModel *)model withRow:(NSInteger)row {
+    [centerCtl updateCurrentList:model withRow:row];
 }
 
 - (void)didReceiveMemoryWarning {

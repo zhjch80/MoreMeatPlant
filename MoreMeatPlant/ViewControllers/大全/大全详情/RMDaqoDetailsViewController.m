@@ -105,6 +105,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[RMDaqoDetailsViewController class]];
+    
+    [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMDaqoDetailsViewController class]];
+    
     imageViewArr = [[NSMutableArray alloc] init];
 
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
@@ -318,6 +323,12 @@
 - (void)footerBtnMethodWithTag:(NSInteger)tag {
     switch (tag) {
         case 1:{
+            if (![[RMUserLoginInfoManager loginmanager] state]){
+                
+                NSLog(@"去登录...");
+                return;
+            }
+            
             isTakingPictures = YES;
             UIActionSheet *sheet = nil;
             if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -329,17 +340,39 @@
             break;
         }
         case 2:{
-//            RMCommentsView * commentsView = [[RMCommentsView alloc] init];
-//            commentsView.delegate = self;
-//            commentsView.backgroundColor = [UIColor clearColor];
-//            commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-//            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  补充:%@",@"补充说明"]];
-//            [self.view addSubview:commentsView];
+            if (![[RMUserLoginInfoManager loginmanager] state]){
+                
+                NSLog(@"去登录...");
+                return;
+            }
+            
+            RMCommentsView * commentsView = [[RMCommentsView alloc] init];
+            commentsView.delegate = self;
+            commentsView.backgroundColor = [UIColor clearColor];
+            commentsView.requestType = 5;
+            commentsView.code = dataModel.auto_id;
+            commentsView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            [commentsView loadCommentsViewWithReceiver:[NSString stringWithFormat:@"  补充:%@",@"补充说明"] withImage:nil];
+            [self.view addSubview:commentsView];
             break;
         }
             
         default:
             break;
+    }
+}
+
+- (void)commentMethodWithType:(NSInteger)type withError:(NSError *)error withState:(BOOL)success withObject:(id)object withImage:(RMImageView *)image {
+    if (error){
+        NSLog(@"%@",error);
+        [self showHint:@"提交失败！"];
+        return;
+    }
+    
+    if (success){
+        [self showHint:[object objectForKey:@"msg"]];
+    }else{
+        [self showHint:[object objectForKey:@"msg"]];
     }
 }
 
@@ -481,25 +514,6 @@
     [RMAFNRequestManager postPlantDaqoAddImageWithAll_id:dataModel.auto_id withContent_img:@"" withID:@"" withPWD:@"" callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            return ;
-        }
-        
-        if (success){
-            
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        }
-    }];
-}
-
-/**
- *  @method      纠正与补充
- */
-- (void)requestSupplement {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getPlantDaqoDetailsAddTheCorrectAddWithPlantAll_id:dataModel.auto_id withCorrectInstructions:@"" withUser_id:@"" withUserPassword:@"" callBack:^(NSError *error, BOOL success, id object) {
-        if (error){
-            NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             return ;
         }

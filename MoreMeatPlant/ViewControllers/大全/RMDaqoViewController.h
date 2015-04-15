@@ -17,4 +17,7 @@
 
 - (void)updataSlideStateClose;
 
+//刷新中间控制器list
+- (void)updateCenterListWithModel:(RMPublicModel *)model withRow:(NSInteger)row;
+
 @end
