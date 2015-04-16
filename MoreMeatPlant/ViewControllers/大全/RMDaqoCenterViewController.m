@@ -51,9 +51,7 @@
     
     dataArr = [[NSMutableArray alloc] init];
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1];
-    
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, plantTypeView.frame.size.height + 64, kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 44) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, plantTypeView.frame.size.height + 64 , kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 44) style:UITableViewStylePlain];
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     mTableView.delegate = self;
     mTableView.dataSource = self;
@@ -267,8 +265,9 @@
             }
             
             plantTypeView = [[RMPlantTypeView alloc] init];
-            plantTypeView.frame = CGRectMake(0, 64, kScreenWidth, 54);
+            plantTypeView.frame = CGRectMake(0, 64, kScreenWidth, 60);
             plantTypeView.delegate = self;
+            plantTypeView.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.62 alpha:1];
             [plantTypeView loadPlantTypeWithImageArr:subsPlantArr];
             [self.view insertSubview:plantTypeView belowSubview:self.recognizerView];
 

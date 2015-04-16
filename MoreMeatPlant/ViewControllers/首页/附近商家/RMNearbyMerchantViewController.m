@@ -165,6 +165,7 @@
         newAnnotationView.tag = [(RMPointAnnotation *)annotation tag];
         RMPublicModel * model = [dataarray objectAtIndex:[(RMPointAnnotation *)annotation tag]-100];
         RMActionPaopaoView * paopao = [[[NSBundle mainBundle] loadNibNamed:@"RMActionPaopaoView" owner:self options:nil] lastObject];
+        [paopao.layer setCornerRadius:5.0];
         [paopao.content_face sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
         paopao.content_content.text = [NSString stringWithFormat:@"店铺名称:%@\n负责人:%@\n联系方式:%@\n店铺地址:%@\n店铺级别:%@",model.content_name,model.content_linkname,model.content_mobile,model.content_address,model.levelId];
         CGSize size = [paopao.content_content.text getcontentsizeWithfont:paopao.content_content.font constrainedtosize:CGSizeMake(paopao.content_content.frame.size.width, 200) linemode:NSLineBreakByCharWrapping];
@@ -181,6 +182,7 @@
         newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
         
         RMActionPaopaoView * paopao = [[[NSBundle mainBundle] loadNibNamed:@"RMActionPaopaoView" owner:self options:nil] lastObject];
+        [paopao.layer setCornerRadius:5.0];
         [paopao.content_face setImage:[UIImage imageNamed:@"photo"]];
         paopao.content_content.text = [NSString stringWithFormat:@"店铺名称:%@\n负责人:%@\n联系方式:%@\n店铺地址:%@\n店铺级别:%@",@"小马哥的店铺",@"马东凯",@"15688889043",@"朝阳区慈云寺竹棒2000 3号楼 1605室 ",@"1"];
         CGSize size = [paopao.content_content.text getcontentsizeWithfont:paopao.content_content.font constrainedtosize:CGSizeMake(paopao.content_content.frame.size.width, 200) linemode:NSLineBreakByCharWrapping];

@@ -115,13 +115,13 @@
 
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
     
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     mTableView.dataSource = self;
     mTableView.delegate = self;
     mTableView.showsVerticalScrollIndicator = NO;
-    mTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//    mTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     mTableView.separatorColor = [UIColor clearColor];
     mTableView.backgroundColor = [UIColor clearColor];
     mTableView.rowHeight = kDKTableViewDefaultCellHeight;
@@ -131,7 +131,7 @@
     //    liveBlur.originalImage = [UIImage imageNamed:@"testBG.jpg"];
     liveBlur.scrollView = mTableView;
     liveBlur.isGlassEffectOn = YES;
-    
+    liveBlur.backgroundColor = [UIColor colorWithRed:0.44 green:0.44 blue:0.44 alpha:1];
     mTableView.backgroundView = liveBlur;
     mTableView.contentInset = UIEdgeInsetsMake(kDKTableViewDefaultContentInset, 0, 0, 0);
     
@@ -140,7 +140,7 @@
     bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
     bottomView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 40);
-    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_buy", @"img_share", nil]];
+    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_buy", nil]];
     [self.view addSubview:bottomView];
 
     isFistViewDidAppear = NO;
@@ -153,15 +153,34 @@
             break;
         }
         case 1:{
+            if (![[RMUserLoginInfoManager loginmanager] state]){
+                NSLog(@"去登录...");
+                return;
+            }
+            
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [RMAFNRequestManager getMembersCollectWithCollect_id:dataModel.auto_id withContent_type:@"3" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+                if (error){
+                    NSLog(@"error:%@",error);
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    return ;
+                }
+                
+                if (success){
+                    [self showHint:[object objectForKey:@"msg"]];
+                    UIButton * btn = (UIButton *)[bottomView viewWithTag:1];
+                    [btn setBackgroundImage:LOADIMAGE(@"img_asced", kImageTypePNG) forState:UIControlStateNormal];
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                }else{
+                    [self showHint:[object objectForKey:@"msg"]];
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                }
+            }];
             
             break;
         }
         case 2:{
-            
-            break;
-        }
-        case 3:{
-            
+            NSLog(@"购买");
             break;
         }
             
@@ -179,35 +198,44 @@
     
     RMDaqoDetailsFooterView * tableFooterView = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoDetailsFooterView" owner:nil options:nil] objectAtIndex:0];
     tableFooterView.delegate = self;
+    tableFooterView.backgroundColor = [UIColor clearColor];
     [tableFooterView.addImageBtn.layer setCornerRadius:5.0];
     [tableFooterView.addedAndCorrectedBtn.layer setCornerRadius:5.0];
     
     tableFooterView.frame = CGRectMake(tableFooterView.frame.origin.x, tableFooterView.frame.origin.y, tableFooterView.frame.size.width, tableFooterView.frame.size.height + offsetY);
     
-    tableFooterView.intro.frame = CGRectMake(tableFooterView.intro.frame.origin.x, tableFooterView.intro.frame.origin.y, tableFooterView.intro.frame.size.width, tableFooterView.intro.frame.size.height + offsetY);
+    tableFooterView.chineseName.frame = CGRectMake(tableFooterView.chineseName.frame.origin.x, tableFooterView.chineseName.frame.origin.y, kScreenWidth - 16, 28);
     
-    tableFooterView.lineTwo.frame = CGRectMake(tableFooterView.lineTwo.frame.origin.x, tableFooterView.lineTwo.frame.origin.y + offsetY, tableFooterView.lineTwo.frame.size.width, tableFooterView.lineTwo.frame.size.height);
-    tableFooterView.atlas.frame = CGRectMake(tableFooterView.atlas.frame.origin.x, tableFooterView.atlas.frame.origin.y + offsetY, tableFooterView.atlas.frame.size.width, tableFooterView.atlas.frame.size.height);
+    tableFooterView.englishName.frame = CGRectMake(tableFooterView.englishName.frame.origin.x, tableFooterView.englishName.frame.origin.y, kScreenWidth - 16, 28);
+
+    tableFooterView.intro.frame = CGRectMake(tableFooterView.intro.frame.origin.x, tableFooterView.intro.frame.origin.y, kScreenWidth - 20, tableFooterView.intro.frame.size.height + offsetY);
+    
+    tableFooterView.lineOne.frame = CGRectMake(tableFooterView.lineOne.frame.origin.x, tableFooterView.lineOne.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineOne.frame.size.height);
+
+    tableFooterView.lineTwo.frame = CGRectMake(tableFooterView.lineTwo.frame.origin.x, tableFooterView.lineTwo.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineTwo.frame.size.height);
+    
+    tableFooterView.atlas.frame = CGRectMake(tableFooterView.atlas.frame.origin.x, tableFooterView.atlas.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.atlas.frame.size.height);
     
     for (NSInteger i=0; i<10; i++){
         UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:501+i];
         image.frame = CGRectMake(image.frame.origin.x, image.frame.origin.y + offsetY, image.frame.size.width, image.frame.size.height);
     }
     
-    tableFooterView.planting.frame = CGRectMake(tableFooterView.planting.frame.origin.x, tableFooterView.planting.frame.origin.y + offsetY, tableFooterView.planting.frame.size.width, tableFooterView.planting.frame.size.height);
+    tableFooterView.planting.frame = CGRectMake(tableFooterView.planting.frame.origin.x, tableFooterView.planting.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.planting.frame.size.height);
     
-    tableFooterView.lineThree.frame = CGRectMake(tableFooterView.lineThree.frame.origin.x, tableFooterView.lineThree.frame.origin.y + offsetY, tableFooterView.lineThree.frame.size.width, tableFooterView.lineThree.frame.size.height);
+    tableFooterView.lineThree.frame = CGRectMake(tableFooterView.lineThree.frame.origin.x, tableFooterView.lineThree.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineThree.frame.size.height);
     
-    tableFooterView.lineFour.frame = CGRectMake(tableFooterView.lineFour.frame.origin.x, tableFooterView.lineFour.frame.origin.y + offsetY, tableFooterView.lineFour.frame.size.width, tableFooterView.lineFour.frame.size.height);
+    tableFooterView.lineFour.frame = CGRectMake(tableFooterView.lineFour.frame.origin.x, tableFooterView.lineFour.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineFour.frame.size.height);
 
-    tableFooterView.breeding.frame = CGRectMake(tableFooterView.breeding.frame.origin.x, tableFooterView.breeding.frame.origin.y + offsetY, tableFooterView.breeding.frame.size.width, tableFooterView.breeding.frame.size.height);
+    tableFooterView.breeding.frame = CGRectMake(tableFooterView.breeding.frame.origin.x, tableFooterView.breeding.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.breeding.frame.size.height);
     
-    tableFooterView.breedingContent.frame = CGRectMake(tableFooterView.breedingContent.frame.origin.x, tableFooterView.breedingContent.frame.origin.y + offsetY, tableFooterView.breedingContent.frame.size.width, tableFooterView.breedingContent.frame.size.height);
+    tableFooterView.breedingContent.frame = CGRectMake(tableFooterView.breedingContent.frame.origin.x, tableFooterView.breedingContent.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.breedingContent.frame.size.height);
     
     tableFooterView.addImageBtn.frame = CGRectMake(tableFooterView.addImageBtn.frame.origin.x, tableFooterView.addImageBtn.frame.origin.y + offsetY, tableFooterView.addImageBtn.frame.size.width, tableFooterView.addImageBtn.frame.size.height);
-    
-    
+    tableFooterView.addImageBtn.center = CGPointMake(kScreenWidth/4, tableFooterView.addImageBtn.center.y);
+
     tableFooterView.addedAndCorrectedBtn.frame = CGRectMake(tableFooterView.addedAndCorrectedBtn.frame.origin.x, tableFooterView.addedAndCorrectedBtn.frame.origin.y + offsetY, tableFooterView.addedAndCorrectedBtn.frame.size.width, tableFooterView.addedAndCorrectedBtn.frame.size.height);
+    tableFooterView.addedAndCorrectedBtn.center = CGPointMake(kScreenWidth/4 * 3, tableFooterView.addedAndCorrectedBtn.center.y);
     
     tableFooterView.chineseName.text = dataModel.family_name;
     tableFooterView.englishName.text = [NSString stringWithFormat:@"拉丁文: %@",dataModel.latin_name];
@@ -230,9 +258,31 @@
             }
         }
     }
-
+    
+    UIImageView * leftCenterImg = (UIImageView *)[tableFooterView viewWithTag:503];
+    leftCenterImg.center = CGPointMake(kScreenWidth/4, leftCenterImg.center.y);
+    
+    UIImageView * rightCenterImg = (UIImageView *)[tableFooterView viewWithTag:508];
+    rightCenterImg.center = CGPointMake(kScreenWidth/4 * 3, rightCenterImg.center.y);
+    
     for (NSInteger i=0; i<5; i++) {
         UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:501+i];
+        if (i == 0){
+            image.center = CGPointMake(leftCenterImg.frame.origin.x - 30, image.center.y);
+        }
+        
+        if (i == 1){
+            image.center = CGPointMake(leftCenterImg.frame.origin.x - 10, image.center.y);
+        }
+        
+        if (i == 3){
+            image.center = CGPointMake(leftCenterImg.frame.origin.x + 30, image.center.y);
+        }
+        
+        if (i == 4){
+            image.center = CGPointMake(leftCenterImg.frame.origin.x + 50, image.center.y);
+        }
+        
         if (i >= dataModel.content_plant1.integerValue){
             image.image = [UIImage imageNamed:@"img_yushui_empty"];
         }else{
@@ -242,6 +292,22 @@
     
     for (NSInteger i=0; i<5; i++) {
         UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:506+i];
+        if (i == 0){
+            image.center = CGPointMake(rightCenterImg.frame.origin.x - 30, image.center.y);
+        }
+        
+        if (i == 1){
+            image.center = CGPointMake(rightCenterImg.frame.origin.x - 10, image.center.y);
+        }
+        
+        if (i == 3){
+            image.center = CGPointMake(rightCenterImg.frame.origin.x + 30, image.center.y);
+        }
+        
+        if (i == 4){
+            image.center = CGPointMake(rightCenterImg.frame.origin.x + 50, image.center.y);
+        }
+        
         if (i >= dataModel.content_plant2.integerValue){
             image.image = [UIImage imageNamed:@"img_sun_empty"];
         }else{
@@ -521,8 +587,14 @@
             dataModel.content_plant1 = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_plant1"]);
             dataModel.content_plant2 = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_plant2"]);
             dataModel.content_breed = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_breed"]);
-            
+            dataModel.is_collect = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"is_collect"]);
+
             dataModel.imgs = [[object objectForKey:@"data"] objectForKey:@"img"];
+            
+            if ([dataModel.is_collect isEqualToString:@"1"]){
+                UIButton * btn = (UIButton *)[bottomView viewWithTag:1];
+                [btn setBackgroundImage:LOADIMAGE(@"img_asced", kImageTypePNG) forState:UIControlStateNormal];
+            }
             
             [liveBlur sd_setImageWithURL:[NSURL URLWithString:dataModel.content_bimg]];
             

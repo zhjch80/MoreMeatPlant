@@ -12,6 +12,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    self.plantName.frame = CGRectMake(width - 110, 3, 100, 60);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -130,7 +130,12 @@
                 }
                 
                 if (success){
-                    
+                    [self showHint:[object objectForKey:@"msg"]];
+                    UIButton * btn = (UIButton *)[bottomView viewWithTag:1];
+                    [btn setBackgroundImage:LOADIMAGE(@"img_asced", kImageTypePNG) forState:UIControlStateNormal];
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                }else{
+                    [self showHint:[object objectForKey:@"msg"]];
                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 }
             }];
@@ -314,6 +319,7 @@
         }else{
             cell.addPraiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
         }
+        cell.praiseCount.text = dataModel.content_top;
         cell.addPraiseImg.indexPath = indexPath;
         return cell;
     }else if (indexPath.row > 0 && indexPath.row <= [advertisingArr count]){
@@ -566,6 +572,11 @@
             dataModel.is_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"is_review"]);
             dataModel.is_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"is_top"]);
             dataModel.members = [[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"member"];
+            
+            if ([dataModel.is_collect isEqualToString:@"1"]){
+                UIButton * btn = (UIButton *)[bottomView viewWithTag:1];
+                [btn setBackgroundImage:LOADIMAGE(@"img_asced", kImageTypePNG) forState:UIControlStateNormal];
+            }
             
             [self loadTableHeadView];
 

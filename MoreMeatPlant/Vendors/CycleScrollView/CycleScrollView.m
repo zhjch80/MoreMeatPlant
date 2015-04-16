@@ -31,8 +31,9 @@
         self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.bounds.size.height - 20, [UIScreen mainScreen].bounds.size.width, 20)];
         [self.pageControl setBackgroundColor:[UIColor clearColor]];
         self.pageControl.currentPage = 0;
+        self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+        self.pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:0.94 green:0 blue:0.32 alpha:1];
         [self.pageControl addTarget:self action:@selector(clickPageControl:) forControlEvents:UIControlEventValueChanged];
-        self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
         if(_totalPageCount > 1){
             self.scrollView.contentSize = CGSizeMake(3 * CGRectGetWidth(self.scrollView.frame), CGRectGetHeight(self.scrollView.frame));
         }else{

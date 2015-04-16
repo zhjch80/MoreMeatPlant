@@ -124,7 +124,6 @@
             __block RMPlantWithSaleDetailsViewController * blockSelf = self;
             
             cycleView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) animationDuration:-1];
-            cycleView.backgroundColor = [UIColor whiteColor];
             cycleView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
                 return displayArr[pageIndex];
             };
@@ -227,7 +226,12 @@
                 }
                 
                 if (success){
-                    
+                    [self showHint:[object objectForKey:@"msg"]];
+                    UIButton * btn = (UIButton *)[bottomView viewWithTag:1];
+                    [btn setBackgroundImage:LOADIMAGE(@"img_asced", kImageTypePNG) forState:UIControlStateNormal];
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                }else{
+                    [self showHint:[object objectForKey:@"msg"]];
                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 }
             }];
@@ -277,6 +281,10 @@
         cell.productIntro.text = [NSString stringWithFormat:@"快递：%@元 库存:%@件",dataModel.express_price,dataModel.content_num];
     }
     
+    if ([dataModel.content_num isEqualToString:@"0"]){
+        cell.showNum.text = @"0";
+    }
+    
     cell.productName.text = dataModel.content_name;
     cell.plantIntro.text = [NSString stringWithFormat:@"肉肉介绍:%@",dataModel.content_desc];
     cell.plantIntro.backgroundColor = [UIColor clearColor];
@@ -315,7 +323,9 @@
             NSInteger num = [[NSString stringWithFormat:@"%@",cell.showNum.text] integerValue];
             if (num > 0){
             }else{
-                num++;
+                if (![dataModel.content_num isEqualToString:@"0"]){
+                    num++;
+                }
             }
             cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
             break;
@@ -525,8 +535,13 @@
             dataModel.body = [[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"body"];
             dataModel.members = [[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"member"];
             dataModel.series = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"series"]);
-            
+            dataModel.is_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"is_collect"]);
             [dataArr addObject:dataModel];
+            
+            if ([dataModel.is_collect isEqualToString:@"1"]){
+                UIButton * btn = (UIButton *)[bottomView viewWithTag:1];
+                [btn setBackgroundImage:LOADIMAGE(@"img_asced", kImageTypePNG) forState:UIControlStateNormal];
+            }
             
             [self loadHeaderView];
             
