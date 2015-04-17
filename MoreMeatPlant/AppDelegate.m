@@ -30,7 +30,6 @@
 @interface AppDelegate ()<EMChatManagerDelegate>{
     RMHomeViewController * homeCtl;
     RMDaqoViewController * daqoCtl;
-    RMAccountViewController * accountCtl;
     RMTalkMoreViewController * talkMoreCtl;
     RMLoginViewController * loginCtl;
     RMCustomTabBarController * customTabBarCtl;
@@ -42,7 +41,8 @@
 
 @implementation AppDelegate
 @synthesize cusNav;
-@synthesize locationManager;
+@synthesize locationManager, accountCtl;
+
 - (id)init
 {
     self = [super init];

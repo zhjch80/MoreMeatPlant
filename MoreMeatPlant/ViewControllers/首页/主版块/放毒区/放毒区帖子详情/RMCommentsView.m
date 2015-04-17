@@ -207,7 +207,7 @@
 //        }];
 //    }else{
 //        //回复
-        [RMAFNRequestManager postReplyToPostsCommentWithComment_id:self.code withContent_body:[commentTextView.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+        [RMAFNRequestManager postReplyToPostsCommentWithComment_id:self.code withContent_body:commentTextView.text withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
             if ([self.delegate respondsToSelector:@selector(commentMethodWithType:withError:withState:withObject:withImage:)]){
                 [self.delegate commentMethodWithType:self.requestType withError:error withState:success withObject:object withImage:receiveImg];
                 [MBProgressHUD hideAllHUDsForView:self animated:YES];

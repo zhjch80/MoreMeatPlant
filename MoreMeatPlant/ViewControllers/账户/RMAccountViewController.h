@@ -28,4 +28,7 @@
 @property (assign, nonatomic) BOOL isCorp;
 
 - (void)initPlat;
+
+- (void)loadMyOrderCtl;
+
 @end

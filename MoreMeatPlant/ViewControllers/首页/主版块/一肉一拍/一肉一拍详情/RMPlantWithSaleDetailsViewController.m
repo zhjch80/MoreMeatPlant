@@ -19,6 +19,9 @@
 #import "RMMyCorpViewController.h"
 #import "UIImage+LK.h"
 #import "RMShopCarViewController.h"
+#import "AppDelegate.h"
+#import "RMMyOrderViewController.h"
+#import "RMMyCollectionViewController.h"
 
 @interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate,RMAddressEditViewCompletedDelegate>{
     BOOL isFirstViewDidAppear;
@@ -201,7 +204,7 @@
     bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
     bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_buy", nil]];
+   [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_up", @"img_buy", @"img_moreChat", nil]];
     [self.view addSubview:bottomView];
 }
 
@@ -212,33 +215,86 @@
             break;
         }
         case 1:{
-            if (![RMUserLoginInfoManager loginmanager].state){
+            [mTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:-1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+            break;
+        }
+        case 2:{
+            if (![[RMUserLoginInfoManager loginmanager] state]){
                 NSLog(@"去登录...");
                 return ;
             }
             
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [RMAFNRequestManager getMembersCollectWithCollect_id:dataModel.auto_id withContent_type:@"3" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
-                if (error){
-                    NSLog(@"error:%@",error);
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                    return ;
-                }
-                
-                if (success){
-                    [self showHint:[object objectForKey:@"msg"]];
-                    UIButton * btn = (UIButton *)[bottomView viewWithTag:1];
-                    [btn setBackgroundImage:LOADIMAGE(@"img_asced", kImageTypePNG) forState:UIControlStateNormal];
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                }else{
-                    [self showHint:[object objectForKey:@"msg"]];
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                }
-            }];
+            RMShopCarViewController * shopCarCtl = [[RMShopCarViewController alloc] init];
+            [self.navigationController pushViewController:shopCarCtl animated:YES];
             break;
         }
-        case 2:{
+        case 3:{
+            KxMenuItem * item1 = [KxMenuItem menuItem:@"多聊消息" image:nil target:self action:@selector(menuSelected:) index:201];
+            item1.foreColor = UIColorFromRGB(0x585858);
             
+            KxMenuItem * item2 = [KxMenuItem menuItem:@"我的订单" image:nil target:self action:@selector(menuSelected:) index:202];
+            item2.foreColor = UIColorFromRGB(0x585858);
+
+            KxMenuItem * item3 = [KxMenuItem menuItem:@"我的收藏" image:nil target:self action:@selector(menuSelected:) index:203];
+            item3.foreColor = UIColorFromRGB(0x585858);
+            
+            KxMenuItem * item4 = [KxMenuItem menuItem:@"我的账户" image:nil target:self action:@selector(menuSelected:) index:204];
+            item4.foreColor = UIColorFromRGB(0x585858);
+            
+            NSArray * arr = [[NSArray alloc]initWithObjects:item1,item2,item3,item4, nil];
+            
+            [KxMenu setTintColor:[UIColor whiteColor]];
+            
+            [KxMenu showMenuInView:self.view fromRect:CGRectMake(kScreenWidth - 100, bottomView.frame.origin.y, 100, 100) menuItems:arr];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+- (void)menuSelected:(KxMenuItem *)sender {
+    switch (sender.tag) {
+        case 201:{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            AppDelegate * shareApp = [UIApplication sharedApplication].delegate;
+            [shareApp tabSelectController:3];
+            break;
+        }
+        case 202:{
+            if (![[RMUserLoginInfoManager loginmanager] state]){
+                NSLog(@"去登录...");
+                return ;
+            }
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            AppDelegate * shareApp = [UIApplication sharedApplication].delegate;
+            [shareApp tabSelectController:2];
+
+            [shareApp.accountCtl loadMyOrderCtl];
+
+            break;
+        }
+        case 203:{
+            if (![[RMUserLoginInfoManager loginmanager] state]){
+                NSLog(@"去登录...");
+                return ;
+            }
+            
+            RMMyCollectionViewController * myCollectionCtl = [[RMMyCollectionViewController alloc] init];
+            [self.navigationController pushViewController:myCollectionCtl animated:YES];
+            break;
+        }
+        case 204:{
+            if (![[RMUserLoginInfoManager loginmanager] state]){
+                NSLog(@"去登录...");
+                return ;
+            }
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            AppDelegate * shareApp = [UIApplication sharedApplication].delegate;
+            [shareApp tabSelectController:2];
             break;
         }
             

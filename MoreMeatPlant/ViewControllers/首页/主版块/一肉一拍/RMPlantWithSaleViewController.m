@@ -20,6 +20,9 @@
 #import "RefreshControl.h"
 #import "CustomRefreshView.h"
 #import "KxMenu.h"
+#import "RMShopCarViewController.h"
+#import "AppDelegate.h"
+#import "RMMyCollectionViewController.h"
 
 @interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,BottomDelegate,RefreshControlDelegate>{
     BOOL isFirstViewDidAppear;
@@ -293,7 +296,13 @@
             break;
         }
         case 2:{
-            NSLog(@"购买");
+            if (![[RMUserLoginInfoManager loginmanager] state]){
+                NSLog(@"去登录....");
+                return;
+            }
+            
+            RMShopCarViewController * shopCarCtl = [[RMShopCarViewController alloc] init];
+            [self.navigationController pushViewController:shopCarCtl animated:YES];
             break;
         }
         case 3:{
@@ -318,15 +327,35 @@
 - (void)menuSelected:(KxMenuItem *)sender {
     switch (sender.tag) {
         case 201:{
-            NSLog(@"多聊消息");
+            if (![[RMUserLoginInfoManager loginmanager] state]){
+                NSLog(@"去登录...");
+                return ;
+            }
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            AppDelegate * shareApp = [UIApplication sharedApplication].delegate;
+            [shareApp tabSelectController:3];
             break;
         }
         case 202:{
-            NSLog(@"我的收藏");
+            if (![[RMUserLoginInfoManager loginmanager] state]){
+                NSLog(@"去登录...");
+                return ;
+            }
+            
+            RMMyCollectionViewController * myCollectionCtl = [[RMMyCollectionViewController alloc] init];
+            [self.navigationController pushViewController:myCollectionCtl animated:YES];
             break;
         }
         case 203:{
-            NSLog(@"我的账户");
+            if (![[RMUserLoginInfoManager loginmanager] state]){
+                NSLog(@"去登录...");
+                return ;
+            }
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            AppDelegate * shareApp = [UIApplication sharedApplication].delegate;
+            [shareApp tabSelectController:2];
             break;
         }
             

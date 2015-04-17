@@ -264,15 +264,24 @@
                 [subsPlantArr addObject:model];
             }
             
+            CGFloat offsetY = 0;
+            if (IS_IPHONE_6p_SCREEN) {
+                offsetY = 65;
+            }else if (IS_IPHONE_6_SCREEN){
+                offsetY = 60;
+            }else{
+                offsetY = 55;
+            }
+            
             plantTypeView = [[RMPlantTypeView alloc] init];
-            plantTypeView.frame = CGRectMake(0, 64, kScreenWidth, 60);
+            plantTypeView.frame = CGRectMake(0, 64, kScreenWidth, offsetY);
             plantTypeView.delegate = self;
             plantTypeView.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.62 alpha:1];
             [plantTypeView loadPlantTypeWithImageArr:subsPlantArr];
             [self.view insertSubview:plantTypeView belowSubview:self.recognizerView];
-
+            
             [UIView animateWithDuration:0.3 animations:^{
-                mTableView.frame = CGRectMake(0, plantTypeView.frame.size.height + 64, kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 44);
+                mTableView.frame = CGRectMake(0, plantTypeView.frame.size.height + 60, kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 44);
             } completion:^(BOOL finished) {
             }];
             

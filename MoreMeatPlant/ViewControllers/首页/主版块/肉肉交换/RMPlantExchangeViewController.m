@@ -25,6 +25,9 @@
 #import "NSString+TimeInterval.h"
 #import "RMCommentsView.h"
 #import "KxMenu.h"
+#import "AppDelegate.h"
+#import "RMPlantWithSaleViewController.h"
+#import "RMFreshPlantMarketViewController.h"
 
 @interface RMPlantExchangeViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate,CommentsViewDelegate>{
     BOOL isFirstViewDidAppear;
@@ -832,15 +835,23 @@
 - (void)menuSelected:(KxMenuItem *)sender {
     switch (sender.tag) {
         case 201:{
-            NSLog(@"多聊消息");
+            if (![[RMUserLoginInfoManager loginmanager] state]){
+                return ;
+            }
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            AppDelegate * shareApp = [UIApplication sharedApplication].delegate;
+            [shareApp tabSelectController:3];
             break;
         }
         case 202:{
-            NSLog(@"一肉一拍");
+            RMPlantWithSaleViewController * plantWithSaleCtl = [[RMPlantWithSaleViewController alloc] init];
+            [self.navigationController pushViewController:plantWithSaleCtl animated:YES];
             break;
         }
         case 203:{
-            NSLog(@"鲜肉市场");
+            RMFreshPlantMarketViewController * freshPlantMarketCtl = [[RMFreshPlantMarketViewController alloc] init];
+            [self.navigationController pushViewController:freshPlantMarketCtl animated:YES];
             break;
         }
             
