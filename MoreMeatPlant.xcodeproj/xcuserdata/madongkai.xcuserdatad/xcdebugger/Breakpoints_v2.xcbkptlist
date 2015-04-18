@@ -163,7 +163,7 @@
                   symbolName = "-[RMUserInfoEditViewController commit]"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E8%B5%84%E6%96%99/RMUserInfoEditViewController.m"
-                  timestampString = "451038331.051973"
+                  timestampString = "451072091.512955"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "34"
@@ -177,7 +177,7 @@
                   symbolName = "__38-[RMUserInfoEditViewController commit]_block_invoke"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E8%B5%84%E6%96%99/RMUserInfoEditViewController.m"
-                  timestampString = "451038331.052102"
+                  timestampString = "451072091.513097"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "34"
@@ -193,13 +193,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x767b;&#x5f55;/RMLoginViewController.m"
-            timestampString = "451027647.928357"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x5e97;&#x94fa;/RMMyCorpViewController.m"
+            timestampString = "451068764.951243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-loginAction:"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
+            landmarkName = "-requestListWithPlant"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -210,43 +210,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x4e3b;&#x9875;/RMMyHomeViewController.m"
-            timestampString = "451038569.834175"
+            timestampString = "451070844.969026"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "-requestMemberInfo"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
+            landmarkName = "-sendPrivateMsgBtnAction:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[RMMyHomeViewController requestMemberInfo]"
-                  moduleName = "MoreMeatPlant"
-                  urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E4%B8%BB%E9%A1%B5/RMMyHomeViewController.m"
-                  timestampString = "451038569.845649"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "136">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__43-[RMMyHomeViewController requestMemberInfo]_block_invoke"
-                  moduleName = "MoreMeatPlant"
-                  urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E4%B8%BB%E9%A1%B5/RMMyHomeViewController.m"
-                  timestampString = "451038569.845929"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

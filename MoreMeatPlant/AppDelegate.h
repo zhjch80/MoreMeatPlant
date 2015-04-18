@@ -31,5 +31,11 @@
 
 - (void)tabSelectController:(NSInteger)index;
 
+- (void)loginEaseMobWithUserName:(NSString *)userName
+                        passWord:(NSString *)passWord
+                         success:(void(^)(id arg))success
+                         failure:(void(^)(id arg))failure;
+- (void)logoutEaseMobWithSuccess:(void(^)(id arg))success
+                         failure:(void(^)(id arg))failure;
 @end
 

@@ -95,7 +95,7 @@
         if(success && model.status){
             [headView.content_img sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
             headView.content_name.text = model.content_name;
-            headView.content_signature.text = model.contentQm;
+            headView.content_signature.text = Str_Objc(model.contentQm, @"什么也没写...");
             headView.city.text = model.content_gps;
 //            self.yu_e.text = [NSString stringWithFormat:@"余额:%.0f",model.spendmoney];
             headView.hua_bi.text = [NSString stringWithFormat:@"花币:%.0f",model.spendmoney];
@@ -330,7 +330,8 @@
 - (void)sendPrivateMsgBtnAction:(UIButton *)sender{
     [self.navigationController popToRootViewControllerAnimated:YES];
     AppDelegate * dele = [[UIApplication sharedApplication] delegate];
-    [dele.talkMoreCtl._chatListVC jumpToChatView:@""];
+    [dele tabSelectController:3];
+    [dele.talkMoreCtl._chatListVC jumpToChatView:_model.content_user];
 }
 
 #pragma mark - 帖子详情

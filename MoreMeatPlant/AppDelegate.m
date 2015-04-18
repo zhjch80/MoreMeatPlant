@@ -80,7 +80,7 @@
 #pragma mark - 环信配置
 #warning  修改一 注册 APNS文件的名字, 需要与后台上传证书时的名字一一对应，该证书用来在有新消息时给用户推送通知
     NSString *apnsCertName = @"";
-    [[EaseMob sharedInstance] registerSDKWithAppKey:@"snowyshell#moremeatplant" apnsCertName:apnsCertName];
+    [[EaseMob sharedInstance] registerSDKWithAppKey:@"yryp-app#yryp" apnsCertName:apnsCertName];
     [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
     
@@ -88,6 +88,8 @@
     
 #warning 修改二 登录环信账号，该部分代码需要移到登录界面登录自己本身的账号成功后
     //登录时候的账号和密码是在环信后台设置好的，以后需要自己的服务器在接口返回 密码都是111111 zhangbeibei
+    NSLog(@"user = %@,pwd = %@",[[RMUserLoginInfoManager loginmanager]user],
+          [[RMUserLoginInfoManager loginmanager] ypwd]);
     if([[RMUserLoginInfoManager loginmanager] state]){
         [self loginEaseMobWithUserName:[[RMUserLoginInfoManager loginmanager]user]
                               passWord:[[RMUserLoginInfoManager loginmanager] ypwd]

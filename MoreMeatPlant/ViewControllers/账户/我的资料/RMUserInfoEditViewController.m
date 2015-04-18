@@ -23,7 +23,7 @@
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
     _nickT.text = __model.contentName;
-    _signatureT.text = __model.contentQm?__model.contentQm:@"暂无";
+    _signatureT.text = Str_Objc(__model.contentQm, @"什么也没写...");
     _mobileT.text = __model.contentMobile;
     _apliyT.text = __model.zfbNo;
     [_sureModifyBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];

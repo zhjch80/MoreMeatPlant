@@ -21,6 +21,8 @@
 #define OBJC(v) (([v isEqual:[NSNull null]] | [v isEqual:@"(null)"] | [v isEqual:@"<null>"] | v== nil) ? @"" : v)
 #define OBJC_Nil(v) (([v isEqual:[NSNull null]]) ? nil : v)
 
+#define Str_Objc(v,replace) (([v length] == 0 | v == nil | [v isEqual:[NSNull null]]) ?replace:v)
+
 #define FONT(_size) [UIFont systemFontOfSize:(_size)]
 #define FONT_0(_size) [UIFont fontWithName:@"FZZXHJW--GB1-0" size:(_size)]
 #define FONT_1(_size) [UIFont fontWithName:@"FZZHJW--GB1-0" size:(_size)]

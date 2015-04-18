@@ -159,9 +159,9 @@
     if([annotation isKindOfClass:[RMPointAnnotation class]])
     {
         BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"shopAnnotation"];
-        //newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
+        newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
 //        newAnnotationView.image = [UIImage imageNamed:@"map_shop_icon"];
-        newAnnotationView.pinColor = BMKPinAnnotationColorRed;
+        newAnnotationView.pinColor = BMKPinAnnotationColorPurple;//附近店铺
         newAnnotationView.tag = [(RMPointAnnotation *)annotation tag];
         RMPublicModel * model = [dataarray objectAtIndex:[(RMPointAnnotation *)annotation tag]-100];
         RMActionPaopaoView * paopao = [[[NSBundle mainBundle] loadNibNamed:@"RMActionPaopaoView" owner:self options:nil] lastObject];
@@ -174,24 +174,13 @@
         newAnnotationView.paopaoView = paopaoView;
         return newAnnotationView;
     }
-    else if ([annotation isKindOfClass:[BMKPointAnnotation class]])
+    else if ([annotation isKindOfClass:[BMKPointAnnotation class]])//我自己
     {
         BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
 //        newAnnotationView.image = [UIImage imageNamed:@"current_icon"];
         newAnnotationView.pinColor = BMKPinAnnotationColorRed;
         newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
         
-        RMActionPaopaoView * paopao = [[[NSBundle mainBundle] loadNibNamed:@"RMActionPaopaoView" owner:self options:nil] lastObject];
-        [paopao.layer setCornerRadius:5.0];
-        [paopao.content_face setImage:[UIImage imageNamed:@"photo"]];
-        paopao.content_content.text = [NSString stringWithFormat:@"店铺名称:%@\n负责人:%@\n联系方式:%@\n店铺地址:%@\n店铺级别:%@",@"小马哥的店铺",@"马东凯",@"15688889043",@"朝阳区慈云寺竹棒2000 3号楼 1605室 ",@"1"];
-        CGSize size = [paopao.content_content.text getcontentsizeWithfont:paopao.content_content.font constrainedtosize:CGSizeMake(paopao.content_content.frame.size.width, 200) linemode:NSLineBreakByCharWrapping];
-        paopao.frame = CGRectMake(paopao.frame.origin.x, paopao.frame.origin.y, paopao.frame.size.width, size.height+8*2);
-        NSLog(@"%f,%f",paopao.frame.size.height,paopao.content_content.frame.size.height);
-        paopao.contentMode = UIViewContentModeScaleToFill;
-         BMKActionPaopaoView * paopaoView = [[BMKActionPaopaoView alloc]initWithCustomView:paopao];
-        newAnnotationView.paopaoView = paopaoView;
-
         return newAnnotationView;
     }
     

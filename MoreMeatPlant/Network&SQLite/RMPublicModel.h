@@ -69,6 +69,7 @@
 @property (nonatomic, strong) NSString *contentFace;        //会员头像
 @property (nonatomic, strong) NSString *contentGps;         //会员位置
 @property (nonatomic, strong) NSString *contentLinkname;    //商家负责人
+@property (nonatomic, retain) NSString *content_user;       //存放用户名
 
 @property (nonatomic, retain) NSString * content_value;     //收支金额
 @property (nonatomic, retain) NSString * content_status;    //收支状态

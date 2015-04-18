@@ -1683,7 +1683,7 @@
         model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
         model.contentQm = OBJC_Nil([dataDic objectForKey:@"content_qm"]);
         model.spendmoney = [OBJC_Nil([dataDic objectForKey:@"spendmoney"]) integerValue];
-        
+        model.content_user = OBJC_Nil([dataDic objectForKey:@"content_user"]);
         if(block){
             block(nil,YES,model);
         }

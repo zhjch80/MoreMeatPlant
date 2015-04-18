@@ -31,7 +31,7 @@
 
     _nickL.text = __model.contentName;
     _passwordL.text = @"******";
-    _signatureL.text = __model.contentQm?__model.contentQm:@"暂无";
+    _signatureL.text = Str_Objc(__model.contentQm, @"什么也没写...");
     _mobileL.text = __model.contentMobile;
     _apliyL.text = __model.zfbNo;
     
@@ -41,7 +41,7 @@
     if([noti.name isEqualToString:RMRequestMemberInfoAgainNotification]){
         _nickL.text = __model.contentName;
         _passwordL.text = @"******";
-        _signatureL.text = __model.contentQm?__model.contentQm:@"暂无";
+        _signatureL.text = Str_Objc(__model.contentQm, @"什么也没写...");
         _mobileL.text = __model.contentMobile;
         _apliyL.text = __model.zfbNo;
     }

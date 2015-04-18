@@ -16,6 +16,7 @@
 #import "CallSessionViewController.h"
 #import "AppDelegate.h"
 #import "IQKeyboardManager.h"
+#import "UIAlertView+Expland.h"
 //两次提示的默认间隔
 static const CGFloat kDefaultPlaySoundInterval = 3.0;
 
@@ -41,10 +42,24 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    if(![[RMUserLoginInfoManager loginmanager] state]){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还没有登录，请先去登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        
+        [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+            AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+            [dele tabSelectController:2];
+        }];
+    }
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+   
     //if 使tabBarController中管理的viewControllers都符合 UIRectEdgeNone
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7) {
         self.edgesForExtendedLayout = UIRectEdgeNone;

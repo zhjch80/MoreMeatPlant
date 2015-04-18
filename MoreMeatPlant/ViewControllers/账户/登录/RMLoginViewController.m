@@ -96,6 +96,17 @@
             [delegate loadMainViewControllersWithType:[[RMUserLoginInfoManager loginmanager] state]];
             [delegate tabSelectController:2];
             
+            //环信登录
+            [delegate loginEaseMobWithUserName:[[RMUserLoginInfoManager loginmanager]user]
+                                  passWord:[[RMUserLoginInfoManager loginmanager] ypwd]
+                                   success:^(id arg) {
+                                       //登录成功s
+                                   }
+                                   failure:^(id arg) {
+                                       //登录失败
+                                   }];
+
+            
         }else{
             
         }

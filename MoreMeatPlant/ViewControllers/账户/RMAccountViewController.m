@@ -101,7 +101,7 @@
         if(success && model.status){
             [self.headerImgV sd_setImageWithURL:[NSURL URLWithString:model.contentFace] placeholderImage:[UIImage imageNamed:@"nophote"]];
             self.userNameL.text = model.contentName;
-            self.userDescL.text = model.contentQm?model.contentQm:@"暂无";
+            self.userDescL.text = Str_Objc(model.contentQm, @"什么也没写...");
             self.regionL.text = model.contentGps;
             self.yu_eL.text = [NSString stringWithFormat:@"余额:%.0f",model.balance];
             self.hua_biL.text = [NSString stringWithFormat:@"花币:%.0f",model.spendmoney];
@@ -156,7 +156,9 @@
             if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:GeneralMember]){//普通会员
                 switch (view.tag-100) {
                     case 0:{//我的肉友
-                        
+                        AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+                        [dele tabSelectController:3];
+                        dele.talkMoreCtl.selectedViewController = dele.talkMoreCtl._contactsVC;
                     }
                         break;
                     case 1:{//我的钱包
@@ -264,7 +266,9 @@
                         break;
                     case 7:{//等待升级
                        
-                        
+                        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"敬请期待!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+                        [alert show];
+                        return ;
                     }
                         break;
                     case 8:{//附近肉友
@@ -309,7 +313,9 @@
             }else{//商家会员
                 switch (view.tag-100) {
                     case 0:{//我的肉友
-                        
+                        AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+                        [dele tabSelectController:3];
+                        dele.talkMoreCtl.selectedViewController = dele.talkMoreCtl._contactsVC;
                     }
                         break;
                     case 1:{//我的钱包
@@ -529,6 +535,14 @@
     [[RMUserLoginInfoManager loginmanager] setPwd:pwd];
     [[RMUserLoginInfoManager loginmanager] setIsCorp:iscorp];
     [[RMUserLoginInfoManager loginmanager] setCoorStr:coorstr];
+    
+    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+    //环信注销
+    [dele logoutEaseMobWithSuccess:^(id arg) {
+        
+    } failure:^(id arg) {
+        
+    }];
 }
 
 #pragma mark - 换头像

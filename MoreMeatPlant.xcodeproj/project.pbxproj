@@ -4279,8 +4279,6 @@
 				514611DE1AE2105B0040E462 /* RMMoreChatViewController.h */,
 				514611DF1AE2105B0040E462 /* RMMoreChatViewController.m */,
 				514611E01AE2105B0040E462 /* RMMoreChatViewController.xib */,
-				514611E11AE2105B0040E462 /* 好友列表 */,
-				514611E21AE2105B0040E462 /* 聊天列表 */,
 			);
 			path = "多聊";
 			sourceTree = "<group>";
@@ -4525,20 +4523,6 @@
 				514611DB1AE2105B0040E462 /* EMSearchDisplayController.m */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		514611E11AE2105B0040E462 /* 好友列表 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "好友列表";
-			sourceTree = "<group>";
-		};
-		514611E21AE2105B0040E462 /* 聊天列表 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "聊天列表";
 			sourceTree = "<group>";
 		};
 		5157DE371AB9BE94005E9FA5 /* 宝贝管理 */ = {

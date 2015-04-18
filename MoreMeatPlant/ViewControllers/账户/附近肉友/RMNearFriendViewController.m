@@ -165,6 +165,7 @@
     if (direction == RefreshDirectionTop) { //下拉刷新
         pageCount = 1;
             [self requestNearMember];
+        [friendsArray removeAllObjects];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
        
             pageCount ++;
