@@ -11,6 +11,7 @@
 #import "KxMenu.h"
 #import "NSString+TimeInterval.h"
 #import "RMHomeHeadView.h"
+#import "AppDelegate.h"
 @interface RMMyHomeViewController ()<RefreshControlDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
@@ -44,6 +45,9 @@
     
     headView.content_img.layer.cornerRadius = 5;
     headView.content_img.clipsToBounds = YES;
+    
+    [headView.attentionHeBtn addTarget:self action:@selector(attentionHeBtnAction:) forControlEvents:UIControlEventTouchDown];
+    [headView.sendPrivateMsgBtn addTarget:self action:@selector(sendPrivateMsgBtnAction:) forControlEvents:UIControlEventTouchDown];
     
     _model = [[RMPublicModel alloc]init];
     
@@ -302,6 +306,31 @@
 
 - (void)addPraiseWithImage:(RMImageView *)image {
     NSLog(@"添加赞");
+}
+
+#pragma mark - 关注／发私信
+- (void)attentionHeBtnAction:(UIButton *)sender{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager attentionFriendRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] withOtherId:self.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                
+            }else{
+                
+            }
+            [self showHint:model.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
+}
+
+- (void)sendPrivateMsgBtnAction:(UIButton *)sender{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+    [dele.talkMoreCtl._chatListVC jumpToChatView:@""];
 }
 
 #pragma mark - 帖子详情

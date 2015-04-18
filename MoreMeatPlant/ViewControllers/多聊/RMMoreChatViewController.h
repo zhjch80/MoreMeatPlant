@@ -7,7 +7,21 @@
 //
 
 #import "RMBaseViewController.h"
+#import "EMChatManagerUtilDelegate.h"
+#import "ChatListViewController.h"
+#import "ContactsViewController.h"
 
-@interface RMMoreChatViewController : RMBaseViewController
 
+@interface RMMoreChatViewController : UITabBarController
+{
+    EMConnectionState _connectionState;
+}
+@property (retain, nonatomic) ChatListViewController *_chatListVC;
+@property (retain, nonatomic) ContactsViewController *_contactsVC;
+
+- (void)jumpToChatList;
+
+- (void)setupUntreatedApplyCount;
+
+- (void)networkChanged:(EMConnectionState)connectionState;
 @end

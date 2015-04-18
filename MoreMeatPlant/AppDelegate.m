@@ -10,7 +10,6 @@
 #import "RMHomeViewController.h"
 #import "RMDaqoViewController.h"
 #import "RMAccountViewController.h"
-#import "RMTalkMoreViewController.h"
 #import "RMCustomTabBarController.h"
 #import "RMLoginViewController.h"
 #import "RMUserLoginInfoManager.h"
@@ -30,7 +29,7 @@
 @interface AppDelegate ()<EMChatManagerDelegate>{
     RMHomeViewController * homeCtl;
     RMDaqoViewController * daqoCtl;
-    RMTalkMoreViewController * talkMoreCtl;
+    
     RMLoginViewController * loginCtl;
     RMCustomTabBarController * customTabBarCtl;
     BMKMapManager* _mapManager;
@@ -41,7 +40,7 @@
 
 @implementation AppDelegate
 @synthesize cusNav;
-@synthesize locationManager, accountCtl;
+@synthesize locationManager, accountCtl,talkMoreCtl;
 
 - (id)init
 {
@@ -62,7 +61,7 @@
     homeCtl = [[RMHomeViewController alloc] init];
     daqoCtl = [[RMDaqoViewController alloc] init];
     accountCtl = [[RMAccountViewController alloc] init];
-    talkMoreCtl = [[RMTalkMoreViewController alloc] init];
+    talkMoreCtl = [[RMMoreChatViewController alloc] init];
     loginCtl = [[RMLoginViewController alloc] init];
     
     
@@ -133,16 +132,18 @@
  *  @param      type        0没有登录 1已经登录
  */
 - (void)loadMainViewControllersWithType:(NSInteger)type {
+    UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:talkMoreCtl];
+
     NSArray * controllers;
     switch (type) {
         case 0:{
             //没有登录
-            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, loginCtl, talkMoreCtl, nil];
+            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, loginCtl, nav, nil];
             break;
         }
         case 1:{
             //已经登录
-            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, talkMoreCtl, nil];
+            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, nav, nil];
             [accountCtl initPlat];
             break;
         }
@@ -290,7 +291,8 @@
                 [dele->locationManager stopLocation];
                 NSString * coor = [NSString stringWithFormat:@"%f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude];
                 [[RMUserLoginInfoManager loginmanager] setCoorStr:coor];
-                NSLog(@"%@",coor);
+                [[NSUserDefaults standardUserDefaults] setValue:coor forKey:UserCoor];
+                NSLog(@"%@",[[RMUserLoginInfoManager loginmanager] coorStr]);
             }
         };
     

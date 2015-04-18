@@ -11,7 +11,7 @@
 #import "RMShareViewDelegate.h"
 #import "RMLocationManager.h"
 #import "RMAccountViewController.h"
-
+#import "RMMoreChatViewController.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
 
 }
@@ -21,6 +21,7 @@
 @property (retain, nonatomic) RMShareViewDelegate * viewdelegate;
 @property (retain, nonatomic) RMLocationManager * locationManager;
 @property (nonatomic, strong) RMAccountViewController * accountCtl;
+@property (nonatomic, retain) RMMoreChatViewController * talkMoreCtl;
 
 /**
  *  @method

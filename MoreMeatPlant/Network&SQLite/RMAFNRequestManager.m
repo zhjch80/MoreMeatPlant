@@ -576,8 +576,8 @@
 /**
  *  @method     登录
  */
-+ (void)loginRequestWithUser:(NSString *)user Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block{
-    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_doLogin",user,pwd];
++ (void)loginRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Gps:(NSString *)gps andCallBack:(RMAFNRequestManagerCallBack)block{
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&GPS=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_doLogin",user,pwd,gps];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         RMPublicModel * model = [[RMPublicModel alloc]init];
@@ -1759,6 +1759,26 @@
         }
     }];
     
+}
+
++ (void)attentionFriendRequestWithUser:(NSString *)user Pwd:(NSString *)pwd withOtherId:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_center&task=concernFriend&frm[friends_id]=2&ID=test&PWD=e10adc3949ba59abbe56e057f20f883e
+    NSString * url = [NSString stringWithFormat:@"%@%@&frm[friends_id]=%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_center&task=concernFriend",auto_id,user,pwd];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+            RMPublicModel * model = [[RMPublicModel alloc]init];
+            model.status = [[dic objectForKey:@"status"] boolValue];
+            model.msg = [dic objectForKey:@"msg"];
+        
+            if(block){
+            block(nil,YES,model);
+            }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+
+    }];
 }
 
 @end

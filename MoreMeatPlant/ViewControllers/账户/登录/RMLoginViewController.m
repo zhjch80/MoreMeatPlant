@@ -59,7 +59,8 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager loginRequestWithUser:[_userTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Pwd:[FileMangerObject md5:_passTextField.text] andCallBack:^(NSError *error, BOOL success, id object) {
+    NSLog(@"%@",[[RMUserLoginInfoManager loginmanager] coorStr]);
+    [RMAFNRequestManager loginRequestWithUser:[_userTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Pwd:[FileMangerObject md5:_passTextField.text] Gps:[[RMUserLoginInfoManager loginmanager] coorStr] andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         RMPublicModel * model = (RMPublicModel *)object;
         if(error){

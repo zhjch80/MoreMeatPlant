@@ -272,7 +272,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      user            用户名
  *  @param      pwd             密码 （md5编码之后的）
  */
-+ (void)loginRequestWithUser:(NSString *)user Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block;
++ (void)loginRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Gps:(NSString *)gps andCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  注册
@@ -675,5 +675,13 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *
  */
 + (void)nearMemberRequestwithCoor:(NSString *)coor andCallBack:(RMAFNRequestManagerCallBack)block;
+
+/**
+ *  关注某人
+ *
+ *  @param auto_id 某人标示
+ *  @param block   回调
+ */
++ (void)attentionFriendRequestWithUser:(NSString *)user Pwd:(NSString *)pwd withOtherId:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block;
 
 @end
