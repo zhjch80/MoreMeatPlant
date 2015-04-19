@@ -98,6 +98,16 @@
         self.edgesForExtendedLayout =  UIRectEdgeNone;
     }
     
+    
+//    UIButton * leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    leftBarButton.frame = CGRectMake(0, 0, 44, 44);
+//    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+//    [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
+//    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+//    UIBarButtonItem * backItem = [[UIBarButtonItem alloc] initWithCustomView:leftBarButton];
+//    self.navigationController.navigationItem.leftBarButtonItem = backItem;
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = item;
     #warning 以下三行代码必须写，注册为SDK的ChatManager的delegate
     [[[EaseMob sharedInstance] deviceManager] addDelegate:self onQueue:nil];
     [[EaseMob sharedInstance].chatManager removeDelegate:self];

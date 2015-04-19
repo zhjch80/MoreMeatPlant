@@ -202,35 +202,24 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [self.dataSource count] + 1;
+    return [self.dataSource count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section == 0) {
-        return 2;
-//        return 1;
-    }
+//    if (section == 0) {
+//        return 2;
+////        return 1;
+//    }
     
-    return [[self.dataSource objectAtIndex:(section - 1)] count];
+    return [[self.dataSource objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BaseTableViewCell *cell;
     
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        cell = (BaseTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"FriendCell"];
-        if (cell == nil) {
-            cell = [[BaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FriendCell"];
-        }
-        
-        cell.imageView.image = [UIImage imageNamed:@"newFriends"];
-        cell.textLabel.text = NSLocalizedString(@"title.apply", @"申请和通知");
-        [cell addSubview:self.unapplyCountLabel];
-    }
-    else{
         static NSString *CellIdentifier = @"ContactListCell";
         cell = (BaseTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         // Configure the cell...
@@ -240,16 +229,10 @@
         }
         
         cell.indexPath = indexPath;
-        if (indexPath.section == 0 && indexPath.row == 1) {
-            cell.imageView.image = [UIImage imageNamed:@"groupPrivateHeader"];
-            cell.textLabel.text = NSLocalizedString(@"title.group", @"群组");
-        }
-        else{
-            EMBuddy *buddy = [[self.dataSource objectAtIndex:(indexPath.section - 1)] objectAtIndex:indexPath.row];
+      
+            EMBuddy *buddy = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
             cell.imageView.image = [UIImage imageNamed:@"chatListCellHead.png"];
             cell.textLabel.text = buddy.username;
-        }
-    }
     
     return cell;
 }
@@ -258,10 +241,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    if (indexPath.section == 0) {
-        return NO;
-        [self isViewLoaded];
-    }
+
     return YES;
 }
 
@@ -271,7 +251,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSDictionary *loginInfo = [[[EaseMob sharedInstance] chatManager] loginInfo];
         NSString *loginUsername = [loginInfo objectForKey:kSDKUsername];
-        EMBuddy *buddy = [[self.dataSource objectAtIndex:(indexPath.section - 1)] objectAtIndex:indexPath.row];
+        EMBuddy *buddy = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         if ([buddy.username isEqualToString:loginUsername]) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"提示") message:NSLocalizedString(@"friend.notDeleteSelf", @"不能删除自己") delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"好的") otherButtonTitles:nil, nil];
             [alertView show];
@@ -280,7 +260,7 @@
         }
         
         [tableView beginUpdates];
-        [[self.dataSource objectAtIndex:(indexPath.section - 1)] removeObjectAtIndex:indexPath.row];
+        [[self.dataSource objectAtIndex:indexPath.section] removeObjectAtIndex:indexPath.row];
         [self.contactsSource removeObject:buddy];
         [tableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView  endUpdates];
@@ -350,23 +330,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            [self.navigationController pushViewController:[ApplyViewController shareController] animated:YES];
-        }
-        else if (indexPath.row == 1)
-        {
-            if (_groupController == nil) {
-                _groupController = [[GroupListViewController alloc] initWithStyle:UITableViewStylePlain];
-            }
-            else{
-                [_groupController reloadDataSource];
-            }
-            [self.navigationController pushViewController:_groupController animated:YES];
-        }
-    }
-    else{
-        EMBuddy *buddy = [[self.dataSource objectAtIndex:(indexPath.section - 1)] objectAtIndex:indexPath.row];
+        EMBuddy *buddy = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         NSDictionary *loginInfo = [[[EaseMob sharedInstance] chatManager] loginInfo];
         NSString *loginUsername = [loginInfo objectForKey:kSDKUsername];
         if (loginUsername && loginUsername.length > 0) {
@@ -381,7 +345,6 @@
         ChatViewController *chatVC = [[ChatViewController alloc] initWithChatter:buddy.username isGroup:NO];
         chatVC.title = buddy.username;
         [self.navigationController pushViewController:chatVC animated:YES];
-    }
 }
 
 #pragma mark - UISearchBarDelegate
@@ -477,7 +440,7 @@
     }
     NSDictionary *loginInfo = [[[EaseMob sharedInstance] chatManager] loginInfo];
     NSString *loginUsername = [loginInfo objectForKey:kSDKUsername];
-    EMBuddy *buddy = [[self.dataSource objectAtIndex:(indexPath.section - 1)] objectAtIndex:indexPath.row];
+    EMBuddy *buddy = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     if ([buddy.username isEqualToString:loginUsername])
     {
         return;

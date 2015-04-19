@@ -66,8 +66,6 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     }
     self.tabBarController.tabBar.hidden = YES;
     
-    UIView * contentView = [self.tabBarController.view.subviews objectAtIndex:0];
-    contentView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
     
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[RMMoreChatViewController class]];
     //获取未读消息数，此时并没有把self注册为SDK的delegate，读取出的未读数是上次退出程序时的
@@ -80,13 +78,7 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     
     [self setupSubviews];
 //    self.selectedIndex = 0;
-    
-    
-    
-    UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    [addButton setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
-    [addButton addTarget:_contactsVC action:@selector(addFriendAction) forControlEvents:UIControlEventTouchUpInside];
-    _addFriendItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
+
     
     
     
@@ -119,12 +111,13 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
         {
             [view setFrame:CGRectMake(view.frame.origin.x, kScreenHeight, view.frame.size.width, view.frame.size.height)];
         } else {
-            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, kScreenHeight-49)];
+            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, kScreenHeight-44)];
         }
     }
     
     [UIView commitAnimations];
 }
+
 
 - (void)segmentControlChanged:(UISegmentedControl *)sender{
     if(sender.selectedSegmentIndex == 0){
@@ -182,9 +175,6 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
 
 - (void)setupSubviews
 {
-//    self.tabBar.backgroundImage = [[UIImage imageNamed:@"tabbarBackground"] stretchableImageWithLeftCapWidth:25 topCapHeight:25];
-//    self.tabBar.selectionIndicatorImage = [[UIImage imageNamed:@"tabbarSelectBg"] stretchableImageWithLeftCapWidth:25 topCapHeight:25];
-    
     _chatListVC = [[ChatListViewController alloc] init];
     [_chatListVC networkChanged:_connectionState];
 
@@ -213,6 +203,16 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     
     UIApplication *application = [UIApplication sharedApplication];
     [application setApplicationIconBadgeNumber:unreadCount];
+}
+
+//返回未读消息数目
+- (NSInteger)UnreadMessageCount{
+    NSArray *conversations = [[[EaseMob sharedInstance] chatManager] conversations];
+    NSInteger unreadCount = 0;
+    for (EMConversation *conversation in conversations) {
+        unreadCount += conversation.unreadMessagesCount;
+    }
+    return unreadCount;
 }
 
 - (void)setupUntreatedApplyCount

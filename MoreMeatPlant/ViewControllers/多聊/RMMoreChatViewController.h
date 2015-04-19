@@ -24,4 +24,7 @@
 - (void)setupUntreatedApplyCount;
 
 - (void)networkChanged:(EMConnectionState)connectionState;
+
+//返回未读消息数目
+- (NSInteger)UnreadMessageCount;
 @end

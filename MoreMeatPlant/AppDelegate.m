@@ -135,7 +135,6 @@
  */
 - (void)loadMainViewControllersWithType:(NSInteger)type {
     UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:talkMoreCtl];
-
     NSArray * controllers;
     switch (type) {
         case 0:{

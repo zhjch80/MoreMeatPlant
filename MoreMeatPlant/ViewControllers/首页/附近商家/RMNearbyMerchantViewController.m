@@ -156,8 +156,8 @@
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id<BMKAnnotation>)annotation
 {
     
-    if([annotation isKindOfClass:[RMPointAnnotation class]])
-    {
+//    if([annotation isKindOfClass:[RMPointAnnotation class]])
+//    {
         BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"shopAnnotation"];
         newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
 //        newAnnotationView.image = [UIImage imageNamed:@"map_shop_icon"];
@@ -173,16 +173,16 @@
         BMKActionPaopaoView * paopaoView = [[BMKActionPaopaoView alloc]initWithCustomView:paopao];
         newAnnotationView.paopaoView = paopaoView;
         return newAnnotationView;
-    }
-    else if ([annotation isKindOfClass:[BMKPointAnnotation class]])//我自己
-    {
-        BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
-//        newAnnotationView.image = [UIImage imageNamed:@"current_icon"];
-        newAnnotationView.pinColor = BMKPinAnnotationColorRed;
-        newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
-        
-        return newAnnotationView;
-    }
+//    }
+//    else if ([annotation isKindOfClass:[BMKPointAnnotation class]])//我自己
+//    {
+//        BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
+////        newAnnotationView.image = [UIImage imageNamed:@"current_icon"];
+//        newAnnotationView.pinColor = BMKPinAnnotationColorRed;
+//        newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
+//        
+//        return newAnnotationView;
+//    }
     
     return nil;
 }

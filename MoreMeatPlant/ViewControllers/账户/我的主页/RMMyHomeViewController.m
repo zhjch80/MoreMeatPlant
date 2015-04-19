@@ -82,7 +82,9 @@
     badge = [[JSBadgeView alloc]initWithParentView:btn alignment:JSBadgeViewAlignmentTopRight];
     badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
     badge.badgeTextFont = FONT(10.0);
-    badge.badgeText = @"99";
+    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+    
+    badge.badgeText = [NSString stringWithFormat:@"%ld",[dele.talkMoreCtl UnreadMessageCount]];
     
     [self requestMemberInfo];
 }
