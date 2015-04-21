@@ -907,7 +907,7 @@
 		51A9BBCC1AE20EF600B486A6 /* sr_refresh@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A9BBC51AE20EF600B486A6 /* sr_refresh@2X.png */; };
 		51A9BBCD1AE20EF600B486A6 /* SRRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9BBC81AE20EF600B486A6 /* SRRefreshView.m */; };
 		51A9BBCE1AE20EF600B486A6 /* SRSlimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9BBCA1AE20EF600B486A6 /* SRSlimeView.m */; };
-		51CE2B761AD6996800E9E43F /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 51CE2B751AD6996800E9E43F /* JKCountDownButton.m */; };
+		51B375EA1AE6802B00E332CA /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B375E91AE6802B00E332CA /* JKCountDownButton.m */; };
 		51CE2B791AD6ADB900E9E43F /* RMOrderReturnEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51CE2B781AD6ADB900E9E43F /* RMOrderReturnEditView.m */; };
 		51CE2B7B1AD6ADC700E9E43F /* RMOrderReturnEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51CE2B7A1AD6ADC700E9E43F /* RMOrderReturnEditView.xib */; };
 		51D883C61ABB179400F7A3BD /* RMAdvertisingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D883C41ABB179400F7A3BD /* RMAdvertisingViewController.m */; };
@@ -2401,8 +2401,8 @@
 		51A9BBC81AE20EF600B486A6 /* SRRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRefreshView.m; sourceTree = "<group>"; };
 		51A9BBC91AE20EF600B486A6 /* SRSlimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSlimeView.h; sourceTree = "<group>"; };
 		51A9BBCA1AE20EF600B486A6 /* SRSlimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSlimeView.m; sourceTree = "<group>"; };
-		51CE2B741AD6996800E9E43F /* JKCountDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownButton.h; sourceTree = "<group>"; };
-		51CE2B751AD6996800E9E43F /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
+		51B375E81AE6802B00E332CA /* JKCountDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownButton.h; sourceTree = "<group>"; };
+		51B375E91AE6802B00E332CA /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
 		51CE2B771AD6ADB900E9E43F /* RMOrderReturnEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMOrderReturnEditView.h; sourceTree = "<group>"; };
 		51CE2B781AD6ADB900E9E43F /* RMOrderReturnEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMOrderReturnEditView.m; sourceTree = "<group>"; };
 		51CE2B7A1AD6ADC700E9E43F /* RMOrderReturnEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderReturnEditView.xib; sourceTree = "<group>"; };
@@ -3879,6 +3879,7 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				51B375E71AE6802B00E332CA /* JKCountDownButton */,
 				1D64F50D1A90CD150073EB98 /* CONST.h */,
 				51DB4E1C1AD1B3F000A6064D /* ShareSDK */,
 				51DB4E181AD1525000A6064D /* UIAlerView+Expland */,
@@ -4050,7 +4051,6 @@
 		1D9336ED1A8E3DFA00BA4FA7 /* MoreMeatPlant */ = {
 			isa = PBXGroup;
 			children = (
-				51CE2B731AD6996800E9E43F /* JKCountDownButton */,
 				0A4104E81ABAB1C20060FBD5 /* Category */,
 				1D4DA3401A921B93006A9EBA /* Network&SQLite */,
 				1D64F5091A904E5B0073EB98 /* Vendors */,
@@ -5338,11 +5338,11 @@
 			path = SlimeRefresh;
 			sourceTree = "<group>";
 		};
-		51CE2B731AD6996800E9E43F /* JKCountDownButton */ = {
+		51B375E71AE6802B00E332CA /* JKCountDownButton */ = {
 			isa = PBXGroup;
 			children = (
-				51CE2B741AD6996800E9E43F /* JKCountDownButton.h */,
-				51CE2B751AD6996800E9E43F /* JKCountDownButton.m */,
+				51B375E81AE6802B00E332CA /* JKCountDownButton.h */,
+				51B375E91AE6802B00E332CA /* JKCountDownButton.m */,
 			);
 			path = JKCountDownButton;
 			sourceTree = "<group>";
@@ -5842,7 +5842,7 @@
 				TargetAttributes = {
 					1D9336EA1A8E3DFA00BA4FA7 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = PTY98AP2WF;
+						DevelopmentTeam = WWD46XW8M3;
 					};
 					1D9337061A8E3DFA00BA4FA7 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -6748,7 +6748,6 @@
 				0A4105731ABAB3C70060FBD5 /* EMSDWebImageManager.m in Sources */,
 				1D386C8D1AC16916000B9686 /* RMSysMessageViewController.m in Sources */,
 				0A4105971ABAB6510060FBD5 /* ConvertToCommonEmoticonsHelper.m in Sources */,
-				51CE2B761AD6996800E9E43F /* JKCountDownButton.m in Sources */,
 				1D4DA3251A921716006A9EBA /* RMActivityWithGroupPurchaseViewController.m in Sources */,
 				1DD6992E1AC10F02009A9327 /* SDImageCache.m in Sources */,
 				1DCC84DE1AD6488D00B04040 /* UIImage+LK.m in Sources */,
@@ -6782,6 +6781,7 @@
 				514612131AE2105B0040E462 /* EMChooseViewController.m in Sources */,
 				1DD6993A1AC10F02009A9327 /* UIImageView+WebCache.m in Sources */,
 				1D75E93B1ACAABCA008BC5FE /* NSString+TimeInterval.m in Sources */,
+				51B375EA1AE6802B00E332CA /* JKCountDownButton.m in Sources */,
 				51DB4E6D1AD268FA00A6064D /* RMAliPayViewController.m in Sources */,
 				51DB4CB81AC7CB0800A6064D /* IQNSArray+Sort.m in Sources */,
 				514612111AE2105B0040E462 /* EMRemarkImageView.m in Sources */,
@@ -7050,8 +7050,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 东凯 马 (QASNBP4646)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 东凯 马 (QASNBP4646)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MoreMeatPlant/Vendors/ShareSDK/Connection",
@@ -7076,7 +7076,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "39d5981f-d436-4eef-87d2-8a65abda8ec6";
+				PROVISIONING_PROFILE = "027a58ea-85d9-4a65-835e-009339355cc5";
 			};
 			name = Debug;
 		};
@@ -7085,8 +7085,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TianFu Hong (RLHUHV5M7K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 东凯 马 (QASNBP4646)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 东凯 马 (QASNBP4646)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MoreMeatPlant/Vendors/ShareSDK/Connection",
@@ -7110,7 +7110,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "39d5981f-d436-4eef-87d2-8a65abda8ec6";
+				PROVISIONING_PROFILE = "027a58ea-85d9-4a65-835e-009339355cc5";
 			};
 			name = Release;
 		};

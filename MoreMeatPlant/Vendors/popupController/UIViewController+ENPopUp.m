@@ -79,9 +79,9 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     bluredView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     bluredView.tag = kENPopUpBluredViewTag;
     [bluredView setBlurAlpha:.0f];
-    [bluredView setAlpha:0.8f];
-    [bluredView setBlurColor:[UIColor clearColor]];
-    bluredView.backgroundColor = [UIColor clearColor];
+    [bluredView setAlpha:0.3f];
+    [bluredView setBlurColor:[UIColor blackColor]];
+    bluredView.backgroundColor = [UIColor blackColor];
 //    [overlayView addSubview:bluredView];
     
     // Make the background clickable

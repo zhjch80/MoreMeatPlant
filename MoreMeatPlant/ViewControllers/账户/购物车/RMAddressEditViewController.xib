@@ -56,7 +56,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="UBb-nR-Nrt">
                             <rect key="frame" x="64" y="136" width="184" height="78"/>
                         </imageView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="北京市朝阳区慈云寺珠蚌 2000 3 号楼 1605室" translatesAutoresizingMaskIntoConstraints="NO" id="Iws-Vn-H9E" customClass="RMBaseTextView">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iws-Vn-H9E" customClass="RMBaseTextView">
                             <rect key="frame" x="64" y="136" width="184" height="78"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -88,7 +88,7 @@
                 <constraint firstItem="apd-ri-R1g" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="wNY-6C-1RS"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="302" y="187"/>
+            <point key="canvasLocation" x="-22" y="57"/>
         </view>
     </objects>
     <resources>

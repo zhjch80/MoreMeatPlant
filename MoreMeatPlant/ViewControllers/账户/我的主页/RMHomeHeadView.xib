@@ -161,7 +161,7 @@
                 <outlet property="hua_bi" destination="1Ea-HA-hHP" id="RXI-vY-2tQ"/>
                 <outlet property="sendPrivateMsgBtn" destination="uZZ-s6-7jN" id="8Rc-an-rzc"/>
             </connections>
-            <point key="canvasLocation" x="423" y="56.75"/>
+            <point key="canvasLocation" x="465" y="4.75"/>
         </view>
     </objects>
     <resources>

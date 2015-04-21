@@ -181,6 +181,12 @@
 
 - (void)settlementAction:(UIButton *)sender{
     //结算
+    if(_model.contentName == nil || _model.contentMobile == nil || _model.contentAddress == nil){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择收货地址" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }
+    
     RMPublicModel * model = [[RMPublicModel alloc]init];
     if(_settle_callback){
         _settle_callback(model);

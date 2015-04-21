@@ -37,6 +37,12 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
+    
+    rightOneBarButton.frame = CGRectMake(rightOneBarButton.frame.origin.x-20, rightOneBarButton.frame.origin.y, rightOneBarButton.frame.size.width+20, rightOneBarButton.frame.size.height);
+    [rightOneBarButton setTitle:@"我的主页" forState:UIControlStateNormal];
+    [rightOneBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    
+    
     headView = [[[NSBundle mainBundle] loadNibNamed:@"RMCorpHeadView" owner:self options:nil] lastObject];
     [_mainTableview setTableHeaderView:headView];
     headView.corp_headImgV.layer.cornerRadius = 5;
@@ -47,9 +53,11 @@
     if(self.auto_id == nil){
         headView.collection.hidden = YES;
         self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
+        rightOneBarButton.hidden = NO;
         self.titleName = @"我的店铺";
     }else{
         self.titleName = @"店铺主页";
+        rightOneBarButton.hidden = YES;
     }
     
     [self setCustomNavTitle:self.titleName];

@@ -228,6 +228,7 @@
         if(success){
             RMPublicModel * model = object;
             [MBProgressHUD showSuccess:model.msg toView:self.view];
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
                     [self showHint:object];
         }

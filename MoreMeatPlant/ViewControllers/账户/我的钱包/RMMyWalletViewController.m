@@ -224,7 +224,7 @@
         [RMAFNRequestManager yu_eTurnHuabiWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Number:cell.yue_Z_huabiTextField.text andCallBack:^(NSError *error, BOOL success, id object) {
             RMPublicModel * model = object;
             if(success && model.status){
-            
+                [self requestAccountInfo];
             }else{
             
             }

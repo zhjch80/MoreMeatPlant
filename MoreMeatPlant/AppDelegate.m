@@ -345,20 +345,20 @@
     /** 连接新浪微博开放平台应用以使用相关功能，此应用需要引用SinaWeiboConnection.framework
      http://open.weibo.com上注册新浪微博开放平台应用，并将相关信息填写到以下字段
      **/
-    [ShareSDK connectSinaWeiboWithAppKey:@"306649366"
-                               appSecret:@"81f5a6b6f1173d7d58b19f58049c610b"
-                             redirectUri:@"http://dj.7-hotel.com/"];
-    
-    /**
-     连接腾讯微博开放平台应用以使用相关功能，此应用需要引用TencentWeiboConnection.framework
-     http://dev.t.qq.com上注册腾讯微博开放平台应用，并将相关信息填写到以下字段
-     
-     如果需要实现SSO，需要导入libWeiboSDK.a，并引入WBApi.h，将WBApi类型传入接口
-     **/
-    [ShareSDK connectTencentWeiboWithAppKey:@"1101736043"
-                                  appSecret:@"TNNrnim5dEF4u1SH"
-                                redirectUri:@"http://dj.7-hotel.com/download/"
-                                   wbApiCls:[WeiboApi class]];
+//    [ShareSDK connectSinaWeiboWithAppKey:@"306649366"
+//                               appSecret:@"81f5a6b6f1173d7d58b19f58049c610b"
+//                             redirectUri:@"http://dj.7-hotel.com/"];
+//    
+//    /**
+//     连接腾讯微博开放平台应用以使用相关功能，此应用需要引用TencentWeiboConnection.framework
+//     http://dev.t.qq.com上注册腾讯微博开放平台应用，并将相关信息填写到以下字段
+//     
+//     如果需要实现SSO，需要导入libWeiboSDK.a，并引入WBApi.h，将WBApi类型传入接口
+//     **/
+//    [ShareSDK connectTencentWeiboWithAppKey:@"1101736043"
+//                                  appSecret:@"TNNrnim5dEF4u1SH"
+//                                redirectUri:@"http://dj.7-hotel.com/download/"
+//                                   wbApiCls:[WeiboApi class]];
     
     //连接短信分享
     [ShareSDK connectSMS];
@@ -395,9 +395,9 @@
     
     //连接邮件
     [ShareSDK connectMail];
-    
-    //连接拷贝
-    [ShareSDK connectCopy];
+//
+//    //连接拷贝
+//    [ShareSDK connectCopy];
 }
 
 

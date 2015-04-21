@@ -38,6 +38,7 @@
 #import "RMAliPayViewController.h"
 #import "RMTransactionRecordsViewController.h"
 #import "RMSeeLogisticsViewController.h"
+#import "RMShareClient.h"
 #define GeneralMember @"1"
 @interface RMAccountViewController ()<RMVPImageCropperDelegate>
 
@@ -80,19 +81,9 @@
     
     [self layoutViews];
     
-//    CGFloat availableLabelWidth = self.userDescL.frame.size.width;
-//    self.userDescL.preferredMaxLayoutWidth = availableLabelWidth;
-
     [self loadInfo];
 }
-//@property (weak, nonatomic) IBOutlet UIImageView *headerImgV;
-//@property (weak, nonatomic) IBOutlet UILabel *userNameL;
-//@property (weak, nonatomic) IBOutlet UILabel *userDescL;
-//@property (weak, nonatomic) IBOutlet UILabel *regionL;
-//@property (weak, nonatomic) IBOutlet UILabel *yu_eL;//余额
-//@property (weak, nonatomic) IBOutlet UILabel *hua_biL;//花币
-//@property (weak, nonatomic) IBOutlet UIButton *member_right;
-//@property (weak, nonatomic) IBOutlet UIButton *member_level;
+
 - (void)loadInfo{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager myInfoRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
@@ -125,15 +116,15 @@
     }
     
     if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:GeneralMember]){//普通会员
-        functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n订单",@"我的\n帖子",@"系统\n通知",@"购物\n篮",@"等待\n升级",@"附近\n肉友",@"我的\n资料" ,nil];
-        funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wddd",@"wdtz",@"xttz",@"gwl",@"ddsj",@"fjry",@"wdzl", nil];
+        functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n订单",@"我的\n帖子",@"系统\n通知",@"购物\n篮",@"等待\n升级",@"附近\n肉友",@"我的\n资料" ,@"分享",nil];
+        funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wddd",@"wdtz",@"xttz",@"gwl",@"ddsj",@"fjry",@"wdzl",@"wdzl", nil];
         
         self.member_right_tag.hidden = YES;
         self.member_right.hidden = YES;
     }
     else{//商户会员
-        functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n资料",@"已出\n宝贝",@"我的\n帖子",@"系统\n通知",@"附近\n肉友",@"宝贝\n管理",@"我的\n店铺",@"发布\n广告",@"等待\n升级",nil];
-        funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wdzl",@"wddd",@"wdtz",@"xttz",@"fjry",@"fbbb",@"sqkd",@"fbgg",@"ddsj", nil];
+        functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n资料",@"已出\n宝贝",@"我的\n帖子",@"系统\n通知",@"附近\n肉友",@"宝贝\n管理",@"我的\n店铺",@"发布\n广告",@"等待\n升级",@"分享",nil];
+        funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wdzl",@"wddd",@"wdtz",@"xttz",@"fjry",@"fbbb",@"sqkd",@"fbgg",@"ddsj",@"ddsj", nil];
         
         self.member_right_tag.hidden = NO;
         self.member_right.hidden = NO;
@@ -240,9 +231,7 @@
                         [self.navigationController pushViewController:home animated:YES];
                     }
                         break;
-                    case 5:{//系统消息
-//                        RMSysMessageViewController * message = [[RMSysMessageViewController alloc]initWithNibName:@"RMSysMessageViewController" bundle:nil];
-//                        [self.navigationController pushViewController:message animated:YES];
+                    case 5:{
                         isShow = YES;
                         RMSysMessageViewController * message = [[RMSysMessageViewController alloc]initWithNibName:@"RMSysMessageViewController" bundle:nil];
                         message.callback = ^(RMSysMessageViewController * controller){
@@ -304,6 +293,10 @@
                         
                         [userinfo.titleLabel drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, userinfo.titleLabel.frame.size.height)];
                         [self presentPopUpViewController:userinfo overlaybounds:CGRectMake(0, 64, kScreenWidth, kScreenHeight-44-64)];
+                    }
+                        break;
+                    case 10:{//分享
+                        [self share:nil];
                     }
                         break;
                     default:
@@ -447,6 +440,10 @@
                         [alert show];
                     }
                         break;
+                    case 12:{//分享
+                        [self share:nil];
+                    }
+                        break;
                     default:
                         break;
                 }
@@ -456,6 +453,35 @@
         [self.view addSubview:acountView];
     }
 }
+
+
+#pragma mark - 分享
+- (void)share:(id)sender
+{
+    RMShareClient * client = [[RMShareClient alloc]init];
+    NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:@"标题" forKey:@"title"];
+    [dic setValue:@"内容分享内容" forKey:@"content"];
+    [dic setValue:@"http://www.baidu.com" forKey:@"url"];
+    [dic setValue:@"image" forKey:@"image"];
+    [client share:dic];
+    client.sharebtnClicked = ^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end){
+        //                SSResponseStateBegan = 0, /**< 开始 */
+        //                SSResponseStateSuccess = 1, /**< 成功 */
+        //                SSResponseStateFail = 2, /**< 失败 */
+        //                SSResponseStateCancel = 3 /**< 取消 */
+        if (state == SSResponseStateCancel||state == SSResponseStateFail) {
+            [self showHint:@"分享失败!"];
+        }
+        else if(state == SSResponseStateSuccess)
+        {
+            [self showHint:@"分享成功!"];
+        }
+    };
+    
+    
+}
+
 
 //外部调用我的订单
 - (void)loadMyOrderCtl {
