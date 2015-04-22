@@ -74,6 +74,8 @@
     
     [self validate];
     
+    [self initializePlat];
+    
     //TODO:判断是否登录
     [self loadMainViewControllersWithType:[[RMUserLoginInfoManager loginmanager] state]];
     

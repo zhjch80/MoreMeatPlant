@@ -51,6 +51,7 @@ typedef enum{
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
     if (!isFirstViewDidAppear){
         [self requestAdvertisingQuery];
         isFirstViewDidAppear = YES;

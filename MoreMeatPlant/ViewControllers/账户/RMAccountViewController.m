@@ -62,7 +62,6 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setCustomNavTitle:@"账户"];
-    
     _headerImgV.layer.cornerRadius = 5;
     _headerImgV.clipsToBounds = YES;
     
