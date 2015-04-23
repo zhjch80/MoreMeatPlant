@@ -14,7 +14,7 @@
 #import "RMSearchViewController.h"
 #import "RMSlideParameter.h"
 #import "RefreshControl.h"
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 
 @interface RMDaqoCenterViewController ()<UITableViewDataSource, UITableViewDelegate, SelectedPlantTypeMethodDelegate,DaqpSelectedPlantTypeDelegate,RefreshControlDelegate>{
     BOOL isRefresh;
@@ -61,7 +61,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
 
     pageCount = 1;
     isRefresh = YES;

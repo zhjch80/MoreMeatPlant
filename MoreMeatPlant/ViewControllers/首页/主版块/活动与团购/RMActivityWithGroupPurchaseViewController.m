@@ -21,7 +21,7 @@
 #import "RMPostClassificationView.h"
 #import "RMSearchViewController.h"
 #import "RefreshControl.h"
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 #import "NSString+TimeInterval.h"
 #import "RMCommentsView.h"
 
@@ -99,7 +99,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
     
     pageCount = 1;
     isRefresh = YES;

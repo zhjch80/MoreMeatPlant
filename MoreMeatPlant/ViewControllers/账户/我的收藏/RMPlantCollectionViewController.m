@@ -8,7 +8,7 @@
 
 #import "RMPlantCollectionViewController.h"
 #import "RefreshControl.h"
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 #import "UIViewController+HUD.h"
 #import "RMPlantWithSaleCell.h"
 #import "RMPlantWithSaleDetailsViewController.h"
@@ -35,7 +35,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:_mainTableView delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
     pageCount = 1;
     isRefresh = YES;
     

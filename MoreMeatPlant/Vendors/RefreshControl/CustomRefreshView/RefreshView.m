@@ -23,9 +23,9 @@
 
 
 
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 
-@implementation CustomRefreshView
+@implementation RefreshView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -39,7 +39,7 @@
 
 - (void)initViews
 {
-//    self.backgroundColor=[UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:237.0/255.0];
+    self.backgroundColor=[UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:237.0/255.0];
 
     _imageView=[[UIImageView alloc] initWithFrame:CGRectZero];
     _imageView.image=[UIImage imageNamed:@"pull_refresh.png"];

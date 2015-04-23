@@ -54,7 +54,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:_mainTableView delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
     pageCount = 1;
     isRefresh = YES;
     

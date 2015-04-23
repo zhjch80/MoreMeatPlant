@@ -19,7 +19,7 @@
 #import "MBProgressHUD+Add.h"
 #import "RMUserLoginInfoManager.h"
 #import "RefreshControl.h"
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 #import "UIImageView+WebCache.h"
 #import "KeyboardManager.h"
 #import "UtilityFunc.h"

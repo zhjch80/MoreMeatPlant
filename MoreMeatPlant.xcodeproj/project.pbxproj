@@ -298,7 +298,6 @@
 		1D75E93C1ACAABCA008BC5FE /* NSString+TransformToDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75E93A1ACAABCA008BC5FE /* NSString+TransformToDate.m */; };
 		1D7AC4141AB9791E002204F6 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4111AB9791E002204F6 /* CycleScrollView.m */; };
 		1D7AC4151AB9791E002204F6 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4131AB9791E002204F6 /* NSTimer+Addition.m */; };
-		1D7AC4261AB979A0002204F6 /* CustomRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC4191AB979A0002204F6 /* CustomRefreshView.m */; };
 		1D7AC4271AB979A0002204F6 /* pull_loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC41A1AB979A0002204F6 /* pull_loading@2x.png */; };
 		1D7AC4281AB979A0002204F6 /* pull_loading@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D7AC41B1AB979A0002204F6 /* pull_loading@3x.png */; };
 		1D7AC4291AB979A0002204F6 /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7AC41D1AB979A0002204F6 /* RefreshControl.m */; };
@@ -584,6 +583,7 @@
 		1DEB75221AB9D67A00EA1FA7 /* wdtz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DEB74DD1AB9D67A00EA1FA7 /* wdtz@2x.png */; };
 		1DEB75231AB9D67A00EA1FA7 /* wdzl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DEB74DE1AB9D67A00EA1FA7 /* wdzl@2x.png */; };
 		1DEB75241AB9D67A00EA1FA7 /* xttz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DEB74DF1AB9D67A00EA1FA7 /* xttz@2x.png */; };
+		4BFFA7251AE8EB4A00D0D462 /* RefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFA7241AE8EB4A00D0D462 /* RefreshView.m */; };
 		5120FDC81AB5D9E3000E9BE1 /* RMMyHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5120FDC61AB5D9E3000E9BE1 /* RMMyHomeViewController.m */; };
 		5120FDC91AB5D9E3000E9BE1 /* RMMyHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5120FDC71AB5D9E3000E9BE1 /* RMMyHomeViewController.xib */; };
 		5120FDDC1AB7138E000E9BE1 /* RMMyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5120FDDA1AB7138E000E9BE1 /* RMMyOrderViewController.m */; };
@@ -1559,8 +1559,6 @@
 		1D7AC4111AB9791E002204F6 /* CycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleScrollView.m; sourceTree = "<group>"; };
 		1D7AC4121AB9791E002204F6 /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
 		1D7AC4131AB9791E002204F6 /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
-		1D7AC4181AB979A0002204F6 /* CustomRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRefreshView.h; sourceTree = "<group>"; };
-		1D7AC4191AB979A0002204F6 /* CustomRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRefreshView.m; sourceTree = "<group>"; };
 		1D7AC41A1AB979A0002204F6 /* pull_loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull_loading@2x.png"; sourceTree = "<group>"; };
 		1D7AC41B1AB979A0002204F6 /* pull_loading@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull_loading@3x.png"; sourceTree = "<group>"; };
 		1D7AC41C1AB979A0002204F6 /* RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshControl.h; sourceTree = "<group>"; };
@@ -1920,6 +1918,8 @@
 		1DEB74DD1AB9D67A00EA1FA7 /* wdtz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wdtz@2x.png"; sourceTree = "<group>"; };
 		1DEB74DE1AB9D67A00EA1FA7 /* wdzl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wdzl@2x.png"; sourceTree = "<group>"; };
 		1DEB74DF1AB9D67A00EA1FA7 /* xttz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xttz@2x.png"; sourceTree = "<group>"; };
+		4BFFA7231AE8EB4A00D0D462 /* RefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshView.h; sourceTree = "<group>"; };
+		4BFFA7241AE8EB4A00D0D462 /* RefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshView.m; sourceTree = "<group>"; };
 		5120FDC51AB5D9E3000E9BE1 /* RMMyHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyHomeViewController.h; sourceTree = "<group>"; };
 		5120FDC61AB5D9E3000E9BE1 /* RMMyHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMyHomeViewController.m; sourceTree = "<group>"; };
 		5120FDC71AB5D9E3000E9BE1 /* RMMyHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMMyHomeViewController.xib; sourceTree = "<group>"; };
@@ -3879,8 +3879,8 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				51B375E71AE6802B00E332CA /* JKCountDownButton */,
 				1D64F50D1A90CD150073EB98 /* CONST.h */,
+				51B375E71AE6802B00E332CA /* JKCountDownButton */,
 				51DB4E1C1AD1B3F000A6064D /* ShareSDK */,
 				51DB4E181AD1525000A6064D /* UIAlerView+Expland */,
 				1D1DAE301ACBDF8B00FC4C4C /* UtilityFunc */,
@@ -3948,8 +3948,8 @@
 		1D7AC4171AB979A0002204F6 /* CustomRefreshView */ = {
 			isa = PBXGroup;
 			children = (
-				1D7AC4181AB979A0002204F6 /* CustomRefreshView.h */,
-				1D7AC4191AB979A0002204F6 /* CustomRefreshView.m */,
+				4BFFA7231AE8EB4A00D0D462 /* RefreshView.h */,
+				4BFFA7241AE8EB4A00D0D462 /* RefreshView.m */,
 				1D7AC41A1AB979A0002204F6 /* pull_loading@2x.png */,
 				1D7AC41B1AB979A0002204F6 /* pull_loading@3x.png */,
 			);
@@ -6619,6 +6619,7 @@
 				514612051AE2105B0040E462 /* PublicGroupListViewController.m in Sources */,
 				51DB4CC21AC7CB0800A6064D /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				514612021AE2105B0040E462 /* GroupSettingViewController.m in Sources */,
+				4BFFA7251AE8EB4A00D0D462 /* RefreshView.m in Sources */,
 				1D7AC4151AB9791E002204F6 /* NSTimer+Addition.m in Sources */,
 				51E4B18E1AC64E8D00714F3E /* RMModifyPassWordViewController.m in Sources */,
 				514611EC1AE2105B0040E462 /* DXFaceView.m in Sources */,
@@ -6674,7 +6675,6 @@
 				51DB4CC71AC86BF000A6064D /* UIView+Expland.m in Sources */,
 				51DB4CBB1AC7CB0800A6064D /* IQKeyboardManager.m in Sources */,
 				514611E91AE2105B0040E462 /* ChatViewController.m in Sources */,
-				1D7AC4261AB979A0002204F6 /* CustomRefreshView.m in Sources */,
 				519927501AB5846100B0F83F /* RMPlantCollectionViewController.m in Sources */,
 				5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */,
 				0A4105711ABAB3C70060FBD5 /* EMSDWebImageDownloader.m in Sources */,

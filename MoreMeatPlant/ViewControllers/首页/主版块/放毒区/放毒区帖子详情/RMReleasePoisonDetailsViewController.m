@@ -15,7 +15,7 @@
 #import "NSString+TimeInterval.h"
 #import "UIImage+LK.h"
 #import "RefreshControl.h"
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 
 //#import "NJKWebViewProgress.h"
 //#import "NJKWebViewProgressView.h"
@@ -89,7 +89,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
     refreshControl.topEnabled = NO;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
     
     pageCount = 1;
     isRefresh = YES;

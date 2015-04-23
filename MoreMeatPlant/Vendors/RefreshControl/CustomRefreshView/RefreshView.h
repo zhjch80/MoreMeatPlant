@@ -30,7 +30,7 @@
 /**
  *	自定义view
  */
-@interface CustomRefreshView : UIView<RefreshViewDelegate>
+@interface RefreshView : UIView<RefreshViewDelegate>
 
 @property (nonatomic,strong)UIImageView * imageView;
 

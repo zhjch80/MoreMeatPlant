@@ -35,7 +35,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:_mtableview delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
     dataarray = [[NSMutableArray alloc]init];
     
     tags = [NSArray arrayWithObjects:@"收支",@"具体内容",@"金额(BTC)",@"时间", nil];

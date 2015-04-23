@@ -8,7 +8,7 @@
 
 #import "RMFreshManCourseOfStudyViewController.h"
 #import "RefreshControl.h"
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 #import "RMBaseWebViewController.h"
 
 @interface RMFreshManCourseOfStudyViewController ()<UITableViewDataSource,UITableViewDelegate,RefreshControlDelegate>{
@@ -56,7 +56,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
     
     pageCount = 1;
     isRefresh = YES;

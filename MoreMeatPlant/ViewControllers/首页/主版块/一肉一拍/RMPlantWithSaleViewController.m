@@ -18,7 +18,7 @@
 #import "RMSearchViewController.h"
 #import "ZFModalTransitionAnimator.h"
 #import "RefreshControl.h"
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 #import "KxMenu.h"
 #import "RMShopCarViewController.h"
 #import "AppDelegate.h"
@@ -77,7 +77,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
     
     pageCount = 1;
     isRefresh = YES;

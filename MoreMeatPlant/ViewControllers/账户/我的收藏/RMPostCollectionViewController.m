@@ -9,7 +9,7 @@
 #import "RMPostCollectionViewController.h"
 #import "RMReleasePoisonDetailsViewController.h"
 #import "RefreshControl.h"
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 #import "UIViewController+HUD.h"
 #import "NSString+TimeInterval.h"
 
@@ -36,7 +36,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:_mainTableView delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
     pageCount = 1;
     
     [self requestListWithPageCount];

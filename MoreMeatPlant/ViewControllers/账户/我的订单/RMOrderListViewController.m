@@ -12,7 +12,7 @@
 #import "RMOrderBottomTableViewCell.h"
 #import "CONST.h"
 #import "RefreshControl.h"
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 #import "UIViewController+HUD.h"
 
 @interface RMOrderListViewController ()<RefreshControlDelegate>{
@@ -36,7 +36,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:_maintableView delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
     pageCount = 1;
     isRefresh = YES;
     

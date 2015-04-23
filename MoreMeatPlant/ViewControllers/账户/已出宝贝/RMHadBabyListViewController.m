@@ -11,7 +11,7 @@
 #import "RMOrderHeadTableViewCell.h"
 #import "RMHadbabyTableViewCell.h"
 #import "RefreshControl.h"
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 #import "UIViewController+HUD.h"
 @interface RMHadBabyListViewController ()<RefreshControlDelegate>{
     NSInteger pageCount;
@@ -32,7 +32,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:_mTableView delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
     pageCount = 1;
     isRefresh = YES;
 }

@@ -21,7 +21,7 @@
 #import "RMSearchViewController.h"
 #import "RMPostClassificationView.h"
 #import "RefreshControl.h"
-#import "CustomRefreshView.h"
+#import "RefreshView.h"
 #import "NSString+TimeInterval.h"
 #import "RMCommentsView.h"
 #import "KxMenu.h"
@@ -30,7 +30,7 @@
 #import "RMFreshPlantMarketViewController.h"
 #import "AppDelegate.h"
 
-@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate,CommentsViewDelegate>{
+@interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate,CommentsViewDelegate>{
     BOOL isFirstViewDidAppear;
     BOOL isRefresh;
     NSInteger pageCount;
@@ -54,14 +54,16 @@
 @property (nonatomic, strong) RMPostClassificationView * fenleiAction;
 @property (nonatomic, strong) RMPostMessageView *action;
 @property (nonatomic, strong) ZFModalTransitionAnimator *animator;
-@property (nonatomic, strong) RefreshControl * refreshControl;
+@property (nonatomic, retain) RefreshControl * refreshControl;
 @property (nonatomic, strong) RMPlantTypeView * plantTopTypeView;
 @property (nonatomic, strong) RMBottomView * bottomView;
+@property (nonatomic, strong) RMPublicModel * actionModel_1;
+@property (nonatomic, strong) RMPublicModel * actionModel_2;
 
 @end
 
 @implementation RMReleasePoisonViewController
-@synthesize mTableView, dataArr, fenleiAction, action, animator, plantTypeArr, advertisingArr, subsPlantArr, newsArr, plantRequestValue, subsPlantRequestValue, refreshControl,plantTopTypeView, bottomView;
+@synthesize mTableView, dataArr, fenleiAction, action, animator, plantTypeArr, advertisingArr, subsPlantArr, newsArr, plantRequestValue, subsPlantRequestValue, refreshControl,plantTopTypeView, bottomView, actionModel_1, actionModel_2;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -109,7 +111,7 @@
     refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
-    [refreshControl registerClassForTopView:[CustomRefreshView class]];
+    [refreshControl registerClassForTopView:[RefreshView class]];
     
     pageCount = 1;
     isRefresh = YES;
@@ -704,23 +706,44 @@
 
 - (void)selectedPostMessageWithPostsType:(NSInteger)type_1 withPlantType:(NSInteger)type_2 {
     [action dismiss];
-    RMPublicModel * model_1 = [plantTypeArr objectAtIndex:type_1-401];
-    RMPublicModel * model_2 = [subsPlantArr objectAtIndex:type_2-407+1];
+    actionModel_1 = [plantTypeArr objectAtIndex:type_1-401];
+    actionModel_2 = [subsPlantArr objectAtIndex:type_2-407+1];
 
-    RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
-    startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
-    
-    animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:startPostingCtl];
-    animator.dragable = NO;
-    animator.bounces = NO;
-    animator.behindViewAlpha = 0.5f;
-    animator.behindViewScale = 0.5f;
-    animator.transitionDuration = 0.7f;
-    animator.direction = ZFModalTransitonDirectionBottom;
-    startPostingCtl.transitioningDelegate = animator;
-    startPostingCtl.model_1 = model_1;
-    startPostingCtl.model_2 = model_2;
-    [self presentViewController:startPostingCtl animated:YES completion:nil];
+    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"快速发帖" otherButtonTitles:@"发长贴子", nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:{
+            RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
+            startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
+            
+            animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:startPostingCtl];
+            animator.dragable = NO;
+            animator.bounces = NO;
+            animator.behindViewAlpha = 0.5f;
+            animator.behindViewScale = 0.5f;
+            animator.transitionDuration = 0.7f;
+            animator.direction = ZFModalTransitonDirectionBottom;
+            startPostingCtl.transitioningDelegate = animator;
+            startPostingCtl.model_1 = actionModel_1;
+            startPostingCtl.model_2 = actionModel_2;
+            [self presentViewController:startPostingCtl animated:YES completion:nil];
+            break;
+        }
+        case 1:{
+            
+            break;
+        }
+        case 2:{
+            
+            break;
+        }
+
+        default:
+            break;
+    }
 }
 
 #pragma mark - 选择科目
