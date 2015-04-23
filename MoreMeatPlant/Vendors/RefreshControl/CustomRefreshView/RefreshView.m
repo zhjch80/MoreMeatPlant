@@ -40,7 +40,7 @@
 - (void)initViews
 {
     self.backgroundColor=[UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:237.0/255.0];
-
+    
     _imageView=[[UIImageView alloc] initWithFrame:CGRectZero];
     _imageView.image=[UIImage imageNamed:@"pull_refresh.png"];
     _imageView.translatesAutoresizingMaskIntoConstraints=NO;

@@ -23,6 +23,9 @@
 #import "RMUpgradeSuggestViewController.h"
 #import "RMBaseView.h"
 
+#import "RefreshControl.h"
+#import "RefreshView.h"
+
 typedef enum{
     kRMDefault = 100,
     kRMReleasePoison = 1,
@@ -34,7 +37,7 @@ typedef enum{
     kRMUpgradeSuggest = 8,
 }GotoViewControllerName;
 
-@interface RMHomeViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface RMHomeViewController ()<UITableViewDataSource,UITableViewDelegate,RefreshControlDelegate>{
     BOOL isFirstViewDidAppear;
 }
 @property (nonatomic, strong) UITableView * mTableView;
@@ -43,11 +46,12 @@ typedef enum{
 @property (nonatomic, strong) NSMutableArray * advertisingArr;      //广告数据
 @property (nonatomic, strong) NSMutableArray * columnsArr;          //栏目数量
 @property (nonatomic, strong) RMBaseView * overloadingView;
+@property (nonatomic, retain) RefreshControl * refreshControl;
 
 @end
 
 @implementation RMHomeViewController
-@synthesize mTableView, advertisingArr, columnsArr, dataImgArr, overloadingView;
+@synthesize mTableView, advertisingArr, columnsArr, dataImgArr, overloadingView,refreshControl;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -90,6 +94,11 @@ typedef enum{
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
+    
+    refreshControl = [[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
+    refreshControl.topEnabled = YES;
+    refreshControl.bottomEnabled = NO;
+    [refreshControl registerClassForTopView:[RefreshView class]];
     
     overloadingView = [[RMBaseView alloc] init];
     overloadingView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
@@ -285,6 +294,8 @@ typedef enum{
         }
         
         if (success){
+            [advertisingArr removeAllObjects];
+            
             for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
@@ -312,6 +323,8 @@ typedef enum{
             return ;
         }
         
+        [columnsArr removeAllObjects];
+        
         if (success){
             [columnsArr addObject:@""];
             
@@ -332,6 +345,9 @@ typedef enum{
                 model.content_num = OBJC([[[[[object objectForKey:@"data"] objectAtIndex:1] objectForKey:@"modules_sub"] objectAtIndex:i] objectForKey:@"content_num"]);
                 [columnsArr addObject:model];
             }
+            
+            [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+
         }
 
         overloadingView.hidden = YES;
@@ -340,6 +356,15 @@ typedef enum{
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
+}
+
+#pragma mark 刷新代理
+
+- (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
+    if (direction == RefreshDirectionTop) { //下拉刷新
+        [self requestAdvertisingQuery];
+    }else if(direction == RefreshDirectionBottom) { //上拉加载
+    }
 }
 
 - (void)didReceiveMemoryWarning {

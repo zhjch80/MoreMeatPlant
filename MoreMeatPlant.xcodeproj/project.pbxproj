@@ -583,6 +583,16 @@
 		1DEB75221AB9D67A00EA1FA7 /* wdtz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DEB74DD1AB9D67A00EA1FA7 /* wdtz@2x.png */; };
 		1DEB75231AB9D67A00EA1FA7 /* wdzl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DEB74DE1AB9D67A00EA1FA7 /* wdzl@2x.png */; };
 		1DEB75241AB9D67A00EA1FA7 /* xttz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DEB74DF1AB9D67A00EA1FA7 /* xttz@2x.png */; };
+		4B3A2AC81AE9225000E1EC24 /* RMStartLongPostingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A2AC61AE9225000E1EC24 /* RMStartLongPostingViewController.m */; };
+		4B3A2AC91AE9225000E1EC24 /* RMStartLongPostingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2AC71AE9225000E1EC24 /* RMStartLongPostingViewController.xib */; };
+		4B3A2ACD1AE92C9200E1EC24 /* RMStartLongPostingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A2ACB1AE92C9200E1EC24 /* RMStartLongPostingCell.m */; };
+		4B3A2ACE1AE92C9200E1EC24 /* RMStartLongPostingCell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2ACC1AE92C9200E1EC24 /* RMStartLongPostingCell_1.xib */; };
+		4B3A2AD11AE932BF00E1EC24 /* RMStartLongPostingCell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2ACF1AE932BF00E1EC24 /* RMStartLongPostingCell_2.xib */; };
+		4B3A2AD21AE932BF00E1EC24 /* RMStartLongPostingCell_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2AD01AE932BF00E1EC24 /* RMStartLongPostingCell_3.xib */; };
+		4B3A2AD61AE9341900E1EC24 /* RMEditContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A2AD41AE9341900E1EC24 /* RMEditContentViewController.m */; };
+		4B3A2AD71AE9341900E1EC24 /* RMEditContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2AD51AE9341900E1EC24 /* RMEditContentViewController.xib */; };
+		4B3A2ADA1AE94FAD00E1EC24 /* RMLongPostFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A2AD91AE94FAD00E1EC24 /* RMLongPostFooterView.m */; };
+		4B3A2AE01AE9574500E1EC24 /* RMLongPostFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2ADF1AE9574500E1EC24 /* RMLongPostFooterView.xib */; };
 		4BFFA7251AE8EB4A00D0D462 /* RefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFA7241AE8EB4A00D0D462 /* RefreshView.m */; };
 		5120FDC81AB5D9E3000E9BE1 /* RMMyHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5120FDC61AB5D9E3000E9BE1 /* RMMyHomeViewController.m */; };
 		5120FDC91AB5D9E3000E9BE1 /* RMMyHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5120FDC71AB5D9E3000E9BE1 /* RMMyHomeViewController.xib */; };
@@ -1918,6 +1928,20 @@
 		1DEB74DD1AB9D67A00EA1FA7 /* wdtz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wdtz@2x.png"; sourceTree = "<group>"; };
 		1DEB74DE1AB9D67A00EA1FA7 /* wdzl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wdzl@2x.png"; sourceTree = "<group>"; };
 		1DEB74DF1AB9D67A00EA1FA7 /* xttz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xttz@2x.png"; sourceTree = "<group>"; };
+		4B3A2AC51AE9225000E1EC24 /* RMStartLongPostingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStartLongPostingViewController.h; sourceTree = "<group>"; };
+		4B3A2AC61AE9225000E1EC24 /* RMStartLongPostingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStartLongPostingViewController.m; sourceTree = "<group>"; };
+		4B3A2AC71AE9225000E1EC24 /* RMStartLongPostingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMStartLongPostingViewController.xib; sourceTree = "<group>"; };
+		4B3A2ACA1AE92C9200E1EC24 /* RMStartLongPostingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStartLongPostingCell.h; sourceTree = "<group>"; };
+		4B3A2ACB1AE92C9200E1EC24 /* RMStartLongPostingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStartLongPostingCell.m; sourceTree = "<group>"; };
+		4B3A2ACC1AE92C9200E1EC24 /* RMStartLongPostingCell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMStartLongPostingCell_1.xib; sourceTree = "<group>"; };
+		4B3A2ACF1AE932BF00E1EC24 /* RMStartLongPostingCell_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMStartLongPostingCell_2.xib; sourceTree = "<group>"; };
+		4B3A2AD01AE932BF00E1EC24 /* RMStartLongPostingCell_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMStartLongPostingCell_3.xib; sourceTree = "<group>"; };
+		4B3A2AD31AE9341900E1EC24 /* RMEditContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMEditContentViewController.h; sourceTree = "<group>"; };
+		4B3A2AD41AE9341900E1EC24 /* RMEditContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMEditContentViewController.m; sourceTree = "<group>"; };
+		4B3A2AD51AE9341900E1EC24 /* RMEditContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMEditContentViewController.xib; sourceTree = "<group>"; };
+		4B3A2AD81AE94FAD00E1EC24 /* RMLongPostFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMLongPostFooterView.h; sourceTree = "<group>"; };
+		4B3A2AD91AE94FAD00E1EC24 /* RMLongPostFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMLongPostFooterView.m; sourceTree = "<group>"; };
+		4B3A2ADF1AE9574500E1EC24 /* RMLongPostFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMLongPostFooterView.xib; sourceTree = "<group>"; };
 		4BFFA7231AE8EB4A00D0D462 /* RefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshView.h; sourceTree = "<group>"; };
 		4BFFA7241AE8EB4A00D0D462 /* RefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshView.m; sourceTree = "<group>"; };
 		5120FDC51AB5D9E3000E9BE1 /* RMMyHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyHomeViewController.h; sourceTree = "<group>"; };
@@ -3567,6 +3591,20 @@
 				1D8397221AB2C8E200DA190A /* RMStartPostingViewController.h */,
 				1D8397231AB2C8E200DA190A /* RMStartPostingViewController.m */,
 				1D8397241AB2C8E200DA190A /* RMStartPostingViewController.xib */,
+				4B3A2AC51AE9225000E1EC24 /* RMStartLongPostingViewController.h */,
+				4B3A2AC61AE9225000E1EC24 /* RMStartLongPostingViewController.m */,
+				4B3A2AC71AE9225000E1EC24 /* RMStartLongPostingViewController.xib */,
+				4B3A2ACA1AE92C9200E1EC24 /* RMStartLongPostingCell.h */,
+				4B3A2ACB1AE92C9200E1EC24 /* RMStartLongPostingCell.m */,
+				4B3A2ACC1AE92C9200E1EC24 /* RMStartLongPostingCell_1.xib */,
+				4B3A2ACF1AE932BF00E1EC24 /* RMStartLongPostingCell_2.xib */,
+				4B3A2AD01AE932BF00E1EC24 /* RMStartLongPostingCell_3.xib */,
+				4B3A2AD81AE94FAD00E1EC24 /* RMLongPostFooterView.h */,
+				4B3A2AD91AE94FAD00E1EC24 /* RMLongPostFooterView.m */,
+				4B3A2ADF1AE9574500E1EC24 /* RMLongPostFooterView.xib */,
+				4B3A2AD31AE9341900E1EC24 /* RMEditContentViewController.h */,
+				4B3A2AD41AE9341900E1EC24 /* RMEditContentViewController.m */,
+				4B3A2AD51AE9341900E1EC24 /* RMEditContentViewController.xib */,
 				1D56467A1AD500820039A586 /* RequestPostUploadHelper.h */,
 				1D56467B1AD500820039A586 /* RequestPostUploadHelper.m */,
 			);
@@ -3739,10 +3777,10 @@
 		1D64F4DE1A904E180073EB98 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				514611641AE2105B0040E462 /* 多聊 */,
 				1D64F4ED1A904E180073EB98 /* 首页 */,
 				1D64F4E31A904E180073EB98 /* 大全 */,
 				1D64F4E71A904E180073EB98 /* 账户 */,
+				514611641AE2105B0040E462 /* 多聊 */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -6070,6 +6108,7 @@
 				0A4106931ABABBF60060FBD5 /* chatBar_keyboardSelected@2x.png in Resources */,
 				51D8842F1ABE620A00F7A3BD /* RMOrderDetailProTableViewCell.xib in Resources */,
 				51D884451ABE63BB00F7A3BD /* order_gray_sun.png in Resources */,
+				4B3A2AC91AE9225000E1EC24 /* RMStartLongPostingViewController.xib in Resources */,
 				1DD326621ABBFE6B006CD1A8 /* RMBaseView.xib in Resources */,
 				5146136E1AE3653E0040E462 /* chatBar_more_cameraSelected@2x.png in Resources */,
 				0A4106A31ABABBF60060FBD5 /* chatBar_colorMore_cameraSelected@2x.png in Resources */,
@@ -6101,6 +6140,7 @@
 				514613A41AE3653E0040E462 /* tabbar_chatsHL@2x.png in Resources */,
 				1D7090C61AC25DE600AE47BF /* img_tzArrow_1.png in Resources */,
 				0A41066B1ABABBF60060FBD5 /* VoiceSearchFeedback020@2x.png in Resources */,
+				4B3A2AD71AE9341900E1EC24 /* RMEditContentViewController.xib in Resources */,
 				5146139D1AE3653E0040E462 /* groupPrivateHeader@2x.png in Resources */,
 				1DDBBD5B1ABBB17500E35CD5 /* daquan_z@2x.png in Resources */,
 				514613A61AE3653E0040E462 /* tabbar_contacts@2x.png in Resources */,
@@ -6135,6 +6175,7 @@
 				5146137F1AE3653E0040E462 /* chat_receiver_audio_playing003@2x.png in Resources */,
 				516F471A1ADE38DC0017879A /* RMHomeHeadView.xib in Resources */,
 				1DEB74F11AB9D67A00EA1FA7 /* fbbb_img_28.png in Resources */,
+				4B3A2AD21AE932BF00E1EC24 /* RMStartLongPostingCell_3.xib in Resources */,
 				1D7AC43A1AB979E1002204F6 /* 方正正黑简体.TTF in Resources */,
 				0A4106501ABABBF60060FBD5 /* VoiceSearchFeedback007.png in Resources */,
 				1D386C8E1AC16916000B9686 /* RMSysMessageViewController.xib in Resources */,
@@ -6165,6 +6206,7 @@
 				514613311AE3653E0040E462 /* call_silence.png in Resources */,
 				1DDBBD7F1ABBB3D300E35CD5 /* duoliao@3x.png in Resources */,
 				1DDBBD6A1ABBB1CB00E35CD5 /* duoliao_z.png in Resources */,
+				4B3A2ACE1AE92C9200E1EC24 /* RMStartLongPostingCell_1.xib in Resources */,
 				514613711AE3653E0040E462 /* chatBar_more_locationSelected.png in Resources */,
 				514613111AE3653E0040E462 /* VoiceSearchFeedback007.png in Resources */,
 				1DDBBD5E1ABBB17E00E35CD5 /* daquan.png in Resources */,
@@ -6173,6 +6215,7 @@
 				514613841AE3653E0040E462 /* chat_sender_audio_playing_000.png in Resources */,
 				0A4106831ABABBF60060FBD5 /* chat_location_detail_disclosure@2x.png in Resources */,
 				0A41069D1ABABBF60060FBD5 /* chatBar_recordSelected@2x.png in Resources */,
+				4B3A2AD11AE932BF00E1EC24 /* RMStartLongPostingCell_2.xib in Resources */,
 				5146136B1AE3653E0040E462 /* chatBar_more_camera.png in Resources */,
 				1D4EE43E1A94D62B00A46490 /* RMReleasePoisonDetailsViewController.xib in Resources */,
 				0A4106AF1ABABBF60060FBD5 /* chatBar_more_location@2x.png in Resources */,
@@ -6553,6 +6596,7 @@
 				0A4106591ABABBF60060FBD5 /* VoiceSearchFeedback011@2x.png in Resources */,
 				514613591AE3653E0040E462 /* chatBar_record.png in Resources */,
 				514613981AE3653E0040E462 /* titleBar.png in Resources */,
+				4B3A2AE01AE9574500E1EC24 /* RMLongPostFooterView.xib in Resources */,
 				51E2685C1AAF43D100252DEF /* RMAddAddressTableViewCell.xib in Resources */,
 				512D75321AB1F6F60027B7C7 /* RMMyWalletTransferTableViewCell.xib in Resources */,
 				51D883E31ABB304800F7A3BD /* RMHadBabyViewController.xib in Resources */,
@@ -6677,6 +6721,7 @@
 				514611E91AE2105B0040E462 /* ChatViewController.m in Sources */,
 				519927501AB5846100B0F83F /* RMPlantCollectionViewController.m in Sources */,
 				5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */,
+				4B3A2ADA1AE94FAD00E1EC24 /* RMLongPostFooterView.m in Sources */,
 				0A4105711ABAB3C70060FBD5 /* EMSDWebImageDownloader.m in Sources */,
 				51E268601AAF448E00252DEF /* RMSettlementTableViewCell.m in Sources */,
 				5157DE671AB9DA78005E9FA5 /* RMPublishNumberTableViewCell.m in Sources */,
@@ -6689,6 +6734,7 @@
 				0A4105841ABAB3C70060FBD5 /* PSTCollectionViewItemKey.m in Sources */,
 				5120FDF01AB71D34000E9BE1 /* RMOrderBottomTableViewCell.m in Sources */,
 				1D191ACC1ABD4B7E00FC8623 /* RMDaqoDetailsCell.m in Sources */,
+				4B3A2AC81AE9225000E1EC24 /* RMStartLongPostingViewController.m in Sources */,
 				512D751A1AB1E1190027B7C7 /* RMUserInfoViewController.m in Sources */,
 				1DEB73FE1AB9CE2600EA1FA7 /* RMBottomView.m in Sources */,
 				514612141AE2105B0040E462 /* EMNavigationController.m in Sources */,
@@ -6792,6 +6838,7 @@
 				51E2685B1AAF43D100252DEF /* RMAddAddressTableViewCell.m in Sources */,
 				0A41056C1ABAB3C70060FBD5 /* MWZoomingScrollView.m in Sources */,
 				0A4105881ABAB3C70060FBD5 /* PSTGridLayoutItem.m in Sources */,
+				4B3A2ACD1AE92C9200E1EC24 /* RMStartLongPostingCell.m in Sources */,
 				51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */,
 				51D8841F1ABDCFD400F7A3BD /* RMRegisterViewController.m in Sources */,
 				95AA6F4F1ABF8CD2007F4C9E /* XHZoomingImageView.m in Sources */,
@@ -6874,6 +6921,7 @@
 				5157DE6C1AB9DA95005E9FA5 /* RMPublishPhotoTableViewCell.m in Sources */,
 				1D64F5081A904E290073EB98 /* RMCustomNavController.m in Sources */,
 				5120FDE11AB71715000E9BE1 /* RMOrderListViewController.m in Sources */,
+				4B3A2AD61AE9341900E1EC24 /* RMEditContentViewController.m in Sources */,
 				514611F41AE2105B0040E462 /* EMChatTextBubbleView.m in Sources */,
 				5146120F1AE2105B0040E462 /* EMSearchBar.m in Sources */,
 				51DB4CBD1AC7CB0800A6064D /* IQSegmentedNextPrevious.m in Sources */,

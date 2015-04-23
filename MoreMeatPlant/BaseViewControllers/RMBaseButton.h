@@ -13,4 +13,7 @@
 @property (nonatomic, strong) NSString * parameter_1;
 @property (nonatomic, strong) NSString * parameter_2;
 
+@property (nonatomic, assign) NSInteger section;
+@property (nonatomic, assign) NSInteger row;
+
 @end

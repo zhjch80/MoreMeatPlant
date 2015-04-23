@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="方正正纤黑简体.TTF">
+            <string>FZZXHJW--GB1-0</string>
+            <string>FZZXHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RMLongPostFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" tag="201" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMt-Vl-HjY" customClass="RMBaseButton">
+                    <rect key="frame" x="36" y="5" width="100" height="30"/>
+                    <color key="backgroundColor" red="0.25100277259999998" green="0.60784313729999995" blue="0.28630388270000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="zGc-eg-eGE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="14"/>
+                    <state key="normal" title="添加文字">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="addSomeContentClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="od0-aA-laK"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="202" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fkc-SP-Oys" customClass="RMBaseButton">
+                    <rect key="frame" x="184" y="5" width="100" height="30"/>
+                    <color key="backgroundColor" red="0.25100277259999998" green="0.60784313729999995" blue="0.28630388270000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="ugx-aQ-Pim"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="14"/>
+                    <state key="normal" title="添加图片">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="addSomeContentClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="xKD-Ot-5ax"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="RMt-Vl-HjY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="36" id="1go-Gz-bTf"/>
+                <constraint firstAttribute="bottom" secondItem="Fkc-SP-Oys" secondAttribute="bottom" constant="5" id="6eP-8A-fQf"/>
+                <constraint firstItem="Fkc-SP-Oys" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="A03-Oo-41t"/>
+                <constraint firstAttribute="trailing" secondItem="Fkc-SP-Oys" secondAttribute="trailing" constant="36" id="OdF-Op-3qr"/>
+                <constraint firstItem="RMt-Vl-HjY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="bGg-Tz-MRF"/>
+                <constraint firstAttribute="bottom" secondItem="RMt-Vl-HjY" secondAttribute="bottom" constant="5" id="pcD-8A-hmg"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addImgBtn" destination="Fkc-SP-Oys" id="lJT-s2-svh"/>
+                <outlet property="addTextBtn" destination="RMt-Vl-HjY" id="KQ0-qY-Ceu"/>
+            </connections>
+        </view>
+    </objects>
+</document>

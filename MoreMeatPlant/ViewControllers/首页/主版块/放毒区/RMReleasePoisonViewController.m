@@ -29,6 +29,7 @@
 #import "RMPlantWithSaleViewController.h"
 #import "RMFreshPlantMarketViewController.h"
 #import "AppDelegate.h"
+#import "RMStartLongPostingViewController.h"
 
 @interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate,CommentsViewDelegate>{
     BOOL isFirstViewDidAppear;
@@ -709,11 +710,12 @@
     actionModel_1 = [plantTypeArr objectAtIndex:type_1-401];
     actionModel_2 = [subsPlantArr objectAtIndex:type_2-407+1];
 
-    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"快速发帖" otherButtonTitles:@"发长贴子", nil];
+    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"快速发帖", @"发长贴子", nil];
     [actionSheet showInView:self.view];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"buttonIndex:%ld",(long)buttonIndex);
     switch (buttonIndex) {
         case 0:{
             RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
@@ -733,7 +735,20 @@
             break;
         }
         case 1:{
+            RMStartLongPostingViewController * startLongPostingCtl = [[RMStartLongPostingViewController alloc] init];
+            startLongPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
             
+            animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:startLongPostingCtl];
+            animator.dragable = NO;
+            animator.bounces = NO;
+            animator.behindViewAlpha = 0.5f;
+            animator.behindViewScale = 0.5f;
+            animator.transitionDuration = 0.7f;
+            animator.direction = ZFModalTransitonDirectionBottom;
+            startLongPostingCtl.transitioningDelegate = animator;
+            startLongPostingCtl.model_1 = actionModel_1;
+            startLongPostingCtl.model_2 = actionModel_2;
+            [self presentViewController:startLongPostingCtl animated:YES completion:nil];
             break;
         }
         case 2:{
