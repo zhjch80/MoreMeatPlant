@@ -38,28 +38,19 @@
 
 - (void)adjustsTextContentFrameWithText:(NSString *)text {
     CGFloat height = [UtilityFunc boundingRectWithSize:CGSizeMake(kScreenWidth - 10, 0) font:FONT(14.0) text:text].height;
-    self.textContent.frame = CGRectMake(self.textContent.frame.origin.x, self.textContent.frame.origin.y, kScreenWidth - 10, height);
+    self.textContent.frame = CGRectMake(self.textContent.frame.origin.x, 3, kScreenWidth - 10, height);
     self.textContent.text = text;
     self.textContent.backgroundColor = [UIColor clearColor];
     self.userInteractionEnabled = YES;
     [self.textContent sizeToFit];
-    self.frame = CGRectMake(0, 0, kScreenWidth, self.textContent.frame.size.height);
+    self.line_3.frame = CGRectMake(5, self.textContent.frame.size.height + 5, kScreenWidth - 10, 1);
+    self.frame = CGRectMake(0, 0, kScreenWidth, self.textContent.frame.size.height + 6);
 }
 
-- (void)adjustsImageContentFrameWithImageUrl:(NSString *)url {
-    NSRange substr = [url rangeOfString:@".gif"];
-    if (substr.location != NSNotFound) {
-    }else{
-        CGSize size = [UIImage downloadImageSizeWithURL:[NSURL URLWithString:url]];
-        
-        CGFloat height = size.height/size.width * kScreenWidth;
-        
-        [self.imageContent sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:nil];
-        
-        [self.imageContent setFrame:CGRectMake(0, 5, kScreenWidth, height)];
-        
-        self.frame = CGRectMake(0, 0, kScreenWidth, self.imageContent.frame.size.height);
-    }
+- (void)adjustsImageContentFrameWithImage:(UIImage *)image {
+    NSLog(@"width:%ld width:%ld",(long)image.size.width,(long)image.size.height);
+    self.imageContent.image = image;
+    self.frame = CGRectMake(0, 0, kScreenWidth, image.size.height);
 }
 
 @end

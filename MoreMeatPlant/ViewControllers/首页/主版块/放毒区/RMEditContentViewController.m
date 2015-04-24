@@ -24,31 +24,44 @@
 @implementation RMEditContentViewController
 @synthesize titleText, textView, mTitle, sectionTag, rowTag, text, bgView;
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    titleText.text = text;
-    [titleText becomeFirstResponder];
-    
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
+    if ([self.mTitle isEqualToString:@"标题"]){
+        titleText.text = text;
+        [titleText becomeFirstResponder];
+    }else{
+        textView.text = text;
+        [textView becomeFirstResponder];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     [titleText resignFirstResponder];
-
+    [textView resignFirstResponder];
+    
     if (isCancel){
         if ([self.delegate respondsToSelector:@selector(getEditContent:withSectionTag:withRowTag:)]){
             [self.delegate getEditContent:text withSectionTag:sectionTag withRowTag:rowTag];
         }
     }else{
-        if ([self.delegate respondsToSelector:@selector(getEditContent:withSectionTag:withRowTag:)]){
-            [self.delegate getEditContent:titleText.text withSectionTag:sectionTag withRowTag:rowTag];
+        if ([self.mTitle isEqualToString:@"标题"]){
+            if ([self.delegate respondsToSelector:@selector(getEditContent:withSectionTag:withRowTag:)]){
+                [self.delegate getEditContent:titleText.text withSectionTag:sectionTag withRowTag:rowTag];
+            }
+        }else{
+            if ([self.delegate respondsToSelector:@selector(getEditContent:withSectionTag:withRowTag:)]){
+                [self.delegate getEditContent:textView.text withSectionTag:sectionTag withRowTag:rowTag];
+            }
         }
     }
+ 
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
@@ -94,6 +107,7 @@
     textView = [[RMBaseTextView alloc] init];
     textView.frame = CGRectMake(5, 70, kScreenWidth - 10, 0);
     textView.keyboardType = UIKeyboardTypeDefault;
+    textView.backgroundColor = [UIColor clearColor];
     textView.font = FONT_1(14.0);
     textView.delegate = self;
     [self.view addSubview:textView];
@@ -108,8 +122,8 @@
 
 - (void)keyboardWillShow:(NSNotification *)noti {
     CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    textView.frame = CGRectMake(5, 70, kScreenWidth - 10, kScreenHeight - size.height - 5);
-    bgView.frame = CGRectMake(5, 70, kScreenWidth - 10, kScreenHeight - size.height - 5);
+    textView.frame = CGRectMake(5, 70, kScreenWidth - 10, kScreenHeight - size.height - 75);
+    bgView.frame = CGRectMake(5, 70, kScreenWidth - 10, kScreenHeight - size.height - 75);
 
 }
 
@@ -133,12 +147,22 @@
             break;
         }
         case 2:{
-            if (titleText.text.length == 0){
-                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"亲，写点内容吧" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-                [alert show];
-                return ;
+            if ([self.mTitle isEqualToString:@"标题"]) {
+                if (titleText.text.length == 0){
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"亲，写点内容吧" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                    [alert show];
+                    return ;
+                }
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }else{
+                if (textView.text.length == 0){
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"亲，写点内容吧" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                    [alert show];
+                    return ;
+                }
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
-            [self dismissViewControllerAnimated:YES completion:nil];
+   
             break;
         }
             

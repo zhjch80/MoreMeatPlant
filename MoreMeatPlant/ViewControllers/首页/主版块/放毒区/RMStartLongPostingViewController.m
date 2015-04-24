@@ -15,6 +15,7 @@
 @interface RMStartLongPostingViewController ()<UITableViewDataSource,UITableViewDelegate,StartLongPostingDelegate,EditContentDelegate,LongPostFooterDelegate> {
     NSInteger cellTextCount;        //section 为2时 总共有几行文字cell
     NSInteger cellImgCount;         //section 为2时 总共有几行图片cell
+    NSInteger cellRow;              //记录内容的行数
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSArray * headerTitleArr;                 //header title arr
@@ -34,6 +35,7 @@
     // Do any additional setup after loading the view from its nib.
     cellTextCount = 0;
     cellImgCount = 0;
+    cellRow = 0;
     
     typeIdentifierArr = [[NSMutableArray alloc] init];
     dataArr = [[NSMutableArray alloc] init];
@@ -68,9 +70,9 @@
     [footerView.addTextBtn.layer setCornerRadius:5.0f];
     [footerView.addImgBtn.layer setCornerRadius:5.0];
     footerView.addTextBtn.section = 2;
-    footerView.addTextBtn.row = 0;
+    footerView.addTextBtn.row = cellRow;
     footerView.addImgBtn.section = 2;
-    footerView.addImgBtn.row = 0;
+    footerView.addImgBtn.row = cellRow;
     footerView.delegate = self;
     mTableView.tableFooterView = footerView;
 }
@@ -84,17 +86,30 @@
 - (void)addSomeContentWithSection:(NSInteger)section
                           withRow:(NSInteger)row
                          withType:(NSInteger)type {
-    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-    RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
-    
+    NSLog(@"section:%ld,row:%ld",(long)section,(long)row);
     if (type == 201){
         //文字
-
-        NSLog(@"文字 section::%ld, row:%ld type:%ld",(long)section,(long)row,(long)type);
-
-        cellTextCount ++;
-        [typeIdentifierArr addObject:@"text"];
+        RMEditContentViewController * editContentCtl = [[RMEditContentViewController alloc] init];
+        editContentCtl.delegate = self;
+        editContentCtl.modalPresentationStyle = UIModalPresentationCustom;
+        animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:editContentCtl];
         
+//        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:cellRow inSection:2];
+//        RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
+
+//        editContentCtl.text = cell.textContent.text;
+        
+        editContentCtl.sectionTag = 2;
+        editContentCtl.rowTag = cellRow;        //将要在此行增加文字,也是新增加的行
+        editContentCtl.mTitle = @"内容";
+        animator.dragable = NO;
+        animator.bounces = NO;
+        animator.behindViewAlpha = 0.5f;
+        animator.behindViewScale = 0.5f;
+        animator.transitionDuration = 0.7f;
+        animator.direction = ZFModalTransitonDirectionLeft;
+        editContentCtl.transitioningDelegate = animator;
+        [self presentViewController:editContentCtl animated:YES completion:nil];
     }else{
         //图片
         NSLog(@"图片 section::%ld, row:%ld type:%ld",(long)section,(long)row,(long)type);
@@ -102,9 +117,6 @@
         cellImgCount ++;
         [typeIdentifierArr addObject:@"img"];
     }
-    
-    [mTableView reloadData];
-    
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -184,6 +196,13 @@
             cell.backgroundColor = [UIColor clearColor];
         }
         
+        if ([[typeIdentifierArr objectAtIndex:indexPath.row] isEqualToString:@"text"]){
+            [cell adjustsTextContentFrameWithText:[dataArr objectAtIndex:indexPath.row]];
+            cell.contentIdentifier = @"text";
+        }else{
+            
+            cell.contentIdentifier = @"image";
+        }
         return cell;
     }
 }
@@ -193,49 +212,71 @@
     return cell.frame.size.height;
 }
 
-- (void)editingContentWithTag:(NSInteger)tag {
-    switch (tag) {
-        case 101:{      //编辑标题
-            RMEditContentViewController * editContentCtl = [[RMEditContentViewController alloc] init];
-            editContentCtl.delegate = self;
-            editContentCtl.modalPresentationStyle = UIModalPresentationCustom;
-            animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:editContentCtl];
-            
-            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
-            RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
-            
-            editContentCtl.mTitle = @"标题";
-            editContentCtl.sectionTag = 1;
-            editContentCtl.rowTag = 0;
-            editContentCtl.text = cell.editTitleDisplay.text;
-            
-            animator.dragable = NO;
-            animator.bounces = NO;
-            animator.behindViewAlpha = 0.5f;
-            animator.behindViewScale = 0.5f;
-            animator.transitionDuration = 0.7f;
-            animator.direction = ZFModalTransitonDirectionLeft;
-            editContentCtl.transitioningDelegate = animator;
-            [self presentViewController:editContentCtl animated:YES completion:nil];
-            break;
-        }
-            
-        default:
-            break;
-    }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
+    NSLog(@"at row:%ld,cell.contentIdentifier:%@",(long)indexPath.row,cell.contentIdentifier);
 }
 
+/**
+ *  @method     编辑标题
+ */
+- (void)editingContentWithTag:(NSInteger)tag {
+    RMEditContentViewController * editContentCtl = [[RMEditContentViewController alloc] init];
+    editContentCtl.delegate = self;
+    editContentCtl.modalPresentationStyle = UIModalPresentationCustom;
+    animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:editContentCtl];
+    
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+    RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
+    
+    editContentCtl.mTitle = @"标题";
+    editContentCtl.sectionTag = 1;
+    editContentCtl.rowTag = 0;
+    editContentCtl.text = cell.editTitleDisplay.text;
+    
+    animator.dragable = NO;
+    animator.bounces = NO;
+    animator.behindViewAlpha = 0.5f;
+    animator.behindViewScale = 0.5f;
+    animator.transitionDuration = 0.7f;
+    animator.direction = ZFModalTransitonDirectionLeft;
+    editContentCtl.transitioningDelegate = animator;
+    [self presentViewController:editContentCtl animated:YES completion:nil];
+}
+
+/**
+ *  @method     获取标题 及 内容的文字
+ */
 - (void)getEditContent:(NSString *)content
         withSectionTag:(NSInteger)section
             withRowTag:(NSInteger)row {
     
-    if (content.length == 0 && section == 1){
+    if (section == 1){
+        //标题
+        if (content.length == 0 && section == 1){
+        }else{
+            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+            RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
+            cell.editTitleDisplay.text = content;
+            cell.editTitleBtn.backgroundColor = [UIColor clearColor];
+            [cell.editTitleBtn setTitle:@"" forState:UIControlStateNormal];
+        }
     }else{
-        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-        RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
-        cell.editTitleDisplay.text = content;
-        cell.editTitleBtn.backgroundColor = [UIColor clearColor];
-        [cell.editTitleBtn setTitle:@"" forState:UIControlStateNormal];
+        //内容
+        if (content.length == 0){
+            NSLog(@"字符串为空");
+        }else{
+            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+            RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
+            [cell adjustsTextContentFrameWithText:content];
+            
+            [dataArr addObject:content];
+            
+            cellTextCount ++;
+            cellRow ++;
+            [typeIdentifierArr addObject:@"text"];
+            [mTableView reloadData];
+        }
     }
 }
 
