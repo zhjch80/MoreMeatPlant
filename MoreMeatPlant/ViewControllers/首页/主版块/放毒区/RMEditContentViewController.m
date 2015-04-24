@@ -23,6 +23,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    titleText.text = text;
     [titleText becomeFirstResponder];
 }
 

@@ -593,6 +593,7 @@
 		4B3A2AD71AE9341900E1EC24 /* RMEditContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2AD51AE9341900E1EC24 /* RMEditContentViewController.xib */; };
 		4B3A2ADA1AE94FAD00E1EC24 /* RMLongPostFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A2AD91AE94FAD00E1EC24 /* RMLongPostFooterView.m */; };
 		4B3A2AE01AE9574500E1EC24 /* RMLongPostFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2ADF1AE9574500E1EC24 /* RMLongPostFooterView.xib */; };
+		4B3A2AE21AE9F58A00E1EC24 /* RMStartLongPostingCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2AE11AE9F58A00E1EC24 /* RMStartLongPostingCell_4.xib */; };
 		4BFFA7251AE8EB4A00D0D462 /* RefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFA7241AE8EB4A00D0D462 /* RefreshView.m */; };
 		5120FDC81AB5D9E3000E9BE1 /* RMMyHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5120FDC61AB5D9E3000E9BE1 /* RMMyHomeViewController.m */; };
 		5120FDC91AB5D9E3000E9BE1 /* RMMyHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5120FDC71AB5D9E3000E9BE1 /* RMMyHomeViewController.xib */; };
@@ -1942,6 +1943,7 @@
 		4B3A2AD81AE94FAD00E1EC24 /* RMLongPostFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMLongPostFooterView.h; sourceTree = "<group>"; };
 		4B3A2AD91AE94FAD00E1EC24 /* RMLongPostFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMLongPostFooterView.m; sourceTree = "<group>"; };
 		4B3A2ADF1AE9574500E1EC24 /* RMLongPostFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMLongPostFooterView.xib; sourceTree = "<group>"; };
+		4B3A2AE11AE9F58A00E1EC24 /* RMStartLongPostingCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMStartLongPostingCell_4.xib; sourceTree = "<group>"; };
 		4BFFA7231AE8EB4A00D0D462 /* RefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshView.h; sourceTree = "<group>"; };
 		4BFFA7241AE8EB4A00D0D462 /* RefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshView.m; sourceTree = "<group>"; };
 		5120FDC51AB5D9E3000E9BE1 /* RMMyHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyHomeViewController.h; sourceTree = "<group>"; };
@@ -3599,6 +3601,7 @@
 				4B3A2ACC1AE92C9200E1EC24 /* RMStartLongPostingCell_1.xib */,
 				4B3A2ACF1AE932BF00E1EC24 /* RMStartLongPostingCell_2.xib */,
 				4B3A2AD01AE932BF00E1EC24 /* RMStartLongPostingCell_3.xib */,
+				4B3A2AE11AE9F58A00E1EC24 /* RMStartLongPostingCell_4.xib */,
 				4B3A2AD81AE94FAD00E1EC24 /* RMLongPostFooterView.h */,
 				4B3A2AD91AE94FAD00E1EC24 /* RMLongPostFooterView.m */,
 				4B3A2ADF1AE9574500E1EC24 /* RMLongPostFooterView.xib */,
@@ -6621,6 +6624,7 @@
 				5120FDF11AB71D34000E9BE1 /* RMOrderBottomTableViewCell.xib in Resources */,
 				0A4106AE1ABABBF60060FBD5 /* chatBar_more_location.png in Resources */,
 				1DEB74E11AB9D67A00EA1FA7 /* btn.png in Resources */,
+				4B3A2AE21AE9F58A00E1EC24 /* RMStartLongPostingCell_4.xib in Resources */,
 				1DEB74821AB9D66800EA1FA7 /* img_tz_7.png in Resources */,
 				514613551AE3653E0040E462 /* chatBar_more.png in Resources */,
 				1D55762B1A95FEDA0072C8C5 /* RMPlantWithSaleDetailsViewController.xib in Resources */,

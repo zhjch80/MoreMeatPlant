@@ -20,4 +20,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *editTitleDisplay;
 @property (weak, nonatomic) IBOutlet UIButton *editTitleBtn;
 
+/**
+ * contentIdentifier 为 text 时为文字  img 时为图片 判断cell展示的是文字 还是图片
+ */
+@property (nonatomic, copy) NSString * contentIdentifier;
+
+//cell 类型3为文字
+
+
+//cell 类型4为图片
+
 @end

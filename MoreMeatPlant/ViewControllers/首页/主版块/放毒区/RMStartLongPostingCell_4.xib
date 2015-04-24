@@ -4,11 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="方正正纤黑简体.TTF">
-            <string>FZZXHJW--GB1-0</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,12 +14,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asM-Bb-AMO">
-                        <rect key="frame" x="5" y="0.0" width="310" height="60"/>
-                        <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kms-ik-uSb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                        <color key="backgroundColor" red="1" green="0.61437945139378525" blue="0.70967607217658035" alpha="1" colorSpace="calibratedRGB"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
         </tableViewCell>

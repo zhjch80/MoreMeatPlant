@@ -12,20 +12,29 @@
 #import "ZFModalTransitionAnimator.h"
 #import "RMLongPostFooterView.h"
 
-@interface RMStartLongPostingViewController ()<UITableViewDataSource,UITableViewDelegate,StartLongPostingDelegate,EditContentDelegate,LongPostFooterDelegate>
+@interface RMStartLongPostingViewController ()<UITableViewDataSource,UITableViewDelegate,StartLongPostingDelegate,EditContentDelegate,LongPostFooterDelegate> {
+    NSInteger cellTextCount;        //section 为2时 总共有几行文字cell
+    NSInteger cellImgCount;         //section 为2时 总共有几行图片cell
+}
 @property (nonatomic, strong) UITableView * mTableView;
-@property (nonatomic, strong) NSArray * headerTitleArr;
+@property (nonatomic, strong) NSArray * headerTitleArr;     //header title arr
+@property (nonatomic, strong) NSMutableArray * dataArr;     //文字 图片cell标识 text img
+
 @property (nonatomic, strong) ZFModalTransitionAnimator * animator;
 @property (nonatomic, strong) RMLongPostFooterView * footerView;
 
 @end
 
 @implementation RMStartLongPostingViewController
-@synthesize mTableView, headerTitleArr, animator, footerView;
+@synthesize mTableView, headerTitleArr, animator, footerView, dataArr;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    cellTextCount = 0;
+    cellImgCount = 0;
+    
+    dataArr = [[NSMutableArray alloc] init];
     
     headerTitleArr = [[NSArray alloc] initWithObjects:@"发帖说明", @"帖子标题", @"帖子内容", nil];
     
@@ -73,16 +82,25 @@
 - (void)addSomeContentWithSection:(NSInteger)section
                           withRow:(NSInteger)row
                          withType:(NSInteger)type {
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
+    
     if (type == 201){
         //文字
         NSLog(@"文字 section::%ld, row:%ld type:%ld",(long)section,(long)row,(long)type);
 
+        cellTextCount ++;
+        [dataArr addObject:@"text"];
+        
     }else{
         //图片
         NSLog(@"图片 section::%ld, row:%ld type:%ld",(long)section,(long)row,(long)type);
-
+        
+        cellImgCount ++;
+        [dataArr addObject:@"img"];
     }
     
+    [mTableView reloadData];
     
 }
 
@@ -98,7 +116,7 @@
     if (section == 0 | section == 1) {
         return 1;
     }else{
-        return 0;
+        return cellTextCount + cellImgCount;
     }
 }
 
@@ -140,12 +158,24 @@
         static NSString * cellIdentifier = @"StartLongPostingIdentifier_3";
         RMStartLongPostingCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!cell) {
-            if (IS_IPHONE_6p_SCREEN){
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMStartLongPostingCell_3" owner:self options:nil] lastObject];
-            }else if (IS_IPHONE_6_SCREEN){
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMStartLongPostingCell_3" owner:self options:nil] lastObject];
+            if ([[dataArr objectAtIndex:indexPath.row] isEqualToString:@"text"]){
+                //文字 cell
+                if (IS_IPHONE_6p_SCREEN){
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMStartLongPostingCell_3" owner:self options:nil] lastObject];
+                }else if (IS_IPHONE_6_SCREEN){
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMStartLongPostingCell_3" owner:self options:nil] lastObject];
+                }else{
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMStartLongPostingCell_3" owner:self options:nil] lastObject];
+                }
             }else{
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMStartLongPostingCell_3" owner:self options:nil] lastObject];
+                //图片 cell
+                if (IS_IPHONE_6p_SCREEN){
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMStartLongPostingCell_4" owner:self options:nil] lastObject];
+                }else if (IS_IPHONE_6_SCREEN){
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMStartLongPostingCell_4" owner:self options:nil] lastObject];
+                }else{
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMStartLongPostingCell_4" owner:self options:nil] lastObject];
+                }
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
@@ -153,7 +183,6 @@
         
         return cell;
     }
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -200,7 +229,6 @@
     if (content.length == 0 && section == 1){
     }else{
         NSIndexPath * indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-        
         RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
         cell.editTitleDisplay.text = content;
         cell.editTitleBtn.backgroundColor = [UIColor clearColor];
