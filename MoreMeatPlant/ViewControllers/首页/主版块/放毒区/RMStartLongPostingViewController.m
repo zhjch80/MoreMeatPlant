@@ -17,8 +17,9 @@
     NSInteger cellImgCount;         //section 为2时 总共有几行图片cell
 }
 @property (nonatomic, strong) UITableView * mTableView;
-@property (nonatomic, strong) NSArray * headerTitleArr;     //header title arr
-@property (nonatomic, strong) NSMutableArray * dataArr;     //文字 图片cell标识 text img
+@property (nonatomic, strong) NSArray * headerTitleArr;                 //header title arr
+@property (nonatomic, strong) NSMutableArray * typeIdentifierArr;       //文字 图片cell标识 text img
+@property (nonatomic, strong) NSMutableArray * dataArr;
 
 @property (nonatomic, strong) ZFModalTransitionAnimator * animator;
 @property (nonatomic, strong) RMLongPostFooterView * footerView;
@@ -26,7 +27,7 @@
 @end
 
 @implementation RMStartLongPostingViewController
-@synthesize mTableView, headerTitleArr, animator, footerView, dataArr;
+@synthesize mTableView, headerTitleArr, animator, footerView, typeIdentifierArr, dataArr;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,6 +35,7 @@
     cellTextCount = 0;
     cellImgCount = 0;
     
+    typeIdentifierArr = [[NSMutableArray alloc] init];
     dataArr = [[NSMutableArray alloc] init];
     
     headerTitleArr = [[NSArray alloc] initWithObjects:@"发帖说明", @"帖子标题", @"帖子内容", nil];
@@ -87,17 +89,18 @@
     
     if (type == 201){
         //文字
+
         NSLog(@"文字 section::%ld, row:%ld type:%ld",(long)section,(long)row,(long)type);
 
         cellTextCount ++;
-        [dataArr addObject:@"text"];
+        [typeIdentifierArr addObject:@"text"];
         
     }else{
         //图片
         NSLog(@"图片 section::%ld, row:%ld type:%ld",(long)section,(long)row,(long)type);
         
         cellImgCount ++;
-        [dataArr addObject:@"img"];
+        [typeIdentifierArr addObject:@"img"];
     }
     
     [mTableView reloadData];
@@ -158,7 +161,7 @@
         static NSString * cellIdentifier = @"StartLongPostingIdentifier_3";
         RMStartLongPostingCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!cell) {
-            if ([[dataArr objectAtIndex:indexPath.row] isEqualToString:@"text"]){
+            if ([[typeIdentifierArr objectAtIndex:indexPath.row] isEqualToString:@"text"]){
                 //文字 cell
                 if (IS_IPHONE_6p_SCREEN){
                     cell = [[[NSBundle mainBundle] loadNibNamed:@"RMStartLongPostingCell_3" owner:self options:nil] lastObject];

@@ -8,23 +8,31 @@
 
 #import "RMEditContentViewController.h"
 #import "RMBaseTextField.h"
+#import "RMBaseTextView.h"
 #import "UITextField+LimitLength.h"
 
-@interface RMEditContentViewController ()<UITextFieldDelegate> {
+@interface RMEditContentViewController ()<UITextFieldDelegate,UITextViewDelegate> {
     BOOL isCancel;
     
 }
 @property (nonatomic, strong) RMBaseTextField * titleText;
+@property (nonatomic, strong) RMBaseTextView * textView;
+@property (nonatomic, strong) UIView * bgView;
 
 @end
 
 @implementation RMEditContentViewController
-@synthesize titleText, mTitle, sectionTag, rowTag, text;
+@synthesize titleText, textView, mTitle, sectionTag, rowTag, text, bgView;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     titleText.text = text;
     [titleText becomeFirstResponder];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -41,6 +49,11 @@
             [self.delegate getEditContent:titleText.text withSectionTag:sectionTag withRowTag:rowTag];
         }
     }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 
 }
 
@@ -70,6 +83,46 @@
     titleText.delegate = self;
     [titleText limitTextLength:20];
     [self.view addSubview:titleText];
+    
+    bgView = [[UIView alloc] init];
+    bgView.userInteractionEnabled = YES;
+    bgView.frame = CGRectMake(5, 70, kScreenWidth - 10, 0);
+    bgView.layer.borderColor = [[UIColor blackColor] CGColor];
+    bgView.layer.borderWidth = 1.0;
+    [self.view addSubview:bgView];
+    
+    textView = [[RMBaseTextView alloc] init];
+    textView.frame = CGRectMake(5, 70, kScreenWidth - 10, 0);
+    textView.keyboardType = UIKeyboardTypeDefault;
+    textView.font = FONT_1(14.0);
+    textView.delegate = self;
+    [self.view addSubview:textView];
+    
+    if ([self.mTitle isEqualToString:@"标题"]){
+        textView.hidden = YES;
+        bgView.hidden = YES;
+    }else{
+        titleText.hidden = YES;
+    }
+}
+
+- (void)keyboardWillShow:(NSNotification *)noti {
+    CGSize size = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    textView.frame = CGRectMake(5, 70, kScreenWidth - 10, kScreenHeight - size.height - 5);
+    bgView.frame = CGRectMake(5, 70, kScreenWidth - 10, kScreenHeight - size.height - 5);
+
+}
+
+- (void)keyboardWillHide:(NSNotification *)noti {
+    
+}
+
+- (void)keyboardDidShow:(NSNotification *)noti {
+    
+}
+
+- (void)keyboardDidHide:(NSNotification *)noti {
+    
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {

@@ -26,8 +26,12 @@
 @property (nonatomic, copy) NSString * contentIdentifier;
 
 //cell 类型3为文字
-
+@property (weak, nonatomic) IBOutlet UILabel *textContent;
 
 //cell 类型4为图片
+@property (weak, nonatomic) IBOutlet UIImageView *imageContent;
+
+- (void)adjustsTextContentFrameWithText:(NSString *)text;
+- (void)adjustsImageContentFrameWithImageUrl:(NSString *)url;
 
 @end
