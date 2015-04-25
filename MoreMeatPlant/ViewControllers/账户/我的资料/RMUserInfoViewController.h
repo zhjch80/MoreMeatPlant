@@ -21,15 +21,11 @@ typedef void (^RMUserInfoModifyAction) (RMUserInfoViewController *controller);
 
 @property (copy, nonatomic) RMUserInfoModifyAction modify_callback;//修改
 
-@property (weak, nonatomic) IBOutlet UILabel *nickL;
-@property (weak, nonatomic) IBOutlet UILabel *passwordL;
-@property (weak, nonatomic) IBOutlet UILabel *signatureL;
-@property (weak, nonatomic) IBOutlet UILabel *mobileL;
-@property (weak, nonatomic) IBOutlet UILabel *apliyL;
-@property (weak, nonatomic) IBOutlet UIButton *editBtn;
+
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
-@property (weak, nonatomic) IBOutlet UIButton *modifyBtn;
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (retain, nonatomic) RMPublicModel * _model;
+@property (weak, nonatomic) IBOutlet UITableView *mtableView;
 
 @end

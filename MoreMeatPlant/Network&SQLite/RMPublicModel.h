@@ -133,4 +133,7 @@
 
 @property (retain, nonatomic) NSString * content_x;//
 @property (retain, nonatomic) NSString * content_y;
+
+@property (retain, nonatomic) NSString * card_photo;//身份证
+@property (retain, nonatomic) NSString * corp_photo;//店铺背景
 @end

@@ -9,12 +9,9 @@
 #import "RMBaseViewController.h"
 
 @interface RMUserInfoEditViewController : RMBaseViewController
-@property (weak, nonatomic) IBOutlet UITextField *nickT;
-@property (weak, nonatomic) IBOutlet UITextField *passwordT;
-@property (weak, nonatomic) IBOutlet UITextView *signatureT;//签名
-@property (weak, nonatomic) IBOutlet UITextField *mobileT;
-@property (weak, nonatomic) IBOutlet UITextField *apliyT;
+
 @property (retain, nonatomic) RMPublicModel * _model;
-@property (weak, nonatomic) IBOutlet UIButton *sureModifyBtn;
+@property (weak, nonatomic) IBOutlet UITableView *mtableView;
+
 
 @end

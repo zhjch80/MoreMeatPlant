@@ -8,7 +8,9 @@
 
 #import "RMUserInfoEditViewController.h"
 #import "UIAlertView+Expland.h"
-@interface RMUserInfoEditViewController ()
+#import "RMUserInfoEditTableViewCell.h"
+#import "RMCorpInfoEditTableViewCell.h"
+@interface RMUserInfoEditViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -22,41 +24,121 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
-    _nickT.text = __model.contentName;
-    _signatureT.text = Str_Objc(__model.contentQm, @"什么也没写...");
-    _mobileT.text = __model.contentMobile;
-    _apliyT.text = __model.zfbNo;
-    [_sureModifyBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
+    
 }
 //修改资料请求有问题
 - (void)commit{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:_apliyT.text Signature:[_signatureT.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Dic:nil andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if(success){
-            RMPublicModel * model = object;
-            if(model.status){
-                __model.contentQm = _signatureT.text;
-                __model.zfbNo = _apliyT.text;
-                [[NSNotificationCenter defaultCenter] postNotificationName:RMRequestMemberInfoAgainNotification object:__model];
-                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"返回", nil];
-                [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
-                    [self navgationBarButtonClick:nil];
-                }];
-                [alert show];
-
+    
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] boolValue]){//店铺资料修改
+    
+        RMCorpInfoEditTableViewCell * cell = (RMCorpInfoEditTableViewCell *)[_mtableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        
+        [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:cell.apliyT.text Signature:[cell.signatureT.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Dic:nil andCallBack:^(NSError *error, BOOL success, id object) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if(success){
+                RMPublicModel * model = object;
+                if(model.status){
+                    __model.contentQm = cell.signatureT.text;
+                    __model.zfbNo = cell.apliyT.text;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:RMRequestMemberInfoAgainNotification object:__model];
+                    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"返回", nil];
+                    [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+                        [self navgationBarButtonClick:nil];
+                    }];
+                    [alert show];
+                    
+                }else{
+                    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                    [alert show];
+                    
+                }
+                
             }else{
-                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
-                [alert show];
-
+                [self showHint:object];
             }
-            
-        }else{
-            [self showHint:object];
-        }
-    }];
+        }];
+
+    }else{//用户资料修改
+        RMUserInfoEditTableViewCell * cell = (RMUserInfoEditTableViewCell *)[_mtableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        
+        [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:cell.apliyT.text Signature:[cell.signatureT.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Dic:nil andCallBack:^(NSError *error, BOOL success, id object) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if(success){
+                RMPublicModel * model = object;
+                if(model.status){
+                    __model.contentQm = cell.signatureT.text;
+                    __model.zfbNo = cell.apliyT.text;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:RMRequestMemberInfoAgainNotification object:__model];
+                    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"返回", nil];
+                    [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+                        [self navgationBarButtonClick:nil];
+                    }];
+                    [alert show];
+                    
+                }else{
+                    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                    [alert show];
+                    
+                }
+                
+            }else{
+                [self showHint:object];
+            }
+        }];
+
+    }
+    
 }
 
+#pragma mark - 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] boolValue]){
+        RMUserInfoEditTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMUserInfoEditTableViewCell"];
+        if(cell == nil){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMUserInfoEditTableViewCell" owner:self options:nil] lastObject];
+            [cell.sureModifyBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
+
+        }
+        
+        cell.signatureT.text = Str_Objc(__model.contentQm, @"什么也没写...");
+        cell.mobileT.text = __model.contentMobile;
+        cell.apliyT.text = __model.zfbNo;
+        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
+        return cell;
+    }else{
+        RMCorpInfoEditTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMCorpInfoEditTableViewCell"];
+        if(cell == nil){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMCorpInfoEditTableViewCell" owner:self options:nil] lastObject];
+            [cell.sureModifyBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
+
+        }
+        cell.signatureT.text = Str_Objc(__model.contentQm, @"什么也没写...");
+        cell.mobileT.text = __model.contentMobile;
+        cell.apliyT.text = __model.zfbNo;
+        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
+        
+        cell.content_link.text = __model.content_linkname;
+        cell.content_mobile.text = __model.content_mobile;
+        cell.content_address.text = __model.content_address;
+        [cell.card_photo sd_setImageWithURL:[NSURL URLWithString:__model.card_photo] placeholderImage:[UIImage imageNamed:@"444"]];
+        [cell.corp_photo sd_setImageWithURL:[NSURL URLWithString:__model.corp_photo] placeholderImage:[UIImage imageNamed:@"222"]];
+        
+        return cell;
+    }
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] boolValue]){
+        return 621;
+    }else{
+        return 364;
+    }
+}
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
     [self.navigationController popViewControllerAnimated:YES];
