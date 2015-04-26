@@ -1667,6 +1667,9 @@
         RMPublicModel * model = [[RMPublicModel alloc]init];
         model.status = [[dic objectForKey:@"status"] boolValue];
         model.msg = [dic objectForKey:@"msg"];
+        NSDictionary * dataDic = OBJC_Nil([dic objectForKey:@"data"]);
+        model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
+        model.is_redirect = OBJC_Nil([dataDic objectForKey:@"is_redirect"]);
         if(block){
             block(nil,YES,model);
         }

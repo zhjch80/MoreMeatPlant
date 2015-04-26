@@ -403,7 +403,7 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
             AppDelegate * dele = [[UIApplication sharedApplication] delegate];
             [dele tabSelectController:3];
-            [dele.talkMoreCtl._chatListVC jumpToChatView:dataModel.member_id];
+            [dele.talkMoreCtl._chatListVC jumpToChatView:[dataModel.members objectForKey:@"content_user"]];
             break;
         }
             
@@ -453,12 +453,13 @@
     product.content_img = dataModel.content_img;
     product.content_name = dataModel.content_name;
     product.content_price = dataModel.content_price;
-    product.content_express = dataModel.content_express;
-    product.express_price = dataModel.express_price;
-    product.express = [dataModel.is_sf boolValue]?@"1":@"2";
+//    product.content_express = dataModel.content_express;
+//    product.express_price = dataModel.express_price;这里就不需要了
+    product.express = @"1";//这里有问题，待修改
     product.corp_id = dataModel.member_id;
     product.content_num = 1;
     product.plante = @"1";
+    product.corp_user = [dataModel.members objectForKey:@"content_user"];
     
     NSLog(@"%@",product);
     

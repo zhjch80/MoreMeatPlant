@@ -8,6 +8,8 @@
 
 #import "RMMyOrderViewController.h"
 #import "RMAliPayViewController.h"
+#import "RMOrderDetailViewController.h"
+#import "RMSeeLogisticsViewController.h"
 @interface RMMyOrderViewController ()
 
 @end
@@ -23,6 +25,7 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kShowCustomTabbar" object:nil];
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,6 +45,8 @@
     waitDeliveryCtl.didSelectCellcallback = ^(RMPublicModel * model){
         if(Self.didSelectCell_callback){
             Self.didSelectCell_callback(model);
+        }else{
+            [Self jumptoDetail:model];
         }
     };
     [waitPayCtl requestData];
@@ -54,12 +59,20 @@
     waitPayCtl.didSelectCellcallback = ^(RMPublicModel *model){
         if(Self.didSelectCell_callback){
             Self.didSelectCell_callback(model);
+        }else{
+            [Self jumptoDetail:model];
         }
     };
     waitPayCtl.gopay_callback = ^(RMPublicModel *model){
         //去付款
         if(Self.gopay_callback){
             Self.gopay_callback(model);
+        }else{
+            //去付款
+            RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
+            alipay.is_direct = NO;
+            alipay.order_id = model.content_sn;//支付宝支付的订单号
+            [Self.navigationController pushViewController:alipay animated:YES];
         }
 
     };
@@ -76,12 +89,20 @@
     deliveryedCtl.didSelectCellcallback = ^(RMPublicModel *model){
         if(Self.didSelectCell_callback){
             Self.didSelectCell_callback(model);
+        }else{
+            [Self jumptoDetail:model];
         }
     };
     deliveryedCtl.seeLogistics_callback = ^ (RMPublicModel * model){
         //查看物流
         if(Self.seeLogistics_callback){
             Self.seeLogistics_callback (model);
+        }else{
+            //查看物流信息
+            RMSeeLogisticsViewController * see = [[RMSeeLogisticsViewController alloc]initWithNibName:@"RMSeeLogisticsViewController" bundle:nil];
+            see.express_name = model.express_name;
+            see.express_no = model.express_no;
+            [Self.navigationController pushViewController:see animated:YES];
         }
     };
     [deliveryedCtl requestData];
@@ -95,6 +116,8 @@
     orderDoneCtl.didSelectCellcallback = ^(RMPublicModel *model){
         if(Self.didSelectCell_callback){
             Self.didSelectCell_callback(model);
+        }else{
+            [Self jumptoDetail:model];
         }
     };
     [orderDoneCtl requestData];
@@ -167,9 +190,19 @@
     }];
 }
 
+- (void)jumptoDetail:(RMPublicModel *)model{
+    RMOrderDetailViewController * detail = [[RMOrderDetailViewController alloc]initWithNibName:@"RMOrderDetailViewController" bundle:nil];
+    detail._model = [[RMPublicModel alloc]init];
+    detail._model = model;
+    detail.order_type = model.content_type;
+    [self.navigationController pushViewController:detail animated:YES];
+}
+
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     if (self.callback){
         _callback();
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

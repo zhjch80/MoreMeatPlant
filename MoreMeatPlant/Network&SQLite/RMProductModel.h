@@ -20,5 +20,6 @@
 @property (retain, nonatomic) NSString * express_price;
 @property (retain, nonatomic) NSString * express;
 @property (retain, nonatomic) NSString * plante;//1 表示一肉一拍 2 表示多肉市场
-
+@property (retain, nonatomic) NSString * order_message;//店铺留言
+@property (retain, nonatomic) NSString * corp_user;//用户联系商家
 @end

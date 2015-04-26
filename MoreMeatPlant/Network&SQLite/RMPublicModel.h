@@ -136,4 +136,7 @@
 
 @property (retain, nonatomic) NSString * card_photo;//身份证
 @property (retain, nonatomic) NSString * corp_photo;//店铺背景
+
+
+@property (retain, nonatomic) NSString * is_redirect;//如果为1，提交订单直接跳转到支付宝接口，如果是0，直接跳转到会员订单列表
 @end

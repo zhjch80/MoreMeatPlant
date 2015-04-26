@@ -19,6 +19,8 @@
 #import "UIView+Expland.h"
 #import "UIAlertView+Expland.h"
 #import "RMAliPayViewController.h"
+#import "AppDelegate.h"
+#import "RMMyOrderViewController.h"
 @interface RMShopCarViewController ()<RMAddressEditViewCompletedDelegate>{
     BOOL isShow;
     __block RMSettlementViewController * settle;
@@ -133,8 +135,14 @@
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMShopLeaveMsTableViewCell" owner:self options:nil] lastObject];
             [cell.contactCorpBtn addTarget:self action:@selector(contactCorpAction:) forControlEvents:UIControlEventTouchDown];
+            cell.leaveMessageT.delegate = self;
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:cell.leaveMessageT];
         }
+        cell.leaveMessageT.tag = indexPath.section*10+1;
         cell.contactCorpBtn.tag = indexPath.section*1000+indexPath.row;
+        
+        cell.leaveMessageT.text = [(RMProductModel *)[[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] objectAtIndex:0] order_message];
+        
         cell.totalMoneyL.text = [NSString stringWithFormat:@"%.0f",[self caculateSection:indexPath]];
         cell.totalL.text = [NSString stringWithFormat:@"%.0f",[self caculateSection:indexPath]];
         int n = 0;
@@ -317,7 +325,13 @@
 #pragma mark - 联系卖家
 - (void)contactCorpAction:(UIButton *)sender{
      NSIndexPath * indexpath = [NSIndexPath indexPathForRow:sender.tag%1000 inSection:sender.tag/1000];
+    NSDictionary * dic = [dataArray objectAtIndex:sender.tag/1000];
     NSLog(@"联系卖家%@",indexpath);
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+    [dele tabSelectController:3];
+    [dele.talkMoreCtl._chatListVC jumpToChatView:[(RMProductModel *)[[dic objectForKey:@"products"] objectAtIndex:0] corp_user]];
+    NSLog(@"%@",[(RMProductModel *)[[dic objectForKey:@"products"] objectAtIndex:0] corp_user]);
 }
 
 #pragma mark - 结算
@@ -369,17 +383,23 @@
     NSString * num = @"";
     NSString * express = @"";
     
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
     for(NSDictionary *dic in dataArray){
         for(RMProductModel * model in [dic objectForKey:@"products"]){
             auto_id = [auto_id stringByAppendingString:[NSString stringWithFormat:@",%@",model.auto_id]];
             num = [num stringByAppendingString:[NSString stringWithFormat:@",%@",model.auto_id]];
-            express = [express stringByAppendingString:[NSString stringWithFormat:@",%@",model.express]];
+            
         }
+        RMProductModel * lastmodel = [[dic objectForKey:@"products"] objectAtIndex:0];
+        express = [express stringByAppendingString:[NSString stringWithFormat:@",%@",lastmodel.express]];
+        
+        RMProductModel * model = [[dic objectForKey:@"products"] objectAtIndex:0];
+        [dict setValue:model.order_message forKey:[NSString stringWithFormat:@"order_message[%@]",model.corp_id]];
         auto_id = [auto_id substringFromIndex:1];
         num = [num substringFromIndex:1];
         express = [express substringFromIndex:1];
     }
-    NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
+    
     [dict setValue:auto_id forKey:@"auto_id"];
     [dict setValue:num forKey:@"num"];
     [dict setValue:parameterModel.payment_id forKey:@"frm[payment_id]"];
@@ -394,11 +414,18 @@
         if(success){
             RMPublicModel * model = object;
             if(model.status){
-                if([parameterModel.payment_id isEqualToString:@"2"]){
+//                if([parameterModel.payment_id isEqualToString:@"2"]){
+//                    
+//                }
+                if([model.is_redirect boolValue]){
                     RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
                     alipay.is_direct = NO;
-                    alipay.order_id = @"";//支付宝支付的订单号
+                    alipay.order_id = model.content_sn;//支付宝支付的订单号
                     [self.navigationController pushViewController:alipay animated:YES];
+                }else{
+                    //跳到订单列表
+                    RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
+                    [self.navigationController pushViewController:order animated:YES];
                 }
             }else{
             
@@ -443,25 +470,48 @@
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    defaultNumber = textField.text;
+    NSLog(@"%@",[textField.superview superview]);
+    if([[textField.superview superview] isKindOfClass:[RMShopCarGoodsTableViewCell class]]){
+        defaultNumber = textField.text;
+    }else if([[textField.superview superview] isKindOfClass:[RMShopLeaveMsTableViewCell class]]){
+        
+    }
+    
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if([[textField.superview superview] isKindOfClass:[RMShopCarGoodsTableViewCell class]]){
+
+    }else if([[textField.superview superview] isKindOfClass:[RMShopLeaveMsTableViewCell class]]){
+        NSMutableDictionary * dic = [dataArray objectAtIndex:textField.tag/10];
+        [dic setValue:textField.text forKey:@"order_message"];
+        NSLog(@"%@",[[dataArray objectAtIndex:textField.tag/10] objectForKey:@"order_message"]);
+        RMProductModel * model = [[dic objectForKey:@"products"] objectAtIndex:0];
+        model.order_message = [[dataArray objectAtIndex:textField.tag/10] objectForKey:@"order_message"];
+        [model updatetoDb];
+    }
+}
 
 #pragma mark - 输入框文字检测
 
 - (void)textFieldChanged:(NSNotification *)noti {
     
     UITextField * textfield = noti.object;
-    NSInteger section = [textfield tag]/3000;
-    int row = [textfield tag]%3000;
-    NSIndexPath * indexpath = [NSIndexPath indexPathForRow:row inSection:section];
-    if(textfield.text.length == 0)
-    {
+    if([[textfield.superview superview] isKindOfClass:[RMShopCarGoodsTableViewCell class]]){
+        NSInteger section = [textfield tag]/3000;
+        int row = [textfield tag]%3000;
+        NSIndexPath * indexpath = [NSIndexPath indexPathForRow:row inSection:section];
+        if(textfield.text.length == 0)
+        {
+            
+        }
+        else
+        {
+            [self validationAction:indexpath andN:[[textfield text] integerValue]];
+        }
+
+    }else if([[textfield.superview superview] isKindOfClass:[RMShopLeaveMsTableViewCell class]]){
         
-    }
-    else
-    {
-        [self validationAction:indexpath andN:[[textfield text] integerValue]];
     }
     
 }

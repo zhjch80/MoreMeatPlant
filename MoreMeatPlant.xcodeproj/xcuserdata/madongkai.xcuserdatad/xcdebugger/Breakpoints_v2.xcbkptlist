@@ -115,22 +115,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x9996;&#x9875;/&#x4e3b;&#x7248;&#x5757;/&#x4e00;&#x8089;&#x4e00;&#x62cd;/&#x4e00;&#x8089;&#x4e00;&#x62cd;&#x8be6;&#x60c5;/RMPlantWithSaleDetailsViewController.m"
-            timestampString = "451744441.157007"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "475"
-            endingLineNumber = "475"
-            landmarkName = "-addGoodsToShopCar"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x5e97;&#x94fa;/RMMyCorpViewController.m"
             timestampString = "451732168.136193"
             startingColumnNumber = "9223372036854775807"
@@ -202,6 +186,22 @@
             startingLineNumber = "77"
             endingLineNumber = "77"
             landmarkName = "-setBlurAlpha:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x9996;&#x9875;/&#x4e3b;&#x7248;&#x5757;/&#x4e00;&#x8089;&#x4e00;&#x62cd;/&#x4e00;&#x8089;&#x4e00;&#x62cd;&#x8be6;&#x60c5;/RMPlantWithSaleDetailsViewController.m"
+            timestampString = "451756573.178153"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
+            landmarkName = "-plantWithSaleCellMethodWithTag:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
