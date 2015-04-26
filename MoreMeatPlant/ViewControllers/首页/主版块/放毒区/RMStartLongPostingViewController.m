@@ -12,10 +12,9 @@
 #import "ZFModalTransitionAnimator.h"
 #import "RMLongPostFooterView.h"
 
-@interface RMStartLongPostingViewController ()<UITableViewDataSource,UITableViewDelegate,StartLongPostingDelegate,EditContentDelegate,LongPostFooterDelegate> {
+@interface RMStartLongPostingViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,StartLongPostingDelegate,EditContentDelegate,LongPostFooterDelegate> {
     NSInteger cellTextCount;        //section 为2时 总共有几行文字cell
     NSInteger cellImgCount;         //section 为2时 总共有几行图片cell
-    NSInteger cellRow;              //记录内容的行数
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSArray * headerTitleArr;                 //header title arr
@@ -25,10 +24,16 @@
 @property (nonatomic, strong) ZFModalTransitionAnimator * animator;
 @property (nonatomic, strong) RMLongPostFooterView * footerView;
 
+@property (nonatomic, copy) NSString * titleContent;                //保存帖子标题
+@property (nonatomic, assign) NSInteger cellRow;                    //记录内容的行数
+@property (nonatomic, assign) NSInteger willOperationCellRow;       //点击cell 将要操作的行数
+@property (nonatomic, assign) BOOL isInsertImage;                   //是否插入图片
+@property (nonatomic, assign) BOOL isReplaceImage;                  //是否替换图片
+
 @end
 
 @implementation RMStartLongPostingViewController
-@synthesize mTableView, headerTitleArr, animator, footerView, typeIdentifierArr, dataArr;
+@synthesize mTableView, headerTitleArr, animator, footerView, typeIdentifierArr, dataArr, titleContent, cellRow, willOperationCellRow, isInsertImage, isReplaceImage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,9 +41,11 @@
     cellTextCount = 0;
     cellImgCount = 0;
     cellRow = 0;
+    willOperationCellRow = 0;
     
     typeIdentifierArr = [[NSMutableArray alloc] init];
     dataArr = [[NSMutableArray alloc] init];
+    titleContent = @"";
     
     headerTitleArr = [[NSArray alloc] initWithObjects:@"发帖说明", @"帖子标题", @"帖子内容", nil];
     
@@ -61,7 +68,6 @@
     [self.view addSubview:mTableView];
     
     [self laodFooterView];
-    
 }
 
 - (void)laodFooterView {
@@ -86,22 +92,19 @@
 - (void)addSomeContentWithSection:(NSInteger)section
                           withRow:(NSInteger)row
                          withType:(NSInteger)type {
-    NSLog(@"section:%ld,row:%ld",(long)section,(long)row);
     if (type == 201){
-        //文字
+        //添加文字
         RMEditContentViewController * editContentCtl = [[RMEditContentViewController alloc] init];
         editContentCtl.delegate = self;
         editContentCtl.modalPresentationStyle = UIModalPresentationCustom;
         animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:editContentCtl];
         
-//        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:cellRow inSection:2];
-//        RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
-
-//        editContentCtl.text = cell.textContent.text;
-        
         editContentCtl.sectionTag = 2;
         editContentCtl.rowTag = cellRow;        //将要在此行增加文字,也是新增加的行
         editContentCtl.mTitle = @"内容";
+        editContentCtl.operationType = @"添加内容";
+        editContentCtl.operationStr = @"添加";
+        
         animator.dragable = NO;
         animator.bounces = NO;
         animator.behindViewAlpha = 0.5f;
@@ -111,13 +114,272 @@
         editContentCtl.transitioningDelegate = animator;
         [self presentViewController:editContentCtl animated:YES completion:nil];
     }else{
-        //图片
-        NSLog(@"图片 section::%ld, row:%ld type:%ld",(long)section,(long)row,(long)type);
-        
-        cellImgCount ++;
-        [typeIdentifierArr addObject:@"img"];
+        //添加图片
+        if (cellImgCount >= 8){
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"图片已经8张啦！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+            return ;
+        }
+        UIActionSheet *sheet = nil;
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            sheet  = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+        }else{
+            sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+        }
+        sheet.tag = 301;
+        [sheet showInView:self.view];
     }
 }
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (actionSheet.tag) {
+        case 301:{
+            //添加图片
+            NSUInteger sourceType = 0;
+            // 判断是否支持相机
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                switch (buttonIndex) {
+                    case 0:{
+                        // 相机
+                        sourceType = UIImagePickerControllerSourceTypeCamera;
+                        break;
+                    }
+                    case 1:{
+                        // 相册
+                        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                        break;
+                    }
+                    case 2:{
+                        // 取消
+                        return;
+                    }
+                }
+            } else {
+                if (buttonIndex == 1) {
+                    return;
+                } else {
+                    sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                }
+            }
+            // 跳转到相机或相册页面
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.delegate = self;
+            imagePickerController.allowsEditing = YES;
+            imagePickerController.sourceType = sourceType;
+            [self presentViewController:imagePickerController animated:YES completion:^{
+            }];
+            break;
+        }
+        case 302:{
+            //编辑文字
+            switch (buttonIndex) {
+                case 0:{
+                    //修改本段文字
+                    RMEditContentViewController * editContentCtl = [[RMEditContentViewController alloc] init];
+                    editContentCtl.delegate = self;
+                    editContentCtl.modalPresentationStyle = UIModalPresentationCustom;
+                    animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:editContentCtl];
+                    
+                    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:willOperationCellRow inSection:2];
+                    RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
+                    
+                    editContentCtl.mTitle = @"内容";
+                    editContentCtl.operationType = @"修改文字";
+                    editContentCtl.operationStr = @"修改";
+                    editContentCtl.operationCellRow = willOperationCellRow;
+                    editContentCtl.text = cell.textContent.text;
+                    
+                    animator.dragable = NO;
+                    animator.bounces = NO;
+                    animator.behindViewAlpha = 0.5f;
+                    animator.behindViewScale = 0.5f;
+                    animator.transitionDuration = 0.7f;
+                    animator.direction = ZFModalTransitonDirectionLeft;
+                    editContentCtl.transitioningDelegate = animator;
+                    [self presentViewController:editContentCtl animated:YES completion:nil];
+                    break;
+                }
+                case 1:{
+                    //删除本段文字
+                    [dataArr removeObjectAtIndex:willOperationCellRow];
+                    [typeIdentifierArr removeObjectAtIndex:willOperationCellRow];
+                    cellTextCount -- ;
+                    cellRow --;
+                    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:willOperationCellRow inSection:2];
+                    [mTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:YES];
+                    break;
+                }
+                case 2:{
+                    //在下面插入图片
+                    if (cellImgCount >= 8){
+                        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"图片已经8张啦！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                        [alert show];
+                        return ;
+                    }
+                    UIActionSheet *sheet = nil;
+                    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                        sheet  = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+                    }else{
+                        sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+                    }
+                    sheet.tag = 301;
+                    [sheet showInView:self.view];
+                    isInsertImage = YES;
+                    break;
+                }
+                case 3:{
+                    //在下面插入文字
+                    RMEditContentViewController * editContentCtl = [[RMEditContentViewController alloc] init];
+                    editContentCtl.delegate = self;
+                    editContentCtl.modalPresentationStyle = UIModalPresentationCustom;
+                    animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:editContentCtl];
+                    
+                    editContentCtl.mTitle = @"内容";
+                    editContentCtl.operationType = @"插入文字";
+                    editContentCtl.operationStr = @"插入";
+                    editContentCtl.operationCellRow = willOperationCellRow+1;         //将要在此行的下一行插入文字
+
+                    animator.dragable = NO;
+                    animator.bounces = NO;
+                    animator.behindViewAlpha = 0.5f;
+                    animator.behindViewScale = 0.5f;
+                    animator.transitionDuration = 0.7f;
+                    animator.direction = ZFModalTransitonDirectionLeft;
+                    editContentCtl.transitioningDelegate = animator;
+                    [self presentViewController:editContentCtl animated:YES completion:nil];
+                    break;
+                }
+                case 4:{
+                    //取消
+                    
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case 303:{
+            //编辑图片
+            switch (buttonIndex) {
+                case 0:{
+                    //替换图片
+                    UIActionSheet *sheet = nil;
+                    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                        sheet  = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+                    }else{
+                        sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+                    }
+                    sheet.tag = 301;
+                    [sheet showInView:self.view];
+                    isReplaceImage = YES;
+                    break;
+                }
+                case 1:{
+                    //删除图片
+                    [dataArr removeObjectAtIndex:willOperationCellRow];
+                    [typeIdentifierArr removeObjectAtIndex:willOperationCellRow];
+                    cellRow --;
+                    cellImgCount --;
+                    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:willOperationCellRow inSection:2];
+                    [mTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:YES];
+                    break;
+                }
+                case 2:{
+                    //在下面插入图片
+                    if (cellImgCount >= 8){
+                        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"图片已经8张啦！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                        [alert show];
+                        return ;
+                    }
+                    UIActionSheet *sheet = nil;
+                    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                        sheet  = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+                    }else{
+                        sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+                    }
+                    sheet.tag = 301;
+                    [sheet showInView:self.view];
+                    isInsertImage = YES;
+                    break;
+                }
+                case 3:{
+                    //在下面插入文字
+                    RMEditContentViewController * editContentCtl = [[RMEditContentViewController alloc] init];
+                    editContentCtl.delegate = self;
+                    editContentCtl.modalPresentationStyle = UIModalPresentationCustom;
+                    animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:editContentCtl];
+                    
+                    editContentCtl.mTitle = @"内容";
+                    editContentCtl.operationType = @"插入文字";
+                    editContentCtl.operationStr = @"插入";
+                    editContentCtl.operationCellRow = willOperationCellRow+1;         //将要在此行的下一行插入文字
+                    
+                    animator.dragable = NO;
+                    animator.bounces = NO;
+                    animator.behindViewAlpha = 0.5f;
+                    animator.behindViewScale = 0.5f;
+                    animator.transitionDuration = 0.7f;
+                    animator.direction = ZFModalTransitonDirectionLeft;
+                    editContentCtl.transitioningDelegate = animator;
+                    [self presentViewController:editContentCtl animated:YES completion:nil];
+                    break;
+                }
+                case 4:{
+                    //取消
+                    
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:^{
+    }];
+    UIImage* image = nil;
+    image = [info objectForKey: UIImagePickerControllerEditedImage];
+    NSData * data = UIImageJPEGRepresentation(image, 0.5);
+    image = [UIImage imageWithData:data];
+    
+    if (isInsertImage){
+        //插入
+        [dataArr insertObject:image atIndex:willOperationCellRow + 1];
+        [typeIdentifierArr insertObject:@"img" atIndex:willOperationCellRow + 1];
+        cellRow ++;
+        cellImgCount ++;
+        [mTableView reloadData];
+    }else if (isReplaceImage){
+        //替换
+        [dataArr removeObjectAtIndex:willOperationCellRow];
+        [dataArr insertObject:image atIndex:willOperationCellRow];
+        [mTableView reloadData];
+    }else{
+        //添加
+        [dataArr addObject:image];
+        [typeIdentifierArr addObject:@"img"];
+        cellRow ++;
+        cellImgCount ++;
+        [mTableView reloadData];
+    }
+    
+    isReplaceImage = NO;
+    isInsertImage = NO;
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
+#pragma mark - UITableViewDataSource UITableViewDelegate
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return [headerTitleArr objectAtIndex:section];
@@ -150,7 +412,6 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
         }
-        
         return cell;
     }else if (indexPath.section == 1){
         static NSString * cellIdentifier = @"StartLongPostingIdentifier_2";
@@ -167,7 +428,17 @@
             cell.backgroundColor = [UIColor clearColor];
             cell.delegate = self;
         }
-        
+        if ([titleContent isEqualToString:@""]){
+            //标题无内容
+            cell.editTitleBtn.backgroundColor = [UIColor colorWithRed:0.27 green:0.6 blue:0.3 alpha:1];
+            [cell.editTitleBtn setTitle:@"请写帖子标题" forState:UIControlStateNormal];
+            cell.editTitleDisplay.backgroundColor = [UIColor clearColor];
+        }else{
+            //标题有内容
+            cell.editTitleBtn.backgroundColor = [UIColor clearColor];
+            [cell.editTitleBtn setTitle:@"" forState:UIControlStateNormal];
+            cell.editTitleDisplay.text = titleContent;
+        }
         return cell;
     }else{
         static NSString * cellIdentifier = @"StartLongPostingIdentifier_3";
@@ -199,8 +470,8 @@
         if ([[typeIdentifierArr objectAtIndex:indexPath.row] isEqualToString:@"text"]){
             [cell adjustsTextContentFrameWithText:[dataArr objectAtIndex:indexPath.row]];
             cell.contentIdentifier = @"text";
-        }else{
-            
+        }else{            
+            [cell adjustsImageContentFrameWithImage:[dataArr objectAtIndex:indexPath.row]];
             cell.contentIdentifier = @"image";
         }
         return cell;
@@ -214,7 +485,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
-    NSLog(@"at row:%ld,cell.contentIdentifier:%@",(long)indexPath.row,cell.contentIdentifier);
+    UIActionSheet * sheet = nil;
+    if ([cell.contentIdentifier isEqualToString:@"text"]){
+        //编辑文字
+        sheet  = [[UIActionSheet alloc] initWithTitle:@"编辑文字" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"修改本段文字", @"删除本段文字", @"在下面插入图片", @"在下面插入文字", nil];
+        sheet.tag = 302;
+    }else{
+        //编辑图片
+        sheet  = [[UIActionSheet alloc] initWithTitle:@"编辑图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"替换图片", @"删除图片", @"在下面插入图片", @"在下面插入文字", nil];
+        sheet.tag = 303;
+    }
+    willOperationCellRow = indexPath.row;       // 将要操作cell 的行数
+    [sheet showInView:self.view];
 }
 
 /**
@@ -230,6 +512,8 @@
     RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
     
     editContentCtl.mTitle = @"标题";
+    editContentCtl.operationType = @"添加标题";
+    editContentCtl.operationStr = @"添加";
     editContentCtl.sectionTag = 1;
     editContentCtl.rowTag = 0;
     editContentCtl.text = cell.editTitleDisplay.text;
@@ -246,11 +530,17 @@
 
 /**
  *  @method     获取标题 及 内容的文字
+ *  @param      content                     编辑的内容
+ *  @param      section                     组
+ *  @param      row                         行
+ *  @param      operationType               将要操作的类型（修改、删除、插入文字、插入图片、取消、添加标题、添加内容）
+ *  @param      operationRow                操作的行数
  */
 - (void)getEditContent:(NSString *)content
         withSectionTag:(NSInteger)section
-            withRowTag:(NSInteger)row {
-    
+            withRowTag:(NSInteger)row
+     withOperationType:(NSString *)operationType
+  withOperationCellRow:(NSInteger)operationRow {
     if (section == 1){
         //标题
         if (content.length == 0 && section == 1){
@@ -260,22 +550,39 @@
             cell.editTitleDisplay.text = content;
             cell.editTitleBtn.backgroundColor = [UIColor clearColor];
             [cell.editTitleBtn setTitle:@"" forState:UIControlStateNormal];
+            titleContent = content;
         }
     }else{
         //内容
+        if ([operationType isEqualToString:@"取消"]){
+            
+            return ;
+        }
+ 
         if (content.length == 0){
             NSLog(@"字符串为空");
         }else{
-            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-            RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
-            [cell adjustsTextContentFrameWithText:content];
-            
-            [dataArr addObject:content];
-            
-            cellTextCount ++;
-            cellRow ++;
-            [typeIdentifierArr addObject:@"text"];
-            [mTableView reloadData];
+            if ([operationType isEqualToString:@"添加内容"]){
+                [dataArr addObject:content];
+                cellTextCount ++;
+                cellRow ++;
+                [typeIdentifierArr addObject:@"text"];
+                [mTableView reloadData];
+            }else if ([operationType isEqualToString:@"修改文字"]){
+                [dataArr removeObjectAtIndex:operationRow];
+                [dataArr insertObject:content atIndex:operationRow];
+                [mTableView reloadData];
+            }else if ([operationType isEqualToString:@"插入图片"]){
+                
+            }else if ([operationType isEqualToString:@"插入文字"]){
+                [dataArr insertObject:content atIndex:operationRow];
+                cellTextCount ++;
+                cellRow ++;
+                [typeIdentifierArr addObject:@"text"];
+                [mTableView reloadData];
+            }else {
+                NSLog(@"获取标题 及 内容的文字 other error");
+            }
         }
     }
 }
@@ -288,11 +595,30 @@
         }
         case 2:{
             NSLog(@"发布");
+            [self request];
             break;
         }
             
         default:
             break;
+    }
+}
+
+#pragma mark - 数据提交
+
+- (void)request {
+    NSIndexPath * indexPath_1 = [NSIndexPath indexPathForRow:0 inSection:1];
+    RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath_1];
+    NSLog(@"标题 cell.editTitleDisplay.text:%@",cell.editTitleDisplay.text);
+    
+    for (NSInteger i=0; i<cellRow; i++) {
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:2];
+        RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
+        if ([[typeIdentifierArr objectAtIndex:indexPath.row] isEqualToString:@"text"]){
+            NSLog(@"content text:%@ 行数:%ld",cell.textContent.text,(long)i);
+        }else{
+            NSLog(@"content img:%@ 行数:%ld",cell.imageContent,(long)i);
+        }
     }
 }
 

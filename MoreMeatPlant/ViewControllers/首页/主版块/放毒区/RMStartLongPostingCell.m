@@ -48,9 +48,10 @@
 }
 
 - (void)adjustsImageContentFrameWithImage:(UIImage *)image {
-    NSLog(@"width:%ld width:%ld",(long)image.size.width,(long)image.size.height);
     self.imageContent.image = image;
-    self.frame = CGRectMake(0, 0, kScreenWidth, image.size.height);
+    CGFloat height = image.size.height/image.size.width * kScreenWidth;
+    self.imageContent.frame = CGRectMake(0, 0, kScreenWidth, height);
+    self.frame = CGRectMake(0, 0, kScreenWidth, height + 3);
 }
 
 @end
