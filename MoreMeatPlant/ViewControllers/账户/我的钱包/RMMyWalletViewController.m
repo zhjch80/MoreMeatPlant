@@ -90,6 +90,15 @@
             cell.chargeRecordBtn.tag = 101311;
             [cell.chargeBtn addTarget:self action:@selector(chargeAction:) forControlEvents:UIControlEventTouchDown];
             [cell.turnBtn addTarget:self action:@selector(sureTurnAction:) forControlEvents:UIControlEventTouchDown];
+            if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 1){
+                cell.huabi_desc.text = @"用于宝贝兑换";
+                cell.zhuanBtnHeight.constant = 0;
+                cell.zhuanFieldHeight.constant = 0;
+                cell.turnBtn.hidden = YES;
+            }else{
+                
+            }
+            
         }
         cell.yu_eL.text = yu_e;
         cell.hua_biL.text = hua_b;
@@ -111,7 +120,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
-        return 133.f;
+        if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 1){
+            return 133.f - 44;
+        }else{
+            return 133.f;
+        }
+        
     }
     else{
         return 334.f;

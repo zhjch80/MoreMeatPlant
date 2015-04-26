@@ -40,7 +40,9 @@
 #import "RMSeeLogisticsViewController.h"
 #import "RMShareClient.h"
 #define GeneralMember @"1"
-@interface RMAccountViewController ()<RMVPImageCropperDelegate>
+@interface RMAccountViewController ()<RMVPImageCropperDelegate>{
+    UIImageView * nav_imageView;
+}
 
 @end
 
@@ -52,6 +54,35 @@
     if(_model == nil){
         _model = [[RMPublicModel alloc]init];
     }
+    
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 2){
+        if(nav_imageView == nil){
+            nav_imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 84+3)];
+            [nav_imageView setImage:[UIImage imageNamed:@"corp_member_nav_bg"]];
+            [self.view addSubview:nav_imageView];
+            
+            UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btn setTitle:@"注销" forState:UIControlStateNormal];
+            btn.frame = CGRectMake(kScreenWidth-80, 0, 80, 30);
+            btn.center = CGPointMake(btn.center.x, 20+44/2);
+            btn.titleLabel.font = FONT_1(14);
+            [btn addTarget:self action:@selector(navImageViewRightBtnAction:) forControlEvents:UIControlEventTouchDown];
+            [nav_imageView addSubview:btn];
+            
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];
+            label.text = @"账户";
+            label.textAlignment = NSTextAlignmentCenter;
+            label.font = FONT_3(16);
+            label.textColor = [UIColor whiteColor];
+            label.center = CGPointMake(nav_imageView.frame.size.width/2, 20+44/2);
+            [nav_imageView addSubview:label];
+        }
+        nav_imageView.hidden = NO;
+    }else{
+        nav_imageView.hidden = YES;
+    }
+    //    corp_member_nav_bg
+    
     if(!isShow){
         [self loadInfo];
     }
@@ -68,6 +99,8 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(replaceHeaderImg:)];
     [_headerImgV addGestureRecognizer:tap];
     _headerImgV.userInteractionEnabled = YES;
+    
+
     
     functitleArray = [[NSMutableArray alloc]init];
     funcimgArray = [[NSMutableArray alloc]init];
@@ -333,6 +366,12 @@
                         mywallet.billcallback = ^(UIButton * sender){
                             //跳转到账单界面push
                             RMTransactionRecordsViewController * record = [[RMTransactionRecordsViewController alloc]initWithNibName:@"RMTransactionRecordsViewController" bundle:nil];
+                            if(sender.tag == 101311){
+                                record.type = @"1";
+                            }else{
+                                
+                            }
+
                             [self.navigationController pushViewController:record animated:YES];
                         };
                         mywallet.top_upcallback = ^(NSString * content_money){
@@ -547,6 +586,13 @@
         default:
             break;
     }
+}
+
+- (void)navImageViewRightBtnAction:(UIButton *)sender{
+    [self resignUserLogin];
+    AppDelegate * delegate = [[UIApplication sharedApplication] delegate];
+    [delegate loadMainViewControllersWithType:[[RMUserLoginInfoManager loginmanager] state]];
+    [delegate tabSelectController:2];
 }
 
 - (void)resignUserLogin{

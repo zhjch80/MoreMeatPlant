@@ -211,13 +211,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x8d44;&#x6599;/RMUserInfoViewController.m"
-            timestampString = "451727813.114173"
+            filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
+            timestampString = "451741592.876323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "-closeAction:"
+            startingLineNumber = "1399"
+            endingLineNumber = "1399"
+            landmarkName = "+myCollectionRequestWithUser:Pwd:Type:Page:andCallBack:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
+            timestampString = "451741592.876323"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1401"
+            endingLineNumber = "1401"
+            landmarkName = "+myCollectionRequestWithUser:Pwd:Type:Page:andCallBack:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

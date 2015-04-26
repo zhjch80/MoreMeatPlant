@@ -1368,21 +1368,26 @@
             
             if([type isEqualToString:@"1"]){//帖子
                 NSDictionary * diction = OBJC([dataDic objectForKey:@"note"]);
-                model.auto_id = OBJC_Nil([diction objectForKey:@"auto_id"]);
-                model.content_name = OBJC_Nil([diction objectForKey:@"content_name"]);
-                model.content_type = OBJC_Nil([diction objectForKey:@"content_type"]);
-                model.content_class = OBJC_Nil([diction objectForKey:@"content_class"]);
-                model.content_course = OBJC_Nil([diction objectForKey:@"content_course"]);
-                
-                model.content_collect = OBJC_Nil([diction objectForKey:@"content_collect"]);
-                model.is_collect = OBJC_Nil([diction objectForKey:@"is_collect"]);
-                model.content_review = OBJC_Nil([diction objectForKey:@"content_review"]);
-                model.is_review = OBJC_Nil([diction objectForKey:@"is_review"]);
-                model.member_name = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"member_name"]);
-                model.content_face = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"content_face"]);
-                model.content_gps = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"content_gps"]);
-                
-                model.imgs = [diction objectForKey:@"imgs"];
+                if([diction isKindOfClass:[NSDictionary class]]){
+                    model.auto_id = OBJC_Nil([diction objectForKey:@"auto_id"]);
+                    model.content_name = OBJC_Nil([diction objectForKey:@"content_name"]);
+                    model.content_type = OBJC_Nil([diction objectForKey:@"content_type"]);
+                    model.content_class = OBJC_Nil([diction objectForKey:@"content_class"]);
+                    model.content_course = OBJC_Nil([diction objectForKey:@"content_course"]);
+                    
+                    model.content_collect = OBJC_Nil([diction objectForKey:@"content_collect"]);
+                    model.is_collect = OBJC_Nil([diction objectForKey:@"is_collect"]);
+                    model.content_review = OBJC_Nil([diction objectForKey:@"content_review"]);
+                    model.is_review = OBJC_Nil([diction objectForKey:@"is_review"]);
+                    model.member_name = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"member_name"]);
+                    model.content_face = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"content_face"]);
+                    model.content_gps = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"content_gps"]);
+                    
+                    model.imgs = [diction objectForKey:@"imgs"];
+                }else{
+                    
+                }
+               
                 
             }else if ([type isEqualToString:@"2"]){//店铺
                 model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
@@ -1391,6 +1396,7 @@
                 model.content_face = OBJC_Nil([OBJC_Nil([dataDic objectForKey:@"corp"]) objectForKey:@"content_face"]);
             }else if ([type isEqualToString:@"3"]){//宝贝
                 if (![[dataDic objectForKey:@"product"] isKindOfClass:[NSDictionary class]]){
+                    
                 }else{
                     NSDictionary * diction = OBJC_Nil([dataDic objectForKey:@"product"]);
                     model.auto_id = OBJC_Nil([diction objectForKey:@"auto_id"]);

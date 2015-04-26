@@ -15,5 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *hua_biL;
 @property (weak, nonatomic) IBOutlet UITextField *yue_Z_huabiTextField;
 @property (weak, nonatomic) IBOutlet UIButton *turnBtn;
+@property (weak, nonatomic) IBOutlet UILabel *huabi_desc;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *zhuanFieldHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *zhuanBtnHeight;
 
 @end

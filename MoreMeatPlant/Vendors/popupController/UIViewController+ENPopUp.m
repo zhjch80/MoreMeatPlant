@@ -78,7 +78,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     JWBlurView *bluredView = [[JWBlurView alloc] initWithFrame:overlayView.bounds];
     bluredView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     bluredView.tag = kENPopUpBluredViewTag;
-    [bluredView setBlurAlpha:.0f];
+    [bluredView setBlurAlpha:0.5f];
     [bluredView setAlpha:0.3f];
     [bluredView setBlurColor:[UIColor blackColor]];
     bluredView.backgroundColor = [UIColor blackColor];

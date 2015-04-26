@@ -141,11 +141,14 @@
                 <outlet property="chargeBtn" destination="Sjb-NV-qpc" id="4hs-qz-GYe"/>
                 <outlet property="chargeRecordBtn" destination="MsY-yg-3hL" id="nAq-FM-XZj"/>
                 <outlet property="hua_biL" destination="sdE-PE-ALw" id="m5y-rn-rt3"/>
+                <outlet property="huabi_desc" destination="U9K-mF-nBM" id="mGm-yD-H5N"/>
                 <outlet property="turnBtn" destination="PZ5-nY-3Ui" id="bK6-K5-1jk"/>
                 <outlet property="yu_eL" destination="Jcr-uc-9ny" id="qjA-TK-S17"/>
                 <outlet property="yue_Z_huabiTextField" destination="fym-63-gYD" id="AX7-EF-Esl"/>
+                <outlet property="zhuanBtnHeight" destination="BSa-Pp-TVe" id="48D-gD-k11"/>
+                <outlet property="zhuanFieldHeight" destination="MQh-lI-e3l" id="9ul-86-zq6"/>
             </connections>
-            <point key="canvasLocation" x="235" y="211.5"/>
+            <point key="canvasLocation" x="215" y="210.5"/>
         </tableViewCell>
     </objects>
     <resources>
