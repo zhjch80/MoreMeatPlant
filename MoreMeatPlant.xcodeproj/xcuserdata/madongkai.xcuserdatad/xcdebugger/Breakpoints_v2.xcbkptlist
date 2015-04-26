@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x9996;&#x9875;/&#x4e3b;&#x7248;&#x5757;/&#x4e00;&#x8089;&#x4e00;&#x62cd;/&#x4e00;&#x8089;&#x4e00;&#x62cd;&#x8be6;&#x60c5;/RMPlantWithSaleDetailsViewController.m"
-            timestampString = "450509636.293172"
+            timestampString = "451744441.157007"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "461"
-            endingLineNumber = "461"
+            startingLineNumber = "475"
+            endingLineNumber = "475"
             landmarkName = "-addGoodsToShopCar"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,38 +202,6 @@
             startingLineNumber = "77"
             endingLineNumber = "77"
             landmarkName = "-setBlurAlpha:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
-            timestampString = "451741592.876323"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1399"
-            endingLineNumber = "1399"
-            landmarkName = "+myCollectionRequestWithUser:Pwd:Type:Page:andCallBack:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
-            timestampString = "451741592.876323"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1401"
-            endingLineNumber = "1401"
-            landmarkName = "+myCollectionRequestWithUser:Pwd:Type:Page:andCallBack:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

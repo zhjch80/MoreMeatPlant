@@ -100,7 +100,6 @@
     [_headerImgV addGestureRecognizer:tap];
     _headerImgV.userInteractionEnabled = YES;
     
-
     
     functitleArray = [[NSMutableArray alloc]init];
     funcimgArray = [[NSMutableArray alloc]init];

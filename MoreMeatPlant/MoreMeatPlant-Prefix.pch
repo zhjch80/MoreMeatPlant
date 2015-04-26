@@ -26,5 +26,7 @@
 //    #import "EaseMob.h"
 #import "EMSDKFull.h"
 
+#import "CONST.h"
+
 #endif
 

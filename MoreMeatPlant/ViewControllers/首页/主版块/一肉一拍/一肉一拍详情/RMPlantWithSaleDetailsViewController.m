@@ -400,6 +400,10 @@
         }
         case 105:{
             NSLog(@"联系掌柜auto_id:%@",self.auto_id);
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+            [dele tabSelectController:3];
+            [dele.talkMoreCtl._chatListVC jumpToChatView:dataModel.member_id];
             break;
         }
             
@@ -418,13 +422,22 @@
         if(success){
             RMPublicModel * model = object;
             if(model.status){
+                [self addGoodsToShopCar];
                 if(isAddShopCar){//加入购物车
-                    [self addGoodsToShopCar];
+                    
                 }else{//立即购买
                     [self buyNow];
                 }
             }else{
-                
+                if( [RMProductModel removeDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",self.auto_id]])
+                {
+                    
+                    if([RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",dataModel.member_id] orderby:@"corp_id"] == nil)
+                    {
+                        [RMCorpModel removeDbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",dataModel.member_id] ];
+                    }
+                }
+
             }
             [self showHint:model.msg];
         }else{
@@ -445,6 +458,7 @@
     product.express = [dataModel.is_sf boolValue]?@"1":@"2";
     product.corp_id = dataModel.member_id;
     product.content_num = 1;
+    product.plante = @"1";
     
     NSLog(@"%@",product);
     

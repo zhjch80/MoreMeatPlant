@@ -32,6 +32,7 @@
 #import "DXMessageToolBar.h"
 #import "DXChatBarMoreView.h"
 #import "ChatViewController+Category.h"
+#import "IQKeyboardManager.h"
 #define KPageCount 20
 
 @interface ChatViewController ()<UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SRRefreshDelegate, IChatManagerDelegate, DXChatBarMoreViewDelegate, DXMessageToolBarDelegate, LocationViewDelegate, IDeviceManagerDelegate>
@@ -98,6 +99,11 @@
         self.edgesForExtendedLayout =  UIRectEdgeNone;
     }
     
+    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[ChatViewController class]];
+    
+    [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[ChatViewController class]];
+    
+//    self.view.frame = CGRectMake(0, 0, , <#CGFloat height#>)
     
 //    UIButton * leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
 //    leftBarButton.frame = CGRectMake(0, 0, 44, 44);

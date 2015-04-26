@@ -225,7 +225,11 @@
         if ([model.imgs isKindOfClass:[NSNull class]]){
             cell.threeImg.image = [UIImage imageNamed:@"img_default.jpg"];
         }else{
-            [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
+            if ([model.imgs count] == 0){
+                cell.threeImg.image = [UIImage imageNamed:@"img_default.jpg"];
+            }else{
+                [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
+            }
         }
         
         cell.threeImg.identifierString = model.auto_id;
