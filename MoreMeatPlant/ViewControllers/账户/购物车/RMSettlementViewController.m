@@ -138,7 +138,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([addressArray count]!=0){
+    if([addressArray count]!=0 && indexPath.row < [addressArray count]){
         _model = [addressArray objectAtIndex:indexPath.row];
         [tableView reloadData];
         if(self.selectAddress_callback){

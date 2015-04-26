@@ -1670,6 +1670,7 @@
         NSDictionary * dataDic = OBJC_Nil([dic objectForKey:@"data"]);
         model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
         model.is_redirect = OBJC_Nil([dataDic objectForKey:@"is_redirect"]);
+        NSLog(@"%@",dic);
         if(block){
             block(nil,YES,model);
         }

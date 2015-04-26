@@ -387,8 +387,7 @@
     for(NSDictionary *dic in dataArray){
         for(RMProductModel * model in [dic objectForKey:@"products"]){
             auto_id = [auto_id stringByAppendingString:[NSString stringWithFormat:@",%@",model.auto_id]];
-            num = [num stringByAppendingString:[NSString stringWithFormat:@",%@",model.auto_id]];
-            
+            num = [num stringByAppendingString:[NSString stringWithFormat:@",%ld",(long)model.content_num]];
         }
         RMProductModel * lastmodel = [[dic objectForKey:@"products"] objectAtIndex:0];
         express = [express stringByAppendingString:[NSString stringWithFormat:@",%@",lastmodel.express]];
@@ -407,7 +406,7 @@
     [dict setValue:parameterModel.content_linkname forKey:@"frm[content_linkname]"];
     [dict setValue:parameterModel.content_mobile forKey:@"frm[content_mobile]"];
     [dict setValue:parameterModel.content_address forKey:@"frm[content_address]"];
-    
+    NSLog(@"%@",dict);
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager commitOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] withDic:dict andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -417,6 +416,8 @@
 //                if([parameterModel.payment_id isEqualToString:@"2"]){
 //                    
 //                }
+                [settle dismissPopUpViewControllerWithcompletion:nil];
+                
                 if([model.is_redirect boolValue]){
                     RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
                     alipay.is_direct = NO;
@@ -427,6 +428,19 @@
                     RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
                     [self.navigationController pushViewController:order animated:YES];
                 }
+                
+                for(RMProductModel * model in [RMProductModel allDbObjects]){
+                    if( [RMProductModel removeDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",model.auto_id]])
+                    {
+                        
+                        if([RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",model.corp_id] orderby:@"corp_id"] == nil)
+                        {
+                            [RMCorpModel removeDbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",model.corp_id] ];
+                        }
+                    }
+                }
+                
+                
             }else{
             
             }
