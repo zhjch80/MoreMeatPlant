@@ -18,13 +18,15 @@
             <string>FZZHJW--GB1-0</string>
             <string>FZZHJW--GB1-0</string>
             <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RMCorpInfoEditTableViewCell" rowHeight="621" id="KGk-i7-Jjw" customClass="RMCorpInfoEditTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="621"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RMCorpInfoEditTableViewCell" rowHeight="649" id="KGk-i7-Jjw" customClass="RMCorpInfoEditTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="649"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -64,7 +66,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="6xg-og-ZEs" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入负责人" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="6xg-og-ZEs" customClass="RMBaseTextField">
                         <rect key="frame" x="103" y="172" width="174" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="CBg-D5-BDM"/>
@@ -73,12 +75,11 @@
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEf-SQ-ZAJ">
-                        <rect key="frame" x="98" y="564" width="125" height="30"/>
+                        <rect key="frame" x="98" y="609" width="125" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="1bR-w0-mgx"/>
                             <constraint firstAttribute="height" constant="30" id="4lH-gD-Dxf"/>
                             <constraint firstAttribute="width" constant="125" id="Ovx-3Q-AxE"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="SJ5-MN-1pd"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
                         <state key="normal" title="确认修改" backgroundImage="fbbb_btn_bg_red.png">
@@ -116,15 +117,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vb7-0L-7VB" customClass="RMBaseTextField">
-                        <rect key="frame" x="103" y="106" width="174" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="25" id="jre-2P-TsD"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="bid-jH-lnH" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入支付宝账号" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="bid-jH-lnH" customClass="RMBaseTextField">
                         <rect key="frame" x="103" y="139" width="174" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="aHo-pA-xb9"/>
@@ -179,7 +172,7 @@
                             <constraint firstAttribute="height" constant="70" id="cBL-SR-ifa"/>
                         </constraints>
                     </imageView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zxh-lO-0Fm" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入电话" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zxh-lO-0Fm" customClass="RMBaseTextField">
                         <rect key="frame" x="103" y="205" width="174" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="QgJ-KS-iNx"/>
@@ -187,8 +180,49 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="验证码：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2w-mA-SIL">
+                        <rect key="frame" x="43" y="562" width="60" height="18.5"/>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入验证码" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="SWM-Yg-yz0" customClass="RMBaseTextField">
+                        <rect key="frame" x="103" y="559" width="99" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="JZV-Kq-Ws2"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sj6-XF-qF7" customClass="JKCountDownButton">
+                        <rect key="frame" x="207" y="559.5" width="70" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="IdA-nT-WhG"/>
+                            <constraint firstAttribute="width" constant="51" id="J8A-1v-cii"/>
+                            <constraint firstAttribute="width" constant="70" id="XWi-hv-T5t"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="12"/>
+                        <state key="normal" title="发送验证码" backgroundImage="login_btn_bg.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="J8A-1v-cii"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入手机号" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vb7-0L-7VB" customClass="RMBaseTextField">
+                        <rect key="frame" x="103" y="106" width="174" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="jre-2P-TsD"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="e2w-mA-SIL" firstAttribute="centerY" secondItem="sj6-XF-qF7" secondAttribute="centerY" id="30t-oS-Efl"/>
+                    <constraint firstItem="LEf-SQ-ZAJ" firstAttribute="top" secondItem="sj6-XF-qF7" secondAttribute="bottom" constant="25" id="4bP-2l-jw9"/>
                     <constraint firstItem="QLN-Zv-6Ix" firstAttribute="top" secondItem="TXg-qa-bf1" secondAttribute="top" id="8Jt-mJ-KqM"/>
                     <constraint firstItem="Vy3-aJ-PFf" firstAttribute="leading" secondItem="M8c-n4-3Es" secondAttribute="leading" id="8P9-4d-xGC"/>
                     <constraint firstItem="Z7o-lm-lAA" firstAttribute="trailing" secondItem="QLN-Zv-6Ix" secondAttribute="trailing" id="8ey-W4-gNp"/>
@@ -198,7 +232,10 @@
                     <constraint firstAttribute="centerX" secondItem="LEf-SQ-ZAJ" secondAttribute="centerX" id="Cs2-SX-Ol0"/>
                     <constraint firstItem="M8c-n4-3Es" firstAttribute="top" secondItem="Vy3-aJ-PFf" secondAttribute="bottom" constant="53" id="DML-cY-R44"/>
                     <constraint firstItem="Zxh-lO-0Fm" firstAttribute="top" secondItem="6xg-og-ZEs" secondAttribute="bottom" constant="8" id="EDN-Dv-7MB"/>
+                    <constraint firstItem="sj6-XF-qF7" firstAttribute="trailing" secondItem="Z7o-lm-lAA" secondAttribute="trailing" id="Ffl-UV-bge"/>
+                    <constraint firstItem="e2w-mA-SIL" firstAttribute="centerY" secondItem="SWM-Yg-yz0" secondAttribute="centerY" id="Gah-cg-YO2"/>
                     <constraint firstItem="QLN-Zv-6Ix" firstAttribute="leading" secondItem="TXg-qa-bf1" secondAttribute="trailing" constant="15" id="IoT-aQ-2jg"/>
+                    <constraint firstItem="sj6-XF-qF7" firstAttribute="leading" secondItem="SWM-Yg-yz0" secondAttribute="trailing" constant="5" id="JW8-sI-PgJ"/>
                     <constraint firstItem="Z7o-lm-lAA" firstAttribute="trailing" secondItem="Zxh-lO-0Fm" secondAttribute="trailing" id="KmL-xN-huu"/>
                     <constraint firstItem="6xg-og-ZEs" firstAttribute="top" secondItem="0fb-jn-arm" secondAttribute="bottom" constant="7" id="KxO-bn-Ssh"/>
                     <constraint firstItem="Z7o-lm-lAA" firstAttribute="trailing" secondItem="Vb7-0L-7VB" secondAttribute="trailing" id="LIi-5z-2g9"/>
@@ -206,11 +243,11 @@
                     <constraint firstItem="sbJ-Wf-4Kk" firstAttribute="top" secondItem="ofJ-4X-nVE" secondAttribute="bottom" constant="12" id="OhN-rd-AL7"/>
                     <constraint firstItem="Vy3-aJ-PFf" firstAttribute="leading" secondItem="TXg-qa-bf1" secondAttribute="leading" id="Opg-Dd-gdh"/>
                     <constraint firstItem="Zxh-lO-0Fm" firstAttribute="leading" secondItem="Q73-Gh-bP8" secondAttribute="trailing" id="SHl-sT-5Oj"/>
-                    <constraint firstItem="LEf-SQ-ZAJ" firstAttribute="top" secondItem="Sv9-EJ-VJc" secondAttribute="bottom" constant="20" id="TD3-LX-UjT"/>
                     <constraint firstItem="Z7o-lm-lAA" firstAttribute="trailing" secondItem="6xg-og-ZEs" secondAttribute="trailing" id="TIQ-K4-CSV"/>
                     <constraint firstItem="BFm-UT-qRe" firstAttribute="leading" secondItem="Q73-Gh-bP8" secondAttribute="leading" id="TaU-NV-J91"/>
                     <constraint firstItem="XZ8-C1-Ve4" firstAttribute="top" secondItem="s7I-Mf-skA" secondAttribute="bottom" constant="10.5" id="U8n-fz-G31"/>
                     <constraint firstItem="hb5-jH-0Pk" firstAttribute="top" secondItem="Z7o-lm-lAA" secondAttribute="bottom" constant="10" id="X2n-2r-mWe"/>
+                    <constraint firstItem="Sv9-EJ-VJc" firstAttribute="leading" secondItem="e2w-mA-SIL" secondAttribute="leading" id="XXP-1i-ck3"/>
                     <constraint firstItem="Z7o-lm-lAA" firstAttribute="top" secondItem="TXg-qa-bf1" secondAttribute="top" id="Y1j-vj-BXI"/>
                     <constraint firstItem="QLN-Zv-6Ix" firstAttribute="top" secondItem="TXg-qa-bf1" secondAttribute="top" id="Ydm-hb-NqW"/>
                     <constraint firstItem="Q73-Gh-bP8" firstAttribute="top" secondItem="sbJ-Wf-4Kk" secondAttribute="bottom" constant="15" id="aWz-dy-uKB"/>
@@ -232,6 +269,7 @@
                     <constraint firstItem="Z7o-lm-lAA" firstAttribute="trailing" secondItem="rx5-NI-vwr" secondAttribute="trailing" id="lRQ-Xs-HRA"/>
                     <constraint firstItem="Vb7-0L-7VB" firstAttribute="leading" secondItem="M8c-n4-3Es" secondAttribute="trailing" id="lh7-oB-THQ"/>
                     <constraint firstItem="Z7o-lm-lAA" firstAttribute="trailing" secondItem="bid-jH-lnH" secondAttribute="trailing" id="liv-7w-sXl"/>
+                    <constraint firstItem="SWM-Yg-yz0" firstAttribute="leading" secondItem="e2w-mA-SIL" secondAttribute="trailing" id="oSr-rp-c79"/>
                     <constraint firstItem="Sv9-EJ-VJc" firstAttribute="width" secondItem="Sv9-EJ-VJc" secondAttribute="height" multiplier="3:1" id="pav-k3-IAd"/>
                     <constraint firstItem="bid-jH-lnH" firstAttribute="top" secondItem="Vb7-0L-7VB" secondAttribute="bottom" constant="8" id="qVl-xR-VZI"/>
                     <constraint firstItem="Vy3-aJ-PFf" firstAttribute="leading" secondItem="5h0-LA-Kgw" secondAttribute="leading" id="qZn-g9-KvL"/>
@@ -239,6 +277,7 @@
                     <constraint firstItem="ofJ-4X-nVE" firstAttribute="trailing" secondItem="Q73-Gh-bP8" secondAttribute="trailing" id="sAc-gz-P6H"/>
                     <constraint firstItem="Z7o-lm-lAA" firstAttribute="trailing" secondItem="0fb-jn-arm" secondAttribute="trailing" id="sUd-rp-L7v"/>
                     <constraint firstItem="Vy3-aJ-PFf" firstAttribute="leading" secondItem="BFm-UT-qRe" secondAttribute="leading" id="ujO-Id-gzS"/>
+                    <constraint firstItem="SWM-Yg-yz0" firstAttribute="top" secondItem="Sv9-EJ-VJc" secondAttribute="bottom" constant="15" id="wH1-B0-EU1"/>
                     <constraint firstItem="Vy3-aJ-PFf" firstAttribute="leading" secondItem="Sv9-EJ-VJc" secondAttribute="leading" id="wH3-hU-jpc"/>
                     <constraint firstItem="Vb7-0L-7VB" firstAttribute="top" secondItem="0fb-jn-arm" secondAttribute="bottom" constant="10" id="wet-38-Wq3"/>
                     <constraint firstItem="M8c-n4-3Es" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="111" id="wf9-Cj-jaT"/>
@@ -255,16 +294,18 @@
             <connections>
                 <outlet property="apliyT" destination="bid-jH-lnH" id="d8c-NU-Pyg"/>
                 <outlet property="card_photo" destination="s7I-Mf-skA" id="mib-WQ-7fR"/>
+                <outlet property="codeField" destination="SWM-Yg-yz0" id="1mK-5D-SHU"/>
                 <outlet property="content_address" destination="Z7o-lm-lAA" id="A1c-28-A8J"/>
                 <outlet property="content_face" destination="hb5-jH-0Pk" id="9qZ-Qw-tVT"/>
                 <outlet property="content_link" destination="6xg-og-ZEs" id="jvC-Cu-Hcd"/>
                 <outlet property="content_mobile" destination="Zxh-lO-0Fm" id="VgF-M2-4gJ"/>
                 <outlet property="corp_photo" destination="Sv9-EJ-VJc" id="JTr-Vn-jDf"/>
                 <outlet property="mobileT" destination="Vb7-0L-7VB" id="xcT-Kg-sVD"/>
+                <outlet property="sendBtn" destination="sj6-XF-qF7" id="tEg-BO-dyU"/>
                 <outlet property="signatureT" destination="0fb-jn-arm" id="mPg-Ay-qr1"/>
                 <outlet property="sureModifyBtn" destination="LEf-SQ-ZAJ" id="YVp-j3-FLF"/>
             </connections>
-            <point key="canvasLocation" x="315" y="317.5"/>
+            <point key="canvasLocation" x="351" y="327.5"/>
         </tableViewCell>
     </objects>
     <resources>
@@ -272,6 +313,7 @@
         <image name="444.png" width="1242" height="555"/>
         <image name="fbbb_btn_bg_red.png" width="678" height="90"/>
         <image name="fbbb_field_bg2.png" width="1024" height="144"/>
+        <image name="login_btn_bg.png" width="549" height="97"/>
         <image name="photo.png" width="500" height="531"/>
     </resources>
 </document>

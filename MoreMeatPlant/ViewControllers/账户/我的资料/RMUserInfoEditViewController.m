@@ -10,12 +10,21 @@
 #import "UIAlertView+Expland.h"
 #import "RMUserInfoEditTableViewCell.h"
 #import "RMCorpInfoEditTableViewCell.h"
-@interface RMUserInfoEditViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "RMVPImageCropper.h"
+@interface RMUserInfoEditViewController ()<UITableViewDelegate,UITableViewDataSource,RMVPImageCropperDelegate>{
+    NSURL * content_faceUrl;
+    NSURL * cardUrl;
+    NSURL * corpUrl;
+    
+    
+}
 
 @end
 
 @implementation RMUserInfoEditViewController
-
+@synthesize content_faceImg;
+@synthesize cardImg;
+@synthesize corpImg;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -30,9 +39,17 @@
 - (void)commit{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    if([[[RMUserLoginInfoManager loginmanager] isCorp] boolValue]){//店铺资料修改
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:@"2"]){//店铺资料修改
     
         RMCorpInfoEditTableViewCell * cell = (RMCorpInfoEditTableViewCell *)[_mtableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        
+        NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+        [dic setValue:cell.content_link.text forKey:@"content_linkname"];
+        [dic setValue:cell.content_mobile.text forKey:@"content_contact"];
+        [dic setValue:cell.content_address.text forKey:@"content_address"];
+        [dic setValue:content_faceUrl forKey:@"content_face"];
+        [dic setValue:cardUrl forKey:@"content_sfzimg"];
+        [dic setValue:corpUrl forKey:@"content_bjimg"];
         
         [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:cell.apliyT.text Signature:[cell.signatureT.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Dic:nil andCallBack:^(NSError *error, BOOL success, id object) {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -96,36 +113,75 @@
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([[[RMUserLoginInfoManager loginmanager] isCorp] boolValue]){
+    NSLog(@"%@",[[RMUserLoginInfoManager loginmanager] isCorp]);
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:@"1"]){
         RMUserInfoEditTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMUserInfoEditTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMUserInfoEditTableViewCell" owner:self options:nil] lastObject];
             [cell.sureModifyBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
-
+            [cell.sendBtn addTarget:self action:@selector(sendCodeAction:) forControlEvents:UIControlEventTouchDown];
+            
+            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectPhoto:)];
+            cell.content_face.tag = 1000;
+            [cell.content_face addGestureRecognizer:tap];
         }
         
         cell.signatureT.text = Str_Objc(__model.contentQm, @"什么也没写...");
-        cell.mobileT.text = __model.contentMobile;
+        cell.mobileT.text = __model.contentUser;
         cell.apliyT.text = __model.zfbNo;
-        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
+        if(content_faceImg == nil){
+            [cell.content_face setImage:[UIImage imageNamed:@"photo"]];
+        }else{
+            [cell.content_face setImage:content_faceImg];
+        }
+        
         return cell;
     }else{
         RMCorpInfoEditTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMCorpInfoEditTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMCorpInfoEditTableViewCell" owner:self options:nil] lastObject];
             [cell.sureModifyBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
-
+            cell.content_face.userInteractionEnabled = YES;
+            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectPhoto:)];
+            cell.content_face.tag = 1000;
+            [cell.content_face addGestureRecognizer:tap];
+            
+            UITapGestureRecognizer * tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectPhoto:)];
+            cell.card_photo.userInteractionEnabled = YES;
+            cell.card_photo.tag = 1001;
+            [cell.card_photo addGestureRecognizer:tap2];
+            
+            UITapGestureRecognizer * tap3 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectPhoto:)];
+            cell.corp_photo.userInteractionEnabled = YES;
+            cell.corp_photo.tag = 1002;
+            [cell.corp_photo addGestureRecognizer:tap3];
+            
+            [cell.sendBtn addTarget:self action:@selector(sendCodeAction:) forControlEvents:UIControlEventTouchDown];
         }
         cell.signatureT.text = Str_Objc(__model.contentQm, @"什么也没写...");
-        cell.mobileT.text = __model.contentMobile;
+        cell.mobileT.text = __model.contentUser;
         cell.apliyT.text = __model.zfbNo;
-        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
+        if(content_faceImg == nil){
+            [cell.content_face setImage:[UIImage imageNamed:@"photo"]];
+        }else{
+            [cell.content_face setImage:content_faceImg];
+        }
         
-        cell.content_link.text = __model.content_linkname;
-        cell.content_mobile.text = __model.content_mobile;
-        cell.content_address.text = __model.content_address;
-        [cell.card_photo sd_setImageWithURL:[NSURL URLWithString:__model.card_photo] placeholderImage:[UIImage imageNamed:@"444"]];
-        [cell.corp_photo sd_setImageWithURL:[NSURL URLWithString:__model.corp_photo] placeholderImage:[UIImage imageNamed:@"222"]];
+        cell.content_link.text = __model.contentLinkname;
+        cell.content_mobile.text = __model.contentContact;
+        cell.content_address.text = __model.contentAddress;
+        if(cardImg == nil){
+            [cell.card_photo setImage:[UIImage imageNamed:@"444"]];
+        }else{
+            [cell.card_photo setImage:cardImg];
+        }
+        if(corpImg == nil){
+            [cell.corp_photo setImage:[UIImage imageNamed:@"222"]];
+        }else{
+            [cell.corp_photo setImage:corpImg];
+        }
+        
+
         
         return cell;
     }
@@ -133,12 +189,120 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([[[RMUserLoginInfoManager loginmanager] isCorp] boolValue]){
-        return 621;
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:@"2"]){
+        return 649;
     }else{
         return 364;
     }
 }
+
+- (void)selectPhoto:(UITapGestureRecognizer *)tap{
+    if(tap.view.tag == 1000){
+        [[RMVPImageCropper shareImageCropper] setCtl:self];
+        [[RMVPImageCropper shareImageCropper] set_scale:1.0];
+        [[RMVPImageCropper shareImageCropper] showActionSheet];
+    }else if (tap.view.tag == 1001){
+        [[RMVPImageCropper shareImageCropper] setCtl:self];
+        [[RMVPImageCropper shareImageCropper] set_scale:5.0/8.0];
+        [[RMVPImageCropper shareImageCropper] showActionSheet];
+    }else{
+        [[RMVPImageCropper shareImageCropper] setCtl:self];
+        [[RMVPImageCropper shareImageCropper] set_scale:1.0/3.0];
+        [[RMVPImageCropper shareImageCropper] showActionSheet];
+    }
+}
+
+
+#pragma mark - 发送验证码
+- (void)sendCodeAction:(id)sender{
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:@"2"]){//店铺资料修改
+        
+        RMCorpInfoEditTableViewCell * cell = (RMCorpInfoEditTableViewCell *)[_mtableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [RMAFNRequestManager modifyInfoSendCodeWith:cell.mobileT.text WithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd]  andCallBack:^(NSError *error, BOOL success, id object) {
+            RMPublicModel * model = (RMPublicModel *)object;
+            if(error){
+                NSLog(@"%@",error);
+            }
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if(success&&model.status){
+                cell.sendBtn.enabled = NO;
+                //button type要 设置成custom 否则会闪动
+                [cell.sendBtn startWithSecond:60];
+                
+                [cell.sendBtn didChange:^NSString *(JKCountDownButton *countDownButton,int second) {
+                    NSString *title = [NSString stringWithFormat:@"剩余%d秒",second];
+                    return title;
+                }];
+                [cell.sendBtn didFinished:^NSString *(JKCountDownButton *countDownButton, int second) {
+                    countDownButton.enabled = YES;
+                    return @"重新获取";
+                }];
+            }
+            [MBProgressHUD showSuccess:model.msg toView:self.view];
+        }];
+
+    }else{
+         RMUserInfoEditTableViewCell * cell = (RMUserInfoEditTableViewCell *)[_mtableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [RMAFNRequestManager modifyInfoSendCodeWith:cell.mobileT.text WithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd]  andCallBack:^(NSError *error, BOOL success, id object) {
+            RMPublicModel * model = (RMPublicModel *)object;
+            if(error){
+                NSLog(@"%@",error);
+            }
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if(success&&model.status){
+                cell.sendBtn.enabled = NO;
+                //button type要 设置成custom 否则会闪动
+                [cell.sendBtn startWithSecond:60];
+                
+                [cell.sendBtn didChange:^NSString *(JKCountDownButton *countDownButton,int second) {
+                    NSString *title = [NSString stringWithFormat:@"剩余%d秒",second];
+                    return title;
+                }];
+                [cell.sendBtn didFinished:^NSString *(JKCountDownButton *countDownButton, int second) {
+                    countDownButton.enabled = YES;
+                    return @"重新获取";
+                }];
+            }
+            [MBProgressHUD showSuccess:model.msg toView:self.view];
+        }];
+
+    }
+//    if(_mobileTextField.text.length==0){
+//        
+//        [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+//        return;
+//    }
+    
+}
+
+
+#pragma mark - RMimageCropperDelegate
+- (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage andfilePath:(NSURL *)filePath{
+    NSLog(@"马东凯头像－－－－－－%@",editedImage);
+    if([[RMVPImageCropper shareImageCropper] _scale] == 1.0){
+        //头像
+        content_faceUrl = filePath;
+        content_faceImg = editedImage;
+    }else if ([[RMVPImageCropper shareImageCropper] _scale] == 5.0/8.0){
+        //身份证
+        cardUrl = filePath;
+        cardImg = editedImage;
+    }else{
+        //店铺背景
+        corpUrl = filePath;
+        corpImg = editedImage;
+    }
+    [_mtableView reloadData];
+}
+
+- (void)RMimageCropperDidCancel:(VPImageCropperViewController *)cropperViewController{
+    NSLog(@"取消替换头像");
+}
+
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
     [self.navigationController popViewControllerAnimated:YES];

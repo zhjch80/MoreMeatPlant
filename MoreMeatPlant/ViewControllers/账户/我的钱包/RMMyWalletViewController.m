@@ -64,6 +64,7 @@
     self.view.backgroundColor = [UIColor clearColor];
     
     [_billBtn addTarget:self action:@selector(billAction:) forControlEvents:UIControlEventTouchDown];
+    _billBtn.tag = 101310;
     [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recevierAction:) name:PaymentCompletedNotification object:nil];
@@ -86,6 +87,7 @@
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMMyWalletYueTableViewCell" owner:self options:nil] lastObject];
              [cell.chargeRecordBtn addTarget:self action:@selector(billAction:) forControlEvents:UIControlEventTouchDown];
+            cell.chargeRecordBtn.tag = 101311;
             [cell.chargeBtn addTarget:self action:@selector(chargeAction:) forControlEvents:UIControlEventTouchDown];
             [cell.turnBtn addTarget:self action:@selector(sureTurnAction:) forControlEvents:UIControlEventTouchDown];
         }

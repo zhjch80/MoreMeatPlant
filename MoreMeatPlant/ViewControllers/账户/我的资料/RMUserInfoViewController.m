@@ -25,7 +25,9 @@
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
     self.view.backgroundColor = [UIColor clearColor];
+    self.mtableView.backgroundColor = UIColorFromRGB(0xc8c8c9);
     
+    [self.closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];
     
     
 }
@@ -63,7 +65,7 @@
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([[[RMUserLoginInfoManager loginmanager] isCorp] boolValue]){
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:@"2"]){
         RMCorpInfoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMCorpInfoTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMCorpInfoTableViewCell" owner:self options:nil] lastObject];
@@ -73,16 +75,14 @@
         cell.nickL.text = __model.contentName;
         cell.passwordL.text = @"******";
         cell.signatureL.text = __model.contentQm?__model.contentQm:@"暂无";
-        cell.mobileL.text = __model.contentMobile;
+        cell.mobileL.text = __model.contentUser;
         cell.apliyL.text = __model.zfbNo;
-        cell.content_linkL.text = __model.content_linkname;
-        cell.content_mobileL.text = __model.content_mobile;
-        cell.content_addressL.text = __model.content_address?__model.content_address:@"还未填写";
+        cell.content_linkL.text = __model.contentLinkname;
+        cell.content_mobileL.text = __model.contentContact;
+        cell.content_addressL.text = __model.contentAddress?__model.contentAddress:@"还未填写";
         [cell.card_photo sd_setImageWithURL:[NSURL URLWithString:__model.card_photo] placeholderImage:[UIImage imageNamed:@"444"]];
         [cell.corp_photo sd_setImageWithURL:[NSURL URLWithString:__model.corp_photo] placeholderImage:[UIImage imageNamed:@"222"]];
-        
-        
-        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
+        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.content_face] placeholderImage:[UIImage imageNamed:@"photo"]];
         return cell;
     }else{
         RMUserInfoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMUserInfoTableViewCell"];
@@ -94,9 +94,9 @@
         cell.nickL.text = __model.contentName;
         cell.passwordL.text = @"******";
         cell.signatureL.text = __model.contentQm?__model.contentQm:@"暂无";
-        cell.mobileL.text = __model.contentMobile;
+        cell.mobileL.text = __model.contentUser;
         cell.apliyL.text = __model.zfbNo;
-        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
+        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.content_face] placeholderImage:[UIImage imageNamed:@"photo"]];
         return cell;
     }
     
@@ -108,7 +108,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([[[RMUserLoginInfoManager loginmanager] isCorp] boolValue]){
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:@"2"]){
         return 667;
     }else{
         return 335;

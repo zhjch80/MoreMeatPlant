@@ -182,6 +182,7 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"没有余位了！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
         [alert show];
     }
+    model.textField_value = [textField.text integerValue];
     [self caculateDays];
 }
 

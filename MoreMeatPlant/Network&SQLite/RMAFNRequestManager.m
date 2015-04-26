@@ -685,13 +685,53 @@
 }
 
 /**
+ *  @method     修改资料发送验证码
+ */
++ (void)modifyInfoSendCodeWith:(NSString *)mobile WithUser:(NSString *)user Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_passport&task=app_editInfoCode&ID=18513217781&PWD=e10adc3949ba59abbe56e057f20f883e
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_editInfoCode",mobile,pwd];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+}
+
+/**
  *  @method     修改会员信息（签名、支付宝、头像）
  */
 + (void)myInfoModifyRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Type:(NSString *)type AlipayNo:(NSString *)alipayno Signature:(NSString *)signature Dic:(NSDictionary *)dic andCallBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&frm[zfb_no]=%@&frm[content_qm]=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_editInfo",user,pwd,alipayno,signature];
-    [[RMHttpOperationShared sharedClient] POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
+    for(NSString * key in [dic allKeys]){
+        if([key isEqualToString:@"content_face"] || [key isEqualToString:@"content_sfzimg"] || [key isEqualToString:@"content_bjimg"]){
+            continue;
+        }
+        [dict setValue:[dic objectForKey:key] forKey:key];
+    }
+    
+    [[RMHttpOperationShared sharedClient] POST:url parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         if(dic != nil){
-            [formData appendPartWithFileURL:[dic objectForKey:@"content_face"] name:@"content_face" error:nil];
+            if([dic objectForKey:@"content_face"]!=nil){
+                [formData appendPartWithFileURL:[dic objectForKey:@"content_face"] name:@"content_face" error:nil];
+            }
+            if([dic objectForKey:@"content_sfzimg"]!=nil){
+                [formData appendPartWithFileURL:[dic objectForKey:@"content_sfzimg"] name:@"content_sfzimg" error:nil];
+            }
+            
+            if([dic objectForKey:@"content_bjimg"]!=nil){
+                [formData appendPartWithFileURL:[dic objectForKey:@"content_bjimg"] name:@"content_bjimg" error:nil];
+            }
+            
         }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dict = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
@@ -756,6 +796,8 @@
         model.contentFace = OBJC_Nil([dataDic objectForKey:@"content_face"]);
         model.contentGps = OBJC_Nil([dataDic objectForKey:@"content_gps"]);
         model.contentLinkname = OBJC_Nil([dataDic objectForKey:@"content_linkname"]);
+        model.card_photo = OBJC_Nil([dataDic objectForKey:@"content_sfzimg"]);
+        model.corp_photo = OBJC_Nil([dataDic objectForKey:@"content_bjimg"]);
         if(block){
             block(nil,YES,model);
         }
@@ -964,9 +1006,14 @@
 /**
  *  @method     账单纪录
  */
-+ (void)billRecordRequest:(NSString *)user Pwd:(NSString *)pwd page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block{
++ (void)billRecordRequest:(NSString *)user Pwd:(NSString *)pwd Type:(NSString *)type page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block{
     //218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_center&task=member_paylist&per=1&row=10&page=1&ID=test&PWD=202cb962ac59075b964b07152d234b70
-    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld",baseUrl,@"&method=appSev&app_com=com_center&task=member_paylist&per=1&row=10",user,pwd,(long)page];
+    NSString * url;
+    if(type == nil){
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld",baseUrl,@"&method=appSev&app_com=com_center&task=member_paylist&per=1&row=10",user,pwd,(long)page];
+    }else{
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld&type=%@",baseUrl,@"&method=appSev&app_com=com_center&task=member_paylist&per=1&row=10",user,pwd,(long)page,type];
+    }
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         NSMutableArray * Array = [[NSMutableArray alloc]init];
@@ -1654,6 +1701,7 @@
         model.content_face = OBJC_Nil([dataDic objectForKey:@"content_face"]);
         model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
         model.contentQm = OBJC_Nil([dataDic objectForKey:@"content_qm"]);
+        model.publish = OBJC_Nil([dataDic objectForKey:@"publish"]);
         for(NSDictionary * dict in [dataDic objectForKey:@"class"]){
             [model.classs addObject:dict];
         }
@@ -1735,9 +1783,9 @@
 
 
 #pragma mark - 附近肉友
-+ (void)nearMemberRequestwithCoor:(NSString *)coor andCallBack:(RMAFNRequestManagerCallBack)block{
++ (void)nearMemberRequestwithCoor:(NSString *)coor page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block{
     //218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_shop&task=nearMem&gps=39.75715,116.218574
-    NSString * url = [NSString stringWithFormat:@"%@%@&gps=%@",baseUrl,@"&method=appSev&app_com=com_shop&task=nearMem",coor];
+    NSString * url = [NSString stringWithFormat:@"%@%@&gps=%@&per=1&row=30&page=%ld",baseUrl,@"&method=appSev&app_com=com_shop&task=nearMem",coor,page];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         NSMutableArray * Array = [[NSMutableArray alloc]init];
@@ -1747,7 +1795,8 @@
             model.msg = [dic objectForKey:@"msg"];
             model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
             model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
-            model.content_img = OBJC_Nil([dataDic objectForKey:@"content_img"]);
+            model.content_img = OBJC_Nil([dataDic objectForKey:@"content_face"]);
+            model.content_type = OBJC_Nil([dataDic objectForKey:@"content_type"]);
             [Array addObject:model];
         }
         if(block){

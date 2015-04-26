@@ -13,7 +13,7 @@
     SEL _sel;
 }
 @property (nonatomic, strong) NSString *identifierString;
-
+@property (nonatomic, strong) NSString * content_type;
 @property (nonatomic, strong) NSIndexPath * indexPath;
 
 - (void)addTarget:(id)target withSelector:(SEL)sel;

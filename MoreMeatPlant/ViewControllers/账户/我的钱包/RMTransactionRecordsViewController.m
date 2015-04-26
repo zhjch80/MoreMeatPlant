@@ -44,7 +44,7 @@
 
 - (void)requestData{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager billRecordRequest:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] page:more andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager billRecordRequest:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd]  Type:self.type page:more andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
             if(more == 1){

@@ -16,8 +16,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="VgC-O3-uis">
-                    <rect key="frame" x="0.0" y="64" width="320" height="491"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="VgC-O3-uis">
+                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="wIq-ef-Hct"/>
@@ -27,7 +27,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="VgC-O3-uis" secondAttribute="bottom" constant="13" id="6t5-dC-Bpw"/>
+                <constraint firstAttribute="bottom" secondItem="VgC-O3-uis" secondAttribute="bottom" id="6t5-dC-Bpw"/>
                 <constraint firstItem="VgC-O3-uis" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TlB-oD-bUB"/>
                 <constraint firstItem="VgC-O3-uis" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="qWz-gM-DNQ"/>
                 <constraint firstAttribute="trailing" secondItem="VgC-O3-uis" secondAttribute="trailing" id="zGG-Bh-Jkt"/>

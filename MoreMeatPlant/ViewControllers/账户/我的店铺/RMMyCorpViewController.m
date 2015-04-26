@@ -39,6 +39,7 @@
     
     
     rightOneBarButton.frame = CGRectMake(rightOneBarButton.frame.origin.x-20, rightOneBarButton.frame.origin.y, rightOneBarButton.frame.size.width+20, rightOneBarButton.frame.size.height);
+    rightOneBarButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [rightOneBarButton setTitle:@"我的主页" forState:UIControlStateNormal];
     [rightOneBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
@@ -394,7 +395,13 @@
             headView.signatureL.text = classsModel.contentQm;
             headView.corp_regionL.text = classsModel.content_gps;
             [headView.corp_level setTitle:classsModel.levelId forState:UIControlStateNormal];
-            
+            if([model.publish boolValue]){
+                
+            }else{//没有审核通过
+                headView.renzhengWidth.constant = 0;
+                headView.renzheng_rightspace.constant = 0;
+                headView.corp_renzheng.hidden = YES;
+            }
             
             NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:@"全部",@"auto_id",@"全部宝贝",@"content_name", nil];
             [classsModel.classs insertObject:dic atIndex:0];

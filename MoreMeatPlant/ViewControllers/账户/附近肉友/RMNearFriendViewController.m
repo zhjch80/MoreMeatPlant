@@ -10,6 +10,7 @@
 #import "RMNearFriendTableViewCell.h"
 #import "RMMyHomeViewController.h"
 #import "RMDaqoCell.h"
+#import "RMMyCorpViewController.h"
 @interface RMNearFriendViewController ()<RefreshControlDelegate,DaqpSelectedPlantTypeDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
@@ -48,7 +49,13 @@
 }
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 12;
+    if ([friendsArray count]%3 == 0){
+        return [friendsArray count] / 3;
+    }else if ([friendsArray count]%3 == 1){
+        return ([friendsArray count] + 2) / 3;
+    }else {
+        return ([friendsArray count] + 1) / 3;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -72,6 +79,7 @@
         cell.leftTitle.text = model.content_name;
         [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         cell.leftImg.identifierString = model.auto_id;
+        cell.leftImg.content_type = model.content_type;
     }else{
         cell.leftTitle.hidden = YES;
         cell.leftImg.hidden = YES;
@@ -81,6 +89,7 @@
         cell.centerTitle.text = model.content_name;
         [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         cell.centerImg.identifierString = model.auto_id;
+        cell.centerImg.content_type = model.content_type;
     }else{
         cell.centerTitle.hidden = YES;
         cell.centerImg.hidden = YES;
@@ -90,12 +99,12 @@
         cell.rightTitle.text = model.content_name;
         [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         cell.rightImg.identifierString = model.auto_id;
+        cell.rightImg.content_type = model.content_type;
     }else{
         cell.rightTitle.hidden = YES;
         cell.rightImg.hidden = YES;
     }
     return cell;
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -104,9 +113,16 @@
 }
 
 - (void)daqoSelectedPlantTypeMethod:(RMImageView *)image{
-    RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
-    home.auto_id = image.identifierString;
-    [self.navigationController pushViewController:home animated:YES];
+    if([image.content_type intValue] == 1){//普通用户
+        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+        home.auto_id = image.identifierString;
+        [self.navigationController pushViewController:home animated:YES];
+    }else{
+        RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
+        corp.auto_id = image.identifierString;
+        [self.navigationController pushViewController:corp animated:YES];
+    }
+   
 }
 
 
@@ -130,7 +146,7 @@
 - (void)requestNearMember{
     NSLog(@"%@",[[RMUserLoginInfoManager loginmanager] coorStr]);
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager nearMemberRequestwithCoor:[[RMUserLoginInfoManager loginmanager] coorStr] andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager nearMemberRequestwithCoor:[[RMUserLoginInfoManager loginmanager] coorStr] page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
             if([object isKindOfClass:[RMPublicModel class]]){//模型类

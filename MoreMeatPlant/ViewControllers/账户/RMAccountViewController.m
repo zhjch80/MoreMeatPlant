@@ -91,7 +91,7 @@
         if(success && model.status){
             [self.headerImgV sd_setImageWithURL:[NSURL URLWithString:model.contentFace] placeholderImage:[UIImage imageNamed:@"nophote"]];
             self.userNameL.text = model.contentName;
-            self.userDescL.text = Str_Objc(model.contentQm, @"什么也没写...");
+            self.userDescL.text = Str_Objc(model.contentQm, @"签名:什么也没写...");
             self.regionL.text = model.contentGps;
             self.yu_eL.text = [NSString stringWithFormat:@"余额:%.0f",model.balance];
             self.hua_biL.text = [NSString stringWithFormat:@"花币:%.0f",model.spendmoney];
@@ -169,6 +169,11 @@
                         mywallet.billcallback = ^(UIButton * sender){
                             //跳转到账单界面push
                             RMTransactionRecordsViewController * record = [[RMTransactionRecordsViewController alloc]initWithNibName:@"RMTransactionRecordsViewController" bundle:nil];
+                            if(sender.tag == 101311){
+                                record.type = @"1";
+                            }else{
+                                
+                            }
                             [self.navigationController pushViewController:record animated:YES];
                         };
                         mywallet.top_upcallback = ^(NSString * content_money){
@@ -578,7 +583,7 @@
 }
 
 #pragma mark - RMimageCropperDelegate
-- (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage{
+- (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage andfilePath:(NSURL *)filePath{
     NSLog(@"马东凯头像－－－－－－%@",editedImage);
 }
 

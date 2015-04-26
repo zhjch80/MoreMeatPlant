@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RMBaseTextField.h"
+#import "JKCountDownButton.h"
 @interface RMCorpInfoEditTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UITextView *signatureT;//签名
@@ -21,4 +22,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *content_address;//
 @property (weak, nonatomic) IBOutlet UIImageView * card_photo;
 @property (weak, nonatomic) IBOutlet UIImageView * corp_photo;
+@property (weak, nonatomic) IBOutlet RMBaseTextField *codeField;
+@property (weak, nonatomic) IBOutlet JKCountDownButton *sendBtn;
 @end

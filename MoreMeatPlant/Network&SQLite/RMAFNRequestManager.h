@@ -315,6 +315,10 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
 + (void)resetPwdRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Code:(NSString *)code andCallBack:(RMAFNRequestManagerCallBack)block;
 
 #pragma mark - 资料修改
+
+
++ (void)modifyInfoSendCodeWith:(NSString *)mobile WithUser:(NSString *)user Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block;
+
 /**
  *  资料修改（支付宝账户、签名修改）
  *
@@ -424,7 +428,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param page  页数
  *  @param block 回调
  */
-+ (void)billRecordRequest:(NSString *)user Pwd:(NSString *)pwd page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block;
++ (void)billRecordRequest:(NSString *)user Pwd:(NSString *)pwd Type:(NSString *)type page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  系统消息
@@ -674,7 +678,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  获取附近肉友
  *
  */
-+ (void)nearMemberRequestwithCoor:(NSString *)coor andCallBack:(RMAFNRequestManagerCallBack)block;
++ (void)nearMemberRequestwithCoor:(NSString *)coor  page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  关注某人

@@ -18,4 +18,5 @@
 @property (retain, nonatomic) NSArray * tags;
 @property (retain, nonatomic) NSString * app_com;
 @property (retain, nonatomic) NSMutableArray * dataarray;
+@property (retain, nonatomic) NSString * type;//1 标示只是充值记录 不传表示所有记录
 @end

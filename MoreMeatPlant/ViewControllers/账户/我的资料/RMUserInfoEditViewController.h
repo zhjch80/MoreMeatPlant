@@ -12,6 +12,8 @@
 
 @property (retain, nonatomic) RMPublicModel * _model;
 @property (weak, nonatomic) IBOutlet UITableView *mtableView;
-
+@property (retain, nonatomic) UIImage * content_faceImg;
+@property (retain, nonatomic) UIImage * cardImg;
+@property (retain, nonatomic) UIImage * corpImg;
 
 @end

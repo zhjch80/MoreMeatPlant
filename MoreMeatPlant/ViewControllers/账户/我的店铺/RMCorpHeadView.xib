@@ -50,18 +50,6 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tHu-GK-QHK">
-                            <rect key="frame" x="278" y="121" width="20" height="20"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="20" id="vrF-Fn-Z4r"/>
-                                <constraint firstAttribute="width" constant="20" id="zae-hZ-bZ1"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                            <state key="normal" backgroundImage="corp_renzheng_icon.png">
-                                <color key="titleColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="花儿与少年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLe-9U-71a">
                             <rect key="frame" x="70" y="105" width="85" height="21"/>
                             <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="17"/>
@@ -115,6 +103,18 @@
                             <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tHu-GK-QHK">
+                            <rect key="frame" x="276" y="121" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="vrF-Fn-Z4r"/>
+                                <constraint firstAttribute="width" constant="20" id="zae-hZ-bZ1"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <state key="normal" backgroundImage="corp_renzheng_icon.png">
+                                <color key="titleColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -185,6 +185,8 @@
                 <outlet property="corp_regionL" destination="8AJ-z6-HZv" id="7Fw-cQ-d7S"/>
                 <outlet property="corp_renzheng" destination="tHu-GK-QHK" id="IND-cx-MkT"/>
                 <outlet property="corp_sun" destination="bQf-ec-I2W" id="CVc-Dt-l8Y"/>
+                <outlet property="renzhengWidth" destination="zae-hZ-bZ1" id="ov6-Um-SZq"/>
+                <outlet property="renzheng_rightspace" destination="Vnh-FO-PXp" id="7ck-46-q9m"/>
                 <outlet property="signatureL" destination="yAy-zp-ric" id="1kk-bG-G2h"/>
             </connections>
             <point key="canvasLocation" x="250" y="17"/>

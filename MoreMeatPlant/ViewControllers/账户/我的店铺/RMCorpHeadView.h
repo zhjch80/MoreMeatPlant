@@ -20,4 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *collection;
 @property (weak, nonatomic) IBOutlet UIView *headbackView;
 @property (weak, nonatomic) IBOutlet UIView *classesView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *renzhengWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *renzheng_rightspace;
 @end
