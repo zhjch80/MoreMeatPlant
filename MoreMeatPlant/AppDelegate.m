@@ -81,7 +81,7 @@
     
 #pragma mark - 环信配置
 #warning  修改一 注册 APNS文件的名字, 需要与后台上传证书时的名字一一对应，该证书用来在有新消息时给用户推送通知
-    NSString *apnsCertName = @"";
+    NSString *apnsCertName = @"AfterSaleForClient";
     [[EaseMob sharedInstance] registerSDKWithAppKey:@"yryp-app#yryp" apnsCertName:apnsCertName];
     [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
@@ -141,12 +141,12 @@
     switch (type) {
         case 0:{
             //没有登录
-            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, loginCtl, nav, nil];
+            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, loginCtl, talkMoreCtl, nil];
             break;
         }
         case 1:{
             //已经登录
-            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, nav, nil];
+            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, talkMoreCtl, nil];
             [accountCtl initPlat];
             break;
         }

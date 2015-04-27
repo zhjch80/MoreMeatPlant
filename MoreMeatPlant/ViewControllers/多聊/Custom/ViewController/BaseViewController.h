@@ -12,6 +12,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RMBaseViewController.h"
-@interface BaseViewController :RMBaseViewController
-
+typedef void (^BaseViewControllerCallback) (void);
+@interface BaseViewController :UINavigationController
+@property (copy, nonatomic) BaseViewControllerCallback callback;
+@property (assign, nonatomic) id delegate;
 @end

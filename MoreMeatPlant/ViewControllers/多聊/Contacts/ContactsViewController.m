@@ -190,6 +190,10 @@
             [weakSelf.searchController.searchBar endEditing:YES];
             ChatViewController *chatVC = [[ChatViewController alloc] initWithChatter:buddy.username isGroup:NO];
             chatVC.title = buddy.username;
+            if(weakSelf.delegate){
+                [[(BaseViewController *)weakSelf.delegate navigationController] pushViewController:chatVC animated:YES];
+                return;
+            }
             [weakSelf.navigationController pushViewController:chatVC animated:YES];
         }];
     }
@@ -344,6 +348,10 @@
         
         ChatViewController *chatVC = [[ChatViewController alloc] initWithChatter:buddy.username isGroup:NO];
         chatVC.title = buddy.username;
+        if(self.delegate){
+        [[(BaseViewController *)self.delegate navigationController] pushViewController:chatVC animated:YES];
+        return;
+        }
         [self.navigationController pushViewController:chatVC animated:YES];
 }
 

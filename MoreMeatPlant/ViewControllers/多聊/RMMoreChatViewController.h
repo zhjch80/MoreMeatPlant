@@ -12,7 +12,7 @@
 #import "ContactsViewController.h"
 
 
-@interface RMMoreChatViewController : UITabBarController
+@interface RMMoreChatViewController : RMBaseViewController
 {
     EMConnectionState _connectionState;
 }
@@ -25,6 +25,7 @@
 
 - (void)networkChanged:(EMConnectionState)connectionState;
 
+- (void)selectController:(NSInteger)index;
 //返回未读消息数目
 - (NSInteger)UnreadMessageCount;
 @end

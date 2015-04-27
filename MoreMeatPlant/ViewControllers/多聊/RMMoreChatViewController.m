@@ -22,18 +22,25 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
 
 @interface RMMoreChatViewController () <UIAlertViewDelegate, IChatManagerDelegate, ICallManagerDelegate>
 {
-    
+    // 存放所有要显示的子控制器
+    NSMutableDictionary *_allChilds;
     CallSessionViewController *_callController;
     UISegmentedControl * _segmentControl;
     UIBarButtonItem *_addFriendItem;
+    NSArray * classNames;
+    BOOL transiting;
+    
+    UINavigationController * nav1;
+    UINavigationController * nav2;
+    
 }
 
 @property (strong, nonatomic) NSDate *lastPlaySoundDate;
-
+@property (retain, nonatomic) UINavigationController * currentController;
 @end
 
 @implementation RMMoreChatViewController
-@synthesize _chatListVC,_contactsVC;
+@synthesize _chatListVC,_contactsVC,currentController;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,6 +50,7 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    
     if(![[RMUserLoginInfoManager loginmanager] state]){
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还没有登录，请先去登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];
@@ -59,15 +67,16 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
 {
     [super viewDidLoad];
     
-   
+    [self setCustomNavTitle:@""];
     //if 使tabBarController中管理的viewControllers都符合 UIRectEdgeNone
-    if ([UIDevice currentDevice].systemVersion.floatValue >= 7) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    self.tabBarController.tabBar.hidden = YES;
+//    if ([UIDevice currentDevice].systemVersion.floatValue >= 7) {
+//        self.edgesForExtendedLayout = UIRectEdgeNone;
+//    }
+//    self.tabBarController.tabBar.hidden = YES;
     
     
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[RMMoreChatViewController class]];
+    [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMMoreChatViewController class]];
     //获取未读消息数，此时并没有把self注册为SDK的delegate，读取出的未读数是上次退出程序时的
     [self didUnreadMessagesCountChanged];
 #warning 把self注册为SDK的delegate
@@ -77,7 +86,6 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callControllerClose:) name:@"callControllerClose" object:nil];
     
     [self setupSubviews];
-//    self.selectedIndex = 0;
 
     
     
@@ -89,43 +97,32 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     
     _segmentControl.selectedSegmentIndex = 0;
 
-    self.navigationItem.titleView = _segmentControl;
+    [self.view addSubview: _segmentControl];
     
     [self setupUnreadMessageCount];
     [self setupUntreatedApplyCount];
     
-    [self hidetabbar];
 }
 
-
-- (void) hidetabbar {
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5];
-    
-    for(UIView *view in self.view.subviews)
-    {
-        NSLog(@"%@", view);
-        
-        if([view isKindOfClass:[UITabBar class]])
-        {
-            [view setFrame:CGRectMake(view.frame.origin.x, kScreenHeight, view.frame.size.width, view.frame.size.height)];
-        } else {
-            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, kScreenHeight-44)];
-        }
+- (void)selectController:(NSInteger)index{
+    if(index == 0){
+        _chatListVC.view.hidden = NO;
+        _contactsVC.view.hidden = YES;
+    }else{
+        _contactsVC.view.hidden = NO;
+        _chatListVC.view.hidden = YES;
     }
-    
-    [UIView commitAnimations];
 }
-
 
 - (void)segmentControlChanged:(UISegmentedControl *)sender{
     if(sender.selectedSegmentIndex == 0){
-        self.selectedViewController = _chatListVC;
+        [self selectController:0];
     }else{
-        self.selectedViewController = _contactsVC;
+        [self selectController:1];
     }
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -176,13 +173,18 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
 - (void)setupSubviews
 {
     _chatListVC = [[ChatListViewController alloc] init];
+    _chatListVC.delegate = self;
+    _chatListVC.view.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight-64-49);
     [_chatListVC networkChanged:_connectionState];
-
     
-    _contactsVC = [[ContactsViewController alloc] initWithNibName:nil bundle:nil];
-
-    self.viewControllers = @[_chatListVC, _contactsVC];
-    self.selectedViewController = _chatListVC;
+    
+    _contactsVC = [[ContactsViewController alloc] init];
+    _contactsVC.view.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight-64-49);
+    _contactsVC.delegate = self;
+    
+    [self.view addSubview:_chatListVC.view];
+    [self.view addSubview:_contactsVC.view];
+    _contactsVC.view.hidden = YES;
 }
 
 // 统计未读消息数
@@ -587,7 +589,8 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     if(_chatListVC)
     {
         [self.navigationController popToViewController:self animated:NO];
-        [self setSelectedViewController:_chatListVC];
+        _segmentControl.selectedSegmentIndex = 0;
+        [self segmentControlChanged:_segmentControl];
     }
 }
 

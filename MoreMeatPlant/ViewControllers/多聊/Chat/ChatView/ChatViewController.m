@@ -89,6 +89,8 @@
     return self;
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -98,6 +100,12 @@
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         self.edgesForExtendedLayout =  UIRectEdgeNone;
     }
+    [self setCustomNavTitle:self.title];
+    
+    
+    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[ChatViewController class]];
     
@@ -172,7 +180,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"kHideCustomTabbar" object:nil];
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"kShowCustomTabbar" object:nil];
+//}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -183,6 +199,11 @@
     else{
         _isScrollToBottom = YES;
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kHideCustomTabbar" object:nil];
+    
+    
+    self.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -193,6 +214,8 @@
     [_conversation markAllMessagesAsRead:YES];
     [[EaseMob sharedInstance].deviceManager disableProximitySensor];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kShowCustomTabbar" object:nil];
+
 }
 
 - (void)dealloc
@@ -303,7 +326,7 @@
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.chatToolBar.frame.size.height) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - self.chatToolBar.frame.size.height) style:UITableViewStylePlain];
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -454,6 +477,7 @@
 -(void)keyBoardHidden
 {
     [self.chatToolBar endEditing:YES];
+    _tableView.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight-self.chatToolBar.frame.size.height);
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)recognizer
@@ -1378,5 +1402,11 @@
         }
     }
 }
+
+#pragma mark - back
+- (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end

@@ -139,6 +139,8 @@
         _tableView.dataSource = self;
         _tableView.tableFooterView = [[UIView alloc] init];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.opaque = NO;
         [_tableView registerClass:[ChatListCell class] forCellReuseIdentifier:@"chatListCell"];
     }
     
@@ -379,6 +381,10 @@
     NSString *chatter = conversation.chatter;
     chatController = [[ChatViewController alloc] initWithChatter:chatter isGroup:conversation.isGroup];
     chatController.title = title;
+    if(self.delegate){
+        [[(BaseViewController *)self.delegate navigationController] pushViewController:chatController animated:YES];
+        return;
+    }
     [self.navigationController pushViewController:chatController animated:YES];
 }
 

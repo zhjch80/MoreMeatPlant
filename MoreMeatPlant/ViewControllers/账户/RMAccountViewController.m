@@ -180,7 +180,7 @@
                     case 0:{//我的肉友
                         AppDelegate * dele = [[UIApplication sharedApplication] delegate];
                         [dele tabSelectController:3];
-                        dele.talkMoreCtl.selectedViewController = dele.talkMoreCtl._contactsVC;
+                        [dele.talkMoreCtl selectController:1];
                     }
                         break;
                     case 1:{//我的钱包
@@ -344,7 +344,7 @@
                     case 0:{//我的肉友
                         AppDelegate * dele = [[UIApplication sharedApplication] delegate];
                         [dele tabSelectController:3];
-                        dele.talkMoreCtl.selectedViewController = dele.talkMoreCtl._contactsVC;
+                        [dele.talkMoreCtl selectController:1];
                     }
                         break;
                     case 1:{//我的钱包
