@@ -12,7 +12,7 @@
 #import "ZFModalTransitionAnimator.h"
 #import "RMLongPostFooterView.h"
 
-@interface RMStartLongPostingViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,StartLongPostingDelegate,EditContentDelegate,LongPostFooterDelegate> {
+@interface RMStartLongPostingViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,StartLongPostingDelegate,EditContentDelegate,LongPostFooterDelegate,RMAFNRequestManagerDelegate> {
     NSInteger cellTextCount;        //section 为2时 总共有几行文字cell
     NSInteger cellImgCount;         //section 为2时 总共有几行图片cell
 }
@@ -484,6 +484,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 | indexPath.section == 1){
+        return ;
+    }
+    
     RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
     UIActionSheet * sheet = nil;
     if ([cell.contentIdentifier isEqualToString:@"text"]){
@@ -572,8 +576,6 @@
                 [dataArr removeObjectAtIndex:operationRow];
                 [dataArr insertObject:content atIndex:operationRow];
                 [mTableView reloadData];
-            }else if ([operationType isEqualToString:@"插入图片"]){
-                
             }else if ([operationType isEqualToString:@"插入文字"]){
                 [dataArr insertObject:content atIndex:operationRow];
                 cellTextCount ++;

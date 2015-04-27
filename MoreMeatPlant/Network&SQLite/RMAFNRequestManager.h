@@ -241,7 +241,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                               withNote_content:(NSString *)note_content
                                       callBack:(RMAFNRequestManagerCallBack)block;
 
-/*
+/**
  *  @method             发布帖子
  *  @param          auto_id             如果是编辑传 帖子标识字段,不传代表新建
  *  @param          content_name        帖子标题
@@ -265,7 +265,36 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                           withID:(NSString *)user_id
                          withPWD:(NSString *)user_password
                         callBack:(RMAFNRequestManagerCallBack)block;
-    
+/**
+ *  @method     帖子 搜索
+ *  @param      plantClass          植物分类
+ *  @param      plantCourse         植物科目
+ *  @param      pageCount           分页
+ *  @param      user_id             用户ID
+ *  @param      user_password       会员密码
+ *  @param      keyword             关键词
+ */
++ (void)getPostsSearchWithrPlantClass:(NSString *)plantClass
+                      withPlantCourse:(NSString *)plantCourse
+                        withPageCount:(NSInteger)pageCount
+                               withID:(NSString *)user_id
+                              withPWD:(NSString *)user_password
+                          withKeyword:(NSString *)keyword
+                             callBack:(RMAFNRequestManagerCallBack)block;
+
+/*
+ *  @method     宝贝 搜索
+ *  @param      babyType            宝贝分类  1为 一肉一拍  2为鲜肉市场
+ *  @param      plantCourse         植物科目
+ *  @param      pageCount           分页
+ *  @param      keyword             关键词
+ */
++ (void)getBabysSearchWithrBabyClass:(NSString *)babyType
+                     withPlantCourse:(NSString *)plantCourse
+                       withPageCount:(NSInteger)pageCount
+                         withKeyword:(NSString *)keyword
+                            callBack:(RMAFNRequestManagerCallBack)block;
+
 /*************************************************************************/
 /**
  *  @method     登录

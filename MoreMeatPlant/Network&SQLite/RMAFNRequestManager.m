@@ -571,6 +571,61 @@
     }];
 }
 
+/**
+ *  @method     帖子 搜索
+ *  @param      plantClass          植物分类
+ *  @param      plantCourse         植物科目
+ *  @param      pageCount           分页
+ *  @param      user_id             用户ID
+ *  @param      user_password       会员密码
+ *  @param      keyword             关键词
+ */
++ (void)getPostsSearchWithrPlantClass:(NSString *)plantClass
+                      withPlantCourse:(NSString *)plantCourse
+                        withPageCount:(NSInteger)pageCount
+                               withID:(NSString *)user_id
+                              withPWD:(NSString *)user_password
+                          withKeyword:(NSString *)keyword
+                             callBack:(RMAFNRequestManagerCallBack)block {
+    
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&type=1&class=%@&course=%@&per=1&row=10&keyword=%@&page=%ld&ID=%@&PWD=%@",baseUrl,plantClass,plantCourse,keyword,(long)pageCount,user_id,user_password];
+    
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
+/*
+ *  @method     宝贝 搜索
+ *  @param      babyType            宝贝分类  1为 一肉一拍  2为鲜肉市场
+ *  @param      plantCourse         植物科目
+ *  @param      pageCount           分页
+ *  @param      keyword             关键词
+ */
++ (void)getBabysSearchWithrBabyClass:(NSString *)babyType
+                      withPlantCourse:(NSString *)plantCourse
+                        withPageCount:(NSInteger)pageCount
+                          withKeyword:(NSString *)keyword
+                             callBack:(RMAFNRequestManagerCallBack)block {
+    
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%@&course=%@&per=1&row=10&page=%ld&keyword=%@",baseUrl,babyType,plantCourse,(long)pageCount,keyword];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
 /*************************************************************************/
 
 /**

@@ -9,6 +9,8 @@
 #import "RMSearchViewController.h"
 #import "RMDaqoCell.h"
 #import "UITextField+LimitLength.h"
+#import "RefreshControl.h"
+#import "RefreshView.h"
 
 @interface RMSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextFieldDelegate,DaqpSelectedPlantTypeDelegate>{
     BOOL isHideKeyboard;
@@ -111,6 +113,11 @@
 
 - (IBAction)searchClick:(UIButton *)sender {
     NSLog(@"搜索 %@",mTextField.text);
+    if ([self.searchType isEqualToString:@"帖子列表搜索"]){
+        [self requestPostsSearchWithKeyWord:mTextField.text withPageCount:1];
+    }else{
+        
+    }
 }
 
 #pragma mark -
@@ -130,8 +137,107 @@
 
 #pragma mark - 请求数据
 
-- (void)request {
-    
+/**
+ *  @method     帖子搜索
+ *  搜索时 不用传植物分类  和  植物科目
+ */
+- (void)requestPostsSearchWithKeyWord:(NSString *)key withPageCount:(NSInteger)pg {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getPostsSearchWithrPlantClass:@"" withPlantCourse:@"" withPageCount:pg withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd withKeyword:key callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            NSLog(@"object:%@",object);
+            /*
+            {
+                "auto_id": "66",
+                "content_name": "那就",
+                "content_type": "1",
+                "content_class": "播种育苗",
+                "content_course": "1003",
+                "create_time": "2015-04-26 16:04",
+                "publish": "1",
+                "member_id": "11",
+                "create_user": "0",
+                "imgs": [
+                         {
+                             "auto_id": "216",
+                             "member_id": "11",
+                             "content_img": "http://218.240.30.6/drzw/file/upload/2015/04/26/1430461247.png",
+                             "content_body": "",
+                             "note_id": "66",
+                             "series": "0",
+                             "create_user": "0",
+                             "create_time": "2015-04-26 16:04:00"
+                         }
+                         ],
+                "content_collect": "1",
+                "content_review": "0",
+                "content_top": "1",
+                "member": {
+                    "member_name": "叶林",
+                    "content_face": "http://218.240.30.6/drzw/file/upload/nophoto.jpg",
+                    "content_user": "15801595516",
+                    "content_gps": "北京市"
+                },
+                "content_title": "那就",
+                "target": "_self",
+                "content_font": "",
+                "content_style": "",
+                "content_color": ""
+            }
+            
+            */
+            [dataArr removeAllObjects];
+            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                model.content_type = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_type"]);
+                model.content_class = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_class"]);
+                model.content_course = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_course"]);
+                model.content_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_top"]);
+                model.content_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_collect"]);
+                model.content_review = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_review"]);
+                model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                model.is_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_top"]);
+                model.is_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_collect"]);
+                model.is_review =  OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_review"]);
+                model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
+                model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                [dataArr addObject:model];
+            }
+            [mTableView reloadData];
+
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
+/**
+ *      @method     宝贝搜索  class 为1 为一肉一拍  2为鲜肉市场
+ *      搜索时   不用传植物科目
+ */
+- (void)requestBabySearchWithKeyWord:(NSString *)key withClass:(NSString *)class withPageCount:(NSInteger)pg {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getBabysSearchWithrBabyClass:@"1" withPlantCourse:@"" withPageCount:1 withKeyword:key callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            NSLog(@"object:%@",object);
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
 
 @end
