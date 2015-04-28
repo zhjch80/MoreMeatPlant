@@ -715,7 +715,6 @@
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"buttonIndex:%ld",(long)buttonIndex);
     switch (buttonIndex) {
         case 0:{
             RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
@@ -835,6 +834,8 @@
         }
         case 2:{
             RMSearchViewController * searchCtl = [[RMSearchViewController alloc] init];
+            searchCtl.searchType = @"帖子";
+            searchCtl.searchWhere = @"防毒区";
             [self.navigationController pushViewController:searchCtl animated:YES];
             break;
         }

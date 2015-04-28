@@ -30,11 +30,12 @@
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
     imageView.tag = -1;
+    imageView.backgroundColor = [UIColor clearColor];
     imageView.image = blurredImage;
     
     UIView *overlay = [[UIView alloc] initWithFrame:self.bounds];
     overlay.tag = -2;
-    overlay.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.8];
+    overlay.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
     
     [self addSubview:imageView];
     [self addSubview:overlay];

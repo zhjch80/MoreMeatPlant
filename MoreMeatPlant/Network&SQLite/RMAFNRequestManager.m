@@ -579,16 +579,18 @@
  *  @param      user_id             用户ID
  *  @param      user_password       会员密码
  *  @param      keyword             关键词
+ *  @param      type                一 为放毒区  二为肉肉交换
  */
 + (void)getPostsSearchWithrPlantClass:(NSString *)plantClass
                       withPlantCourse:(NSString *)plantCourse
+                             withType:(NSString *)type
                         withPageCount:(NSInteger)pageCount
                                withID:(NSString *)user_id
                               withPWD:(NSString *)user_password
                           withKeyword:(NSString *)keyword
                              callBack:(RMAFNRequestManagerCallBack)block {
     
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&type=1&class=%@&course=%@&per=1&row=10&keyword=%@&page=%ld&ID=%@&PWD=%@",baseUrl,plantClass,plantCourse,keyword,(long)pageCount,user_id,user_password];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&type=%@&class=%@&course=%@&per=1&row=10&keyword=%@&page=%ld&ID=%@&PWD=%@",baseUrl,type,plantClass,plantCourse,keyword,(long)pageCount,user_id,user_password];
     
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
@@ -615,6 +617,23 @@
                              callBack:(RMAFNRequestManagerCallBack)block {
     
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%@&course=%@&per=1&row=10&page=%ld&keyword=%@",baseUrl,babyType,plantCourse,(long)pageCount,keyword];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
+/**
+ *  @method     获取植物大全总数量
+ */
++ (void)getDaqoAllcountscallBack:(RMAFNRequestManagerCallBack)block {
+    
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAllcounts",baseUrl];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);

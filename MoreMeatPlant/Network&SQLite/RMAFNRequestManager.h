@@ -273,9 +273,11 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param      user_id             用户ID
  *  @param      user_password       会员密码
  *  @param      keyword             关键词
+ *  @param      type                一 为放毒区  二为肉肉交换
  */
 + (void)getPostsSearchWithrPlantClass:(NSString *)plantClass
                       withPlantCourse:(NSString *)plantCourse
+                             withType:(NSString *)type
                         withPageCount:(NSInteger)pageCount
                                withID:(NSString *)user_id
                               withPWD:(NSString *)user_password
@@ -294,6 +296,12 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                        withPageCount:(NSInteger)pageCount
                          withKeyword:(NSString *)keyword
                             callBack:(RMAFNRequestManagerCallBack)block;
+
+
+/**
+ *  @method     获取植物大全总数量
+ */
++ (void)getDaqoAllcountscallBack:(RMAFNRequestManagerCallBack)block;
 
 /*************************************************************************/
 /**

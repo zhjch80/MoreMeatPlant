@@ -16,6 +16,7 @@
 #import "RMDaqoDetailsFooterView.h"
 #import "RMCommentsView.h"
 #import "FileUtil.h"
+#import "UIView+Effects.h"
 
 #define kDKTableViewMainBackgroundImageFileName @"DaQuanBackground.jpg"
 #define kDKTableViewDefaultCellHeight 50.0f
@@ -27,6 +28,7 @@
     BOOL isFistViewDidAppear;
     BOOL isTakingPictures;          //是否在选取图片
     
+    BOOL isBlur;                    //是否已经添加毛玻璃
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) DKLiveBlurView *liveBlur;
@@ -35,11 +37,12 @@
 @property (nonatomic, strong) NSMutableArray * imageViewArr;
 @property (nonatomic, strong) XHBottomToolBar * bottomToolBar;
 @property (nonatomic, strong) RMPublicModel * dataModel;
+@property (nonatomic, strong) UIView * bgBlurView;
 
 @end
 
 @implementation RMDaqoDetailsViewController
-@synthesize mTableView, liveBlur, bottomView, imageViewer, imageViewArr, dataModel;
+@synthesize mTableView, liveBlur, bottomView, imageViewer, imageViewArr, dataModel, bgBlurView;
 
 - (void)shareButtonClicked:(UIButton *)sender {
     UIImage *currentImage = [imageViewer currentImage];
@@ -136,6 +139,11 @@
     mTableView.contentInset = UIEdgeInsetsMake(kDKTableViewDefaultContentInset, 0, 0, 0);
     
     [self.view addSubview:mTableView];
+    
+//    bgBlurView =  [[UIView alloc] init];
+//    bgBlurView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+//    bgBlurView.userInteractionEnabled = YES;
+//    [self.view addSubview:bgBlurView];
     
     bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
@@ -535,8 +543,20 @@
 
     if (widthHeight-kDKTableViewDefaultCellHeight+mTableView.contentOffset.y > kDKTableViewDefaultCellHeight/2){
         cell.backupBtn.hidden = YES;
+        if (isBlur){
+            
+        }else{
+            [liveBlur blur];
+            isBlur = YES;
+        }
     }else{
         cell.backupBtn.hidden = NO;
+        if (isBlur){
+            [liveBlur unBlur];
+            isBlur = NO;
+        }else{
+            
+        }
     }
     
     if (!isScrollLoadComplete){
@@ -546,7 +566,7 @@
             [UIView animateWithDuration:0.3 animations:^{
                 bottomView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 40);
             } completion:^(BOOL finished) {
-                
+
             }];
         }else{
             [UIView animateWithDuration:0.3 animations:^{
@@ -573,6 +593,13 @@
         }
         
         if (success){
+            
+            if ([[[object objectForKey:@"data"] objectForKey:@"data"] count] == 0){
+                [self showHint:@"数据返回异常"];
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                return;
+            }
+            
             dataModel = [[RMPublicModel alloc] init];
             dataModel.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"auto_id"]);
             dataModel.content_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_name"]);

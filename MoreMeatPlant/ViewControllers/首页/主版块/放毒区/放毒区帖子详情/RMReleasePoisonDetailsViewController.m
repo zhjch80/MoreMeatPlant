@@ -177,8 +177,7 @@
     tableHeadView.detailsTitle.text = dataModel.content_name;
     tableHeadView.detailsTime.text = dataModel.create_time;
     tableHeadView.detailsUserNameTime.text = [NSString stringWithFormat:@"%@ %@",[dataModel.members objectForKey:@"member_name"],[[NSString stringWithFormat:@"%@:00",dataModel.create_time] intervalSinceNow]];
-    tableHeadView.detailsLocation.text = @"正在定位. . .";
-    [tableHeadView.detailsUserHead sd_setImageWithURL:[NSURL URLWithString:[dataModel.members objectForKey:@"content_face"]] placeholderImage:nil];
+    tableHeadView.detailsLocation.text = [NSString stringWithFormat:@"%@",[dataModel.members objectForKey:@"content_gps"]];    [tableHeadView.detailsUserHead sd_setImageWithURL:[NSURL URLWithString:[dataModel.members objectForKey:@"content_face"]] placeholderImage:nil];
 
     offsetY = 0;
     offsetY = offsetY + 120;
@@ -361,7 +360,7 @@
             cell.replyBtn_1.tag = indexPath.row;
             cell.replyBtn_1.parameter_1 = @"评论";
             cell.userName_1.text = [model.members objectForKey:@"member_name"];
-            cell.userLocatiom_1.text = @"正在定位...";
+            cell.userLocatiom_1.text = [model.members objectForKey:@"content_gps"];
             cell.userPostTime_1.text = model.create_time;
             cell.comments_1.text = model.content_body;
             
@@ -387,7 +386,7 @@
             cell.replyBtn_2.parameter_1 = @"回复";
             [cell.userHead_2 sd_setImageWithURL:[NSURL URLWithString:[[[model.returns objectAtIndex:0] objectForKey:@"member"] objectForKey:@"content_face"]] placeholderImage:nil];
             cell.userName_2.text = [[[model.returns objectAtIndex:0] objectForKey:@"member"] objectForKey:@"member_name"];
-            cell.userLocatiom_2.text = @"正在定位...";
+            cell.userLocatiom_2.text = [[[model.returns objectAtIndex:0] objectForKey:@"member"] objectForKey:@"content_gps"];
             cell.userPostTime_2.text = model.create_time;
             
             CGRect rect_1 = [cell boundingRectCommentWith:[NSString stringWithFormat:@"%@",model.content_body]];
@@ -500,6 +499,7 @@
     
     if (success){
         [self showHint:[object objectForKey:@"msg"]];
+        [self requestDetatils];
     }else{
         [self showHint:[object objectForKey:@"msg"]];
     }

@@ -20,6 +20,9 @@
 //请求list
 - (void)requestDataWithPageCount:(NSInteger)pc withPlantType:(NSString *)plantType;
 
+//获取全部肉肉总数量
+- (void)requestDaqoAllCounts;
+
 //刷新当前list
 - (void)updateCurrentList:(RMPublicModel *)model withRow:(NSInteger)row;
 

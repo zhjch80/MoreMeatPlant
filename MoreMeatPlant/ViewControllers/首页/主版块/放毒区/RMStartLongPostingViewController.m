@@ -12,7 +12,7 @@
 #import "ZFModalTransitionAnimator.h"
 #import "RMLongPostFooterView.h"
 
-@interface RMStartLongPostingViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,StartLongPostingDelegate,EditContentDelegate,LongPostFooterDelegate,RMAFNRequestManagerDelegate> {
+@interface RMStartLongPostingViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,StartLongPostingDelegate,EditContentDelegate,LongPostFooterDelegate> {
     NSInteger cellTextCount;        //section 为2时 总共有几行文字cell
     NSInteger cellImgCount;         //section 为2时 总共有几行图片cell
 }

@@ -28,6 +28,7 @@
     if (!isFirstViewDidAppear){
         [centerCtl requestDataWithPageCount:1 withPlantType:@""];
         [centerCtl requestPlantSubjects];
+        [centerCtl requestDaqoAllCounts];
         [rightCtl requestPlantSubs];
         isFirstViewDidAppear = YES;
     }

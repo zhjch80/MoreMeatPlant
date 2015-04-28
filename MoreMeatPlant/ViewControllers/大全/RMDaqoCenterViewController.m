@@ -392,4 +392,24 @@
     }
 }
 
+/**
+ *  @method     获取大全 全部肉肉 总数量
+ */
+- (void)requestDaqoAllCounts {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getDaqoAllcountscallBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            NSString * counts = [[object objectForKey:@"data"] objectForKey:@"counts"];
+            [self setCustomNavTitle:[NSString stringWithFormat:@"全部肉肉(%@)",counts]];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
 @end

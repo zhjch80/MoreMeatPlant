@@ -76,7 +76,7 @@
         
     }else{
         if ([dataModel.body count] == 1){
-            UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
+            UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth)];
             image.userInteractionEnabled = YES;
             image.backgroundColor = [UIColor clearColor];
             image.contentMode = UIViewContentModeCenter;
@@ -102,7 +102,7 @@
             
             for (NSInteger i=0; i<count; i++) {
                 
-                UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
+                UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth)];
                 image.userInteractionEnabled = YES;
                 image.backgroundColor = [UIColor clearColor];
                 image.contentMode = UIViewContentModeCenter;
@@ -126,7 +126,7 @@
             
             __block RMPlantWithSaleDetailsViewController * blockSelf = self;
             
-            cycleView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) animationDuration:-1];
+            cycleView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kScreenWidth) animationDuration:-1];
             cycleView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
                 return displayArr[pageIndex];
             };
@@ -190,7 +190,7 @@
     headerView.userHeader.clipsToBounds = YES;
     [headerView.userHeader sd_setImageWithURL:[NSURL URLWithString:[dataModel.members objectForKey:@"content_face"]] placeholderImage:nil];
     headerView.userName.text = [dataModel.members objectForKey:@"member_name"];
-    headerView.userLocation.text = @"正在定位. . .";
+    headerView.userLocation.text = [dataModel.members objectForKey:@"content_gps"];
     [self.view addSubview:headerView];
 }
 
@@ -366,24 +366,41 @@
             NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
             RMPlantWithSaleDetailsCell * cell = (RMPlantWithSaleDetailsCell *)[mTableView cellForRowAtIndexPath:indexPath];
             NSInteger num = [[NSString stringWithFormat:@"%@",cell.showNum.text] integerValue];
-            if (num <= 1){
+            
+            if ([self.mTitle isEqualToString:@"一肉一拍"]){
+                if (num <= 1){
+                }else{
+                    num --;
+                }
+                cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
             }else{
-                num--;
+                if (num >= 1){
+                    num --;
+                }else{
+                }
+                cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
             }
-            cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
+            
             break;
         }
         case 102:{
             NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
             RMPlantWithSaleDetailsCell * cell = (RMPlantWithSaleDetailsCell *)[mTableView cellForRowAtIndexPath:indexPath];
             NSInteger num = [[NSString stringWithFormat:@"%@",cell.showNum.text] integerValue];
-            if (num > 0){
-            }else{
-                if (![dataModel.content_num isEqualToString:@"0"]){
-                    num++;
+            
+            if ([self.mTitle isEqualToString:@"一肉一拍"]){
+                if (num > 0){
+                }else{
+                    if (![dataModel.content_num isEqualToString:@"0"]){
+                        num ++;
+                    }
                 }
+                cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
+            }else{
+                num ++;
+                cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
             }
-            cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
+    
             break;
         }
         case 103:{

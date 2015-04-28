@@ -331,6 +331,8 @@
         }
         case 2:{
             RMSearchViewController * searchCtl = [[RMSearchViewController alloc] init];
+            searchCtl.searchWhere = @"鲜肉市场";
+            searchCtl.searchType = @"宝贝";
             [self.navigationController pushViewController:searchCtl animated:YES];
             break;
         }
