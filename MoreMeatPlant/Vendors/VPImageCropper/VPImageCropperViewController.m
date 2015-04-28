@@ -207,9 +207,10 @@
         // calculate accelerator
         CGFloat absCenterX = self.cropFrame.origin.x + self.cropFrame.size.width / 2;
         CGFloat absCenterY = self.cropFrame.origin.y + self.cropFrame.size.height / 2;
-        CGFloat scaleRatio = self.showImgView.frame.size.width / self.cropFrame.size.width;
-        CGFloat acceleratorX = 1 - ABS(absCenterX - view.center.x) / (scaleRatio * absCenterX);
-        CGFloat acceleratorY = 1 - ABS(absCenterY - view.center.y) / (scaleRatio * absCenterY);
+        CGFloat scaleRatiox = self.showImgView.frame.size.width / self.cropFrame.size.width;
+        CGFloat scaleRatioy = self.showImgView.frame.size.height / self.cropFrame.size.height;
+        CGFloat acceleratorX = 1 - ABS(absCenterX - view.center.x) / (scaleRatiox * absCenterX);
+        CGFloat acceleratorY = 1 - ABS(absCenterY - view.center.y) / (scaleRatioy * absCenterY);
         CGPoint translation = [panGestureRecognizer translationInView:view.superview];
         [view setCenter:(CGPoint){view.center.x + translation.x * acceleratorX, view.center.y + translation.y * acceleratorY}];
         [panGestureRecognizer setTranslation:CGPointZero inView:view.superview];

@@ -18,7 +18,7 @@
 #define kPhotoName              @"content_license.png"
 #define kImageCachePath         @"imagecache"
 
-#define ORIGINAL_MAX_WIDTH 640.0f
+#define ORIGINAL_MAX_WIDTH  [UIScreen mainScreen].bounds.size.width*2
 
 @implementation UIViewController (VPImageCropper)
 
