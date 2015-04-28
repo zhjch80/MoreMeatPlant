@@ -40,14 +40,17 @@
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
     headView = [[[NSBundle mainBundle] loadNibNamed:@"RMHomeHeadView" owner:self options:nil] lastObject];
-    [_mainTableView setTableHeaderView:headView];
-    
-    
+    headView.frame = CGRectMake(0, 0, kScreenWidth, 132);
     headView.content_img.layer.cornerRadius = 5;
     headView.content_img.clipsToBounds = YES;
     
     [headView.attentionHeBtn addTarget:self action:@selector(attentionHeBtnAction:) forControlEvents:UIControlEventTouchDown];
     [headView.sendPrivateMsgBtn addTarget:self action:@selector(sendPrivateMsgBtnAction:) forControlEvents:UIControlEventTouchDown];
+    
+    UIView * v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 132)];
+    [v addSubview:headView];
+    v.clipsToBounds = YES;
+    [_mainTableView setTableHeaderView:v];
     
     _model = [[RMPublicModel alloc]init];
     
@@ -63,6 +66,9 @@
     if (self.auto_id == nil){
         self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
         self.titleName = @"我的帖子";
+        headView.sendPrivateMsgBtn.hidden = YES;
+        headView.attentionHeBtn.hidden = YES;
+        
     }else{
         self.titleName = @"肉友主页";
     }

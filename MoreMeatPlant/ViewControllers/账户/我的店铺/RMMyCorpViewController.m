@@ -45,9 +45,15 @@
     
     
     headView = [[[NSBundle mainBundle] loadNibNamed:@"RMCorpHeadView" owner:self options:nil] lastObject];
-    [_mainTableview setTableHeaderView:headView];
+
     headView.corp_headImgV.layer.cornerRadius = 5;
     headView.corp_headImgV.clipsToBounds = YES;
+    
+    UIView * v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 226)];
+    v.backgroundColor = [UIColor whiteColor];
+    [v addSubview:headView];
+    v.clipsToBounds = YES;
+    [_mainTableview setTableHeaderView:v];
     
     [headView.collection addTarget:self action:@selector(collectionAction:) forControlEvents:UIControlEventTouchDown];
     
@@ -60,6 +66,10 @@
         self.titleName = @"店铺主页";
         rightOneBarButton.hidden = YES;
     }
+    
+//    [_mainTableview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[headView(==226)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(headView)]];
+    
+    
     
     [self setCustomNavTitle:self.titleName];
 

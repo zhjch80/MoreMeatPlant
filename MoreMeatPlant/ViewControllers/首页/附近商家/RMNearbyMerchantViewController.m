@@ -117,7 +117,7 @@
     float maxlat = myLocationannotation.coordinate.latitude;
     for (RMPublicModel * item in dataarray) {
         RMPointAnnotation * ann = [[RMPointAnnotation alloc]init];
-        CLLocationCoordinate2D coo = CLLocationCoordinate2DMake([item.content_y floatValue], [item.content_x floatValue]);
+        CLLocationCoordinate2D coo = CLLocationCoordinate2DMake([item.content_x floatValue], [item.content_y floatValue]);
         ann.tag = 100+i;
         ann.title = item.content_name;
         ann.coordinate = coo;
@@ -154,7 +154,7 @@
     {
         BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"shopAnnotation"];
         newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
-//        newAnnotationView.image = [UIImage imageNamed:@"map_shop_icon"];
+//        newAnnotationView.image = [UIImage imageNamed:@"img_sun_full"];
         newAnnotationView.pinColor = BMKPinAnnotationColorPurple;//附近店铺
         newAnnotationView.tag = [(RMPointAnnotation *)annotation tag];
         RMPublicModel * model = [dataarray objectAtIndex:[(RMPointAnnotation *)annotation tag]-100];

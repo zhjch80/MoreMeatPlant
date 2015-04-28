@@ -1832,6 +1832,15 @@
             model.content_linkname = OBJC_Nil([dataDic objectForKey:@"content_linkname"]);
             model.content_mobile = OBJC_Nil([dataDic objectForKey:@"content_contact"]);
             model.content_address = OBJC_Nil([dataDic objectForKey:@"content_address"]);
+            model.content_gps = OBJC_Nil([dataDic objectForKey:@"content_gps"]);
+            NSLog(@"%@",model.content_gps);
+            if([model.content_gps rangeOfString:@","].location == NSNotFound){
+                NSLog(@"123123");
+            }else{
+                model.content_x = [OBJC_Nil(model.content_gps) substringToIndex:[model.content_gps rangeOfString:@","].location];
+                model.content_y = [model.content_gps substringFromIndex:[model.content_gps rangeOfString:@","].location+1];
+            }
+            
             model.levelId = OBJC_Nil([dataDic objectForKey:@"level_id"]);
             [Array addObject:model];
         }
