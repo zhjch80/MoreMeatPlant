@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x4e3b;&#x9875;/RMMyHomeViewController.m"
-            timestampString = "451932126.952671"
+            timestampString = "452018076.584153"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "342"
-            endingLineNumber = "342"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "-sendPrivateMsgBtnAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -243,13 +243,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x9996;&#x9875;/&#x9644;&#x8fd1;&#x5546;&#x5bb6;/RMNearbyMerchantViewController.m"
-            timestampString = "451934977.494251"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x5e97;&#x94fa;/RMMyCorpViewController.m"
+            timestampString = "452018361.492902"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "-addAnnotion"
+            startingLineNumber = "510"
+            endingLineNumber = "510"
+            landmarkName = "-goCorp:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

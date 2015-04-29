@@ -12,12 +12,15 @@
 #import "NSString+TimeInterval.h"
 #import "RMHomeHeadView.h"
 #import "AppDelegate.h"
+#import "RMPlantWithSaleViewController.h"
+#import "RMFreshPlantMarketViewController.h"
 @interface RMMyHomeViewController ()<RefreshControlDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
     BOOL isLoadComplete;
     RMPublicModel * _model;
     RMHomeHeadView * headView;
+    JSBadgeView * chat_badge;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
@@ -89,8 +92,16 @@
     badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
     badge.badgeTextFont = FONT(10.0);
     AppDelegate * dele = [[UIApplication sharedApplication] delegate];
-    
-    badge.badgeText = [NSString stringWithFormat:@"%ld",[dele.talkMoreCtl UnreadMessageCount]];
+    badge.hidden = NO;
+    if([dele.talkMoreCtl UnreadMessageCount] == 0){
+        badge.hidden = YES;
+    }else if([dele.talkMoreCtl UnreadMessageCount] < 10){
+        badge.badgeText = [NSString stringWithFormat:@" %ld ",[dele.talkMoreCtl UnreadMessageCount]];
+    }else if ([dele.talkMoreCtl UnreadMessageCount] > 99){
+        badge.badgeText = [NSString stringWithFormat:@"%d",99];
+    }else{
+        badge.badgeText = [NSString stringWithFormat:@"%ld",[dele.talkMoreCtl UnreadMessageCount]];
+    }
     
     [self requestMemberInfo];
 }
@@ -501,7 +512,31 @@
             UIButton * btn = (UIButton *)[bottomView viewWithTag:2];
             [KxMenu showMenuInView:self.view fromRect:CGRectMake(btn.frame.origin.x, bottomView.frame.origin.y, 100, 100) menuItems:arr];
 
-            break;
+            for(UIView * v in self.view.subviews){
+                if([v isKindOfClass:[KxMenuOverlay class]]){
+                    KxMenuView * menuView = (KxMenuView *)[v.subviews lastObject];
+                    UIView * targetView = [menuView viewWithTag:100];
+                    
+                    UILabel * targetlabel = (UILabel *)[targetView viewWithTag:1];
+                    chat_badge = [[JSBadgeView alloc]initWithParentView:targetlabel alignment:JSBadgeViewAlignmentCenterRight];
+                    chat_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
+                    chat_badge.badgeTextFont = FONT(10.0);
+                    chat_badge.badgeText = @"99";
+                    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+                    chat_badge.hidden = NO;
+                    if([dele.talkMoreCtl UnreadMessageCount] == 0){
+                        chat_badge.hidden = YES;
+                    }else if([dele.talkMoreCtl UnreadMessageCount] < 10){
+                        chat_badge.badgeText = [NSString stringWithFormat:@" %ld ",[dele.talkMoreCtl UnreadMessageCount]];
+                    }else if ([dele.talkMoreCtl UnreadMessageCount] > 99){
+                        chat_badge.badgeText = [NSString stringWithFormat:@"%d",99];
+                    }else{
+                        chat_badge.badgeText = [NSString stringWithFormat:@"%ld",[dele.talkMoreCtl UnreadMessageCount]];
+                    }
+                    
+                    break;
+                }
+            }            break;
         }
             
         default:
@@ -512,6 +547,30 @@
 #pragma mark - 菜单选择
 - (void)menuSelected:(id)sender{
     KxMenuItem * item = (KxMenuItem *)sender;
+    switch (item.tag-100) {
+        case 0:
+        {
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+            [dele tabSelectController:3];
+        }
+            break;
+        case 1:
+        {
+            RMPlantWithSaleViewController * plante = [[RMPlantWithSaleViewController alloc]init];
+            [self.navigationController pushViewController:plante animated:YES];
+        }
+            break;
+        case 2:
+        {
+            RMFreshPlantMarketViewController * plante = [[RMFreshPlantMarketViewController alloc]init];
+            [self.navigationController pushViewController:plante animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
+
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{

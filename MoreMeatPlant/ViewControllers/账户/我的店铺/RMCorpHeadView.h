@@ -22,4 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIView *classesView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *renzhengWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *renzheng_rightspace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backViewWidth;
 @end

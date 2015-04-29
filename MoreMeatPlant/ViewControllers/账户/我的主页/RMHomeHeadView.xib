@@ -20,7 +20,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sh2-Ko-Cml">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="132.5"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8gD-Ua-lKN">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="444.png" translatesAutoresizingMaskIntoConstraints="NO" id="8gD-Ua-lKN">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="132.5"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="花儿与少年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tt-Si-CMU">
@@ -166,6 +166,7 @@
         </view>
     </objects>
     <resources>
+        <image name="444.png" width="1242" height="555"/>
         <image name="member_my_home_btn.png" width="242" height="89"/>
         <image name="member_pointline.png" width="831" height="1"/>
         <image name="member_region_icon.png" width="47" height="47"/>

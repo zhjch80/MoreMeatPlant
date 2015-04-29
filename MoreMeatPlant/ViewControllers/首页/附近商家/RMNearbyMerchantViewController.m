@@ -161,7 +161,7 @@
         RMActionPaopaoView * paopao = [[[NSBundle mainBundle] loadNibNamed:@"RMActionPaopaoView" owner:self options:nil] lastObject];
         [paopao.layer setCornerRadius:5.0];
         [paopao.content_face sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
-        paopao.content_content.text = [NSString stringWithFormat:@"店铺名称:%@\n负责人:%@\n联系方式:%@\n店铺地址:%@\n店铺级别:%@",model.content_name,model.content_linkname,model.content_mobile,model.content_address,model.levelId];
+        paopao.content_content.text = [NSString stringWithFormat:@"店铺名称:  %@\n负责人:  %@\n联系方式:  %@\n店铺地址:  %@\n店铺级别:  %@",model.content_name,model.content_linkname,model.content_mobile,model.content_address,model.levelId];
         CGSize size = [paopao.content_content.text getcontentsizeWithfont:paopao.content_content.font constrainedtosize:CGSizeMake(paopao.content_content.frame.size.width, 200) linemode:NSLineBreakByCharWrapping];
         paopao.frame = CGRectMake(paopao.frame.origin.x, paopao.frame.origin.y, paopao.frame.size.width, size.height+8*2);
         BMKActionPaopaoView * paopaoView = [[BMKActionPaopaoView alloc]initWithCustomView:paopao];
@@ -193,7 +193,7 @@
 
 - (void)mapView:(BMKMapView *)mapView annotationViewForBubble:(BMKAnnotationView *)view
 {
-    RMPublicModel * model = [dataarray objectAtIndexedSubscript:[(RMPointAnnotation *)view.annotation tag]];
+    RMPublicModel * model = [dataarray objectAtIndexedSubscript:[(RMPointAnnotation *)view.annotation tag]-100];
     RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
     corp.auto_id = model.auto_id;
     [self.navigationController pushViewController:corp animated:YES];

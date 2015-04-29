@@ -11,6 +11,11 @@
 #import "RMPlantWithSaleDetailsViewController.h"
 #import "RMShopCarViewController.h"
 #import "RMCorpHeadView.h"
+#import "AppDelegate.h"
+#import "RMPlantWithSaleViewController.h"
+#import "RMFreshPlantMarketViewController.h"
+#import "RMMyHomeViewController.h"
+
 @interface RMMyCorpViewController ()<RefreshControlDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
@@ -45,16 +50,20 @@
     
     
     headView = [[[NSBundle mainBundle] loadNibNamed:@"RMCorpHeadView" owner:self options:nil] lastObject];
+//    UIView * v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth/2+75)];
+//    headView.backViewHeight.constant = kScreenWidth/2+75;
+//    headView.backViewWidth.constant = kScreenWidth;
+//    [v addSubview:headView];
+//    
+//    [_mainTableview setTableHeaderView:v];
+    _mainTableview.tableHeaderView = headView;
+    
 
     headView.corp_headImgV.layer.cornerRadius = 5;
     headView.corp_headImgV.clipsToBounds = YES;
     
-    UIView * v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 226)];
-    v.backgroundColor = [UIColor whiteColor];
-    [v addSubview:headView];
-    v.clipsToBounds = YES;
-    [_mainTableview setTableHeaderView:v];
-    
+
+
     [headView.collection addTarget:self action:@selector(collectionAction:) forControlEvents:UIControlEventTouchDown];
     
     if(self.auto_id == nil){
@@ -91,7 +100,18 @@
     car_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
     car_badge.badgeTextFont = FONT(10.0);
     car_badge.badgeText = @"99";
-    
+    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+    chat_badge.hidden = NO;
+    if([dele.talkMoreCtl UnreadMessageCount] == 0){
+        car_badge.hidden = YES;
+    }else if([dele.talkMoreCtl UnreadMessageCount] < 10){
+        car_badge.badgeText = [NSString stringWithFormat:@" %ld ",[dele.talkMoreCtl UnreadMessageCount]];
+    }else if ([dele.talkMoreCtl UnreadMessageCount] > 99){
+        car_badge.badgeText = [NSString stringWithFormat:@"%d",99];
+    }else{
+        car_badge.badgeText = [NSString stringWithFormat:@"%ld",[dele.talkMoreCtl UnreadMessageCount]];
+    }
+
     
     refreshControl=[[RefreshControl alloc] initWithScrollView:_mainTableview delegate:self];
     refreshControl.topEnabled = YES;
@@ -106,6 +126,9 @@
     [self requestCorpid];
     
 }
+
+
+
 
 - (void)createClassView{
     float width = (kScreenWidth-10*2-3)/4.0;
@@ -141,13 +164,13 @@
 - (void)bottomMethodWithTag:(NSInteger)tag {
     switch (tag) {
         case 0:{
-            KxMenuItem * item1 = [KxMenuItem menuItem:@"一肉一拍" image:nil target:self action:@selector(menuClassSelected:) index:100];
-            item1.foreColor = UIColorFromRGB(0x585858);
-            KxMenuItem * item2 = [KxMenuItem menuItem:@"进口肉肉" image:nil target:self action:@selector(menuClassSelected:) index:101];
-            item2.foreColor = UIColorFromRGB(0x585858);
-            KxMenuItem * item3 = [KxMenuItem menuItem:@"老庄专区" image:nil target:self action:@selector(menuClassSelected:) index:102];
-            item3.foreColor = UIColorFromRGB(0x585858);
-            NSArray * arr = [[NSArray alloc]initWithObjects:item1,item2,item3, nil];
+            NSMutableArray * arr = [[NSMutableArray alloc]init];
+            for(int i = 1;i<[classsModel.classs count];i++){
+                NSDictionary * dic = [classsModel.classs objectAtIndex:i];
+                KxMenuItem * item = [KxMenuItem menuItem:[dic objectForKey:@"content_name"] image:nil target:self action:@selector(menuClassSelected:) index:100+i];
+                item.foreColor = UIColorFromRGB(0x585858);
+                [arr addObject:item];
+            }
             
             [KxMenu setTintColor:[UIColor whiteColor]];
             UIButton * btn = (UIButton *)[bottomView viewWithTag:0];
@@ -193,6 +216,18 @@
                     chat_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
                     chat_badge.badgeTextFont = FONT(10.0);
                     chat_badge.badgeText = @"99";
+                    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+                    chat_badge.hidden = NO;
+                    if([dele.talkMoreCtl UnreadMessageCount] == 0){
+                        chat_badge.hidden = YES;
+                    }else if([dele.talkMoreCtl UnreadMessageCount] < 10){
+                        chat_badge.badgeText = [NSString stringWithFormat:@" %ld ",[dele.talkMoreCtl UnreadMessageCount]];
+                    }else if ([dele.talkMoreCtl UnreadMessageCount] > 99){
+                        chat_badge.badgeText = [NSString stringWithFormat:@"%d",99];
+                    }else{
+                        chat_badge.badgeText = [NSString stringWithFormat:@"%ld",[dele.talkMoreCtl UnreadMessageCount]];
+                    }
+                    
                     break;
                 }
             }
@@ -209,10 +244,36 @@
 #pragma mark - 点击左下角分类
 - (void)menuClassSelected:(id)sender{
     KxMenuItem * item = (KxMenuItem *)sender;
+    pageCount = 1;
+    self.member_class = [[classsModel.classs objectAtIndex:item.tag-100] objectForKey:@"auto_id"];
+    [self requestListWithPlant];
 }
 #pragma mark - 点击右下角聊天
 - (void)menuSelected:(id)sender{
     KxMenuItem * item = (KxMenuItem *)sender;
+    switch (item.tag-100) {
+        case 0:
+        {
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+            [dele tabSelectController:3];
+        }
+            break;
+        case 1:
+        {
+            RMPlantWithSaleViewController * plante = [[RMPlantWithSaleViewController alloc]init];
+            [self.navigationController pushViewController:plante animated:YES];
+        }
+            break;
+        case 2:
+        {
+            RMFreshPlantMarketViewController * plante = [[RMFreshPlantMarketViewController alloc]init];
+            [self.navigationController pushViewController:plante animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark -
@@ -444,6 +505,16 @@
     }];
 }
 
+- (void)goCorp:(id)sender{
+    RMMyHomeViewController * home = [[RMMyHomeViewController alloc]init];
+    if([self.auto_id isEqualToString:[[RMUserLoginInfoManager loginmanager] s_id]]){
+        
+    }else{
+        home.auto_id = self.auto_id;
+    }
+    [self.navigationController pushViewController:home animated:YES];
+}
+
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     switch (sender.tag) {
         case 1:{
@@ -451,7 +522,7 @@
             break;
         }
         case 2:{
-            
+            [self goCorp:nil];
             break;
         }
             
