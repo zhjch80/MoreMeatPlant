@@ -17,6 +17,9 @@
 #import "RefreshControl.h"
 #import "RefreshView.h"
 
+#import "RMMyCorpViewController.h"
+#import "RMMyHomeViewController.h"
+
 //#import "NJKWebViewProgress.h"
 //#import "NJKWebViewProgressView.h"
 
@@ -341,9 +344,13 @@
         
         [cell.toPromoteImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         cell.toPromoteImg.identifierString = model.member_id;
+        cell.toPromoteImg.content_type = model.note_id;
+        [cell.toPromoteImg addTarget:self withSelector:@selector(jumpPromoteMethod:)];
+        
         return cell;
     }else{
-        RMPublicModel * model = [dataCommentArr objectAtIndex:indexPath.row - 1];
+        
+        RMPublicModel * model = [dataCommentArr objectAtIndex:indexPath.row - 1 - [advertisingArr count]];
         if ([model.returns isKindOfClass:[NSNull class]]){
             //评论
             static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_3";
@@ -429,9 +436,15 @@
 
 - (void)jumpPromoteMethod:(RMImageView *)image {
     NSLog(@"member_id:%@",image.identifierString);
-    RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置" withisloadRequest:YES];
-    [self.navigationController pushViewController:baseWebCtl animated:YES];
+    if([image.content_type isEqualToString:@"0"]){
+        RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
+        corp.auto_id = image.identifierString;
+        [self.navigationController pushViewController:corp animated:YES];
+    }else{
+        RMReleasePoisonDetailsViewController * ReleasePoisonDetails = [[RMReleasePoisonDetailsViewController alloc]initWithNibName:@"RMReleasePoisonDetailsViewController" bundle:nil];
+        ReleasePoisonDetails.auto_id = image.identifierString;
+        [self.navigationController pushViewController:ReleasePoisonDetails animated:YES];
+    }
 }
 
 #pragma mark - 给此帖点赞
@@ -684,6 +697,7 @@
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                 model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
+                model.note_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"note_id"]);
                 [advertisingArr addObject:model];
             }
 

@@ -141,9 +141,12 @@
         cell.leaveMessageT.tag = indexPath.section*10+1;
         cell.contactCorpBtn.tag = indexPath.section*1000+indexPath.row;
         
-        cell.leaveMessageT.text = [(RMProductModel *)[[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] objectAtIndex:0] order_message];
+        RMCorpModel * corpmodel = [[RMCorpModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",[(RMProductModel *)[[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] objectAtIndex:0] corp_id]] orderby:nil] lastObject];
         
-        cell.totalMoneyL.text = [NSString stringWithFormat:@"%.0f",[self caculateSection:indexPath]];
+        cell.leaveMessageT.text = [corpmodel order_message];
+        
+//        cell.totalMoneyL.text = [NSString stringWithFormat:@"%.0f",[self caculateSection:indexPath]];
+        cell.express_price.text = [NSString stringWithFormat:@"(含运费%@)",[(RMProductModel *)[[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] objectAtIndex:0] express_price]];
         cell.totalL.text = [NSString stringWithFormat:@"%.0f",[self caculateSection:indexPath]];
         int n = 0;
         for(RMProductModel * model in [[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"]){
@@ -204,7 +207,7 @@
 - (void)goCorpAction:(UIButton *)sender{
     NSInteger tag = sender.tag/1000;
     RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
-    RMProductModel * product = [[[[dataArray objectAtIndex:tag] objectAtIndex:tag] objectForKey:@"products"] lastObject];
+    RMProductModel * product = [[[dataArray objectAtIndex:tag]  objectForKey:@"products"] lastObject];
     corp.auto_id = product.corp_id;
     [self.navigationController pushViewController:corp animated:YES];
 }
@@ -221,6 +224,12 @@
 //    NSInteger num = [cell.numTextField.text integerValue];
 //    num++;
 //    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
+    RMProductModel * model = [[[dataArray objectAtIndex:sender.tag/1000] objectForKey:@"products"] objectAtIndex:sender.tag%1000];
+    if([model.plante isEqualToString:@"1"]){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"一肉一拍区的宝贝只能选择一个哦！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
+        return;
+    }
     
     NSInteger section = sender.tag/1000;
     NSInteger row = sender.tag%1000;
@@ -327,7 +336,7 @@
      NSIndexPath * indexpath = [NSIndexPath indexPathForRow:sender.tag%1000 inSection:sender.tag/1000];
     NSDictionary * dic = [dataArray objectAtIndex:sender.tag/1000];
     NSLog(@"联系卖家%@",indexpath);
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
     AppDelegate * dele = [[UIApplication sharedApplication] delegate];
     [dele tabSelectController:3];
     [dele.talkMoreCtl._chatListVC jumpToChatView:[(RMProductModel *)[[dic objectForKey:@"products"] objectAtIndex:0] corp_user]];
@@ -428,6 +437,7 @@
                     RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
                     [self.navigationController pushViewController:order animated:YES];
                 }
+                 [self dismissPopUpViewControllerWithcompletion:nil];
                 
                 for(RMProductModel * model in [RMProductModel allDbObjects]){
                     if( [RMProductModel removeDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",model.auto_id]])
@@ -497,12 +507,15 @@
     if([[textField.superview superview] isKindOfClass:[RMShopCarGoodsTableViewCell class]]){
 
     }else if([[textField.superview superview] isKindOfClass:[RMShopLeaveMsTableViewCell class]]){
-        NSMutableDictionary * dic = [dataArray objectAtIndex:textField.tag/10];
-        [dic setValue:textField.text forKey:@"order_message"];
-        NSLog(@"%@",[[dataArray objectAtIndex:textField.tag/10] objectForKey:@"order_message"]);
-        RMProductModel * model = [[dic objectForKey:@"products"] objectAtIndex:0];
-        model.order_message = [[dataArray objectAtIndex:textField.tag/10] objectForKey:@"order_message"];
-        [model updatetoDb];
+        NSDictionary * dic = [dataArray objectAtIndex:textField.tag/10];
+        RMCorpModel * model = [[RMCorpModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",[(RMProductModel *)[[dic objectForKey:@"products"] objectAtIndex:0] corp_id]] orderby:nil] lastObject];
+        model.order_message = textField.text;
+        NSLog(@"%ld",(long)model.id__);
+        if([model updatetoDb]){
+            NSLog(@"更新成功");
+        }else{
+            NSLog(@"更新失败");
+        }
     }
 }
 

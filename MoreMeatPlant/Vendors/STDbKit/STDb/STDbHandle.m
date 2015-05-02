@@ -787,7 +787,7 @@ enum {
     }
     sqlite3_finalize(stmt);
     stmt = NULL;
-    [STDbHandle closeDb];
+    //[STDbHandle closeDb];
     if ((rc != SQLITE_DONE) && (rc != SQLITE_ROW)) {
         fprintf(stderr,"update table fail: %s\n",errmsg);
         return NO;

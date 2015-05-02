@@ -22,5 +22,6 @@ typedef void (^RMOrderListViewSeeLogisticsCallBack)(RMPublicModel *model);
 @property (copy, nonatomic) RMOrderListViewGoPayCallBack gopay_callback;
 @property (copy, nonatomic) RMOrderListViewSeeLogisticsCallBack seeLogistics_callback;
 @property (copy, nonatomic) RMOrderListViewGoCorpCallBack goCorp_callback;
+@property (assign, nonatomic) NSInteger pageCount;
 - (void)requestData;
 @end

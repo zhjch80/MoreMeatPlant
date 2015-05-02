@@ -72,16 +72,17 @@
  * Note about setBlurAlpha: You can't change the alpha if the background doesn't have a color set to it
  */
 - (void) setBlurAlpha:(CGFloat)alphaValue{
-    NSInteger numComponents = CGColorGetNumberOfComponents([[self backgroundColor] CGColor]);
-    if (numComponents == 4){
-        const CGFloat *components = CGColorGetComponents([[self backgroundColor] CGColor]);
-        CGFloat red = components[0];
-        CGFloat green = components[1];
-        CGFloat blue = components[2];
-        [self setBackgroundColor:[UIColor colorWithRed:red green:green blue:blue alpha:alphaValue]];
-    }else{
-        [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
-    }
+    int numComponents = CGColorGetNumberOfComponents([[self backgroundColor] CGColor]);
+//    if (numComponents == 4){
+//        const CGFloat *components = CGColorGetComponents([[self backgroundColor] CGColor]);
+//        CGFloat red = components[0];
+//        CGFloat green = components[1];
+//        CGFloat blue = components[2];
+//        [self setBackgroundColor:[UIColor colorWithRed:red green:green blue:blue alpha:alphaValue]];
+//    }else{
+//        [self setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:alphaValue]];
+//    }
+    [self setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:alphaValue]];
 }
 
 @end

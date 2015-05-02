@@ -17,12 +17,15 @@ typedef void (^RMMyOrderViewDidSelectCallBack) (RMPublicModel *model);
     RMOrderListViewController * waitPayCtl;
     RMOrderListViewController * deliveryedCtl;
     RMOrderListViewController * orderDoneCtl;
+    RMOrderListViewController * orderReturnCtl;
 }
 @property (weak, nonatomic) IBOutlet UIButton *waitDelivery;
 @property (weak, nonatomic) IBOutlet UIButton *waitPay;
 @property (weak, nonatomic) IBOutlet UIButton *deliveryed;
 @property (weak, nonatomic) IBOutlet UIButton *orderDone;
+@property (weak, nonatomic) IBOutlet UIButton *returned;
 @property (copy, nonatomic) RMOrderListViewGoPayCallBack  gopay_callback;
+@property (copy, nonatomic) RMOrderListViewGoCorpCallBack goCorp_callback;
 @property (copy, nonatomic) RMOrderListViewSeeLogisticsCallBack seeLogistics_callback;
 
 @property (copy, nonatomic) RMMyOrderViewCallBack callback;

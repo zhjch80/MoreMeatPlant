@@ -14,17 +14,19 @@
 #import "RefreshControl.h"
 #import "RefreshView.h"
 #import "UIViewController+HUD.h"
+#import "RMOrderReturnEditView.h"
 
 @interface RMOrderListViewController ()<RefreshControlDelegate>{
-    NSInteger pageCount;
+    
     BOOL isRefresh;
+    RMOrderReturnEditView * returnEditView;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
 @end
 
 @implementation RMOrderListViewController
-@synthesize refreshControl;
+@synthesize refreshControl,pageCount;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -78,6 +80,8 @@
                  cell.order_status.text = @"已取消";
             }else if ([model.is_status integerValue] == 5){
                  cell.order_status.text = @"已完成";
+            }else{
+                cell.order_status.text = @"未处理";
             }
         }else{
             cell.order_status.text = @"待付款";
@@ -129,6 +133,15 @@
                 [cell.rightBtn setTitle:@"发表评论" forState:UIControlStateNormal];
             }
 
+        }else if ([_order_type isEqualToString:@"returnorder"]){
+            cell.leftBtn.hidden = YES;
+            cell.rightBtn.hidden = NO;
+            if([model.is_return boolValue]){//已经退货签收
+                cell.rightBtn.hidden = YES;
+            }else{//待签收
+                [cell.rightBtn setTitle:@"申请退货" forState:UIControlStateNormal];
+            }
+            
         }
         return cell;
     }else{
@@ -197,6 +210,12 @@
     }else if ([_order_type isEqualToString:@"okorder"]){
         //发表评价
         [self publishEvaluate:model];
+    }else if ([_order_type isEqualToString:@"returnorder"]){
+        if([model.is_return boolValue]){
+        
+        }else{
+            [self applyReturn:model];
+        }
     }
 }
 
@@ -214,6 +233,71 @@
         
     }
 }
+#pragma mark - 申请退货
+- (void)applyReturn:(RMPublicModel *)model{
+    [self showReturnEditView:model];
+}
+
+- (void)showReturnEditView:(RMPublicModel *)model{
+    
+    UIControl * cover = [[UIControl alloc]initWithFrame:_maintableView.frame];
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissAction:)];
+    cover.backgroundColor = [UIColor blackColor];
+    cover.alpha = 0.25;
+    cover.tag = 101311;
+    [cover addGestureRecognizer:tap];
+    [self.view addSubview:cover];
+    
+    if(returnEditView == nil){
+        returnEditView = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderReturnEditView_1" owner:self options:nil] lastObject];
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0 + 64 +49);
+        [returnEditView.seeBtn addTarget:self action:@selector(seeExpress:) forControlEvents:UIControlEventTouchDown];
+        [returnEditView.commitBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
+    }
+    
+    returnEditView._model = model;
+    returnEditView.expressName.text = model.express_name;
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        returnEditView.frame = CGRectMake(0, kScreenHeight-kScreenWidth*206.0/320.0-  64 -49, kScreenWidth, kScreenWidth*206.0/320.0 + 64 +49);
+        
+        [self.view addSubview:returnEditView];
+    }];
+}
+
+- (void)dismissAction:(UITapGestureRecognizer *)tap{
+    [UIView animateWithDuration:0.3 animations:^{
+        UIControl * cover = (UIControl *)[self.view viewWithTag:101311];
+        [cover removeFromSuperview];
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0 + 64 +49);
+        returnEditView.expressName.text = nil;
+        returnEditView.express_price.text = nil;//这里实际上是快递单号，不是价格，
+    }];
+    
+}
+
+
+- (void)commit{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager memberReturnGoodsOrSureDeliveryWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isReturn:YES orderId:returnEditView._model.auto_id expressName:[returnEditView._model.express_name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] expressId:returnEditView.express_price.text andCallBack:^(NSError *error, BOOL success, id object) {
+        
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                //申请成功
+                pageCount = 1;
+                [self requestData];
+            }else{
+                
+            }
+            [self showHint:model.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
+}
+
 
 #pragma mark - 取消订单
 - (void)cancelOrder:(RMPublicModel *)model{
@@ -223,7 +307,8 @@
         if(success){
             RMPublicModel * _model = object;
             if(_model.status){
-            
+                pageCount = 1;
+                [self requestData];
             }else{
             
             }

@@ -252,7 +252,7 @@
                             see.express_no = model.express_no;
                             [self.navigationController pushViewController:see animated:YES];
                         };
-                        order.gopay_callback = ^(RMPublicModel * model){
+                        order.goCorp_callback = ^(RMPublicModel * model){
                             RMMyCorpViewController * corp = [[RMMyCorpViewController alloc] initWithNibName:@"RMMyCorpViewController" bundle:nil];
                             corp.auto_id = [[model.pros lastObject] objectForKey:@"corp_id"];
                             [self.navigationController pushViewController:corp animated:YES];
@@ -420,13 +420,26 @@
                     }
                         break;
                     case 4:{//已出宝贝
-//                        RMHadBabyViewController * hadbaby = [RMHadBabyViewController alloc]
                         isShow = YES;
                         RMHadBabyViewController * hadbaby = [[RMHadBabyViewController alloc]initWithNibName:@"RMHadBabyViewController" bundle:nil];
                         hadbaby.callback = ^(void){
                             isShow = NO;
                             [self dismissPopUpViewControllerWithcompletion:nil];
                         };
+                        
+                        hadbaby.seeLogistics_callback = ^(RMPublicModel * model){
+                            //查看物流信息
+                            RMSeeLogisticsViewController * see = [[RMSeeLogisticsViewController alloc]initWithNibName:@"RMSeeLogisticsViewController" bundle:nil];
+                            see.express_name = model.express_name;
+                            see.express_no = model.express_no;
+                            [self.navigationController pushViewController:see animated:YES];
+                        };
+                        hadbaby.goCorp_callback = ^(RMPublicModel * model){
+                            RMMyCorpViewController * corp = [[RMMyCorpViewController alloc] initWithNibName:@"RMMyCorpViewController" bundle:nil];
+                            corp.auto_id = [[model.pros lastObject] objectForKey:@"corp_id"];
+                            [self.navigationController pushViewController:corp animated:YES];
+                        };
+                        
                         hadbaby.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
                         [self presentPopUpViewController:hadbaby overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
                     }
@@ -599,6 +612,9 @@
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UserPwd];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:LoginState];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UserType];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UserYPWD];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UserS_id];
+
     
     NSString * user = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
     NSString * pwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserPwd];
@@ -610,6 +626,9 @@
     [[RMUserLoginInfoManager loginmanager] setPwd:pwd];
     [[RMUserLoginInfoManager loginmanager] setIsCorp:iscorp];
     [[RMUserLoginInfoManager loginmanager] setCoorStr:coorstr];
+    [[RMUserLoginInfoManager loginmanager] setYpwd:nil];
+    [[RMUserLoginInfoManager loginmanager] setS_id:nil];
+
     
     AppDelegate * dele = [[UIApplication sharedApplication] delegate];
     //环信注销

@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RMPublicModel.h"
 @interface RMOrderReturnEditView : UIView
 @property (weak, nonatomic) IBOutlet UITextField *expressName;
 @property (weak, nonatomic) IBOutlet UITextField *express_price;
 @property (weak, nonatomic) IBOutlet UIButton *commitBtn;
 @property (weak, nonatomic) IBOutlet UIButton *seeBtn;
+@property (retain, nonatomic) RMPublicModel * _model;
 
 @end

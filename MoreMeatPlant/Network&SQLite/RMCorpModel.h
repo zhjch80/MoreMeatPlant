@@ -11,4 +11,5 @@
 @interface RMCorpModel : STDbObject
 @property (retain, nonatomic) NSString * corp_name;
 @property (retain, nonatomic) NSString * corp_id;
+@property (retain, nonatomic) NSString * order_message;//留言
 @end

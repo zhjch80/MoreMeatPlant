@@ -78,11 +78,12 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     JWBlurView *bluredView = [[JWBlurView alloc] initWithFrame:overlayView.bounds];
     bluredView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     bluredView.tag = kENPopUpBluredViewTag;
-    [bluredView setBlurAlpha:0.5f];
-    [bluredView setAlpha:0.3f];
-    [bluredView setBlurColor:[UIColor blackColor]];
-    bluredView.backgroundColor = [UIColor blackColor];
-//    [overlayView addSubview:bluredView];
+    [bluredView setBlurAlpha:.0f];
+    [bluredView setAlpha:.0f];
+    [bluredView setBlurColor:[UIColor clearColor]];
+    bluredView.backgroundColor = [UIColor clearColor];
+    [overlayView addSubview:bluredView];
+    
     
     // Make the background clickable
 //    UIButton * dismissButton = [UIButton buttonWithType:UIButtonTypeCustom];

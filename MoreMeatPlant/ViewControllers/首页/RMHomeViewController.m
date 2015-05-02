@@ -26,6 +26,9 @@
 #import "RefreshControl.h"
 #import "RefreshView.h"
 
+#import "RMReleasePoisonDetailsViewController.h"
+#import "RMMyCorpViewController.h"
+
 typedef enum{
     kRMDefault = 100,
     kRMReleasePoison = 1,
@@ -125,6 +128,7 @@ typedef enum{
         RMPublicModel * model = [advertisingArr objectAtIndex:i];
         popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + i*45, kScreenWidth, 45);
         popularizeView.identifierString = model.member_id;
+        popularizeView.content_type = model.note_id;
         [popularizeView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         [popularizeView addTarget:self withSelector:@selector(jumpPopularize:)];
         [headerView addSubview:popularizeView];
@@ -272,10 +276,15 @@ typedef enum{
 
 - (void)jumpPopularize:(RMImageView *)image {
     NSLog(@"会员标识:%@",image.identifierString);
-
-    RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置" withisloadRequest:YES];
-    [self.navigationController pushViewController:baseWebCtl animated:YES];
+    if([image.content_type isEqualToString:@"0"]){
+        RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
+        corp.auto_id = image.identifierString;
+        [self.navigationController pushViewController:corp animated:YES];
+    }else{
+        RMReleasePoisonDetailsViewController * ReleasePoisonDetails = [[RMReleasePoisonDetailsViewController alloc]initWithNibName:@"RMReleasePoisonDetailsViewController" bundle:nil];
+        ReleasePoisonDetails.auto_id = image.identifierString;
+        [self.navigationController pushViewController:ReleasePoisonDetails animated:YES];
+    }   
 }
 
 #pragma mark - 数据请求
@@ -300,6 +309,7 @@ typedef enum{
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                 model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
+                model.note_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"note_id"]);
                 [advertisingArr addObject:model];
             }
 

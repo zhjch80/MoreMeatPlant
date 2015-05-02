@@ -227,7 +227,20 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="206" y="139.5"/>
+            <connections>
+                <outlet property="btn_right" destination="SPb-Xy-rTh" id="ZeR-oq-uw0"/>
+                <outlet property="content_address" destination="iMO-YQ-0QJ" id="JtZ-Bx-nSN"/>
+                <outlet property="content_mobile" destination="qJl-fw-iEW" id="TnV-zB-fAx"/>
+                <outlet property="content_name" destination="58L-hD-T66" id="MFe-fD-Ulp"/>
+                <outlet property="content_num" destination="o0l-4J-2ga" id="0dK-Kz-O7h"/>
+                <outlet property="express" destination="ufN-cY-Fqh" id="fQg-ai-XBJ"/>
+                <outlet property="leaveMsg" destination="ZCh-RX-MMe" id="Xge-fq-1Ku"/>
+                <outlet property="left_btn" destination="3Oh-zR-ehy" id="bAB-vm-sM0"/>
+                <outlet property="note" destination="7Zw-4m-9wo" id="9OH-xK-Ddl"/>
+                <outlet property="realy_total" destination="kiK-mL-kVh" id="miP-4q-6XZ"/>
+                <outlet property="total_money" destination="k4R-mr-HeX" id="rhB-4N-dCV"/>
+            </connections>
+            <point key="canvasLocation" x="347" y="182.5"/>
         </tableViewCell>
     </objects>
     <resources>

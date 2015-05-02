@@ -167,7 +167,7 @@
     self.backgroundImageView.alpha = blurLevel;
     
     if (self.isGlassEffectOn) {
-//        self.backgroundGlassView.alpha = MAX(0.0, MIN(self.backgroundImageView.alpha - self.initialGlassLevel, self.initialGlassLevel));
+        self.backgroundGlassView.alpha = MAX(0.0, MIN(self.backgroundImageView.alpha - self.initialGlassLevel, self.initialGlassLevel));
     }
 }
 

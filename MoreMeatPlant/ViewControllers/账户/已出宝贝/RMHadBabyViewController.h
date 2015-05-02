@@ -15,6 +15,15 @@ typedef void (^RMHadBabyViewCtlCallBack)(void);
     RMHadBabyListViewController * waitPayCtl;
     RMHadBabyListViewController * deliveryedCtl;
     RMHadBabyListViewController * orderDoneCtl;
+    RMHadBabyListViewController * orderReturnCtl;
 }
 @property (copy, nonatomic) RMHadBabyViewCtlCallBack  callback;
+@property (weak, nonatomic) IBOutlet UIButton *waitDelivery;
+@property (weak, nonatomic) IBOutlet UIButton *waitPay;
+@property (weak, nonatomic) IBOutlet UIButton *deliveryed;
+@property (weak, nonatomic) IBOutlet UIButton *orderDone;
+@property (weak, nonatomic) IBOutlet UIButton *returned;
+@property (copy, nonatomic) RMOrderListViewGoPayCallBack  gopay_callback;
+@property (copy, nonatomic) RMOrderListViewGoCorpCallBack goCorp_callback;
+@property (copy, nonatomic) RMOrderListViewSeeLogisticsCallBack seeLogistics_callback;
 @end

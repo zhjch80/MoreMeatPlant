@@ -31,6 +31,9 @@
 #import "AppDelegate.h"
 #import "RMStartLongPostingViewController.h"
 
+#import "RMMyCorpViewController.h"
+#import "RMMyHomeViewController.h"
+
 @interface RMReleasePoisonViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate,CommentsViewDelegate>{
     BOOL isFirstViewDidAppear;
     BOOL isRefresh;
@@ -150,6 +153,7 @@
         RMPublicModel * model = [advertisingArr objectAtIndex:i];
         popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + i*40, kScreenWidth, 40);
         popularizeView.identifierString = model.member_id;
+        popularizeView.content_type = model.note_id;
         [popularizeView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         [popularizeView addTarget:self withSelector:@selector(jumpPopularize:)];
         [headView addSubview:popularizeView];
@@ -811,9 +815,15 @@
 - (void)jumpPopularize:(RMImageView *)image {
     //TODO:数据显示不出来
     NSLog(@"member_id:%@",image.identifierString);
-    RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:@"" withTitle: @"广告位置" withisloadRequest:YES];
-    [self.navigationController pushViewController:baseWebCtl animated:YES];
+    if([image.content_type isEqualToString:@"0"]){
+        RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
+        corp.auto_id = image.identifierString;
+        [self.navigationController pushViewController:corp animated:YES];
+    }else{
+        RMReleasePoisonDetailsViewController * ReleasePoisonDetails = [[RMReleasePoisonDetailsViewController alloc]initWithNibName:@"RMReleasePoisonDetailsViewController" bundle:nil];
+        ReleasePoisonDetails.auto_id = image.identifierString;
+        [self.navigationController pushViewController:ReleasePoisonDetails animated:YES];
+    }
 }
 
 #pragma mark -
@@ -938,6 +948,7 @@
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                 model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
+                model.note_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"note_id"]);
                 [advertisingArr addObject:model];
             }
             

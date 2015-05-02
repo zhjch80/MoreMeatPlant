@@ -9,7 +9,7 @@
 #import "RMOrderReturnEditView.h"
 
 @implementation RMOrderReturnEditView
-
+@synthesize _model;
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -18,4 +18,10 @@
 }
 */
 
+- (id)initWithFrame:(CGRect)frame{
+    if(self == [super initWithFrame:frame]){
+        _model = [[RMPublicModel alloc]init];
+    }
+    return self;
+}
 @end

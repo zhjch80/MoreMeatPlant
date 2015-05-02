@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x5b9d;&#x8d1d;&#x7ba1;&#x7406;/RMBabyListViewController.m"
-            timestampString = "449819412.501536"
+            timestampString = "452236559.376144"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "-shelves_btnAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x5b9d;&#x8d1d;&#x7ba1;&#x7406;/RMBabyListViewController.m"
-            timestampString = "449819758.251932"
+            timestampString = "452236559.376144"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "-shelves_btnAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -131,60 +131,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x8d44;&#x6599;/RMUserInfoEditViewController.m"
-            timestampString = "451725623.38819"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/Vendors/popupController/JWBlurView.m"
-            timestampString = "451715348.720284"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "-setBlurAlpha:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x9996;&#x9875;/&#x4e3b;&#x7248;&#x5757;/&#x4e00;&#x8089;&#x4e00;&#x62cd;/&#x4e00;&#x8089;&#x4e00;&#x62cd;&#x8be6;&#x60c5;/RMPlantWithSaleDetailsViewController.m"
-            timestampString = "451756573.178153"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
-            landmarkName = "-plantWithSaleCellMethodWithTag:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x8d2d;&#x7269;&#x8f66;/RMShopCarViewController.m"
-            timestampString = "451762750.272214"
+            timestampString = "452231722.312178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "421"
-            endingLineNumber = "421"
+            startingLineNumber = "430"
+            endingLineNumber = "430"
             landmarkName = "-commitOrderAction"
             landmarkType = "5">
          </BreakpointContent>
@@ -196,28 +148,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
-            timestampString = "451761440.595519"
+            timestampString = "452281431.63993"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1673"
-            endingLineNumber = "1673"
-            landmarkName = "@implementation RMAFNRequestManager"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
-            timestampString = "451761818.65878"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1679"
-            endingLineNumber = "1679"
-            landmarkName = "+corpReturnSureWithUser:Pwd:orderId:andCallBack:"
+            startingLineNumber = "1674"
+            endingLineNumber = "1674"
+            landmarkName = "+corpStockUpProductWithUser:Pwd:orderId:andCallBack:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -227,13 +163,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x591a;&#x804a;/Chat/ChatView/ChatViewController.m"
-            timestampString = "451847933.174493"
+            filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
+            timestampString = "452281431.63993"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479"
-            landmarkName = "-keyBoardHidden"
+            startingLineNumber = "1680"
+            endingLineNumber = "1680"
+            landmarkName = "+corpStockUpProductWithUser:Pwd:orderId:andCallBack:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -250,6 +186,194 @@
             startingLineNumber = "510"
             endingLineNumber = "510"
             landmarkName = "-goCorp:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x8d2d;&#x7269;&#x8f66;/RMShopCarViewController.m"
+            timestampString = "452231722.312178"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
+            landmarkName = "-validationAction:andN:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x8ba2;&#x5355;/RMMyOrderViewController.m"
+            timestampString = "452236559.376144"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x8ba2;&#x5355;/RMMyOrderViewController.m"
+            timestampString = "452236559.376144"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/RMAccountViewController.m"
+            timestampString = "452235524.832755"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "-layoutViews"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x53d1;&#x5e03;&#x5b9d;&#x8d1d;/RMPublishBabyViewController.m"
+            timestampString = "452236380.235904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "667"
+            endingLineNumber = "667"
+            landmarkName = "-pulishAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x5927;&#x5168;/&#x5927;&#x5168;&#x8be6;&#x60c5;/DKLiveBlurView.m"
+            timestampString = "452237411.960383"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "-setBlurLevel:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DKLiveBlurView setBlurLevel:]"
+                  moduleName = "MoreMeatPlant"
+                  urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E5%A4%A7%E5%85%A8/%E5%A4%A7%E5%85%A8%E8%AF%A6%E6%83%85/DKLiveBlurView.m"
+                  timestampString = "452284193.681366"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "170"
+                  endingLineNumber = "170"
+                  offsetFromSymbolStart = "132">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DKLiveBlurView setBlurLevel:]"
+                  moduleName = "MoreMeatPlant"
+                  urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E5%A4%A7%E5%85%A8/%E5%A4%A7%E5%85%A8%E8%AF%A6%E6%83%85/DKLiveBlurView.m"
+                  timestampString = "452284193.6815"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "170"
+                  endingLineNumber = "170"
+                  offsetFromSymbolStart = "172">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DKLiveBlurView setBlurLevel:]"
+                  moduleName = "MoreMeatPlant"
+                  urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E5%A4%A7%E5%85%A8/%E5%A4%A7%E5%85%A8%E8%AF%A6%E6%83%85/DKLiveBlurView.m"
+                  timestampString = "452284193.681612"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "170"
+                  endingLineNumber = "170"
+                  offsetFromSymbolStart = "176">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x8d2d;&#x7269;&#x8f66;/RMShopCarViewController.m"
+            timestampString = "452245891.644257"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "437"
+            endingLineNumber = "437"
+            landmarkName = "-commitOrderAction"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/RMAccountViewController.m"
+            timestampString = "452283877.532538"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "432"
+            endingLineNumber = "432"
+            landmarkName = "-layoutViews"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x5df2;&#x51fa;&#x5b9d;&#x8d1d;/RMHadBabyViewController.m"
+            timestampString = "452283982.089254"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

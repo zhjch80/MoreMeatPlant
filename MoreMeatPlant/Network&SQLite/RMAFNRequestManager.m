@@ -1576,7 +1576,7 @@
             model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
             model.content_status = OBJC_Nil([dataDic objectForKey:@"content_status"]);
             model.content_linkname = OBJC_Nil([dataDic objectForKey:@"content_linkname"]);
-            model.content_address = OBJC_Nil([dataDic objectForKey:@"content_adress"]);
+            model.content_address = OBJC_Nil([dataDic objectForKey:@"content_address"]);
             model.content_mobile = OBJC_Nil([dataDic objectForKey:@"content_mobile"]);
             model.is_pay = OBJC_Nil([dataDic objectForKey:@"is_pay"]);//支付文字状态
             model.payment_id = OBJC_Nil([dataDic objectForKey:@"payment_id"]);
@@ -1592,6 +1592,7 @@
             model.is_status = OBJC_Nil([dataDic objectForKey:@"is_status"]);
             model.is_paystatus = OBJC_Nil([dataDic objectForKey:@"is_paystatus"]);
             model.create_time = OBJC_Nil([dataDic objectForKey:@"create_time"]);
+            model.member_user = OBJC_Nil([dataDic objectForKey:@"member_user"]);
             
             model.express_name = OBJC_Nil([dataDic objectForKey:@"express_name"]);
             model.express_no = OBJC_Nil([dataDic objectForKey:@"express_no"]);

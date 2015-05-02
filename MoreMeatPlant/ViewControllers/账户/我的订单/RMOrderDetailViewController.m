@@ -39,9 +39,9 @@
 //    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.mTableView];
 }
 
-- (void)showReturnEditView{
+- (void)showReturnEditView:(RMPublicModel *)model{
     
-    UIControl * cover = [[UIControl alloc]initWithFrame:_mTableView.frame];
+    UIControl * cover = [[UIControl alloc]initWithFrame:_maintableView.frame];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissAction:)];
     cover.backgroundColor = [UIColor blackColor];
     cover.alpha = 0.25;
@@ -50,15 +50,19 @@
     [self.view addSubview:cover];
     
     if(returnEditView == nil){
-        returnEditView = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderReturnEditView" owner:self options:nil] lastObject];
-        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 206);
+        returnEditView = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderReturnEditView_1" owner:self options:nil] lastObject];
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0 + 64 +49);
+        [returnEditView.seeBtn addTarget:self action:@selector(seeExpress:) forControlEvents:UIControlEventTouchDown];
+        [returnEditView.commitBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
     }
-
+    
+    returnEditView._model = model;
+    returnEditView.expressName.text = model.express_name;
     
     [UIView animateWithDuration:0.3 animations:^{
         
-               returnEditView.frame = CGRectMake(0, kScreenHeight-206, kScreenWidth, 206);
-
+        returnEditView.frame = CGRectMake(0, kScreenHeight-kScreenWidth*206.0/320.0-  64 -49, kScreenWidth, kScreenWidth*206.0/320.0 + 64 +49);
+        
         [self.view addSubview:returnEditView];
     }];
 }
@@ -67,12 +71,34 @@
     [UIView animateWithDuration:0.3 animations:^{
         UIControl * cover = (UIControl *)[self.view viewWithTag:101311];
         [cover removeFromSuperview];
-        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 206);
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0 + 64 +49);
         returnEditView.expressName.text = nil;
         returnEditView.express_price.text = nil;//这里实际上是快递单号，不是价格，
     }];
     
 }
+
+
+- (void)commit{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager memberReturnGoodsOrSureDeliveryWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isReturn:YES orderId:returnEditView._model.auto_id expressName:[returnEditView._model.express_name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] expressId:returnEditView.express_price.text andCallBack:^(NSError *error, BOOL success, id object) {
+        
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                //申请成功
+                pageCount = 1;
+                [self requestData];
+            }else{
+                
+            }
+            [self showHint:model.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [__model.pros count]+4;
 }

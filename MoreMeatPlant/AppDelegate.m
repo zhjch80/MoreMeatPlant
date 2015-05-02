@@ -179,6 +179,14 @@
     self.cusNav.navigationBar.hidden = YES;
     [self.window setRootViewController:self.cusNav];
 }
+//#pragma mark - 登陆
+//- (void)goLoginUser
+//{
+//    RMLoginViewController * login = [[RMLoginViewController alloc]init];
+//    UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:login];
+//    nav.navigationBar.hidden = YES;
+//    [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
+//}
 
 #pragma mark - 外面调用select tab的控制器
 

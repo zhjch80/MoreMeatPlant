@@ -92,6 +92,9 @@
 - (void)requestDataWithPageCount:(NSInteger)page{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager corpBabyListWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Page:page andCallBack:^(NSError *error, BOOL success, id object) {
+        if(pageCount == 1){
+            [babyArray removeAllObjects];
+        }
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
             if([object isKindOfClass:[RMPublicModel class]]){//模型类

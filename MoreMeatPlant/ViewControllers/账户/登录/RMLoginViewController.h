@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *forgotPassBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *registBtn;
+
 @end

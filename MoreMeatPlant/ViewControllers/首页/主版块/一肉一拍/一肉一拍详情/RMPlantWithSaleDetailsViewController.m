@@ -22,16 +22,18 @@
 #import "AppDelegate.h"
 #import "RMMyOrderViewController.h"
 #import "RMMyCollectionViewController.h"
+#import "NSString+Addtion.h"
 
 @interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate,RMAddressEditViewCompletedDelegate>{
     BOOL isFirstViewDidAppear;
     BOOL isRefresh;
-    NSInteger pageCount;
+    NSInteger baby_num;
     BOOL isLoadComplete;
     
     BOOL isAddShopCar;//判断是否是加入购物车还是立即购买                demoker添加
     RMSettlementViewController * settle;
     RMPublicModel * parameterModel;
+    NSString * is_sf;
 }
 @property (nonatomic, strong) RMPlantWithSaleHeaderView * headerView;;
 @property (nonatomic, strong) UITableView * mTableView;
@@ -59,6 +61,8 @@
     // Do any additional setup after loading the view from its nib.
     
     dataArr = [[NSMutableArray alloc] init];
+    
+    baby_num = 1;
     
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
@@ -219,10 +223,6 @@
             break;
         }
         case 2:{
-            if (![[RMUserLoginInfoManager loginmanager] state]){
-                NSLog(@"去登录...");
-                return ;
-            }
             
             RMShopCarViewController * shopCarCtl = [[RMShopCarViewController alloc] init];
             [self.navigationController pushViewController:shopCarCtl animated:YES];
@@ -323,6 +323,26 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         cell.delegate = self;
+        UILabel * kucun = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, cell.productIntro.frame.size.height)];
+        kucun.tag = 101311;
+        [cell.contentView addSubview:kucun];
+        UILabel * shunfengL = [[UILabel alloc]init];
+        shunfengL.tag = 101312;
+        [cell.contentView addSubview:shunfengL];
+        
+        UIButton * shunfengB = [UIButton buttonWithType:UIButtonTypeCustom];
+        shunfengB.tag = 101313;
+        [shunfengB addTarget:self action:@selector(expressSelect:) forControlEvents:UIControlEventTouchDown];
+        [cell.contentView addSubview:shunfengB];
+        
+        UILabel * other_expressL = [[UILabel alloc]init];
+        other_expressL.tag = 101314;
+        [cell.contentView addSubview:other_expressL];
+        
+        UIButton * other_expressB = [UIButton buttonWithType:UIButtonTypeCustom];
+        other_expressB.tag = 101315;
+        [other_expressB addTarget:self action:@selector(expressSelect:) forControlEvents:UIControlEventTouchDown];
+        [cell.contentView addSubview:other_expressB];
     }
     
     NSString * _price = [NSString stringWithFormat:@"¥%@",dataModel.content_price];
@@ -331,11 +351,71 @@
     cell.price.textColor = [UIColor colorWithRed:0.94 green:0 blue:0.3 alpha:1];
     cell.price.attributedText = oneAttributeStr;
 
-    if ([dataModel.is_sf isEqualToString:@"1"]){
-        cell.productIntro.text = [NSString stringWithFormat:@"快递：%@元 顺风:22元 库存:%@件",dataModel.express_price,dataModel.content_num];
-    }else{
-        cell.productIntro.text = [NSString stringWithFormat:@"快递：%@元 库存:%@件",dataModel.express_price,dataModel.content_num];
+//    if ([dataModel.is_sf isEqualToString:@"1"]){
+//        cell.productIntro.text = [NSString stringWithFormat:@"快递：%@元 顺风:22元 库存:%@件",dataModel.express_price,dataModel.content_num];
+//    }else{
+//        cell.productIntro.text = [NSString stringWithFormat:@"快递：%@元 库存:%@件",dataModel.express_price,dataModel.content_num];
+//    }
+    
+    
+    UILabel * kucun = (UILabel *)[cell.contentView viewWithTag:101311];
+    kucun.text = [NSString stringWithFormat:@"库存:%@件",dataModel.content_num];
+    kucun.numberOfLines = 0;
+    kucun.font  = FONT_0(13);
+    kucun.tag = 101311;
+    CGSize size = [kucun.text getcontentsizeWithfont:kucun.font constrainedtosize:CGSizeMake(200, 30) linemode:NSLineBreakByWordWrapping];
+    kucun.frame = CGRectMake(cell.productIntro.frame.size.width-size.width, 0, size.width, size.height);
+    kucun.center = CGPointMake(kucun.center.x, cell.productIntro.frame.size.height/2);
+    
+    
+    
+    UILabel * shunfengL = (UILabel *)[cell.contentView viewWithTag:101312];
+    UIButton * shunfengB = (UIButton *)[cell.contentView viewWithTag:101313];
+    UILabel * other_expressL = (UILabel *)[cell.contentView viewWithTag:101314];
+    UIButton * other_expressB = (UIButton *)[cell.contentView viewWithTag:101315];
+    
+    
+    
+    
+    other_expressB.frame = CGRectMake(other_expressL.frame.origin.x-30, cell.productIntro.frame.size.height/2-30/2, 30, 30);
+    
+    if([dataModel.content_express length]>1 && dataModel.express_price != nil){
+        other_expressL.text = [NSString stringWithFormat:@"%@:%@元",dataModel.content_express,dataModel.express_price];
+        other_expressL.numberOfLines = 0;
+        other_expressL.font  = FONT_0(13);
+        CGSize size = [kucun.text getcontentsizeWithfont:other_expressL.font constrainedtosize:CGSizeMake(200, 30) linemode:NSLineBreakByWordWrapping];
+        other_expressL.frame = CGRectMake(kucun.frame.origin.x-size.width-10, 0, size.width, size.height);
+        other_expressL.center = CGPointMake(other_expressL.center.x, cell.productIntro.frame.size.height/2);
+        
+        other_expressB.frame = CGRectMake(other_expressL.frame.origin.x-20, cell.productIntro.frame.size.height/2-20/2, 20, 20);
+        if([is_sf isEqualToString:@"0"]){
+            [other_expressB setImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
+        }else{
+            [other_expressB setImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
+        }
     }
+    
+    if([dataModel.is_sf boolValue]){
+        if([dataModel.content_express length] == 0){
+            other_expressL.frame = CGRectMake(kucun.frame.origin.x-other_expressL.frame.size.width-10, 0, other_expressL.frame.size.width, other_expressL.frame.size.height);
+            other_expressL.center = CGPointMake(other_expressL.center.x, cell.productIntro.frame.size.height/2);
+            other_expressB.frame = CGRectMake(other_expressL.frame.origin.x-20, cell.productIntro.frame.size.height/2-20/2, 0, 0);
+        }
+        shunfengL.text = [NSString stringWithFormat:@"顺丰:22元"];
+        shunfengL.numberOfLines = 0;
+        shunfengL.font  = FONT_0(13);
+        CGSize size = [kucun.text getcontentsizeWithfont:shunfengL.font constrainedtosize:CGSizeMake(200, 30) linemode:NSLineBreakByWordWrapping];
+        shunfengL.frame = CGRectMake(other_expressB.frame.origin.x-size.width-10, 0, size.width, size.height);
+        shunfengL.center = CGPointMake(shunfengL.center.x, cell.productIntro.frame.size.height/2);
+        
+        shunfengB.frame = CGRectMake(shunfengL.frame.origin.x-20, cell.productIntro.frame.size.height/2-20/2, 20, 20);
+        if([is_sf isEqualToString:@"1"]){
+            [shunfengB setImage:[UIImage imageNamed:@"fbbb_select"] forState:UIControlStateNormal];
+        }else{
+            [shunfengB setImage:[UIImage imageNamed:@"fbbb_no_select"] forState:UIControlStateNormal];
+        }
+    }
+    
     
     if ([dataModel.content_num isEqualToString:@"0"]){
         cell.showNum.text = @"0";
@@ -360,6 +440,24 @@
     return (cell.frame.size.height > 165 ? cell.frame.size.height : 165);
 }
 
+#pragma mark - 
+- (void)expressSelect:(UIButton *)sender{
+    if(sender.tag == 101313){
+        if([is_sf isEqualToString:@"1"]){
+            
+        }else{
+            is_sf = @"1";
+        }
+    }else if (sender.tag == 101315){
+        if([is_sf isEqualToString:@"1"]){
+            is_sf = @"0";
+        }else{
+            
+        }
+    }
+    [mTableView reloadData];
+}
+
 - (void)plantWithSaleCellMethodWithTag:(NSInteger)tag {
     switch (tag) {
         case 101:{
@@ -367,20 +465,24 @@
             RMPlantWithSaleDetailsCell * cell = (RMPlantWithSaleDetailsCell *)[mTableView cellForRowAtIndexPath:indexPath];
             NSInteger num = [[NSString stringWithFormat:@"%@",cell.showNum.text] integerValue];
             
-            if ([self.mTitle isEqualToString:@"一肉一拍"]){
+            if ([dataModel.content_class isEqualToString:@"1"]){//1 标示一肉一拍
                 if (num <= 1){
+                    num = 1;
                 }else{
                     num --;
                 }
                 cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
-            }else{
+            }else{//鲜肉市场
                 if (num >= 1){
                     num --;
                 }else{
+                    num = 1;
                 }
                 cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
+                
             }
-            
+            baby_num = num;
+            [self showHint:@"至少要选择一个宝贝！"];
             break;
         }
         case 102:{
@@ -388,7 +490,7 @@
             RMPlantWithSaleDetailsCell * cell = (RMPlantWithSaleDetailsCell *)[mTableView cellForRowAtIndexPath:indexPath];
             NSInteger num = [[NSString stringWithFormat:@"%@",cell.showNum.text] integerValue];
             
-            if ([self.mTitle isEqualToString:@"一肉一拍"]){
+            if ([dataModel.content_class isEqualToString:@"1"]){
                 if (num > 0){
                 }else{
                     if (![dataModel.content_num isEqualToString:@"0"]){
@@ -396,21 +498,34 @@
                     }
                 }
                 cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
+                [self showHint:@"一肉一拍区的宝贝只能选择一个哦！"];
             }else{
                 num ++;
                 cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
             }
     
+            baby_num = num;
+            
             break;
         }
         case 103:{
             NSLog(@"立即购买auto_id:%@",self.auto_id);
+            if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 2){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"商家会员不可以进行购买服务" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
             [self valliateNums];
             isAddShopCar = NO;
             break;
         }
         case 104:{
             NSLog(@"加入购物车auto_id:%@",self.auto_id);
+            if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 2){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"商家会员不可以进行购买服务" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
             [self valliateNums];
             isAddShopCar = YES;
             break;
@@ -430,10 +545,39 @@
 }
 
 
+#pragma mark - 查阅数据库该宝贝的数量
+- (void)refertoBabyNum{
+    if([dataModel.content_class isEqualToString:@"1"]){
+    
+    }else{
+        
+    }
+}
+
 #pragma mark - 验证库存，加入购物车
 - (void)valliateNums{
+    if(is_sf == nil){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择快递方式" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
+        return;
+    }
+    NSInteger n = baby_num;
+    if([RMProductModel existDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",dataModel.auto_id]])
+    {
+        RMProductModel * pp = [[RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",dataModel.auto_id] orderby:nil] lastObject];
+        if([dataModel.content_class isEqualToString:@"1"]){
+           
+        }else{
+             n = baby_num + pp.content_num;
+        }
+    }else{
+        
+    }
+    
+    
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager valliateGoodsNumWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] auto_id:self.auto_id Nums:1 andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager valliateGoodsNumWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] auto_id:self.auto_id Nums:n andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
         if(success){
@@ -470,12 +614,17 @@
     product.content_img = dataModel.content_img;
     product.content_name = dataModel.content_name;
     product.content_price = dataModel.content_price;
-//    product.content_express = dataModel.content_express;
-//    product.express_price = dataModel.express_price;这里就不需要了
-    product.express = @"1";//这里有问题，待修改
+
+    if([is_sf isEqualToString:@"1"]){
+        product.express = @"1";
+        product.express_price = @"22";
+    }else{
+        product.express = @"2";
+        product.express_price = dataModel.express_price;
+    }
     product.corp_id = dataModel.member_id;
-    product.content_num = 1;
-    product.plante = @"1";
+    product.content_num = baby_num;
+    product.plante = dataModel.content_class;//一肉一拍 还是 鲜肉市场?
     product.corp_user = [dataModel.members objectForKey:@"content_user"];
     
     NSLog(@"%@",product);
@@ -483,6 +632,7 @@
     RMCorpModel * shop = [[RMCorpModel alloc]init];
     shop.corp_id = dataModel.member_id;
     shop.corp_name = [dataModel.members objectForKey:@"member_name"];
+    shop.order_message = @"";
     if([RMCorpModel existDbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",shop.corp_id]])
     {
         [shop updatetoDb];
@@ -492,8 +642,20 @@
         [shop insertToDb];
     }
     
+    NSArray * arr = [RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",product.auto_id] orderby:nil];
+    for(RMProductModel * p in arr){//把所有的这个店铺的商品的快递方式都设置为最后添加的快递方式
+        p.express = product.express;
+        p.express_price = product.express_price;
+    }
+    
     if([RMProductModel existDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",product.auto_id]])
     {
+        RMProductModel * pp = [[RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",product.auto_id] orderby:nil] lastObject];
+        if([dataModel.content_class isEqualToString:@"1"]){
+            
+        }else{
+            pp.content_num = baby_num + pp.content_num;
+        }
         [product updatetoDb];
     }
     else
@@ -625,6 +787,12 @@
             dataModel.series = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"series"]);
             dataModel.is_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"is_collect"]);
             [dataArr addObject:dataModel];
+            
+            if([dataModel.is_sf boolValue]){
+                is_sf = @"1";
+            }else{
+                is_sf = @"0";
+            }
             
             if ([dataModel.is_collect isEqualToString:@"1"]){
                 UIButton * btn = (UIButton *)[bottomView viewWithTag:1];

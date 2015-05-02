@@ -139,4 +139,6 @@
 
 
 @property (retain, nonatomic) NSString * is_redirect;//如果为1，提交订单直接跳转到支付宝接口，如果是0，直接跳转到会员订单列表
+
+@property (retain, nonatomic) NSString * note_id;
 @end

@@ -129,7 +129,7 @@
     mTableView.backgroundColor = [UIColor clearColor];
     mTableView.rowHeight = kDKTableViewDefaultCellHeight;
     
-    liveBlur = [[DKLiveBlurView alloc] initWithFrame: self.view.bounds];
+    liveBlur = [[DKLiveBlurView alloc] initWithFrame: CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
     liveBlur.contentMode = UIViewContentModeCenter;
     //    liveBlur.originalImage = [UIImage imageNamed:@"testBG.jpg"];
     liveBlur.scrollView = mTableView;

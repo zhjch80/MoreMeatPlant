@@ -7,8 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RMBaseViewController.h"
+#import "RMOrderListViewController.h"
 @interface RMHadBabyListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
+@property (retain, nonatomic) NSMutableArray * dataarray;
+@property (assign, nonatomic) NSInteger pageCount;
 
+@property (retain, nonatomic) NSString * order_type;
+@property (copy, nonatomic) RMOrderListViewDidSelectCallBack  didSelectCellcallback;
+@property (copy, nonatomic) RMOrderListViewGoPayCallBack gopay_callback;
+@property (copy, nonatomic) RMOrderListViewSeeLogisticsCallBack seeLogistics_callback;
+@property (copy, nonatomic) RMOrderListViewGoCorpCallBack goCorp_callback;
+
+- (void)requestData;
 @end

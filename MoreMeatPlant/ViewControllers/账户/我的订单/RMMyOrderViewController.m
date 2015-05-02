@@ -26,9 +26,21 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kShowCustomTabbar" object:nil];
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+#pragma mark - 支付完成通知
+- (void)receiveNoti:(NSNotification *)noti{
+    if([noti.name isEqualToString:PaymentCompletedNotification]){
+        
+        [waitPayCtl requestData];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNoti:) name:PaymentCompletedNotification object:nil];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor clearColor];
     [self setCustomNavTitle:@"我的订单"];
@@ -124,16 +136,33 @@
     orderDoneCtl.view.hidden = YES;
     [self.view addSubview:orderDoneCtl.view];
     
+//    orderReturnCtl
+    orderReturnCtl = [[RMOrderListViewController alloc]initWithNibName:@"RMOrderListViewController" bundle:nil];
+    orderReturnCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
+    orderReturnCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
+    orderReturnCtl.order_type = @"returnorder";
+    orderReturnCtl.didSelectCellcallback = ^(RMPublicModel *model){
+        if(Self.didSelectCell_callback){
+            Self.didSelectCell_callback(model);
+        }else{
+            [Self jumptoDetail:model];
+        }
+    };
+    [orderReturnCtl requestData];
+    orderReturnCtl.view.hidden = YES;
+    [self.view addSubview:orderReturnCtl.view];
     
     [_waitDelivery addTarget:self action:@selector(selectOrderType:) forControlEvents:UIControlEventTouchDown];
     [_waitPay addTarget:self action:@selector(selectOrderType:) forControlEvents:UIControlEventTouchDown];
     [_deliveryed addTarget:self action:@selector(selectOrderType:) forControlEvents:UIControlEventTouchDown];
     [_orderDone addTarget:self action:@selector(selectOrderType:) forControlEvents:UIControlEventTouchDown];
+    [_returned addTarget:self action:@selector(selectOrderType:) forControlEvents:UIControlEventTouchDown];
     
     _waitDelivery.tag = 100;
     _waitPay.tag = 101;
     _deliveryed.tag = 102;
     _orderDone.tag  =103;
+    _returned.tag = 104;
     
 }
 - (void)selectOrderType:(UIButton *)sender{
@@ -142,7 +171,7 @@
     [_waitPay setTitleColor:UIColorFromRGB(0xef93aa) forState:UIControlStateNormal];
     [_deliveryed setTitleColor:UIColorFromRGB(0xef93aa) forState:UIControlStateNormal];
     [_orderDone setTitleColor:UIColorFromRGB(0xef93aa) forState:UIControlStateNormal];
-    
+    [_returned setTitleColor:UIColorFromRGB(0xef93aa) forState:UIControlStateNormal];
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [UIView animateWithDuration:0.3 animations:^{
@@ -154,6 +183,7 @@
                 waitPayCtl.view.hidden = YES;
                 deliveryedCtl.view.hidden = YES;
                 orderDoneCtl.view.hidden = YES;
+                orderReturnCtl.view.hidden = YES;
             }
                 break;
             case 1:
@@ -163,6 +193,7 @@
                 waitPayCtl.view.hidden = NO;
                 deliveryedCtl.view.hidden = YES;
                 orderDoneCtl.view.hidden = YES;
+                orderReturnCtl.view.hidden = YES;
             }
                 break;
             case 2:
@@ -172,6 +203,7 @@
                 waitPayCtl.view.hidden = YES;
                 deliveryedCtl.view.hidden = NO;
                 orderDoneCtl.view.hidden = YES;
+                orderReturnCtl.view.hidden = YES;
             }
                 break;
             case 3:
@@ -181,6 +213,17 @@
                 waitPayCtl.view.hidden = YES;
                 deliveryedCtl.view.hidden = YES;
                 orderDoneCtl.view.hidden = NO;
+                orderReturnCtl.view.hidden = YES;
+            }
+                break;
+            case 4:
+            {
+                //退货
+                waitDeliveryCtl.view.hidden = YES;
+                waitPayCtl.view.hidden = YES;
+                deliveryedCtl.view.hidden = YES;
+                orderDoneCtl.view.hidden = YES;
+                orderReturnCtl.view.hidden = NO;
             }
                 break;
             default:

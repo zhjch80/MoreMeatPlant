@@ -757,6 +757,7 @@
 		516F47221ADE5E2E0017879A /* RMPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47211ADE5E2E0017879A /* RMPointAnnotation.m */; };
 		516F47251ADE5ED90017879A /* RMActionPaopaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47241ADE5ED90017879A /* RMActionPaopaoView.m */; };
 		516F47271ADE5EE90017879A /* RMActionPaopaoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */; };
+		51783FCF1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FCE1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
@@ -2124,6 +2125,7 @@
 		516F47231ADE5ED90017879A /* RMActionPaopaoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMActionPaopaoView.h; sourceTree = "<group>"; };
 		516F47241ADE5ED90017879A /* RMActionPaopaoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMActionPaopaoView.m; sourceTree = "<group>"; };
 		516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMActionPaopaoView.xib; sourceTree = "<group>"; };
+		51783FCE1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderReturnEditView_1.xib; sourceTree = "<group>"; };
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
@@ -4098,6 +4100,7 @@
 				51CE2B771AD6ADB900E9E43F /* RMOrderReturnEditView.h */,
 				51CE2B781AD6ADB900E9E43F /* RMOrderReturnEditView.m */,
 				51CE2B7A1AD6ADC700E9E43F /* RMOrderReturnEditView.xib */,
+				51783FCE1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib */,
 			);
 			path = "我的订单";
 			sourceTree = "<group>";
@@ -5735,6 +5738,7 @@
 				5146132C1AE3653E0040E462 /* VoiceSearchFeedback020@2x.png in Resources */,
 				514613261AE3653E0040E462 /* VoiceSearchFeedback017@2x.png in Resources */,
 				514613381AE3653E0040E462 /* chatBar_more_card@2x.png in Resources */,
+				51783FCF1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib in Resources */,
 				1DEB745B1AB9D66800EA1FA7 /* icon_keyword_photo@2x.png in Resources */,
 				1DE43B8D1ABFBADB0035420E /* test_1.jpg in Resources */,
 				51E4B1921AC6534600714F3E /* login_select_bg.png in Resources */,
