@@ -265,6 +265,32 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                           withID:(NSString *)user_id
                          withPWD:(NSString *)user_password
                         callBack:(RMAFNRequestManagerCallBack)block;
+
+/*
+ *  @method             发布长帖子
+ *  @param          auto_id             如果是编辑传 帖子标识字段,不传代表新建
+ *  @param          content_name        帖子标题
+ *  @param          content_type        帖子分类1：放毒区，2:肉肉交换
+ *  @param          content_class       植物分类
+ *  @param          content_course      植物科目
+ *  @param          content_body        帖子内容文字,多个重复传此值
+ *  @param          content_img         帖子内容图片,多个重复传此值
+ *  @param          bodyAuto_id         帖子内容标识字段,不传代表新建，多个重复传此值
+ *  @param          user_id             会员用户名
+ *  @param          user_password       会员密码
+ */
++ (void)postSendLongPostsWithAuto_id:(NSString *)auto_id
+                     withContentName:(NSString *)content_name
+                     withContentType:(NSString *)content_type
+                    withContentClass:(NSString *)content_class
+                   withContentCourse:(NSString *)content_course
+                     withContentBody:(NSDictionary *)content_body
+                      withContentImg:(NSDictionary *)content_img
+                     withBodyAuto_id:(NSString *)bodyAuto_id
+                              withID:(NSString *)user_id
+                             withPWD:(NSString *)user_password
+                            callBack:(RMAFNRequestManagerCallBack)block;
+    
 /**
  *  @method     帖子 搜索
  *  @param      plantClass          植物分类

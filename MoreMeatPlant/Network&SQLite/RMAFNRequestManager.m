@@ -571,6 +571,50 @@
     }];
 }
 
+/*
+ *  @method             发布长帖子
+ *  @param          auto_id             如果是编辑传 帖子标识字段,不传代表新建
+ *  @param          content_name        帖子标题
+ *  @param          content_type        帖子分类1：放毒区，2:肉肉交换
+ *  @param          content_class       植物分类
+ *  @param          content_course      植物科目
+ *  @param          content_body        帖子内容文字,多个重复传此值
+ *  @param          content_img         帖子内容图片,多个重复传此值
+ *  @param          bodyAuto_id         帖子内容标识字段,不传代表新建，多个重复传此值
+ *  @param          user_id             会员用户名
+ *  @param          user_password       会员密码
+ */
++ (void)postSendLongPostsWithAuto_id:(NSString *)auto_id
+                 withContentName:(NSString *)content_name
+                 withContentType:(NSString *)content_type
+                withContentClass:(NSString *)content_class
+               withContentCourse:(NSString *)content_course
+                 withContentBody:(NSDictionary *)content_body
+                  withContentImg:(NSDictionary *)content_img
+                 withBodyAuto_id:(NSString *)bodyAuto_id
+                          withID:(NSString *)user_id
+                         withPWD:(NSString *)user_password
+                        callBack:(RMAFNRequestManagerCallBack)block {
+    NSString * url = [NSString stringWithFormat:@"%@&method=save&app_com=com_center&task=updateNote&frm[content_name]=%@&frm[content_type]=%@&frm[content_class]=%@&frm[content_course]=%@&frm[body][0][content_body]=%@&ID=%@&PWD=%@",baseUrl,content_name,content_type,content_class,content_course,content_body,user_id,user_password];
+    
+    [[RMHttpOperationShared sharedClient] POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSArray * keys = [content_img allKeys];
+        for (NSInteger i=0; i<[keys count]; i++){
+            NSURL * path = [NSURL fileURLWithPath:[content_img objectForKey:[keys objectAtIndex:i]]];
+            NSLog(@"\npath:%ld key:%@\nvalue:%@\n",(long)i,[keys objectAtIndex:i],path);
+            [formData appendPartWithFileURL:path name:[keys objectAtIndex:i] error:nil];
+        }
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
 /**
  *  @method     帖子 搜索
  *  @param      plantClass          植物分类
