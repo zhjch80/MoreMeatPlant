@@ -41,7 +41,7 @@
 
 - (void)showReturnEditView:(RMPublicModel *)model{
     
-    UIControl * cover = [[UIControl alloc]initWithFrame:_maintableView.frame];
+    UIControl * cover = [[UIControl alloc]initWithFrame:_mTableView.frame];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissAction:)];
     cover.backgroundColor = [UIColor blackColor];
     cover.alpha = 0.25;
@@ -87,8 +87,7 @@
             RMPublicModel * model = object;
             if(model.status){
                 //申请成功
-                pageCount = 1;
-                [self requestData];
+                __model.is_return = @"1";
             }else{
                 
             }
@@ -407,7 +406,7 @@
 }
 
 - (void)iWantToReturn:(UIButton *)sender{
-    [self showReturnEditView];
+    [self showReturnEditView:__model];
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
