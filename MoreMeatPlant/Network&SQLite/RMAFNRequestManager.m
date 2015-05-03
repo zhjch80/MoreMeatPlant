@@ -1278,7 +1278,7 @@
         url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld",baseUrl,@"&method=appSev&app_com=com_ccenter&task=productList&per=1&row=10",user,pwd,(long)page];
     }else if (is_shelf != nil){
         url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld&is_shelf=%@",baseUrl,@"&method=appSev&app_com=com_ccenter&task=productList&per=1&row=10",user,pwd,(long)page,is_shelf];
-    }else if (memberclass == nil){
+    }else if (memberclass != nil){
         url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld&memberclass=%@",baseUrl,@"&method=appSev&app_com=com_ccenter&task=productList&per=1&row=10",user,pwd,(long)page,memberclass];
     }
     

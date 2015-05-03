@@ -36,6 +36,8 @@
     all_Ctl = [[RMBabyListViewController alloc] initWithNibName:@"RMBabyListViewController" bundle:nil];
     all_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight);
     all_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-40);
+    all_Ctl.is_shelf = nil;
+    all_Ctl.member_class = nil;
     [self.view addSubview:all_Ctl.view];
     
     
@@ -50,39 +52,63 @@
     };
     
     
-//    ware_Ctl = [[RMBabyListViewController alloc]initWithNibName:@"RMBabyListViewController" bundle:nil];
-//    ware_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-44);
-//    ware_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-44);
-//    
+    ware_Ctl = [[RMBabyListViewController alloc]initWithNibName:@"RMBabyListViewController" bundle:nil];
+    ware_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-40);
+    ware_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-40);
+    ware_Ctl.is_shelf = @"0";
+    ware_Ctl.member_class = nil;
+    [self.view addSubview:ware_Ctl.view];
+    
+    ware_Ctl.view.hidden = YES;
+    
 //    class_Ctl = [[RMBabyListViewController alloc]initWithNibName:@"RMBabyListViewController" bundle:nil];
 //    class_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-44);
 //    class_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-44);
+    [_all_baby_btn addTarget:self action:@selector(all_babyAction:) forControlEvents:UIControlEventTouchDown];
+    
     [_warehouse_baby_btn addTarget:self action:@selector(warehouse_baby_btnAction:) forControlEvents:UIControlEventTouchDown];
     [_class_baby_btn addTarget:self action:@selector(class_baby_btnAction:) forControlEvents:UIControlEventTouchDown];
+    [self requestMemberClass];
 }
 
 
+- (void)all_babyAction:(UIButton *)sender{
+    all_Ctl.member_class = nil;
+    [all_Ctl requestDataWithPageCount:1];
+}
+
 - (void)warehouse_baby_btnAction:(UIButton *)sender{
-    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂未开通，敬请期待！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
-    [alert show];
+    all_Ctl.view.hidden = YES;
+    ware_Ctl.view.hidden = NO;
 }
 
 - (void)class_baby_btnAction:(UIButton *)sender{
 //    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂未开通，敬请期待！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
 //    [alert show];
+    all_Ctl.view.hidden = NO;
+    ware_Ctl.view.hidden = YES;
+    NSMutableArray * arr = [[NSMutableArray alloc]init];
     for(int i = 0;i<[classArray count];i++){
         RMPublicModel * model = [classArray objectAtIndex:i];
         KxMenuItem * item = [KxMenuItem menuItem:model.content_name image:nil target:self action:@selector(menuClassSelected:) index:100+i];
         item.foreColor = UIColorFromRGB(0x585858);
+        [arr addObject:item];
     }
     
     [KxMenu setTintColor:[UIColor whiteColor]];
+    [KxMenu showMenuInView:self.view fromRect:CGRectMake(_class_baby_btn.frame.origin.x, _class_baby_btn.frame.size.height, _class_baby_btn.frame.size.width, _class_baby_btn.frame.size.height)  menuItems:arr];
 }
 
 - (void)menuClassSelected:(KxMenuItem *)sender{
     KxMenuItem * item = (KxMenuItem *)sender;
-//    self.member_class = [[classsModel.classs objectAtIndex:item.tag-100] objectForKey:@"auto_id"];
-//    [self requestListWithPlant];
+    RMPublicModel * model = [classArray objectAtIndex:item.tag-100];
+    if(!all_Ctl.view.hidden){
+        all_Ctl.member_class = model.auto_id;
+        [all_Ctl requestDataWithPageCount:1];
+    }else{
+//        [ware_Ctl requestDataWithPageCount:1];
+        
+    }
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
@@ -112,7 +138,9 @@
 
 #pragma mark - 请求分类
 - (void)requestMemberClass{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager corpbabyClassRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
                 [classArray addObjectsFromArray:object];
         }else{
