@@ -619,6 +619,7 @@
     [[RMHttpOperationShared sharedClient] POST:url parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (NSInteger i=0; i<[content_img count]; i++) {
             NSURL * path = [NSURL fileURLWithPath:[content_img objectAtIndex:i]];
+            NSLog(@"path:%@,index:%ld",path,(long)i);
             [formData appendPartWithFileURL:path name:[NSString stringWithFormat:@"frm[body][%ld][content_img]",(long)i] error:nil];
         }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {

@@ -600,6 +600,17 @@
         }
         case 2:{
             //发布
+            
+            if ([[self trim:titleContent] isEqualToString:@""]){
+                [self showHint:@"请填写一个标题吧"];
+                return ;
+            }
+            
+            if (cellRow==0){
+                [self showHint:@"请填写一点内容吧"];
+                return ;
+            }
+            
             [self requestCommentData];
             break;
         }
@@ -672,7 +683,15 @@
         }
         
         if (success){
-            NSLog(@"object:%@",object);
+            [self showHint:[object objectForKey:@"msg"]];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
+//            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
+//            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                [self dismissViewControllerAnimated:YES completion:nil];
+//            });
+        }else{
+            [self showHint:[object objectForKey:@"msg"]];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];
@@ -686,6 +705,10 @@
     [imageData writeToFile:path atomically:NO];
 }
 
+//校对字符串是否为空
+- (NSString *)trim:(NSString *)str {
+    return [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
