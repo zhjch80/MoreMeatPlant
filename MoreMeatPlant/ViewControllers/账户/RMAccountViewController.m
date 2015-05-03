@@ -152,6 +152,7 @@
         
         self.member_right_tag.hidden = YES;
         self.member_right.hidden = YES;
+        self.member_level.hidden = YES;
     }
     else{//商户会员
         functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n资料",@"已出\n宝贝",@"我的\n帖子",@"系统\n通知",@"附近\n肉友",@"宝贝\n管理",@"我的\n店铺",@"发布\n广告",@"等待\n升级",@"分享",nil];

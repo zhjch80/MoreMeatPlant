@@ -1254,9 +1254,17 @@
 /**
  *  @method     商家宝贝管理列表
  */
-+ (void)corpBabyListWithUser:(NSString *)user Pwd:(NSString *)pwd Page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block{
++ (void)corpBabyListWithUser:(NSString *)user Pwd:(NSString *)pwd memberclass:(NSString *)memberclass is_shelf:(NSString *)is_shelf Page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block{
     //218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_ccenter&task=productList&per=1&row=10&page=1&ID=18513217782&PWD=202cb962ac59075b964b07152d234b70
-    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld",baseUrl,@"&method=appSev&app_com=com_ccenter&task=productList&per=1&row=10",user,pwd,(long)page];
+    NSString * url ;
+    if(memberclass == nil && is_shelf == nil){
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld",baseUrl,@"&method=appSev&app_com=com_ccenter&task=productList&per=1&row=10",user,pwd,(long)page];
+    }else if (is_shelf != nil){
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld&is_shelf=%@",baseUrl,@"&method=appSev&app_com=com_ccenter&task=productList&per=1&row=10",user,pwd,(long)page,is_shelf];
+    }else if (memberclass == nil){
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld&memberclass=%@",baseUrl,@"&method=appSev&app_com=com_ccenter&task=productList&per=1&row=10",user,pwd,(long)page,memberclass];
+    }
+    
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         NSMutableArray * Array = [[NSMutableArray alloc]init];
@@ -1522,6 +1530,12 @@
                     model.content_price = OBJC_Nil([diction objectForKey:@"content_price"]) ;
                     model.content_img = OBJC_Nil([diction objectForKey:@"content_img"]) ;
                 }
+            }else if ([type isEqualToString:@"4"]){
+                //大全
+                NSDictionary * diction = OBJC_Nil([dataDic objectForKey:@"all"]);
+                model.auto_id = OBJC_Nil([diction objectForKey:@"auto_id"]);
+                model.content_name = OBJC_Nil([diction objectForKey:@"content_name"]);
+                model.content_img = OBJC_Nil([diction objectForKey:@"content_img"]) ;
             }
             
             [Array addObject:model];

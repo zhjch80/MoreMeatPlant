@@ -167,7 +167,7 @@
             }
             
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [RMAFNRequestManager getMembersCollectWithCollect_id:dataModel.auto_id withContent_type:@"3" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+            [RMAFNRequestManager getMembersCollectWithCollect_id:dataModel.auto_id withContent_type:@"4" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
                 if (error){
                     NSLog(@"error:%@",error);
                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

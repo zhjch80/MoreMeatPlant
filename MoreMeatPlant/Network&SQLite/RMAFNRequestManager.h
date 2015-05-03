@@ -578,7 +578,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param page  页数
  *  @param block 回调
  */
-+ (void)corpBabyListWithUser:(NSString *)user Pwd:(NSString *)pwd Page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block;
++ (void)corpBabyListWithUser:(NSString *)user Pwd:(NSString *)pwd memberclass:(NSString *)memberclass is_shelf:(NSString *)is_shelf Page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  商家会员分类请求

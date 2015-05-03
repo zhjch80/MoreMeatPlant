@@ -10,15 +10,18 @@
 #import "RMPostCollectionViewController.h"
 #import "RMPlantCollectionViewController.h"
 #import "RMCorpCollectionViewController.h"
+#import "RMDaquanCollectionViewController.h"
 @interface RMMyCollectionViewController : RMBaseViewController{
     RMPostCollectionViewController * postCollectionController;
     RMPlantCollectionViewController * plantCollectionController;
     RMCorpCollectionViewController * corpCollectionController;
+    RMDaquanCollectionViewController * daquanCollectionController;
     NSInteger current_index;
 }
 @property (weak, nonatomic) IBOutlet UIButton *plantBtn;
 @property (weak, nonatomic) IBOutlet UIButton *postBtn;
 @property (weak, nonatomic) IBOutlet UIButton *corpBtn;
 @property (weak, nonatomic) IBOutlet UIView *operationView;
+@property (weak, nonatomic) IBOutlet UIButton *daquan;
 
 @end

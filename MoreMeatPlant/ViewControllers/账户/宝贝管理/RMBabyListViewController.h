@@ -14,5 +14,7 @@ typedef void (^RMBabyListViewModifyCallback) (RMPublicModel * _model);
 }
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
 @property (copy, nonatomic) RMBabyListViewModifyCallback modifycallback;
+@property (retain, nonatomic) NSString * member_class;
+@property (retain, nonatomic) NSString * is_shelf;
 - (void)requestDataWithPageCount:(NSInteger)page;
 @end

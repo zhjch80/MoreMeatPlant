@@ -758,6 +758,8 @@
 		516F47251ADE5ED90017879A /* RMActionPaopaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47241ADE5ED90017879A /* RMActionPaopaoView.m */; };
 		516F47271ADE5EE90017879A /* RMActionPaopaoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */; };
 		51783FCF1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FCE1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib */; };
+		51783FD31AF592D900C6EE18 /* RMDaquanCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FD11AF592D900C6EE18 /* RMDaquanCollectionViewController.m */; };
+		51783FD41AF592D900C6EE18 /* RMDaquanCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FD21AF592D900C6EE18 /* RMDaquanCollectionViewController.xib */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
@@ -2126,6 +2128,9 @@
 		516F47241ADE5ED90017879A /* RMActionPaopaoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMActionPaopaoView.m; sourceTree = "<group>"; };
 		516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMActionPaopaoView.xib; sourceTree = "<group>"; };
 		51783FCE1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderReturnEditView_1.xib; sourceTree = "<group>"; };
+		51783FD01AF592D900C6EE18 /* RMDaquanCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDaquanCollectionViewController.h; sourceTree = "<group>"; };
+		51783FD11AF592D900C6EE18 /* RMDaquanCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDaquanCollectionViewController.m; sourceTree = "<group>"; };
+		51783FD21AF592D900C6EE18 /* RMDaquanCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaquanCollectionViewController.xib; sourceTree = "<group>"; };
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
@@ -4879,6 +4884,9 @@
 				519927521AB5870100B0F83F /* RMCorpCollectionViewController.h */,
 				519927531AB5870100B0F83F /* RMCorpCollectionViewController.m */,
 				519927541AB5870100B0F83F /* RMCorpCollectionViewController.xib */,
+				51783FD01AF592D900C6EE18 /* RMDaquanCollectionViewController.h */,
+				51783FD11AF592D900C6EE18 /* RMDaquanCollectionViewController.m */,
+				51783FD21AF592D900C6EE18 /* RMDaquanCollectionViewController.xib */,
 				519927571AB5876500B0F83F /* RMMyCollectionViewController.h */,
 				519927581AB5876500B0F83F /* RMMyCollectionViewController.m */,
 				519927591AB5876500B0F83F /* RMMyCollectionViewController.xib */,
@@ -5663,6 +5671,7 @@
 				1D7AC43A1AB979E1002204F6 /* 方正正黑简体.TTF in Resources */,
 				1D386C8E1AC16916000B9686 /* RMSysMessageViewController.xib in Resources */,
 				514613391AE3653E0040E462 /* chatBar_more_cardSelected.png in Resources */,
+				51783FD41AF592D900C6EE18 /* RMDaquanCollectionViewController.xib in Resources */,
 				514613721AE3653E0040E462 /* chatBar_more_locationSelected@2x.png in Resources */,
 				1D7090B71AC25CEC00AE47BF /* img_tzed_12.png in Resources */,
 				1DD854881A9454E9003B12A5 /* RMReleasePoisonCell_3.xib in Resources */,
@@ -6131,6 +6140,7 @@
 				0A4105711ABAB3C70060FBD5 /* EMSDWebImageDownloader.m in Sources */,
 				51E268601AAF448E00252DEF /* RMSettlementTableViewCell.m in Sources */,
 				5157DE671AB9DA78005E9FA5 /* RMPublishNumberTableViewCell.m in Sources */,
+				51783FD31AF592D900C6EE18 /* RMDaquanCollectionViewController.m in Sources */,
 				1D9CB17A1AAE9EE500BD5A7D /* AFSecurityPolicy.m in Sources */,
 				1D4DA3201A9216BA006A9EBA /* RMReleasePoisonViewController.m in Sources */,
 				0A41058A1ABAB3C70060FBD5 /* PSTGridLayoutSection.m in Sources */,

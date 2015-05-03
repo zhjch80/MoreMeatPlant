@@ -10,6 +10,7 @@
 #import "RMReleasePoisonDetailsViewController.h"
 #import "RMPlantWithSaleDetailsViewController.h"
 #import "RMMyCorpViewController.h"
+#import "RMDaquanCollectionViewController.h"
 @interface RMMyCollectionViewController ()
 
 @end
@@ -59,19 +60,34 @@
         [SELF.navigationController pushViewController:corp animated:YES];
     };
     
+    
+    daquanCollectionController = [[RMDaquanCollectionViewController alloc]initWithNibName:@"RMDaquanCollectionViewController" bundle:nil];
+    daquanCollectionController.view.frame = CGRectMake(0, _operationView.frame.origin.y+_operationView.frame.size.height, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
+    daquanCollectionController.mainTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
+    daquanCollectionController.view.backgroundColor = [UIColor redColor];
+    daquanCollectionController.detailcall_back = ^ (NSString * auto_id){
+        RMDaqoDetailsViewController * corp = [[RMDaqoDetailsViewController alloc]initWithNibName:@"RMDaqoDetailsViewController" bundle:nil];
+        corp.auto_id = auto_id;
+        [SELF.navigationController pushViewController:corp animated:YES];
+    };
+    
     [self.view addSubview:corpCollectionController.view];
     [self.view addSubview:postCollectionController.view];
     [self.view addSubview:plantCollectionController.view];
+    [self.view addSubview:daquanCollectionController.view];
     
     corpCollectionController.view.hidden = YES;
     postCollectionController.view.hidden = YES;
+    daquanCollectionController.view.hidden = YES;
     
     [_plantBtn addTarget:self action:@selector(selectedAction:) forControlEvents:UIControlEventTouchDown];
     [_postBtn addTarget:self action:@selector(selectedAction:) forControlEvents:UIControlEventTouchDown];
     [_corpBtn addTarget:self action:@selector(selectedAction:) forControlEvents:UIControlEventTouchDown];
+    [_daquan addTarget:self action:@selector(selectedAction:) forControlEvents:UIControlEventTouchDown];
     _plantBtn.tag = 100;
     _postBtn.tag = 101;
     _corpBtn.tag = 102;
+    _daquan.tag = 103;
     
 }
 
@@ -81,6 +97,7 @@
     [_postBtn setTitleColor:UIColorFromRGB(0xef93aa) forState:UIControlStateNormal];
     [_plantBtn setTitleColor:UIColorFromRGB(0xef93aa) forState:UIControlStateNormal];
     [_corpBtn setTitleColor:UIColorFromRGB(0xef93aa) forState:UIControlStateNormal];
+    [_daquan setTitleColor:UIColorFromRGB(0xef93aa) forState:UIControlStateNormal];
     
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
@@ -93,6 +110,7 @@
                 plantCollectionController.view.hidden = NO;
                 corpCollectionController.view.hidden = YES;
                 postCollectionController.view.hidden = YES;
+                daquanCollectionController.view.hidden = YES;
             }
                 break;
             case 1:
@@ -101,6 +119,7 @@
                 plantCollectionController.view.hidden = YES;
                 corpCollectionController.view.hidden = YES;
                 postCollectionController.view.hidden = NO;
+                daquanCollectionController.view.hidden = YES;
             }
                 break;
             case 2:
@@ -109,6 +128,16 @@
                 plantCollectionController.view.hidden = YES;
                 corpCollectionController.view.hidden = NO;
                 postCollectionController.view.hidden = YES;
+                daquanCollectionController.view.hidden = YES;
+            }
+                break;
+            case 3:
+            {
+                //大全
+                plantCollectionController.view.hidden = YES;
+                corpCollectionController.view.hidden = YES;
+                postCollectionController.view.hidden = YES;
+                daquanCollectionController.view.hidden = NO;
             }
                 break;
             default:
