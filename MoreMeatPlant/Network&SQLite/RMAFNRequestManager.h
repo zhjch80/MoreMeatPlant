@@ -636,6 +636,14 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
 + (void)babyShelfOperationWithUser:(NSString *)user Pwd:(NSString *)pwd upShelf:(BOOL)isUp Autoid:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
+ *  宝贝删除
+ *
+ *  @return
+ */
+#pragma mark - 宝贝删除操作
++ (void)babyDeleteOperationWithUser:(NSString *)user Pwd:(NSString *)pwd  Autoid:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block;
+
+/**
  *  广告位信息查询
  *
  *  @param user  用户名

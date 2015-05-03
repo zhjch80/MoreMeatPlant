@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface JWBlurView ()
-@property (nonatomic, strong) UIToolbar * blurBar;
+@property (nonatomic, strong) UIView * blurBar;
 @end
 
 @implementation JWBlurView
@@ -50,8 +50,8 @@
     self.backgroundColor = [UIColor clearColor];
     if (![self blurBar]) {  // lazy instantiate
         self.BlurBar = [[UIToolbar alloc] initWithFrame:[self bounds]];
-        self.blurBar.barStyle = UIBarStyleBlack;
-        self.blurBar.alpha = 1.00f;
+//        self.blurBar.barStyle = UIBarStyleBlackTranslucent;
+        self.blurBar.alpha = 0.7f;
         [self.layer insertSublayer:[self.blurBar layer] atIndex:0];
         
     }
@@ -72,17 +72,16 @@
  * Note about setBlurAlpha: You can't change the alpha if the background doesn't have a color set to it
  */
 - (void) setBlurAlpha:(CGFloat)alphaValue{
-    int numComponents = CGColorGetNumberOfComponents([[self backgroundColor] CGColor]);
-//    if (numComponents == 4){
-//        const CGFloat *components = CGColorGetComponents([[self backgroundColor] CGColor]);
-//        CGFloat red = components[0];
-//        CGFloat green = components[1];
-//        CGFloat blue = components[2];
-//        [self setBackgroundColor:[UIColor colorWithRed:red green:green blue:blue alpha:alphaValue]];
-//    }else{
-//        [self setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:alphaValue]];
-//    }
-    [self setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:alphaValue]];
+    NSInteger numComponents = CGColorGetNumberOfComponents([[self backgroundColor] CGColor]);
+    if (numComponents == 4){
+        const CGFloat *components = CGColorGetComponents([[self backgroundColor] CGColor]);
+        CGFloat red = components[0];
+        CGFloat green = components[1];
+        CGFloat blue = components[2];
+        [self setBackgroundColor:[UIColor colorWithRed:red green:green blue:blue alpha:alphaValue]];
+    }else{
+        [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
+    }
 }
 
 @end

@@ -330,17 +330,21 @@
     switch (sender.tag) {
         case 201:{
             if (![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
                 NSLog(@"去登录...");
                 return ;
             }
             
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self.navigationController popToRootViewControllerAnimated:NO];
             AppDelegate * shareApp = [UIApplication sharedApplication].delegate;
             [shareApp tabSelectController:3];
             break;
         }
         case 202:{
             if (![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
                 NSLog(@"去登录...");
                 return ;
             }
@@ -352,6 +356,8 @@
         case 203:{
             if (![[RMUserLoginInfoManager loginmanager] state]){
                 NSLog(@"去登录...");
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
                 return ;
             }
             

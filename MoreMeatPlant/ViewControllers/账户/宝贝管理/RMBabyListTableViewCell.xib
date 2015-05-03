@@ -106,11 +106,12 @@
                 <outlet property="content_img" destination="LkG-PX-0GL" id="oix-vh-2tX"/>
                 <outlet property="content_name" destination="7BZ-Gh-v5D" id="Ity-H1-PQY"/>
                 <outlet property="content_price" destination="wav-c9-3Zk" id="VCh-rY-96P"/>
+                <outlet property="deleteWidth" destination="9iu-lG-HGI" id="MA0-Qt-JpY"/>
                 <outlet property="delete_btn" destination="xcN-qF-BHh" id="fwE-7u-WJe"/>
                 <outlet property="modify_btn" destination="BIu-ge-Aqo" id="WLH-zV-ae1"/>
                 <outlet property="shelves_btn" destination="hKm-NP-rFI" id="PQE-Vp-fNr"/>
             </connections>
-            <point key="canvasLocation" x="186" y="176"/>
+            <point key="canvasLocation" x="87" y="176"/>
         </tableViewCell>
     </objects>
     <resources>

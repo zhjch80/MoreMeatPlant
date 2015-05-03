@@ -753,14 +753,14 @@
 		5157DE721AB9DABB005E9FA5 /* RMPublishSureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5157DE701AB9DABB005E9FA5 /* RMPublishSureTableViewCell.xib */; };
 		516F47181ADE38D00017879A /* RMHomeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47171ADE38D00017879A /* RMHomeHeadView.m */; };
 		516F471A1ADE38DC0017879A /* RMHomeHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F47191ADE38DC0017879A /* RMHomeHeadView.xib */; };
-		516F471D1ADE416F0017879A /* RMCorpHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F471C1ADE416F0017879A /* RMCorpHeadView.m */; };
-		516F471F1ADE41880017879A /* RMCorpHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F471E1ADE41880017879A /* RMCorpHeadView.xib */; };
 		516F47221ADE5E2E0017879A /* RMPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47211ADE5E2E0017879A /* RMPointAnnotation.m */; };
 		516F47251ADE5ED90017879A /* RMActionPaopaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47241ADE5ED90017879A /* RMActionPaopaoView.m */; };
 		516F47271ADE5EE90017879A /* RMActionPaopaoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */; };
 		51783FCF1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FCE1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib */; };
 		51783FD31AF592D900C6EE18 /* RMDaquanCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FD11AF592D900C6EE18 /* RMDaquanCollectionViewController.m */; };
 		51783FD41AF592D900C6EE18 /* RMDaquanCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FD21AF592D900C6EE18 /* RMDaquanCollectionViewController.xib */; };
+		51783FDF1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FDD1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.m */; };
+		51783FE01AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FDE1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.xib */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
@@ -2121,9 +2121,6 @@
 		516F47161ADE38D00017879A /* RMHomeHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMHomeHeadView.h; sourceTree = "<group>"; };
 		516F47171ADE38D00017879A /* RMHomeHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMHomeHeadView.m; sourceTree = "<group>"; };
 		516F47191ADE38DC0017879A /* RMHomeHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMHomeHeadView.xib; sourceTree = "<group>"; };
-		516F471B1ADE416F0017879A /* RMCorpHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCorpHeadView.h; sourceTree = "<group>"; };
-		516F471C1ADE416F0017879A /* RMCorpHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCorpHeadView.m; sourceTree = "<group>"; };
-		516F471E1ADE41880017879A /* RMCorpHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMCorpHeadView.xib; sourceTree = "<group>"; };
 		516F47201ADE5E2E0017879A /* RMPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPointAnnotation.h; sourceTree = "<group>"; };
 		516F47211ADE5E2E0017879A /* RMPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPointAnnotation.m; sourceTree = "<group>"; };
 		516F47231ADE5ED90017879A /* RMActionPaopaoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMActionPaopaoView.h; sourceTree = "<group>"; };
@@ -2133,6 +2130,9 @@
 		51783FD01AF592D900C6EE18 /* RMDaquanCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDaquanCollectionViewController.h; sourceTree = "<group>"; };
 		51783FD11AF592D900C6EE18 /* RMDaquanCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDaquanCollectionViewController.m; sourceTree = "<group>"; };
 		51783FD21AF592D900C6EE18 /* RMDaquanCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMDaquanCollectionViewController.xib; sourceTree = "<group>"; };
+		51783FDC1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCorpHeadTableViewCell.h; sourceTree = "<group>"; };
+		51783FDD1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCorpHeadTableViewCell.m; sourceTree = "<group>"; };
+		51783FDE1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMCorpHeadTableViewCell.xib; sourceTree = "<group>"; };
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
@@ -4868,9 +4868,9 @@
 				519927331AB5682700B0F83F /* RMMyCorpViewController.xib */,
 				519927441AB572AA00B0F83F /* RMCorpClassesButton.h */,
 				519927451AB572AA00B0F83F /* RMCorpClassesButton.m */,
-				516F471B1ADE416F0017879A /* RMCorpHeadView.h */,
-				516F471C1ADE416F0017879A /* RMCorpHeadView.m */,
-				516F471E1ADE41880017879A /* RMCorpHeadView.xib */,
+				51783FDC1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.h */,
+				51783FDD1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.m */,
+				51783FDE1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.xib */,
 			);
 			path = "我的店铺";
 			sourceTree = "<group>";
@@ -5996,7 +5996,6 @@
 				51DB4E4C1AD1B3F000A6064D /* Resource.bundle in Resources */,
 				1DEB74F21AB9D67A00EA1FA7 /* fbbb_img_32.png in Resources */,
 				51E268391AAE003000252DEF /* STDbKit-Info.plist in Resources */,
-				516F471F1ADE41880017879A /* RMCorpHeadView.xib in Resources */,
 				514613361AE3653E0040E462 /* chat_video_play.png in Resources */,
 				1D93AB891AB13A290034574C /* RMReleasePoisonDetailsCell_4.xib in Resources */,
 				514613141AE3653E0040E462 /* VoiceSearchFeedback008@2x.png in Resources */,
@@ -6030,6 +6029,7 @@
 				514613AA1AE3653E0040E462 /* tabbar_setting@2x.png in Resources */,
 				1DEB75091AB9D67A00EA1FA7 /* login_vaule_bg1.png in Resources */,
 				1DDBBD561ABBB15700E35CD5 /* home.png in Resources */,
+				51783FE01AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.xib in Resources */,
 				514613491AE3653E0040E462 /* faceDelete.png in Resources */,
 				1DAE81C31AD3A77B003BDB85 /* RMReleasePoisonDetailsCell_2_6p.xib in Resources */,
 				519927511AB5846100B0F83F /* RMPlantCollectionViewController.xib in Resources */,
@@ -6106,6 +6106,7 @@
 				1D8397481AB3F72D00DA190A /* AssetHelper.m in Sources */,
 				1D64F4FA1A904E180073EB98 /* RMDaqoViewController.m in Sources */,
 				1D4DA34D1A9393ED006A9EBA /* RMDaqoDetailsViewController.m in Sources */,
+				51783FDF1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.m in Sources */,
 				514611FA1AE2105B0040E462 /* MessageModelManager.m in Sources */,
 				1DD699331AC10F02009A9327 /* SDWebImageManager.m in Sources */,
 				1D7AC4141AB9791E002204F6 /* CycleScrollView.m in Sources */,
@@ -6317,7 +6318,6 @@
 				51D883E71ABB30D600F7A3BD /* RMHadBabyListViewController.m in Sources */,
 				0A41057C1ABAB3C70060FBD5 /* UIImageView+EMWebCache.m in Sources */,
 				1DD326701ABC1132006CD1A8 /* NJKWebViewProgress.m in Sources */,
-				516F471D1ADE416F0017879A /* RMCorpHeadView.m in Sources */,
 				51E268661AAF4D8100252DEF /* RMAddressEditViewController.m in Sources */,
 				1DD6992C1AC10F02009A9327 /* MKAnnotationView+WebCache.m in Sources */,
 				5120FDDC1AB7138E000E9BE1 /* RMMyOrderViewController.m in Sources */,

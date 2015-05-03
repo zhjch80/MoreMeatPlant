@@ -31,7 +31,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="YrO-lw-3wJ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="YrO-lw-3wJ">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dn3-QD-AZn">
@@ -142,7 +142,9 @@
             <constraints>
                 <constraint firstItem="NdB-vH-zBx" firstAttribute="leading" secondItem="wGs-lG-1oa" secondAttribute="leading" id="2jf-8r-qI6"/>
                 <constraint firstItem="NdB-vH-zBx" firstAttribute="top" secondItem="CHr-Ky-lim" secondAttribute="bottom" constant="15" id="9xj-Xc-wEn"/>
+                <constraint firstAttribute="trailing" secondItem="YrO-lw-3wJ" secondAttribute="trailing" id="A9g-7T-Nlv"/>
                 <constraint firstItem="CHr-Ky-lim" firstAttribute="leading" secondItem="NdB-vH-zBx" secondAttribute="leading" id="Api-3n-g3R"/>
+                <constraint firstAttribute="bottom" secondItem="YrO-lw-3wJ" secondAttribute="bottom" id="EIZ-If-R5D"/>
                 <constraint firstItem="CHr-Ky-lim" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="77" id="FJg-Ts-pia"/>
                 <constraint firstItem="KUU-2K-lNI" firstAttribute="leading" secondItem="CHr-Ky-lim" secondAttribute="trailing" id="J6S-oj-70i"/>
                 <constraint firstItem="CTV-qX-JH4" firstAttribute="top" secondItem="wGs-lG-1oa" secondAttribute="bottom" constant="15" id="LWI-eP-SK5"/>
@@ -154,6 +156,7 @@
                 <constraint firstItem="NdB-vH-zBx" firstAttribute="leading" secondItem="dn3-QD-AZn" secondAttribute="leading" id="Tfx-36-TkQ"/>
                 <constraint firstItem="dn3-QD-AZn" firstAttribute="top" secondItem="W31-nS-w0M" secondAttribute="top" id="W3j-BN-yLA"/>
                 <constraint firstItem="KUU-2K-lNI" firstAttribute="trailing" secondItem="W31-nS-w0M" secondAttribute="trailing" id="Ypm-q6-mK1"/>
+                <constraint firstItem="YrO-lw-3wJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cHn-o3-Agj"/>
                 <constraint firstItem="CHr-Ky-lim" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="164" id="diF-ib-woL"/>
                 <constraint firstItem="dn3-QD-AZn" firstAttribute="top" secondItem="NdB-vH-zBx" secondAttribute="bottom" constant="15" id="dob-Ra-qtK"/>
                 <constraint firstAttribute="trailing" secondItem="YPq-Z4-pyO" secondAttribute="trailing" constant="77" id="fbf-H8-frd"/>
@@ -162,6 +165,7 @@
                 <constraint firstItem="W31-nS-w0M" firstAttribute="trailing" secondItem="wGs-lG-1oa" secondAttribute="trailing" id="nNy-gw-kM6"/>
                 <constraint firstItem="CHr-Ky-lim" firstAttribute="leading" secondItem="dn3-QD-AZn" secondAttribute="leading" id="oqY-w2-jfh"/>
                 <constraint firstItem="RPy-5D-hFH" firstAttribute="leading" secondItem="KUU-2K-lNI" secondAttribute="trailing" constant="1" id="pqQ-4l-Zh6"/>
+                <constraint firstItem="YrO-lw-3wJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rad-IM-GOQ"/>
                 <constraint firstItem="NdB-vH-zBx" firstAttribute="top" secondItem="YPq-Z4-pyO" secondAttribute="top" id="rlf-HK-tfb"/>
                 <constraint firstItem="CHr-Ky-lim" firstAttribute="leading" secondItem="NdB-vH-zBx" secondAttribute="leading" id="rpI-F5-Oj5"/>
                 <constraint firstItem="W31-nS-w0M" firstAttribute="trailing" secondItem="YPq-Z4-pyO" secondAttribute="trailing" id="rz9-Ry-6SF"/>

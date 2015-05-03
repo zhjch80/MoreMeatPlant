@@ -45,31 +45,24 @@
                         <constraint firstAttribute="height" constant="1" id="F5J-vb-BGf"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="246" verticalHuggingPriority="251" text="选择快递公司" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFZ-IJ-Gx6">
-                    <rect key="frame" x="15" y="61" width="82" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="246" verticalHuggingPriority="251" text="选择快递公司" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFZ-IJ-Gx6">
+                    <rect key="frame" x="15" y="61" width="84" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="84" id="TFe-mc-Hta"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="13"/>
                     <color key="textColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="247" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="qII-ra-5Gb">
-                    <rect key="frame" x="100" y="56" width="82" height="27"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="82" id="W8t-vT-Q8U"/>
-                        <constraint firstAttribute="height" constant="27" id="d0A-HR-9M9"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6e1-5s-a66">
-                    <rect key="frame" x="190" y="61" width="26" height="16"/>
+                    <rect key="frame" x="192" y="61" width="26" height="16"/>
                     <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="13"/>
                     <color key="textColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="VNu-kc-rkZ">
-                    <rect key="frame" x="219" y="56" width="86" height="27"/>
+                    <rect key="frame" x="221" y="56" width="84" height="27"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="86" id="H7P-bZ-Pzm"/>
                         <constraint firstAttribute="height" constant="27" id="uLP-VK-Yyh"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -97,6 +90,15 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="247" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="qII-ra-5Gb">
+                    <rect key="frame" x="102" y="56" width="82" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="82" id="W8t-vT-Q8U"/>
+                        <constraint firstAttribute="height" constant="27" id="d0A-HR-9M9"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -131,7 +133,7 @@
                 <outlet property="express_price" destination="VNu-kc-rkZ" id="wDK-J7-byU"/>
                 <outlet property="seeBtn" destination="8EF-GM-WtT" id="c5O-Yr-LgR"/>
             </connections>
-            <point key="canvasLocation" x="133" y="151"/>
+            <point key="canvasLocation" x="74" y="178"/>
         </view>
     </objects>
     <resources>

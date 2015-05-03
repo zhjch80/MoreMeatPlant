@@ -11,7 +11,7 @@
 #import "RMUserInfoEditTableViewCell.h"
 #import "RMCorpInfoEditTableViewCell.h"
 #import "RMVPImageCropper.h"
-@interface RMUserInfoEditViewController ()<UITableViewDelegate,UITableViewDataSource,RMVPImageCropperDelegate>{
+@interface RMUserInfoEditViewController ()<UITableViewDelegate,UITableViewDataSource,RMVPImageCropperDelegate,UITextFieldDelegate,UITextViewDelegate>{
     NSURL * content_faceUrl;
     NSURL * cardUrl;
     NSURL * corpUrl;
@@ -123,6 +123,7 @@
             
             UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectPhoto:)];
             cell.content_face.tag = 1000;
+            cell.content_face.userInteractionEnabled = YES;
             [cell.content_face addGestureRecognizer:tap];
         }
         
@@ -193,6 +194,45 @@
         return 649;
     }else{
         return 364;
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:@"1"]){//普通用户
+        
+        RMUserInfoEditTableViewCell * cell = (RMUserInfoEditTableViewCell *)[_mtableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        if(textField == cell.apliyT){
+            __model.zfbNo = textField.text;
+        }else if (textField == cell.codeField){
+        
+        }
+        
+    }else{
+        RMCorpInfoEditTableViewCell * cell = (RMCorpInfoEditTableViewCell *)[_mtableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        if(textField == cell.apliyT){
+            __model.zfbNo = textField.text;
+        }else if (textField == cell.content_link){
+            __model.contentLinkname = textField.text;
+        }else if (textField == cell.content_mobile){
+            __model.contentContact = textField.text;
+        }
+    }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:@"1"]){//普通用户
+        RMUserInfoEditTableViewCell * cell = (RMUserInfoEditTableViewCell *)[_mtableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        if(textView == cell.signatureT){
+            __model.contentQm = textView.text;
+        }
+    }else{
+        RMCorpInfoEditTableViewCell * cell = (RMCorpInfoEditTableViewCell *)[_mtableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        if(textView == cell.signatureT){
+            __model.contentQm = textView.text;
+        }else if (textView == cell.content_address){
+            __model.contentAddress = textView.text;
+        }
     }
 }
 

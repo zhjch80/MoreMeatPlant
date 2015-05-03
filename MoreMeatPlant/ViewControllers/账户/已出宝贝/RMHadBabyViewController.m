@@ -88,8 +88,9 @@
     
     [orderReturnCtl requestData];
     orderReturnCtl.view.hidden = YES;
-    [self.view addSubview:orderDoneCtl.view];
+    [self.view addSubview:orderReturnCtl.view];
     
+    [self showHint:@""];
     
     
     

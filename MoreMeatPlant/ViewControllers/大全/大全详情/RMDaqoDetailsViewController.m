@@ -17,6 +17,7 @@
 #import "RMCommentsView.h"
 #import "FileUtil.h"
 #import "UIView+Effects.h"
+#import "RMShopCarViewController.h"
 
 #define kDKTableViewMainBackgroundImageFileName @"DaQuanBackground.jpg"
 #define kDKTableViewDefaultCellHeight 50.0f
@@ -163,6 +164,8 @@
         case 1:{
             if (![[RMUserLoginInfoManager loginmanager] state]){
                 NSLog(@"去登录...");
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
                 return;
             }
             
@@ -189,6 +192,13 @@
         }
         case 2:{
             NSLog(@"购买");
+            if(![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
+            RMShopCarViewController * shop = [[RMShopCarViewController alloc]initWithNibName:@"RMShopCarViewController" bundle:nil];
+            [self.navigationController pushViewController:shop animated:YES];
             break;
         }
             
@@ -399,7 +409,9 @@
     switch (tag) {
         case 1:{
             if (![[RMUserLoginInfoManager loginmanager] state]){
-                
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
                 NSLog(@"去登录...");
                 return;
             }
@@ -416,7 +428,9 @@
         }
         case 2:{
             if (![[RMUserLoginInfoManager loginmanager] state]){
-                
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
                 NSLog(@"去登录...");
                 return;
             }

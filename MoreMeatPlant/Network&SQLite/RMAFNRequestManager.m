@@ -1495,6 +1495,29 @@
 }
 
 
+#pragma mark - 宝贝删除操作
++ (void)babyDeleteOperationWithUser:(NSString *)user Pwd:(NSString *)pwd  Autoid:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_ccenter&task=delProduct&auto_id=1&ID=18513217782&PWD=202cb962ac59075b964b07152d234b70
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@",baseUrl,@"&method=save&app_com=com_ccenter&task=delProduct",user,pwd,auto_id];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+}
+
+
+
 /**
  *  @method     我的收藏列表 收藏类型：1：帖子、2：店铺、3：宝贝
  */

@@ -10,18 +10,19 @@
 #import "RMCorpClassesButton.h"
 #import "RMPlantWithSaleDetailsViewController.h"
 #import "RMShopCarViewController.h"
-#import "RMCorpHeadView.h"
+#import "RMCorpHeadTableViewCell.h"
 #import "AppDelegate.h"
 #import "RMPlantWithSaleViewController.h"
 #import "RMFreshPlantMarketViewController.h"
 #import "RMMyHomeViewController.h"
+#import "RMBaseWebViewController.h"
 
 @interface RMMyCorpViewController ()<RefreshControlDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
     BOOL isLoadComplete;
     NSMutableArray * dataArr;
-    RMCorpHeadView * headView;
+    RMCorpHeadTableViewCell * headView;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
@@ -48,24 +49,15 @@
     [rightOneBarButton setTitle:@"我的主页" forState:UIControlStateNormal];
     [rightOneBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
-    
-    headView = [[[NSBundle mainBundle] loadNibNamed:@"RMCorpHeadView" owner:self options:nil] lastObject];
-//    UIView * v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth/2+75)];
-//    headView.backViewHeight.constant = kScreenWidth/2+75;
-//    headView.backViewWidth.constant = kScreenWidth;
-//    [v addSubview:headView];
-//    
-//    [_mainTableview setTableHeaderView:v];
-    _mainTableview.tableHeaderView = headView;
-    
-
+    if(headView == nil){
+        headView = [[[NSBundle mainBundle] loadNibNamed:@"RMCorpHeadTableViewCell" owner:self options:nil] lastObject];
+        [headView.collection addTarget:self action:@selector(collectionAction:) forControlEvents:UIControlEventTouchDown];
+        [headView.corp_level addTarget:self action:@selector(jumpToNews:) forControlEvents:UIControlEventTouchDown];
+        [headView.corp_renzheng addTarget:self action:@selector(jumpToNews:) forControlEvents:UIControlEventTouchDown];
+        [headView.corp_sun addTarget:self action:@selector(jumpToNews:) forControlEvents:UIControlEventTouchDown];
+    }
     headView.corp_headImgV.layer.cornerRadius = 5;
     headView.corp_headImgV.clipsToBounds = YES;
-    
-
-
-    [headView.collection addTarget:self action:@selector(collectionAction:) forControlEvents:UIControlEventTouchDown];
-    
     if(self.auto_id == nil){
         headView.collection.hidden = YES;
         self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
@@ -75,11 +67,7 @@
         self.titleName = @"店铺主页";
         rightOneBarButton.hidden = YES;
     }
-    
-//    [_mainTableview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[headView(==226)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(headView)]];
-    
-    
-    
+
     [self setCustomNavTitle:self.titleName];
 
     
@@ -109,7 +97,7 @@
     }else if ([dele.talkMoreCtl UnreadMessageCount] > 99){
         car_badge.badgeText = [NSString stringWithFormat:@"%d",99];
     }else{
-        car_badge.badgeText = [NSString stringWithFormat:@"%ld",[dele.talkMoreCtl UnreadMessageCount]];
+        car_badge.badgeText = [NSString stringWithFormat:@"%ld",(long)[dele.talkMoreCtl UnreadMessageCount]];
     }
 
     
@@ -132,6 +120,7 @@
 
 - (void)createClassView{
     float width = (kScreenWidth-10*2-3)/4.0;
+    
     for(NSInteger i = 0; i<([classsModel.classs count]>4?4:[classsModel.classs count]); i ++ ){
         RMCorpClassesButton * btn = [[RMCorpClassesButton alloc]initWithFrame:CGRectMake(10+(width+1)*(i%4), 0, width, 40)];
         btn.tag = 100+i;
@@ -142,7 +131,6 @@
             self.member_class = [[classsModel.classs objectAtIndex:i] objectForKey:@"auto_id"];
             [self requestListWithPlant];
         };
-        
         [headView.classesView addSubview:btn];
         
         
@@ -221,11 +209,11 @@
                     if([dele.talkMoreCtl UnreadMessageCount] == 0){
                         chat_badge.hidden = YES;
                     }else if([dele.talkMoreCtl UnreadMessageCount] < 10){
-                        chat_badge.badgeText = [NSString stringWithFormat:@" %ld ",[dele.talkMoreCtl UnreadMessageCount]];
+                        chat_badge.badgeText = [NSString stringWithFormat:@" %ld ",(long)[dele.talkMoreCtl UnreadMessageCount]];
                     }else if ([dele.talkMoreCtl UnreadMessageCount] > 99){
                         chat_badge.badgeText = [NSString stringWithFormat:@"%d",99];
                     }else{
-                        chat_badge.badgeText = [NSString stringWithFormat:@"%ld",[dele.talkMoreCtl UnreadMessageCount]];
+                        chat_badge.badgeText = [NSString stringWithFormat:@"%ld",(long)[dele.talkMoreCtl UnreadMessageCount]];
                     }
                     
                     break;
@@ -239,6 +227,13 @@
         default:
             break;
     }
+}
+
+#pragma mark  -点击认证图标的新闻介绍
+- (void)jumpToNews:(UIButton *)sender{
+    RMBaseWebViewController * baseWebView = [[RMBaseWebViewController alloc] init];
+    [self.navigationController pushViewController:baseWebView animated:YES];
+    [baseWebView loadHtmlWithAuto_id:@"10" withTitle:@"说明" withisloadRequest:NO];
 }
 
 #pragma mark - 点击左下角分类
@@ -278,89 +273,106 @@
 
 #pragma mark -
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([dataArr count]%3 == 0){
-        return [dataArr count] / 3;
-    }else if ([dataArr count]%3 == 1){
-        return ([dataArr count] + 2) / 3;
-    }else {
-        return ([dataArr count] + 1) / 3;
+    if(section == 0){
+        return 1;
+    }else{
+        if ([dataArr count]%3 == 0){
+            return [dataArr count] / 3;
+        }else if ([dataArr count]%3 == 1){
+            return ([dataArr count] + 2) / 3;
+        }else {
+            return ([dataArr count] + 1) / 3;
+        }
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * identifierStr = @"plantWithSaleIdentifier";
-    RMPlantWithSaleCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
-    if (!cell){
-        if (IS_IPHONE_6p_SCREEN){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell_6p" owner:self options:nil] lastObject];
-        }else if (IS_IPHONE_6_SCREEN){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell_6" owner:self options:nil] lastObject];
-        }else{
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell" owner:self options:nil] lastObject];
+    if(indexPath.section == 0){
+        return headView;
+    }else{
+        static NSString * identifierStr = @"plantWithSaleIdentifier";
+        RMPlantWithSaleCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+        if (!cell){
+            if (IS_IPHONE_6p_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell_6p" owner:self options:nil] lastObject];
+            }else if (IS_IPHONE_6_SCREEN){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell_6" owner:self options:nil] lastObject];
+            }else{
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell" owner:self options:nil] lastObject];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
+            cell.delegate = self;
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
-        cell.delegate = self;
+        
+        if(indexPath.row*3 < dataArr.count){
+            cell.leftPrice.hidden = NO;
+            cell.leftImg.hidden = NO;
+            cell.leftName.hidden = NO;
+            RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
+            NSString * _price = [NSString stringWithFormat:@"  ¥%@",OBJC(model.content_price)];
+            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+            [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
+            cell.leftPrice.attributedText = oneAttributeStr;
+            cell.leftName.text = [NSString stringWithFormat:@" %@",model.content_name];
+            cell.leftImg.identifierString = model.auto_id;
+            [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        }else{
+            cell.leftPrice.hidden = YES;
+            cell.leftImg.hidden = YES;
+            cell.leftName.hidden = YES;
+        }
+        if(indexPath.row*3+1 < dataArr.count){
+            cell.centerPrice.hidden = NO;
+            cell.centerImg.hidden = NO;
+            cell.centerName.hidden = NO;
+            RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
+            NSString * _price = [NSString stringWithFormat:@"  ¥%@",OBJC(model.content_price)];
+            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+            [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
+            cell.centerPrice.attributedText = oneAttributeStr;
+            cell.centerName.text = [NSString stringWithFormat:@" %@",model.content_name];
+            cell.centerImg.identifierString = model.auto_id;
+            [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        }else{
+            cell.centerPrice.hidden = YES;
+            cell.centerImg.hidden = YES;
+            cell.centerName.hidden = YES;
+        }
+        if(indexPath.row*3+2 < dataArr.count){
+            cell.rightPrice.hidden = NO;
+            cell.rightImg.hidden = NO;
+            cell.rightName.hidden = NO;
+            RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
+            NSString * _price = [NSString stringWithFormat:@"  ¥%@",OBJC(model.content_price)];
+            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+            [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
+            cell.rightPrice.attributedText = oneAttributeStr;
+            cell.rightName.text = [NSString stringWithFormat:@" %@",model.content_name];
+            cell.rightImg.identifierString = model.auto_id;
+            [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        }else{
+            cell.rightPrice.hidden = YES;
+            cell.rightImg.hidden = YES;
+            cell.rightName.hidden = YES;
+        }
+        return cell;
+ 
     }
-    
-    if(indexPath.row*3 < dataArr.count){
-        cell.leftPrice.hidden = NO;
-        cell.leftImg.hidden = NO;
-        cell.leftName.hidden = NO;
-        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
-        NSString * _price = [NSString stringWithFormat:@"  ¥%@",OBJC(model.content_price)];
-        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
-        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
-        cell.leftPrice.attributedText = oneAttributeStr;
-        cell.leftName.text = [NSString stringWithFormat:@" %@",model.content_name];
-        cell.leftImg.identifierString = model.auto_id;
-        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
-    }else{
-        cell.leftPrice.hidden = YES;
-        cell.leftImg.hidden = YES;
-        cell.leftName.hidden = YES;
-    }
-    if(indexPath.row*3+1 < dataArr.count){
-        cell.centerPrice.hidden = NO;
-        cell.centerImg.hidden = NO;
-        cell.centerName.hidden = NO;
-        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
-        NSString * _price = [NSString stringWithFormat:@"  ¥%@",OBJC(model.content_price)];
-        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
-        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
-        cell.centerPrice.attributedText = oneAttributeStr;
-        cell.centerName.text = [NSString stringWithFormat:@" %@",model.content_name];
-        cell.centerImg.identifierString = model.auto_id;
-        [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
-    }else{
-        cell.centerPrice.hidden = YES;
-        cell.centerImg.hidden = YES;
-        cell.centerName.hidden = YES;
-    }
-    if(indexPath.row*3+2 < dataArr.count){
-        cell.rightPrice.hidden = NO;
-        cell.rightImg.hidden = NO;
-        cell.rightName.hidden = NO;
-        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
-        NSString * _price = [NSString stringWithFormat:@"  ¥%@",OBJC(model.content_price)];
-        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
-        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
-        cell.rightPrice.attributedText = oneAttributeStr;
-        cell.rightName.text = [NSString stringWithFormat:@" %@",model.content_name];
-        cell.rightImg.identifierString = model.auto_id;
-        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
-    }else{
-        cell.rightPrice.hidden = YES;
-        cell.rightImg.hidden = YES;
-        cell.rightName.hidden = YES;
-    }
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell * cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+    if(indexPath.section == 0){
+        return 226;
+    }else{
+        UITableViewCell * cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.frame.size.height;
+    }
 }
 - (void)jumpPlantDetailsWithImage:(RMImageView *)image {
     RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
@@ -461,6 +473,7 @@
             RMPublicModel * model = object;
             classsModel = model;
 
+//            headView = (RMCorpHeadTableViewCell *)[_mainTableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             [headView.corp_headImgV sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
             headView.corp_nameL.text = classsModel.content_name;
             headView.signatureL.text = classsModel.contentQm;

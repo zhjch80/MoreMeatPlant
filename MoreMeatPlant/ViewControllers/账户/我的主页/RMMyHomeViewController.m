@@ -43,17 +43,12 @@
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
     headView = [[[NSBundle mainBundle] loadNibNamed:@"RMHomeHeadView" owner:self options:nil] lastObject];
-    headView.frame = CGRectMake(0, 0, kScreenWidth, 132);
     headView.content_img.layer.cornerRadius = 5;
     headView.content_img.clipsToBounds = YES;
     
     [headView.attentionHeBtn addTarget:self action:@selector(attentionHeBtnAction:) forControlEvents:UIControlEventTouchDown];
     [headView.sendPrivateMsgBtn addTarget:self action:@selector(sendPrivateMsgBtnAction:) forControlEvents:UIControlEventTouchDown];
     
-    UIView * v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 132)];
-    [v addSubview:headView];
-    v.clipsToBounds = YES;
-    [_mainTableView setTableHeaderView:v];
     
     _model = [[RMPublicModel alloc]init];
     
@@ -129,10 +124,16 @@
 
 
 #pragma mark -
-
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [dataArr count];
+    if(section == 0){
+        return 1;
+    }else{
+        return [dataArr count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -140,172 +141,177 @@
 }
 
 - (UITableViewCell *)loadIndexPath:(NSIndexPath *)indexPath withTableView:(UITableView *)tableView {
-    RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
-    NSInteger value = 0;
-    if ([model.imgs isKindOfClass:[NSNull class]]){
-        value = 0;
+    if(indexPath.section == 0){
+        return headView;
     }else{
-        value = [model.imgs count];
-    }
-    
-    if (value >= 3){
-        static NSString * identifierStr = @"releasePoisonIdentifier_2";
-        RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
-        
-        if (!cell){
-            if (IS_IPHONE_6_SCREEN){
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_2_6" owner:self options:nil] lastObject];
-            }else if (IS_IPHONE_6p_SCREEN){
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_2_6p" owner:self options:nil] lastObject];
-            }else{
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_2" owner:self options:nil] lastObject];
-            }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
-            cell.delegate = self;
-        }
-        
-        cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
-        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
-        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.59 green:0.59 blue:0.59 alpha:1] range:NSMakeRange(0, 2)];
-        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
-        cell.plantTitle.attributedText = oneAttributeStr;
-        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
-        
-        NSString * _name;
-        if ([[model.members objectForKey:@"member_name"] length] > 5){
-            _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
-            _name = [NSString stringWithFormat:@"%@...",_name];
-        }else{
-            _name = [model.members objectForKey:@"member_name"];
-        }
-        
-        cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
-        
-        [cell.leftTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
-        [cell.rightUpTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
-        [cell.rightDownTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:2] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
-        
-        cell.leftTwoImg.identifierString = model.auto_id;
-        cell.rightUpTwoImg.identifierString = model.auto_id;
-        cell.rightDownTwoImg.identifierString = model.auto_id;
-        
-        cell.likeImg.identifierString = model.auto_id;
-        cell.chatImg.identifierString = model.auto_id;
-        cell.praiseImg.identifierString = model.auto_id;
-        
-        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
-        cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
-        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
-        
-        cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
-        cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
-        cell.praiseTitle.text = [self getLargeNumbersToSpecificStr:model.content_top];
-        return cell;
-    }else if (value == 2){
-        static NSString * identifierStr = @"releasePoisonIdentifier_1";
-        RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
-        
-        if (!cell){
-            if (IS_IPHONE_6_SCREEN){
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1_6" owner:self options:nil] lastObject];
-            }else if (IS_IPHONE_6p_SCREEN){
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1_6p" owner:self options:nil] lastObject];
-            }else{
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1" owner:self options:nil] lastObject];
-            }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
-            cell.delegate = self;
-        }
-        
-        cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
-        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
-        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
-        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
-        cell.plantTitle.attributedText = oneAttributeStr;
-        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
-        
-        NSString * _name;
-        if ([[model.members objectForKey:@"member_name"] length] > 5){
-            _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
-            _name = [NSString stringWithFormat:@"%@...",_name];
-        }else{
-            _name = [model.members objectForKey:@"member_name"];
-        }
-        
-        cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
-        
-        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
-        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
-        
-        cell.leftImg.identifierString = model.auto_id;
-        cell.rightImg.identifierString = model.auto_id;
-        cell.likeImg.identifierString = model.auto_id;
-        cell.chatImg.identifierString = model.auto_id;
-        cell.praiseImg.identifierString = model.auto_id;
-        
-        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
-        cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
-        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
-        
-        cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
-        cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
-        cell.praiseTitle.text = [self getLargeNumbersToSpecificStr:model.content_top];
-        return cell;
-    } else {
-        static NSString * identifierStr = @"releasePoisonIdentifier_3";
-        RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
-        
-        if (!cell){
-            if (IS_IPHONE_6p_SCREEN){
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_3_6p" owner:self options:nil] lastObject];
-            }else if (IS_IPHONE_6_SCREEN){
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_3_6" owner:self options:nil] lastObject];
-            }else{
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_3" owner:self options:nil] lastObject];
-            }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
-            cell.delegate = self;
-        }
-        
-        cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
-        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
-        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
-        [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
-        cell.plantTitle.attributedText = oneAttributeStr;
-        [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
-        
-        NSString * _name;
-        if ([[model.members objectForKey:@"member_name"] length] > 5){
-            _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
-            _name = [NSString stringWithFormat:@"%@...",_name];
-        }else{
-            _name = [model.members objectForKey:@"member_name"];
-        }
-        
-        cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
-        
+        RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
+        NSInteger value = 0;
         if ([model.imgs isKindOfClass:[NSNull class]]){
-            cell.threeImg.image = [UIImage imageNamed:@"img_default.jpg"];
+            value = 0;
         }else{
-            [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
+            value = [model.imgs count];
         }
         
-        cell.threeImg.identifierString = model.auto_id;
-        cell.likeImg.identifierString = model.auto_id;
-        cell.chatImg.identifierString = model.auto_id;
-        cell.praiseImg.identifierString = model.auto_id;
-        
-        cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
-        cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
-        cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
-        
-        cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
-        cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
-        cell.praiseTitle.text = [self getLargeNumbersToSpecificStr:model.content_top];
-        return cell;
+        if (value >= 3){
+            static NSString * identifierStr = @"releasePoisonIdentifier_2";
+            RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+            
+            if (!cell){
+                if (IS_IPHONE_6_SCREEN){
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_2_6" owner:self options:nil] lastObject];
+                }else if (IS_IPHONE_6p_SCREEN){
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_2_6p" owner:self options:nil] lastObject];
+                }else{
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_2" owner:self options:nil] lastObject];
+                }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
+                cell.delegate = self;
+            }
+            
+            cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
+            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
+            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.59 green:0.59 blue:0.59 alpha:1] range:NSMakeRange(0, 2)];
+            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
+            cell.plantTitle.attributedText = oneAttributeStr;
+            [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
+            
+            NSString * _name;
+            if ([[model.members objectForKey:@"member_name"] length] > 5){
+                _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
+                _name = [NSString stringWithFormat:@"%@...",_name];
+            }else{
+                _name = [model.members objectForKey:@"member_name"];
+            }
+            
+            cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
+            
+            [cell.leftTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
+            [cell.rightUpTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
+            [cell.rightDownTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:2] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
+            
+            cell.leftTwoImg.identifierString = model.auto_id;
+            cell.rightUpTwoImg.identifierString = model.auto_id;
+            cell.rightDownTwoImg.identifierString = model.auto_id;
+            
+            cell.likeImg.identifierString = model.auto_id;
+            cell.chatImg.identifierString = model.auto_id;
+            cell.praiseImg.identifierString = model.auto_id;
+            
+            cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+            cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
+            cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+            
+            cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
+            cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
+            cell.praiseTitle.text = [self getLargeNumbersToSpecificStr:model.content_top];
+            return cell;
+        }else if (value == 2){
+            static NSString * identifierStr = @"releasePoisonIdentifier_1";
+            RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+            
+            if (!cell){
+                if (IS_IPHONE_6_SCREEN){
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1_6" owner:self options:nil] lastObject];
+                }else if (IS_IPHONE_6p_SCREEN){
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1_6p" owner:self options:nil] lastObject];
+                }else{
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_1" owner:self options:nil] lastObject];
+                }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
+                cell.delegate = self;
+            }
+            
+            cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
+            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
+            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
+            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
+            cell.plantTitle.attributedText = oneAttributeStr;
+            [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
+            
+            NSString * _name;
+            if ([[model.members objectForKey:@"member_name"] length] > 5){
+                _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
+                _name = [NSString stringWithFormat:@"%@...",_name];
+            }else{
+                _name = [model.members objectForKey:@"member_name"];
+            }
+            
+            cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
+            
+            [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
+            [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
+            
+            cell.leftImg.identifierString = model.auto_id;
+            cell.rightImg.identifierString = model.auto_id;
+            cell.likeImg.identifierString = model.auto_id;
+            cell.chatImg.identifierString = model.auto_id;
+            cell.praiseImg.identifierString = model.auto_id;
+            
+            cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+            cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
+            cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+            
+            cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
+            cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
+            cell.praiseTitle.text = [self getLargeNumbersToSpecificStr:model.content_top];
+            return cell;
+        } else {
+            static NSString * identifierStr = @"releasePoisonIdentifier_3";
+            RMReleasePoisonCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+            
+            if (!cell){
+                if (IS_IPHONE_6p_SCREEN){
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_3_6p" owner:self options:nil] lastObject];
+                }else if (IS_IPHONE_6_SCREEN){
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_3_6" owner:self options:nil] lastObject];
+                }else{
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonCell_3" owner:self options:nil] lastObject];
+                }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
+                cell.delegate = self;
+            }
+            
+            cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
+            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
+            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
+            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
+            cell.plantTitle.attributedText = oneAttributeStr;
+            [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
+            
+            NSString * _name;
+            if ([[model.members objectForKey:@"member_name"] length] > 5){
+                _name = [[model.members objectForKey:@"member_name"] substringToIndex:5];
+                _name = [NSString stringWithFormat:@"%@...",_name];
+            }else{
+                _name = [model.members objectForKey:@"member_name"];
+            }
+            
+            cell.userName.text = [NSString stringWithFormat:@"%@ %@",_name,[[NSString stringWithFormat:@"%@:00",model.create_time] intervalSinceNow]];
+            
+            if ([model.imgs isKindOfClass:[NSNull class]]){
+                cell.threeImg.image = [UIImage imageNamed:@"img_default.jpg"];
+            }else{
+                [cell.threeImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
+            }
+            
+            cell.threeImg.identifierString = model.auto_id;
+            cell.likeImg.identifierString = model.auto_id;
+            cell.chatImg.identifierString = model.auto_id;
+            cell.praiseImg.identifierString = model.auto_id;
+            
+            cell.likeImg.image = LOADIMAGE(@"img_asc", kImageTypePNG);
+            cell.chatImg.image = LOADIMAGE(@"img_chat", kImageTypePNG);
+            cell.praiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
+            
+            cell.likeTitle.text = [self getLargeNumbersToSpecificStr:model.content_collect];
+            cell.chatTitle.text = [self getLargeNumbersToSpecificStr:model.content_review];
+            cell.praiseTitle.text = [self getLargeNumbersToSpecificStr:model.content_top];
+            return cell;
+        }
+
     }
 }
 

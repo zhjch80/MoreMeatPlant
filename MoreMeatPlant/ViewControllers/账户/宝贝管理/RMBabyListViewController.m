@@ -39,7 +39,6 @@
     
     babyArray = [[NSMutableArray alloc]init];
     
-    [self requestDataWithPageCount:pageCount];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -63,6 +62,15 @@
             [cell.shelves_btn setTitle:@"下架" forState:UIControlStateNormal];
         }else{
             [cell.shelves_btn setTitle:@"上架" forState:UIControlStateNormal];
+        }
+        
+        if([model.publish boolValue]){//已审核
+            cell.delete_btn.hidden = YES;
+            cell.modify_btn.hidden = YES;
+        }else{//未审核
+            cell.delete_btn.hidden = NO;
+            cell.modify_btn.hidden = NO;
+            cell.deleteWidth.constant = 35;
         }
 
     }
@@ -92,7 +100,7 @@
 - (void)requestDataWithPageCount:(NSInteger)page{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager corpBabyListWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] memberclass:self.member_class is_shelf:self.is_shelf Page:page  andCallBack:^(NSError *error, BOOL success, id object) {
-        if(pageCount == 1){
+        if(page == 1){
             [babyArray removeAllObjects];
         }
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -100,7 +108,7 @@
             if([object isKindOfClass:[RMPublicModel class]]){//模型类
                 RMPublicModel * model = object;
                 if(model.status){
-                    if(pageCount == 1){
+                    if(page == 1){
                         [self showHint:@"您还没有发布宝贝噢！"];
                         [refreshControl finishRefreshingDirection:RefreshDirectionTop];
                     }else{
@@ -112,7 +120,7 @@
                 }
             }else{//数组
                 [babyArray addObjectsFromArray:object];
-                if(pageCount == 1){
+                if(page == 1){
                     [refreshControl finishRefreshingDirection:RefreshDirectionTop];
                 }else{
                     [refreshControl finishRefreshingDirection:RefreshDirectionBottom];
@@ -134,9 +142,23 @@
 }
 #pragma mark - 删除宝贝
 - (void)delete_btnAction:(UIButton *)sender{
-//    RMPublicModel * model = [babyArray objectAtIndex:sender.tag
-//                             /100];
-    [self showHint:@"暂未开通，敬请期待!"];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    RMPublicModel * model = [babyArray objectAtIndex:sender.tag
+                             /100];
+    [RMAFNRequestManager babyDeleteOperationWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Autoid:model.auto_code andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * _model = object;
+            if(_model.status){
+                [babyArray removeObject:model];
+            }else{
+                
+            }
+            [self showHint:_model.msg];
+        }else{
+            [self showHint:object];
+        }
+    }];
 }
 #pragma mark - 上下架宝贝
 - (void)shelves_btnAction:(UIButton *)sender{
@@ -156,6 +178,7 @@
         if(success){
             if(_model.status){
                 model.is_shelf = [NSString stringWithFormat:@"%d",![model.is_shelf boolValue]];
+                [babyArray removeObject:model];
             }else{
                 
             }

@@ -39,6 +39,7 @@
     all_Ctl.is_shelf = nil;
     all_Ctl.member_class = nil;
     [self.view addSubview:all_Ctl.view];
+    [all_Ctl requestDataWithPageCount:1];
     
     
     __block RMBabyManageViewController * SELF = self;
@@ -58,12 +59,10 @@
     ware_Ctl.is_shelf = @"0";
     ware_Ctl.member_class = nil;
     [self.view addSubview:ware_Ctl.view];
-    
+    [ware_Ctl requestDataWithPageCount:1];
     ware_Ctl.view.hidden = YES;
     
-//    class_Ctl = [[RMBabyListViewController alloc]initWithNibName:@"RMBabyListViewController" bundle:nil];
-//    class_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight-64-44);
-//    class_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-44);
+
     [_all_baby_btn addTarget:self action:@selector(all_babyAction:) forControlEvents:UIControlEventTouchDown];
     
     [_warehouse_baby_btn addTarget:self action:@selector(warehouse_baby_btnAction:) forControlEvents:UIControlEventTouchDown];
@@ -73,7 +72,10 @@
 
 
 - (void)all_babyAction:(UIButton *)sender{
+    all_Ctl.view.hidden = NO;
+    ware_Ctl.view.hidden = YES;
     all_Ctl.member_class = nil;
+    
     [all_Ctl requestDataWithPageCount:1];
 }
 
@@ -96,7 +98,7 @@
     }
     
     [KxMenu setTintColor:[UIColor whiteColor]];
-    [KxMenu showMenuInView:self.view fromRect:CGRectMake(_class_baby_btn.frame.origin.x, _class_baby_btn.frame.size.height, _class_baby_btn.frame.size.width, _class_baby_btn.frame.size.height)  menuItems:arr];
+    [KxMenu showMenuInView:self.view fromRect:CGRectMake(_class_baby_btn.frame.origin.x, _class_baby_btn.frame.size.height+20, _class_baby_btn.frame.size.width, _class_baby_btn.frame.size.height)  menuItems:arr];
 }
 
 - (void)menuClassSelected:(KxMenuItem *)sender{

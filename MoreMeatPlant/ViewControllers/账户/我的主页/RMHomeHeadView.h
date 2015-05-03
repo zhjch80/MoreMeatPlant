@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RMHomeHeadView : UIView
+@interface RMHomeHeadView : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *content_img;
 @property (weak, nonatomic) IBOutlet UILabel *content_name;
 @property (weak, nonatomic) IBOutlet UILabel *content_signature;

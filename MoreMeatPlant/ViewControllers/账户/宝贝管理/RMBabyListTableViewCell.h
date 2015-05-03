@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *modify_btn;
 @property (weak, nonatomic) IBOutlet UIButton *shelves_btn;
 @property (weak, nonatomic) IBOutlet UIButton *delete_btn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *deleteWidth;
 
 @end

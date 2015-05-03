@@ -77,7 +77,14 @@
     }];
     
 }
-
+#pragma mark - 查看物流
+- (void)seeExpress:(RMPublicModel *)model{
+    //查看物流信息
+    RMSeeLogisticsViewController * see = [[RMSeeLogisticsViewController alloc]initWithNibName:@"RMSeeLogisticsViewController" bundle:nil];
+    see.express_name = model.express_name;
+    see.express_no = model.express_no;
+    [self.navigationController pushViewController:see animated:YES];
+}
 
 - (void)commit{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -298,8 +305,6 @@
 
 #pragma mark - 进入店铺
 - (void)goCorp:(UITapGestureRecognizer *)tap{
-    NSInteger tag = tap.view.tag-100;
-    
     RMMyCorpViewController * corp = [[RMMyCorpViewController alloc] initWithNibName:@"RMMyCorpViewController" bundle:nil];
     corp.auto_id = [[__model.pros lastObject] objectForKey:@"corp_id"];
     [self.navigationController pushViewController:corp animated:YES];

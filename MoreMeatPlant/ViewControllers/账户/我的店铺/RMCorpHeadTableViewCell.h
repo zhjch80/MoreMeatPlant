@@ -1,14 +1,14 @@
 //
-//  RMCorpHeadView.h
+//  RMCorpHeadTableViewCell.h
 //  MoreMeatPlant
 //
-//  Created by 马东凯 on 15/4/15.
+//  Created by 马东凯 on 15/5/3.
 //  Copyright (c) 2015年 runmobile. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface RMCorpHeadView : UIView
+@interface RMCorpHeadTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *bannerImgV;
 @property (weak, nonatomic) IBOutlet UIImageView *corp_headImgV;
 @property (weak, nonatomic) IBOutlet UILabel *corp_nameL;
