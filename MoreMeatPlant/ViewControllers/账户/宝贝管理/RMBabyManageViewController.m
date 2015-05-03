@@ -81,8 +81,8 @@
 
 - (void)menuClassSelected:(KxMenuItem *)sender{
     KxMenuItem * item = (KxMenuItem *)sender;
-    self.member_class = [[classsModel.classs objectAtIndex:item.tag-100] objectForKey:@"auto_id"];
-    [self requestListWithPlant];
+//    self.member_class = [[classsModel.classs objectAtIndex:item.tag-100] objectForKey:@"auto_id"];
+//    [self requestListWithPlant];
 }
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{

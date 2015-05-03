@@ -91,7 +91,7 @@
 
 - (void)requestDataWithPageCount:(NSInteger)page{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager corpBabyListWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Page:page andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager corpBabyListWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] memberclass:@"" is_shelf:@"" Page:page  andCallBack:^(NSError *error, BOOL success, id object) {
         if(pageCount == 1){
             [babyArray removeAllObjects];
         }
