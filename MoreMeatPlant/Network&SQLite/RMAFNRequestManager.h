@@ -284,8 +284,8 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                      withContentType:(NSString *)content_type
                     withContentClass:(NSString *)content_class
                    withContentCourse:(NSString *)content_course
-                     withContentBody:(NSDictionary *)content_body
-                      withContentImg:(NSDictionary *)content_img
+                     withContentBody:(NSMutableArray *)content_body
+                      withContentImg:(NSMutableArray *)content_img
                      withBodyAuto_id:(NSString *)bodyAuto_id
                               withID:(NSString *)user_id
                              withPWD:(NSString *)user_password

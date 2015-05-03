@@ -11,6 +11,7 @@
 #import "RMEditContentViewController.h"
 #import "ZFModalTransitionAnimator.h"
 #import "RMLongPostFooterView.h"
+#import "FileUtil.h"
 
 @interface RMStartLongPostingViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,StartLongPostingDelegate,EditContentDelegate,LongPostFooterDelegate> {
     NSInteger cellTextCount;        //section 为2时 总共有几行文字cell
@@ -441,7 +442,9 @@
         }
         return cell;
     }else{
-        static NSString * cellIdentifier = @"StartLongPostingIdentifier_3";
+//        static NSString * cellIdentifier = @"StartLongPostingIdentifier_3";
+        NSString * cellIdentifier = [NSString stringWithFormat:@"StartLongPostingIdentifier_%ld",(long)indexPath.row];
+
         RMStartLongPostingCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!cell) {
             if ([[typeIdentifierArr objectAtIndex:indexPath.row] isEqualToString:@"text"]){
@@ -596,8 +599,8 @@
             break;
         }
         case 2:{
-            NSLog(@"发布");
-            [self request];
+            //发布
+            [self requestCommentData];
             break;
         }
             
@@ -608,50 +611,81 @@
 
 #pragma mark - 数据提交
 
-- (void)request {
-    NSIndexPath * indexPath_1 = [NSIndexPath indexPathForRow:0 inSection:1];
-    RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath_1];
-    NSLog(@"标题 cell.editTitleDisplay.text:%@",cell.editTitleDisplay.text);
+- (void)requestCommentData {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    NSMutableArray * content_bodys = [[NSMutableArray alloc] init];
+    NSMutableArray * content_imgs = [[NSMutableArray alloc] init];
+    
+    BOOL isSeparated = NO;
     
     for (NSInteger i=0; i<cellRow; i++) {
-        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:2];
-        RMStartLongPostingCell * cell = (RMStartLongPostingCell *)[mTableView cellForRowAtIndexPath:indexPath];
-        if ([[typeIdentifierArr objectAtIndex:indexPath.row] isEqualToString:@"text"]){
-            NSLog(@"content text:%@ 行数:%ld",cell.textContent.text,(long)i);
+        if ([[typeIdentifierArr objectAtIndex:i] isEqualToString:@"text"]){
+            
+            if (i==0){
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+
+                NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+                
+                NSString * img_str = [basePath  stringByAppendingPathComponent:@"transparent_img.jpg"];
+                
+                [content_imgs addObject:img_str];
+            }
+            
+            NSString * str = [dataArr objectAtIndex:i];
+            
+            if (isSeparated){ //替换
+                NSString * str_1 = [content_bodys lastObject];
+                [content_bodys removeLastObject];
+                [content_bodys addObject:[NSString stringWithFormat:@"%@\n%@",str_1,str]];
+            }else{  //追加
+                [content_bodys addObject:str];
+            }
+            
+            isSeparated = YES;
         }else{
-            NSLog(@"content img:%@ 行数:%ld",cell.imageContent,(long)i);
+            
+            UIImage * uploadImage = [dataArr objectAtIndex:i];
+            
+            NSData * data = UIImageJPEGRepresentation(uploadImage, 0.5);
+            
+            [self saveImage:[UIImage imageWithData:data] withName:[NSString stringWithFormat:@"uploadLongImage_%ld.jpg",(long)i]];
+            
+            NSString *fullPath = [[FileUtil getCachePathFor:@"uploadLongImageCache"] stringByAppendingPathComponent:[NSString stringWithFormat:@"uploadLongImage_%ld.jpg",(long)i]];
+            
+            [content_imgs addObject:fullPath];
+            
+            if (i+1 == cellRow){    //追加空文字
+                [content_bodys addObject:@""];
+            }
+            
+            isSeparated = NO;
         }
     }
     
-    
-//    RMAFNRequestManager postSendLongPostsWithAuto_id:@"" withContentName:cell.editTitleDisplay.text withContentType:@"1" withContentClass:@"====" withContentCourse:@"====" withContentBody:<#(NSDictionary *)#> withContentImg:<#(NSDictionary *)#> withBodyAuto_id:<#(NSString *)#> withID:<#(NSString *)#> withPWD:<#(NSString *)#> callBack:<#^(NSError *error, BOOL success, id object)block#>
-//    
-//    RMAFNRequestManager postSendPostsWithAuto_id:@"" withContentName:cell.editTitleDisplay.text withContentType:@"1" withContentClass:@"====" withContentCourse:@"=====" withContentBody:<#(NSString *)#> withContentImg:<#(NSDictionary *)#> withBodyAuto_id:<#(NSString *)#> withID:<#(NSString *)#> withPWD:<#(NSString *)#> callBack:<#^(NSError *error, BOOL success, id object)block#>
-//    
-    
-    
-    
-    /*
-     *  @method             发布帖子
-     *  @param          auto_id             如果是编辑传 帖子标识字段,不传代表新建
-     *  @param          content_name        帖子标题
-     *  @param          content_type        帖子分类1：放毒区，2:肉肉交换
-     *  @param          content_class       植物分类
-     *  @param          content_course      植物科目
-     *  @param          content_body        帖子内容文字,多个重复传此值
-     *  @param          content_img         帖子内容图片,多个重复传此值
-     *  @param          bodyAuto_id         帖子内容标识字段,不传代表新建，多个重复传此值
-     *  @param          user_id             会员用户名
-     *  @param          user_password       会员密码
-     */
-    
-    /*
-    
-    218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_center&task=updateNote&frm[content_name]=111&frm[content_type]=1&frm[content_class]=1&frm[content_course]=1000&frm[body][][content_body]=11&ID=test&PWD=202cb962ac59075b964b07152d234b70
-    
-    */
-    
+    [RMAFNRequestManager postSendLongPostsWithAuto_id:@"" withContentName:titleContent withContentType:@"1" withContentClass:self.model_1.value withContentCourse:self.model_2.auto_code withContentBody:content_bodys withContentImg:content_imgs withBodyAuto_id:@"" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+
+        if (error){
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            NSLog(@"%@",error);
+            return ;
+        }
+        
+        if (success){
+            NSLog(@"object:%@",object);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 }
+
+- (void)saveImage:(UIImage *)currentImage withName:(NSString *)imageName {
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    NSString *path = [[FileUtil getCachePathFor:@"uploadLongImageCache"] stringByAppendingPathComponent:imageName];
+    // 将图片写入文件
+    [imageData writeToFile:path atomically:NO];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -589,20 +589,37 @@
                  withContentType:(NSString *)content_type
                 withContentClass:(NSString *)content_class
                withContentCourse:(NSString *)content_course
-                 withContentBody:(NSDictionary *)content_body
-                  withContentImg:(NSDictionary *)content_img
+                 withContentBody:(NSMutableArray *)content_body
+                  withContentImg:(NSMutableArray *)content_img
                  withBodyAuto_id:(NSString *)bodyAuto_id
                           withID:(NSString *)user_id
                          withPWD:(NSString *)user_password
                         callBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=save&app_com=com_center&task=updateNote&frm[content_name]=%@&frm[content_type]=%@&frm[content_class]=%@&frm[content_course]=%@&frm[body][0][content_body]=%@&ID=%@&PWD=%@",baseUrl,content_name,content_type,content_class,content_course,content_body,user_id,user_password];
     
-    [[RMHttpOperationShared sharedClient] POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        NSArray * keys = [content_img allKeys];
-        for (NSInteger i=0; i<[keys count]; i++){
-            NSURL * path = [NSURL fileURLWithPath:[content_img objectForKey:[keys objectAtIndex:i]]];
-            NSLog(@"\npath:%ld key:%@\nvalue:%@\n",(long)i,[keys objectAtIndex:i],path);
-            [formData appendPartWithFileURL:path name:[keys objectAtIndex:i] error:nil];
+    NSString *url = @"http://218.240.30.6/drzw/index.php";
+
+    NSInteger i = 0;
+    NSMutableDictionary * parameter = [[NSMutableDictionary alloc] init];
+    for(NSString * value in content_body){
+        [parameter setValue:value forKey:[NSString stringWithFormat:@"frm[body][%ld][content_body]",(long)i]];
+        i++;
+    }
+    
+    [parameter setValue:@"com_appService" forKey:@"com"];
+    [parameter setValue:@"save" forKey:@"method"];
+    [parameter setValue:@"com_center" forKey:@"app_com"];
+    [parameter setValue:@"updateNote" forKey:@"task"];
+    [parameter setValue:content_name forKey:@"frm[content_name]"];
+    [parameter setValue:content_type forKey:@"frm[content_type]"];
+    [parameter setValue:content_class forKey:@"frm[content_class]"];
+    [parameter setValue:content_course forKey:@"frm[content_course]"];
+    [parameter setValue:user_id forKey:@"ID"];
+    [parameter setValue:user_password forKey:@"PWD"];
+
+    [[RMHttpOperationShared sharedClient] POST:url parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (NSInteger i=0; i<[content_img count]; i++) {
+            NSURL * path = [NSURL fileURLWithPath:[content_img objectAtIndex:i]];
+            [formData appendPartWithFileURL:path name:[NSString stringWithFormat:@"frm[body][%ld][content_img]",(long)i] error:nil];
         }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
