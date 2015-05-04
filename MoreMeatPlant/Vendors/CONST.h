@@ -68,3 +68,7 @@ _Pragma("clang diagnostic pop") \
 
 #define PaymentCompletedNotification @"PaymentCompletedNotification" //支付完成
 #define RMRequestMemberInfoAgainNotification @"RMRequestMemberInfoAgainNotification" //重新请求用户资料
+
+
+
+

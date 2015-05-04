@@ -442,9 +442,7 @@
         }
         return cell;
     }else{
-//        static NSString * cellIdentifier = @"StartLongPostingIdentifier_3";
-        NSString * cellIdentifier = [NSString stringWithFormat:@"StartLongPostingIdentifier_%ld",(long)indexPath.row];
-
+        static NSString * cellIdentifier = @"StartLongPostingIdentifier_3";
         RMStartLongPostingCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!cell) {
             if ([[typeIdentifierArr objectAtIndex:indexPath.row] isEqualToString:@"text"]){

@@ -19,13 +19,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="点击帖子任何一个部分即可进行修改、添加、删除等操作。一次添加图片不能超过8张，以免因网络问题导致发帖失败。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cj-eL-qta">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击帖子任何一个部分即可进行修改、添加、删除等操作。一次添加图片不能超过8张，以免因网络问题导致发帖失败。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cj-eL-qta">
                         <rect key="frame" x="10" y="5" width="300" height="60"/>
                         <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="13"/>
                         <color key="textColor" red="0.67566287878787878" green="0.027603968433995357" blue="0.080889040679410593" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="2cj-eL-qta" secondAttribute="bottom" constant="4" id="7tX-Cn-FCz"/>
+                    <constraint firstItem="2cj-eL-qta" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="B2u-Gq-y0E"/>
+                    <constraint firstAttribute="trailing" secondItem="2cj-eL-qta" secondAttribute="trailing" constant="10" id="abZ-dF-lI5"/>
+                    <constraint firstItem="2cj-eL-qta" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="dBd-YG-LaR"/>
+                </constraints>
             </tableViewCellContentView>
         </tableViewCell>
     </objects>

@@ -20,7 +20,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" tag="101" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msl-3A-oim">
+                    <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msl-3A-oim">
                         <rect key="frame" x="10" y="5" width="300" height="30"/>
                         <color key="backgroundColor" red="0.2510027726226855" green="0.60784313725490191" blue="0.28630388265906215" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="15"/>
@@ -31,7 +31,7 @@
                             <action selector="editBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MPi-ur-n2z"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyZ-e2-A7l">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyZ-e2-A7l">
                         <rect key="frame" x="10" y="6" width="300" height="30"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="FZZXHJW--GB1-0" family="FZZhengHeiS-EL-GB" pointSize="14"/>
@@ -39,6 +39,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="msl-3A-oim" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="3bO-M3-pde"/>
+                    <constraint firstAttribute="bottom" secondItem="nyZ-e2-A7l" secondAttribute="bottom" constant="3" id="Ana-7r-TaR"/>
+                    <constraint firstItem="nyZ-e2-A7l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="IdF-um-DJh"/>
+                    <constraint firstAttribute="bottom" secondItem="msl-3A-oim" secondAttribute="bottom" constant="4" id="MW8-zk-wFZ"/>
+                    <constraint firstItem="msl-3A-oim" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Rbi-rn-BQO"/>
+                    <constraint firstItem="nyZ-e2-A7l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Tca-7y-5Aj"/>
+                    <constraint firstAttribute="trailing" secondItem="nyZ-e2-A7l" secondAttribute="trailing" constant="10" id="Zhv-f8-j9L"/>
+                    <constraint firstAttribute="trailing" secondItem="msl-3A-oim" secondAttribute="trailing" constant="10" id="gxU-WE-ktn"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="editTitleBtn" destination="msl-3A-oim" id="pdk-qw-1cf"/>
