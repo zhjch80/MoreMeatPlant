@@ -33,7 +33,7 @@
 /**
  *  @method     广告查询
  *  @param      type        广告类型
- *   1：首页广告、2：放毒区、3：放毒区帖子底部、4：一物一拍、5：鲜肉市场
+ *   1：首页广告、2：放毒区、3：放毒区帖子底部、4：一肉一拍、5：鲜肉市场
  */
 + (void)getAdvertisingQueryWithType:(NSInteger)type callBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=ad&auto_id=%ld",baseUrl,(long)type];
@@ -166,6 +166,22 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if(block){
+            block(error, NO, kMSGFailure);
+        }
+    }];
+}
+
+/**
+ *  @method     植物科目 大全侧滑分类list
+ */
++ (void)getClassificationOfSideslipCallBack:(RMAFNRequestManagerCallBack)block {
+    NSString * url = @"http://218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_shop&task=shopALLright";
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block(nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
             block(error, NO, kMSGFailure);
         }
     }];
@@ -685,6 +701,24 @@
                              callBack:(RMAFNRequestManagerCallBack)block {
     
     NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%@&course=%@&per=1&row=10&page=%ld&keyword=%@",baseUrl,babyType,plantCourse,(long)pageCount,keyword];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (block){
+            block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block){
+            block (error, NO, kMSGFailure);
+        }
+    }];
+}
+
+/**
+ *  @method     植物大全搜索
+ */
++ (void)getDaqoSearchWithKeyWord:(NSString *)keyword
+                   withPageCount:(NSInteger)pageCount
+                        callBack:(RMAFNRequestManagerCallBack)block {
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAll&data=series&order=asc&grow=&course=&keyword=%@&per=1&row=10&page=%ld",baseUrl,keyword,pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
@@ -1992,7 +2026,7 @@
 #pragma mark - 附近肉友
 + (void)nearMemberRequestwithCoor:(NSString *)coor page:(NSInteger)page andCallBack:(RMAFNRequestManagerCallBack)block{
     //218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_shop&task=nearMem&gps=39.75715,116.218574
-    NSString * url = [NSString stringWithFormat:@"%@%@&gps=%@&per=1&row=30&page=%ld",baseUrl,@"&method=appSev&app_com=com_shop&task=nearMem",coor,page];
+    NSString * url = [NSString stringWithFormat:@"%@%@&gps=%@&per=1&row=30&page=%ld",baseUrl,@"&method=appSev&app_com=com_shop&task=nearMem",coor,(long)page];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         NSMutableArray * Array = [[NSMutableArray alloc]init];

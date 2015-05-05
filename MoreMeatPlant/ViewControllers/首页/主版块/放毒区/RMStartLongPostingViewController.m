@@ -626,7 +626,7 @@
     NSMutableDictionary * content_bodys = [[NSMutableDictionary alloc] init];
     NSMutableDictionary * content_imgs = [[NSMutableDictionary alloc] init];
     
-    BOOL isSeparated = NO;
+//    BOOL isSeparated = NO;
     
     for (NSInteger i=0; i<cellRow; i++) {
         if ([[typeIdentifierArr objectAtIndex:i] isEqualToString:@"text"]){
@@ -652,8 +652,9 @@
 //            }
 //            
 //            isSeparated = YES;
-             NSString * str = [dataArr objectAtIndex:i];
-            [content_bodys setValue:str forKey:[NSString stringWithFormat:@"frm[body][%ld][content_body]",i]];
+            NSString * str = [dataArr objectAtIndex:i];
+            
+            [content_bodys setValue:str forKey:[NSString stringWithFormat:@"frm[body][%ld][content_body]",(long)i]];
         }else{
             
             UIImage * uploadImage = [dataArr objectAtIndex:i];
@@ -663,8 +664,10 @@
             [self saveImage:[UIImage imageWithData:data] withName:[NSString stringWithFormat:@"uploadLongImage_%ld.jpg",(long)i]];
             
             NSString *fullPath = [[FileUtil getCachePathFor:@"uploadLongImageCache"] stringByAppendingPathComponent:[NSString stringWithFormat:@"uploadLongImage_%ld.jpg",(long)i]];
+            
             NSURL * filePath = [NSURL fileURLWithPath:fullPath];
-            [content_imgs setValue:filePath forKey:[NSString stringWithFormat:@"frm[body][%ld][content_img]",i]];
+            
+            [content_imgs setValue:filePath forKey:[NSString stringWithFormat:@"frm[body][%ld][content_img]",(long)i]];
             
 //            if (i+1 == cellRow){    //追加空文字
 //                [content_bodys addObject:@""];

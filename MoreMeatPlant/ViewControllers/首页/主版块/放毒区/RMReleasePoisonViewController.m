@@ -819,8 +819,6 @@
 #pragma mark - 跳转到广告
 
 - (void)jumpPopularize:(RMImageView *)image {
-    //TODO:数据显示不出来
-    NSLog(@"member_id:%@",image.identifierString);
     if([image.content_type isEqualToString:@"0"]){
         RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
         corp.auto_id = image.identifierString;

@@ -53,6 +53,11 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                              callBack:(RMAFNRequestManagerCallBack)block;
 
 /**
+ *  @method     植物科目 大全侧滑分类list
+ */
++ (void)getClassificationOfSideslipCallBack:(RMAFNRequestManagerCallBack)block;
+
+/**
  *  @method     News
  *  @param      pageCount       页数
  *  @param      optionid        类别 
@@ -323,7 +328,13 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                          withKeyword:(NSString *)keyword
                             callBack:(RMAFNRequestManagerCallBack)block;
 
-
+/**
+ *  @method     植物大全搜索
+ */
++ (void)getDaqoSearchWithKeyWord:(NSString *)keyword
+                   withPageCount:(NSInteger)pageCount
+                        callBack:(RMAFNRequestManagerCallBack)block;
+    
 /**
  *  @method     获取植物大全总数量
  */

@@ -178,6 +178,7 @@
         case 1:{
             RMDaqoViewController * daqoCtl = self.DaqoDelegate;
             RMSearchViewController * searchCtl = [[RMSearchViewController alloc] init];
+            searchCtl.searchType = @"大全";
             [daqoCtl.navigationController pushViewController:searchCtl animated:YES];
             break;
         }

@@ -159,21 +159,30 @@
 
 - (void)requestPlantSubs {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getPlantSubjectsListWithLevel:2 callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getClassificationOfSideslipCallBack:^(NSError *error, BOOL success, id object) {
         if (error){
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             NSLog(@"error:%@",error);
         }
         
         if (success){
-            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+            for (NSInteger i=0; i<[[[object objectForKey:@"data"] objectForKey:@"course"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
-                model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
-                model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
-                model.modules_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"modules_name"]);
-                model.sub = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"sub"];
+                model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                model.modules_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"modules_name"]);
+                model.auto_code = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_code"]);
+                model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                model.sub = [[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"sub"];
                 [dataArr addObject:model];
             }
+            
+            for (NSInteger i=0; i<[[[object objectForKey:@"data"] objectForKey:@"grow"] count]; i++) {
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.modules_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"label"]);
+                model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"value"]);
+                [dataArr addObject:model];
+            }
+            
             [mTableView reloadData];
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }

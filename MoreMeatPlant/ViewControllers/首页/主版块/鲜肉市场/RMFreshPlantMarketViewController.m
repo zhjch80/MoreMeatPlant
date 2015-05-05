@@ -23,6 +23,8 @@
 #import "RMShopCarViewController.h"
 #import "AppDelegate.h"
 #import "RMMyCollectionViewController.h"
+#import "RMMyCorpViewController.h"
+#import "RMReleasePoisonDetailsViewController.h"
 
 @interface RMFreshPlantMarketViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,BottomDelegate,JumpPlantDetailsDelegate,RefreshControlDelegate>{
     BOOL isFirstViewDidAppear;
@@ -33,6 +35,7 @@
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;         //list数据
 @property (nonatomic, strong) NSMutableArray * newsArr;         //置顶数据
+@property (nonatomic, strong) NSMutableArray * advertisingArr;  //广告数据
 @property (nonatomic, strong) NSMutableArray * subsPlantArr;    //植物科目
 
 @property (nonatomic, strong) ZFModalTransitionAnimator * animator;
@@ -44,12 +47,13 @@
 @end
 
 @implementation RMFreshPlantMarketViewController
-@synthesize mTableView, dataArr, animator, newsArr, subsPlantArr, refreshControl, subsPlantRequestValue, bottomView;
+@synthesize mTableView, dataArr, animator, newsArr, subsPlantArr, refreshControl, subsPlantRequestValue, bottomView, advertisingArr;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!isFirstViewDidAppear){
         [self requestNews];
+        [self requestAdvertisingQuery];
         [self requestPlantSubjects];
         isFirstViewDidAppear = YES;
     }
@@ -65,7 +69,8 @@
 
     newsArr = [[NSMutableArray alloc] init];
     dataArr = [[NSMutableArray alloc] init];
-
+    advertisingArr = [[NSMutableArray alloc] init];
+    
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 40) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
@@ -207,7 +212,20 @@
     [rmImage addTarget:self withSelector:@selector(jumpPlantWithSaleNearbyMerchant)];
     [headView addSubview:rmImage];
     
-    CGFloat height = rmImage.frame.size.height;
+    NSInteger value = 0;
+    for (NSInteger i=0; i<[advertisingArr count]; i++) {
+        RMImageView * popularizeView = [[RMImageView alloc] init];
+        RMPublicModel * model = [advertisingArr objectAtIndex:i];
+        popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + i*45, kScreenWidth, 45);
+        popularizeView.identifierString = model.member_id;
+        popularizeView.content_type = model.note_id;
+        [popularizeView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        [popularizeView addTarget:self withSelector:@selector(jumpPopularize:)];
+        [headView addSubview:popularizeView];
+        value ++;
+    }
+    
+    CGFloat height = rmImage.frame.size.height + value * 45;
     
     for (NSInteger i=0; i<[newsArr count]; i++) {
         RMPublicModel * model = [newsArr objectAtIndex:i];
@@ -239,6 +257,20 @@
 - (void)jumpPlantWithSaleNearbyMerchant {
     RMNearbyMerchantViewController * nearbyMerchantCtl = [[RMNearbyMerchantViewController alloc] init];
     [self.navigationController pushViewController:nearbyMerchantCtl animated:YES];
+}
+
+#pragma mark - 跳转到广告
+
+- (void)jumpPopularize:(RMImageView *)image {
+    if([image.content_type isEqualToString:@"0"]){
+        RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
+        corp.auto_id = image.identifierString;
+        [self.navigationController pushViewController:corp animated:YES];
+    }else{
+        RMReleasePoisonDetailsViewController * ReleasePoisonDetails = [[RMReleasePoisonDetailsViewController alloc]initWithNibName:@"RMReleasePoisonDetailsViewController" bundle:nil];
+        ReleasePoisonDetails.auto_id = image.identifierString;
+        [self.navigationController pushViewController:ReleasePoisonDetails animated:YES];
+    }
 }
 
 #pragma mark - 跳转到置顶详情界面
@@ -353,7 +385,7 @@
  */
 - (void)requestNews {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getNewsWithOptionid:971 withPageCount:1 callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getNewsWithOptionid:972 withPageCount:1 callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -374,6 +406,33 @@
             [self loadTableViewHead];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
+    }];
+}
+
+/**
+ *  请求广告查询
+ */
+- (void)requestAdvertisingQuery {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getAdvertisingQueryWithType:5 callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"广告查询error::%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                RMPublicModel * model = [[RMPublicModel alloc] init];
+                model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
+                model.note_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"note_id"]);
+                [advertisingArr addObject:model];
+            }
+            
+            [self loadTableViewHead];
+        }
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
 }
 

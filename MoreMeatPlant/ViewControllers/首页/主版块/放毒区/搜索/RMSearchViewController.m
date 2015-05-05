@@ -16,6 +16,7 @@
 #import "RMCommentsView.h"
 #import "RMReleasePoisonDetailsViewController.h"
 #import "RMPlantWithSaleDetailsViewController.h"
+#import "RMDaqoDetailsViewController.h"
 
 @interface RMSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextFieldDelegate,DaqpSelectedPlantTypeDelegate,RefreshControlDelegate,PostDetatilsDelegate,CommentsViewDelegate>{
     BOOL isHideKeyboard;
@@ -111,7 +112,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.searchType isEqualToString:@"帖子"]){
         return [self loadPostsIndexPath:indexPath withTableView:tableView];
-    }else{//宝贝
+    }else{//宝贝 或者 大全
         return [self loadBabyIndexPath:indexPath withTableView:tableView];
     }
 }
@@ -338,7 +339,7 @@
     }
 }
 
-#pragma mark - 宝贝 list
+#pragma mark - 宝贝 list 或者 大全list
 
 - (UITableViewCell *)loadBabyIndexPath:(NSIndexPath *)indexPath withTableView:(UITableView *)tableView {
     static NSString * identifierStr = @"DaqoidentifierStr";
@@ -685,13 +686,19 @@
     }];
 }
 
-#pragma mark - 宝贝详情代理方法
+#pragma mark - 宝贝详情代理方法 或者 大全详情代理方法
 
 - (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
-    RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
-    plantWithSaleDetailsCtl.auto_id = image.identifierString;
-    plantWithSaleDetailsCtl.mTitle = @"一肉一拍";
-    [self.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
+    if ([self.searchType isEqualToString:@"宝贝"]){
+        RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
+        plantWithSaleDetailsCtl.auto_id = image.identifierString;
+        plantWithSaleDetailsCtl.mTitle = @"一肉一拍";
+        [self.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
+    }else{
+        RMDaqoDetailsViewController * daqoDetailsCtl = [[RMDaqoDetailsViewController alloc] init];
+        daqoDetailsCtl.auto_id = image.identifierString;
+        [self.navigationController pushViewController:daqoDetailsCtl animated:YES];
+    }
 }
 
 #pragma mark -
@@ -714,15 +721,18 @@
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    if ([[self trim:textField.text] isEqualToString:@""]){
-        [self showHint:@"输入内容不能为空"];
-        return NO;
-    }
+//    if ([[self trim:textField.text] isEqualToString:@""]){
+//        [self.mTextField resignFirstResponder];
+//        [self showHint:@"输入内容不能为空"];
+//        return NO;
+//    }
     
     if ([self.searchType isEqualToString:@"帖子"]){
         [self requestPostsSearchWithKeyWord:[textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withType:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:1];
-    }else{
-        [self requestBabySearchWithKeyWord:[textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withClass:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:1];
+    }else if ([self.searchType isEqualToString:@"宝贝"]){
+        [self requestBabySearchWithKeyWord:[mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withClass:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:1];
+    }else {
+        [self requetDaqoSearchWithKeyWord:[mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withPageCount:1 withGrow:@"" withCourse:@""];
     }
     return YES;
 }
@@ -733,14 +743,17 @@
 - (IBAction)searchClick:(UIButton *)sender {
     
     if ([[self trim:mTextField.text] isEqualToString:@""]){
+        [self.mTextField resignFirstResponder];
         [self showHint:@"输入内容不能为空"];
         return ;
     }
     
     if ([self.searchType isEqualToString:@"帖子"]){
         [self requestPostsSearchWithKeyWord:[mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withType:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:1];
-    }else{
+    }else if ([self.searchType isEqualToString:@"宝贝"]){
         [self requestBabySearchWithKeyWord:[mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withClass:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:1];
+    }else {
+        [self requetDaqoSearchWithKeyWord:[mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withPageCount:1 withGrow:@"" withCourse:@""];
     }
 }
 
@@ -955,6 +968,82 @@
     }];
 }
 
+/**
+ *  @method     植物大全搜索
+ */
+- (void)requetDaqoSearchWithKeyWord:(NSString *)key
+                      withPageCount:(NSInteger)pg
+                           withGrow:(NSString *)grow
+                         withCourse:(NSString *)course {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager getDaqoSearchWithKeyWord:key withPageCount:pg callBack:^(NSError *error, BOOL success, id object) {
+        if (error){
+            NSLog(@"error:%@",error);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            return ;
+        }
+        
+        if (success){
+            if ([[object objectForKey:@"data"] count] == 0){
+                [self showHint:@"没有搜索到相关内容"];
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                return ;
+            }
+
+            if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+            }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
+                if ([[object objectForKey:@"data"] count] == 0){
+                    [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    isLoadComplete = YES;
+                    return;
+                }
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+            }
+            
+            if (isRefresh){
+                
+                if ([[object objectForKey:@"data"] count] == 0){
+                    [self showHint:@"没有搜索到相关内容"];
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    return ;
+                }
+                
+                [dataArr removeAllObjects];
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    [dataArr addObject:model];
+                }
+                [mTableView reloadData];
+            }
+            
+            [self.view endEditing:YES];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
+}
+
 #pragma mark 刷新代理
 
 - (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
@@ -972,8 +1061,10 @@
         isLoadComplete = NO;
         if ([self.searchType isEqualToString:@"帖子"]){
             [self requestPostsSearchWithKeyWord:[mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withType:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:1];
+        }else if ([self.searchType isEqualToString:@"宝贝"]){
+            [self requestBabySearchWithKeyWord:[self.mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withClass:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:1];
         }else{
-            [self requestBabySearchWithKeyWord:[self.mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withClass:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:pageCount];
+            [self requetDaqoSearchWithKeyWord:[mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withPageCount:1 withGrow:@"" withCourse:@""];
         }
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
@@ -986,9 +1077,11 @@
             pageCount ++;
             isRefresh = NO;
             if ([self.searchType isEqualToString:@"帖子"]){
-                [self requestPostsSearchWithKeyWord:[mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withType:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:1];
-            }else{
+                [self requestPostsSearchWithKeyWord:[mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withType:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:pageCount];
+            }else if ([self.searchType isEqualToString:@"宝贝"]){
                 [self requestBabySearchWithKeyWord:[self.mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withClass:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:pageCount];
+            }else{
+                [self requetDaqoSearchWithKeyWord:[mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withPageCount:pageCount withGrow:@"" withCourse:@""];
             }
         }
     }
