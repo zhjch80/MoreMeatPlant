@@ -219,11 +219,20 @@
             break;
         }
         case 1:{
+            if(![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
             [mTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:-1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
             break;
         }
         case 2:{
-            
+            if(![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
             RMShopCarViewController * shopCarCtl = [[RMShopCarViewController alloc] init];
             [self.navigationController pushViewController:shopCarCtl animated:YES];
             break;
@@ -268,7 +277,6 @@
                 UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
                 [alert show];
                 return;
-                return ;
             }
             
             [self.navigationController popToRootViewControllerAnimated:YES];
@@ -411,7 +419,7 @@
         shunfengL.text = [NSString stringWithFormat:@"顺丰:22元"];
         shunfengL.numberOfLines = 0;
         shunfengL.font  = FONT_0(13);
-        CGSize size = [kucun.text getcontentsizeWithfont:shunfengL.font constrainedtosize:CGSizeMake(200, 30) linemode:NSLineBreakByWordWrapping];
+        CGSize size = [shunfengL.text getcontentsizeWithfont:shunfengL.font constrainedtosize:CGSizeMake(200, 30) linemode:NSLineBreakByWordWrapping];
         shunfengL.frame = CGRectMake(other_expressB.frame.origin.x-size.width-10, 0, size.width, size.height);
         shunfengL.center = CGPointMake(shunfengL.center.x, cell.productIntro.frame.size.height/2);
         
@@ -489,6 +497,7 @@
                 
             }
             baby_num = num;
+            cell.showNum.text = @"1";
             [self showHint:@"至少要选择一个宝贝！"];
             break;
         }
@@ -516,6 +525,11 @@
             break;
         }
         case 103:{
+            if(![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
             NSLog(@"立即购买auto_id:%@",self.auto_id);
             if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 2){
                 UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"商家会员不可以进行购买服务" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
@@ -527,6 +541,11 @@
             break;
         }
         case 104:{
+            if(![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
             NSLog(@"加入购物车auto_id:%@",self.auto_id);
             if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 2){
                 UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"商家会员不可以进行购买服务" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
@@ -538,6 +557,11 @@
             break;
         }
         case 105:{
+            if(![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
             NSLog(@"联系掌柜auto_id:%@",self.auto_id);
             [self.navigationController popToRootViewControllerAnimated:YES];
             AppDelegate * dele = [[UIApplication sharedApplication] delegate];
@@ -568,20 +592,16 @@
         [alert show];
         return;
     }
-    NSInteger n = baby_num;
+    NSInteger n = 0;
     if([RMProductModel existDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",dataModel.auto_id]])
     {
         RMProductModel * pp = [[RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",dataModel.auto_id] orderby:nil] lastObject];
-        if([dataModel.content_class isEqualToString:@"1"]){
-           
-        }else{
-             n = baby_num + pp.content_num;
-        }
+        n = baby_num + pp.content_num;
     }else{
-        
+        n = baby_num;
     }
     
-    
+    NSLog(@"+++++++++++++++++++++%ld",(long)n);
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager valliateGoodsNumWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] auto_id:self.auto_id Nums:n andCallBack:^(NSError *error, BOOL success, id object) {
@@ -590,23 +610,17 @@
         if(success){
             RMPublicModel * model = object;
             if(model.status){
-                [self addGoodsToShopCar];
+                [self addGoodsToShopCar:n];
                 if(isAddShopCar){//加入购物车
                     
                 }else{//立即购买
                     [self buyNow];
                 }
+                
             }else{
-                if( [RMProductModel removeDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",self.auto_id]])
-                {
-                    
-                    if([RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",dataModel.member_id] orderby:@"corp_id"] == nil)
-                    {
-                        [RMCorpModel removeDbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",dataModel.member_id] ];
-                    }
-                }
-
+                //没有的话不做任何操作
             }
+            
             [self showHint:model.msg];
         }else{
             [self showHint:object];
@@ -614,7 +628,7 @@
     }];
 }
 #pragma mark -添加宝贝到购物车
-- (void)addGoodsToShopCar{
+- (void)addGoodsToShopCar:(NSInteger)num{
 
     RMProductModel * product = [[RMProductModel alloc]init];
     product.auto_id = dataModel.auto_id;
@@ -630,7 +644,7 @@
         product.express_price = dataModel.express_price;
     }
     product.corp_id = dataModel.member_id;
-    product.content_num = baby_num;
+    product.content_num = num;
     product.plante = dataModel.content_class;//一肉一拍 还是 鲜肉市场?
     product.corp_user = [dataModel.members objectForKey:@"content_user"];
     
@@ -653,17 +667,15 @@
     for(RMProductModel * p in arr){//把所有的这个店铺的商品的快递方式都设置为最后添加的快递方式
         p.express = product.express;
         p.express_price = product.express_price;
+        [p updatetoDb];
     }
     
-    if([RMProductModel existDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",product.auto_id]])
+    if([RMProductModel existDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",dataModel.auto_id]])
     {
-        RMProductModel * pp = [[RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",product.auto_id] orderby:nil] lastObject];
-        if([dataModel.content_class isEqualToString:@"1"]){
-            
-        }else{
-            pp.content_num = baby_num + pp.content_num;
-        }
-        [product updatetoDb];
+        RMProductModel * ppt = [[RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",dataModel.auto_id] orderby:nil] lastObject];
+        
+       ppt.content_num = num;
+        [ppt updatetoDb];
     }
     else
     {

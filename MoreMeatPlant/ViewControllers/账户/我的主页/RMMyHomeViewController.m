@@ -335,6 +335,11 @@
 
 #pragma mark - 关注／发私信
 - (void)attentionHeBtnAction:(UIButton *)sender{
+    if(![[RMUserLoginInfoManager loginmanager] state]){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
+        return;
+    }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager attentionFriendRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] withOtherId:self.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -353,6 +358,11 @@
 }
 
 - (void)sendPrivateMsgBtnAction:(UIButton *)sender{
+    if(![[RMUserLoginInfoManager loginmanager] state]){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
+        return;
+    }
     [self.navigationController popToRootViewControllerAnimated:YES];
     AppDelegate * dele = [[UIApplication sharedApplication] delegate];
     [dele tabSelectController:3];
@@ -504,6 +514,11 @@
             break;
         }
         case 2:{
+            if(![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
             //多聊
             NSLog(@"多聊");
             KxMenuItem * item1 = [KxMenuItem menuItem:@"多聊消息" image:nil target:self action:@selector(menuSelected:) index:100];
@@ -556,6 +571,11 @@
     switch (item.tag-100) {
         case 0:
         {
+            if(![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
             [self.navigationController popToRootViewControllerAnimated:NO];
             AppDelegate * dele = [[UIApplication sharedApplication] delegate];
             [dele tabSelectController:3];

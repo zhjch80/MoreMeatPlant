@@ -12,7 +12,7 @@
 
 #import <UIKit/UIKit.h>
 #import <mapkit/mapkit.h>
-
+#import "RMBaseViewController.h"
 @protocol LocationViewDelegate <NSObject>
 
 -(void)sendLocationLatitude:(double)latitude
@@ -20,7 +20,7 @@
                  andAddress:(NSString *)address;
 @end
 
-@interface LocationViewController : UIViewController
+@interface LocationViewController : RMBaseViewController
 
 @property (nonatomic, assign) id<LocationViewDelegate> delegate;
 

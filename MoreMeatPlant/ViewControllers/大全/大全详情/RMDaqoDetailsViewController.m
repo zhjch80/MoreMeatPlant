@@ -412,8 +412,7 @@
                 UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
                 [alert show];
                 return;
-                NSLog(@"去登录...");
-                return;
+                ;
             }
             
             isTakingPictures = YES;
@@ -430,8 +429,6 @@
             if (![[RMUserLoginInfoManager loginmanager] state]){
                 UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
                 [alert show];
-                return;
-                NSLog(@"去登录...");
                 return;
             }
             

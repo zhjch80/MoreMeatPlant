@@ -59,14 +59,17 @@
     [super viewDidLoad];
     
     [self searchController];
-    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
+    self.searchBar.frame = CGRectMake(0, 0, kScreenWidth, 44);
     [self.view addSubview:self.searchBar];
     
-    self.tableView.frame = CGRectMake(0, self.searchBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.searchBar.frame.size.height);
+    self.tableView.frame = CGRectMake(0, self.searchBar.frame.size.height, kScreenWidth, kScreenHeight - self.searchBar.frame.size.height);
     [self.view addSubview:self.tableView];
     [self.tableView addSubview:self.slimeView];
     
     [self.slimeView setLoadingWithExpansion];
+    
+    NSLog(@"%@",self.view);
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,7 +135,7 @@
 {
     if (_tableView == nil)
     {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 44 - self.searchBar.frame.size.height) style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -417,6 +420,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    NSLog(@"%@",self.view);
     [_slimeView scrollViewDidScroll];
 }
 
@@ -511,7 +515,7 @@
 
 - (void)reloadDataSource
 {
-    [self showHudInView:self.view hint:NSLocalizedString(@"refreshData", @"刷新数据...")];
+    [self showHudInView:[UIApplication sharedApplication].keyWindow hint:NSLocalizedString(@"refreshData", @"刷新数据...")];
     [self.dataSource removeAllObjects];
     [self.contactsSource removeAllObjects];
     

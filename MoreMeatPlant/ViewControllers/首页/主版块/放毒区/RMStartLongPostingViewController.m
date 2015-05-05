@@ -623,35 +623,37 @@
 - (void)requestCommentData {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    NSMutableArray * content_bodys = [[NSMutableArray alloc] init];
-    NSMutableArray * content_imgs = [[NSMutableArray alloc] init];
+    NSMutableDictionary * content_bodys = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary * content_imgs = [[NSMutableDictionary alloc] init];
     
     BOOL isSeparated = NO;
     
     for (NSInteger i=0; i<cellRow; i++) {
         if ([[typeIdentifierArr objectAtIndex:i] isEqualToString:@"text"]){
             
-            if (i==0){
-                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-
-                NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-                
-                NSString * img_str = [basePath  stringByAppendingPathComponent:@"transparent_img.jpg"];
-                
-                [content_imgs addObject:img_str];
-            }
+//            if (i==0){
+//                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//
+//                NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+//                
+//                NSString * img_str = [basePath  stringByAppendingPathComponent:@"transparent_img.jpg"];
+//                
+//                [content_imgs addObject:img_str];
+//            }
             
-            NSString * str = [dataArr objectAtIndex:i];
-            
-            if (isSeparated){ //替换
-                NSString * str_1 = [content_bodys lastObject];
-                [content_bodys removeLastObject];
-                [content_bodys addObject:[NSString stringWithFormat:@"%@\n%@",str_1,str]];
-            }else{  //追加
-                [content_bodys addObject:str];
-            }
-            
-            isSeparated = YES;
+//            NSString * str = [dataArr objectAtIndex:i];
+//            
+//            if (isSeparated){ //替换
+//                NSString * str_1 = [content_bodys lastObject];
+//                [content_bodys removeLastObject];
+//                [content_bodys addObject:[NSString stringWithFormat:@"%@\n%@",str_1,str]];
+//            }else{  //追加
+//                [content_bodys addObject:str];
+//            }
+//            
+//            isSeparated = YES;
+             NSString * str = [dataArr objectAtIndex:i];
+            [content_bodys setValue:str forKey:[NSString stringWithFormat:@"frm[body][%ld][content_body]",i]];
         }else{
             
             UIImage * uploadImage = [dataArr objectAtIndex:i];
@@ -661,14 +663,14 @@
             [self saveImage:[UIImage imageWithData:data] withName:[NSString stringWithFormat:@"uploadLongImage_%ld.jpg",(long)i]];
             
             NSString *fullPath = [[FileUtil getCachePathFor:@"uploadLongImageCache"] stringByAppendingPathComponent:[NSString stringWithFormat:@"uploadLongImage_%ld.jpg",(long)i]];
+            NSURL * filePath = [NSURL fileURLWithPath:fullPath];
+            [content_imgs setValue:filePath forKey:[NSString stringWithFormat:@"frm[body][%ld][content_img]",i]];
             
-            [content_imgs addObject:fullPath];
-            
-            if (i+1 == cellRow){    //追加空文字
-                [content_bodys addObject:@""];
-            }
-            
-            isSeparated = NO;
+//            if (i+1 == cellRow){    //追加空文字
+//                [content_bodys addObject:@""];
+//            }
+//            
+//            isSeparated = NO;
         }
     }
     

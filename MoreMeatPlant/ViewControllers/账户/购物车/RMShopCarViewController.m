@@ -172,7 +172,7 @@
         [cell.content_imgV sd_setImageWithURL:[NSURL URLWithString:product.content_img] placeholderImage:[UIImage imageNamed:@"nophote"]];
         cell.content_titleL.text = product.content_name;
         cell.content_priceL.text = product.content_price;
-        cell.numTextField.text = [NSString stringWithFormat:@"%ld",product.content_num];
+        cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)product.content_num];
         return cell;
     }
 }
@@ -224,7 +224,7 @@
 //    NSInteger num = [cell.numTextField.text integerValue];
 //    num++;
 //    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
-    RMProductModel * model = [[[dataArray objectAtIndex:sender.tag/1000] objectForKey:@"products"] objectAtIndex:sender.tag%1000];
+    RMProductModel * model = [[[dataArray objectAtIndex:sender.tag/1000] objectForKey:@"products"] objectAtIndex:sender.tag%1000-1];
     if([model.plante isEqualToString:@"1"]){
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"一肉一拍区的宝贝只能选择一个哦！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
         [alert show];
@@ -345,6 +345,12 @@
 
 #pragma mark - 结算
 - (void)settlementAction:(UIButton *)sender{
+    
+    if(![[RMUserLoginInfoManager loginmanager] state]){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
+        return;
+    }
     
     if([dataArray count]== 0){
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"购物篮空空如也！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];

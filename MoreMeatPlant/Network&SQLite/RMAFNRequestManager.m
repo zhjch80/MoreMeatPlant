@@ -589,8 +589,8 @@
                  withContentType:(NSString *)content_type
                 withContentClass:(NSString *)content_class
                withContentCourse:(NSString *)content_course
-                 withContentBody:(NSMutableArray *)content_body
-                  withContentImg:(NSMutableArray *)content_img
+                 withContentBody:(NSMutableDictionary *)content_body
+                  withContentImg:(NSMutableDictionary *)content_img
                  withBodyAuto_id:(NSString *)bodyAuto_id
                           withID:(NSString *)user_id
                          withPWD:(NSString *)user_password
@@ -600,8 +600,8 @@
 
     NSInteger i = 0;
     NSMutableDictionary * parameter = [[NSMutableDictionary alloc] init];
-    for(NSString * value in content_body){
-        [parameter setValue:value forKey:[NSString stringWithFormat:@"frm[body][%ld][content_body]",(long)i]];
+    for(NSString * value in [content_body allKeys]){
+        [parameter setValue:[content_body objectForKey:value] forKey:value];
         i++;
     }
     
@@ -617,11 +617,17 @@
     [parameter setValue:user_password forKey:@"PWD"];
 
     [[RMHttpOperationShared sharedClient] POST:url parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        for (NSInteger i=0; i<[content_img count]; i++) {
-            NSURL * path = [NSURL fileURLWithPath:[content_img objectAtIndex:i]];
-            NSLog(@"path:%@,index:%ld",path,(long)i);
-            [formData appendPartWithFileURL:path name:[NSString stringWithFormat:@"frm[body][%ld][content_img]",(long)i] error:nil];
+//        for (NSInteger i=0; i<[content_img count]; i++) {
+//            NSURL * path = [NSURL fileURLWithPath:[content_img objectAtIndex:i]];
+//            NSLog(@"path:%@,index:%ld",path,(long)i);
+//            [formData appendPartWithFileURL:path name:[NSString stringWithFormat:@"frm[body][%ld][content_img]",(long)i] error:nil];
+//        }
+        
+        for(NSString * key in [content_img allKeys]){
+            NSURL * fileurl = [content_img objectForKey:key];
+            [formData appendPartWithFileURL:fileurl name:key error:nil];
         }
+        NSLog(@"%@",content_img);
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
@@ -845,8 +851,15 @@
 /**
  *  @method     修改会员信息（签名、支付宝、头像）
  */
-+ (void)myInfoModifyRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Type:(NSString *)type AlipayNo:(NSString *)alipayno Signature:(NSString *)signature Dic:(NSDictionary *)dic andCallBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&frm[zfb_no]=%@&frm[content_qm]=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_editInfo",user,pwd,alipayno,signature];
++ (void)myInfoModifyRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Type:(NSString *)type AlipayNo:(NSString *)alipayno Signature:(NSString *)signature Dic:(NSDictionary *)dic contentCode:code andCallBack:(RMAFNRequestManagerCallBack)block {
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_passport&task=app_editInfo",user,pwd];
+    //&frm[zfb_no]=%@&frm[content_qm]=%@&content_code=%@
+    //,alipayno,signature,code
+    
+    url = alipayno? [url stringByAppendingString:[NSString stringWithFormat:@"&frm[zfb_no]=%@",alipayno]]:url;
+    url = signature? [url stringByAppendingString:[NSString stringWithFormat:@"&frm[content_qm]=%@",signature]]:url;
+    url = code? [url stringByAppendingString:[NSString stringWithFormat:@"&content_code=%@",signature]]:url;
+    
     NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
     for(NSString * key in [dic allKeys]){
         if([key isEqualToString:@"content_face"] || [key isEqualToString:@"content_sfzimg"] || [key isEqualToString:@"content_bjimg"]){
@@ -854,7 +867,7 @@
         }
         [dict setValue:[dic objectForKey:key] forKey:key];
     }
-    
+    NSLog(@"%@",dic);
     [[RMHttpOperationShared sharedClient] POST:url parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         if(dic != nil){
             if([dic objectForKey:@"content_face"]!=nil){
@@ -1885,7 +1898,8 @@
         model.content_face = OBJC_Nil([dataDic objectForKey:@"content_face"]);
         model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
         model.contentQm = OBJC_Nil([dataDic objectForKey:@"content_qm"]);
-        model.publish = OBJC_Nil([dataDic objectForKey:@"publish"]);
+        model.publish = OBJC_Nil([dataDic objectForKey:@"publish"]);//
+        model.corp_photo = OBJC_Nil([dataDic objectForKey:@"content_bjimg"]);
         for(NSDictionary * dict in [dataDic objectForKey:@"class"]){
             [model.classs addObject:dict];
         }

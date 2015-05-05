@@ -39,7 +39,11 @@
     [refreshControl registerClassForTopView:[RefreshView class]];
     pageCount = 1;
     
+    NSLog(@"%@",self.view);
+    
     [self requestListWithPageCount];
+    
+    NSLog(@"%@",self.view);
 }
 #pragma mark -
 
@@ -324,7 +328,7 @@
                 }
             }
             
-            
+            NSLog(@"%@",self.view);
         }else{
             [self showHint:object];
         }

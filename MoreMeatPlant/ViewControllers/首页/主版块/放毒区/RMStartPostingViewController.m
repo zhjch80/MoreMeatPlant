@@ -138,7 +138,7 @@
                     
                     NSString *fullPath = [[FileUtil getCachePathFor:@"uploadImageCache"] stringByAppendingPathComponent:[NSString stringWithFormat:@"uploadImage_%ld.jpg",(long)i]];
                     
-                    [imageDic setObject:fullPath forKey:[NSString stringWithFormat:@"frm[body][%ld][content_img]",(long)i]];
+                    [imageDic setObject:fullPath forKey:[NSString stringWithFormat:@"frm[body][%ld][content_img]",(long)i+1]];
                 }
             }
             

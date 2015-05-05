@@ -51,7 +51,7 @@
         [dic setValue:cardUrl forKey:@"content_sfzimg"];
         [dic setValue:corpUrl forKey:@"content_bjimg"];
         
-        [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:cell.apliyT.text Signature:[cell.signatureT.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Dic:nil andCallBack:^(NSError *error, BOOL success, id object) {
+        [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:cell.apliyT.text Signature:[cell.signatureT.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Dic:dic contentCode:cell.codeField.text andCallBack:^(NSError *error, BOOL success, id object) {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             if(success){
                 RMPublicModel * model = object;
@@ -59,6 +59,7 @@
                     __model.contentQm = cell.signatureT.text;
                     __model.zfbNo = cell.apliyT.text;
                     [[NSNotificationCenter defaultCenter] postNotificationName:RMRequestMemberInfoAgainNotification object:__model];
+                    
                     UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"返回", nil];
                     [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
                         [self navgationBarButtonClick:nil];
@@ -79,7 +80,11 @@
     }else{//用户资料修改
         RMUserInfoEditTableViewCell * cell = (RMUserInfoEditTableViewCell *)[_mtableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         
-        [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:cell.apliyT.text Signature:[cell.signatureT.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Dic:nil andCallBack:^(NSError *error, BOOL success, id object) {
+        NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+        [dic setValue:content_faceUrl forKey:@"content_face"];
+        NSLog(@"========%@",dic);
+        
+        [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:cell.apliyT.text Signature:[cell.signatureT.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Dic:dic contentCode:cell.codeField.text andCallBack:^(NSError *error, BOOL success, id object) {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             if(success){
                 RMPublicModel * model = object;
@@ -241,14 +246,17 @@
         [[RMVPImageCropper shareImageCropper] setCtl:self];
         [[RMVPImageCropper shareImageCropper] set_scale:1.0];
         [[RMVPImageCropper shareImageCropper] showActionSheet];
+        [[RMVPImageCropper shareImageCropper] setFileName:@"content_face.jpg"];
     }else if (tap.view.tag == 1001){
         [[RMVPImageCropper shareImageCropper] setCtl:self];
         [[RMVPImageCropper shareImageCropper] set_scale:5.0/8.0];
         [[RMVPImageCropper shareImageCropper] showActionSheet];
+        [[RMVPImageCropper shareImageCropper] setFileName:@"content_sfzimg.jpg"];
     }else{
         [[RMVPImageCropper shareImageCropper] setCtl:self];
         [[RMVPImageCropper shareImageCropper] set_scale:1.0/3.0];
         [[RMVPImageCropper shareImageCropper] showActionSheet];
+        [[RMVPImageCropper shareImageCropper] setFileName:@"content_bjimg.jpg"];
     }
 }
 
@@ -329,11 +337,11 @@
         content_faceImg = editedImage;
     }else if ([[RMVPImageCropper shareImageCropper] _scale] == 5.0/8.0){
         //身份证
-        cardUrl = filePath;
+        cardUrl = filePath ;
         cardImg = editedImage;
     }else{
         //店铺背景
-        corpUrl = filePath;
+        corpUrl = filePath ;
         corpImg = editedImage;
     }
     [_mtableView reloadData];

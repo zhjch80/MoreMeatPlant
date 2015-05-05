@@ -326,7 +326,7 @@
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - self.chatToolBar.frame.size.height) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - self.chatToolBar.frame.size.height-64) style:UITableViewStylePlain];
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -477,7 +477,7 @@
 -(void)keyBoardHidden
 {
     [self.chatToolBar endEditing:YES];
-    _tableView.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight-self.chatToolBar.frame.size.height);
+    _tableView.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight-self.chatToolBar.frame.size.height-64);
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)recognizer

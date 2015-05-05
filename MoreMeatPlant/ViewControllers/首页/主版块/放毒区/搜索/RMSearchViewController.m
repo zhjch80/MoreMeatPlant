@@ -399,6 +399,8 @@
 - (void)addLikeWithImage:(RMImageView *)image {
     if (![RMUserLoginInfoManager loginmanager].state){
         NSLog(@"去登录.....");
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
         return;
     }
     
@@ -489,6 +491,8 @@
 - (void)addChatWithImage:(RMImageView *)image {
     if (![RMUserLoginInfoManager loginmanager].state){
         NSLog(@"去登录.....");
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
         return;
     }
     
@@ -591,6 +595,8 @@
 - (void)addPraiseWithImage:(RMImageView *)image {
     if (![RMUserLoginInfoManager loginmanager].state){
         NSLog(@"去登录.....");
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
         return;
     }
     

@@ -42,6 +42,9 @@
 #define GeneralMember @"1"
 @interface RMAccountViewController ()<RMVPImageCropperDelegate>{
     UIImageView * nav_imageView;
+    RMUserInfoViewController * userinfo;
+    
+    NSURL * _filePath;
 }
 
 @end
@@ -51,8 +54,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if(_model == nil){
-        _model = [[RMPublicModel alloc]init];
+    if(__model == nil){
+        __model = [[RMPublicModel alloc]init];
     }
     
     if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 2){
@@ -88,9 +91,18 @@
     }
 }
 
+- (void)recevierNotification:(NSNotification *)noti{
+    
+    if([noti.name isEqualToString:RMRequestMemberInfoAgainNotification]){
+        [self loadInfo];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recevierNotification:) name:RMRequestMemberInfoAgainNotification object:nil];
     
     [self setCustomNavTitle:@"账户"];
     _headerImgV.layer.cornerRadius = 5;
@@ -110,16 +122,17 @@
     [rightTwoBarButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self initPlat];
     
-    [self layoutViews];
     
-    [self loadInfo];
+   
 }
 
 - (void)loadInfo{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.baseIndicator startAnimatingActivit];
     [RMAFNRequestManager myInfoRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
+        [self.baseIndicator LoadSuccess];
         RMPublicModel * model = object;
-        _model = model;
+        __model = model;
         if(success && model.status){
             [self.headerImgV sd_setImageWithURL:[NSURL URLWithString:model.contentFace] placeholderImage:[UIImage imageNamed:@"nophote"]];
             self.userNameL.text = model.contentName;
@@ -129,9 +142,14 @@
             self.hua_biL.text = [NSString stringWithFormat:@"花币:%.0f",model.spendmoney];
             [self.member_right setTitle:model.levelId forState:UIControlStateNormal];
             [self.member_level setTitle:model.levelId forState:UIControlStateNormal];
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        }else{
+//            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
+            if(userinfo){
+                userinfo._model = __model;
+                [userinfo.mtableView reloadData];
+            }
+        }else{
+            [self showHint:object];
         }
     }];
 }
@@ -162,10 +180,17 @@
         self.member_right.hidden = NO;
     }
     
+    
+    
     [self layoutViews];
+    
+    
 }
 
 - (void)layoutViews {
+    
+    __weak RMAccountViewController * SELF = self;
+    
     int width = (kScreenWidth-15*2-3*3)/4.0;
     int height = width*(166.0/280.0);
     for(int i = 0;i<[functitleArray count];i++)
@@ -188,8 +213,8 @@
                         isShow = YES;
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
                         rightTwoBarButton.enabled = NO;
-                        mywallet.zfb_no = _model.zfbNo;
-                        mywallet.content_mobile = _model.contentMobile;
+                        mywallet.zfb_no = __model.zfbNo;
+                        mywallet.content_mobile = __model.contentMobile;
                         mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
                         [mywallet.titleLabel drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, mywallet.titleLabel.frame.size.height)];
                         
@@ -303,27 +328,27 @@
                     }
                         break;
                     case 9:{
-                        RMUserInfoViewController * userinfo = [[RMUserInfoViewController alloc]initWithNibName:@"RMUserInfoViewController" bundle:nil];
+                        userinfo = [[RMUserInfoViewController alloc]initWithNibName:@"RMUserInfoViewController" bundle:nil];
                         
                         userinfo.close_action = ^(RMUserInfoViewController * controller){
-                            [self dismissPopUpViewControllerWithcompletion:nil];
+                            [SELF dismissPopUpViewControllerWithcompletion:nil];
                         };
                         userinfo.modify_callback = ^(RMUserInfoViewController *controller){
                             //跳转到修改密码
                             RMModifyPassWordViewController * modify = [[RMModifyPassWordViewController alloc]initWithNibName:@"RMModifyPassWordViewController" bundle:nil];
-                            [self.navigationController pushViewController:modify animated:YES];
+                            [SELF.navigationController pushViewController:modify animated:YES];
                         };
                         
                         userinfo.callback = ^(RMUserInfoViewController * controller){
                             
                             RMUserInfoEditViewController * edit = [[RMUserInfoEditViewController alloc]initWithNibName:@"RMUserInfoEditViewController" bundle:nil];
                             edit._model = [[RMPublicModel alloc]init];
-                            edit._model = _model;
-                            [self.navigationController pushViewController:edit animated:YES];
+                            edit._model = SELF._model;
+                            [SELF.navigationController pushViewController:edit animated:YES];
                             
                         };
                         userinfo._model = [[RMPublicModel alloc]init];
-                        userinfo._model = _model;
+                        userinfo._model = __model;
                         
                         
                         userinfo.view.frame = CGRectMake(20, 0, kScreenWidth-20*2, kScreenHeight/3*2);
@@ -352,8 +377,8 @@
                         isShow = YES;
                         RMMyWalletViewController * mywallet = [[RMMyWalletViewController alloc]initWithNibName:@"RMMyWalletViewController" bundle:nil];
                         rightTwoBarButton.enabled = NO;
-                        mywallet.zfb_no = _model.zfbNo;
-                        mywallet.content_mobile = _model.contentMobile;
+                        mywallet.zfb_no = __model.zfbNo;
+                        mywallet.content_mobile = __model.contentMobile;
                         mywallet.view.frame = CGRectMake(20, 20, kScreenWidth-20*2, kScreenHeight-64-44-40);
                         [mywallet.titleLabel drawCorner:UIRectCornerTopLeft | UIRectCornerTopRight withFrame:CGRectMake(0, 0,kScreenWidth-20*2, mywallet.titleLabel.frame.size.height)];
                         
@@ -390,27 +415,27 @@
                     }
                         break;
                     case 3:{//我的资料
-                        RMUserInfoViewController * userinfo = [[RMUserInfoViewController alloc]initWithNibName:@"RMUserInfoViewController" bundle:nil];
+                        userinfo = [[RMUserInfoViewController alloc]initWithNibName:@"RMUserInfoViewController" bundle:nil];
                         
                         userinfo.close_action = ^(RMUserInfoViewController * controller){
-                            [self dismissPopUpViewControllerWithcompletion:nil];
+                            [SELF dismissPopUpViewControllerWithcompletion:nil];
                         };
                         userinfo.modify_callback = ^(RMUserInfoViewController *controller){
                             //跳转到修改密码
                             RMModifyPassWordViewController * modify = [[RMModifyPassWordViewController alloc]initWithNibName:@"RMModifyPassWordViewController" bundle:nil];
-                            [self.navigationController pushViewController:modify animated:YES];
+                            [SELF.navigationController pushViewController:modify animated:YES];
                         };
                         
                         userinfo.callback = ^(RMUserInfoViewController * controller){
                             
                             RMUserInfoEditViewController * edit = [[RMUserInfoEditViewController alloc]initWithNibName:@"RMUserInfoEditViewController" bundle:nil];
                             edit._model = [[RMPublicModel alloc]init];
-                            edit._model = _model;
-                            [self.navigationController pushViewController:edit animated:YES];
+                            edit._model = SELF._model;
+                            [SELF.navigationController pushViewController:edit animated:YES];
                             
                         };
                         userinfo._model = [[RMPublicModel alloc]init];
-                        userinfo._model = _model;
+                        userinfo._model = __model;
                         
                         
                         userinfo.view.frame = CGRectMake(20, 0, kScreenWidth-20*2, kScreenHeight/3*2);
@@ -508,6 +533,16 @@
         };
         [self.view addSubview:acountView];
     }
+    if(self.baseIndicator == nil){
+        self.baseIndicator = [[ActivityIndicator alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64-49) LabelText:Loading withdelegate:nil withType:ActivityIndicatorLogin andAction:nil];
+        [self.view addSubview:self.baseIndicator];
+    }
+    
+    [self.view bringSubviewToFront:self.baseIndicator];
+    
+    
+    
+    [self loadInfo];
 }
 
 
@@ -589,6 +624,7 @@
             break;
         }
         case 3:{
+            [self dismissPopUpViewControllerWithcompletion:nil];
             [self resignUserLogin];
             AppDelegate * delegate = [[UIApplication sharedApplication] delegate];
             [delegate loadMainViewControllersWithType:[[RMUserLoginInfoManager loginmanager] state]];
@@ -645,15 +681,42 @@
     [[RMVPImageCropper shareImageCropper] setCtl:self];
     [[RMVPImageCropper shareImageCropper] set_scale:1.0];
     [[RMVPImageCropper shareImageCropper] showActionSheet];
+    [[RMVPImageCropper shareImageCropper] setFileName:@"content_face.jpg"];
 }
 
 #pragma mark - RMimageCropperDelegate
 - (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage andfilePath:(NSURL *)filePath{
     NSLog(@"马东凯头像－－－－－－%@",editedImage);
+    _filePath = filePath;
+    [self modifyPhoto];
 }
 
 - (void)RMimageCropperDidCancel:(VPImageCropperViewController *)cropperViewController{
     NSLog(@"取消替换头像");
+}
+
+#pragma mark - 
+- (void)modifyPhoto{
+    NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:_filePath forKey:@"content_face"];
+    [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:nil Signature:nil Dic:dic contentCode:nil andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                [self showHint:model.msg];
+                [self loadInfo];
+            }else{
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                
+            }
+            
+        }else{
+            [self showHint:object];
+        }
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {

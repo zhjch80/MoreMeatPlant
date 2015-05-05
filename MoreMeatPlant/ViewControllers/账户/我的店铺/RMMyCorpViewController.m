@@ -16,13 +16,15 @@
 #import "RMFreshPlantMarketViewController.h"
 #import "RMMyHomeViewController.h"
 #import "RMBaseWebViewController.h"
+#import "RMVPImageCropper.h"
 
-@interface RMMyCorpViewController ()<RefreshControlDelegate>{
+@interface RMMyCorpViewController ()<RefreshControlDelegate,RMVPImageCropperDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
     BOOL isLoadComplete;
     NSMutableArray * dataArr;
     RMCorpHeadTableViewCell * headView;
+    NSURL * _filePath;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
@@ -63,11 +65,15 @@
         self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
         rightOneBarButton.hidden = NO;
         self.titleName = @"我的店铺";
+        headView.bannerImgV.userInteractionEnabled = YES;
     }else{
         self.titleName = @"店铺主页";
         rightOneBarButton.hidden = YES;
+        headView.bannerImgV.userInteractionEnabled = NO;
     }
-
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(replaceBannerImg:)];
+    [headView.bannerImgV addGestureRecognizer:tap];
+    
     [self setCustomNavTitle:self.titleName];
 
     
@@ -172,12 +178,22 @@
             break;
         }
         case 2:{
+            if(![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
             //购物车
             RMShopCarViewController * shop = [[RMShopCarViewController alloc]initWithNibName:@"RMShopCarViewController" bundle:nil];
             [self.navigationController pushViewController:shop animated:YES];
             break;
         }
         case 3:{
+            if(![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
             //多聊
             NSLog(@"多聊");
             KxMenuItem * item1 = [KxMenuItem menuItem:@"多聊消息" image:nil target:self action:@selector(menuSelected:) index:100];
@@ -475,6 +491,7 @@
 
 //            headView = (RMCorpHeadTableViewCell *)[_mainTableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             [headView.corp_headImgV sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:[UIImage imageNamed:@"nophote"]];
+            [headView.bannerImgV sd_setImageWithURL:[NSURL URLWithString:model.corp_photo] placeholderImage:[UIImage imageNamed:@"222"]];
             headView.corp_nameL.text = classsModel.content_name;
             headView.signatureL.text = classsModel.contentQm;
             headView.corp_regionL.text = classsModel.content_gps;
@@ -500,6 +517,12 @@
 
 #pragma mark - 收藏
 - (void)collectionAction:(UIButton *)sender{
+    if(![[RMUserLoginInfoManager loginmanager] state]){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
+        return;
+    }
+    
     //收藏
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager getMembersCollectWithCollect_id:self.auto_id withContent_type:@"2" withID:[[RMUserLoginInfoManager loginmanager] user] withPWD:[[RMUserLoginInfoManager loginmanager] pwd] callBack:^(NSError *error, BOOL success, id object) {
@@ -543,6 +566,51 @@
             break;
     }
 }
+
+#pragma mark - 换头像
+- (void)replaceBannerImg:(UITapGestureRecognizer *)tap{
+    [[RMVPImageCropper shareImageCropper] setCtl:self];
+    [[RMVPImageCropper shareImageCropper] set_scale:1.0/3.0];
+    [[RMVPImageCropper shareImageCropper] showActionSheet];
+    [[RMVPImageCropper shareImageCropper] setFileName:@"content_bjimg.jpg"];
+}
+
+#pragma mark - RMimageCropperDelegate
+- (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage andfilePath:(NSURL *)filePath{
+    _filePath = filePath;
+    [self modifyPhoto];
+}
+
+- (void)RMimageCropperDidCancel:(VPImageCropperViewController *)cropperViewController{
+    NSLog(@"取消替换头像");
+}
+
+#pragma mark -
+- (void)modifyPhoto{
+    NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:_filePath forKey:@"content_bjimg"];
+    [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:nil Signature:nil Dic:dic contentCode:nil andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                [self showHint:model.msg];
+                [self requestCorpid];
+                pageCount = 1;
+            }else{
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                
+            }
+            
+        }else{
+            [self showHint:object];
+        }
+    }];
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -62,13 +62,20 @@ static LocationViewController *defaultLocation = nil;
     
     self.title = NSLocalizedString(@"location.messageType", @"location message");
     
+    [self setCustomNavTitle:@"附近肉友"];
+    
+    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    
+    
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [backButton setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
     [backButton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backItem];
     
-    _mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
+    _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64)];
     _mapView.delegate = self;
     _mapView.mapType = MKMapTypeStandard;
     _mapView.zoomEnabled = YES;
@@ -77,13 +84,10 @@ static LocationViewController *defaultLocation = nil;
     if (_isSendLocation) {
         _mapView.showsUserLocation = YES;//显示当前位置
         
-        UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-        [sendButton setTitle:NSLocalizedString(@"send", @"Send") forState:UIControlStateNormal];
-        [sendButton setTitleColor:[UIColor colorWithRed:32 / 255.0 green:134 / 255.0 blue:158 / 255.0 alpha:1.0] forState:UIControlStateNormal];
-        [sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-        [sendButton addTarget:self action:@selector(sendLocation) forControlEvents:UIControlEventTouchUpInside];
-        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:sendButton]];
-        self.navigationItem.rightBarButtonItem.enabled = NO;
+        [rightTwoBarButton setTitle:@"发送" forState:UIControlStateNormal];
+        rightTwoBarButton.titleLabel.font = FONT_1(15);
+        [rightTwoBarButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [rightTwoBarButton addTarget:self action:@selector(sendLocation) forControlEvents:UIControlEventTouchUpInside];
         
         [self startLocation];
     }
@@ -225,5 +229,7 @@ static LocationViewController *defaultLocation = nil;
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
 
 @end

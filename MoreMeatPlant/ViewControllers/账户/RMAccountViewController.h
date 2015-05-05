@@ -11,7 +11,7 @@
 @interface RMAccountViewController : RMBaseViewController{
     NSMutableArray * functitleArray;
     NSMutableArray * funcimgArray;
-    RMPublicModel * _model;
+    
     BOOL isShow;//YES 表示当前界面有其他控制器的View
     
 }
@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *member_right;
 @property (weak, nonatomic) IBOutlet UIButton *member_level;
 @property (weak, nonatomic) IBOutlet UIButton *member_right_tag;
-
+@property (retain, nonatomic) RMPublicModel * _model;
 @property (assign, nonatomic) BOOL isCorp;
 
 - (void)initPlat;

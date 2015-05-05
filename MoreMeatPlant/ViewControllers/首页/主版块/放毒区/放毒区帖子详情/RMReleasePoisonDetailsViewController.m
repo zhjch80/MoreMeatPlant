@@ -121,6 +121,8 @@
         case 1:{
             if (![RMUserLoginInfoManager loginmanager].state){
                 NSLog(@"去登录.....");
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
                 return;
             }
             
@@ -147,6 +149,8 @@
         case 2:{
             if (![RMUserLoginInfoManager loginmanager].state){
                 NSLog(@"去登录.....");
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
                 return;
             }
             
@@ -191,12 +195,32 @@
         NSInteger count = [dataModel.body count];
         
         for (NSInteger i=0; i<count; i++) {
-            UILabel * bodyStr = [[UILabel alloc] init];
             CGFloat bodyHeight = 0;
             
             if ([[[dataModel.body objectAtIndex:i] objectForKey:@"content_body"] isEqualToString:@""]){
-                bodyStr.frame = CGRectMake(0, 0, 0, 0);
+                
+                UIImageView * imageView = [[UIImageView alloc] init];
+                
+                NSRange substr = [[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"] rangeOfString:@".gif"];
+                if (substr.location != NSNotFound) {
+                    
+                }else{
+                    CGSize size = [UIImage downloadImageSizeWithURL:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]];
+                    CGFloat height = size.height/size.width * kScreenWidth;
+                    
+                    [imageView sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil];
+                    
+                    [imageView setFrame:CGRectMake(0, 10 + offsetY, kScreenWidth, height)];
+                    
+                    [tableHeadView addSubview:imageView];
+                    
+                    offsetY = offsetY + imageView.frame.size.height + 10;
+                }
+
+                
             }else{
+                UILabel * bodyStr = [[UILabel alloc] init];
+
                 bodyHeight = [UtilityFunc boundingRectWithSize:CGSizeMake(kScreenWidth - 20, 0) font:[UIFont systemFontOfSize:15.0] text:[[dataModel.body objectAtIndex:i] objectForKey:@"content_body"]].height;
                 
                 bodyStr.backgroundColor = [UIColor clearColor];
@@ -205,27 +229,11 @@
                 bodyStr.font = [UIFont systemFontOfSize:15.0];
                 bodyStr.frame = CGRectMake(10, offsetY + 10, kScreenWidth - 20, bodyHeight);
                 [tableHeadView addSubview:bodyStr];
+                offsetY = offsetY + bodyStr.frame.size.height + 10;
+
             }
          
-            offsetY = offsetY + bodyStr.frame.size.height + 10;
             
-            UIImageView * imageView = [[UIImageView alloc] init];
-            
-            NSRange substr = [[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"] rangeOfString:@".gif"];
-            if (substr.location != NSNotFound) {
-
-            }else{
-                CGSize size = [UIImage downloadImageSizeWithURL:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]];
-                CGFloat height = size.height/size.width * kScreenWidth;
-                
-                [imageView sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil];
-                
-                [imageView setFrame:CGRectMake(0, 10 + offsetY, kScreenWidth, height)];
-                
-                [tableHeadView addSubview:imageView];
-                
-                offsetY = offsetY + imageView.frame.size.height + 10;
-            }
         }
     }
 
@@ -452,6 +460,8 @@
 - (void)addPraiseMethod:(RMImageView *)image {
     if (![RMUserLoginInfoManager loginmanager].state){
         NSLog(@"去登录.....");
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
         return;
     }
     
@@ -491,6 +501,8 @@
 - (void)reportMethod:(UIButton *)button {
     if (![[RMUserLoginInfoManager loginmanager] state]){
         NSLog(@"去登录");
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
         return;
     }
     
@@ -523,6 +535,8 @@
 - (void)replyMethod:(RMBaseButton *)button {
     if (![[RMUserLoginInfoManager loginmanager] state]){
         NSLog(@"去登录");
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
         return;
     }
     

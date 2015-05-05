@@ -8,6 +8,8 @@
 
 #import "RMBaseViewController.h"
 
+typedef void (^RMUserInfoEditViewFinished) (RMPublicModel *);
+
 @interface RMUserInfoEditViewController : RMBaseViewController
 
 @property (retain, nonatomic) RMPublicModel * _model;
@@ -15,5 +17,6 @@
 @property (retain, nonatomic) UIImage * content_faceImg;
 @property (retain, nonatomic) UIImage * cardImg;
 @property (retain, nonatomic) UIImage * corpImg;
+@property (copy, nonatomic) RMUserInfoEditViewFinished editFinished;
 
 @end

@@ -761,6 +761,8 @@
 		51783FD41AF592D900C6EE18 /* RMDaquanCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FD21AF592D900C6EE18 /* RMDaquanCollectionViewController.xib */; };
 		51783FDF1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FDD1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.m */; };
 		51783FE01AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FDE1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.xib */; };
+		51783FE61AF86AA400C6EE18 /* ActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FE31AF86AA400C6EE18 /* ActivityIndicator.m */; };
+		51783FE71AF86AA400C6EE18 /* ActivityIndictButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FE51AF86AA400C6EE18 /* ActivityIndictButton.m */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
@@ -2133,6 +2135,10 @@
 		51783FDC1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCorpHeadTableViewCell.h; sourceTree = "<group>"; };
 		51783FDD1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCorpHeadTableViewCell.m; sourceTree = "<group>"; };
 		51783FDE1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMCorpHeadTableViewCell.xib; sourceTree = "<group>"; };
+		51783FE21AF86AA400C6EE18 /* ActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityIndicator.h; sourceTree = "<group>"; };
+		51783FE31AF86AA400C6EE18 /* ActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityIndicator.m; sourceTree = "<group>"; };
+		51783FE41AF86AA400C6EE18 /* ActivityIndictButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityIndictButton.h; sourceTree = "<group>"; };
+		51783FE51AF86AA400C6EE18 /* ActivityIndictButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityIndictButton.m; sourceTree = "<group>"; };
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
@@ -3445,6 +3451,7 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				51783FE11AF86AA400C6EE18 /* ActivityIndicator */,
 				1D64F50D1A90CD150073EB98 /* CONST.h */,
 				51B375E71AE6802B00E332CA /* JKCountDownButton */,
 				51DB4E1C1AD1B3F000A6064D /* ShareSDK */,
@@ -4858,6 +4865,17 @@
 				5157DE4E1AB9CB9C005E9FA5 /* JSBadgeView.m */,
 			);
 			path = JSBadgeView;
+			sourceTree = "<group>";
+		};
+		51783FE11AF86AA400C6EE18 /* ActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				51783FE21AF86AA400C6EE18 /* ActivityIndicator.h */,
+				51783FE31AF86AA400C6EE18 /* ActivityIndicator.m */,
+				51783FE41AF86AA400C6EE18 /* ActivityIndictButton.h */,
+				51783FE51AF86AA400C6EE18 /* ActivityIndictButton.m */,
+			);
+			path = ActivityIndicator;
 			sourceTree = "<group>";
 		};
 		519927301AB5680200B0F83F /* 我的店铺 */ = {
@@ -6274,6 +6292,7 @@
 				51DB4E171AD130DA00A6064D /* RMCorpModel.m in Sources */,
 				514612161AE2105B0040E462 /* XHMessageTextView.m in Sources */,
 				5157DE531AB9CC5D005E9FA5 /* RMPublishBabyViewController.m in Sources */,
+				51783FE61AF86AA400C6EE18 /* ActivityIndicator.m in Sources */,
 				514612061AE2105B0040E462 /* ChineseToPinyin.m in Sources */,
 				0A4105741ABAB3C70060FBD5 /* EMSDWebImagePrefetcher.m in Sources */,
 				51D883C61ABB179400F7A3BD /* RMAdvertisingViewController.m in Sources */,
@@ -6334,6 +6353,7 @@
 				5191D4C01AD55B7A0011AFCC /* RMRecordsTableViewCell.m in Sources */,
 				95AA6F4A1ABF8CD2007F4C9E /* UIImageView+XHURLDownload.m in Sources */,
 				957A38F61AB4519E00A335F7 /* RMPlantWithSaleHeaderView.m in Sources */,
+				51783FE71AF86AA400C6EE18 /* ActivityIndictButton.m in Sources */,
 				514611E61AE2105B0040E462 /* CallSessionViewController.m in Sources */,
 				1D4DA3521A939CA8006A9EBA /* RMReleasePoisonCell.m in Sources */,
 				95AA6F481ABF8CD2007F4C9E /* NSString+XHMD5.m in Sources */,
@@ -6520,8 +6540,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: JiaBin Guo (4VJR4QFLLL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JiaBin Guo (4VJR4QFLLL)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: eLongtian Network Technology Corporation Limited (WWD46XW8M3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: eLongtian Network Technology Corporation Limited (WWD46XW8M3)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MoreMeatPlant/Vendors/ShareSDK/Connection",
@@ -6555,8 +6575,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: JiaBin Guo (4VJR4QFLLL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JiaBin Guo (4VJR4QFLLL)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: eLongtian Network Technology Corporation Limited (WWD46XW8M3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: eLongtian Network Technology Corporation Limited (WWD46XW8M3)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MoreMeatPlant/Vendors/ShareSDK/Connection",

@@ -284,8 +284,8 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
                      withContentType:(NSString *)content_type
                     withContentClass:(NSString *)content_class
                    withContentCourse:(NSString *)content_course
-                     withContentBody:(NSMutableArray *)content_body
-                      withContentImg:(NSMutableArray *)content_img
+                     withContentBody:(NSMutableDictionary *)content_body
+                      withContentImg:(NSMutableDictionary *)content_img
                      withBodyAuto_id:(NSString *)bodyAuto_id
                               withID:(NSString *)user_id
                              withPWD:(NSString *)user_password
@@ -392,7 +392,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param signature 签名
  *  @param dic 头像图片上传
  */
-+ (void)myInfoModifyRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Type:(NSString *)type AlipayNo:(NSString *)alipayno Signature:(NSString *)signature Dic:(NSDictionary *)dic andCallBack:(RMAFNRequestManagerCallBack)block;
++ (void)myInfoModifyRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Type:(NSString *)type AlipayNo:(NSString *)alipayno Signature:(NSString *)signature Dic:(NSDictionary *)dic contentCode:code andCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  获取个人信息

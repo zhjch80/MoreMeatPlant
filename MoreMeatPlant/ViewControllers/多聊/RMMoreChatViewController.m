@@ -182,6 +182,8 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     _contactsVC.view.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight-64-49);
     _contactsVC.delegate = self;
     
+    NSLog(@"%@\n%@",self.view,_contactsVC.view);
+    
     [self.view addSubview:_chatListVC.view];
     [self.view addSubview:_contactsVC.view];
     _contactsVC.view.hidden = YES;

@@ -33,6 +33,7 @@
 
 }
 
+@property (retain, nonatomic) ActivityIndicator * baseIndicator;
 /**
  *  @param navigationBar    自定义的navigationBar
  *  @param statusBar        自定义的statusBar

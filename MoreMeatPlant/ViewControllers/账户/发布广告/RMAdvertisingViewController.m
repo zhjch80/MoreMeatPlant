@@ -24,6 +24,9 @@
 //    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
     [self setCustomNavTitle:@"发布广告"];
     
+    self.baseIndicator = [[ActivityIndicator alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64) LabelText:Loading withdelegate:nil withType:ActivityIndicatorLogin andAction:nil];
+    [self.view addSubview:self.baseIndicator];
+    
     
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
@@ -35,14 +38,15 @@
 }
 
 - (void)planteRequest{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.baseIndicator startAnimatingActivit];
     [RMAFNRequestManager corpAdvantageListRequestWithUser:[[RMUserLoginInfoManager loginmanager]user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self.baseIndicator LoadSuccess];
         if(success){
             [planteArray addObjectsFromArray:object];
             [_mTableView reloadData];
         }else{
-            [MBProgressHUD showError:object toView:self.view];
+            [self showHint:object];
         }
 
     }];
@@ -222,7 +226,8 @@
         return;
     }
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.baseIndicator startAnimatingActivit];
     [RMAFNRequestManager corpAdvantageApplyWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Dic:multabledic filePath:_filePath andCallBack:^(NSError *error, BOOL success, id object) {
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

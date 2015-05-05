@@ -28,8 +28,6 @@
     self.mtableView.backgroundColor = UIColorFromRGB(0xc8c8c9);
     
     [self.closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchDown];
-    
-    
 }
 
 - (void)recevierNotification:(NSNotification *)noti{
@@ -82,7 +80,7 @@
         cell.content_addressL.text = __model.contentAddress?__model.contentAddress:@"还未填写";
         [cell.card_photo sd_setImageWithURL:[NSURL URLWithString:__model.card_photo] placeholderImage:[UIImage imageNamed:@"444"]];
         [cell.corp_photo sd_setImageWithURL:[NSURL URLWithString:__model.corp_photo] placeholderImage:[UIImage imageNamed:@"222"]];
-        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.content_face] placeholderImage:[UIImage imageNamed:@"photo"]];
+        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.contentFace] placeholderImage:[UIImage imageNamed:@"photo"]];
         return cell;
     }else{
         RMUserInfoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMUserInfoTableViewCell"];
@@ -96,7 +94,7 @@
         cell.signatureL.text = (__model.contentQm && __model.contentQm.length>0)?__model.contentQm:@"还未填写";
         cell.mobileL.text = __model.contentUser;
         cell.apliyL.text = (__model.zfbNo && __model.zfbNo.length>0)?__model.zfbNo:@"还未填写";
-        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.content_face] placeholderImage:[UIImage imageNamed:@"photo"]];
+        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.contentFace] placeholderImage:[UIImage imageNamed:@"photo"]];
         return cell;
     }
     

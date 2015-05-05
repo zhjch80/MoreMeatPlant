@@ -180,6 +180,11 @@
 }
 
 - (void)settlementAction:(UIButton *)sender{
+    if(![[RMUserLoginInfoManager loginmanager] state]){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
+        return;
+    }
     //结算
     if(_model.contentName == nil || _model.contentMobile == nil || _model.contentAddress == nil){
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择收货地址" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
