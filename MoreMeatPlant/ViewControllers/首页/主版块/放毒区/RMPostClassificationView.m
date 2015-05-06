@@ -47,11 +47,11 @@
     [self addSubview:self.subView];
     
     if (IS_IPHONE_6p_SCREEN){
-        kHeightX = 0.0;
+        kHeightX = 4.0;
     }else if (IS_IPHONE_6_SCREEN){
-        kHeightX = 11.0;
+        kHeightX = 3.5;
     }else{
-        kHeightX = 8.0;
+        kHeightX = 1.5;
     }
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -95,14 +95,14 @@
         UIImageView * image = [[UIImageView alloc] init];
         image.userInteractionEnabled = YES;
         image.multipleTouchEnabled = YES;
-        image.frame = CGRectMake(16 + (i-1)*((width - 32)/[subs count] + kHeightX), 105, 44, 44);
+        image.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count] - 1) + kHeightX), 105, 44, 44);
         image.tag = 6 + i;
         [image sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         image.backgroundColor = [UIColor clearColor];
         [subView addSubview:image];
         
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(16 + (i-1)*((width - 32)/[subs count] + kHeightX), 105, 44, 44);
+        button.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count] - 1) + kHeightX), 105, 44, 44);
         button.tag = 6 + i;
         [button addTarget:self action:@selector(selectUpdataListType:) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor clearColor];
@@ -143,7 +143,13 @@
             [imageView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         }
         
+        for (NSInteger i=1; i<[globPlantArr count]; i++) {
+            UIImageView * imageView = (UIImageView *)[subView viewWithTag:i + 6];
+            imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, 44, 44);
+        }
+        
         UIImageView * imageView = (UIImageView *)[subView viewWithTag:sender.tag];
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height + 5);
         RMPublicModel * model = [globSubsPlantArr objectAtIndex:sender.tag-6];
         [imageView sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
     }
@@ -157,15 +163,23 @@
  *  更新食物科目选择状态
  */
 - (void)updataPlantClassificationSelectStateWith:(NSInteger)value {
-    for (NSInteger i=1; i<[globSubsPlantArr count]; i++) {
-        RMPublicModel * model = [globSubsPlantArr objectAtIndex:i];
-        UIImageView * imageView = (UIImageView *)[subView viewWithTag:i+6];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+    if (value == -100){
+        for (NSInteger i=1; i<[globSubsPlantArr count]; i++) {
+            RMPublicModel * model = [globSubsPlantArr objectAtIndex:i];
+            UIImageView * imageView = (UIImageView *)[subView viewWithTag:i + 6];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        }
+    }else{
+        for (NSInteger i=1; i<[globSubsPlantArr count]; i++) {
+            RMPublicModel * model = [globSubsPlantArr objectAtIndex:i];
+            UIImageView * imageView = (UIImageView *)[subView viewWithTag:i+6];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        }
+        
+        UIImageView * imageView = (UIImageView *)[subView viewWithTag:value+6];
+        RMPublicModel * model = [globSubsPlantArr objectAtIndex:value];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
     }
-    
-    UIImageView * imageView = (UIImageView *)[subView viewWithTag:value+6];
-    RMPublicModel * model = [globSubsPlantArr objectAtIndex:value];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
 }
 
 @end

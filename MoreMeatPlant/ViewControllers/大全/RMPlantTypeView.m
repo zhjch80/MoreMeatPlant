@@ -34,13 +34,13 @@
     counts = [imageArr count];
     
     if (IS_IPHONE_6p_SCREEN){
-        kWidthOffset = 0.0;
+        kWidthOffset = 14.0;
         kHeightY = 0.0;
-        kHeightOffset = 0.0;
+        kHeightOffset = 10.0;
         kHeightChangeOffset = 0.0;
         kHeightNormalOffset = 0.0;
     }else if (IS_IPHONE_6_SCREEN){
-        kWidthOffset = 8.0;
+        kWidthOffset = 9.0;
         kHeightOffset = 4.0;
         kHeightY = 3.0;
         kHeightChangeOffset = 0.0;

@@ -48,15 +48,16 @@
     self.backgroundColor = [UIColor clearColor];
 
     _activityIndicatorView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    _activityIndicatorView.frame = CGRectZero;
     _activityIndicatorView.hidesWhenStopped=YES;
     _activityIndicatorView.color=[UIColor orangeColor];
     _activityIndicatorView.translatesAutoresizingMaskIntoConstraints=NO;
     [self addSubview:_activityIndicatorView];
     
-    _loadingLabel=[[UILabel alloc] initWithFrame:CGRectZero];
+    _loadingLabel=[[UILabel alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2, 15, 100, 30)];
     _loadingLabel.backgroundColor=[UIColor clearColor];
     _loadingLabel.font=[UIFont systemFontOfSize:13];
-    _loadingLabel.translatesAutoresizingMaskIntoConstraints=NO;
+//    _loadingLabel.translatesAutoresizingMaskIntoConstraints=NO;
     [self addSubview:_loadingLabel];
     
     _promptLabel=[[UILabel alloc] initWithFrame:CGRectZero];

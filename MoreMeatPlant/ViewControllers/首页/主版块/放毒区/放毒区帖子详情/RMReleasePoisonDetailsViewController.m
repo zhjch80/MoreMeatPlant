@@ -443,7 +443,6 @@
 #pragma mark - 跳转到广告位置
 
 - (void)jumpPromoteMethod:(RMImageView *)image {
-    NSLog(@"member_id:%@",image.identifierString);
     if([image.content_type isEqualToString:@"0"]){
         RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
         corp.auto_id = image.identifierString;
@@ -479,9 +478,10 @@
             RMReleasePoisonDetailsCell * cell = (RMReleasePoisonDetailsCell *)[mTableView cellForRowAtIndexPath:image.indexPath];
 
             cell.addPraiseImg.image = LOADIMAGE(@"img_zaned", kImageTypePNG);
-            
+            NSInteger count = cell.praiseCount.text.integerValue;
+            count ++;
+            cell.praiseCount.text = [NSString stringWithFormat:@"%ld",(long)count];
             dataModel.is_top = @"1";
-            
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }else{
             [self showHint:[object objectForKey:@"msg"]];

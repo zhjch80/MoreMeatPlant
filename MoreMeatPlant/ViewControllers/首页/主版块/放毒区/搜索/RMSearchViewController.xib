@@ -38,8 +38,11 @@
                                 <action selector="buttonClick:" destination="-1" eventType="touchUpInside" id="ruq-be-BXy"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2U-Ek-yBa">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2U-Ek-yBa">
                             <rect key="frame" x="274" y="8" width="46" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="P6o-ee-RIe"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="15"/>
                             <state key="normal" title="搜索">
                                 <color key="titleColor" red="0.34991164434523814" green="0.34991164434523814" blue="0.34991164434523814" alpha="1" colorSpace="calibratedRGB"/>
@@ -51,6 +54,10 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.91062127976190477" green="0.91062127976190477" blue="0.91062127976190477" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="H2U-Ek-yBa" secondAttribute="trailing" id="L7b-6A-ual"/>
+                        <constraint firstItem="H2U-Ek-yBa" firstAttribute="top" secondItem="eNv-hF-Ifd" secondAttribute="top" constant="8" id="bIp-Sn-bMl"/>
+                    </constraints>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入要搜索的内容" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uXZ-AB-17E" customClass="RMBaseTextField">
                     <rect key="frame" x="45" y="24" width="230" height="35"/>

@@ -64,7 +64,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f0B-Hc-jHq" customClass="RMImageView">
-                                <rect key="frame" x="0.0" y="27" width="402" height="200"/>
+                                <rect key="frame" x="0.0" y="27" width="405" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                         </subviews>

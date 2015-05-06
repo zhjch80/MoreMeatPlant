@@ -777,6 +777,7 @@
         //全部
         subsPlantRequestValue = 10000;
         isRefresh = YES;
+        [fenleiAction updataPlantClassificationSelectStateWith:-100];
         [self requestListWithPageCount:1];
     }else{
         //分类
