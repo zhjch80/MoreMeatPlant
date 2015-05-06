@@ -1708,7 +1708,7 @@
     if(iscorp){//商家
         url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld&app_com=%@&task=%@",baseUrl,@"&method=appSev&per=1&row=10",user,pwd,(long)page,@"com_ccenter",type];
     }else{
-        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld&app_com=%@&task=%@",baseUrl,@"&method=appSev&app_com=com_ccenter&task=productList&per=1&row=10",user,pwd,(long)page,@"com_pcenter",type];
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&page=%ld&app_com=%@&task=%@",baseUrl,@"&method=appSev&per=1&row=10",user,pwd,(long)page,@"com_pcenter",type];
     }
       [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);

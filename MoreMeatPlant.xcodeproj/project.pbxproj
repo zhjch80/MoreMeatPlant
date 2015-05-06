@@ -763,6 +763,10 @@
 		51783FE01AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FDE1AF5E2D700C6EE18 /* RMCorpHeadTableViewCell.xib */; };
 		51783FE61AF86AA400C6EE18 /* ActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FE31AF86AA400C6EE18 /* ActivityIndicator.m */; };
 		51783FE71AF86AA400C6EE18 /* ActivityIndictButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FE51AF86AA400C6EE18 /* ActivityIndictButton.m */; };
+		51783FEB1AF9070700C6EE18 /* RMOrderAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FE91AF9070700C6EE18 /* RMOrderAddressTableViewCell.m */; };
+		51783FEC1AF9070700C6EE18 /* RMOrderAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FEA1AF9070700C6EE18 /* RMOrderAddressTableViewCell.xib */; };
+		51783FF01AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FEE1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.m */; };
+		51783FF11AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FEF1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.xib */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
@@ -2139,6 +2143,12 @@
 		51783FE31AF86AA400C6EE18 /* ActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityIndicator.m; sourceTree = "<group>"; };
 		51783FE41AF86AA400C6EE18 /* ActivityIndictButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityIndictButton.h; sourceTree = "<group>"; };
 		51783FE51AF86AA400C6EE18 /* ActivityIndictButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityIndictButton.m; sourceTree = "<group>"; };
+		51783FE81AF9070700C6EE18 /* RMOrderAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMOrderAddressTableViewCell.h; sourceTree = "<group>"; };
+		51783FE91AF9070700C6EE18 /* RMOrderAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMOrderAddressTableViewCell.m; sourceTree = "<group>"; };
+		51783FEA1AF9070700C6EE18 /* RMOrderAddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderAddressTableViewCell.xib; sourceTree = "<group>"; };
+		51783FED1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMOrderLeaveMsgTableViewCell.h; sourceTree = "<group>"; };
+		51783FEE1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMOrderLeaveMsgTableViewCell.m; sourceTree = "<group>"; };
+		51783FEF1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderLeaveMsgTableViewCell.xib; sourceTree = "<group>"; };
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
@@ -4116,6 +4126,12 @@
 				51CE2B781AD6ADB900E9E43F /* RMOrderReturnEditView.m */,
 				51CE2B7A1AD6ADC700E9E43F /* RMOrderReturnEditView.xib */,
 				51783FCE1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib */,
+				51783FE81AF9070700C6EE18 /* RMOrderAddressTableViewCell.h */,
+				51783FE91AF9070700C6EE18 /* RMOrderAddressTableViewCell.m */,
+				51783FEA1AF9070700C6EE18 /* RMOrderAddressTableViewCell.xib */,
+				51783FED1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.h */,
+				51783FEE1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.m */,
+				51783FEF1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.xib */,
 			);
 			path = "我的订单";
 			sourceTree = "<group>";
@@ -5815,6 +5831,7 @@
 				1D4DA3131A920F21006A9EBA /* RMHomeCell.xib in Resources */,
 				1DEB74831AB9D66800EA1FA7 /* img_tz_8.png in Resources */,
 				514613101AE3653E0040E462 /* VoiceSearchFeedback006@2x.png in Resources */,
+				51783FF11AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.xib in Resources */,
 				51D883CC1ABB189000F7A3BD /* RMAdvertisingHeadTableViewCell.xib in Resources */,
 				51B3760B1AEB71BD00E332CA /* RMUserInfoEditTableViewCell.xib in Resources */,
 				1DEB74631AB9D66800EA1FA7 /* img_home_5.png in Resources */,
@@ -5977,6 +5994,7 @@
 				1D4DA34E1A9393ED006A9EBA /* RMDaqoDetailsViewController.xib in Resources */,
 				1D7090C81AC25DE600AE47BF /* img_tzArrow_3.png in Resources */,
 				1DEB74601AB9D66800EA1FA7 /* img_home_2.png in Resources */,
+				51783FEC1AF9070700C6EE18 /* RMOrderAddressTableViewCell.xib in Resources */,
 				5146135F1AE3653E0040E462 /* chatBar_recordSelectedBg.png in Resources */,
 				1DEB750C1AB9D67A00EA1FA7 /* member_collection_collected.png in Resources */,
 				1DD3265F1ABBFACE006CD1A8 /* jia_img.png in Resources */,
@@ -6152,6 +6170,7 @@
 				514612271AE2190D0040E462 /* UIViewController+DismissKeyboard.m in Sources */,
 				0A4105821ABAB3C70060FBD5 /* PSTCollectionViewData.m in Sources */,
 				514611EE1AE2105B0040E462 /* DXChatBarMoreView.m in Sources */,
+				51783FEB1AF9070700C6EE18 /* RMOrderAddressTableViewCell.m in Sources */,
 				514611F31AE2105B0040E462 /* EMChatLocationBubbleView.m in Sources */,
 				51B375FF1AEB67DA00E332CA /* RMUserInfoTableViewCell.m in Sources */,
 				51DB4CC71AC86BF000A6064D /* UIView+Expland.m in Sources */,
@@ -6283,6 +6302,7 @@
 				51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */,
 				51D8841F1ABDCFD400F7A3BD /* RMRegisterViewController.m in Sources */,
 				95AA6F4F1ABF8CD2007F4C9E /* XHZoomingImageView.m in Sources */,
+				51783FF01AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.m in Sources */,
 				1D4DA3121A920F21006A9EBA /* RMHomeCell.m in Sources */,
 				1DD3266A1ABC0A97006CD1A8 /* RMPostClassificationView.m in Sources */,
 				514611F71AE2105B0040E462 /* EMChatViewBaseCell.m in Sources */,
