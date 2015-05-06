@@ -1740,6 +1740,8 @@
             model.create_time = OBJC_Nil([dataDic objectForKey:@"create_time"]);
             model.member_user = OBJC_Nil([dataDic objectForKey:@"member_user"]);
             
+            model.is_comment = OBJC_Nil([dataDic objectForKey:@"is_comment"]);
+            
             model.express_name = OBJC_Nil([dataDic objectForKey:@"express_name"]);
             model.express_no = OBJC_Nil([dataDic objectForKey:@"express_no"]);
             model.expresspay = OBJC([dataDic objectForKey:@"expresspay"]);
@@ -2068,6 +2070,25 @@
             block(error,NO,RequestFailed);
         }
 
+    }];
+}
+
++ (void)iwantEvaulateOrderWithUser:(NSString *)user Pwd:(NSString *)pwd Orderid:(NSString *)orderid Comment_num:(NSString *)comment_num auto_idStr:(NSString *)autoidStr Comment_desc:(NSDictionary *)comment_desc andCallBack:(RMAFNRequestManagerCallBack)block{
+    //localhost/drzw/index.php?com=com_appService&method=save&app_com=com_pcenter&task=orderComment&orderid=2&comment_num=4&auto_id=1,2&comment_desc=%E5%BE%88%E5%A5%BD%E5%95%8A,%E4%B8%8D%E9%94%99%E5%93%A6%E5%93%A6&ID=test&PWD=202CB962AC59075B964B07152D234B70
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&orderid=%@&comment_num=%@&auto_id=%@",baseUrl,@"&method=save&app_com=com_pcenter&task=orderComment",user,pwd,orderid,comment_num,autoidStr];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:comment_desc success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
     }];
 }
 

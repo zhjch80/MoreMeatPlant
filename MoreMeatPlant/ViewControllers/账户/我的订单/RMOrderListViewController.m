@@ -22,7 +22,7 @@
 #import "RMOrderAddressTableViewCell.h"
 #import "RMOederDetailOperationTableViewCell.h"
 #import "RMOrderDetailEvaluateTableViewCell.h"
-@interface RMOrderListViewController ()<RefreshControlDelegate>{
+@interface RMOrderListViewController ()<RefreshControlDelegate,UITextFieldDelegate>{
     
     BOOL isRefresh;
     RMOrderReturnEditView * returnEditView;
@@ -101,66 +101,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     RMPublicModel * model = [orderlists objectAtIndex:indexPath.section];
-    
-    
-    
-    RMOrderDetailProTableViewCell * procell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderDetailProTableViewCell"];
-    if(procell == nil){
-        procell = [[[NSBundle mainBundle]loadNibNamed:@"RMOrderDetailProTableViewCell" owner:self options:nil] lastObject];
-        procell.returnBtn.hidden = YES;
-        [procell.returnBtn addTarget:self action:@selector(iWantToReturn:) forControlEvents:UIControlEventTouchDown];
-        procell.fieldHeght.constant = 0;
-    }
-    procell.returnBtn.tag = indexPath.section*1000+indexPath.row;
-    
-    RMOrderLeaveMsgTableViewCell * leavecell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderLeaveMsgTableViewCell"];
-    if(leavecell == nil){
-        leavecell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderLeaveMsgTableViewCell" owner:self options:nil] lastObject];
-        leavecell.leaveMsg.userInteractionEnabled = NO;
-    }
-    
-    RMOrderDetailNumTableViewCell * numcell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderDetailNumTableViewCell"];
-    if(numcell == nil){
-        numcell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailNumTableViewCell" owner:self options:nil] lastObject];
-    }
-    
-    RMOrderAddressTableViewCell * addresscell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderAddressTableViewCell"];
-    if(addresscell == nil){
-        addresscell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderAddressTableViewCell" owner:self options:nil] lastObject];
-    }
-    
-    RMOrderDetailEvaluateTableViewCell * evaluatecell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderDetailEvaluateTableViewCell"];
-    if(evaluatecell == nil){
-        evaluatecell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailEvaluateTableViewCell" owner:self options:nil] lastObject];
-        for(int i = 0;i<4;i++){
-            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(evaluateAction:)];
-            UILabel * label = (UILabel *)[evaluatecell.contentView viewWithTag:100+i];
-            [label addGestureRecognizer:tap];
-        }
-    }
-    
-    RMOederDetailOperationTableViewCell * operationcell = [tableView dequeueReusableCellWithIdentifier:@"RMOederDetailOperationTableViewCell"];
-    if(operationcell == nil){
-        operationcell = [[[NSBundle mainBundle] loadNibNamed:@"RMOederDetailOperationTableViewCell" owner:self options:nil] lastObject];
-        
-        [operationcell.rightBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchDown];
-        [operationcell.leftBtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchDown];
-    }
-    
-    operationcell.leftBtn.tag = indexPath.section*100;
-    operationcell.rightBtn.tag = indexPath.section*100+1;
-    
-    RMOrderHeadTableViewCell * headcell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderHeadTableViewCell"];
-    if(headcell == nil){
-        headcell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderHeadTableViewCell" owner:self options:nil] lastObject];
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goCorp:)];
-        headcell.corp_name.userInteractionEnabled = YES;
-        [headcell.corp_name addGestureRecognizer:tap];
-    }
-    
-    
+
     if(indexPath.row == 0){
     
+        RMOrderHeadTableViewCell * headcell = [tableView dequeueReusableCellWithIdentifier:@"RMOrderHeadTableViewCell"];
+        if(headcell == nil){
+            headcell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderHeadTableViewCell" owner:self options:nil] lastObject];
+            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goCorp:)];
+            headcell.corp_name.userInteractionEnabled = YES;
+            [headcell.corp_name addGestureRecognizer:tap];
+        }
+        
         headcell.corp_name.tag = indexPath.section+100;
         headcell.corp_name.text = OBJC_Nil([model.corp objectForKey:@"content_name"]);
         headcell.create_time.text = model.create_time;
@@ -188,18 +139,21 @@
             if([model.is_status integerValue] == 0){//未处理
                 if(indexPath.row == [model.pros count] +5-1){
                     //操作
+                    RMOederDetailOperationTableViewCell * operationcell = [self getRMOederDetailOperationTableViewCell:indexPath];
                     operationcell.leftBtn.hidden = YES;
                     operationcell.rightBtn.hidden = NO;
                     [operationcell.rightBtn setTitle:@"取消订单" forState:UIControlStateNormal];
                     return operationcell;
                 }else if(indexPath.row == [model.pros count]+5-2){
                 //地址
+                    RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
                     return addresscell;
                 }else if (indexPath.row == [model.pros count]+5-3){
                     //和
+                    RMOrderDetailNumTableViewCell * numcell = [self getRMOrderDetailNumTableViewCell:indexPath];
                     int num = 0;
                     for(NSDictionary * prodic in [model pros]){
                         num += [[prodic objectForKey:@"content_num"] integerValue];
@@ -212,26 +166,32 @@
                     return numcell;
                 }else if (indexPath.row == [model.pros count]+5-4){
                     //留言
+                    RMOrderLeaveMsgTableViewCell * leavecell = [self getRMOrderLeaveMsgTableViewCell:indexPath];
                     leavecell.leaveMsg.text = model.order_message;
 
                     return leavecell;
                 }else{
                     NSDictionary * prodic = [model.pros objectAtIndex:indexPath.row-1];
+                    RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
                     [procell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                     procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
-                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
+                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
                     procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
                     return procell;
                 }
             }else { //([model.is_status integerValue] == 1){//待发货
                 if(indexPath.row == [model.pros count]+4-1){
                     //地址
+                    RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
+
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
                     return addresscell;
                 }else if (indexPath.row == [model.pros count]+4-2){
                     //和
+                    RMOrderDetailNumTableViewCell * numcell = [self getRMOrderDetailNumTableViewCell:indexPath];
+
                     int num = 0;
                     for(NSDictionary * prodic in [model pros]){
                         num += [[prodic objectForKey:@"content_num"] integerValue];
@@ -243,10 +203,14 @@
                     return numcell;
                 }else if (indexPath.row == [model.pros count]+4-3){
                     //留言
+                    RMOrderLeaveMsgTableViewCell * leavecell = [self getRMOrderLeaveMsgTableViewCell:indexPath];
+
                     leavecell.leaveMsg.text = model.order_message;
                     return leavecell;
                 }else{
                     NSDictionary * prodic = [model.pros objectAtIndex:indexPath.row-1];
+                    RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
+
                     [procell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                     procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
                     procell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
@@ -258,6 +222,8 @@
         }else if ([_order_type isEqualToString:@"unpayorder"]){
             if(indexPath.row == [model.pros count] +5-1){
                 //操作
+                RMOederDetailOperationTableViewCell * operationcell = [self getRMOederDetailOperationTableViewCell:indexPath];
+
                 operationcell.leftBtn.hidden = NO;
                 operationcell.rightBtn.hidden = NO;
                 [operationcell.leftBtn setTitle:@"取消订单" forState:UIControlStateNormal];
@@ -265,12 +231,16 @@
                 return operationcell;
             }else if(indexPath.row == [model.pros count]+5-2){
                 //地址
+                RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
+
                 addresscell.content_name.text = model.content_linkname;
                 addresscell.content_mobile.text = model.content_mobile;
                 addresscell.content_address.text = model.content_address;
                 return addresscell;
             }else if (indexPath.row == [model.pros count]+5-3){
                 //和
+                RMOrderDetailNumTableViewCell * numcell = [self getRMOrderDetailNumTableViewCell:indexPath];
+
                 int num = 0;
                 for(NSDictionary * prodic in [model pros]){
                     num += [[prodic objectForKey:@"content_num"] integerValue];
@@ -282,13 +252,17 @@
                 return numcell;
             }else if (indexPath.row == [model.pros count]+5-4){
                 //留言
+                RMOrderLeaveMsgTableViewCell * leavecell = [self getRMOrderLeaveMsgTableViewCell:indexPath];
+
                 leavecell.leaveMsg.text = model.order_message;
                 return leavecell;
             }else{
                 NSDictionary * prodic = [model.pros objectAtIndex:indexPath.row-1];
+                RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
+
                 [procell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                 procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
-                procell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
+                procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
                 procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
                 return procell;
                 return procell;
@@ -297,6 +271,8 @@
             if([model.is_status integerValue] == 2){//已发货
                 if(indexPath.row == [model.pros count] +5-1){
                     //操作
+                    RMOederDetailOperationTableViewCell * operationcell = [self getRMOederDetailOperationTableViewCell:indexPath];
+
                     operationcell.leftBtn.hidden = NO;
                     operationcell.rightBtn.hidden = NO;
                     [operationcell.leftBtn setTitle:@"查看物流" forState:UIControlStateNormal];
@@ -304,12 +280,16 @@
                     return operationcell;
                 }else if(indexPath.row == [model.pros count]+5-2){
                     //地址
+                    RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
+
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
                     return addresscell;
                 }else if (indexPath.row == [model.pros count]+5-3){
                     //和
+                    RMOrderDetailNumTableViewCell * numcell = [self getRMOrderDetailNumTableViewCell:indexPath];
+
                     int num = 0;
                     for(NSDictionary * prodic in [model pros]){
                         num += [[prodic objectForKey:@"content_num"] integerValue];
@@ -321,25 +301,33 @@
                     return numcell;
                 }else if (indexPath.row == [model.pros count]+5-4){
                     //留言
+                    RMOrderLeaveMsgTableViewCell * leavecell = [self getRMOrderLeaveMsgTableViewCell:indexPath];
+
                     leavecell.leaveMsg.text = model.order_message;
                     return leavecell;
                 }else{
                     NSDictionary * prodic = [model.pros objectAtIndex:indexPath.row-1];
+                    RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
+
                     [procell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                     procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
-                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
+                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
                     procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
                     return procell;
                 }
             }else{//[model.is_status integerValue] == 3 已签收,显示产品退货按钮
                 if(indexPath.row == [model.pros count]+4-1){
                     //地址
+                    RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
+
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
                     return addresscell;
                 }else if (indexPath.row == [model.pros count]+4-2){
                     //和
+                    RMOrderDetailNumTableViewCell * numcell = [self getRMOrderDetailNumTableViewCell:indexPath];
+
                     int num = 0;
                     for(NSDictionary * prodic in [model pros]){
                         num += [[prodic objectForKey:@"content_num"] integerValue];
@@ -351,9 +339,13 @@
                     return numcell;
                 }else if (indexPath.row == [model.pros count]+4-3){
                     //留言
+                    RMOrderLeaveMsgTableViewCell * leavecell = [self getRMOrderLeaveMsgTableViewCell:indexPath];
+
                     leavecell.leaveMsg.text = model.order_message;
                     return leavecell;
                 }else{
+                    RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
+
                     procell.returnBtn.hidden = NO;
                     NSDictionary * prodic = [model.pros objectAtIndex:indexPath.row-1];
 
@@ -366,7 +358,7 @@
                     }
                     [procell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                     procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
-                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
+                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
                     procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
                     return procell;
                 }
@@ -374,15 +366,28 @@
         }else if ([_order_type isEqualToString:@"okorder"]){
             if([model.is_comment boolValue]){
                 if(indexPath.row == [model.pros count] +5-1){
+                   RMOrderDetailEvaluateTableViewCell * evaluatecell = [self getRMOrderDetailEvaluateTableViewCell:indexPath];
+                    NSInteger n = [[[model.pros objectAtIndex:indexPath.section] objectForKey:@"comment_num"] integerValue];
+                    //                    banImg
+                    //                    generalImg
+                    //                    goodImg
+                    //                    pefectImg
+                    UIButton * btn = (UIButton *)[evaluatecell.contentView viewWithTag:1000*indexPath.section+n-1];
+                    [btn setImage:[UIImage imageNamed:@"order_yellow_sun"] forState:UIControlStateNormal];
+                    evaluatecell.userInteractionEnabled = NO;
                     return evaluatecell;
                 }else if(indexPath.row == [model.pros count]+5-2){
                     //地址
+                    RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
+
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
                     return addresscell;
                 }else if (indexPath.row == [model.pros count]+5-3){
                     //和
+                    RMOrderDetailNumTableViewCell * numcell = [self getRMOrderDetailNumTableViewCell:indexPath];
+
                     int num = 0;
                     for(NSDictionary * prodic in [model pros]){
                         num += [[prodic objectForKey:@"content_num"] integerValue];
@@ -394,36 +399,54 @@
                     return numcell;
                 }else if (indexPath.row == [model.pros count]+5-4){
                     //留言
+                    RMOrderLeaveMsgTableViewCell * leavecell = [self getRMOrderLeaveMsgTableViewCell:indexPath];
+
                     leavecell.leaveMsg.text = model.order_message;
                     return leavecell;
                 }else{
+                    RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
+
                     NSDictionary * prodic = [model.pros objectAtIndex:indexPath.row-1];
                     [procell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                     procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
-                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
+                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
                     procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
                     procell.fieldHeght.constant = 30;
                     procell.userInteractionEnabled = NO;
+                    procell.evaluateTextField.text = [[model.pros objectAtIndex:indexPath.row-1] objectForKey:@"comment_desc"];
                     return procell;
                 }
             }else{
                 if(indexPath.row == [model.pros count] +6-1){
                     //操作
+                    RMOederDetailOperationTableViewCell * operationcell = [self getRMOederDetailOperationTableViewCell:indexPath];
+
                     operationcell.leftBtn.hidden = YES;
                     operationcell.rightBtn.hidden = NO;
                     [operationcell.rightBtn setTitle:@"我要评价" forState:UIControlStateNormal];
                     return operationcell;
                 }else if(indexPath.row == [model.pros count] +6-2){
-                    
+                    RMOrderDetailEvaluateTableViewCell * evaluatecell = [self getRMOrderDetailEvaluateTableViewCell:indexPath];
+                    NSInteger n = [[[model.pros objectAtIndex:indexPath.section] objectForKey:@"comment_num"] integerValue];
+                    //                    banImg
+                    //                    generalImg
+                    //                    goodImg
+                    //                    pefectImg
+                    UIButton * btn = (UIButton *)[evaluatecell.contentView viewWithTag:1000*indexPath.section+n-1];
+                    [btn setImage:[UIImage imageNamed:@"order_yellow_sun"] forState:UIControlStateNormal];
                     return evaluatecell;
                 }else if(indexPath.row == [model.pros count]+6-3){
                     //地址
+                    RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
+
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
                     return addresscell;
                 }else if (indexPath.row == [model.pros count]+6-4){
                     //和
+                    RMOrderDetailNumTableViewCell * numcell = [self getRMOrderDetailNumTableViewCell:indexPath];
+
                     int num = 0;
                     for(NSDictionary * prodic in [model pros]){
                         num += [[prodic objectForKey:@"content_num"] integerValue];
@@ -435,23 +458,108 @@
                     return numcell;
                 }else if (indexPath.row == [model.pros count]+6-5){
                     //留言
+                    RMOrderLeaveMsgTableViewCell * leavecell = [self getRMOrderLeaveMsgTableViewCell:indexPath];
                     leavecell.leaveMsg.text = model.order_message;
                     return leavecell;
                 }else{
+                    RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
                     NSDictionary * prodic = [model.pros objectAtIndex:indexPath.row-1];
                     [procell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                     procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
-                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
+                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
                     procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
                     procell.fieldHeght.constant = 30;
-                    procell.userInteractionEnabled = YES;
+                    procell.evaluateTextField.userInteractionEnabled = YES;
+                    procell.evaluateTextField.text = [[model.pros objectAtIndex:indexPath.row-1] objectForKey:@"comment_desc"];
                     return procell;
                 }
             }
         }else{//退货
+            RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
             return procell;
         }
     }
+}
+//RMOrderDetailProTableViewCell.h
+//RMOrderLeaveMsgTableViewCell.h
+//RMOrderDetailNumTableViewCell.h
+//RMOrderAddressTableViewCell.h
+//RMOederDetailOperationTableViewCell.h
+//RMOrderDetailEvaluateTableViewCell.h
+- (RMOrderDetailProTableViewCell *)getRMOrderDetailProTableViewCell:(NSIndexPath *)indexPath{
+    RMOrderDetailProTableViewCell * procell = [_maintableView dequeueReusableCellWithIdentifier:@"RMOrderDetailProTableViewCell"];
+    if(procell == nil){
+        procell = [[[NSBundle mainBundle]loadNibNamed:@"RMOrderDetailProTableViewCell" owner:self options:nil] lastObject];
+        procell.returnBtn.hidden = YES;
+        [procell.returnBtn addTarget:self action:@selector(iWantToReturn:) forControlEvents:UIControlEventTouchDown];
+        procell.fieldHeght.constant = 0;
+    }
+    procell.returnBtn.tag = indexPath.section*1000+indexPath.row;
+    procell.evaluateTextField.tag = indexPath.section*100+1+indexPath.row;
+    procell.evaluateTextField.delegate = self;
+    return procell;
+}
+
+- (RMOrderLeaveMsgTableViewCell *)getRMOrderLeaveMsgTableViewCell:(NSIndexPath *)indexPath{
+    RMOrderLeaveMsgTableViewCell * leavecell = [_maintableView dequeueReusableCellWithIdentifier:@"RMOrderLeaveMsgTableViewCell"];
+    if(leavecell == nil){
+        leavecell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderLeaveMsgTableViewCell" owner:self options:nil] lastObject];
+        leavecell.leaveMsg.userInteractionEnabled = NO;
+    }
+    return leavecell;
+}
+
+- (RMOrderDetailNumTableViewCell *)getRMOrderDetailNumTableViewCell:(NSIndexPath *)indexPath{
+    RMOrderDetailNumTableViewCell * numcell = [_maintableView dequeueReusableCellWithIdentifier:@"RMOrderDetailNumTableViewCell"];
+    if(numcell == nil){
+        numcell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailNumTableViewCell" owner:self options:nil] lastObject];
+    }
+    return numcell;
+}
+
+- (RMOrderAddressTableViewCell *)getRMOrderAddressTableViewCell:(NSIndexPath *)indexPath{
+    RMOrderAddressTableViewCell * addresscell = [_maintableView dequeueReusableCellWithIdentifier:@"RMOrderAddressTableViewCell"];
+    if(addresscell == nil){
+        addresscell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderAddressTableViewCell" owner:self options:nil] lastObject];
+    }
+    return addresscell;
+}
+
+- (RMOederDetailOperationTableViewCell *)getRMOederDetailOperationTableViewCell:(NSIndexPath *)indexPath{
+    RMOederDetailOperationTableViewCell * operationcell = [_maintableView dequeueReusableCellWithIdentifier:@"RMOederDetailOperationTableViewCell"];
+    if(operationcell == nil){
+        operationcell = [[[NSBundle mainBundle] loadNibNamed:@"RMOederDetailOperationTableViewCell" owner:self options:nil] lastObject];
+        
+        [operationcell.rightBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchDown];
+        [operationcell.leftBtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchDown];
+    }
+    operationcell.leftBtn.tag = indexPath.section*100;
+    operationcell.rightBtn.tag = indexPath.section*100+1;
+    return operationcell;
+}
+
+- (RMOrderDetailEvaluateTableViewCell *)getRMOrderDetailEvaluateTableViewCell:(NSIndexPath *)indexPath{
+    RMOrderDetailEvaluateTableViewCell * evaluatecell = [_maintableView dequeueReusableCellWithIdentifier:@"RMOrderDetailEvaluateTableViewCell"];
+    if(evaluatecell == nil){
+        evaluatecell = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderDetailEvaluateTableViewCell" owner:self options:nil] lastObject];
+        for(int i = 0;i<4;i++){
+            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(evaluateAction:)];
+            UILabel * label = (UILabel *)[evaluatecell.contentView viewWithTag:100+i];
+            [label addGestureRecognizer:tap];
+        }
+        
+        
+    }
+    evaluatecell.bad.tag = indexPath.section*100;
+    evaluatecell.general.tag = indexPath.section*100 + 1;
+    evaluatecell.good.tag = indexPath.section*100 + 2;
+    evaluatecell.pefect.tag = indexPath.section*100 + 3;
+    
+    evaluatecell.banImg.tag = indexPath.section * 1000;
+    evaluatecell.generalImg.tag = indexPath.section * 1000 + 1;
+    evaluatecell.goodImg.tag = indexPath.section * 1000 + 2;
+    evaluatecell.pefectImg.tag = indexPath.section * 1000 + 3;
+    return evaluatecell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -595,7 +703,6 @@
             return 80.f;
         }
     }
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -609,11 +716,56 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    RMPublicModel * model = [orderlists objectAtIndex:indexPath.section];
-    model.content_type = self.order_type;
-    if(self.didSelectCellcallback){
-        _didSelectCellcallback(model);
+//    RMPublicModel * model = [orderlists objectAtIndex:indexPath.section];
+//    model.content_type = self.order_type;
+//    if(self.didSelectCellcallback){
+//        _didSelectCellcallback(model);
+//    }
+}
+
+
+#pragma mark - 评价
+- (void)evaluateAction:(UITapGestureRecognizer *)sender{
+    NSInteger n = sender.view.tag/100;
+    NSInteger m = sender.view.tag%100;
+    RMPublicModel * model = [orderlists objectAtIndex:n];
+    model.comment_num = [NSString stringWithFormat:@"%ld",m+1];
+//    [_maintableView reloadData];
+    RMOrderDetailEvaluateTableViewCell * cell = (RMOrderDetailEvaluateTableViewCell *)[_maintableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[model.pros count]+4 inSection:n]];
+    for(UIButton * btn in cell.contentView.subviews){
+        if([btn isKindOfClass:[UIButton class]]){
+            if(btn.tag == n*1000 + sender.view.tag%100){
+                [btn setImage:[UIImage imageNamed:@"order_yellow_sun"] forState:UIControlStateNormal];
+            }
+            else{
+                [btn setImage:[UIImage imageNamed:@"order_gray_sun"] forState:UIControlStateNormal];
+            }
+        }
+        
     }
+    
+    NSLog(@"333333%@",model);
+    
+    [orderlists replaceObjectAtIndex:n withObject:model];
+    
+        NSLog(@"44444%@",model);
+    
+    
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    NSLog(@"%ld",(long)textField.tag);
+    NSInteger n = textField.tag/100;
+    RMPublicModel * model = [orderlists objectAtIndex:n];
+    NSLog(@"1111111%@",model.pros);
+    model.comment_num = [NSString stringWithFormat:@"%ld",n+1];
+    NSMutableArray * arr = [[NSMutableArray alloc]initWithArray:model.pros];
+    NSMutableDictionary * dic = [[NSMutableDictionary alloc]initWithDictionary:[model.pros objectAtIndex:textField.tag%100-1-1]];
+    [dic setValue:textField.text forKey:@"comment_desc"];
+    [arr replaceObjectAtIndex:textField.tag%100-1-1 withObject:dic];
+    model.pros = [NSArray arrayWithArray:arr];
+    NSLog(@"2222222%@",model.pros);
 }
 
 #pragma mark - 进入店铺
@@ -773,6 +925,35 @@
 #pragma mark - 发表评论
 - (void)publishEvaluate:(RMPublicModel *)model{
     //这里应该是调用接口
+    NSString * autoidStr = @"";
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
+    int i = 0;
+    for(NSDictionary * dic in model.pros){
+        autoidStr = [autoidStr stringByAppendingString:[NSString stringWithFormat:@",%@",[dic objectForKey:@"orderpro_id"]]];
+        if([[model.pros objectAtIndex:i] objectForKey:@"comment_desc"] == nil || [[[model.pros objectAtIndex:i] objectForKey:@"comment_desc"] length] == 0){
+            [self showHint:@"请对没有文字评价的宝贝进行填写！"];
+            return;
+        }
+        [dict setValue:[[model.pros objectAtIndex:i] objectForKey:@"comment_desc"] forKey:[NSString stringWithFormat:@"comment_desc[%d]",i]];
+        i++;
+    }
+    autoidStr = [autoidStr substringFromIndex:1];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager iwantEvaulateOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Orderid:model.auto_id Comment_num:model.comment_num auto_idStr:autoidStr Comment_desc:dict andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                [self requestData];
+            }else{
+                
+            }
+            [_maintableView reloadData];
+        }else{
+            [self showHint:object];
+        }
+    }];
 }
 
 #pragma mark -确认签收

@@ -770,4 +770,17 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  */
 + (void)attentionFriendRequestWithUser:(NSString *)user Pwd:(NSString *)pwd withOtherId:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block;
 
+/**
+ *  订单评价
+ *
+ *  @param user         user description
+ *  @param pwd          pwd description
+ *  @param orderid      orderid description
+ *  @param comment_num  comment_num description
+ *  @param autoidStr    autoidStr description
+ *  @param comment_desc comment_desc description
+ *  @param block        block description
+ */
++ (void)iwantEvaulateOrderWithUser:(NSString *)user Pwd:(NSString *)pwd Orderid:(NSString *)orderid Comment_num:(NSString *)comment_num auto_idStr:(NSString *)autoidStr Comment_desc:(NSDictionary *)comment_desc andCallBack:(RMAFNRequestManagerCallBack)block;
+
 @end
