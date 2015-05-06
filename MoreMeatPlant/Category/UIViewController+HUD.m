@@ -57,8 +57,8 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     }else{
         offsetY = 150.f;
     }
-    hud.yOffset = offsetY;
-//    hud.yOffset = 64-kScreenHeight/2+20;
+//    hud.yOffset = offsetY;
+    hud.yOffset = 64-kScreenHeight/2+20;
     hud.removeFromSuperViewOnHide = YES;
     [hud hide:YES afterDelay:2];
 }

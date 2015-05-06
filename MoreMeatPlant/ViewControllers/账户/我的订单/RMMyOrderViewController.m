@@ -61,7 +61,14 @@
             [Self jumptoDetail:model];
         }
     };
-    [waitPayCtl requestData];
+    
+    waitDeliveryCtl.goCorp_callback = ^(RMPublicModel * model){
+        if(Self.goCorp_callback){
+            Self.goCorp_callback(model);
+        }
+    };
+    
+    [waitDeliveryCtl requestData];
     [self.view addSubview:waitDeliveryCtl.view];
     
     waitPayCtl = [[RMOrderListViewController alloc]initWithNibName:@"RMOrderListViewController" bundle:nil];
@@ -83,12 +90,19 @@
             //去付款
             RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
             alipay.is_direct = NO;
+            alipay.content_type = @"0";
             alipay.order_id = model.content_sn;//支付宝支付的订单号
             [Self.navigationController pushViewController:alipay animated:YES];
         }
 
     };
     
+    
+    waitPayCtl.goCorp_callback = ^(RMPublicModel * model){
+        if(Self.goCorp_callback){
+            Self.goCorp_callback(model);
+        }
+    };
     
     [waitPayCtl requestData];
     waitPayCtl.view.hidden = YES;
@@ -117,6 +131,13 @@
             [Self.navigationController pushViewController:see animated:YES];
         }
     };
+    
+    deliveryedCtl.goCorp_callback = ^(RMPublicModel * model){
+        if(Self.goCorp_callback){
+            Self.goCorp_callback(model);
+        }
+    };
+    
     [deliveryedCtl requestData];
     deliveryedCtl.view.hidden = YES;
     [self.view addSubview:deliveryedCtl.view];
@@ -132,6 +153,12 @@
             [Self jumptoDetail:model];
         }
     };
+    orderDoneCtl.goCorp_callback = ^(RMPublicModel * model){
+        if(Self.goCorp_callback){
+            Self.goCorp_callback(model);
+        }
+    };
+    
     [orderDoneCtl requestData];
     orderDoneCtl.view.hidden = YES;
     [self.view addSubview:orderDoneCtl.view];
@@ -148,6 +175,12 @@
             [Self jumptoDetail:model];
         }
     };
+    orderReturnCtl.goCorp_callback = ^(RMPublicModel * model){
+        if(Self.goCorp_callback){
+            Self.goCorp_callback(model);
+        }
+    };
+    
     [orderReturnCtl requestData];
     orderReturnCtl.view.hidden = YES;
     [self.view addSubview:orderReturnCtl.view];

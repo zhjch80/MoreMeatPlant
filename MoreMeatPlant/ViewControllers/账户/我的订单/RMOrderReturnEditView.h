@@ -13,6 +13,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *express_price;
 @property (weak, nonatomic) IBOutlet UIButton *commitBtn;
 @property (weak, nonatomic) IBOutlet UIButton *seeBtn;
-@property (retain, nonatomic) RMPublicModel * _model;
+@property (retain, nonatomic) NSDictionary * _model;
 
 @end

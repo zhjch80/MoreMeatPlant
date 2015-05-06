@@ -86,11 +86,10 @@
     orderReturnCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
     orderReturnCtl.order_type = @"returnorder";
     
-    [orderReturnCtl requestData];
+//    [orderReturnCtl requestData];
     orderReturnCtl.view.hidden = YES;
     [self.view addSubview:orderReturnCtl.view];
     
-    [self showHint:@""];
     
     
     

@@ -81,6 +81,7 @@
     }
     for(RMCorpModel * shop in merchants)
     {
+        float express_price = 0;
         NSMutableDictionary * dic = [[NSMutableDictionary alloc] init];
         [dic setValue:shop.corp_id forKey:@"corp_id"];
         [dic setValue:shop.corp_name forKey:@"corp_name"];
@@ -88,10 +89,13 @@
         for(RMProductModel * p in [RMProductModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",shop.corp_id] orderby:@"corp_id"])
         {
             [arr addObject:p];
-                n+= [p.content_price floatValue]*p.content_num;
-            _all_total_moneyL.text = [NSString stringWithFormat:@"¥%.2f",n];
+            n+= [p.content_price floatValue]*p.content_num;
+            express_price = [p.express_price floatValue];
         }
         
+        n += express_price;
+        
+        _all_total_moneyL.text = [NSString stringWithFormat:@"¥%.2f",n];
         if([arr count]!=0)
         {
             [dic setObject:arr forKey:@"products"];
@@ -105,9 +109,12 @@
 
 - (float)caculateSection:(NSIndexPath *)indexpath{
     float n = 0;
+    float express_price = 0;
     for(RMProductModel * product in [[dataArray objectAtIndex:indexpath.section] objectForKey:@"products"]){
         n += product.content_num * [product.content_price floatValue];
+        express_price = [product.express_price floatValue];
     }
+    n += express_price;
     return n;
 }
 
@@ -407,13 +414,13 @@
         RMProductModel * lastmodel = [[dic objectForKey:@"products"] objectAtIndex:0];
         express = [express stringByAppendingString:[NSString stringWithFormat:@",%@",lastmodel.express]];
         
-        RMProductModel * model = [[dic objectForKey:@"products"] objectAtIndex:0];
-        [dict setValue:model.order_message forKey:[NSString stringWithFormat:@"order_message[%@]",model.corp_id]];
-        auto_id = [auto_id substringFromIndex:1];
-        num = [num substringFromIndex:1];
-        express = [express substringFromIndex:1];
+        RMCorpModel * corp = [[RMCorpModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",[[[dic objectForKey:@"products"] objectAtIndex:0] corp_id]] orderby:nil] lastObject];
+        [dict setValue:corp.order_message forKey:[NSString stringWithFormat:@"order_message[%@]",corp.corp_id]];
     }
-    
+    auto_id = [auto_id substringFromIndex:1];
+    num = [num substringFromIndex:1];
+    express = [express substringFromIndex:1];
+
     [dict setValue:auto_id forKey:@"auto_id"];
     [dict setValue:num forKey:@"num"];
     [dict setValue:parameterModel.payment_id forKey:@"frm[payment_id]"];

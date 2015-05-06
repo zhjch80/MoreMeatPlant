@@ -433,7 +433,7 @@
     
     
     if ([dataModel.content_num isEqualToString:@"0"]){
-        cell.showNum.text = @"0";
+        cell.showNum.text = @"1";
     }
     
     cell.productName.text = dataModel.content_name;
@@ -637,10 +637,10 @@
     product.content_price = dataModel.content_price;
 
     if([is_sf isEqualToString:@"1"]){
-        product.express = @"1";
+        product.express = @"2";
         product.express_price = @"22";
     }else{
-        product.express = @"2";
+        product.express = @"1";
         product.express_price = dataModel.express_price;
     }
     product.corp_id = dataModel.member_id;
@@ -699,10 +699,10 @@
     settle.callback = ^(void){
         [SELF dismissPopUpViewControllerWithcompletion:nil];
     };
-    settle.settle_callback = ^(RMPublicModel * model){//支付宝网站支付
-        [SELF commitOrderAction];
-
-    };
+//    settle.settle_callback = ^(RMPublicModel * model){//支付宝网站支付
+//        [SELF commitOrderAction];
+//
+//    };
     settle.editAddress_callback = ^(RMPublicModel * model_){
         RMAddressEditViewController * address_edit = [[RMAddressEditViewController alloc]initWithNibName:@"RMAddressEditViewController" bundle:nil];
         address_edit._model = [[RMPublicModel alloc]init];
@@ -731,40 +731,40 @@
 }
 
 #pragma mark - 提交订单
-- (void)commitOrderAction{
-    
-    parameterModel.express = [dataModel.is_sf boolValue]?@"1":@"2";
-    
-    NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
-    [dict setValue:dataModel.auto_id forKey:@"auto_id"];
-    [dict setValue:@"1" forKey:@"num"];
-    [dict setValue:parameterModel.payment_id forKey:@"frm[payment_id]"];
-    [dict setValue:parameterModel.express forKey:@"express"];
-    [dict setValue:parameterModel.content_linkname forKey:@"frm[content_linkname]"];
-    [dict setValue:parameterModel.content_mobile forKey:@"frm[content_mobile]"];
-    [dict setValue:parameterModel.content_address forKey:@"frm[content_address]"];
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager commitOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] withDic:dict andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if(success){
-            RMPublicModel * model = object;
-            if(model.status){
-                if([parameterModel.payment_id isEqualToString:@"2"]){
-                    RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
-                    alipay.is_direct = YES;
-                    alipay.order_id = model.content_sn;//支付宝支付的订单号
-                    [self.navigationController pushViewController:alipay animated:YES];
-                }
-            }else{
-                
-            }
-            [self showHint:model.msg];
-        }else{
-            [self showHint:object];
-        }
-    }];
-}
+//- (void)commitOrderAction{
+//    
+//    parameterModel.express = [dataModel.is_sf boolValue]?@"2":@"1";
+//    
+//    NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
+//    [dict setValue:dataModel.auto_id forKey:@"auto_id"];
+//    [dict setValue:@"1" forKey:@"num"];
+//    [dict setValue:parameterModel.payment_id forKey:@"frm[payment_id]"];
+//    [dict setValue:parameterModel.express forKey:@"express"];
+//    [dict setValue:parameterModel.content_linkname forKey:@"frm[content_linkname]"];
+//    [dict setValue:parameterModel.content_mobile forKey:@"frm[content_mobile]"];
+//    [dict setValue:parameterModel.content_address forKey:@"frm[content_address]"];
+//    
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [RMAFNRequestManager commitOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] withDic:dict andCallBack:^(NSError *error, BOOL success, id object) {
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        if(success){
+//            RMPublicModel * model = object;
+//            if(model.status){
+//                if([parameterModel.payment_id isEqualToString:@"2"]){
+//                    RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
+//                    alipay.is_direct = YES;
+//                    alipay.order_id = model.content_sn;//支付宝支付的订单号
+//                    [self.navigationController pushViewController:alipay animated:YES];
+//                }
+//            }else{
+//                
+//            }
+//            [self showHint:model.msg];
+//        }else{
+//            [self showHint:object];
+//        }
+//    }];
+//}
 
 
 

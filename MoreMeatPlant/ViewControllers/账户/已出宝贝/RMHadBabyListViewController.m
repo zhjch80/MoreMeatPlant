@@ -357,61 +357,39 @@
 #pragma mark - 提交
 - (void)commit{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager memberReturnGoodsOrSureDeliveryWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isReturn:NO orderId:returnEditView._model.auto_id expressName:[returnEditView.expressName.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] expressId:returnEditView.express_price.text andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if(success){
-            RMPublicModel * model = object;
-            if(model.status){
-                //发货成功
-                [self dismissAction:nil];
-                pageCount = 1;
-                [self requestData];
-            }
-            [self showHint:model.msg];
-        }else{
-            [self showHint:object];
-        }
-    }];
+//    [RMAFNRequestManager memberReturnGoodsOrSureDeliveryWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isReturn:NO orderId:returnEditView._model.auto_id expressName:[returnEditView.expressName.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] expressId:returnEditView.express_price.text andCallBack:^(NSError *error, BOOL success, id object) {
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        if(success){
+//            RMPublicModel * model = object;
+//            if(model.status){
+//                //发货成功
+//                [self dismissAction:nil];
+//                pageCount = 1;
+//                [self requestData];
+//            }
+//            [self showHint:model.msg];
+//        }else{
+//            [self showHint:object];
+//        }
+//    }];
 }
 
 
 #pragma mark 刷新代理
 
 - (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager myOrderListRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isCorp:NO type:self.order_type Page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if(success){
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            if(pageCount == 1){
-                [dataarray removeAllObjects];
-                [dataarray addObjectsFromArray:object];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
-                if([object count] == 0){
-                    [MBProgressHUD showSuccess:@"暂无订单" toView:self.view];
-                    
-                }
-            }else{
-                [dataarray addObjectsFromArray:object];
-                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-                if([object count] == 0){
-                    [MBProgressHUD showSuccess:@"没有更多订单了" toView:self.view];
-                    pageCount--;
-                }
-            }
-            
-            
-        }else{
-            [self showHint:object];
-        }
-        
-        [_mTableView reloadData];
-    }];
+    if (direction == RefreshDirectionTop) { //下拉刷新
+        pageCount = 1;
+        [self requestData];
+    }else if(direction == RefreshDirectionBottom) { //上拉加载
+        pageCount ++;
+        [self requestData];
+    }
 }
 
 - (void)requestData{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager myOrderListRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isCorp:NO type:self.order_type Page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager myOrderListRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isCorp:YES type:self.order_type Page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

@@ -270,7 +270,7 @@
                             alipay.order_id = model.content_sn;//支付宝支付的订单号
                             [self.navigationController pushViewController:alipay animated:YES];
                         };
-                        
+
                         order.seeLogistics_callback = ^(RMPublicModel * model){
                             //查看物流信息
                             RMSeeLogisticsViewController * see = [[RMSeeLogisticsViewController alloc]initWithNibName:@"RMSeeLogisticsViewController" bundle:nil];

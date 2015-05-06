@@ -88,21 +88,21 @@
 
 - (void)commit{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager memberReturnGoodsOrSureDeliveryWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isReturn:YES orderId:returnEditView._model.auto_id expressName:[returnEditView._model.express_name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] expressId:returnEditView.express_price.text andCallBack:^(NSError *error, BOOL success, id object) {
-        
-        if(success){
-            RMPublicModel * model = object;
-            if(model.status){
-                //申请成功
-                __model.is_return = @"1";
-            }else{
-                
-            }
-            [self showHint:model.msg];
-        }else{
-            [self showHint:object];
-        }
-    }];
+//    [RMAFNRequestManager memberReturnGoodsOrSureDeliveryWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isReturn:YES orderId:returnEditView._model.auto_id expressName:[returnEditView._model.express_name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] expressId:returnEditView.express_price.text andCallBack:^(NSError *error, BOOL success, id object) {
+//        
+//        if(success){
+//            RMPublicModel * model = object;
+//            if(model.status){
+//                //申请成功
+//                __model.is_return = @"1";
+//            }else{
+//                
+//            }
+//            [self showHint:model.msg];
+//        }else{
+//            [self showHint:object];
+//        }
+//    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -351,6 +351,8 @@
             RMPublicModel * _model = object;
             if(_model.status){
                 //刷新界面，然后发送完成通知
+                __model.is_status = @"4";
+                [_mTableView reloadData];
             }else{
                 
             }
