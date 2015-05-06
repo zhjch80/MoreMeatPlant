@@ -73,13 +73,16 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  */
 + (void)getNewsDetailsWithAuto_id:(NSString *)auto_id
                          callBack:(RMAFNRequestManagerCallBack)block;
+
 /**
  *  @method     植物大全列表
  *  @param      pageCount           分页
  *  @param      classification      植物科目
+ *  @param      growStr             生长季
  */
 + (void)getPlantDaqoListWithSubPlantClassification:(NSString *)classification
                                      withPageCount:(NSInteger)pageCount
+                                          withGrow:(NSString *)growStr
                                           callBack:(RMAFNRequestManagerCallBack)block;
 
 /**

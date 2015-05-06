@@ -26,7 +26,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!isFirstViewDidAppear){
-        [centerCtl requestDataWithPageCount:1 withPlantType:@""];
+        [centerCtl requestDataWithPageCount:1 withPlantType:@"" withGrow:@""];
         [centerCtl requestPlantSubjects];
         [centerCtl requestDaqoAllCounts];
         [rightCtl requestPlantSubs];

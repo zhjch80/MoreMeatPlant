@@ -210,7 +210,7 @@
     }
     
     isRefresh = YES;
-    [self requestDataWithPageCount:1 withPlantType:plantType];
+    [self requestDataWithPageCount:1 withPlantType:plantType withGrow:@""];
 }
 
 - (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
@@ -232,7 +232,7 @@
     //TODO:操作
     
     isRefresh = YES;
-    [self requestDataWithPageCount:1 withPlantType:@""];
+    [self requestDataWithPageCount:1 withPlantType:@"" withGrow:@""];
 }
 
 #pragma mark -  数据请求
@@ -293,11 +293,15 @@
 
 /**
  *  @method     获取list数据
- *  @param      pc          分页
+ *  @param      pc                  分页
+ *  @param      plantType           植物科目
+ *  @param      grow                生长季
  */
-- (void)requestDataWithPageCount:(NSInteger)pc withPlantType:(NSString *)plantType{
+- (void)requestDataWithPageCount:(NSInteger)pc
+                   withPlantType:(NSString *)plantType
+                        withGrow:(NSString *)grow {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getPlantDaqoListWithSubPlantClassification:plantType withPageCount:pc callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getPlantDaqoListWithSubPlantClassification:plantType withPageCount:pc withGrow:grow callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -367,7 +371,7 @@
             plantType = model_1.auto_code;
         }
         
-        [self requestDataWithPageCount:1 withPlantType:plantType];
+        [self requestDataWithPageCount:1 withPlantType:plantType withGrow:@""];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
@@ -388,7 +392,7 @@
                 plantType = model_1.auto_code;
             }
             
-            [self requestDataWithPageCount:pageCount withPlantType:plantType];
+            [self requestDataWithPageCount:pageCount withPlantType:plantType withGrow:@""];
         }
     }
 }

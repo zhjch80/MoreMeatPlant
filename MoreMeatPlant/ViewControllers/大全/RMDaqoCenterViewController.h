@@ -18,8 +18,9 @@
 - (void)requestPlantSubjects;
 
 //请求list
-- (void)requestDataWithPageCount:(NSInteger)pc withPlantType:(NSString *)plantType;
-
+- (void)requestDataWithPageCount:(NSInteger)pc
+                   withPlantType:(NSString *)plantType
+                        withGrow:(NSString *)grow;
 //获取全部肉肉总数量
 - (void)requestDaqoAllCounts;
 

@@ -84,11 +84,13 @@
  *  @method     植物大全列表
  *  @param      pageCount           分页
  *  @param      classification      植物科目
+ *  @param      growStr             生长季
  */
 + (void)getPlantDaqoListWithSubPlantClassification:(NSString *)classification
                                      withPageCount:(NSInteger)pageCount
+                                          withGrow:(NSString *)growStr
                                           callBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAll&data=series&order=asc&per=1&row=10&page=%ld",baseUrl,(long)pageCount];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAll&data=series&order=asc&per=1&row=10&page=%ld&grow=%@&course=%@",baseUrl,(long)pageCount,growStr,classification];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
