@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RMBaseViewController.h"
 #import "RMOrderListViewController.h"
+typedef void (^RMHadBabyListViewCtlCallback)(void);
 @interface RMHadBabyListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
 @property (retain, nonatomic) NSMutableArray * dataarray;
@@ -20,5 +21,6 @@
 @property (copy, nonatomic) RMOrderListViewSeeLogisticsCallBack seeLogistics_callback;
 @property (copy, nonatomic) RMOrderListViewGoCorpCallBack goCorp_callback;
 
+@property (copy, nonatomic) RMHadBabyListViewCtlCallback call_back;
 - (void)requestData;
 @end

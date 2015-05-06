@@ -20,12 +20,14 @@
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"物流查询"];
     self.mainWebView.scalesPageToFit = NO;
-    
+    self.mainWebView.opaque = NO;
+    self.mainWebView.backgroundColor = [UIColor clearColor];
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
 
     NSString * url = [RMAFNRequestManager getWuliuUrlWithExpressName:[self.express_name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] no:self.express_no];
+    NSLog(@"物流:%@",url);
     
     [_mainWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }

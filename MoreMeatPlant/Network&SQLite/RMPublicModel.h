@@ -143,4 +143,6 @@
 @property (retain, nonatomic) NSString * note_id;
 
 @property (retain, nonatomic) NSString * comment_num;//评论级别1-4
+
+@property (retain, nonatomic) NSString * order_id;
 @end

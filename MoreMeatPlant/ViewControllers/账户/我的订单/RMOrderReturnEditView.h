@@ -13,6 +13,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *express_price;
 @property (weak, nonatomic) IBOutlet UIButton *commitBtn;
 @property (weak, nonatomic) IBOutlet UIButton *seeBtn;
-@property (retain, nonatomic) NSDictionary * _model;
+@property (retain, nonatomic) RMPublicModel * _model;//用于申请退货/发货
+@property (retain, nonatomic) NSDictionary * _proDic;
 
+@property (weak, nonatomic) IBOutlet UILabel *content_mobile;
+@property (weak, nonatomic) IBOutlet UILabel *content_name;
+@property (weak, nonatomic) IBOutlet UILabel *content_address;
 @end

@@ -95,7 +95,7 @@
             return [model.pros count] + 6;
         }
     }else{//退货
-        return 1;
+        return 1+2;
     }
 }
 
@@ -115,23 +115,7 @@
         headcell.corp_name.tag = indexPath.section+100;
         headcell.corp_name.text = OBJC_Nil([model.corp objectForKey:@"content_name"]);
         headcell.create_time.text = model.create_time;
-        if([model.is_paystatus boolValue]){
-            if([model.is_status integerValue] == 1){
-                 headcell.order_status.text = @"待发货";
-            }else if ([model.is_status integerValue] == 2){
-                 headcell.order_status.text = @"已发货";
-            }else if ([model.is_status integerValue] == 3){
-                 headcell.order_status.text = @"已签收";
-            }else if ([model.is_status integerValue] == 4){
-                 headcell.order_status.text = @"已取消";
-            }else if ([model.is_status integerValue] == 5){
-                 headcell.order_status.text = @"已完成";
-            }else{
-                headcell.order_status.text = @"未处理";
-            }
-        }else{
-            headcell.order_status.text = @"待付款";
-        }
+        headcell.order_status.text = model.content_status;
         return headcell;
     }else{
         
@@ -475,8 +459,24 @@
                 }
             }
         }else{//退货
-            RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
-            return procell;
+            if(indexPath.row == 1 +2-1){
+                //地址
+                RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
+                
+                addresscell.content_name.text = [model.corp objectForKey:@"content_name"];
+                addresscell.content_mobile.text = [model.corp objectForKey:@"content_mobile"];
+                addresscell.content_address.text = [model.corp objectForKey:@"content_address"];
+                return addresscell;
+            }else{
+                RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
+                [procell.content_img sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"nophote"]];
+                procell.content_name.text  = model.content_name;
+                procell.content_price.text = model.content_price;
+                procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil(model.content_num)];
+                procell.fieldHeght.constant = 0;
+                
+                return procell;
+            }
         }
     }
 }
@@ -700,7 +700,11 @@
                 }
             }
         }else{//退货
-            return 80.f;
+            if(indexPath.row == 1 + 2 -1){
+                return 55.f;
+            }else{
+                return 80.f;
+            }
         }
     }
 }
@@ -797,7 +801,7 @@
         //发表评价
         [self publishEvaluate:model];
     }else if ([_order_type isEqualToString:@"returnorder"]){
-        if([model.is_return boolValue]){
+        if([model.is_status boolValue]){
         
         }else{
             
@@ -824,11 +828,11 @@
 - (void)iWantToReturn:(UIButton *)sender{
     RMPublicModel * model = [orderlists objectAtIndex:sender.tag/1000];
     NSDictionary * dic = [model.pros objectAtIndex:sender.tag%1000-1];
-    [self showReturnEditView:dic];
+    [self showReturnEditView:model withDic:dic];
 }
 
 
-- (void)showReturnEditView:(NSDictionary *)model{
+- (void)showReturnEditView:(RMPublicModel *)model withDic:(NSDictionary *)prodic{
     
     UIControl * cover = [[UIControl alloc]initWithFrame:_maintableView.frame];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissAction:)];
@@ -839,13 +843,17 @@
     [self.view addSubview:cover];
     
     if(returnEditView == nil){
-        returnEditView = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderReturnEditView_1" owner:self options:nil] lastObject];
+        returnEditView = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderReturnEditView" owner:self options:nil] lastObject];
         returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0 + 64 +49);
 //        [returnEditView.seeBtn addTarget:self action:@selector(seeExpress:) forControlEvents:UIControlEventTouchDown];
         [returnEditView.commitBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
     }
     
     returnEditView._model = model;
+    returnEditView._proDic = prodic;
+    returnEditView.content_name.text = [model.corp objectForKey:@"content_name"];
+    returnEditView.content_mobile.text = [model.corp objectForKey:@"content_mobile"];
+    returnEditView.content_address.text = [model.corp objectForKey:@"content_address"];
     
     [UIView animateWithDuration:0.3 animations:^{
         
@@ -869,13 +877,14 @@
 
 - (void)commit{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager memberReturnGoodsOrSureDeliveryWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isReturn:YES orderId:[returnEditView._model objectForKey:@"orderpro_id"] expressName:[returnEditView.expressName.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] expressId:returnEditView.express_price.text andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager memberReturnGoodsOrSureDeliveryWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isReturn:YES orderId:[returnEditView._proDic objectForKey:@"orderpro_id"] expressName:[returnEditView.expressName.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] expressId:returnEditView.express_price.text andCallBack:^(NSError *error, BOOL success, id object) {
         
         if(success){
             RMPublicModel * model = object;
             if(model.status){
                 //申请成功
                 pageCount = 1;
+                [self dismissAction:nil];
                 [self requestData];
             }else{
                 
@@ -945,6 +954,7 @@
         if(success){
             RMPublicModel * model = object;
             if(model.status){
+                pageCount = 1;
                 [self requestData];
             }else{
                 

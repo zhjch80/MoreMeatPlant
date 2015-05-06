@@ -158,9 +158,9 @@
                             <exclude reference="OVX-0u-vGd"/>
                             <exclude reference="4RN-R6-H7g"/>
                             <exclude reference="fOe-Za-2Wi"/>
-                            <exclude reference="bn5-8k-K56"/>
                             <exclude reference="G1V-mA-cdS"/>
                             <exclude reference="Pf6-UL-oGl"/>
+                            <exclude reference="bn5-8k-K56"/>
                         </mask>
                     </variation>
                 </view>

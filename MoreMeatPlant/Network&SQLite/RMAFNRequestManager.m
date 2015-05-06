@@ -1718,35 +1718,58 @@
         NSArray * dataArray = OBJC_Nil([dic objectForKey:@"data"]);
         for(NSDictionary * dataDic in dataArray){
             RMPublicModel * model = [[RMPublicModel alloc]init];
-            model.status = [[dic objectForKey:@"status"] boolValue];
-            model.msg = [dic objectForKey:@"msg"];
-            model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
-            model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
-            model.content_status = OBJC_Nil([dataDic objectForKey:@"content_status"]);
-            model.content_linkname = OBJC_Nil([dataDic objectForKey:@"content_linkname"]);
-            model.content_address = OBJC_Nil([dataDic objectForKey:@"content_address"]);
-            model.content_mobile = OBJC_Nil([dataDic objectForKey:@"content_mobile"]);
-            model.is_pay = OBJC_Nil([dataDic objectForKey:@"is_pay"]);//支付文字状态
-            model.payment_id = OBJC_Nil([dataDic objectForKey:@"payment_id"]);
-            model.content_total = OBJC_Nil([dataDic objectForKey:@"content_total"]);
-            model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
-            model.content_realPay = OBJC_Nil([dataDic objectForKey:@"content_realPay"]);
-            model.order_message = OBJC_Nil([dataDic objectForKey:@"order_message"]);
-            model.corp_id = OBJC_Nil([dataDic objectForKey:@"content_id"]);
-            model.corp = OBJC_Nil([dataDic objectForKey:@"corp"]);
-            model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
-            model.mem = OBJC_Nil([dataDic objectForKey:@"mem"]);
-            model.pros = OBJC_Nil([dataDic objectForKey:@"pros"]);
-            model.is_status = OBJC_Nil([dataDic objectForKey:@"is_status"]);
-            model.is_paystatus = OBJC_Nil([dataDic objectForKey:@"is_paystatus"]);
-            model.create_time = OBJC_Nil([dataDic objectForKey:@"create_time"]);
-            model.member_user = OBJC_Nil([dataDic objectForKey:@"member_user"]);
-            
-            model.is_comment = OBJC_Nil([dataDic objectForKey:@"is_comment"]);
-            
-            model.express_name = OBJC_Nil([dataDic objectForKey:@"express_name"]);
-            model.express_no = OBJC_Nil([dataDic objectForKey:@"express_no"]);
-            model.expresspay = OBJC([dataDic objectForKey:@"expresspay"]);
+            if([type isEqualToString:@"returnorder"]){//退货清单
+                model.status = [[dic objectForKey:@"status"] boolValue];
+                model.msg = [dic objectForKey:@"msg"];
+                model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
+                model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
+                model.content_status = OBJC_Nil([dataDic objectForKey:@"content_status"]);
+                model.corp = OBJC_Nil([dataDic objectForKey:@"corp"]);
+                model.mem = [[dataDic objectForKey:@"mem"] isKindOfClass:[NSDictionary class]]?[dataDic objectForKey:@"mem"]:nil;
+                model.is_status = OBJC_Nil([dataDic objectForKey:@"is_status"]);
+                
+                model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
+                model.content_price = OBJC_Nil([dataDic objectForKey:@"content_price"]);
+                model.content_num = OBJC_Nil([dataDic objectForKey:@"content_num"]);
+                model.create_time = OBJC_Nil([dataDic objectForKey:@"create_time"]);
+                model.content_img = OBJC_Nil([dataDic objectForKey:@"content_img"]);
+                
+                model.express_name = OBJC_Nil([dataDic objectForKey:@"express_name"]);
+                model.express_no = OBJC_Nil([dataDic objectForKey:@"express_no"]);
+
+                model.order_id = OBJC_Nil([dataDic objectForKey:@"order_id"]);
+                
+            }else{
+                model.status = [[dic objectForKey:@"status"] boolValue];
+                model.msg = [dic objectForKey:@"msg"];
+                model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
+                model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
+                model.content_status = OBJC_Nil([dataDic objectForKey:@"content_status"]);
+                model.content_linkname = OBJC_Nil([dataDic objectForKey:@"content_linkname"]);
+                model.content_address = OBJC_Nil([dataDic objectForKey:@"content_address"]);
+                model.content_mobile = OBJC_Nil([dataDic objectForKey:@"content_mobile"]);
+                model.is_pay = OBJC_Nil([dataDic objectForKey:@"is_pay"]);//支付文字状态
+                model.payment_id = OBJC_Nil([dataDic objectForKey:@"payment_id"]);
+                model.content_total = OBJC_Nil([dataDic objectForKey:@"content_total"]);
+                model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
+                model.content_realPay = OBJC_Nil([dataDic objectForKey:@"content_realPay"]);
+                model.order_message = OBJC_Nil([dataDic objectForKey:@"order_message"]);
+                model.corp_id = OBJC_Nil([dataDic objectForKey:@"content_id"]);
+                model.corp = OBJC_Nil([dataDic objectForKey:@"corp"]);
+                model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
+                model.mem = [[dataDic objectForKey:@"mem"] isKindOfClass:[NSDictionary class]]?[dataDic objectForKey:@"mem"]:nil;
+                model.pros = OBJC_Nil([dataDic objectForKey:@"pros"]);
+                model.is_status = OBJC_Nil([dataDic objectForKey:@"is_status"]);
+                model.is_paystatus = OBJC_Nil([dataDic objectForKey:@"is_paystatus"]);
+                model.create_time = OBJC_Nil([dataDic objectForKey:@"create_time"]);
+                model.member_user = OBJC_Nil([dataDic objectForKey:@"member_user"]);
+                
+                model.is_comment = OBJC_Nil([dataDic objectForKey:@"is_comment"]);
+                
+                model.express_name = OBJC_Nil([dataDic objectForKey:@"express_name"]);
+                model.express_no = OBJC_Nil([dataDic objectForKey:@"express_no"]);
+                model.expresspay = OBJC([dataDic objectForKey:@"expresspay"]);
+            }
             [Array addObject:model];
         }
         if(block){
@@ -1758,8 +1781,7 @@
         }
     }];
 }
-
-
+//218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_ccenter&task=returnQs&orderid=6&ID=18513217782&PWD=e10adc3949ba59abbe56e057f20f883e
 /**
  *  用户会员取消或者确认收货
  */

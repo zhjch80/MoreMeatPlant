@@ -26,6 +26,10 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kShowCustomTabbar" object:nil];
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,6 +44,11 @@
     waitDeliveryCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
     waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64  - 40);
     waitDeliveryCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64  - 40);
+    waitDeliveryCtl.call_back = ^(){
+        if(Self.callback){
+            Self.callback();
+        }
+    };
     waitDeliveryCtl.order_type = @"unorder";
     [waitDeliveryCtl requestData];
     [self.view addSubview:waitDeliveryCtl.view];
@@ -68,6 +77,12 @@
             [Self.navigationController pushViewController:see animated:YES];
         }
     };
+    
+    deliveryedCtl.call_back = ^(){
+        if(Self.callback){
+            Self.callback();
+        }
+    };
     [deliveryedCtl requestData];
     deliveryedCtl.view.hidden = YES;
     [self.view addSubview:deliveryedCtl.view];
@@ -85,8 +100,19 @@
     orderReturnCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
     orderReturnCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
     orderReturnCtl.order_type = @"returnorder";
-    
-//    [orderReturnCtl requestData];
+    orderReturnCtl.seeLogistics_callback = ^ (RMPublicModel * model){
+        //查看物流
+        if(Self.seeLogistics_callback){
+            Self.seeLogistics_callback (model);
+        }else{
+            //查看物流信息
+            RMSeeLogisticsViewController * see = [[RMSeeLogisticsViewController alloc]initWithNibName:@"RMSeeLogisticsViewController" bundle:nil];
+            see.express_name = model.express_name;
+            see.express_no = model.express_no;
+            [Self.navigationController pushViewController:see animated:YES];
+        }
+    };
+    [orderReturnCtl requestData];
     orderReturnCtl.view.hidden = YES;
     [self.view addSubview:orderReturnCtl.view];
     
