@@ -78,10 +78,10 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngd-QY-J0l">
-                    <rect key="frame" x="15" y="170" width="290" height="27"/>
+                    <rect key="frame" x="15" y="164" width="290" height="30"/>
                     <color key="backgroundColor" red="0.90588235294117647" green="0.21568627450980393" blue="0.41960784313725491" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="27" id="aAF-uW-0aP"/>
+                        <constraint firstAttribute="height" constant="30" id="aAF-uW-0aP"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="12"/>
                     <state key="normal" title="提交物流信息">
@@ -127,7 +127,7 @@
                 <constraint firstItem="eFn-ff-t8W" firstAttribute="leading" secondItem="ISu-Bi-2Wh" secondAttribute="trailing" constant="8" id="PiJ-Pk-zqr"/>
                 <constraint firstAttribute="trailing" secondItem="r7Q-UZ-1l6" secondAttribute="trailing" constant="15" id="QCE-1l-Xiw"/>
                 <constraint firstItem="c9Z-dW-mqG" firstAttribute="top" secondItem="2Ep-fZ-4RF" secondAttribute="bottom" constant="8" id="TlT-9w-qA3"/>
-                <constraint firstItem="Ngd-QY-J0l" firstAttribute="top" secondItem="b6t-cW-Nn7" secondAttribute="bottom" constant="26" id="Vcb-C2-cpv"/>
+                <constraint firstItem="Ngd-QY-J0l" firstAttribute="top" secondItem="b6t-cW-Nn7" secondAttribute="bottom" constant="20" id="Vcb-C2-cpv"/>
                 <constraint firstItem="r7Q-UZ-1l6" firstAttribute="top" secondItem="o1V-HU-osO" secondAttribute="bottom" constant="8" id="X7C-IR-Gxm"/>
                 <constraint firstItem="c9Z-dW-mqG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="XPG-Ab-oOJ"/>
                 <constraint firstItem="c9Z-dW-mqG" firstAttribute="centerY" secondItem="G2L-Vw-9dP" secondAttribute="centerY" id="Z6P-DV-xsY"/>
@@ -148,9 +148,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="commitBtn" destination="Ngd-QY-J0l" id="20B-E9-kDm"/>
-                <outlet property="content_address" destination="o1V-HU-osO" id="AKu-oc-vmN"/>
-                <outlet property="content_mobile" destination="G2L-Vw-9dP" id="hQd-f0-IJ8"/>
-                <outlet property="content_name" destination="c9Z-dW-mqG" id="3dk-yB-ELa"/>
+                <outlet property="content_address" destination="o1V-HU-osO" id="BYy-3S-dh7"/>
+                <outlet property="content_mobile" destination="G2L-Vw-9dP" id="xGH-qP-lvP"/>
+                <outlet property="content_name" destination="c9Z-dW-mqG" id="mGQ-AF-qZZ"/>
                 <outlet property="expressName" destination="ISu-Bi-2Wh" id="dDE-ts-mqr"/>
                 <outlet property="express_price" destination="b6t-cW-Nn7" id="wYM-g2-u65"/>
             </connections>

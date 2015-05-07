@@ -9,6 +9,7 @@
 #import "RMAliPayViewController.h"
 #import "RMShopCarViewController.h"
 #import "RMPlantWithSaleDetailsViewController.h"
+#import "RMMyOrderViewController.h"
 @interface RMAliPayViewController ()
 @end
 
@@ -78,7 +79,10 @@
 #pragma mark - 跳转到订单列表
 - (void)animationToOrderlist
 {
-    
+    //跳到订单列表
+    RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
+    order.from_memCenter = NO;
+    [self.navigationController pushViewController:order animated:YES];
 }
 
 #pragma mark -  返回
@@ -108,6 +112,9 @@
                 [arr addObject:vc];
                 
             }
+            RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
+            order.from_memCenter = NO;
+            [arr addObject:order];
             self.navigationController.viewControllers = arr;
         }
 

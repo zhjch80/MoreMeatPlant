@@ -112,7 +112,7 @@
             [cell.sureWithdrawalBtn addTarget:self action:@selector(sureWithdrawalAction:) forControlEvents:UIControlEventTouchDown];
             [cell.sendCodeBtn addTarget:self action:@selector(sendCodeAction:) forControlEvents:UIControlEventTouchDown];
         }
-        cell.mobileL.text = _content_mobile;
+        cell.mobileL.text = [[RMUserLoginInfoManager loginmanager] user];
         cell.alipayName.text = [NSString stringWithFormat:@"支付宝: %@",_zfb_no];
         return cell;
     }
@@ -139,14 +139,13 @@
 #pragma mark - 发送验证码
 - (void)sendCodeAction:(JKCountDownButton *)sender{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager withdrawalSendCode:_content_mobile andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager withdrawalSendCode:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
         RMPublicModel * model = object;
         
         if(success && model.status){
             sender.enabled = NO;
             //button type要 设置成custom 否则会闪动
             [sender startWithSecond:60];
-            
             [sender didChange:^NSString *(JKCountDownButton *countDownButton,int second) {
                 NSString *title = [NSString stringWithFormat:@"剩余%d秒",second];
                 return title;

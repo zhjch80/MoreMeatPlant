@@ -448,6 +448,7 @@
                 }else{
                     //跳到订单列表
                     RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
+                    order.from_memCenter = NO;
                     [self.navigationController pushViewController:order animated:YES];
                 }
                  [self dismissPopUpViewControllerWithcompletion:nil];

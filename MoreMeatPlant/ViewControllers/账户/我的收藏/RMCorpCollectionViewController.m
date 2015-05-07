@@ -71,8 +71,8 @@
     if(indexPath.row*3 < dataArr.count){
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
         cell.leftTitle.text = model.content_name;
-        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
-        cell.leftImg.identifierString = model.auto_id;
+        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:nil];
+        cell.leftImg.identifierString = model.member_id;
     }else{
         cell.leftTitle.hidden = YES;
         cell.leftImg.hidden = YES;
@@ -80,8 +80,8 @@
     if(indexPath.row*3+1 < dataArr.count){
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
         cell.centerTitle.text = model.content_name;
-        [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
-        cell.centerImg.identifierString = model.auto_id;
+        [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:nil];
+        cell.centerImg.identifierString = model.member_id;
     }else{
         cell.centerTitle.hidden = YES;
         cell.centerImg.hidden = YES;
@@ -89,8 +89,8 @@
     if(indexPath.row*3+2 < dataArr.count){
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
         cell.rightTitle.text = model.content_name;
-        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
-        cell.rightImg.identifierString = model.auto_id;
+        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_face] placeholderImage:nil];
+        cell.rightImg.identifierString = model.member_id;
     }else{
         cell.rightTitle.hidden = YES;
         cell.rightImg.hidden = YES;

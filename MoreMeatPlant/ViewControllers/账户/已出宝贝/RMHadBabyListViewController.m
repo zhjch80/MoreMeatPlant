@@ -23,6 +23,8 @@
 #import "RMOederDetailOperationTableViewCell.h"
 #import "RMOrderDetailEvaluateTableViewCell.h"
 
+#import "UIAlertView+Expland.h"
+
 @interface RMHadBabyListViewController ()<RefreshControlDelegate,UITextFieldDelegate>{
     BOOL isRefresh;
     BOOL isLoadComplete;
@@ -212,7 +214,7 @@
                     
                     [procell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                     procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
-                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
+                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
                     procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
                     return procell;
                 }
@@ -356,7 +358,7 @@
             if([model.is_comment boolValue]){
                 if(indexPath.row == [model.pros count] +5-1){
                     RMOrderDetailEvaluateTableViewCell * evaluatecell = [self getRMOrderDetailEvaluateTableViewCell:indexPath];
-                    NSInteger n = [[[model.pros objectAtIndex:indexPath.section] objectForKey:@"comment_num"] integerValue];
+                    NSInteger n = [model.comment_num integerValue];
                     //                    banImg
                     //                    generalImg
                     //                    goodImg
@@ -839,48 +841,65 @@
 #pragma mark -确认签收
 - (void)sureReceiver:(RMPublicModel *)model{
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    if(self.startRequest){
-        self.startRequest();
-    }
-    [RMAFNRequestManager corpReturnSureWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] orderId:model.order_id andCallBack:^(NSError *error, BOOL success, id object) {
-//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if(self.finishedRequest){
-            self.finishedRequest();
-        }
-        if(success){
-            RMPublicModel * _model = object;
-            if(_model.status){
-                //
-                pageCount = 1;
-                [self requestData];
-            }else{
-                
-            }
-            [self showHint:_model.msg];
-        }else{
-            [self showHint:object];
-        }
-
-    }];
     
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您确定签收吗？" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"取消",@"确认", nil];
+    [alert show];
+    
+    [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+        if(btnIndex == 1){
+            if(self.startRequest){
+                self.startRequest();
+            }
+            [RMAFNRequestManager corpReturnSureWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] orderId:model.order_id andCallBack:^(NSError *error, BOOL success, id object) {
+                //        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                if(self.finishedRequest){
+                    self.finishedRequest();
+                }
+                if(success){
+                    RMPublicModel * _model = object;
+                    if(_model.status){
+                        //
+                        pageCount = 1;
+                        [self requestData];
+                    }else{
+                        
+                    }
+                    [self showHint:_model.msg];
+                }else{
+                    [self showHint:object];
+                }
+                
+            }];
+
+        }
+    }];
 }
 
 #pragma mark - 备货
 - (void)startBh:(RMPublicModel *)model{
-    [RMAFNRequestManager corpStockUpProductWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
-        if(success){
-            RMPublicModel * model = object;
-            if(model.status){
-                pageCount = 1;
-                [self requestData];
-            }else{
-                
-            }
-            [self showHint:model.msg];
-        }else{
-            [self showHint:object];
+    
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您确定要准备备货吗？" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"取消",@"确认", nil];
+    [alert show];
+    
+    [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+        if(btnIndex == 1){
+            [RMAFNRequestManager corpStockUpProductWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
+                if(success){
+                    RMPublicModel * model = object;
+                    if(model.status){
+                        pageCount = 1;
+                        [self requestData];
+                    }else{
+                        
+                    }
+                    [self showHint:model.msg];
+                }else{
+                    [self showHint:object];
+                }
+            }];
         }
     }];
+    
 }
 
 
@@ -897,9 +916,11 @@
     
     if(returnEditView == nil){
         returnEditView = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderReturnEditView_1" owner:self options:nil] lastObject];
-        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0);
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*220.0/320.0);
         [returnEditView.commitBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
     }
+    
+    NSLog(@"++++++++++%@",[NSValue valueWithCGRect:returnEditView.frame]);
     
     returnEditView._model = model;
     returnEditView.content_name.text = model.content_linkname;
@@ -908,8 +929,8 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         
-        returnEditView.frame = CGRectMake(0, self.view.frame.size.height-(kScreenWidth, kScreenWidth*206.0/320.0)+30, kScreenWidth, kScreenWidth*206.0/320.0);
-        
+        returnEditView.frame = CGRectMake(0, _mTableView.frame.size.height-(kScreenWidth*220.0/320.0), kScreenWidth, kScreenWidth*220.0/320.0);
+        NSLog(@"-------%@",[NSValue valueWithCGRect:returnEditView.frame]);
         [self.view addSubview:returnEditView];
     }];
 }
@@ -930,6 +951,11 @@
 #pragma mark - 提交
 - (void)commit{
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    if(returnEditView.express_price.text.length == 0 || returnEditView.expressName.text.length == 0){
+        [self showHint:@"请输入快递公司和单号"];
+        return;
+    }
     if(self.startRequest){
         self.startRequest();
     }

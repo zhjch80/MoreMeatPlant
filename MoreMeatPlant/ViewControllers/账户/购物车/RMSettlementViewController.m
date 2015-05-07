@@ -76,7 +76,7 @@
             [cell.editBtn addTarget:self action:@selector(editAction:) forControlEvents:UIControlEventTouchDown];
         }
         RMPublicModel * model = [addressArray objectAtIndex:indexPath.row];
-        if([model isEqual:_model]){
+        if([model.auto_id isEqual:_model.auto_id]){
             [cell.selectAddressBtn setImage:[UIImage imageNamed:@"gwc_select"] forState:UIControlStateNormal];
         }else{
             [cell.selectAddressBtn setImage:[UIImage imageNamed:@"gwc_no_select"] forState:UIControlStateNormal];

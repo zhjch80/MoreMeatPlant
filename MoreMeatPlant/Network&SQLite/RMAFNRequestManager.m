@@ -1172,9 +1172,10 @@
 /**
  *  @method     提现发送验证码
  */
-+ (void)withdrawalSendCode:(NSString *)mobile andCallBack:(RMAFNRequestManagerCallBack)block{
+//+ (void)withdrawalSendCode:(NSString *)mobile andCallBack:(RMAFNRequestManagerCallBack)block
++ (void)withdrawalSendCode:(NSString *)user  Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block{
     //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_center&task=cashCode&ID=18513217781&PWD=e10adc3949ba59abbe56e057f20f883e
-    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@",baseUrl,@"&method=save&app_com=com_center&task=cashCode",mobile];
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@",baseUrl,@"&method=save&app_com=com_center&task=cashCode",user,pwd];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         RMPublicModel * model = [[RMPublicModel alloc]init];
@@ -1610,7 +1611,7 @@
                 
             }else if ([type isEqualToString:@"2"]){//店铺
                 model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
-                model.member_id = OBJC_Nil([dataDic objectForKey:@"member_id"]);
+                model.member_id = OBJC_Nil([OBJC_Nil([dataDic objectForKey:@"corp"]) objectForKey:@"member_id"]);
                 model.content_name = OBJC_Nil([OBJC_Nil([dataDic objectForKey:@"corp"]) objectForKey:@"content_name"]);
                 model.content_face = OBJC_Nil([OBJC_Nil([dataDic objectForKey:@"corp"]) objectForKey:@"content_face"]);
             }else if ([type isEqualToString:@"3"]){//宝贝
@@ -1741,6 +1742,8 @@
                 model.express_no = OBJC_Nil([dataDic objectForKey:@"express_no"]);
 
                 model.order_id = OBJC_Nil([dataDic objectForKey:@"order_id"]);
+                model.member_id = OBJC_Nil([dataDic objectForKey:@"member_id"]);
+                model.corp_id = OBJC_Nil([dataDic objectForKey:@"corp_id"]);
                 
             }else{
                 model.status = [[dic objectForKey:@"status"] boolValue];
@@ -1757,7 +1760,7 @@
                 model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
                 model.content_realPay = OBJC_Nil([dataDic objectForKey:@"content_realPay"]);
                 model.order_message = OBJC_Nil([dataDic objectForKey:@"order_message"]);
-                model.corp_id = OBJC_Nil([dataDic objectForKey:@"content_id"]);
+                model.corp_id = OBJC_Nil([dataDic objectForKey:@"corp_id"]);
                 model.corp = OBJC_Nil([dataDic objectForKey:@"corp"]);
                 model.content_sn = OBJC_Nil([dataDic objectForKey:@"content_sn"]);
                 model.mem = [[dataDic objectForKey:@"mem"] isKindOfClass:[NSDictionary class]]?[dataDic objectForKey:@"mem"]:nil;
@@ -1766,7 +1769,7 @@
                 model.is_paystatus = OBJC_Nil([dataDic objectForKey:@"is_paystatus"]);
                 model.create_time = OBJC_Nil([dataDic objectForKey:@"create_time"]);
                 model.member_user = OBJC_Nil([dataDic objectForKey:@"member_user"]);
-                
+                model.member_id = OBJC_Nil([dataDic objectForKey:@"member_id"]);
                 model.is_comment = OBJC_Nil([dataDic objectForKey:@"is_comment"]);
                 
                 model.express_name = OBJC_Nil([dataDic objectForKey:@"express_name"]);
@@ -2102,7 +2105,7 @@
 
 + (void)iwantEvaulateOrderWithUser:(NSString *)user Pwd:(NSString *)pwd Orderid:(NSString *)orderid Comment_num:(NSString *)comment_num auto_idStr:(NSString *)autoidStr Comment_desc:(NSDictionary *)comment_desc andCallBack:(RMAFNRequestManagerCallBack)block{
     //localhost/drzw/index.php?com=com_appService&method=save&app_com=com_pcenter&task=orderComment&orderid=2&comment_num=4&auto_id=1,2&comment_desc=%E5%BE%88%E5%A5%BD%E5%95%8A,%E4%B8%8D%E9%94%99%E5%93%A6%E5%93%A6&ID=test&PWD=202CB962AC59075B964B07152D234B70
-    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&orderid=%@&comment_num=%@&auto_id=%@",baseUrl,@"&method=save&app_com=com_pcenter&task=orderComment",user,pwd,orderid,comment_num,autoidStr];
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&orderid=%@&comment_num=%@",baseUrl,@"&method=save&app_com=com_pcenter&task=orderComment",user,pwd,orderid,comment_num];
     [[RMHttpOperationShared sharedClient] GET:url parameters:comment_desc success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         RMPublicModel * model = [[RMPublicModel alloc]init];
