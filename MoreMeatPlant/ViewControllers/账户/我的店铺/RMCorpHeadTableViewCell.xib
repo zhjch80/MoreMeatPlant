@@ -160,11 +160,11 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="Zja-aX-A2k"/>
-                                        <exclude reference="eKE-lQ-kRG"/>
-                                        <exclude reference="bgJ-6h-fM8"/>
-                                        <exclude reference="hlW-MV-HBx"/>
                                         <exclude reference="2LR-za-6uk"/>
+                                        <exclude reference="hlW-MV-HBx"/>
+                                        <exclude reference="Zja-aX-A2k"/>
+                                        <exclude reference="bgJ-6h-fM8"/>
+                                        <exclude reference="eKE-lQ-kRG"/>
                                     </mask>
                                 </variation>
                             </view>

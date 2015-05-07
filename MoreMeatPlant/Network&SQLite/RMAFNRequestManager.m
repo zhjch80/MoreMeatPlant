@@ -1611,7 +1611,7 @@
                 
             }else if ([type isEqualToString:@"2"]){//店铺
                 model.auto_id = OBJC_Nil([dataDic objectForKey:@"auto_id"]);
-                model.member_id = OBJC_Nil([dataDic objectForKey:@"member_id"]);
+                model.member_id = OBJC_Nil([OBJC_Nil([dataDic objectForKey:@"corp"]) objectForKey:@"member_id"]);
                 model.content_name = OBJC_Nil([OBJC_Nil([dataDic objectForKey:@"corp"]) objectForKey:@"content_name"]);
                 model.content_face = OBJC_Nil([OBJC_Nil([dataDic objectForKey:@"corp"]) objectForKey:@"content_face"]);
             }else if ([type isEqualToString:@"3"]){//宝贝
