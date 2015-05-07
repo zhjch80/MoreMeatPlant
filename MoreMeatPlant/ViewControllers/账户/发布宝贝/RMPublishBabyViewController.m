@@ -694,7 +694,13 @@
 
 #pragma mark - 发布
 - (void)pulishAction:(UIButton *)sener{
-    [self showTipView];
+    
+    if(self.auto_id == nil){
+        [self showTipView];
+    }else{
+        [self commit];
+    }
+    
 }
 
 

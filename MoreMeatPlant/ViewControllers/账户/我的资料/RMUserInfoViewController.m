@@ -104,10 +104,11 @@
         cell.signatureL.text = (__model.contentQm && __model.contentQm.length>0)?__model.contentQm:@"还未填写";
         cell.mobileL.text = __model.contentUser;
         cell.apliyL.text = (__model.zfbNo && __model.zfbNo.length>0)?__model.zfbNo:@"还未填写";
-        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.contentFace] placeholderImage:[UIImage imageNamed:@"photo"]];
+        [cell.content_face sd_setImageWithURL:[NSURL URLWithString:__model.contentFace] placeholderImage:[UIImage imageNamed:@"photo"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            self.content_faceImg = image;
+        }];
         return cell;
     }
-    
     
     
     

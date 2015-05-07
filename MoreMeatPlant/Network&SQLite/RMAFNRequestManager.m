@@ -1605,7 +1605,10 @@
                     model.content_gps = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"content_gps"]);
                     model.create_time = OBJC_Nil([diction objectForKey:@"create_time"]);
 //                    model.imgs = [diction objectForKey:@"imgs"];
-                    model.imgs = [[[dic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
+                    model.imgs = [diction objectForKey:@"imgs"];
+                    model.content_top = OBJC([diction objectForKey:@"content_top"]);
+                    model.members = [diction objectForKey:@"member"];
+
                 }else{
                     
                 }

@@ -30,6 +30,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMPostCollectionViewController class]];
+
+    
     dataArr = [[NSMutableArray alloc] init];
     
     self.mainTableView.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
