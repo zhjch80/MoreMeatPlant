@@ -49,7 +49,7 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
-    CGFloat height = self.from_memCenter? (kScreenHeight - 64-40- 44):(kScreenHeight - 64-40);
+    CGFloat height = self.from_memCenter? (kScreenHeight - 64 - 40 - 49):(kScreenHeight - 64-40);
     
     waitDeliveryCtl = [[RMOrderListViewController alloc]initWithNibName:@"RMOrderListViewController" bundle:nil];
     waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, height);

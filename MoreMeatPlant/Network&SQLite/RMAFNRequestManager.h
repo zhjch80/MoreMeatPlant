@@ -497,7 +497,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param mobile 手机
  *  @param block  回调
  */
-+ (void)withdrawalSendCode:(NSString *)mobile andCallBack:(RMAFNRequestManagerCallBack)block;
++ (void)withdrawalSendCode:(NSString *)user  Pwd:(NSString *)pwd andCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
  *  账户

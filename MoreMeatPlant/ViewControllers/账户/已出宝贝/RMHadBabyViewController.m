@@ -41,18 +41,24 @@
     
     __weak RMHadBabyViewController * Self = self;
     
+    
+    CGFloat height = kScreenHeight - 64 - 40 - 49;
+    
     waitDeliveryCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64  - 40-44);
-    waitDeliveryCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64  - 40-44);
+    waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, height);
+    waitDeliveryCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, height);
     waitDeliveryCtl.call_back = ^(){
         if(Self.callback){
             Self.callback();
         }
     };
     waitDeliveryCtl.goCorp_callback = ^(RMPublicModel * model){
-        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
-        home.auto_id = model.member_id;
-        [Self.navigationController pushViewController:home animated:YES];
+//        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+//        home.auto_id = model.member_id;
+//        [Self.navigationController pushViewController:home animated:YES];
+        if(Self.goCorp_callback){
+            Self.goCorp_callback(model);
+        }
     };
     
     waitDeliveryCtl.startRequest = ^(){
@@ -66,8 +72,8 @@
     [self.view addSubview:waitDeliveryCtl.view];
     
     waitPayCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    waitPayCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40-44);
-    waitPayCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40-44);
+    waitPayCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, height);
+    waitPayCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, height);
     waitPayCtl.order_type = @"unpayorder";
     waitPayCtl.startRequest = ^(){
         [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
@@ -76,17 +82,20 @@
         [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
     };
     waitPayCtl.goCorp_callback = ^(RMPublicModel * model){
-        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
-        home.auto_id = model.member_id;
-        [Self.navigationController pushViewController:home animated:YES];
+//        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+//        home.auto_id = model.member_id;
+//        [Self.navigationController pushViewController:home animated:YES];
+        if(Self.goCorp_callback){
+            Self.goCorp_callback(model);
+        }
     };
     [waitPayCtl requestData];
     waitPayCtl.view.hidden = YES;
     [self.view addSubview:waitPayCtl.view];
     
     deliveryedCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    deliveryedCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40-44);
-    deliveryedCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40-44);
+    deliveryedCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, height);
+    deliveryedCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, height);
     deliveryedCtl.order_type = @"onorder";
     deliveryedCtl.seeLogistics_callback = ^ (RMPublicModel * model){
         //查看物流
@@ -101,9 +110,12 @@
         }
     };
     deliveryedCtl.goCorp_callback = ^(RMPublicModel * model){
-        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
-        home.auto_id = model.member_id;
-        [Self.navigationController pushViewController:home animated:YES];
+//        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+//        home.auto_id = model.member_id;
+//        [Self.navigationController pushViewController:home animated:YES];
+        if(Self.goCorp_callback){
+            Self.goCorp_callback(model);
+        }
     };
     deliveryedCtl.startRequest = ^(){
         [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
@@ -122,13 +134,16 @@
     [self.view addSubview:deliveryedCtl.view];
     
     orderDoneCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    orderDoneCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40-44);
-    orderDoneCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40-44);
+    orderDoneCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, height);
+    orderDoneCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, height);
     orderDoneCtl.order_type = @"okorder";
     orderDoneCtl.goCorp_callback = ^(RMPublicModel * model){
-        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
-        home.auto_id = model.member_id;
-        [Self.navigationController pushViewController:home animated:YES];
+//        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+//        home.auto_id = model.member_id;
+//        [Self.navigationController pushViewController:home animated:YES];
+        if(Self.goCorp_callback){
+            Self.goCorp_callback(model);
+        }
     };
     orderDoneCtl.startRequest = ^(){
         [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
@@ -141,8 +156,8 @@
     [self.view addSubview:orderDoneCtl.view];
     
     orderReturnCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    orderReturnCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40-44);
-    orderReturnCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40-44);
+    orderReturnCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, height);
+    orderReturnCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, height);
     orderReturnCtl.order_type = @"returnorder";
     orderReturnCtl.seeLogistics_callback = ^ (RMPublicModel * model){
         //查看物流
@@ -157,9 +172,12 @@
         }
     };
     orderReturnCtl.goCorp_callback = ^(RMPublicModel * model){
-        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
-        home.auto_id = model.member_id;
-        [Self.navigationController pushViewController:home animated:YES];
+//        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+//        home.auto_id = model.member_id;
+//        [Self.navigationController pushViewController:home animated:YES];
+        if(Self.goCorp_callback){
+            Self.goCorp_callback(model);
+        }
     };
     orderReturnCtl.startRequest = ^(){
         [MBProgressHUD showHUDAddedTo:Self.view animated:YES];

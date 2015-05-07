@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RMBaseTextField.h"
 @interface RMOrderDetailProTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *content_img;
 @property (weak, nonatomic) IBOutlet UILabel *content_name;
 @property (weak, nonatomic) IBOutlet UILabel *content_price;
 @property (weak, nonatomic) IBOutlet UILabel *content_num;
-@property (weak, nonatomic) IBOutlet UITextField *evaluateTextField;
+@property (weak, nonatomic) IBOutlet RMBaseTextField *evaluateTextField;
 
 @property (weak, nonatomic) IBOutlet UIButton *returnBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fieldHeght;

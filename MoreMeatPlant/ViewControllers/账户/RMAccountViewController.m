@@ -281,7 +281,7 @@
                         };
                         order.goCorp_callback = ^(RMPublicModel * model){
                             RMMyCorpViewController * corp = [[RMMyCorpViewController alloc] initWithNibName:@"RMMyCorpViewController" bundle:nil];
-                            corp.auto_id = [[model.pros lastObject] objectForKey:@"corp_id"];
+                            corp.auto_id = model.corp_id;
                             [self.navigationController pushViewController:corp animated:YES];
                         };
                         
@@ -462,13 +462,13 @@
                             [self.navigationController pushViewController:see animated:YES];
                         };
                         hadbaby.goCorp_callback = ^(RMPublicModel * model){
-                            RMMyCorpViewController * corp = [[RMMyCorpViewController alloc] initWithNibName:@"RMMyCorpViewController" bundle:nil];
-                            corp.auto_id = [[model.pros lastObject] objectForKey:@"corp_id"];
-                            [self.navigationController pushViewController:corp animated:YES];
+                            RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+                            home.auto_id = model.member_id;
+                            [self.navigationController pushViewController:home animated:YES];
                         };
                         
-                        hadbaby.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-44);
-                        [self presentPopUpViewController:hadbaby overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
+                        hadbaby.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-49);
+                        [self presentPopUpViewController:hadbaby overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-49)];
                     }
                         break;
                     case 5:{//我的帖子

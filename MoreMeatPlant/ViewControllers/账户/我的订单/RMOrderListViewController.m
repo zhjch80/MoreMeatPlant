@@ -22,6 +22,7 @@
 #import "RMOrderAddressTableViewCell.h"
 #import "RMOederDetailOperationTableViewCell.h"
 #import "RMOrderDetailEvaluateTableViewCell.h"
+#import "UIAlertView+Expland.h"
 @interface RMOrderListViewController ()<RefreshControlDelegate,UITextFieldDelegate>{
     
     BOOL isRefresh;
@@ -395,7 +396,7 @@
                     procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
                     procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
                     procell.fieldHeght.constant = 30;
-                    procell.userInteractionEnabled = NO;
+                    procell.evaluateTextField.userInteractionEnabled = NO;
                     procell.evaluateTextField.text = [[model.pros objectAtIndex:indexPath.row-1] objectForKey:@"comment_desc"];
                     return procell;
                 }
@@ -415,6 +416,7 @@
                     //                    generalImg
                     //                    goodImg
                     //                    pefectImg
+                    evaluatecell.userInteractionEnabled = YES;
                     UIButton * btn = (UIButton *)[evaluatecell.contentView viewWithTag:1000*indexPath.section+n-1];
                     [btn setImage:[UIImage imageNamed:@"order_yellow_sun"] forState:UIControlStateNormal];
                     return evaluatecell;
@@ -718,6 +720,20 @@
     return v;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if(section == [orderlists count]-1){
+        return 10;
+    }else{
+        return 0;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView * v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    v.backgroundColor = [UIColor clearColor];
+    return v;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //    RMPublicModel * model = [orderlists objectAtIndex:indexPath.section];
 //    model.content_type = self.order_type;
@@ -843,7 +859,7 @@
     
     if(returnEditView == nil){
         returnEditView = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderReturnEditView" owner:self options:nil] lastObject];
-        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0);
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*220.0/320.0);
         [returnEditView.commitBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
     }
     
@@ -855,7 +871,7 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         
-        returnEditView.frame = CGRectMake(0, self.view.frame.size.height-(kScreenWidth, kScreenWidth*206.0/320.0), kScreenWidth, kScreenWidth*206.0/320.0);
+        returnEditView.frame = CGRectMake(0, _maintableView.frame.size.height-(kScreenWidth*220.0/320.0), kScreenWidth, kScreenWidth*220.0/320.0);
         [self.view addSubview:returnEditView];
     }];
 }
@@ -864,7 +880,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         UIControl * cover = (UIControl *)[self.view viewWithTag:101311];
         [cover removeFromSuperview];
-        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0);
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*220.0/320.0);
         returnEditView.expressName.text = nil;
         returnEditView.express_price.text = nil;//这里实际上是快递单号，不是价格，
     }];
@@ -874,6 +890,11 @@
 
 - (void)commit{
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    if(returnEditView.express_price.text.length == 0 || returnEditView.expressName.text.length == 0){
+        [self showHint:@"请输入快递公司和单号"];
+        return;
+    }
     if(self.startRequest){
         self.startRequest();
     }
@@ -902,27 +923,38 @@
 #pragma mark - 取消订单
 - (void)cancelOrder:(RMPublicModel *)model{
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    if(self.startRequest){
-        self.startRequest();
-    }
-    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:YES orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
-//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if(self.finishedRequest){
-            self.finishedRequest();
-        }
-        if(success){
-            RMPublicModel * _model = object;
-            if(_model.status){
-                pageCount = 1;
-                [self requestData];
-            }else{
-            
+    
+    
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您确定取消该订单吗？" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"取消",@"确认", nil];
+    [alert show];
+    
+    [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+        if(btnIndex == 1){
+            if(self.startRequest){
+                self.startRequest();
             }
-            [self showHint:_model.msg];
-        }else{
-            [self showHint:object];
+            [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:YES orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
+                //        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                if(self.finishedRequest){
+                    self.finishedRequest();
+                }
+                if(success){
+                    RMPublicModel * _model = object;
+                    if(_model.status){
+                        pageCount = 1;
+                        [self requestData];
+                    }else{
+                        
+                    }
+                    [self showHint:_model.msg];
+                }else{
+                    [self showHint:object];
+                }
+            }];
         }
     }];
+    
+   
 }
 
 #pragma mark - 去付款
@@ -942,25 +974,30 @@
 #pragma mark - 发表评论
 - (void)publishEvaluate:(RMPublicModel *)model{
     //这里应该是调用接口
-    NSString * autoidStr = @"";
+    
+    
+//    NSString * autoidStr = @"";
     NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
     int i = 0;
     for(NSDictionary * dic in model.pros){
-        autoidStr = [autoidStr stringByAppendingString:[NSString stringWithFormat:@",%@",[dic objectForKey:@"orderpro_id"]]];
+//        autoidStr = [autoidStr stringByAppendingString:[NSString stringWithFormat:@",%@",[dic objectForKey:@"orderpro_id"]]];
         if([[model.pros objectAtIndex:i] objectForKey:@"comment_desc"] == nil || [[[model.pros objectAtIndex:i] objectForKey:@"comment_desc"] length] == 0){
             [self showHint:@"请对没有文字评价的宝贝进行填写！"];
             return;
         }
         [dict setValue:[[model.pros objectAtIndex:i] objectForKey:@"comment_desc"] forKey:[NSString stringWithFormat:@"comment_desc[%d]",i]];
+        [dict setValue:[[model.pros objectAtIndex:i] objectForKey:@"orderpro_id"] forKey:[NSString stringWithFormat:@"auto_id[%d]",i]];
         i++;
     }
-    autoidStr = [autoidStr substringFromIndex:1];
+    
+    NSLog(@"+++++%@",dict);
+
     
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if(self.startRequest){
         self.startRequest();
     }
-    [RMAFNRequestManager iwantEvaulateOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Orderid:model.auto_id Comment_num:model.comment_num auto_idStr:autoidStr Comment_desc:dict andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager iwantEvaulateOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Orderid:model.auto_id Comment_num:model.comment_num auto_idStr:nil Comment_desc:dict andCallBack:^(NSError *error, BOOL success, id object) {
 //        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(self.finishedRequest){
             self.finishedRequest();
@@ -983,25 +1020,31 @@
 #pragma mark -确认签收
 - (void)sureReceiver:(RMPublicModel *)model{
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    if(self.startRequest){
-        self.startRequest();
-    }
-    [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:NO orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
-//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if(self.finishedRequest){
-            self.finishedRequest();
-        }
-        if(success){
-            RMPublicModel * _model = object;
-            if(_model.status){
-                pageCount = 1;
-                [self requestData];
-            }else{
-                
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您确定要签收吗？" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"取消",@"确认", nil];
+    [alert show];
+    [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+        if(btnIndex == 1){
+            if(self.startRequest){
+                self.startRequest();
             }
-            [self showHint:_model.msg];
-        }else{
-            [self showHint:object];
+            [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:NO orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
+                //        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                if(self.finishedRequest){
+                    self.finishedRequest();
+                }
+                if(success){
+                    RMPublicModel * _model = object;
+                    if(_model.status){
+                        pageCount = 1;
+                        [self requestData];
+                    }else{
+                        
+                    }
+                    [self showHint:_model.msg];
+                }else{
+                    [self showHint:object];
+                }
+            }];
         }
     }];
 }

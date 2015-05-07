@@ -23,6 +23,8 @@
 #import "RMOederDetailOperationTableViewCell.h"
 #import "RMOrderDetailEvaluateTableViewCell.h"
 
+#import "UIAlertView+Expland.h"
+
 @interface RMHadBabyListViewController ()<RefreshControlDelegate,UITextFieldDelegate>{
     BOOL isRefresh;
     BOOL isLoadComplete;
@@ -839,48 +841,65 @@
 #pragma mark -确认签收
 - (void)sureReceiver:(RMPublicModel *)model{
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    if(self.startRequest){
-        self.startRequest();
-    }
-    [RMAFNRequestManager corpReturnSureWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] orderId:model.order_id andCallBack:^(NSError *error, BOOL success, id object) {
-//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if(self.finishedRequest){
-            self.finishedRequest();
-        }
-        if(success){
-            RMPublicModel * _model = object;
-            if(_model.status){
-                //
-                pageCount = 1;
-                [self requestData];
-            }else{
-                
-            }
-            [self showHint:_model.msg];
-        }else{
-            [self showHint:object];
-        }
-
-    }];
     
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您确定签收吗？" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"取消",@"确认", nil];
+    [alert show];
+    
+    [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+        if(btnIndex == 1){
+            if(self.startRequest){
+                self.startRequest();
+            }
+            [RMAFNRequestManager corpReturnSureWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] orderId:model.order_id andCallBack:^(NSError *error, BOOL success, id object) {
+                //        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                if(self.finishedRequest){
+                    self.finishedRequest();
+                }
+                if(success){
+                    RMPublicModel * _model = object;
+                    if(_model.status){
+                        //
+                        pageCount = 1;
+                        [self requestData];
+                    }else{
+                        
+                    }
+                    [self showHint:_model.msg];
+                }else{
+                    [self showHint:object];
+                }
+                
+            }];
+
+        }
+    }];
 }
 
 #pragma mark - 备货
 - (void)startBh:(RMPublicModel *)model{
-    [RMAFNRequestManager corpStockUpProductWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
-        if(success){
-            RMPublicModel * model = object;
-            if(model.status){
-                pageCount = 1;
-                [self requestData];
-            }else{
-                
-            }
-            [self showHint:model.msg];
-        }else{
-            [self showHint:object];
+    
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您确定要准备备货吗？" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"取消",@"确认", nil];
+    [alert show];
+    
+    [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+        if(btnIndex == 1){
+            [RMAFNRequestManager corpStockUpProductWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
+                if(success){
+                    RMPublicModel * model = object;
+                    if(model.status){
+                        pageCount = 1;
+                        [self requestData];
+                    }else{
+                        
+                    }
+                    [self showHint:model.msg];
+                }else{
+                    [self showHint:object];
+                }
+            }];
         }
     }];
+    
 }
 
 
@@ -932,6 +951,11 @@
 #pragma mark - 提交
 - (void)commit{
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    if(returnEditView.express_price.text.length == 0 || returnEditView.expressName.text.length == 0){
+        [self showHint:@"请输入快递公司和单号"];
+        return;
+    }
     if(self.startRequest){
         self.startRequest();
     }
