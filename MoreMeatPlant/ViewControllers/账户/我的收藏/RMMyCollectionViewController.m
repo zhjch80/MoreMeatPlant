@@ -35,6 +35,12 @@
     postCollectionController = [[RMPostCollectionViewController alloc]initWithNibName:@"RMPostCollectionViewController" bundle:nil];
     postCollectionController.view.frame = CGRectMake(0, _operationView.frame.origin.y+_operationView.frame.size.height, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
     postCollectionController.mainTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
+    postCollectionController.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:SELF.view animated:YES];
+    };
+    postCollectionController.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:SELF.view animated:YES];
+    };
     postCollectionController.detailcall_back = ^ (NSString * auto_id){
         RMReleasePoisonDetailsViewController * releasePoisonDetailsCtl = [[RMReleasePoisonDetailsViewController alloc] init];
         releasePoisonDetailsCtl.auto_id = auto_id;
@@ -45,6 +51,12 @@
     plantCollectionController = [[RMPlantCollectionViewController alloc]initWithNibName:@"RMPlantCollectionViewController" bundle:nil];
     plantCollectionController.view.frame = CGRectMake(0, _operationView.frame.origin.y+_operationView.frame.size.height, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
     plantCollectionController.mainTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
+    plantCollectionController.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:SELF.view animated:YES];
+    };
+    plantCollectionController.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:SELF.view animated:YES];
+    };
     plantCollectionController.detailcall_back = ^(NSString * auto_id){
         RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
         plantWithSaleDetailsCtl.auto_id = auto_id;
@@ -54,6 +66,12 @@
     corpCollectionController = [[RMCorpCollectionViewController alloc]initWithNibName:@"RMCorpCollectionViewController" bundle:nil];
     corpCollectionController.view.frame = CGRectMake(0, _operationView.frame.origin.y+_operationView.frame.size.height, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
     corpCollectionController.mainTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
+    corpCollectionController.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:SELF.view animated:YES];
+    };
+    corpCollectionController.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:SELF.view animated:YES];
+    };
     corpCollectionController.detailcall_back = ^ (NSString * auto_id){
         RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
         corp.auto_id = auto_id;
@@ -64,6 +82,12 @@
     daquanCollectionController = [[RMDaquanCollectionViewController alloc]initWithNibName:@"RMDaquanCollectionViewController" bundle:nil];
     daquanCollectionController.view.frame = CGRectMake(0, _operationView.frame.origin.y+_operationView.frame.size.height, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
     daquanCollectionController.mainTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-( _operationView.frame.origin.y+_operationView.frame.size.height));
+    daquanCollectionController.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:SELF.view animated:YES];
+    };
+    daquanCollectionController.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:SELF.view animated:YES];
+    };
     daquanCollectionController.view.backgroundColor = [UIColor redColor];
     daquanCollectionController.detailcall_back = ^ (NSString * auto_id){
         RMDaqoDetailsViewController * corp = [[RMDaqoDetailsViewController alloc]initWithNibName:@"RMDaqoDetailsViewController" bundle:nil];

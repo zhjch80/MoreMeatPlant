@@ -62,6 +62,13 @@
         }
     };
     
+    waitDeliveryCtl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
+    };
+    waitDeliveryCtl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
+    };
+    
     waitDeliveryCtl.goCorp_callback = ^(RMPublicModel * model){
         if(Self.goCorp_callback){
             Self.goCorp_callback(model);
@@ -81,6 +88,12 @@
         }else{
             [Self jumptoDetail:model];
         }
+    };
+    waitPayCtl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
+    };
+    waitPayCtl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
     };
     waitPayCtl.gopay_callback = ^(RMPublicModel *model){
         //去付款
@@ -119,6 +132,12 @@
             [Self jumptoDetail:model];
         }
     };
+    deliveryedCtl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
+    };
+    deliveryedCtl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
+    };
     deliveryedCtl.seeLogistics_callback = ^ (RMPublicModel * model){
         //查看物流
         if(Self.seeLogistics_callback){
@@ -153,6 +172,12 @@
             [Self jumptoDetail:model];
         }
     };
+    orderDoneCtl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
+    };
+    orderDoneCtl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
+    };
     orderDoneCtl.goCorp_callback = ^(RMPublicModel * model){
         if(Self.goCorp_callback){
             Self.goCorp_callback(model);
@@ -174,6 +199,12 @@
         }else{
             [Self jumptoDetail:model];
         }
+    };
+    orderReturnCtl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
+    };
+    orderReturnCtl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
     };
     orderReturnCtl.goCorp_callback = ^(RMPublicModel * model){
         if(Self.goCorp_callback){

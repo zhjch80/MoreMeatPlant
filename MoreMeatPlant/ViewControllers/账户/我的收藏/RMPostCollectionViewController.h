@@ -10,8 +10,9 @@
 #import "RMImageView.h"
 #import "RMReleasePoisonCell.h"
 #import "CONST.h"
+#import "RMFoundationViewController.h"
 typedef void (^RMPostCollectionViewCtlDetailCallBack) (NSString * auto_id);
-@interface RMPostCollectionViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,PostDetatilsDelegate>
+@interface RMPostCollectionViewController : RMFoundationViewController<UITableViewDataSource,UITableViewDelegate,PostDetatilsDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @property (copy, nonatomic) RMPostCollectionViewCtlDetailCallBack detailcall_back;

@@ -101,12 +101,18 @@
 }
 
 - (void)requestDataWithPageCount:(NSInteger)page{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(self.startRequest){
+        self.startRequest();
+    }
     [RMAFNRequestManager corpBabyListWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] memberclass:self.member_class is_shelf:self.is_shelf Page:page  andCallBack:^(NSError *error, BOOL success, id object) {
         if(page == 1){
             [babyArray removeAllObjects];
         }
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(self.finishedRequest){
+            self.finishedRequest();
+        }
         if(success){
             if([object isKindOfClass:[RMPublicModel class]]){//模型类
                 RMPublicModel * model = object;
@@ -150,12 +156,13 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     RMPublicModel * model = [babyArray objectAtIndex:sender.tag
                              /100];
-    [RMAFNRequestManager babyDeleteOperationWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Autoid:model.auto_code andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager babyDeleteOperationWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Autoid:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
             RMPublicModel * _model = object;
             if(_model.status){
                 [babyArray removeObject:model];
+                [_mTableView reloadData];
             }else{
                 
             }

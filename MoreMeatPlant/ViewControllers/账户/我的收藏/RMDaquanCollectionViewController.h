@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "RMDaqoCell.h"
+#import "RMFoundationViewController.h"
 typedef void (^RMCorpCollectionViewCtlDetailCallBack) (NSString * auto_id);
-@interface RMDaquanCollectionViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,DaqpSelectedPlantTypeDelegate>
+@interface RMDaquanCollectionViewController : RMFoundationViewController<UITableViewDataSource, UITableViewDelegate,DaqpSelectedPlantTypeDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
 @property (copy, nonatomic) RMCorpCollectionViewCtlDetailCallBack detailcall_back;

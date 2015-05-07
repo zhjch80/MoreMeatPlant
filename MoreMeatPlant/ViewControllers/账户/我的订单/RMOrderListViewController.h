@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "RMBaseViewController.h"
+#import "RMFoundationViewController.h"
 typedef void (^RMOrderListViewDidSelectCallBack)(RMPublicModel *model);
 typedef void (^RMOrderListViewGoPayCallBack)(RMPublicModel *model);
 typedef void (^RMOrderListViewGoCorpCallBack)(RMPublicModel *model);
 typedef void (^RMOrderListViewSeeLogisticsCallBack)(RMPublicModel *model);
-@interface RMOrderListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+@interface RMOrderListViewController : RMFoundationViewController<UITableViewDataSource,UITableViewDelegate>{
     NSMutableArray * orderlists;
 }
 

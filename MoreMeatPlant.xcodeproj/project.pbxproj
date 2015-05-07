@@ -767,6 +767,7 @@
 		51783FEC1AF9070700C6EE18 /* RMOrderAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FEA1AF9070700C6EE18 /* RMOrderAddressTableViewCell.xib */; };
 		51783FF01AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FEE1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.m */; };
 		51783FF11AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FEF1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.xib */; };
+		51783FF41AFB432100C6EE18 /* RMFoundationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FF31AFB432100C6EE18 /* RMFoundationViewController.m */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
@@ -2149,6 +2150,8 @@
 		51783FED1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMOrderLeaveMsgTableViewCell.h; sourceTree = "<group>"; };
 		51783FEE1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMOrderLeaveMsgTableViewCell.m; sourceTree = "<group>"; };
 		51783FEF1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderLeaveMsgTableViewCell.xib; sourceTree = "<group>"; };
+		51783FF21AFB432100C6EE18 /* RMFoundationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMFoundationViewController.h; sourceTree = "<group>"; };
+		51783FF31AFB432100C6EE18 /* RMFoundationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMFoundationViewController.m; sourceTree = "<group>"; };
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
@@ -3454,6 +3457,8 @@
 				1DEB73FD1AB9CE2600EA1FA7 /* RMBottomView.m */,
 				1DB0415E1AD7A6B500E05DC6 /* RMBaseButton.h */,
 				1DB0415F1AD7A6B500E05DC6 /* RMBaseButton.m */,
+				51783FF21AFB432100C6EE18 /* RMFoundationViewController.h */,
+				51783FF31AFB432100C6EE18 /* RMFoundationViewController.m */,
 			);
 			path = BaseViewControllers;
 			sourceTree = "<group>";
@@ -6384,6 +6389,7 @@
 				1D64F5081A904E290073EB98 /* RMCustomNavController.m in Sources */,
 				5120FDE11AB71715000E9BE1 /* RMOrderListViewController.m in Sources */,
 				4B3A2AD61AE9341900E1EC24 /* RMEditContentViewController.m in Sources */,
+				51783FF41AFB432100C6EE18 /* RMFoundationViewController.m in Sources */,
 				514611F41AE2105B0040E462 /* EMChatTextBubbleView.m in Sources */,
 				5146120F1AE2105B0040E462 /* EMSearchBar.m in Sources */,
 				51DB4CBD1AC7CB0800A6064D /* IQSegmentedNextPrevious.m in Sources */,

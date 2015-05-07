@@ -33,6 +33,9 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
+    __block RMBabyManageViewController * SELF = self;
+
+    
     all_Ctl = [[RMBabyListViewController alloc] initWithNibName:@"RMBabyListViewController" bundle:nil];
     all_Ctl.view.frame = CGRectMake(0, 64+40, kScreenWidth, kScreenHeight);
     all_Ctl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-40);
@@ -41,15 +44,11 @@
     [self.view addSubview:all_Ctl.view];
     [all_Ctl requestDataWithPageCount:1];
     
-    
-    __block RMBabyManageViewController * SELF = self;
-    all_Ctl.modifycallback = ^(RMPublicModel *model){
-        RMPublishBabyViewController * publish = [[RMPublishBabyViewController alloc]initWithNibName:@"RMPublishBabyViewController" bundle:nil];
-        publish.auto_id = model.auto_id;
-        publish.publishCompleted = ^(void){
-            [SELF->all_Ctl requestDataWithPageCount:1];
-        };
-        [SELF.navigationController pushViewController:publish animated:YES];
+    all_Ctl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:SELF.view animated:YES];
+    };
+    all_Ctl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:SELF.view animated:YES];
     };
     
     
@@ -60,7 +59,21 @@
     ware_Ctl.member_class = nil;
     [self.view addSubview:ware_Ctl.view];
     ware_Ctl.view.hidden = YES;
+    ware_Ctl.modifycallback = ^(RMPublicModel *model){
+        RMPublishBabyViewController * publish = [[RMPublishBabyViewController alloc]initWithNibName:@"RMPublishBabyViewController" bundle:nil];
+        publish.auto_id = model.auto_id;
+        publish.publishCompleted = ^(void){
+            [SELF->ware_Ctl requestDataWithPageCount:1];
+        };
+        [SELF.navigationController pushViewController:publish animated:YES];
+    };
     
+    ware_Ctl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:SELF.view animated:YES];
+    };
+    ware_Ctl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:SELF.view animated:YES];
+    };
 
     [_all_baby_btn addTarget:self action:@selector(all_babyAction:) forControlEvents:UIControlEventTouchDown];
     

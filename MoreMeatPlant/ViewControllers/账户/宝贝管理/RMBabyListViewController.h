@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "RMPublicModel.h"
+#import "RMFoundationViewController.h"
 typedef void (^RMBabyListViewModifyCallback) (RMPublicModel * _model);
-@interface RMBabyListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+@interface RMBabyListViewController : RMFoundationViewController<UITableViewDataSource,UITableViewDelegate>{
     NSMutableArray * babyArray;
 }
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;

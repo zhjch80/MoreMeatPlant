@@ -49,6 +49,12 @@
             Self.callback();
         }
     };
+    waitDeliveryCtl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
+    };
+    waitDeliveryCtl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
+    };
     waitDeliveryCtl.order_type = @"unorder";
     [waitDeliveryCtl requestData];
     [self.view addSubview:waitDeliveryCtl.view];
@@ -57,6 +63,12 @@
     waitPayCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40-44);
     waitPayCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40-44);
     waitPayCtl.order_type = @"unpayorder";
+    waitPayCtl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
+    };
+    waitPayCtl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
+    };
     [waitPayCtl requestData];
     waitPayCtl.view.hidden = YES;
     [self.view addSubview:waitPayCtl.view];
@@ -77,6 +89,12 @@
             [Self.navigationController pushViewController:see animated:YES];
         }
     };
+    deliveryedCtl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
+    };
+    deliveryedCtl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
+    };
     
     deliveryedCtl.call_back = ^(){
         if(Self.callback){
@@ -91,7 +109,12 @@
     orderDoneCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40-44);
     orderDoneCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40-44);
     orderDoneCtl.order_type = @"okorder";
-
+    orderDoneCtl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
+    };
+    orderDoneCtl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
+    };
     [orderDoneCtl requestData];
     orderDoneCtl.view.hidden = YES;
     [self.view addSubview:orderDoneCtl.view];
@@ -111,6 +134,12 @@
             see.express_no = model.express_no;
             [Self.navigationController pushViewController:see animated:YES];
         }
+    };
+    orderReturnCtl.startRequest = ^(){
+        [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
+    };
+    orderReturnCtl.finishedRequest = ^(){
+        [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
     };
     [orderReturnCtl requestData];
     orderReturnCtl.view.hidden = YES;

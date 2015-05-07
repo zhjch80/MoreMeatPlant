@@ -838,10 +838,15 @@
 
 #pragma mark -确认签收
 - (void)sureReceiver:(RMPublicModel *)model{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(self.startRequest){
+        self.startRequest();
+    }
     [RMAFNRequestManager corpReturnSureWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] orderId:model.order_id andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(self.finishedRequest){
+            self.finishedRequest();
+        }
         if(success){
             RMPublicModel * _model = object;
             if(_model.status){
@@ -924,9 +929,15 @@
 
 #pragma mark - 提交
 - (void)commit{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(self.startRequest){
+        self.startRequest();
+    }
     [RMAFNRequestManager memberReturnGoodsOrSureDeliveryWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isReturn:NO orderId:[returnEditView._model auto_id] expressName:[returnEditView.expressName.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] expressId:returnEditView.express_price.text andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(self.finishedRequest){
+            self.finishedRequest ();
+        }
         if(success){
             RMPublicModel * model = object;
             if(model.status){
@@ -956,11 +967,16 @@
 }
 
 - (void)requestData{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(self.startRequest){
+        self.startRequest();
+    }
     [RMAFNRequestManager myOrderListRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isCorp:YES type:self.order_type Page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(self.finishedRequest){
+            self.finishedRequest ();
+        }
         if(success){
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             if(pageCount == 1){
                 [dataarray removeAllObjects];
                 [dataarray addObjectsFromArray:object];

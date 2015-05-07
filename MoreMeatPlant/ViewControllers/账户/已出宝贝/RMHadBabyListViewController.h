@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "RMBaseViewController.h"
 #import "RMOrderListViewController.h"
+#import "RMFoundationViewController.h"
 typedef void (^RMHadBabyListViewCtlCallback)(void);
-@interface RMHadBabyListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface RMHadBabyListViewController : RMFoundationViewController<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
 @property (retain, nonatomic) NSMutableArray * dataarray;
 @property (assign, nonatomic) NSInteger pageCount;

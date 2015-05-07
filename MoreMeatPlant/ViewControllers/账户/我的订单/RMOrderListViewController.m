@@ -845,7 +845,6 @@
     if(returnEditView == nil){
         returnEditView = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderReturnEditView" owner:self options:nil] lastObject];
         returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0);
-//        [returnEditView.seeBtn addTarget:self action:@selector(seeExpress:) forControlEvents:UIControlEventTouchDown];
         [returnEditView.commitBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
     }
     
@@ -875,9 +874,14 @@
 
 
 - (void)commit{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(self.startRequest){
+        self.startRequest();
+    }
     [RMAFNRequestManager memberReturnGoodsOrSureDeliveryWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isReturn:YES orderId:[returnEditView._proDic objectForKey:@"orderpro_id"] expressName:[returnEditView.expressName.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] expressId:returnEditView.express_price.text andCallBack:^(NSError *error, BOOL success, id object) {
-        
+        if(self.finishedRequest){
+            self.finishedRequest();
+        }
         if(success){
             RMPublicModel * model = object;
             if(model.status){
@@ -898,9 +902,15 @@
 
 #pragma mark - 取消订单
 - (void)cancelOrder:(RMPublicModel *)model{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(self.startRequest){
+        self.startRequest();
+    }
     [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:YES orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(self.finishedRequest){
+            self.finishedRequest();
+        }
         if(success){
             RMPublicModel * _model = object;
             if(_model.status){
@@ -947,9 +957,15 @@
     }
     autoidStr = [autoidStr substringFromIndex:1];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(self.startRequest){
+        self.startRequest();
+    }
     [RMAFNRequestManager iwantEvaulateOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Orderid:model.auto_id Comment_num:model.comment_num auto_idStr:autoidStr Comment_desc:dict andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(self.finishedRequest){
+            self.finishedRequest();
+        }
         if(success){
             RMPublicModel * model = object;
             if(model.status){
@@ -967,9 +983,15 @@
 
 #pragma mark -确认签收
 - (void)sureReceiver:(RMPublicModel *)model{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(self.startRequest){
+        self.startRequest();
+    }
     [RMAFNRequestManager memberCancelOrSureOrderWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] iscancel:NO orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(self.finishedRequest){
+            self.finishedRequest();
+        }
         if(success){
             RMPublicModel * _model = object;
             if(_model.status){
@@ -999,18 +1021,22 @@
 
 
 - (void)requestData{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 //    BOOL iscorp ;
 //    if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:@"1"]){
 //        iscorp = NO;
 //    }else{
 //        iscorp = YES;
 //    }
-    
+    if(self.startRequest){
+        self.startRequest();
+    }
     [RMAFNRequestManager myOrderListRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] isCorp:NO type:self.order_type Page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(self.finishedRequest){
+            self.finishedRequest ();
+        }
         if(success){
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             if(pageCount == 1){
                 [orderlists removeAllObjects];
                 [orderlists addObjectsFromArray:object];

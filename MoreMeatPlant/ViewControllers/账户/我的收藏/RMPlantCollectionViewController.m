@@ -161,9 +161,15 @@
 }
 
 - (void)requestDataWithPageCount{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(self.startRequest){
+        self.startRequest();
+    }
     [RMAFNRequestManager myCollectionRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:@"3" Page:pageCount andCallBack:^(NSError *error, BOOL success, id object) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(self.finishedRequest){
+            self.finishedRequest ();
+        }
         if(success){
             if(pageCount == 1){
                 [dataArr removeAllObjects];
