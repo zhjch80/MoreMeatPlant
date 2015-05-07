@@ -1581,6 +1581,7 @@
         NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
         NSMutableArray * Array = [[NSMutableArray alloc]init];
         NSArray * dataArray = OBJC_Nil([dic objectForKey:@"data"]);
+        int i = 0;
         for(NSDictionary * dataDic in dataArray){
             RMPublicModel * model = [[RMPublicModel alloc]init];
             model.status = [[dic objectForKey:@"status"] boolValue];
@@ -1602,8 +1603,9 @@
                     model.member_name = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"member_name"]);
                     model.content_face = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"content_face"]);
                     model.content_gps = OBJC_Nil([OBJC_Nil([diction objectForKey:@"member"]) objectForKey:@"content_gps"]);
-                    
-                    model.imgs = [diction objectForKey:@"imgs"];
+                    model.create_time = OBJC_Nil([diction objectForKey:@"create_time"]);
+//                    model.imgs = [diction objectForKey:@"imgs"];
+                    model.imgs = [[[dic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
                 }else{
                     
                 }
@@ -1633,6 +1635,7 @@
             }
             
             [Array addObject:model];
+            i++;
         }
         if(block){
             block(nil,YES,Array);

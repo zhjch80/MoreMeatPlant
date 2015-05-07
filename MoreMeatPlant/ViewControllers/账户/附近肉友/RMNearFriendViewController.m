@@ -74,6 +74,10 @@
         cell.delegate = self;
     }
     
+    cell.leftImg.contentMode = UIViewContentModeScaleToFill;
+    cell.rightImg.contentMode = UIViewContentModeScaleToFill;
+    cell.centerImg.contentMode = UIViewContentModeScaleToFill;
+    
     if(indexPath.row*3 < friendsArray.count){
         RMPublicModel *model = [friendsArray objectAtIndex:indexPath.row*3];
         cell.leftTitle.text = model.content_name;

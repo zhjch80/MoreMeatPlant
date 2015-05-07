@@ -55,6 +55,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * identifierStr = @"DaqoidentifierStr";
     RMDaqoCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+    
     if (!cell){
         if (IS_IPHONE_6p_SCREEN){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell_6p" owner:self options:nil] lastObject];
@@ -67,6 +68,9 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.delegate = self;
     }
+    cell.leftImg.contentMode = UIViewContentModeScaleToFill;
+    cell.rightImg.contentMode = UIViewContentModeScaleToFill;
+    cell.centerImg.contentMode = UIViewContentModeScaleToFill;
     
     if(indexPath.row*3 < dataArr.count){
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];

@@ -345,6 +345,10 @@
                             RMUserInfoEditViewController * edit = [[RMUserInfoEditViewController alloc]initWithNibName:@"RMUserInfoEditViewController" bundle:nil];
                             edit._model = [[RMPublicModel alloc]init];
                             edit._model = SELF._model;
+                            
+                            edit.content_faceImg = controller.content_faceImg;
+                            edit.cardImg = controller.cardImg;
+                            edit.corpImg = controller.corpImg;
                             [SELF.navigationController pushViewController:edit animated:YES];
                             
                         };
@@ -432,6 +436,10 @@
                             RMUserInfoEditViewController * edit = [[RMUserInfoEditViewController alloc]initWithNibName:@"RMUserInfoEditViewController" bundle:nil];
                             edit._model = [[RMPublicModel alloc]init];
                             edit._model = SELF._model;
+                            
+                            edit.content_faceImg = controller.content_faceImg;
+                            edit.cardImg = controller.cardImg;
+                            edit.corpImg = controller.corpImg;
                             [SELF.navigationController pushViewController:edit animated:YES];
                             
                         };
@@ -710,7 +718,6 @@
             }else{
                 UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:model.msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
                 [alert show];
-                
             }
             
         }else{

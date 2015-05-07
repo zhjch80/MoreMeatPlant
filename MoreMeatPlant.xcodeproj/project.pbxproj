@@ -768,6 +768,8 @@
 		51783FF01AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FEE1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.m */; };
 		51783FF11AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FEF1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.xib */; };
 		51783FF41AFB432100C6EE18 /* RMFoundationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FF31AFB432100C6EE18 /* RMFoundationViewController.m */; };
+		517840331AFBFB4700C6EE18 /* RMAdvantageTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 517840321AFBFB4700C6EE18 /* RMAdvantageTipView.m */; };
+		517840351AFBFB5500C6EE18 /* RMAdvantageTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 517840341AFBFB5500C6EE18 /* RMAdvantageTipView.xib */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
@@ -2152,6 +2154,9 @@
 		51783FEF1AF908F300C6EE18 /* RMOrderLeaveMsgTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderLeaveMsgTableViewCell.xib; sourceTree = "<group>"; };
 		51783FF21AFB432100C6EE18 /* RMFoundationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMFoundationViewController.h; sourceTree = "<group>"; };
 		51783FF31AFB432100C6EE18 /* RMFoundationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMFoundationViewController.m; sourceTree = "<group>"; };
+		517840311AFBFB4700C6EE18 /* RMAdvantageTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAdvantageTipView.h; sourceTree = "<group>"; };
+		517840321AFBFB4700C6EE18 /* RMAdvantageTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAdvantageTipView.m; sourceTree = "<group>"; };
+		517840341AFBFB5500C6EE18 /* RMAdvantageTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMAdvantageTipView.xib; sourceTree = "<group>"; };
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
@@ -4974,6 +4979,9 @@
 				51DB4CD81ACAE31A00A6064D /* RMSectionFooterTableViewCell.h */,
 				51DB4CD91ACAE31A00A6064D /* RMSectionFooterTableViewCell.m */,
 				51DB4CDB1ACAE32B00A6064D /* RMSectionFooterTableViewCell.xib */,
+				517840311AFBFB4700C6EE18 /* RMAdvantageTipView.h */,
+				517840321AFBFB4700C6EE18 /* RMAdvantageTipView.m */,
+				517840341AFBFB5500C6EE18 /* RMAdvantageTipView.xib */,
 			);
 			path = "发布广告";
 			sourceTree = "<group>";
@@ -6045,6 +6053,7 @@
 				1DEB74561AB9D66800EA1FA7 /* btn_add_photo_n.png in Resources */,
 				5157DE5E1AB9DA3E005E9FA5 /* RMPublishPlateTableViewCell.xib in Resources */,
 				514613781AE3653E0040E462 /* chat_receiver_audio_playing000.png in Resources */,
+				517840351AFBFB5500C6EE18 /* RMAdvantageTipView.xib in Resources */,
 				514613911AE3653E0040E462 /* account@2x.png in Resources */,
 				1DEB74841AB9D66800EA1FA7 /* img_tz_9.png in Resources */,
 				514613651AE3653E0040E462 /* chatBar_colorMore_location@2x.png in Resources */,
@@ -6280,6 +6289,7 @@
 				95AA6F4E1ABF8CD2007F4C9E /* XHViewState.m in Sources */,
 				0A4105611ABAB3C70060FBD5 /* Emoji.m in Sources */,
 				51E2681A1AADE77700252DEF /* RMSopCarHeadTableViewCell.m in Sources */,
+				517840331AFBFB4700C6EE18 /* RMAdvantageTipView.m in Sources */,
 				1DD699301AC10F02009A9327 /* SDWebImageDecoder.m in Sources */,
 				1DD699311AC10F02009A9327 /* SDWebImageDownloader.m in Sources */,
 				0A41056F1ABAB3C70060FBD5 /* EMSDWebImageCompat.m in Sources */,

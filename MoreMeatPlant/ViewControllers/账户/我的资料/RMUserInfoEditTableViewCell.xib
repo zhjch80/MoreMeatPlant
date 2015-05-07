@@ -123,7 +123,7 @@
                             </mask>
                         </variation>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入手机号" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="s76-Zp-3Vx" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s76-Zp-3Vx" customClass="RMBaseTextField">
                         <rect key="frame" x="103" y="112" width="174" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="j33-qp-ZGO"/>

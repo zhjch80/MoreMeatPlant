@@ -25,6 +25,7 @@
     NSMutableArray * dataArr;
     RMCorpHeadTableViewCell * headView;
     NSURL * _filePath;
+    NSURL * _headPath;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
@@ -58,6 +59,11 @@
         [headView.corp_renzheng addTarget:self action:@selector(jumpToNews:) forControlEvents:UIControlEventTouchDown];
         [headView.corp_sun addTarget:self action:@selector(jumpToNews:) forControlEvents:UIControlEventTouchDown];
     }
+    UITapGestureRecognizer * tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(replaceBannerImg:)];
+    [headView.corp_headImgV addGestureRecognizer:tap2];
+    headView.corp_headImgV.tag = 10000;
+    headView.bannerImgV.tag = 10001;
+    
     headView.corp_headImgV.layer.cornerRadius = 5;
     headView.corp_headImgV.clipsToBounds = YES;
     if(self.auto_id == nil){
@@ -66,10 +72,14 @@
         rightOneBarButton.hidden = NO;
         self.titleName = @"我的店铺";
         headView.bannerImgV.userInteractionEnabled = YES;
+        headView.corp_headImgV.userInteractionEnabled = YES;
+
     }else{
         self.titleName = @"店铺主页";
         rightOneBarButton.hidden = YES;
         headView.bannerImgV.userInteractionEnabled = NO;
+        headView.corp_headImgV.userInteractionEnabled = NO;
+
     }
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(replaceBannerImg:)];
     [headView.bannerImgV addGestureRecognizer:tap];
@@ -569,15 +579,29 @@
 
 #pragma mark - 换头像
 - (void)replaceBannerImg:(UITapGestureRecognizer *)tap{
-    [[RMVPImageCropper shareImageCropper] setCtl:self];
-    [[RMVPImageCropper shareImageCropper] set_scale:1.0/3.0];
-    [[RMVPImageCropper shareImageCropper] showActionSheet];
-    [[RMVPImageCropper shareImageCropper] setFileName:@"content_bjimg.jpg"];
+    if(tap.view.tag == 10001){
+        [[RMVPImageCropper shareImageCropper] setCtl:self];
+        [[RMVPImageCropper shareImageCropper] set_scale:1.0/2.0];
+        [[RMVPImageCropper shareImageCropper] showActionSheet];
+        [[RMVPImageCropper shareImageCropper] setFileName:@"content_bjimg.jpg"];
+    }else{
+        [[RMVPImageCropper shareImageCropper] setCtl:self];
+        [[RMVPImageCropper shareImageCropper] set_scale:1.0/1.0];
+        [[RMVPImageCropper shareImageCropper] showActionSheet];
+        [[RMVPImageCropper shareImageCropper] setFileName:@"content_face.jpg"];
+    }
+    
 }
 
 #pragma mark - RMimageCropperDelegate
 - (void)RMimageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage andfilePath:(NSURL *)filePath{
-    _filePath = filePath;
+    if([[RMVPImageCropper shareImageCropper] _scale] == 1){
+        _headPath = filePath;
+        
+    }else{
+        _filePath = filePath;
+    }
+    
     [self modifyPhoto];
 }
 
@@ -588,12 +612,19 @@
 #pragma mark -
 - (void)modifyPhoto{
     NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
-    [dic setValue:_filePath forKey:@"content_bjimg"];
+    if(_filePath != nil){
+        [dic setValue:_filePath forKey:@"content_bjimg"];
+    }
+    if(_headPath != nil){
+        [dic setValue:_headPath forKey:@"content_face"];
+    }
     [RMAFNRequestManager myInfoModifyRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Type:nil AlipayNo:nil Signature:nil Dic:dic contentCode:nil andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
             RMPublicModel * model = object;
             if(model.status){
+                _filePath = nil;
+                _headPath = nil;
                 [self showHint:model.msg];
                 [self requestCorpid];
                 pageCount = 1;

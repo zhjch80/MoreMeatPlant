@@ -11,7 +11,10 @@
 #import "RMAdvertisingHeadTableViewCell.h"
 #import "RMVPImageCropper.h"
 #import "RMSectionFooterTableViewCell.h"
-@interface RMAdvertisingViewController ()<RMVPImageCropperDelegate>
+#import "RMAdvantageTipView.h"
+@interface RMAdvertisingViewController ()<RMVPImageCropperDelegate>{
+    RMAdvantageTipView * tipView;
+}
 
 @end
 
@@ -101,7 +104,12 @@
         cell.addBtn.tag = indexPath.row*100+2;
         RMPublicModel * model = [planteArray objectAtIndex:indexPath.row-2];
         cell.planteName.text = model.content_name;
-        cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)model.textField_value];
+        if(model.textField_value == 0){
+            cell.numTextField.text = [NSString stringWithFormat:@"%d",1];
+        }else{
+            cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)model.textField_value];
+        }
+        
         cell.priceL.text = [NSString stringWithFormat:@"%@米/天",model.content_price];
         cell.yu_weiL.text = [NSString stringWithFormat:@"余位 %ld",(long)model.num];
         return cell;
@@ -186,7 +194,12 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"没有余位了！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
         [alert show];
     }
-    model.textField_value = [textField.text integerValue];
+    if([textField.text integerValue] > 0){
+        model.textField_value = [textField.text integerValue];
+    }else{
+        model.textField_value = 1;
+    }
+    
     [self caculateDays];
 }
 
@@ -206,6 +219,7 @@
 #pragma mark - 确认发布
 - (void)surePublishAction:(UIButton *)sender{
     NSLog(@"%@",selectArray);
+    
     int i = 0;
     NSMutableDictionary * multabledic = [[NSMutableDictionary alloc]init];
     for(NSNumber * number in selectArray){
@@ -236,7 +250,7 @@
             [MBProgressHUD showSuccess:model.msg toView:self.view];
             [self.navigationController popViewControllerAnimated:YES];
         }else{
-                    [self showHint:object];
+                [self showHint:object];
         }
         
     }];
@@ -262,6 +276,8 @@
 - (void)RMimageCropperDidCancel:(VPImageCropperViewController *)cropperViewController{
     
 }
+
+
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
     [self.navigationController popViewControllerAnimated:YES];

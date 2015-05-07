@@ -16,10 +16,12 @@
 #import "RMPublishCourseTableViewCell.h"
 #import "NSString+Addtion.h"
 #import "RMVPImageCropper.h"
+#import "RMAdvantageTipView.h"
 @interface RMPublishBabyViewController ()<RMVPImageCropperDelegate,RMPublishCourseTableViewCellDelegate,RMPublishClassTableViewCellDelegate>{
     BOOL isCourseFirst;
     BOOL isClassFirst;
     BOOL selectQt;//选择其他快递
+    RMAdvantageTipView * tipView;
 }
 
 @end
@@ -599,21 +601,19 @@
 
 
 
-#pragma mark - 发布
-- (void)pulishAction:(UIButton *)sener{
-    
+- (void)commit{
     if([current_Model.content_name length]==0){
-    
+        
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝名称" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];
         return;
     }else if ([current_Model.content_desc length] == 0){
-    
+        
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝描述" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];
         return;
     }else if ([current_Model.content_price length] == 0){
-    
+        
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝价格" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];
         return;
@@ -632,12 +632,16 @@
         [alert show];
         return;
     }else if (current_Model.member_class.length == 0){
-    
+        
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择会员分类" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];
         return;
     }else if ([current_Model.content_num length] == 0){
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入库存" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if([current_Model.content_class isEqualToString:@"1"]){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"一肉一拍市场的宝贝只能有一件" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];
         return;
     }
@@ -668,7 +672,7 @@
     
     NSLog(@"参数：%@",dic);
     NSLog(@"-------------------------------------------------------");
-   
+    
     
     [RMAFNRequestManager babyPublishWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Auto_id:self.auto_id newPhotoDic:newAddPhotoDic modifyPhotoDic:modifyPhotoDic otherDic:dic andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -685,8 +689,60 @@
             [self showHint:object];
         }
     }];
+
 }
 
+#pragma mark - 发布
+- (void)pulishAction:(UIButton *)sener{
+    [self showTipView];
+}
+
+
+- (void)showTipView{
+    
+    UIControl * cover = [[UIControl alloc]initWithFrame:_mTableView.frame];
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissAction:)];
+    cover.backgroundColor = [UIColor blackColor];
+    cover.alpha = 0.25;
+    cover.tag = 101311;
+    [cover addGestureRecognizer:tap];
+    [self.view addSubview:cover];
+    
+    if(tipView == nil){
+        tipView = [[[NSBundle mainBundle] loadNibNamed:@"RMAdvantageTipView" owner:self options:nil] lastObject];
+        tipView.frame = CGRectMake(0, 0, 150, 120);
+        [tipView.continueB addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
+        
+        tipView.layer.cornerRadius = 4;
+        [tipView.closeB addTarget:self action:@selector(close:) forControlEvents:UIControlStateNormal];
+    }
+    
+    tipView.hidden = YES;
+    tipView.kouL.text = [NSString stringWithFormat:@"扣除花币: %.1f米",0.5];
+//    tipView.yuL.text = [NSString stringWithFormat:@"剩余花币 %.0f米",[(RMPublicModel *)[planteArray lastObject] balance]];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        tipView.frame = CGRectMake(0, 0, 150, 120);
+        tipView.center = CGPointMake(kScreenWidth/2, kScreenHeight/2);
+        [self.view addSubview:tipView];
+        tipView.hidden = NO;
+    }];
+}
+
+- (void)dismissAction:(UITapGestureRecognizer *)tap{
+    [UIView animateWithDuration:0.3 animations:^{
+        UIControl * cover = (UIControl *)[self.view viewWithTag:101311];
+        [cover removeFromSuperview];
+        tipView.hidden = YES;
+    }];
+    
+}
+
+
+- (void)close:(UIButton *)sender{
+    [self dismissAction:nil];
+}
 
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender{
