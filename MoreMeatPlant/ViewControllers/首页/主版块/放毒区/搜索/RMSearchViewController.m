@@ -17,8 +17,9 @@
 #import "RMReleasePoisonDetailsViewController.h"
 #import "RMPlantWithSaleDetailsViewController.h"
 #import "RMDaqoDetailsViewController.h"
+#import "RMPlantWithSaleCell.h"
 
-@interface RMSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextFieldDelegate,DaqpSelectedPlantTypeDelegate,RefreshControlDelegate,PostDetatilsDelegate,CommentsViewDelegate>{
+@interface RMSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextFieldDelegate,DaqpSelectedPlantTypeDelegate,RefreshControlDelegate,PostDetatilsDelegate,CommentsViewDelegate,JumpPlantDetailsDelegate>{
     BOOL isHideKeyboard;
     
     BOOL isFirstViewDidAppear;
@@ -112,8 +113,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.searchType isEqualToString:@"帖子"]){
         return [self loadPostsIndexPath:indexPath withTableView:tableView];
-    }else{//宝贝 或者 大全
+    }else if ([self.searchType isEqualToString:@"宝贝"]){
         return [self loadBabyIndexPath:indexPath withTableView:tableView];
+    }else{//大全
+        return [self loadDaqoIndexPath:indexPath withTableView:tableView];
     }
 }
 
@@ -339,9 +342,81 @@
     }
 }
 
-#pragma mark - 宝贝 list 或者 大全list
+#pragma mark - 宝贝 list
 
 - (UITableViewCell *)loadBabyIndexPath:(NSIndexPath *)indexPath withTableView:(UITableView *)tableView {
+    static NSString * identifierStr = @"PlantWithSaleidentifierStr";
+    RMPlantWithSaleCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+    if (!cell){
+        if (IS_IPHONE_6p_SCREEN){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell_6p" owner:self options:nil] lastObject];
+        }else if (IS_IPHONE_6_SCREEN){
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell_6" owner:self options:nil] lastObject];
+        }else{
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPlantWithSaleCell" owner:self options:nil] lastObject];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.delegate = self;
+    }
+    
+    if(indexPath.row*3 < dataArr.count){
+        cell.leftPrice.hidden = NO;
+        cell.leftImg.hidden = NO;
+        cell.leftName.hidden = NO;
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
+        NSString * _price = [NSString stringWithFormat:@"  ¥%@",OBJC(model.content_price)];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
+        cell.leftPrice.attributedText = oneAttributeStr;
+        cell.leftName.text = [NSString stringWithFormat:@" %@",model.content_name];
+        cell.leftImg.identifierString = model.auto_id;
+        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+    }else{
+        cell.leftPrice.hidden = YES;
+        cell.leftImg.hidden = YES;
+        cell.leftName.hidden = YES;
+    }
+    if(indexPath.row*3+1 < dataArr.count){
+        cell.centerPrice.hidden = NO;
+        cell.centerImg.hidden = NO;
+        cell.centerName.hidden = NO;
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
+        NSString * _price = [NSString stringWithFormat:@"  ¥%@",OBJC(model.content_price)];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
+        cell.centerPrice.attributedText = oneAttributeStr;
+        cell.centerName.text = [NSString stringWithFormat:@" %@",model.content_name];
+        cell.centerImg.identifierString = model.auto_id;
+        [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+    }else{
+        cell.centerPrice.hidden = YES;
+        cell.centerImg.hidden = YES;
+        cell.centerName.hidden = YES;
+    }
+    if(indexPath.row*3+2 < dataArr.count){
+        cell.rightPrice.hidden = NO;
+        cell.rightImg.hidden = NO;
+        cell.rightName.hidden = NO;
+        RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
+        NSString * _price = [NSString stringWithFormat:@"  ¥%@",OBJC(model.content_price)];
+        NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:_price];
+        [oneAttributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, 3)];
+        cell.rightPrice.attributedText = oneAttributeStr;
+        cell.rightName.text = [NSString stringWithFormat:@" %@",model.content_name];
+        cell.rightImg.identifierString = model.auto_id;
+        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+    }else{
+        cell.rightPrice.hidden = YES;
+        cell.rightImg.hidden = YES;
+        cell.rightName.hidden = YES;
+    }
+    return cell;
+}
+
+#pragma mark - 大全 list
+
+- (UITableViewCell *)loadDaqoIndexPath:(NSIndexPath *)indexPath withTableView:(UITableView *)tableView {
     static NSString * identifierStr = @"DaqoidentifierStr";
     RMDaqoCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     if (!cell){
@@ -686,19 +761,21 @@
     }];
 }
 
-#pragma mark - 宝贝详情代理方法 或者 大全详情代理方法
+#pragma mark - 大全详情代理方法
 
 - (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
-    if ([self.searchType isEqualToString:@"宝贝"]){
-        RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
-        plantWithSaleDetailsCtl.auto_id = image.identifierString;
-        plantWithSaleDetailsCtl.mTitle = @"一肉一拍";
-        [self.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
-    }else{
-        RMDaqoDetailsViewController * daqoDetailsCtl = [[RMDaqoDetailsViewController alloc] init];
-        daqoDetailsCtl.auto_id = image.identifierString;
-        [self.navigationController pushViewController:daqoDetailsCtl animated:YES];
-    }
+    RMDaqoDetailsViewController * daqoDetailsCtl = [[RMDaqoDetailsViewController alloc] init];
+    daqoDetailsCtl.auto_id = image.identifierString;
+    [self.navigationController pushViewController:daqoDetailsCtl animated:YES];
+}
+
+#pragma mark - 宝贝详情代理方法
+
+- (void)jumpPlantDetailsWithImage:(RMImageView *)image {
+    RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
+    plantWithSaleDetailsCtl.auto_id = image.identifierString;
+    plantWithSaleDetailsCtl.mTitle = @"一肉一拍";
+    [self.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
 }
 
 #pragma mark -
@@ -919,9 +996,10 @@
                 [dataArr removeAllObjects];
                 for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
-                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
-                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_price = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_price"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                     [dataArr addObject:model];
                 }
                 [mTableView reloadData];
@@ -935,9 +1013,10 @@
                 }
                 for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
-                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
-                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_price = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_price"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                     [dataArr addObject:model];
                 }
                 [mTableView reloadData];
@@ -945,24 +1024,19 @@
             }
             
             if (isRefresh){
-                
-                if ([[object objectForKey:@"data"] count] == 0){
-                    [self showHint:@"没有搜索到相关内容"];
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                    return ;
-                }
-                
                 [dataArr removeAllObjects];
                 for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
-                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
-                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_price = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_price"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                     [dataArr addObject:model];
                 }
                 [mTableView reloadData];
             }
             [self.view endEditing:YES];
+
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];
