@@ -170,8 +170,8 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
 
 /**
  *  @method     帖子评论列表
- *  @param      review_id       帖子标识
- *  @param      pageCount       页数
+ *  @param      review_id           帖子标识
+ *  @param      pageCount           页数
  */
 + (void)getPostsCommentsListWithReview_id:(NSString *)review_id
                             withPageCount:(NSInteger)pageCount
@@ -218,13 +218,15 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @method     回复帖子评论
  *  @param      comment_id              评论标识
  *  @param      content_body            回复评论内容
+ *  @param      review_id               帖子标识
  *  @param      user_id                 会员用户名
- *  @param      user_password           会员密码      
+ *  @param      user_password           会员密码
  */
 + (void)postReplyToPostsCommentWithComment_id:(NSString *)comment_id
                              withContent_body:(NSString *)content_body
                                        withID:(NSString *)user_id
                                       withPWD:(NSString *)user_password
+                                withReview_id:(NSString *)review_id
                                      callBack:(RMAFNRequestManagerCallBack)block;
 
 /**

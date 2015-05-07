@@ -27,7 +27,7 @@
 @end
 
 @implementation RMStartPostingViewController
-@synthesize uploadImageArr;
+@synthesize uploadImageArr, postWhere;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -143,7 +143,7 @@
             }
             
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [RMAFNRequestManager postSendPostsWithAuto_id:@"" withContentName:[self.mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withContentType:@"1" withContentClass:self.model_1.value withContentCourse:self.model_2.auto_code withContentBody:[self.mTextView.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withContentImg:imageDic withBodyAuto_id:@"" withID:OBJC([RMUserLoginInfoManager loginmanager].user) withPWD:OBJC([RMUserLoginInfoManager loginmanager].pwd) callBack:^(NSError *error, BOOL success, id object) {
+            [RMAFNRequestManager postSendPostsWithAuto_id:@"" withContentName:[self.mTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withContentType:postWhere withContentClass:self.model_1.value withContentCourse:self.model_2.auto_code withContentBody:[self.mTextView.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withContentImg:imageDic withBodyAuto_id:@"" withID:OBJC([RMUserLoginInfoManager loginmanager].user) withPWD:OBJC([RMUserLoginInfoManager loginmanager].pwd) callBack:^(NSError *error, BOOL success, id object) {
                 if (error){
                     NSLog(@"error:%@",error);
                     [self showHint:@"发帖失败！请重新发送"];

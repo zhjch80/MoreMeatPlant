@@ -740,6 +740,7 @@
             startPostingCtl.transitioningDelegate = animator;
             startPostingCtl.model_1 = actionModel_1;
             startPostingCtl.model_2 = actionModel_2;
+            startPostingCtl.postWhere = @"1";
             [self presentViewController:startPostingCtl animated:YES completion:nil];
             break;
         }
@@ -757,6 +758,7 @@
             startLongPostingCtl.transitioningDelegate = animator;
             startLongPostingCtl.model_1 = actionModel_1;
             startLongPostingCtl.model_2 = actionModel_2;
+            startLongPostingCtl.postWhere = @"1";
             [self presentViewController:startLongPostingCtl animated:YES completion:nil];
             break;
         }

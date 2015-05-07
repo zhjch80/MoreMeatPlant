@@ -360,13 +360,13 @@
 
 /**
  *  @method     帖子评论列表
- *  @param      review_id       帖子标识
- *  @param      pageCount       页数
+ *  @param      review_id           帖子标识
+ *  @param      pageCount           页数
  */
 + (void)getPostsCommentsListWithReview_id:(NSString *)review_id
                             withPageCount:(NSInteger)pageCount
                                  callBack:(RMAFNRequestManagerCallBack)block{
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNotereview&review_id=%@&per=1&row=10&page=%ld",baseUrl,review_id,(long)pageCount];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNotereview&review_id=%@&per=1&row=100&page=%ld",baseUrl,review_id,(long)pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block) {
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
@@ -463,6 +463,7 @@
  *  @method     回复帖子评论
  *  @param      comment_id              评论标识
  *  @param      content_body            回复评论内容
+ *  @param      review_id               帖子标识
  *  @param      user_id                 会员用户名
  *  @param      user_password           会员密码
  */
@@ -470,6 +471,7 @@
                              withContent_body:(NSString *)content_body
                                        withID:(NSString *)user_id
                                       withPWD:(NSString *)user_password
+                                withReview_id:(NSString *)review_id
                                      callBack:(RMAFNRequestManagerCallBack)block {
     NSString *url = @"http://218.240.30.6/drzw/index.php";
     NSDictionary * parameter = @{
@@ -477,10 +479,11 @@
                                  @"method": @"save",
                                  @"app_com": @"com_center",
                                  @"task": @"returnComment",
+                                 @"review_id": review_id,
                                  @"comment_id": comment_id,
                                  @"content_body": content_body,
                                  @"ID": user_id,
-                                 @"PWD": user_password,
+                                 @"PWD": user_password
                                  };
     [[RMHttpOperationShared sharedClient] POST:url parameters:parameter success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){

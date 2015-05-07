@@ -34,7 +34,7 @@
 @end
 
 @implementation RMStartLongPostingViewController
-@synthesize mTableView, headerTitleArr, animator, footerView, typeIdentifierArr, dataArr, titleContent, cellRow, willOperationCellRow, isInsertImage, isReplaceImage;
+@synthesize mTableView, headerTitleArr, animator, footerView, typeIdentifierArr, dataArr, titleContent, cellRow, willOperationCellRow, isInsertImage, isReplaceImage, postWhere;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -677,7 +677,7 @@
         }
     }
     
-    [RMAFNRequestManager postSendLongPostsWithAuto_id:@"" withContentName:titleContent withContentType:@"1" withContentClass:self.model_1.value withContentCourse:self.model_2.auto_code withContentBody:content_bodys withContentImg:content_imgs withBodyAuto_id:@"" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager postSendLongPostsWithAuto_id:@"" withContentName:titleContent withContentType:postWhere withContentClass:self.model_1.value withContentCourse:self.model_2.auto_code withContentBody:content_bodys withContentImg:content_imgs withBodyAuto_id:@"" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
 
         if (error){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

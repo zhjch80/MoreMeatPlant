@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) RMPublicModel * model_1;         //发帖    类型(家有鲜肉，播种育苗...)
 @property (nonatomic, strong) RMPublicModel * model_2;         //发帖    植物科类
+@property (nonatomic, strong) NSString * postWhere;             //发帖位置
 
 @property (weak, nonatomic) IBOutlet RMBaseTextField *mTextField;
 @property (weak, nonatomic) IBOutlet RMBaseTextView *mTextView;

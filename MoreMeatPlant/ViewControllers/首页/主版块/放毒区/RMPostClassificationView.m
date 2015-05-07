@@ -43,7 +43,7 @@
     
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
-    subHeight = 220;
+    subHeight = 240;
     
     subView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, width, subHeight)];
     subView.userInteractionEnabled = YES;
@@ -103,14 +103,14 @@
         UIImageView * image = [[UIImageView alloc] init];
         image.userInteractionEnabled = YES;
         image.multipleTouchEnabled = YES;
-        image.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count] - 1) + kHeightX), 105, 44, 44);
+        image.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count] - 1) + kHeightX), 120, 44, 44);
         image.tag = 6 + i;
         [image sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         image.backgroundColor = [UIColor clearColor];
         [subView addSubview:image];
         
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count] - 1) + kHeightX), 105, 44, 44);
+        button.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count] - 1) + kHeightX), 120, 44, 44);
         button.tag = 6 + i;
         [button addTarget:self action:@selector(selectUpdataListType:) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor clearColor];
@@ -119,7 +119,7 @@
     
     UIButton * refreshBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     refreshBtn.frame = CGRectMake(0, 0, 100, 30);
-    refreshBtn.center = CGPointMake(width/2, 180);
+    refreshBtn.center = CGPointMake(width/2, 200);
     refreshBtn.backgroundColor = [UIColor colorWithRed:0.94 green:0 blue:0.32 alpha:1];
     [refreshBtn.layer setCornerRadius:8.0];
     [refreshBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -230,7 +230,13 @@
             [imageView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         }
         
+        for (NSInteger i=1; i<[globPlantArr count]; i++) {
+            UIImageView * imageView = (UIImageView *)[subView viewWithTag:i + 6];
+            imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, 44, 44);
+        }
+        
         UIImageView * imageView = (UIImageView *)[subView viewWithTag:value+6];
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height + 5);
         RMPublicModel * model = [globSubsPlantArr objectAtIndex:value];
         [imageView sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
     }

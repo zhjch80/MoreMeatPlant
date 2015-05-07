@@ -44,7 +44,7 @@
     
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
-    subHeight = 220;
+    subHeight = 240;
 
     subView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, width, subHeight)];
     subView.userInteractionEnabled = YES;
@@ -101,14 +101,14 @@
         UIImageView * image = [[UIImageView alloc] init];
         image.userInteractionEnabled = YES;
         image.multipleTouchEnabled = YES;
-        image.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count]-1) + kHeightX), 105, 44, 44);
+        image.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count]-1) + kHeightX), 120, 44, 44);
         image.tag = 401 + 6 + i - 1;
         [image sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         image.backgroundColor = [UIColor clearColor];
         [subView addSubview:image];
         
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count]-1) + kHeightX), 105, 44, 44);
+        button.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count]-1) + kHeightX), 120, 44, 44);
         button.tag = 401 + 6 + i - 1;
         [button addTarget:self action:@selector(selectPostsType:) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor clearColor];
@@ -117,7 +117,7 @@
     
     UIButton * postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     postBtn.frame = CGRectMake(0, 0, 100, 30);
-    postBtn.center = CGPointMake(width/2, 180);
+    postBtn.center = CGPointMake(width/2, 200);
     postBtn.backgroundColor = [UIColor colorWithRed:0.94 green:0 blue:0.32 alpha:1];
     [postBtn.layer setCornerRadius:8.0];
     [postBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

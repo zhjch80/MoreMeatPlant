@@ -30,6 +30,9 @@ typedef enum{
 @property (nonatomic, assign) RequestType requestType;      //请求类型
 @property (nonatomic, copy) NSString * code;                //标识
 
+@property (nonatomic, copy) NSString * review_id;           //评论帖子标识
+@property (nonatomic, copy) NSString * comment_id;          //帖子标识  回复帖子的标识
+
 //评论
 @property (nonatomic, copy) NSString * commentType;
 

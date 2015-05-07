@@ -29,9 +29,10 @@
 #import "RMPlantWithSaleViewController.h"
 #import "RMFreshPlantMarketViewController.h"
 #import "RMMyCorpViewController.h"
-
 #import "RMMyHomeViewController.h"
-@interface RMPlantExchangeViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate,CommentsViewDelegate>{
+#import "RMStartLongPostingViewController.h"
+
+@interface RMPlantExchangeViewController ()<UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,PostMessageSelectedPlantDelegate,PostDetatilsDelegate,BottomDelegate,PostClassificationDelegate,RefreshControlDelegate,CommentsViewDelegate>{
     BOOL isFirstViewDidAppear;
     BOOL isRefresh;
     NSInteger pageCount;
@@ -57,10 +58,13 @@
 @property (nonatomic, strong) RefreshControl * refreshControl;
 @property (nonatomic, strong) RMPlantTypeView * plantTypeView;
 @property (nonatomic, strong) RMBottomView * bottomView;
+@property (nonatomic, strong) RMPublicModel * actionModel_1;
+@property (nonatomic, strong) RMPublicModel * actionModel_2;
+
 @end
 
 @implementation RMPlantExchangeViewController
-@synthesize mTableView, dataArr, fenleiAction, action, animator, plantTypeArr, advertisingArr, subsPlantArr, newsArr, plantRequestValue, subsPlantRequestValue, refreshControl,plantTypeView, bottomView;
+@synthesize mTableView, dataArr, fenleiAction, action, animator, plantTypeArr, advertisingArr, subsPlantArr, newsArr, plantRequestValue, subsPlantRequestValue, refreshControl,plantTypeView, bottomView, actionModel_1, actionModel_2;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -700,24 +704,61 @@
 #pragma mark - 选择类型 开始发帖
 
 - (void)selectedPostMessageWithPostsType:(NSInteger)type_1 withPlantType:(NSInteger)type_2 {
+    
     [action dismiss];
-    RMPublicModel * model_1 = [plantTypeArr objectAtIndex:type_1-401];
-    RMPublicModel * model_2 = [subsPlantArr objectAtIndex:type_2-407+1];
+    actionModel_1 = [plantTypeArr objectAtIndex:type_1-401];
+    actionModel_2 = [subsPlantArr objectAtIndex:type_2-407+1];
     
-    RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
-    startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
-    
-    animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:startPostingCtl];
-    animator.dragable = NO;
-    animator.bounces = NO;
-    animator.behindViewAlpha = 0.5f;
-    animator.behindViewScale = 0.5f;
-    animator.transitionDuration = 0.7f;
-    animator.direction = ZFModalTransitonDirectionBottom;
-    startPostingCtl.transitioningDelegate = animator;
-    startPostingCtl.model_1 = model_1;
-    startPostingCtl.model_2 = model_2;
-    [self presentViewController:startPostingCtl animated:YES completion:nil];
+    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"快速发帖", @"发长贴子", nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:{
+            RMStartPostingViewController * startPostingCtl = [[RMStartPostingViewController alloc] init];
+            startPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
+            
+            animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:startPostingCtl];
+            animator.dragable = NO;
+            animator.bounces = NO;
+            animator.behindViewAlpha = 0.5f;
+            animator.behindViewScale = 0.5f;
+            animator.transitionDuration = 0.7f;
+            animator.direction = ZFModalTransitonDirectionBottom;
+            startPostingCtl.transitioningDelegate = animator;
+            startPostingCtl.model_1 = actionModel_1;
+            startPostingCtl.model_2 = actionModel_2;
+            startPostingCtl.postWhere = @"2";
+            [self presentViewController:startPostingCtl animated:YES completion:nil];
+            break;
+        }
+        case 1:{
+            RMStartLongPostingViewController * startLongPostingCtl = [[RMStartLongPostingViewController alloc] init];
+            startLongPostingCtl.modalPresentationStyle = UIModalPresentationCustom;
+            
+            animator = [[ZFModalTransitionAnimator alloc] initWithModalViewController:startLongPostingCtl];
+            animator.dragable = NO;
+            animator.bounces = NO;
+            animator.behindViewAlpha = 0.5f;
+            animator.behindViewScale = 0.5f;
+            animator.transitionDuration = 0.7f;
+            animator.direction = ZFModalTransitonDirectionBottom;
+            startLongPostingCtl.transitioningDelegate = animator;
+            startLongPostingCtl.model_1 = actionModel_1;
+            startLongPostingCtl.model_2 = actionModel_2;
+            startLongPostingCtl.postWhere = @"2";
+            [self presentViewController:startLongPostingCtl animated:YES completion:nil];
+            break;
+        }
+        case 2:{
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - 选择肉肉类型
@@ -765,8 +806,6 @@
 #pragma mark - 跳转到广告
 
 - (void)jumpPopularize:(RMImageView *)image {
-    //TODO:未做
-    NSLog(@"member_id:%@",image.identifierString);
     if([image.content_type isEqualToString:@"0"]){
         RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
         corp.auto_id = image.identifierString;

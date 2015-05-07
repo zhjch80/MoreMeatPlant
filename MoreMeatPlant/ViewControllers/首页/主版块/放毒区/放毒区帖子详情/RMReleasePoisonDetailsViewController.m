@@ -90,7 +90,7 @@
     [self.view addSubview:mTableView];
     
     refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
-    refreshControl.topEnabled = NO;
+    refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
     [refreshControl registerClassForTopView:[RefreshView class]];
     
@@ -359,35 +359,9 @@
     }else{
         
         RMPublicModel * model = [dataCommentArr objectAtIndex:indexPath.row - 1 - [advertisingArr count]];
-        if ([model.returns isKindOfClass:[NSNull class]]){
-            //评论
-            static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_3";
-            RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
-            if (!cell){
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_3" owner:self options:nil] lastObject];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.backgroundColor = [UIColor clearColor];
-                cell.delegate = self;
-            }
-            
-            [cell.userHead_1 sd_setImageWithURL:[NSURL URLWithString:[dataModel.members objectForKey:@"content_face"]] placeholderImage:nil];
-
-            cell.replyBtn_1.tag = indexPath.row;
-            cell.replyBtn_1.parameter_1 = @"评论";
-            cell.userName_1.text = [model.members objectForKey:@"member_name"];
-            cell.userLocatiom_1.text = [model.members objectForKey:@"content_gps"];
-            cell.userPostTime_1.text = model.create_time;
-            cell.comments_1.text = model.content_body;
-            
-            CGRect rect = [cell boundingRectCommentWith:model.content_body];
-            
-            cell.comments_1.frame = CGRectMake(cell.comments_1.frame.origin.x, cell.comments_1.frame.origin.y, rect.size.width, rect.size.height);
-            
-            [cell setFrame:CGRectMake(0, 0, kScreenWidth, cell.comments_1.frame.origin.y + cell.comments_1.frame.size.height + 5)];
-
-            cell.line_1.frame = CGRectMake(0, cell.frame.size.height-1, kScreenWidth, 1);
-            return cell;
-        }else{
+        
+        if ([model.returns isKindOfClass:[NSDictionary class]]){
+            //return 存在
             //回复
             static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_4";
             RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
@@ -399,13 +373,13 @@
             }
             cell.replyBtn_2.tag = indexPath.row;
             cell.replyBtn_2.parameter_1 = @"回复";
-            [cell.userHead_2 sd_setImageWithURL:[NSURL URLWithString:[[[model.returns objectAtIndex:0] objectForKey:@"member"] objectForKey:@"content_face"]] placeholderImage:nil];
-            cell.userName_2.text = [[[model.returns objectAtIndex:0] objectForKey:@"member"] objectForKey:@"member_name"];
-            cell.userLocatiom_2.text = [[[model.returns objectAtIndex:0] objectForKey:@"member"] objectForKey:@"content_gps"];
+            [cell.userHead_2 sd_setImageWithURL:[NSURL URLWithString:[[model.returns objectForKey:@"member"] objectForKey:@"content_face"]] placeholderImage:nil];
+            cell.userName_2.text = [[model.returns objectForKey:@"member"] objectForKey:@"member_name"];
+            cell.userLocatiom_2.text = [[model.returns objectForKey:@"member"] objectForKey:@"content_gps"];
             cell.userPostTime_2.text = model.create_time;
             
             CGRect rect_1 = [cell boundingRectCommentWith:[NSString stringWithFormat:@"%@",model.content_body]];
-
+            
             cell.comments_2_1_bgView.frame = CGRectMake(cell.comments_2_1_bgView.frame.origin.x, cell.comments_2_1_bgView.frame.origin.y, kScreenWidth - 95, rect_1.size.height + 20);
             
             cell.comments_2_1.frame = CGRectMake(cell.comments_2_1.frame.origin.x, cell.comments_2_1.frame.origin.y, kScreenWidth - 105, rect_1.size.height + 20);
@@ -417,19 +391,47 @@
             cell.comments_2_1.attributedText = oneAttributeStr;
             
             /**********分割线**********/
-
-            NSString * returns = [[model.returns objectAtIndex:0] objectForKey:@"content_body"];
-
+            
+            NSString * returns = [model.returns objectForKey:@"content_body"];
+            
             CGRect rect_2 = [cell boundingRectCommentWith:[NSString stringWithFormat:@"%@",returns]];
             
             cell.comments_2_2.frame = CGRectMake(cell.comments_2_2.frame.origin.x, cell.comments_2_1.frame.origin.y + cell.comments_2_1.frame.size.height + 5, kScreenWidth - 105, rect_2.size.height);
-
+            
             cell.comments_2_2.text = returns;
             
             [cell setFrame:CGRectMake(0, 0, kScreenWidth, 45 + cell.comments_2_1.frame.size.height + cell.comments_2_2.frame.size.height + 20)];
             
             cell.line_2.frame = CGRectMake(0, cell.frame.size.height-1, kScreenWidth, 1);
-
+            
+            return cell;
+        }else{
+            //return 不存在
+            static NSString * identifierStr = @"ReleasePoisonDetailsIdentifier_3";
+            RMReleasePoisonDetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
+            if (!cell){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"RMReleasePoisonDetailsCell_3" owner:self options:nil] lastObject];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.backgroundColor = [UIColor clearColor];
+                cell.delegate = self;
+            }
+            
+            [cell.userHead_1 sd_setImageWithURL:[NSURL URLWithString:[dataModel.members objectForKey:@"content_face"]] placeholderImage:nil];
+            
+            cell.replyBtn_1.tag = indexPath.row;
+            cell.replyBtn_1.parameter_1 = @"回复";
+            cell.userName_1.text = [model.members objectForKey:@"member_name"];
+            cell.userLocatiom_1.text = [model.members objectForKey:@"content_gps"];
+            cell.userPostTime_1.text = model.create_time;
+            cell.comments_1.text = model.content_body;
+            
+            CGRect rect = [cell boundingRectCommentWith:model.content_body];
+            
+            cell.comments_1.frame = CGRectMake(cell.comments_1.frame.origin.x, cell.comments_1.frame.origin.y, rect.size.width, rect.size.height);
+            
+            [cell setFrame:CGRectMake(0, 0, kScreenWidth, cell.comments_1.frame.origin.y + cell.comments_1.frame.size.height + 5)];
+            
+            cell.line_1.frame = CGRectMake(0, cell.frame.size.height-1, kScreenWidth, 1);
             return cell;
         }
     }
@@ -524,7 +526,8 @@
     
     if (success){
         [self showHint:[object objectForKey:@"msg"]];
-        [self requestDetatils];
+        isRefresh = YES;
+        [self requestCommentListsWithPageCount:1];
     }else{
         [self showHint:[object objectForKey:@"msg"]];
     }
@@ -551,8 +554,15 @@
         name = model.content_name;
         commentsView.code = model.auto_id;
     }else{
-        name = [[[model.returns objectAtIndex:0] objectForKey:@"member"] objectForKey:@"member_name"];
-        commentsView.code = [[model.returns objectAtIndex:0] objectForKey:@"auto_id"];
+        if ([model.returns isKindOfClass:[NSDictionary class]]){
+            name = [[model.returns objectForKey:@"member"] objectForKey:@"member_name"];
+            commentsView.review_id = dataModel.auto_id;
+            commentsView.comment_id = [model.returns objectForKey:@"auto_id"];
+        }else{
+            name = [model.members objectForKey:@"member_name"];
+            commentsView.review_id = dataModel.auto_id;
+            commentsView.comment_id = model.auto_id;
+        }
     }
     commentsView.commentType = button.parameter_1;
     commentsView.backgroundColor = [UIColor clearColor];
@@ -630,6 +640,23 @@
         
         if (success){
             if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
+                
+                [dataCommentArr removeAllObjects];
+                
+                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
+                    model.content_body = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_body"]);
+                    model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
+                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    model.returns = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"return"];
+                    [dataCommentArr addObject:model];
+                }
+
+                [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
             }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
                 if ([[object objectForKey:@"data"] count] == 0){
                     [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
@@ -655,6 +682,9 @@
             }
             
             if (isRefresh){
+                
+                [dataCommentArr removeAllObjects];
+                
                 for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
@@ -679,6 +709,10 @@
 
 - (void)refreshControl:(RefreshControl *)refreshControl didEngageRefreshDirection:(RefreshDirection)direction {
     if (direction == RefreshDirectionTop) { //下拉刷新
+        pageCount = 1;
+        isRefresh = YES;
+        isLoadComplete = NO;
+        [self requestCommentListsWithPageCount:1];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
