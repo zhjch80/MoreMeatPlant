@@ -44,6 +44,10 @@
     return self;
 }
 
+- (void)viewWillLayoutSubviews{
+//    self.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

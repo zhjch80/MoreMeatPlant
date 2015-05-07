@@ -1741,6 +1741,7 @@
                 model.express_no = OBJC_Nil([dataDic objectForKey:@"express_no"]);
 
                 model.order_id = OBJC_Nil([dataDic objectForKey:@"order_id"]);
+                model.member_id = OBJC_Nil([dataDic objectForKey:@"member_id"]);
                 
             }else{
                 model.status = [[dic objectForKey:@"status"] boolValue];
@@ -1766,7 +1767,7 @@
                 model.is_paystatus = OBJC_Nil([dataDic objectForKey:@"is_paystatus"]);
                 model.create_time = OBJC_Nil([dataDic objectForKey:@"create_time"]);
                 model.member_user = OBJC_Nil([dataDic objectForKey:@"member_user"]);
-                
+                model.member_id = OBJC_Nil([dataDic objectForKey:@"member_id"]);
                 model.is_comment = OBJC_Nil([dataDic objectForKey:@"is_comment"]);
                 
                 model.express_name = OBJC_Nil([dataDic objectForKey:@"express_name"]);

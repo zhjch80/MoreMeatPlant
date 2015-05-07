@@ -197,7 +197,7 @@
 
                     [procell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                     procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
-                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
+                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
                     procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
                     return procell;
                 }
@@ -248,7 +248,6 @@
                 procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
                 procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
                 procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
-                return procell;
                 return procell;
             }
         }else if ([_order_type isEqualToString:@"onorder"]){
@@ -351,7 +350,7 @@
             if([model.is_comment boolValue]){
                 if(indexPath.row == [model.pros count] +5-1){
                    RMOrderDetailEvaluateTableViewCell * evaluatecell = [self getRMOrderDetailEvaluateTableViewCell:indexPath];
-                    NSInteger n = [[[model.pros objectAtIndex:indexPath.section] objectForKey:@"comment_num"] integerValue];
+                    NSInteger n = [model.comment_num integerValue];
                     //                    banImg
                     //                    generalImg
                     //                    goodImg
@@ -411,7 +410,7 @@
                     return operationcell;
                 }else if(indexPath.row == [model.pros count] +6-2){
                     RMOrderDetailEvaluateTableViewCell * evaluatecell = [self getRMOrderDetailEvaluateTableViewCell:indexPath];
-                    NSInteger n = [[[model.pros objectAtIndex:indexPath.section] objectForKey:@"comment_num"] integerValue];
+                    NSInteger n = [model.comment_num integerValue];
                     //                    banImg
                     //                    generalImg
                     //                    goodImg

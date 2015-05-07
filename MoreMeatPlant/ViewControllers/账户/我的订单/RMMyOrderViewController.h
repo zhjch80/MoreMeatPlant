@@ -30,5 +30,6 @@ typedef void (^RMMyOrderViewDidSelectCallBack) (RMPublicModel *model);
 
 @property (copy, nonatomic) RMMyOrderViewCallBack callback;
 @property (copy, nonatomic) RMMyOrderViewDidSelectCallBack didSelectCell_callback;
+@property (assign, nonatomic) BOOL from_memCenter;//从会员中心点进去的 ＝＝ yes，否则 ＝＝no
 
 @end

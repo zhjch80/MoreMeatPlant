@@ -252,6 +252,7 @@
                         break;
                     case 3:{//我的订单
                         RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
+                        order.from_memCenter = YES;
                         order.callback = ^(void){
                         
                             [self dismissPopUpViewControllerWithcompletion:nil];

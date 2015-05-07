@@ -8,7 +8,7 @@
 
 #import "RMHadBabyViewController.h"
 #import "RMSeeLogisticsViewController.h"
-
+#import "RMMyHomeViewController.h"
 @interface RMHadBabyViewController ()
 
 @end
@@ -49,6 +49,12 @@
             Self.callback();
         }
     };
+    waitDeliveryCtl.goCorp_callback = ^(RMPublicModel * model){
+        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+        home.auto_id = model.member_id;
+        [Self.navigationController pushViewController:home animated:YES];
+    };
+    
     waitDeliveryCtl.startRequest = ^(){
         [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
     };
@@ -68,6 +74,11 @@
     };
     waitPayCtl.finishedRequest = ^(){
         [MBProgressHUD hideAllHUDsForView:Self.view animated:YES];
+    };
+    waitPayCtl.goCorp_callback = ^(RMPublicModel * model){
+        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+        home.auto_id = model.member_id;
+        [Self.navigationController pushViewController:home animated:YES];
     };
     [waitPayCtl requestData];
     waitPayCtl.view.hidden = YES;
@@ -89,6 +100,11 @@
             [Self.navigationController pushViewController:see animated:YES];
         }
     };
+    deliveryedCtl.goCorp_callback = ^(RMPublicModel * model){
+        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+        home.auto_id = model.member_id;
+        [Self.navigationController pushViewController:home animated:YES];
+    };
     deliveryedCtl.startRequest = ^(){
         [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
     };
@@ -109,6 +125,11 @@
     orderDoneCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40-44);
     orderDoneCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40-44);
     orderDoneCtl.order_type = @"okorder";
+    orderDoneCtl.goCorp_callback = ^(RMPublicModel * model){
+        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+        home.auto_id = model.member_id;
+        [Self.navigationController pushViewController:home animated:YES];
+    };
     orderDoneCtl.startRequest = ^(){
         [MBProgressHUD showHUDAddedTo:Self.view animated:YES];
     };
@@ -134,6 +155,11 @@
             see.express_no = model.express_no;
             [Self.navigationController pushViewController:see animated:YES];
         }
+    };
+    orderReturnCtl.goCorp_callback = ^(RMPublicModel * model){
+        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+        home.auto_id = model.member_id;
+        [Self.navigationController pushViewController:home animated:YES];
     };
     orderReturnCtl.startRequest = ^(){
         [MBProgressHUD showHUDAddedTo:Self.view animated:YES];

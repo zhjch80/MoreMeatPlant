@@ -71,10 +71,10 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yOB-Ol-c6H">
-                    <rect key="frame" x="15" y="163" width="290" height="27"/>
+                    <rect key="frame" x="15" y="157" width="290" height="30"/>
                     <color key="backgroundColor" red="0.90588235289999997" green="0.2156862745" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="27" id="jWM-rD-BCz"/>
+                        <constraint firstAttribute="height" constant="30" id="jWM-rD-BCz"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="12"/>
                     <state key="normal" title="提交物流信息">
@@ -115,7 +115,7 @@
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="1" green="0.37653962639999999" blue="0.16784965330000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="yNk-1B-4VN" firstAttribute="top" secondItem="cbD-IN-4Gm" secondAttribute="bottom" constant="9" id="1Ux-HK-tXw"/>
                 <constraint firstItem="SFZ-IJ-Gx6" firstAttribute="centerY" secondItem="VNu-kc-rkZ" secondAttribute="centerY" id="9Qb-ev-Ypo"/>
@@ -128,7 +128,7 @@
                 <constraint firstItem="7Ic-xI-j2k" firstAttribute="leading" secondItem="dNk-i9-xvc" secondAttribute="leading" constant="15" id="GfP-08-pUi"/>
                 <constraint firstItem="KY1-2d-W9m" firstAttribute="leading" secondItem="dNk-i9-xvc" secondAttribute="leading" constant="15" id="H5s-qa-53j"/>
                 <constraint firstItem="SFZ-IJ-Gx6" firstAttribute="centerY" secondItem="qII-ra-5Gb" secondAttribute="centerY" id="HKY-3g-Der"/>
-                <constraint firstItem="yOB-Ol-c6H" firstAttribute="top" secondItem="VNu-kc-rkZ" secondAttribute="bottom" constant="26" id="MuJ-wv-5qk"/>
+                <constraint firstItem="yOB-Ol-c6H" firstAttribute="top" secondItem="VNu-kc-rkZ" secondAttribute="bottom" constant="20" id="MuJ-wv-5qk"/>
                 <constraint firstItem="KY1-2d-W9m" firstAttribute="centerY" secondItem="k5U-6R-XX1" secondAttribute="centerY" id="N1d-fz-Mjf"/>
                 <constraint firstItem="hPK-nR-Gi9" firstAttribute="top" secondItem="k5U-6R-XX1" secondAttribute="bottom" constant="5" id="NgA-qk-740"/>
                 <constraint firstAttribute="trailing" secondItem="yNk-1B-4VN" secondAttribute="trailing" constant="15" id="Nkh-0a-73R"/>
@@ -150,9 +150,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="commitBtn" destination="yOB-Ol-c6H" id="j2U-6B-KtL"/>
-                <outlet property="content_address" destination="hPK-nR-Gi9" id="x1X-rh-CWu"/>
-                <outlet property="content_mobile" destination="k5U-6R-XX1" id="Xj4-46-nqG"/>
-                <outlet property="content_name" destination="KY1-2d-W9m" id="kLq-AF-khX"/>
+                <outlet property="content_address" destination="hPK-nR-Gi9" id="Egn-zY-V2B"/>
+                <outlet property="content_mobile" destination="k5U-6R-XX1" id="DE1-rQ-d9Z"/>
+                <outlet property="content_name" destination="KY1-2d-W9m" id="1zK-8j-2ga"/>
                 <outlet property="expressName" destination="qII-ra-5Gb" id="XoS-fX-IpM"/>
                 <outlet property="express_price" destination="VNu-kc-rkZ" id="wDK-J7-byU"/>
             </connections>

@@ -212,7 +212,7 @@
                     
                     [procell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                     procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
-                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"content_price"]);
+                    procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
                     procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil([prodic objectForKey:@"content_num"])];
                     return procell;
                 }
@@ -356,7 +356,7 @@
             if([model.is_comment boolValue]){
                 if(indexPath.row == [model.pros count] +5-1){
                     RMOrderDetailEvaluateTableViewCell * evaluatecell = [self getRMOrderDetailEvaluateTableViewCell:indexPath];
-                    NSInteger n = [[[model.pros objectAtIndex:indexPath.section] objectForKey:@"comment_num"] integerValue];
+                    NSInteger n = [model.comment_num integerValue];
                     //                    banImg
                     //                    generalImg
                     //                    goodImg
@@ -897,9 +897,11 @@
     
     if(returnEditView == nil){
         returnEditView = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderReturnEditView_1" owner:self options:nil] lastObject];
-        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0);
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*220.0/320.0);
         [returnEditView.commitBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
     }
+    
+    NSLog(@"++++++++++%@",[NSValue valueWithCGRect:returnEditView.frame]);
     
     returnEditView._model = model;
     returnEditView.content_name.text = model.content_linkname;
@@ -908,8 +910,8 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         
-        returnEditView.frame = CGRectMake(0, self.view.frame.size.height-(kScreenWidth, kScreenWidth*206.0/320.0)+30, kScreenWidth, kScreenWidth*206.0/320.0);
-        
+        returnEditView.frame = CGRectMake(0, _mTableView.frame.size.height-(kScreenWidth*220.0/320.0), kScreenWidth, kScreenWidth*220.0/320.0);
+        NSLog(@"-------%@",[NSValue valueWithCGRect:returnEditView.frame]);
         [self.view addSubview:returnEditView];
     }];
 }
