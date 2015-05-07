@@ -16,19 +16,19 @@
 @implementation RMHadBabyViewController
 
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"kHideCustomTabbar" object:nil];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"kShowCustomTabbar" object:nil];
-}
-
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"kHideCustomTabbar" object:nil];
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"kShowCustomTabbar" object:nil];
+//}
+//
+//- (void)dealloc{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
 
 - (void)viewDidLoad {
@@ -42,8 +42,8 @@
     __weak RMHadBabyViewController * Self = self;
     
     waitDeliveryCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64  - 40);
-    waitDeliveryCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64  - 40);
+    waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64  - 40-44);
+    waitDeliveryCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64  - 40-44);
     waitDeliveryCtl.call_back = ^(){
         if(Self.callback){
             Self.callback();
@@ -54,16 +54,16 @@
     [self.view addSubview:waitDeliveryCtl.view];
     
     waitPayCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    waitPayCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
-    waitPayCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
+    waitPayCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40-44);
+    waitPayCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40-44);
     waitPayCtl.order_type = @"unpayorder";
     [waitPayCtl requestData];
     waitPayCtl.view.hidden = YES;
     [self.view addSubview:waitPayCtl.view];
     
     deliveryedCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    deliveryedCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
-    deliveryedCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
+    deliveryedCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40-44);
+    deliveryedCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40-44);
     deliveryedCtl.order_type = @"onorder";
     deliveryedCtl.seeLogistics_callback = ^ (RMPublicModel * model){
         //查看物流
@@ -88,8 +88,8 @@
     [self.view addSubview:deliveryedCtl.view];
     
     orderDoneCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    orderDoneCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
-    orderDoneCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
+    orderDoneCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40-44);
+    orderDoneCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40-44);
     orderDoneCtl.order_type = @"okorder";
 
     [orderDoneCtl requestData];
@@ -97,8 +97,8 @@
     [self.view addSubview:orderDoneCtl.view];
     
     orderReturnCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    orderReturnCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
-    orderReturnCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
+    orderReturnCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40-44);
+    orderReturnCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40-44);
     orderReturnCtl.order_type = @"returnorder";
     orderReturnCtl.seeLogistics_callback = ^ (RMPublicModel * model){
         //查看物流

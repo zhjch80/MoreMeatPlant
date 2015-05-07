@@ -297,7 +297,7 @@
                 }else{
                     NSDictionary * prodic = [model.pros objectAtIndex:indexPath.row-1];
                     RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
-                    
+                    procell.returnBtn.hidden = YES;
                     [procell.content_img sd_setImageWithURL:[NSURL URLWithString:[prodic objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"nophote"]];
                     procell.content_name.text  = OBJC_Nil([prodic objectForKey:@"content_name"])?OBJC_Nil([prodic objectForKey:@"content_name"]):@" ";
                     procell.content_price.text = OBJC_Nil([prodic objectForKey:@"single_price"]);
@@ -809,9 +809,9 @@
         [self showHint:@"该商家被停用了！"];
         return;
     }
-    if(self.call_back){
-        _call_back();
-    }
+//    if(self.call_back){
+//        _call_back();
+//    }
     [self.navigationController popToRootViewControllerAnimated:NO];
     AppDelegate * dele = [[UIApplication sharedApplication] delegate];
     [dele tabSelectController:3];
@@ -825,9 +825,9 @@
     if(self.seeLogistics_callback){
         _seeLogistics_callback (model);
     }
-    if(self.call_back){
-        _call_back();
-    }
+//    if(self.call_back){
+//        _call_back();
+//    }
 }
 
 #pragma mark - 点击发货
@@ -892,7 +892,7 @@
     
     if(returnEditView == nil){
         returnEditView = [[[NSBundle mainBundle] loadNibNamed:@"RMOrderReturnEditView_1" owner:self options:nil] lastObject];
-        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0 + 64 +49);
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0);
         [returnEditView.commitBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchDown];
     }
     
@@ -903,7 +903,7 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         
-        returnEditView.frame = CGRectMake(0, kScreenHeight-kScreenWidth*206.0/320.0-  64 -49, kScreenWidth, kScreenWidth*206.0/320.0 + 64 +49);
+        returnEditView.frame = CGRectMake(0, self.view.frame.size.height-(kScreenWidth, kScreenWidth*206.0/320.0)+30, kScreenWidth, kScreenWidth*206.0/320.0);
         
         [self.view addSubview:returnEditView];
     }];
@@ -913,7 +913,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         UIControl * cover = (UIControl *)[self.view viewWithTag:101311];
         [cover removeFromSuperview];
-        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0 + 64 +49);
+        returnEditView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenWidth*206.0/320.0);
         returnEditView.expressName.text = nil;
         returnEditView.express_price.text = nil;//这里实际上是快递单号，不是价格，
     }];

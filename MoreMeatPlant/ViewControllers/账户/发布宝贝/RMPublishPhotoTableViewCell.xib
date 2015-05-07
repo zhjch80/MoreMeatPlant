@@ -7,6 +7,9 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="方正正准黑简体.TTF">
+            <string>FZZZHUNHJW--GB1-0</string>
+        </mutableArray>
         <mutableArray key="方正正黑简体.TTF">
             <string>FZZHJW--GB1-0</string>
             <string>FZZHJW--GB1-0</string>
@@ -222,6 +225,16 @@
                             </mask>
                         </variation>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="封面" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-2J-j2Y">
+                        <rect key="frame" x="18" y="27" width="42" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="42" id="Fv3-L6-7ss"/>
+                            <constraint firstAttribute="height" constant="21" id="tyB-JL-60m"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="13"/>
+                        <color key="textColor" red="0.89019607840000003" green="0.086274509799999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Vvk-Pr-pDP" firstAttribute="centerY" secondItem="RrV-ea-cb3" secondAttribute="centerY" id="09O-eQ-w90"/>
@@ -231,6 +244,7 @@
                     <constraint firstItem="7Ow-iC-BO0" firstAttribute="height" secondItem="mm3-MT-XsB" secondAttribute="height" id="3F4-gf-jez"/>
                     <constraint firstAttribute="trailing" secondItem="At5-QT-Gkm" secondAttribute="trailing" constant="10" id="3Od-eE-qi4"/>
                     <constraint firstItem="7Ow-iC-BO0" firstAttribute="width" secondItem="mm3-MT-XsB" secondAttribute="height" multiplier="1:1" id="3TW-4p-1US"/>
+                    <constraint firstItem="8ly-kf-k5F" firstAttribute="centerX" secondItem="Whw-2J-j2Y" secondAttribute="centerX" id="3ox-ch-ZFk"/>
                     <constraint firstItem="mm3-MT-XsB" firstAttribute="leading" secondItem="8ly-kf-k5F" secondAttribute="trailing" constant="1" id="3p0-1l-2sf"/>
                     <constraint firstItem="8hw-Ll-zWc" firstAttribute="top" secondItem="Vvk-Pr-pDP" secondAttribute="bottom" constant="5" id="6QV-dI-x3H"/>
                     <constraint firstItem="7Ow-iC-BO0" firstAttribute="centerY" secondItem="tUr-CO-zka" secondAttribute="centerY" id="6Vc-7g-QXa"/>
@@ -272,6 +286,7 @@
                     <constraint firstItem="8ly-kf-k5F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="oWp-Kb-k4g"/>
                     <constraint firstItem="At5-QT-Gkm" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="10" id="thC-uv-Yef"/>
                     <constraint firstAttribute="trailing" secondItem="Frv-Hq-rJW" secondAttribute="trailing" constant="10" id="u6U-XE-Vpy"/>
+                    <constraint firstItem="Vvk-Pr-pDP" firstAttribute="top" secondItem="Whw-2J-j2Y" secondAttribute="bottom" constant="24" id="vQT-Oj-iP0"/>
                     <constraint firstItem="Frv-Hq-rJW" firstAttribute="leading" secondItem="Pbw-fZ-L4V" secondAttribute="trailing" constant="1" id="wDF-OA-yVu"/>
                     <constraint firstItem="7Ow-iC-BO0" firstAttribute="centerY" secondItem="y8K-Gf-1en" secondAttribute="centerY" id="wEZ-rc-pV4"/>
                     <constraint firstItem="8ly-kf-k5F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="xZF-km-8eA"/>
@@ -290,6 +305,7 @@
                 <outlet property="camera3" destination="Xj6-x1-yYz" id="OL4-Uy-Rx0"/>
                 <outlet property="camera4" destination="Pbw-fZ-L4V" id="Axk-we-6sQ"/>
                 <outlet property="camera5" destination="Frv-Hq-rJW" id="pc7-Px-gm0"/>
+                <outlet property="fengmian" destination="Whw-2J-j2Y" id="1gG-vB-995"/>
                 <outlet property="img1" destination="8ly-kf-k5F" id="Cdy-pV-tXs"/>
                 <outlet property="img2" destination="mm3-MT-XsB" id="EeQ-2b-nwd"/>
                 <outlet property="img3" destination="tUr-CO-zka" id="0zE-ls-tAc"/>

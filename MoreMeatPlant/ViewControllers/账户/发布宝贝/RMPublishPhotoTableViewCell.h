@@ -28,4 +28,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img5;
 @property (weak, nonatomic) IBOutlet UIButton *picSelect5;
 @property (weak, nonatomic) IBOutlet UIButton *camera5;
+@property (weak, nonatomic) IBOutlet UILabel *fengmian;
 @end

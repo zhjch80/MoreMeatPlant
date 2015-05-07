@@ -16,5 +16,7 @@ typedef void (^RMBabyListViewModifyCallback) (RMPublicModel * _model);
 @property (copy, nonatomic) RMBabyListViewModifyCallback modifycallback;
 @property (retain, nonatomic) NSString * member_class;
 @property (retain, nonatomic) NSString * is_shelf;
+@property (assign, nonatomic) NSInteger pageCount;
+@property (assign, nonatomic) BOOL isLoadComplete;
 - (void)requestDataWithPageCount:(NSInteger)page;
 @end

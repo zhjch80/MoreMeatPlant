@@ -16,15 +16,14 @@
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD.h"
 @interface RMBabyListViewController ()<RefreshControlDelegate>{
-    NSInteger pageCount;
-    BOOL isRefresh;
-    BOOL isLoadComplete;
+
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
 @end
 
 @implementation RMBabyListViewController
+@synthesize pageCount,isLoadComplete;
 @synthesize refreshControl;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,8 +34,7 @@
     refreshControl.bottomEnabled = YES;
     [refreshControl registerClassForTopView:[RefreshView class]];
     pageCount = 1;
-    isRefresh = YES;
-    
+    isLoadComplete = NO;
     babyArray = [[NSMutableArray alloc]init];
     
 }
@@ -60,18 +58,23 @@
         cell.content_price.text = model.content_price;
         if([model.is_shelf boolValue]){
             [cell.shelves_btn setTitle:@"下架" forState:UIControlStateNormal];
-        }else{
-            [cell.shelves_btn setTitle:@"上架" forState:UIControlStateNormal];
-        }
-        
-        if([model.publish boolValue]){//已审核
             cell.delete_btn.hidden = YES;
             cell.modify_btn.hidden = YES;
-        }else{//未审核
-            cell.delete_btn.hidden = NO;
-            cell.modify_btn.hidden = NO;
-            cell.deleteWidth.constant = 35;
+        }else{
+            [cell.shelves_btn setTitle:@"上架" forState:UIControlStateNormal];
+                cell.delete_btn.hidden = NO;
+                cell.modify_btn.hidden = NO;
+                cell.deleteWidth.constant = 35;
         }
+//        if([model.publish boolValue]){//已审核
+//            cell.delete_btn.hidden = YES;
+//            cell.modify_btn.hidden = YES;
+//        }else{//未审核
+//            cell.delete_btn.hidden = NO;
+//            cell.modify_btn.hidden = NO;
+//            cell.deleteWidth.constant = 35;
+//        }
+        
 
     }
     cell.modify_btn.tag = 100*indexPath.row;
@@ -122,6 +125,8 @@
                 [babyArray addObjectsFromArray:object];
                 if(page == 1){
                     [refreshControl finishRefreshingDirection:RefreshDirectionTop];
+                    isLoadComplete = YES;
+
                 }else{
                     [refreshControl finishRefreshingDirection:RefreshDirectionBottom];
                 }

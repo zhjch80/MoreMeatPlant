@@ -284,8 +284,8 @@
                             [self.navigationController pushViewController:corp animated:YES];
                         };
                         
-                        order.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-                        [self presentPopUpViewController:order overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+                        order.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-49);
+                        [self presentPopUpViewController:order overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-49)];
                     }
                         break;
                     case 4:{//我的帖子
@@ -466,8 +466,8 @@
                             [self.navigationController pushViewController:corp animated:YES];
                         };
                         
-                        hadbaby.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-                        [self presentPopUpViewController:hadbaby overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+                        hadbaby.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-44);
+                        [self presentPopUpViewController:hadbaby overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
                     }
                         break;
                     case 5:{//我的帖子

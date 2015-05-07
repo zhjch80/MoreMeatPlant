@@ -59,7 +59,6 @@
     ware_Ctl.is_shelf = @"0";
     ware_Ctl.member_class = nil;
     [self.view addSubview:ware_Ctl.view];
-    [ware_Ctl requestDataWithPageCount:1];
     ware_Ctl.view.hidden = YES;
     
 
@@ -82,6 +81,8 @@
 - (void)warehouse_baby_btnAction:(UIButton *)sender{
     all_Ctl.view.hidden = YES;
     ware_Ctl.view.hidden = NO;
+    
+    [ware_Ctl requestDataWithPageCount:1];
 }
 
 - (void)class_baby_btnAction:(UIButton *)sender{

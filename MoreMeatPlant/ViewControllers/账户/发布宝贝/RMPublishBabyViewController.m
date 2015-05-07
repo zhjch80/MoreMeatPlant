@@ -272,6 +272,7 @@
         cell.img5.tag = indexPath.row*300+5;
         
         if(indexPath.row == 5){
+            cell.fengmian.hidden = NO;
             int j = 0;
             for(NSDictionary * dic in current_Model.body){
                 if(j == 0){
@@ -288,6 +289,7 @@
                 j++;
             }
         }else if(indexPath.row == 6){
+            cell.fengmian.hidden = YES;
             int j = 0;
             for(NSDictionary * dic in current_Model.body){
                 if(j == 5){

@@ -16,19 +16,19 @@
 
 @implementation RMMyOrderViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"kHideCustomTabbar" object:nil];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"kShowCustomTabbar" object:nil];
-}
-
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"kHideCustomTabbar" object:nil];
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"kShowCustomTabbar" object:nil];
+//}
+//
+//- (void)dealloc{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 #pragma mark - 支付完成通知
 - (void)receiveNoti:(NSNotification *)noti{
     if([noti.name isEqualToString:PaymentCompletedNotification]){
@@ -50,8 +50,8 @@
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
     waitDeliveryCtl = [[RMOrderListViewController alloc]initWithNibName:@"RMOrderListViewController" bundle:nil];
-    waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
-    waitDeliveryCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
+    waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40- 44);
+    waitDeliveryCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, waitDeliveryCtl.view.frame.size.height);
     waitDeliveryCtl.order_type = @"unorder";
     __block RMMyOrderViewController * Self = self;
     waitDeliveryCtl.didSelectCellcallback = ^(RMPublicModel * model){
@@ -72,8 +72,8 @@
     [self.view addSubview:waitDeliveryCtl.view];
     
     waitPayCtl = [[RMOrderListViewController alloc]initWithNibName:@"RMOrderListViewController" bundle:nil];
-    waitPayCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
-    waitPayCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
+    waitPayCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40- 44);
+    waitPayCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, waitPayCtl.view.frame.size.height);
     waitPayCtl.order_type = @"unpayorder";
     waitPayCtl.didSelectCellcallback = ^(RMPublicModel *model){
         if(Self.didSelectCell_callback){
@@ -109,8 +109,8 @@
     [self.view addSubview:waitPayCtl.view];
     
     deliveryedCtl = [[RMOrderListViewController alloc]initWithNibName:@"RMOrderListViewController" bundle:nil];
-    deliveryedCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
-    deliveryedCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
+    deliveryedCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40- 44);
+    deliveryedCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, deliveryedCtl.view.frame.size.height);
     deliveryedCtl.order_type = @"onorder";
     deliveryedCtl.didSelectCellcallback = ^(RMPublicModel *model){
         if(Self.didSelectCell_callback){
@@ -143,8 +143,8 @@
     [self.view addSubview:deliveryedCtl.view];
     
     orderDoneCtl = [[RMOrderListViewController alloc]initWithNibName:@"RMOrderListViewController" bundle:nil];
-    orderDoneCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
-    orderDoneCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
+    orderDoneCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40- 44);
+    orderDoneCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, orderDoneCtl.view.frame.size.height);
     orderDoneCtl.order_type = @"okorder";
     orderDoneCtl.didSelectCellcallback = ^(RMPublicModel *model){
         if(Self.didSelectCell_callback){
@@ -165,8 +165,8 @@
     
 //    orderReturnCtl
     orderReturnCtl = [[RMOrderListViewController alloc]initWithNibName:@"RMOrderListViewController" bundle:nil];
-    orderReturnCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40);
-    orderReturnCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40);
+    orderReturnCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight - 64-40- 44);
+    orderReturnCtl.maintableView.frame = CGRectMake(0, 0, kScreenWidth, orderReturnCtl.view.frame.size.height);
     orderReturnCtl.order_type = @"returnorder";
     orderReturnCtl.didSelectCellcallback = ^(RMPublicModel *model){
         if(Self.didSelectCell_callback){
