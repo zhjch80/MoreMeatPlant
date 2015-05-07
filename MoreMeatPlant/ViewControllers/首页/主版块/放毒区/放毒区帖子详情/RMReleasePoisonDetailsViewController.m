@@ -373,32 +373,40 @@
             }
             cell.replyBtn_2.tag = indexPath.row;
             cell.replyBtn_2.parameter_1 = @"回复";
+            cell.replyBtn_2.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - cell.replyBtn_2.frame.size.width - 2, cell.replyBtn_2.frame.origin.y, cell.replyBtn_2.frame.size.width, cell.replyBtn_2.frame.size.height);
+            
+            //灰色区域
             [cell.userHead_2 sd_setImageWithURL:[NSURL URLWithString:[[model.returns objectForKey:@"member"] objectForKey:@"content_face"]] placeholderImage:nil];
             cell.userName_2.text = [[model.returns objectForKey:@"member"] objectForKey:@"member_name"];
             cell.userLocatiom_2.text = [[model.returns objectForKey:@"member"] objectForKey:@"content_gps"];
-            cell.userPostTime_2.text = model.create_time;
             
-            CGRect rect_1 = [cell boundingRectCommentWith:[NSString stringWithFormat:@"%@",model.content_body]];
+            cell.userPostTime_2.text = model.create_time;
+            cell.userPostTime_2.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - cell.userPostTime_2.frame.size.width - 5, cell.userPostTime_2.frame.origin.y, cell.userPostTime_2.frame.size.width, cell.userPostTime_2.frame.size.height);
+            
+            cell.pointLine_2.frame = CGRectMake(cell.pointLine_2.frame.origin.x, cell.pointLine_2.frame.origin.y, [UIScreen mainScreen].bounds.size.width - cell.pointLine_2.frame.origin.y, cell.pointLine_2.frame.size.height);
+            
+            CGRect rect_1 = [cell boundingRectCommentWith:[NSString stringWithFormat:@"%@",[model.returns objectForKey:@"content_body"]]];
             
             cell.comments_2_1_bgView.frame = CGRectMake(cell.comments_2_1_bgView.frame.origin.x, cell.comments_2_1_bgView.frame.origin.y, kScreenWidth - 95, rect_1.size.height + 20);
             
             cell.comments_2_1.frame = CGRectMake(cell.comments_2_1.frame.origin.x, cell.comments_2_1.frame.origin.y, kScreenWidth - 105, rect_1.size.height + 20);
             
-            cell.comments_2_1.text = [NSString stringWithFormat:@"%@\n%@",model.content_name,model.content_body];
+            cell.comments_2_1.text = [NSString stringWithFormat:@"%@\n%@",[[model.returns objectForKey:@"member"] objectForKey:@"member_name"],[NSString stringWithFormat:@"%@",[model.returns objectForKey:@"content_body"]]];
+            [cell.comments_2_1 sizeToFit];
             
-            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@\n%@",model.content_name,model.content_body]];
-            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:1 green:0.18 blue:0.45 alpha:1] range:NSMakeRange(0, [NSString stringWithFormat:@"%@",model.content_name].length)];
+            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@\n%@",[[model.returns objectForKey:@"member"] objectForKey:@"member_name"],[NSString stringWithFormat:@"%@",[model.returns objectForKey:@"content_body"]]]];
+            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:1 green:0.18 blue:0.45 alpha:1] range:NSMakeRange(0, [NSString stringWithFormat:@"%@",[[model.returns objectForKey:@"member"] objectForKey:@"member_name"]].length)];
             cell.comments_2_1.attributedText = oneAttributeStr;
             
             /**********分割线**********/
-            
-            NSString * returns = [model.returns objectForKey:@"content_body"];
-            
-            CGRect rect_2 = [cell boundingRectCommentWith:[NSString stringWithFormat:@"%@",returns]];
+            //白色区域
+
+            CGRect rect_2 = [cell boundingRectCommentWith:[NSString stringWithFormat:@"%@",model.content_body]];
             
             cell.comments_2_2.frame = CGRectMake(cell.comments_2_2.frame.origin.x, cell.comments_2_1.frame.origin.y + cell.comments_2_1.frame.size.height + 5, kScreenWidth - 105, rect_2.size.height);
             
-            cell.comments_2_2.text = returns;
+            cell.comments_2_2.text = model.content_body;
+            [cell.comments_2_2 sizeToFit];
             
             [cell setFrame:CGRectMake(0, 0, kScreenWidth, 45 + cell.comments_2_1.frame.size.height + cell.comments_2_2.frame.size.height + 20)];
             
@@ -420,15 +428,32 @@
             
             cell.replyBtn_1.tag = indexPath.row;
             cell.replyBtn_1.parameter_1 = @"回复";
+            cell.replyBtn_1.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - cell.replyBtn_1.frame.size.width - 2, cell.replyBtn_1.frame.origin.y, cell.replyBtn_1.frame.size.width, cell.replyBtn_1.frame.size.height);
+
             cell.userName_1.text = [model.members objectForKey:@"member_name"];
             cell.userLocatiom_1.text = [model.members objectForKey:@"content_gps"];
+            
             cell.userPostTime_1.text = model.create_time;
+            cell.userPostTime_1.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - cell.userPostTime_1.frame.size.width - 5, cell.userPostTime_1.frame.origin.y, cell.userPostTime_1.frame.size.width, cell.userPostTime_1.frame.size.height);
+            
+            cell.pointLine_1.frame = CGRectMake(cell.pointLine_1.frame.origin.x, cell.pointLine_1.frame.origin.y, [UIScreen mainScreen].bounds.size.width - cell.pointLine_1.frame.origin.y, cell.pointLine_1.frame.size.height);
+
             cell.comments_1.text = model.content_body;
             
             CGRect rect = [cell boundingRectCommentWith:model.content_body];
             
-            cell.comments_1.frame = CGRectMake(cell.comments_1.frame.origin.x, cell.comments_1.frame.origin.y, rect.size.width, rect.size.height);
+            CGFloat widthDeviation = 0;
             
+            if (IS_IPHONE_6p_SCREEN){
+                widthDeviation = 90;
+            }else if (IS_IPHONE_6_SCREEN){
+                widthDeviation = 90;
+            }else{
+                widthDeviation = 90;
+            }
+            
+            cell.comments_1.frame = CGRectMake(cell.comments_1.frame.origin.x, cell.comments_1.frame.origin.y, [UIScreen mainScreen].bounds.size.width - widthDeviation, rect.size.height);
+
             [cell setFrame:CGRectMake(0, 0, kScreenWidth, cell.comments_1.frame.origin.y + cell.comments_1.frame.size.height + 5)];
             
             cell.line_1.frame = CGRectMake(0, cell.frame.size.height-1, kScreenWidth, 1);
@@ -649,7 +674,7 @@
                     model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
                     model.content_body = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_body"]);
                     model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
-                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_name = OBJC([[[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"] objectForKey:@"member_name"]);
                     model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
                     model.returns = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"return"];
                     [dataCommentArr addObject:model];
@@ -671,7 +696,7 @@
                     model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
                     model.content_body = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_body"]);
                     model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
-                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_name = OBJC([[[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"] objectForKey:@"member_name"]);
                     model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
                     model.returns = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"return"];
                     [dataCommentArr addObject:model];
@@ -691,7 +716,7 @@
                     model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
                     model.content_body = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_body"]);
                     model.create_time = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"create_time"]);
-                    model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
+                    model.content_name = OBJC([[[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"] objectForKey:@"member_name"]);
                     model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
                     model.returns = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"return"];
                     [dataCommentArr addObject:model];

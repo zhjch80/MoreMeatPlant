@@ -17,9 +17,9 @@
     self.centerImg.clipsToBounds = YES;
     self.rightImg.clipsToBounds = YES;
 
-    self.leftImg.contentMode = UIViewContentModeCenter;
-    self.centerImg.contentMode = UIViewContentModeCenter;
-    self.rightImg.contentMode = UIViewContentModeCenter;
+//    self.leftImg.contentMode = UIViewContentModeCenter;
+//    self.centerImg.contentMode = UIViewContentModeCenter;
+//    self.rightImg.contentMode = UIViewContentModeCenter;
 
     [self.leftImg addTarget:self withSelector:@selector(selectedImgJumpPlantDetails:)];
     [self.centerImg addTarget:self withSelector:@selector(selectedImgJumpPlantDetails:)];

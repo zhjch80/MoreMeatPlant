@@ -224,21 +224,27 @@
 }
 
 - (void)updateCurrentList:(RMPublicModel *)model withRow:(NSInteger)row {
+    currentPlantGrow = @"";
+    currentPlantSubjects = @"";
+    isRefresh = YES;
+
     if (row == -1){
+        //header
         if ([model.isGrow isEqualToString:@"YES"]){
             currentPlantGrow = model.auto_code;
         }else{
             currentPlantSubjects = model.auto_code;
         }
+        [self requestDataWithPageCount:1 withPlantType:currentPlantSubjects withGrow:currentPlantGrow];
     }else if (row == -2){
-        NSLog(@"刷新全部当前肉肉");
+        //刷新全部
+        [self requestDataWithPageCount:1 withPlantType:currentPlantSubjects withGrow:currentPlantGrow];
     }else{
-        currentPlantSubjects = [[model.sub objectAtIndex:row] objectForKey:@"auto_code"];
+        //二级分类
+        currentPlantSubjects = model.auto_code;
+        [self requestDataWithPageCount:1 withPlantType:currentPlantSubjects withGrow:currentPlantGrow];
     }
-    
-    isRefresh = YES;
-    
-    [self requestDataWithPageCount:1 withPlantType:currentPlantSubjects withGrow:currentPlantGrow];
+    [plantTypeView updataSelectState:0];
 }
 
 #pragma mark -  数据请求

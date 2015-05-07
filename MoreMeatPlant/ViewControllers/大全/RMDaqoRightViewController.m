@@ -14,7 +14,7 @@
 #import "RMImageView.h"
 
 @interface RMDaqoRightViewController ()<UITableViewDataSource,UITableViewDelegate>{
-    
+    NSInteger PlantSubjectsNum;     //植物科目数量
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;
@@ -49,8 +49,9 @@
     
     UILabel * allMeat = [[UILabel alloc] init];
     allMeat.frame = CGRectMake(0, 0, kSlideWidth, 30);
-    allMeat.text = @"    全部肉肉";
+    allMeat.text = @"  全部肉肉";
     allMeat.backgroundColor = [UIColor clearColor];
+    allMeat.textColor = [UIColor colorWithRed:0.1 green:0.38 blue:0.11 alpha:1];
     allMeat.font = FONT_1(15.0);
     allMeat.userInteractionEnabled = YES;
     allMeat.multipleTouchEnabled = YES;
@@ -62,7 +63,12 @@
 - (void)allOfTheMeatMethod {
     RMDaqoViewController * daqoCtl = self.DaqoDelegate;
 
-    [daqoCtl updateCenterListWithModel:nil withRow:-2];
+    RMPublicModel * _model = [[RMPublicModel alloc] init];
+    _model.modules_name = @"全部肉肉";
+    _model.auto_code = @"";
+    //modules_name   auto_code
+
+    [daqoCtl updateCenterListWithModel:_model withRow:-2];
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -85,20 +91,26 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     RMPublicModel * model = [dataArr objectAtIndex:section];
-
+    
     RMBaseView * headerView = [[RMBaseView alloc] init];
     headerView.frame = CGRectMake(kScreenWidth - kSlideWidth, 0, kSlideWidth, 44);
     headerView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
     headerView.model = model;
     [headerView addTarget:self withSelector:@selector(cellHeaderMethod:)];
-
+    
     UILabel * title = [[UILabel alloc] init];
     title.userInteractionEnabled = YES;
     title.multipleTouchEnabled = YES;
-    title.font = FONT_1(14.0);
     title.backgroundColor = [UIColor clearColor];
     title.frame = CGRectMake(0, 0, kSlideWidth, 44);
-    title.text = [NSString stringWithFormat:@"    %@",model.modules_name];
+    if ([model.modules_name isEqualToString:@"植物科目"] || [model.modules_name isEqualToString:@"生长季"]){
+        title.textColor = [UIColor colorWithRed:0.1 green:0.38 blue:0.11 alpha:1];
+        title.text = [NSString stringWithFormat:@"  %@",model.modules_name];
+        title.font = FONT_1(15.0);
+    }else{
+        title.text = [NSString stringWithFormat:@"    %@",model.modules_name];
+        title.font = FONT_1(14.0);
+    }
     [headerView addSubview:title];
     [title adjustsFontSizeToFitWidth];
     
@@ -106,8 +118,12 @@
 }
 
 - (void)cellHeaderMethod:(RMBaseView *)view {
+    if ([view.model.modules_name isEqualToString:@"植物科目"] || [view.model.modules_name isEqualToString:@"生长季"]){
+        return ;
+    }
+    
     RMDaqoViewController * daqoCtl = self.DaqoDelegate;
-
+    //modules_name   auto_code
     [daqoCtl updateCenterListWithModel:view.model withRow:-1];
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
@@ -133,21 +149,27 @@
     RMDaqoRightCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     if (!cell){
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoRightCell" owner:self options:nil] lastObject];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
     }
-    RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
+    
+    RMPublicModel * model = [dataArr objectAtIndex:indexPath.row + 1];
     cell.mTitle.text = [NSString stringWithFormat:@"    %@",[[model.sub objectAtIndex:indexPath.row] objectForKey:@"modules_name"]];
-    cell.mTitle.font = FONT_1(16.0);
+    cell.mTitle.font = FONT_1(13.0);
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     RMDaqoViewController * daqoCtl = self.DaqoDelegate;
 
-    RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
+    RMPublicModel * model = [dataArr objectAtIndex:indexPath.row + 1];
+    //modules_name   auto_code
 
-    [daqoCtl updateCenterListWithModel:model withRow:indexPath.row];
+    RMPublicModel * _model = [[RMPublicModel alloc] init];
+    _model.modules_name = [[model.sub objectAtIndex:indexPath.row] objectForKey:@"modules_name"];
+    _model.auto_code = [[model.sub objectAtIndex:indexPath.row] objectForKey:@"auto_code"];
+
+    [daqoCtl updateCenterListWithModel:_model withRow:indexPath.row];
 
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -166,6 +188,10 @@
         }
         
         if (success){
+            RMPublicModel * model_1 = [[RMPublicModel alloc] init];
+            model_1.modules_name = @"植物科目";
+            [dataArr addObject:model_1];
+            
             for (NSInteger i=0; i<[[[object objectForKey:@"data"] objectForKey:@"course"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_id"]);
@@ -176,6 +202,10 @@
                 model.isGrow = @"NO";
                 [dataArr addObject:model];
             }
+            
+            RMPublicModel * model_2 = [[RMPublicModel alloc] init];
+            model_2.modules_name = @"生长季";
+            [dataArr addObject:model_2];
             
             for (NSInteger i=0; i<[[[object objectForKey:@"data"] objectForKey:@"grow"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
