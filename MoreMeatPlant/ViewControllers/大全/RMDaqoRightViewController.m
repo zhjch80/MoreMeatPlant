@@ -133,7 +133,7 @@
     RMDaqoRightCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierStr];
     if (!cell){
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoRightCell" owner:self options:nil] lastObject];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.backgroundColor = [UIColor clearColor];
     }
     RMPublicModel * model = [dataArr objectAtIndex:indexPath.row];
@@ -173,13 +173,15 @@
                 model.auto_code = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_code"]);
                 model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_id"]);
                 model.sub = [[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"sub"];
+                model.isGrow = @"NO";
                 [dataArr addObject:model];
             }
             
             for (NSInteger i=0; i<[[[object objectForKey:@"data"] objectForKey:@"grow"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.modules_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"label"]);
-                model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"value"]);
+                model.auto_code = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"value"]);
+                model.isGrow = @"YES";
                 [dataArr addObject:model];
             }
             

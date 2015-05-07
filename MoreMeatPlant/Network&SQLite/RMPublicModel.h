@@ -145,4 +145,6 @@
 @property (retain, nonatomic) NSString * comment_num;//评论级别1-4
 
 @property (retain, nonatomic) NSString * order_id;
+
+@property (nonatomic, copy) NSString * isGrow;
 @end

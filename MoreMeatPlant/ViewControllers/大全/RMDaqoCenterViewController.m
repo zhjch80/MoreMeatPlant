@@ -27,17 +27,21 @@
 @property (nonatomic, strong) RefreshControl * refreshControl;
 @property (nonatomic, strong) RMPlantTypeView * plantTypeView;
 @property (nonatomic, copy) NSString * plantClassification;         //选择植物分类
+@property (nonatomic, copy) NSString * currentPlantSubjects;        //当前植物科目
+@property (nonatomic, copy) NSString * currentPlantGrow;            //当前植物生长季
 
 @end
 
 @implementation RMDaqoCenterViewController
-@synthesize mTableView, dataArr, refreshControl, subsPlantArr, plantTypeView, plantClassification;
+@synthesize mTableView, dataArr, refreshControl, subsPlantArr, plantTypeView, plantClassification, currentPlantSubjects, currentPlantGrow;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
     plantClassification = @"";
+    currentPlantSubjects = @"";
+    currentPlantGrow = @"";
     
     [self setRightBarButtonNumber:1];
     leftBarButton.frame = CGRectMake(5, 1, 43, 43);
@@ -194,7 +198,6 @@
 }
 
 - (void)selectedPlantWithType:(NSString *)type {
-    NSString * plantType;
 
     if ([type isEqualToString:@"0"]){
         plantClassification = @"10000";
@@ -203,14 +206,14 @@
     }
     
     if ([plantClassification isEqualToString:@"10000"] | [plantClassification isEqualToString:@""]){
-        plantType = @"";
+        currentPlantSubjects = @"";
     }else{
         RMPublicModel * model_1 = [subsPlantArr objectAtIndex:plantClassification.integerValue];
-        plantType = model_1.auto_code;
+        currentPlantSubjects = model_1.auto_code;
     }
     
     isRefresh = YES;
-    [self requestDataWithPageCount:1 withPlantType:plantType withGrow:@""];
+    [self requestDataWithPageCount:1 withPlantType:currentPlantSubjects withGrow:currentPlantGrow];
 }
 
 - (void)daqoSelectedPlantTypeMethod:(RMImageView *)image {
@@ -222,17 +225,20 @@
 
 - (void)updateCurrentList:(RMPublicModel *)model withRow:(NSInteger)row {
     if (row == -1){
-        NSLog(@"header 标识:%@",model.modules_name);
+        if ([model.isGrow isEqualToString:@"YES"]){
+            currentPlantGrow = model.auto_code;
+        }else{
+            currentPlantSubjects = model.auto_code;
+        }
     }else if (row == -2){
         NSLog(@"刷新全部当前肉肉");
     }else{
-        NSLog(@"sub name:%@",[[model.sub objectAtIndex:row] objectForKey:@"modules_name"]);
+        currentPlantSubjects = [[model.sub objectAtIndex:row] objectForKey:@"auto_code"];
     }
     
-    //TODO:操作
-    
     isRefresh = YES;
-    [self requestDataWithPageCount:1 withPlantType:@"" withGrow:@""];
+    
+    [self requestDataWithPageCount:1 withPlantType:currentPlantSubjects withGrow:currentPlantGrow];
 }
 
 #pragma mark -  数据请求
@@ -362,16 +368,7 @@
         isRefresh = YES;
         isLoadComplete = NO;
         
-        NSString * plantType;
-        
-        if ([plantClassification isEqualToString:@"10000"] | [plantClassification isEqualToString:@""]){
-            plantType = @"";
-        }else{
-            RMPublicModel * model_1 = [subsPlantArr objectAtIndex:plantClassification.integerValue];
-            plantType = model_1.auto_code;
-        }
-        
-        [self requestDataWithPageCount:1 withPlantType:plantType withGrow:@""];
+        [self requestDataWithPageCount:1 withPlantType:currentPlantSubjects withGrow:currentPlantGrow];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
         if (isLoadComplete){
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.44 * NSEC_PER_SEC));
@@ -383,16 +380,7 @@
             pageCount ++;
             isRefresh = NO;
             
-            NSString * plantType;
-            
-            if ([plantClassification isEqualToString:@"10000"] | [plantClassification isEqualToString:@""]){
-                plantType = @"";
-            }else{
-                RMPublicModel * model_1 = [subsPlantArr objectAtIndex:plantClassification.integerValue];
-                plantType = model_1.auto_code;
-            }
-            
-            [self requestDataWithPageCount:pageCount withPlantType:plantType withGrow:@""];
+            [self requestDataWithPageCount:pageCount withPlantType:currentPlantSubjects withGrow:currentPlantGrow];
         }
     }
 }
