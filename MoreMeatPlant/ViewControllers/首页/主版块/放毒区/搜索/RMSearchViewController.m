@@ -721,11 +721,11 @@
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-//    if ([[self trim:textField.text] isEqualToString:@""]){
-//        [self.mTextField resignFirstResponder];
-//        [self showHint:@"输入内容不能为空"];
-//        return NO;
-//    }
+    if ([[self trim:textField.text] isEqualToString:@""]){
+        [self.mTextField resignFirstResponder];
+        [self showHint:@"输入内容不能为空"];
+        return NO;
+    }
     
     if ([self.searchType isEqualToString:@"帖子"]){
         [self requestPostsSearchWithKeyWord:[textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withType:[NSString stringWithFormat:@"%ld",(long)classValue] withPageCount:1];

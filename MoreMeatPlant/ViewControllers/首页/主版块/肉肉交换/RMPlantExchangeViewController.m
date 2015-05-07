@@ -737,13 +737,11 @@
     }
 }
 
-- (void)selectedPlantType:(NSInteger)type {
-    if (type<6){
-        plantRequestValue = type;
-    }else{
-        subsPlantRequestValue = type-6;
-        [plantTypeView updataSelectState:type - 6];
-    }
+- (void)selectedPlantType:(NSInteger)type_1 withType:(NSInteger)type_2 {
+    plantRequestValue = type_1;
+    subsPlantRequestValue = type_2-6;
+    [plantTypeView updataSelectState:type_2 - 6];
+    
     isRefresh = YES;
     [self requestListWithPageCount:1];
 }

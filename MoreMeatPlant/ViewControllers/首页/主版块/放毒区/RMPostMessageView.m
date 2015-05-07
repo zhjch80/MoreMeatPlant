@@ -52,11 +52,11 @@
     [self addSubview:subView];
     
     if (IS_IPHONE_6p_SCREEN){
-        kHeightX = 0.0;
+        kHeightX = 4.0;
     }else if (IS_IPHONE_6_SCREEN){
-        kHeightX = 11.0;
+        kHeightX = 3.5;
     }else{
-        kHeightX = 8.0;
+        kHeightX = 1.5;
     }
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -101,14 +101,14 @@
         UIImageView * image = [[UIImageView alloc] init];
         image.userInteractionEnabled = YES;
         image.multipleTouchEnabled = YES;
-        image.frame = CGRectMake(16 + (i-1)*((width - 32)/[subs count] + kHeightX), 105, 44, 44);
+        image.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count]-1) + kHeightX), 105, 44, 44);
         image.tag = 401 + 6 + i - 1;
         [image sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         image.backgroundColor = [UIColor clearColor];
         [subView addSubview:image];
         
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(16 + (i-1)*((width - 32)/[subs count] + kHeightX), 105, 44, 44);
+        button.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count]-1) + kHeightX), 105, 44, 44);
         button.tag = 401 + 6 + i - 1;
         [button addTarget:self action:@selector(selectPostsType:) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor clearColor];
@@ -143,8 +143,14 @@
             [image sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         }
 
+        for (NSInteger i=1; i<[subsPlantArrs count]; i++) {
+            UIImageView * imageView = (UIImageView *)[subView viewWithTag:i-1 + 6+401];
+            imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, 44, 44);
+        }
+        
         RMPublicModel * model = [subsPlantArrs objectAtIndex:sender.tag-6-401 + 1];
         UIImageView * image = (UIImageView *)[subView viewWithTag:sender.tag];
+        image.frame = CGRectMake(image.frame.origin.x, image.frame.origin.y, image.frame.size.width, image.frame.size.height + 5);
         [image sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
         postType_2 = sender.tag;/*407--412*/
         isSelectedType_2 = YES;

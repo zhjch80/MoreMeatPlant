@@ -13,7 +13,7 @@
 
 @optional
 
-- (void)selectedPlantType:(NSInteger)type;
+- (void)selectedPlantType:(NSInteger)type_1 withType:(NSInteger)type_2;
 
 @end
 

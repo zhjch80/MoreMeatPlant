@@ -790,13 +790,9 @@
 
 #pragma mark - 选择分类
 
-- (void)selectedPlantType:(NSInteger)type {
-    if (type<6){
-        plantRequestValue = type;
-    }else{
-        subsPlantRequestValue = type-6;
-        [plantTopTypeView updataSelectState:type - 6];
-    }
+- (void)selectedPlantType:(NSInteger)type_1 withType:(NSInteger)type_2 {
+    plantRequestValue = type_1;
+    [plantTopTypeView updataSelectState:type_2 - 6];
     isRefresh = YES;
     [self requestListWithPageCount:1];
 }
