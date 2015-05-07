@@ -915,12 +915,14 @@
         case 1:
         {
             RMPlantWithSaleViewController * plante = [[RMPlantWithSaleViewController alloc]init];
+            [plante setCustomNavTitle:@"一肉一拍"];
             [self.navigationController pushViewController:plante animated:YES];
         }
             break;
         case 2:
         {
             RMFreshPlantMarketViewController * plante = [[RMFreshPlantMarketViewController alloc]init];
+            [plante setCustomNavTitle:@"鲜肉市场"];
             [self.navigationController pushViewController:plante animated:YES];
         }
             break;

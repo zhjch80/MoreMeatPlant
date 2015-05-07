@@ -38,6 +38,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setCustomNavTitle:self.titleName];
+
     self.mainTableview.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
     
     dataArr = [[NSMutableArray alloc]init];
@@ -51,6 +53,7 @@
     rightOneBarButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [rightOneBarButton setTitle:@"我的主页" forState:UIControlStateNormal];
     [rightOneBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    
     
     if(headView == nil){
         headView = [[[NSBundle mainBundle] loadNibNamed:@"RMCorpHeadTableViewCell" owner:self options:nil] lastObject];
@@ -84,7 +87,6 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(replaceBannerImg:)];
     [headView.bannerImgV addGestureRecognizer:tap];
     
-    [self setCustomNavTitle:self.titleName];
 
     
     bottomView = [[RMBottomView alloc] init];
@@ -568,6 +570,9 @@
             break;
         }
         case 2:{
+            break;
+        }
+        case 3:{
             [self goCorp:nil];
             break;
         }
