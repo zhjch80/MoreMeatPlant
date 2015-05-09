@@ -72,17 +72,18 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     overlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [overlayView blur];
     overlayView.tag = kENPopUpOverlayViewTag;
-    overlayView.backgroundColor = [UIColor clearColor];
+    overlayView.backgroundColor = [UIColor blackColor];
+    overlayView.backgroundColor = [overlayView.backgroundColor colorWithAlphaComponent:0.8];
     
     // Add Blured View
-    JWBlurView *bluredView = [[JWBlurView alloc] initWithFrame:overlayView.bounds];
-    bluredView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    bluredView.tag = kENPopUpBluredViewTag;
-    [bluredView setBlurAlpha:0.5f];
-    [bluredView setAlpha:0.5f];
-    [bluredView setBlurColor:[UIColor clearColor]];
-    bluredView.backgroundColor = [UIColor clearColor];
-    [overlayView addSubview:bluredView];
+//    JWBlurView *bluredView = [[JWBlurView alloc] initWithFrame:overlayView.bounds];
+//    bluredView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    bluredView.tag = kENPopUpBluredViewTag;
+//    [bluredView setBlurAlpha:0.5f];
+//    [bluredView setAlpha:0.5f];
+//    [bluredView setBlurColor:[UIColor clearColor]];
+//    bluredView.backgroundColor = [UIColor clearColor];
+//    [overlayView addSubview:bluredView];
     
     
     // Make the background clickable
@@ -109,7 +110,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     [sourceView addSubview:overlayView];
 
     [self setAnimationStateFrom:popUpView];
-    [self performAppearAnimationWithBlurView:bluredView popupView:popUpView completion:completionBlock];
+    [self performAppearAnimationWithBlurView:overlayView popupView:popUpView completion:completionBlock];
 }
 
 
@@ -131,7 +132,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     return CATransform3DConcat(transform, scale);
 }
 
-- (void)performAppearAnimationWithBlurView:(JWBlurView *)blurView popupView:(UIView *)popupView completion:(void (^)(void))completionBlock
+- (void)performAppearAnimationWithBlurView:(UIView *)blurView popupView:(UIView *)popupView completion:(void (^)(void))completionBlock
 {
     
     CATransform3D transform;

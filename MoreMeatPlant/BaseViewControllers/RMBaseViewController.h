@@ -56,4 +56,14 @@
  */
 - (void)setCustomNavTitle:(NSString *)title;
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender;
+/**
+ *  查询数据库购物车中商品数量
+ *
+ *  @return 
+ */
+- (NSString *)queryShopCarNumber;
+/**
+ *  查询聊天信息数目
+ */
+- (NSString *)queryInfoNumber;
 @end

@@ -22,6 +22,8 @@
     BOOL isClassFirst;
     BOOL selectQt;//选择其他快递
     RMAdvantageTipView * tipView;
+    
+    CGFloat photoCellheight;
 }
 
 @end
@@ -36,13 +38,17 @@
     isClassFirst = YES;
     selectQt = NO;
     
+    
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
     classArray = [[NSMutableArray alloc]init];
     courseArray = [[NSMutableArray alloc]init];
-    current_Model = [[RMPublicModel alloc]init];
+    if(current_Model == nil){
+        current_Model = [[RMPublicModel alloc]init];
+        current_Model.content_num = @"1";
+    }
     
     modifyPhotoDic = [[NSMutableDictionary alloc]init];
     modifyImageDic = [[NSMutableDictionary alloc]init];
@@ -53,7 +59,10 @@
     [self courseRequest];
     
     if(self.auto_id != nil){
+        photoCellheight = (kScreenWidth-10*2-4*1)/5.0+5+8;
         [self editDataequest];
+    }else{
+        photoCellheight = (kScreenWidth-10*2-4*1)/5.0+8+5+21+5+21+8;
     }
 }
 
@@ -254,6 +263,21 @@
             [cell.camera4 addTarget:self action:@selector(selectFromCamera:) forControlEvents:UIControlEventTouchDown];
             [cell.camera5 addTarget:self action:@selector(selectFromCamera:) forControlEvents:UIControlEventTouchDown];
             
+            
+            if(self.auto_id != nil){
+                cell.picSelect1.hidden = YES;
+                cell.picSelect2.hidden = YES;
+                cell.picSelect3.hidden = YES;
+                cell.picSelect4.hidden = YES;
+                cell.picSelect5.hidden = YES;
+                cell.camera1.hidden = YES;
+                cell.camera2.hidden = YES;
+                cell.camera3.hidden = YES;
+                cell.camera4.hidden = YES;
+                cell.camera5.hidden = YES;
+                
+            }
+            
         }
         cell.picSelect1.tag = indexPath.row*100+1;
         cell.picSelect2.tag = indexPath.row*100+2;
@@ -308,6 +332,7 @@
                 j++;
             }
         }
+        
         
         for(NSString * n in [modifyImageDic allKeys]){
             UIImageView * imageV = (UIImageView *)[cell.contentView viewWithTag:[n integerValue]];
@@ -376,9 +401,9 @@
     }else if (indexPath.row == 4){
         return 44;
     }else if (indexPath.row == 5){
-        return 129;
+        return photoCellheight;
     }else if (indexPath.row == 6){
-        return 129;
+        return photoCellheight;
     }else{
         return 58;
     }
@@ -602,50 +627,6 @@
 
 
 - (void)commit{
-    if([current_Model.content_name length]==0){
-        
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝名称" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-        [alert show];
-        return;
-    }else if ([current_Model.content_desc length] == 0){
-        
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝描述" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-        [alert show];
-        return;
-    }else if ([current_Model.content_price length] == 0){
-        
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝价格" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-        [alert show];
-        return;
-    }else if (![current_Model.is_sf boolValue]&&([current_Model.content_express length]==0||[current_Model.express_price length] == 0)){
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入快递信息" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-        [alert show];
-        return;
-    }else if (current_Model.content_course.length == 0){
-        
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择科目分类" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-        [alert show];
-        return;
-    }else if (current_Model.content_class.length == 0){
-        
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择发布市场" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-        [alert show];
-        return;
-    }else if (current_Model.member_class.length == 0){
-        
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择会员分类" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-        [alert show];
-        return;
-    }else if ([current_Model.content_num length] == 0){
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入库存" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-        [alert show];
-        return;
-    }else if([current_Model.content_class isEqualToString:@"1"]){
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"一肉一拍市场的宝贝只能有一件" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-        [alert show];
-        return;
-    }
-    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
@@ -694,7 +675,51 @@
 
 #pragma mark - 发布
 - (void)pulishAction:(UIButton *)sener{
+    if([current_Model.content_name length]==0){
+        
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝名称" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if ([current_Model.content_desc length] == 0){
+        
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝描述" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if ([current_Model.content_price length] == 0){
+        
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入宝贝价格" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if (![current_Model.is_sf boolValue]&&([current_Model.content_express length]==0||[current_Model.express_price length] == 0)){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入快递信息" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if (current_Model.content_course.length == 0){
+        
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择科目分类" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if (current_Model.content_class.length == 0){
+        
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择发布市场" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if (current_Model.member_class.length == 0){
+        
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择商家分类" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if ([current_Model.content_num length] == 0){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入库存" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }else if([current_Model.content_class isEqualToString:@"1"]&&current_Model.content_num.integerValue > 1){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"一肉一拍市场的宝贝只能有一件" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
+    }
     
+
     if(self.auto_id == nil){
         [self showTipView];
     }else{

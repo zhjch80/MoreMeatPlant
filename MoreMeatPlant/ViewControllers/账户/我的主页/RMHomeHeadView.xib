@@ -25,14 +25,13 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="444.png" translatesAutoresizingMaskIntoConstraints="NO" id="UY8-Uw-MVE">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="131.5"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="花儿与少年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iuh-Tb-HJD">
-                                <rect key="frame" x="70" y="15" width="80" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iuh-Tb-HJD">
                                 <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="16"/>
                                 <color key="textColor" red="0.87843137250000003" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="member_pointline.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kiw-GI-4M1">
-                                <rect key="frame" x="70" y="36" width="240" height="1"/>
+                                <rect key="frame" x="70" y="16" width="240" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="ULg-C7-eJo"/>
                                 </constraints>
@@ -50,25 +49,22 @@
                                     <constraint firstAttribute="width" constant="18" id="vRe-o3-hX7"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="北京" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ec8-JH-UDq">
-                                <rect key="frame" x="89" y="65" width="22" height="13.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ec8-JH-UDq">
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="花币：..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zwu-9l-Ua9">
-                                <rect key="frame" x="161" y="65" width="43" height="13.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zwu-9l-Ua9">
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" text="签名：美丽的心灵才配得上美丽肉肉" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rka-5k-AKS">
-                                <rect key="frame" x="70" y="39" width="176" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rka-5k-AKS">
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="422-P3-M3N">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="422-P3-M3N">
                                 <rect key="frame" x="5" y="12" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="7By-aA-A9J"/>
@@ -168,7 +164,7 @@
                 <outlet property="hua_bi" destination="Zwu-9l-Ua9" id="PrQ-M0-i47"/>
                 <outlet property="sendPrivateMsgBtn" destination="aRi-Dz-Wtr" id="Nbe-jt-OHI"/>
             </connections>
-            <point key="canvasLocation" x="571" y="64"/>
+            <point key="canvasLocation" x="695" y="55"/>
         </tableViewCell>
     </objects>
     <resources>
@@ -176,6 +172,5 @@
         <image name="member_my_home_btn.png" width="242" height="89"/>
         <image name="member_pointline.png" width="831" height="1"/>
         <image name="member_region_icon.png" width="47" height="47"/>
-        <image name="photo.png" width="500" height="531"/>
     </resources>
 </document>

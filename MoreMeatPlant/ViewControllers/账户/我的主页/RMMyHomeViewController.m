@@ -32,6 +32,11 @@
 @synthesize dataArr;
 @synthesize refreshControl;
 
+- (void)viewWillAppear:(BOOL)animated{
+    badge.badgeText = [self queryInfoNumber];
+    chat_badge.badgeText = [self queryInfoNumber];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -86,19 +91,8 @@
     UIButton * btn = (UIButton *)[bottomView viewWithTag:2];
     badge = [[JSBadgeView alloc]initWithParentView:btn alignment:JSBadgeViewAlignmentTopRight];
     badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-    badge.badgeTextFont = FONT(10.0);
-    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
-    badge.hidden = NO;
-    if([dele.talkMoreCtl UnreadMessageCount] == 0){
-        badge.hidden = YES;
-    }else if([dele.talkMoreCtl UnreadMessageCount] < 10){
-        badge.badgeText = [NSString stringWithFormat:@" %ld ",[dele.talkMoreCtl UnreadMessageCount]];
-    }else if ([dele.talkMoreCtl UnreadMessageCount] > 99){
-        badge.badgeText = [NSString stringWithFormat:@"%d",99];
-    }else{
-        badge.badgeText = [NSString stringWithFormat:@"%ld",[dele.talkMoreCtl UnreadMessageCount]];
-    }
-    
+    badge.badgeTextFont = FONT(12.0);
+    badge.badgeText = [self queryInfoNumber];
     [self requestMemberInfo];
 }
 
@@ -872,20 +866,8 @@
                     UILabel * targetlabel = (UILabel *)[targetView viewWithTag:1];
                     chat_badge = [[JSBadgeView alloc]initWithParentView:targetlabel alignment:JSBadgeViewAlignmentCenterRight];
                     chat_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-                    chat_badge.badgeTextFont = FONT(10.0);
-                    chat_badge.badgeText = @"99";
-                    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
-                    chat_badge.hidden = NO;
-                    if([dele.talkMoreCtl UnreadMessageCount] == 0){
-                        chat_badge.hidden = YES;
-                    }else if([dele.talkMoreCtl UnreadMessageCount] < 10){
-                        chat_badge.badgeText = [NSString stringWithFormat:@" %ld ",[dele.talkMoreCtl UnreadMessageCount]];
-                    }else if ([dele.talkMoreCtl UnreadMessageCount] > 99){
-                        chat_badge.badgeText = [NSString stringWithFormat:@"%d",99];
-                    }else{
-                        chat_badge.badgeText = [NSString stringWithFormat:@"%ld",[dele.talkMoreCtl UnreadMessageCount]];
-                    }
-                    
+                    chat_badge.badgeTextFont = FONT(12.0);
+                    chat_badge.badgeText = [self queryInfoNumber];
                     break;
                 }
             }            break;

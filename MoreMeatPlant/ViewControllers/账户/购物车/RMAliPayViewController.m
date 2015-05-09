@@ -39,9 +39,9 @@
 
     NSString * urlstr = nil;
     if([self.content_type isEqualToString:@"0"]){//订单付款
-     urlstr = [RMAFNRequestManager alipayWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] content_type:self.content_type isDirectPurchase:_is_direct Order_sn:order_id content_money:nil];
+     urlstr = [RMAFNRequestManager alipayWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] content_type:self.content_type isDirectPurchase:NO Order_sn:order_id content_money:nil];
     }else{//充值
-     urlstr = [RMAFNRequestManager alipayWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] content_type:self.content_type isDirectPurchase:_is_direct Order_sn:order_id content_money:self.content_money];
+     urlstr = [RMAFNRequestManager alipayWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] content_type:self.content_type isDirectPurchase:YES Order_sn:order_id content_money:self.content_money];
     }
    
     
@@ -70,8 +70,15 @@
         NSMutableDictionary * dic = [[NSMutableDictionary alloc] init];
         [dic setValue:@"1" forKey:@"pay_success"];
         [[NSNotificationCenter defaultCenter] postNotificationName:PaymentCompletedNotification object:self userInfo:dic];
-            
-        [self animationToOrderlist];
+        if([self.content_type isEqualToString:@"0"]){
+            if(_fromMember){
+                [self navgationBarButtonClick:nil];
+            }else{
+                [self animationToOrderlist];
+            }
+        }else{
+            [self navgationBarButtonClick:nil];
+        }
         return NO;
     }
     return YES;
@@ -89,18 +96,8 @@
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender
 {
     if([self.content_type isEqualToString:@"0"]){
-        if(_is_direct){
-            NSMutableArray * arr = [[NSMutableArray alloc] init];
-            for(UIViewController * vc in self.navigationController.viewControllers)
-            {
-                if([vc isKindOfClass:[RMPlantWithSaleDetailsViewController class]])
-                {
-                    continue;
-                }
-                [arr addObject:vc];
-                
-            }
-            self.navigationController.viewControllers = arr;
+        if(_fromMember){
+            
         }else{
             NSMutableArray * arr = [[NSMutableArray alloc] init];
             for(UIViewController * vc in self.navigationController.viewControllers)

@@ -30,13 +30,12 @@
 //    [[NSNotificationCenter defaultCenter] removeObserver:self];
 //}
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
     self.view.backgroundColor = [UIColor clearColor];
+    
     [self setCustomNavTitle:@"已出宝贝"];
     
     __weak RMHadBabyViewController * Self = self;
@@ -45,7 +44,7 @@
     CGFloat height = kScreenHeight - 64 - 40 - 49;
     
     waitDeliveryCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, height);
+    waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight);
     waitDeliveryCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, height);
     waitDeliveryCtl.call_back = ^(){
         if(Self.callback){
@@ -72,7 +71,7 @@
     [self.view addSubview:waitDeliveryCtl.view];
     
     waitPayCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    waitPayCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, height);
+    waitPayCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight);
     waitPayCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, height);
     waitPayCtl.order_type = @"unpayorder";
     waitPayCtl.startRequest = ^(){
@@ -94,7 +93,7 @@
     [self.view addSubview:waitPayCtl.view];
     
     deliveryedCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    deliveryedCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, height);
+    deliveryedCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight);
     deliveryedCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, height);
     deliveryedCtl.order_type = @"onorder";
     deliveryedCtl.seeLogistics_callback = ^ (RMPublicModel * model){
@@ -134,7 +133,7 @@
     [self.view addSubview:deliveryedCtl.view];
     
     orderDoneCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    orderDoneCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, height);
+    orderDoneCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight);
     orderDoneCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, height);
     orderDoneCtl.order_type = @"okorder";
     orderDoneCtl.goCorp_callback = ^(RMPublicModel * model){
@@ -156,7 +155,7 @@
     [self.view addSubview:orderDoneCtl.view];
     
     orderReturnCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
-    orderReturnCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, height);
+    orderReturnCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight);
     orderReturnCtl.mTableView.frame = CGRectMake(0, 0, kScreenWidth, height);
     orderReturnCtl.order_type = @"returnorder";
     orderReturnCtl.seeLogistics_callback = ^ (RMPublicModel * model){
@@ -207,6 +206,7 @@
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    
 }
 
 #pragma mark - 

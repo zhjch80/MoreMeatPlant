@@ -116,8 +116,8 @@
     CGFloat textWidth = [self sizeOfTextForCurrentSettings].width;
     CGFloat textHeight = [self sizeOfTextForCurrentSettings].height;
     
-    CGFloat viewWidth = textWidth + kBadgeTextSideMargin + (kMarginToDrawInside * 2) ;//+ 8;
-    CGFloat viewHeight = textWidth +kBadgeTextSideMargin+ (kMarginToDrawInside * 2);
+    CGFloat viewWidth = textWidth + kBadgeTextSideMargin + (kMarginToDrawInside * 2) + 6;
+    CGFloat viewHeight = viewWidth;//textHeight +kBadgeTextSideMargin+ (kMarginToDrawInside * 2) + 5;
     
     CGFloat superviewWidth = superviewFrame.size.width;
     CGFloat superviewHeight = superviewFrame.size.height;

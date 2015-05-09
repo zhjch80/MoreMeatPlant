@@ -442,7 +442,8 @@
                 
                 if([model.is_redirect boolValue]){
                     RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
-                    alipay.is_direct = NO;
+                    alipay.fromMember = NO;
+                    alipay.content_type = @"0";
                     alipay.order_id = model.content_sn;//支付宝支付的订单号
                     [self.navigationController pushViewController:alipay animated:YES];
                 }else{

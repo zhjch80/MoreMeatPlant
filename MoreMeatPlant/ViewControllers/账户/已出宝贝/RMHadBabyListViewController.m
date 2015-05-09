@@ -41,6 +41,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 //    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.mTableView];
+    self.view.backgroundColor = [UIColor clearColor];
+//    self.view.backgroundColor = [self.view.backgroundColor colorWithAlphaComponent:0.8];
     
     dataarray = [[NSMutableArray alloc]init];
     refreshControl=[[RefreshControl alloc] initWithScrollView:_mTableView delegate:self];
@@ -49,6 +51,9 @@
     [refreshControl registerClassForTopView:[RefreshView class]];
     pageCount = 1;
     isRefresh = YES;
+    
+    self.mTableView.backgroundColor = [UIColor clearColor];
+    self.mTableView.opaque = NO;
 }
 
 #pragma mark - UITableViewDelegate

@@ -604,10 +604,14 @@
 
 - (void)userHeaderClick:(RMImageView *)image {
     NSLog(@"帖主 👦");
+    if(dataModel.member_id){
+        RMMyHomeViewController * home = [[RMMyHomeViewController alloc]initWithNibName:@"RMMyHomeViewController" bundle:nil];
+        home.auto_id = dataModel.member_id;
+        [self.navigationController pushViewController:home animated:YES];
+    }
 }
 
 #pragma 数据请求
-
 - (void)requestDetatils {
     NSString * user_id = [RMUserLoginInfoManager loginmanager].user;
     NSString * user_password = [RMUserLoginInfoManager loginmanager].pwd;
@@ -616,13 +620,19 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager getPostsListDetailsWithAuto_id:self.auto_id withUser_id:user_id withUser_password:user_password callBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
         if (error){
             NSLog(@"error:%@",error);
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             return ;
         }
         
         if (success){
+            if([[object objectForKey:@"data"] count] == 0){
+                [self showHint:@"data为空"];
+                return;
+            }
+            
             dataModel.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"auto_id"]);
             dataModel.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_name"]);
             dataModel.content_type = OBJC([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_type"]);
@@ -650,7 +660,6 @@
             
             [self requestCommentListsWithPageCount:1];
             
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];
 }

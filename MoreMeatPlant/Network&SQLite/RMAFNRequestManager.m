@@ -2013,10 +2013,11 @@
     }];
 
 }
+
 #pragma mark - 查看物流
 + (NSString *)getWuliuUrlWithExpressName:(NSString *)name no:(NSString *)no{
     //m.kuaidi100.com/index_all.html?type=[快递公司]&postid=[快递单号]
-    NSString * url = [NSString stringWithFormat:@"m.kuaidi100.com/index_all.html?type=%@&postid=%@",name,no];
+    NSString * url = [NSString stringWithFormat:@"http://m.kuaidi100.com/index_all.html?type=%@&postid=%@",name,no];
     return url;
 }
 

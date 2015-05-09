@@ -267,7 +267,8 @@
                         order.gopay_callback = ^(RMPublicModel *model){
                             //去付款
                             RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
-                            alipay.is_direct = NO;
+                            alipay.fromMember = YES;
+                            alipay.content_type = @"0";
                             alipay.order_id = model.content_sn;//支付宝支付的订单号
                             [self.navigationController pushViewController:alipay animated:YES];
                         };
@@ -285,8 +286,8 @@
                             [self.navigationController pushViewController:corp animated:YES];
                         };
                         
-                        order.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-49);
-                        [self presentPopUpViewController:order overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-49)];
+                        order.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-40);
+                        [self presentPopUpViewController:order overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-40)];
                     }
                         break;
                     case 4:{//我的帖子
@@ -475,8 +476,8 @@
                             [self.navigationController pushViewController:home animated:YES];
                         };
                         
-                        hadbaby.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-49);
-                        [self presentPopUpViewController:hadbaby overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-49)];
+                        hadbaby.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-40);
+                        [self presentPopUpViewController:hadbaby overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-40)];
                     }
                         break;
                     case 5:{//我的帖子
@@ -498,8 +499,8 @@
                             [self.navigationController pushViewController:detail animated:YES];
                         };
 
-                        message.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-44);
-                        [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-44)];
+                        message.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-40);
+                        [self presentPopUpViewController:message overlaybounds:CGRectMake(0, 0, kScreenWidth, kScreenHeight-40)];
                     }
                         break;
                     case 7:{//附近肉有
@@ -543,7 +544,7 @@
         [self.view addSubview:acountView];
     }
     if(self.baseIndicator == nil){
-        self.baseIndicator = [[ActivityIndicator alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64-49) LabelText:Loading withdelegate:nil withType:ActivityIndicatorLogin andAction:nil];
+        self.baseIndicator = [[ActivityIndicator alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64-40) LabelText:Loading withdelegate:nil withType:ActivityIndicatorLogin andAction:nil];
         [self.view addSubview:self.baseIndicator];
     }
     
@@ -600,7 +601,8 @@
     order.gopay_callback = ^(RMPublicModel *model){
         //去付款
         RMAliPayViewController * alipay = [[RMAliPayViewController alloc]initWithNibName:@"RMAliPayViewController" bundle:nil];
-        alipay.is_direct = NO;
+        alipay.fromMember = YES;
+        alipay.content_type = @"0";
         alipay.order_id = model.content_sn;//支付宝支付的订单号
         [self.navigationController pushViewController:alipay animated:YES];
     };

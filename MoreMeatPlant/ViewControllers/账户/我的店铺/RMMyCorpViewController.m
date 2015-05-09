@@ -34,6 +34,12 @@
 @implementation RMMyCorpViewController
 @synthesize refreshControl;
 
+- (void)viewWillAppear:(BOOL)animated{
+    badge.badgeText = [self queryInfoNumber];
+    car_badge.badgeText = [self queryShopCarNumber];
+    chat_badge.badgeText = [self queryInfoNumber];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -95,29 +101,20 @@
     [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_class", @"img_up", @"img_buy", @"img_moreChat", nil]];
     [self.view addSubview:bottomView];
     
-    UIButton * btn = (UIButton *)[bottomView viewWithTag:4];
+    UIButton * btn = (UIButton *)[bottomView viewWithTag:3];
     badge = [[JSBadgeView alloc]initWithParentView:btn alignment:JSBadgeViewAlignmentTopRight];
     badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-    badge.badgeTextFont = FONT(10.0);
-    badge.badgeText = @"99";
+    badge.badgeTextFont = FONT(12.0);
+    badge.badgeText = [self queryInfoNumber];
     
-    UIButton * car_btn = (UIButton *)[bottomView viewWithTag:3];
+    UIButton * car_btn = (UIButton *)[bottomView viewWithTag:2];
     car_badge = [[JSBadgeView alloc]initWithParentView:car_btn alignment:JSBadgeViewAlignmentTopRight];
     car_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-    car_badge.badgeTextFont = FONT(10.0);
-    car_badge.badgeText = @"99";
-    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
-    chat_badge.hidden = NO;
-    if([dele.talkMoreCtl UnreadMessageCount] == 0){
-        car_badge.hidden = YES;
-    }else if([dele.talkMoreCtl UnreadMessageCount] < 10){
-        car_badge.badgeText = [NSString stringWithFormat:@" %ld ",[dele.talkMoreCtl UnreadMessageCount]];
-    }else if ([dele.talkMoreCtl UnreadMessageCount] > 99){
-        car_badge.badgeText = [NSString stringWithFormat:@"%d",99];
-    }else{
-        car_badge.badgeText = [NSString stringWithFormat:@"%ld",(long)[dele.talkMoreCtl UnreadMessageCount]];
-    }
-
+    car_badge.badgeTextFont = FONT(12.0);
+    car_badge.badgeText = [self queryShopCarNumber];
+    
+    
+    
     
     refreshControl=[[RefreshControl alloc] initWithScrollView:_mainTableview delegate:self];
     refreshControl.topEnabled = YES;
@@ -230,20 +227,8 @@
                     UILabel * targetlabel = (UILabel *)[targetView viewWithTag:1];
                     chat_badge = [[JSBadgeView alloc]initWithParentView:targetlabel alignment:JSBadgeViewAlignmentCenterRight];
                     chat_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-                    chat_badge.badgeTextFont = FONT(10.0);
-                    chat_badge.badgeText = @"99";
-                    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
-                    chat_badge.hidden = NO;
-                    if([dele.talkMoreCtl UnreadMessageCount] == 0){
-                        chat_badge.hidden = YES;
-                    }else if([dele.talkMoreCtl UnreadMessageCount] < 10){
-                        chat_badge.badgeText = [NSString stringWithFormat:@" %ld ",(long)[dele.talkMoreCtl UnreadMessageCount]];
-                    }else if ([dele.talkMoreCtl UnreadMessageCount] > 99){
-                        chat_badge.badgeText = [NSString stringWithFormat:@"%d",99];
-                    }else{
-                        chat_badge.badgeText = [NSString stringWithFormat:@"%ld",(long)[dele.talkMoreCtl UnreadMessageCount]];
-                    }
-                    
+                    chat_badge.badgeTextFont = FONT(12.0);
+                    chat_badge.badgeText = [self queryInfoNumber];
                     break;
                 }
             }

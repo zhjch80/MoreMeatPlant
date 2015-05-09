@@ -54,6 +54,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="surePublish" destination="fwc-mS-SQz" id="3mD-fY-4RI"/>
+                <outlet property="sure_bottomtip" destination="pdF-bs-Nft" id="gt4-pp-1hP"/>
             </connections>
             <point key="canvasLocation" x="198" y="161"/>
         </tableViewCell>

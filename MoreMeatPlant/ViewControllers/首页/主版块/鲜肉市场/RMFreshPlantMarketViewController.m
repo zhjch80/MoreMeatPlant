@@ -25,12 +25,14 @@
 #import "RMMyCollectionViewController.h"
 #import "RMMyCorpViewController.h"
 #import "RMReleasePoisonDetailsViewController.h"
+#import "JSBadgeView.h"
 
 @interface RMFreshPlantMarketViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,BottomDelegate,JumpPlantDetailsDelegate,RefreshControlDelegate>{
     BOOL isFirstViewDidAppear;
     BOOL isRefresh;
     NSInteger pageCount;
     BOOL isLoadComplete;
+    JSBadgeView * car_badge;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;         //list数据
@@ -57,6 +59,10 @@
         [self requestPlantSubjects];
         isFirstViewDidAppear = YES;
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    car_badge.badgeText = [self queryShopCarNumber];
 }
 
 - (void)viewDidLoad {
@@ -89,6 +95,12 @@
     subsPlantRequestValue = -9999;
 
     [self loadBottomView];
+    
+    UIButton * car_btn = (UIButton *)[bottomView viewWithTag:2];
+    car_badge = [[JSBadgeView alloc]initWithParentView:car_btn alignment:JSBadgeViewAlignmentTopRight];
+    car_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
+    car_badge.badgeTextFont = FONT(12.0);
+    car_badge.badgeText = [self queryShopCarNumber];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

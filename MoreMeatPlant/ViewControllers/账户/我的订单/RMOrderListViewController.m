@@ -38,7 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor clearColor];
-    
+
     _maintableView.backgroundColor = [UIColor clearColor];
     _maintableView.opaque = NO;
     

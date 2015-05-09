@@ -18,6 +18,7 @@
 #import "FileUtil.h"
 #import "UIView+Effects.h"
 #import "RMShopCarViewController.h"
+#import "JSBadgeView.h"
 
 #define kDKTableViewMainBackgroundImageFileName @"DaQuanBackground.jpg"
 #define kDKTableViewDefaultCellHeight 50.0f
@@ -30,6 +31,7 @@
     BOOL isTakingPictures;          //是否在选取图片
     
     BOOL isBlur;                    //是否已经添加毛玻璃
+    JSBadgeView * car_badge;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) DKLiveBlurView *liveBlur;
@@ -93,6 +95,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    
+    car_badge.badgeText = [self queryShopCarNumber];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -153,6 +157,13 @@
     [self.view addSubview:bottomView];
 
     isFistViewDidAppear = NO;
+    
+    
+    UIButton * car_btn = (UIButton *)[bottomView viewWithTag:2];
+    car_badge = [[JSBadgeView alloc]initWithParentView:car_btn alignment:JSBadgeViewAlignmentTopRight];
+    car_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
+    car_badge.badgeTextFont = FONT(12.0);
+    car_badge.badgeText = [self queryShopCarNumber];
 }
 
 - (void)bottomMethodWithTag:(NSInteger)tag {

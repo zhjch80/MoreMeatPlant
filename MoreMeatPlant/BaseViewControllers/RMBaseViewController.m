@@ -10,6 +10,7 @@
 #import "RMCorpModel.h"
 #import "RMProductModel.h"
 //#import "IQKeyboardManager.h"
+#import "AppDelegate.h"
 
 @interface RMBaseViewController (){
 }
@@ -161,6 +162,37 @@
             
         default:
             break;
+    }
+}
+
+
+#pragma mark - 查询购物车数量
+
+- (NSString *)queryShopCarNumber{
+    
+    NSInteger  num;
+    
+    for(RMProductModel * product in [RMProductModel allDbObjects]){
+        num += product.content_num;
+    }
+    
+    if(num == 0){
+        return nil;
+    }else if (num > 99){
+        return @"99";
+    }else{
+        return [NSString stringWithFormat:@"%ld",(long)num];
+    }
+}
+
+- (NSString *)queryInfoNumber{
+    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+    if([dele.talkMoreCtl UnreadMessageCount] == 0){
+        return nil;
+    }else if ([dele.talkMoreCtl UnreadMessageCount] > 99){
+        return @"99";
+    }else{
+        return [NSString stringWithFormat:@"%ld",(long)[dele.talkMoreCtl UnreadMessageCount]];
     }
 }
 

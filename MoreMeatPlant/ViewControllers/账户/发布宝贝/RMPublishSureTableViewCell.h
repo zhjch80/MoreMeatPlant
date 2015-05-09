@@ -10,5 +10,6 @@
 
 @interface RMPublishSureTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *surePublish;
+@property (weak, nonatomic) IBOutlet UILabel *sure_bottomtip;
 
 @end

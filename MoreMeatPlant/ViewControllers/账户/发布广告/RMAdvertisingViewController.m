@@ -169,15 +169,15 @@
     RMAdvertisingSectionTableViewCell * cell =  (RMAdvertisingSectionTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag/100 inSection:0]];
     NSInteger num = [cell.numTextField.text integerValue];
    
-    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
     RMPublicModel * model = [planteArray objectAtIndex:sender.tag/100-2];
     
      num++;
-    if(num>model.num){
-        num--;
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"没有余位了！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
-        [alert show];
-    }
+//    if(num>model.num){
+//        num--;
+//        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"没有余位了！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+//        [alert show];
+//    }
+    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
     model.textField_value = num;
     [self caculateDays];
 }
@@ -189,11 +189,11 @@
     if([textField.text length] == 0 ){
         textField.text = 0;
     }
-    if([textField.text integerValue]>model.num){
-        textField.text = [NSString stringWithFormat:@"%ld",(long)model.num];
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"没有余位了！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
-        [alert show];
-    }
+//    if([textField.text integerValue]>model.num){
+//        textField.text = [NSString stringWithFormat:@"%ld",(long)model.num];
+//        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"没有余位了！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+//        [alert show];
+//    }
     if([textField.text integerValue] > 0){
         model.textField_value = [textField.text integerValue];
     }else{

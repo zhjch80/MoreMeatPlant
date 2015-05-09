@@ -23,6 +23,7 @@
 #import "RMMyOrderViewController.h"
 #import "RMMyCollectionViewController.h"
 #import "NSString+Addtion.h"
+#import "JSBadgeView.h"
 
 @interface RMPlantWithSaleDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,BottomDelegate,PlantWithSaleHeaderViewDelegate,PlantWithSaleDetailsDelegate,RMAddressEditViewCompletedDelegate>{
     BOOL isFirstViewDidAppear;
@@ -34,6 +35,8 @@
     RMSettlementViewController * settle;
     RMPublicModel * parameterModel;
     NSString * is_sf;
+    
+    JSBadgeView * car_badge;
 }
 @property (nonatomic, strong) RMPlantWithSaleHeaderView * headerView;;
 @property (nonatomic, strong) UITableView * mTableView;
@@ -55,6 +58,9 @@
         isFirstViewDidAppear = YES;
     }
 }
+- (void)viewWillAppear:(BOOL)animated{
+    car_badge.badgeText = [self queryShopCarNumber];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,13 +72,20 @@
     
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     
-    [self loadBottomView];
     
     mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 37) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:mTableView];
+    
+    [self loadBottomView];
+
+    UIButton * car_btn = (UIButton *)[bottomView viewWithTag:2];
+    car_badge = [[JSBadgeView alloc]initWithParentView:car_btn alignment:JSBadgeViewAlignmentTopRight];
+    car_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
+    car_badge.badgeTextFont = FONT(12.0);
+    car_badge.badgeText = [self queryShopCarNumber];
 }
 
 - (void)loadTableHeaderView {
@@ -416,7 +429,7 @@
         other_expressL.text = [NSString stringWithFormat:@"%@:%@元",dataModel.content_express,dataModel.express_price];
         other_expressL.numberOfLines = 0;
         other_expressL.font  = FONT_0(13);
-        CGSize size = [kucun.text getcontentsizeWithfont:other_expressL.font constrainedtosize:CGSizeMake(200, 30) linemode:NSLineBreakByWordWrapping];
+        CGSize size = [other_expressL.text getcontentsizeWithfont:other_expressL.font constrainedtosize:CGSizeMake(200, 30) linemode:NSLineBreakByWordWrapping];
         other_expressL.frame = CGRectMake(kucun.frame.origin.x-size.width-10, 0, size.width, size.height);
         other_expressL.center = CGPointMake(other_expressL.center.x, cell.productIntro.frame.size.height/2);
         
@@ -699,6 +712,7 @@
     {
         [product insertToDb];
     }
+    car_badge.badgeText = [self queryShopCarNumber];
     [self showHint:@"添加购物车成功!"];
 }
 
