@@ -25,6 +25,7 @@
 #import <TencentOpenAPI/QQApi.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
+#import "UIAlertView+Expland.h"
 
 @interface AppDelegate ()<EMChatManagerDelegate>{
     RMHomeViewController * homeCtl;
@@ -318,6 +319,19 @@
     [[EaseMob sharedInstance] applicationWillTerminate:application];
 }
 
+
+#pragma mark - 推送处理
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您有新消息推送，是否立即查看？" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"稍后查看",@"立即查看", nil];
+    [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+        if(btnIndex == 0){
+        
+        }else{
+            [self tabSelectController:3];
+        }
+    }];
+    [alert show];
+}
 #pragma mark - 
 
 // 注册推送
