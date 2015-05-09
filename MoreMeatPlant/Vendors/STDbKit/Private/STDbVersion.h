@@ -44,19 +44,18 @@
     1. 支持复杂类型（NSData， NSDate， NSArray, NSDictionary）
     2. 修正一些bug
  --------------------------
- *  @brief v1.0.4 2013-12-20新
- 1. 添加dbObject过期属性，当数据过期，数据会被自动删除，可用于有时间限制的历史纪录等场景
+ *  @brief v1.0.4 2013-12-20更新
+    1. 添加dbObject过期属性，当数据过期，数据会被自动删除，可用于有时间限制的历史纪录等场景
  --------------------------
+ *  @brief v1.0.5 2013-12-31更新
+    1. 添加dbObject加密功能
  *****************************************/
 
-/**
- *	@brief	版本号
- *
- *	@return	版本号
- */
-static inline NSString* STDbVersion()
-{
-	return @"1.0.4";
-}
+
+#define STDbKitVersionNumber1_0 100.00
+#define STDbKitVersionNumber1_0_4 100.40
+
+static double STDbKitVersionNumber = STDbKitVersionNumber1_0_4;
+static const unsigned char STDbKitVersionString[] = "1.0.4";
 
 #endif

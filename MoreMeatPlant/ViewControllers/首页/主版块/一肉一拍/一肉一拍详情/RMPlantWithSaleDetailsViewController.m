@@ -208,7 +208,7 @@
     bottomView = [[RMBottomView alloc] init];
     bottomView.delegate = self;
     bottomView.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-   [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_up", @"img_buy", @"img_moreChat", nil]];
+   [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_collectiom", @"img_buy", @"img_moreChat", nil]];
     [self.view addSubview:bottomView];
 }
 
@@ -224,7 +224,25 @@
                 [alert show];
                 return;
             }
-            [mTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:-1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+            
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [RMAFNRequestManager getMembersCollectWithCollect_id:@"" withContent_type:@"3" withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd callBack:^(NSError *error, BOOL success, id object) {
+                if (error){
+                    NSLog(@"error:%@",error);
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    return ;
+                }
+                
+                if (success){
+                    [self showHint:[object objectForKey:@"msg"]];
+                    UIButton * btn = (UIButton *)[bottomView viewWithTag:1];
+                    [btn setBackgroundImage:LOADIMAGE(@"img_asced", kImageTypePNG) forState:UIControlStateNormal];
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                }else{
+                    [self showHint:[object objectForKey:@"msg"]];
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                }
+            }];
             break;
         }
         case 2:{
@@ -818,6 +836,11 @@
                 [btn setBackgroundImage:LOADIMAGE(@"img_asced", kImageTypePNG) forState:UIControlStateNormal];
             }
             
+            if ([dataModel.is_collect isEqualToString:@"1"]){
+                UIButton * btn = (UIButton *)[bottomView viewWithTag:1];
+                [btn setBackgroundImage:LOADIMAGE(@"img_asced", kImageTypePNG) forState:UIControlStateNormal];
+            }
+           
             [self loadHeaderView];
             
             [mTableView reloadData];

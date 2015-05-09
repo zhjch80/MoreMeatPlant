@@ -12,6 +12,8 @@
 @implementation UIView (Effects)
 
 - (void)blur{
+    self.backgroundColor = [UIColor clearColor];
+    
     UIGraphicsBeginImageContext(self.bounds.size);
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();

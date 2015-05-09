@@ -723,7 +723,7 @@
 + (void)getDaqoSearchWithKeyWord:(NSString *)keyword
                    withPageCount:(NSInteger)pageCount
                         callBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAll&data=series&order=asc&grow=&course=&keyword=%@&per=1&row=10&page=%ld",baseUrl,keyword,pageCount];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAll&data=series&order=asc&grow=&course=&keyword=%@&per=1&row=10&page=%ld",baseUrl,keyword,(long)pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);

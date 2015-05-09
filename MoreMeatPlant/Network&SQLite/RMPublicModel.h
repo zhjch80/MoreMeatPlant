@@ -147,4 +147,7 @@
 @property (retain, nonatomic) NSString * order_id;
 
 @property (nonatomic, copy) NSString * isGrow;
+
+@property (nonatomic, copy) NSString * isRead;              //已读 未读
+
 @end

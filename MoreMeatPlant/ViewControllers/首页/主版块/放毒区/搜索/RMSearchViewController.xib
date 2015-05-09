@@ -29,8 +29,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eNv-hF-Ifd">
                     <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqI-bm-623">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqI-bm-623">
                             <rect key="frame" x="5" y="7" width="30" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="8Am-yb-ZRM"/>
+                                <constraint firstAttribute="height" constant="30" id="GjD-8x-KOC"/>
+                            </constraints>
                             <state key="normal" image="img_leftArrow">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -38,8 +43,9 @@
                                 <action selector="buttonClick:" destination="-1" eventType="touchUpInside" id="ruq-be-BXy"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2U-Ek-yBa">
-                            <rect key="frame" x="274" y="8" width="46" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2U-Ek-yBa">
+                            <rect key="frame" x="274" y="8" width="46" height="31"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="46" id="P6o-ee-RIe"/>
                             </constraints>
@@ -55,8 +61,11 @@
                     </subviews>
                     <color key="backgroundColor" red="0.91062127976190477" green="0.91062127976190477" blue="0.91062127976190477" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="44" id="2f6-5l-rQ2"/>
+                        <constraint firstItem="xqI-bm-623" firstAttribute="leading" secondItem="eNv-hF-Ifd" secondAttribute="leading" constant="5" id="4Bl-Yd-55X"/>
                         <constraint firstAttribute="trailing" secondItem="H2U-Ek-yBa" secondAttribute="trailing" id="L7b-6A-ual"/>
                         <constraint firstItem="H2U-Ek-yBa" firstAttribute="top" secondItem="eNv-hF-Ifd" secondAttribute="top" constant="8" id="bIp-Sn-bMl"/>
+                        <constraint firstItem="xqI-bm-623" firstAttribute="top" secondItem="eNv-hF-Ifd" secondAttribute="top" constant="7" id="tMt-Ds-KGm"/>
                     </constraints>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入要搜索的内容" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uXZ-AB-17E" customClass="RMBaseTextField">
@@ -92,6 +101,11 @@
                 <constraint firstItem="eNv-hF-Ifd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zR8-m5-ff6"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="b8X-yJ-4sF"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>

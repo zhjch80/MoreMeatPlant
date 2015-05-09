@@ -39,6 +39,9 @@
         receiveImg.indexPath = image.indexPath;
     }
     
+    self.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1];
+    self.backgroundColor = [self.backgroundColor colorWithAlphaComponent:0.5];
+    
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [self addGestureRecognizer:gesture];
     
@@ -51,7 +54,7 @@
     receiver.frame = CGRectMake(0, kScreenHeight, kScreenWidth-70, 30);
     receiver.text = receive;
     receiver.font = FONT_1(16.0);
-    receiver.textColor = [UIColor colorWithRed:0.42 green:0.42 blue:0.42 alpha:1];
+    receiver.textColor = [UIColor whiteColor];
     receiver.backgroundColor = [UIColor clearColor];
     [bgView addSubview:receiver];
     
@@ -206,7 +209,7 @@
         }];
     }else{
         //回复
-        [RMAFNRequestManager postReplyToPostsCommentWithComment_id:self.comment_id withContent_body:[commentTextView.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd withReview_id:self.review_id callBack:^(NSError *error, BOOL success, id object) {
+        [RMAFNRequestManager postReplyToPostsCommentWithComment_id:self.comment_id withContent_body:commentTextView.text withID:[RMUserLoginInfoManager loginmanager].user withPWD:[RMUserLoginInfoManager loginmanager].pwd withReview_id:self.review_id callBack:^(NSError *error, BOOL success, id object) {
             if ([self.delegate respondsToSelector:@selector(commentMethodWithType:withError:withState:withObject:withImage:)]){
                 [self.delegate commentMethodWithType:self.requestType withError:error withState:success withObject:object withImage:receiveImg];
                 [MBProgressHUD hideAllHUDsForView:self animated:YES];

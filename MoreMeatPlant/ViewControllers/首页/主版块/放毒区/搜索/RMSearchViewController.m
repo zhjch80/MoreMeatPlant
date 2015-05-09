@@ -86,6 +86,7 @@
     [self.view addSubview:mTableView];
     
     mTableView.tableFooterView = [[UIView alloc] init];
+    mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     refreshControl=[[RefreshControl alloc] initWithScrollView:mTableView delegate:self];
     refreshControl.topEnabled = YES;
@@ -964,6 +965,9 @@
                     [dataArr addObject:model];
                 }
                 [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+
             }
             [self.view endEditing:YES];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -977,7 +981,7 @@
  */
 - (void)requestBabySearchWithKeyWord:(NSString *)key withClass:(NSString *)class withPageCount:(NSInteger)pg {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getBabysSearchWithrBabyClass:class withPlantCourse:@"" withPageCount:1 withKeyword:key callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager getBabysSearchWithrBabyClass:class withPlantCourse:@"" withPageCount:pg withKeyword:key callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -1002,8 +1006,10 @@
                     model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                     [dataArr addObject:model];
                 }
+                
                 [mTableView reloadData];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+                
             }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
                 if ([[object objectForKey:@"data"] count] == 0){
                     [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
@@ -1019,8 +1025,10 @@
                     model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                     [dataArr addObject:model];
                 }
+                
                 [mTableView reloadData];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
+                
             }
             
             if (isRefresh){
@@ -1034,9 +1042,10 @@
                     [dataArr addObject:model];
                 }
                 [mTableView reloadData];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
+                [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
             }
             [self.view endEditing:YES];
-
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];

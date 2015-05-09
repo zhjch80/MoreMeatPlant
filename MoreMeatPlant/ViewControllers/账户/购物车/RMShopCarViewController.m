@@ -524,7 +524,6 @@
         NSDictionary * dic = [dataArray objectAtIndex:textField.tag/10];
         RMCorpModel * model = [[RMCorpModel dbObjectsWhere:[NSString stringWithFormat:@"corp_id=%@",[(RMProductModel *)[[dic objectForKey:@"products"] objectAtIndex:0] corp_id]] orderby:nil] lastObject];
         model.order_message = textField.text;
-        NSLog(@"%ld",(long)model.id__);
         if([model updatetoDb]){
             NSLog(@"更新成功");
         }else{

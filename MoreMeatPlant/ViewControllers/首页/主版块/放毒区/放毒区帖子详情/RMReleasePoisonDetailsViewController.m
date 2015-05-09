@@ -68,6 +68,7 @@
         [self requestDetatils];
         isFirstViewDidAppear = YES;
     }
+    
 }
 
 - (void)viewDidLoad {
@@ -376,8 +377,11 @@
             cell.replyBtn_2.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - cell.replyBtn_2.frame.size.width - 2, cell.replyBtn_2.frame.origin.y, cell.replyBtn_2.frame.size.width, cell.replyBtn_2.frame.size.height);
             
             //灰色区域
-            [cell.userHead_2 sd_setImageWithURL:[NSURL URLWithString:[[model.returns objectForKey:@"member"] objectForKey:@"content_face"]] placeholderImage:nil];
-            cell.userName_2.text = [[model.returns objectForKey:@"member"] objectForKey:@"member_name"];
+
+            //注意：回复评论的信息
+            [cell.userHead_2 sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
+            cell.userName_2.text = model.content_name;
+            
             cell.userLocatiom_2.text = [[model.returns objectForKey:@"member"] objectForKey:@"content_gps"];
             
             cell.userPostTime_2.text = model.create_time;

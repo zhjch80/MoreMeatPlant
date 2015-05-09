@@ -26,9 +26,12 @@
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
+#import <objc/runtime.h>
 #import "STDbObject.h"
 
 @class STDbObject;
+
+extern objc_property_t * st_class_copyPropertyList(Class cls, unsigned int *count);
 
 @interface STDbHandle : NSObject
 
@@ -38,6 +41,11 @@
  *	@return	单例
  */
 + (instancetype)shareDb;
+
+/**
+ *	@brief	是否加密
+ */
+@property (nonatomic, assign) BOOL encryptEnable;
 
 /**
  *	@brief	打开数据库
@@ -85,7 +93,14 @@
  *
  *	@param 	obj 	数据对象
  */
-+ (BOOL)insertDbObject:(STDbObject *)obj;
+- (BOOL)insertDbObject:(STDbObject *)obj;
+
+/**
+ *	@brief	仅插入一条数据
+ *
+ *	@param 	obj 	数据对象
+ */
+- (BOOL)replaceDbObject:(STDbObject *)obj;
 
 /**
  *	@brief	根据条件查询数据
@@ -97,7 +112,7 @@
  *
  *	@return	数据对象数组
  */
-+ (NSMutableArray *)selectDbObjects:(Class)aClass condition:(NSString *)condition orderby:(NSString *)orderby;
+- (NSMutableArray *)selectDbObjects:(Class)aClass condition:(NSString *)condition orderby:(NSString *)orderby;
 
 /**
  *	@brief	根据条件删除类
@@ -108,7 +123,7 @@
  *
  *	@return	删除是否成功
  */
-+ (BOOL)removeDbObjects:(Class)aClass condition:(NSString *)condition;
+- (BOOL)removeDbObjects:(Class)aClass condition:(NSString *)condition;
 
 /**
  *	@brief	根据条件修改一条数据
@@ -118,7 +133,7 @@
  *
  *	@return	修改是否成功
  */
-+ (BOOL)updateDbObject:(STDbObject *)obj condition:(NSString *)condition;
+- (BOOL)updateDbObject:(STDbObject *)obj condition:(NSString *)condition;
 
 /**
  *	@brief	根据aClass删除表
@@ -133,5 +148,10 @@
  * 查看所有表名
  */
 + (NSArray *)sqlite_tablename;
+
+/*
+ * 查看最后插入数据的行号
+ */
++ (NSInteger)lastRowIdWithClass:(Class)aClass;
 
 @end
