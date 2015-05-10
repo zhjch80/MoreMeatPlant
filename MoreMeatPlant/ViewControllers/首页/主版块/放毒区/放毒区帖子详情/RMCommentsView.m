@@ -39,8 +39,8 @@
         receiveImg.indexPath = image.indexPath;
     }
     
-    self.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1];
-    self.backgroundColor = [self.backgroundColor colorWithAlphaComponent:0.5];
+    self.backgroundColor = [UIColor blackColor];
+    self.backgroundColor = [self.backgroundColor colorWithAlphaComponent:0.9];
     
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [self addGestureRecognizer:gesture];
