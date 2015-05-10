@@ -27,6 +27,9 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "UIAlertView+Expland.h"
 
+#import "AppDelegate+EaseMob.h"
+
+
 @interface AppDelegate ()<EMChatManagerDelegate>{
     RMHomeViewController * homeCtl;
     RMDaqoViewController * daqoCtl;
@@ -34,6 +37,7 @@
     RMLoginViewController * loginCtl;
     RMCustomTabBarController * customTabBarCtl;
     BMKMapManager* _mapManager;
+    EMConnectionState _connectionState;
 }
 
 @end
@@ -59,6 +63,10 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
+    
+    // 初始化环信SDK，详细内容在AppDelegate+EaseMob.m 文件中
+    [self easemobApplication:application didFinishLaunchingWithOptions:launchOptions];
+    
     homeCtl = [[RMHomeViewController alloc] init];
     daqoCtl = [[RMDaqoViewController alloc] init];
     accountCtl = [[RMAccountViewController alloc] init];
@@ -80,29 +88,6 @@
     //TODO:判断是否登录
     [self loadMainViewControllersWithType:[[RMUserLoginInfoManager loginmanager] state]];
     
-#pragma mark - 环信配置
-#warning  修改一 注册 APNS文件的名字, 需要与后台上传证书时的名字一一对应，该证书用来在有新消息时给用户推送通知
-    NSString *apnsCertName = @"AfterSaleForClient";
-    [[EaseMob sharedInstance] registerSDKWithAppKey:@"yryp-app#yryp" apnsCertName:apnsCertName];
-    [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
-    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
-    
-    [self registerRemoteNotification];
-    
-#warning 修改二 登录环信账号，该部分代码需要移到登录界面登录自己本身的账号成功后
-    //登录时候的账号和密码是在环信后台设置好的，以后需要自己的服务器在接口返回 密码都是111111 zhangbeibei
-    NSLog(@"user = %@,pwd = %@",[[RMUserLoginInfoManager loginmanager]user],
-          [[RMUserLoginInfoManager loginmanager] ypwd]);
-    if([[RMUserLoginInfoManager loginmanager] state]){
-        [self loginEaseMobWithUserName:[[RMUserLoginInfoManager loginmanager]user]
-                              passWord:[[RMUserLoginInfoManager loginmanager] ypwd]
-                               success:^(id arg) {
-                                   //登录成功s
-                               }
-                               failure:^(id arg) {
-                                   //登录失败
-                               }];
-    }
     
     return YES;
 }
@@ -125,6 +110,15 @@
         [[RMUserLoginInfoManager loginmanager] setCoorStr:coorstr];
         [[RMUserLoginInfoManager loginmanager] setYpwd:ypwd];
         [[RMUserLoginInfoManager loginmanager] setS_id:s_id];
+        
+        
+        [self loginEaseMobWithUserName:[[RMUserLoginInfoManager loginmanager]user]
+                              passWord:[[RMUserLoginInfoManager loginmanager] ypwd] success:^(id arg) {
+                                  NSLog(@"登录成功！");
+                              } failure:^(id arg) {
+                                  NSLog(@"登录失败！");
+                              }];
+        
     }else{
         [[RMUserLoginInfoManager loginmanager] setState:NO];
         [[RMUserLoginInfoManager loginmanager] setUser:@""];
@@ -159,6 +153,7 @@
     if (!customTabBarCtl){
         customTabBarCtl = [[RMCustomTabBarController alloc] init];
     }
+    
     ((RMCustomTabBarController *)customTabBarCtl).tabbarHeight = 49;
     ((RMCustomTabBarController *)customTabBarCtl).TabarItemWidth = kScreenWidth/4.0f;
     ((RMCustomTabBarController *)customTabBarCtl).isInDeck = YES;
@@ -179,35 +174,14 @@
     self.cusNav = [[RMCustomNavController alloc] initWithRootViewController:customTabBarCtl];
     self.cusNav.navigationBar.hidden = YES;
     [self.window setRootViewController:self.cusNav];
+    
 }
-//#pragma mark - 登陆
-//- (void)goLoginUser
-//{
-//    RMLoginViewController * login = [[RMLoginViewController alloc]init];
-//    UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:login];
-//    nav.navigationBar.hidden = YES;
-//    [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
-//}
+
 
 #pragma mark - 外面调用select tab的控制器
 
 - (void)tabSelectController:(NSInteger)index {
     [customTabBarCtl clickButtonWithIndex:index];
-}
-
-#pragma mark - EMChatManagerDelegate
-
-- (void)didLoginFromOtherDevice {
-    //账号在其他设备登陆，登出
-    EMError *error;
-    [[EaseMob sharedInstance].chatManager logoffWithUnbindDeviceToken:YES error:&error];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                        message:@"你的账号已在其他地方登录"
-                                                       delegate:self
-                                              cancelButtonTitle:@"确定"
-                                              otherButtonTitles:nil,nil];
-    [alertView show];
-    //TODO:检测到账号在其他设备登录后要做的操作，如：退出该账号到登录界面等，根据项目需求来做
 }
 
 #pragma mark - 登录和退出环信方法
@@ -275,23 +249,7 @@
     }
 }
 
-
-#pragma mark - application
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    [[EaseMob sharedInstance] applicationWillResignActive:application];
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
-}
-
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    
     
     __block AppDelegate * dele = self;
     if(locationManager == nil){
@@ -307,17 +265,8 @@
                 NSLog(@"%@",[[RMUserLoginInfoManager loginmanager] coorStr]);
             }
         };
-    
-    [[EaseMob sharedInstance] applicationDidBecomeActive:application];
 }
 
-//- (RMLocationManager *)getLocationManager{
-//    return locationManager;
-//}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    [[EaseMob sharedInstance] applicationWillTerminate:application];
-}
 
 
 #pragma mark - 推送处理
@@ -332,33 +281,6 @@
     }];
     [alert show];
 }
-#pragma mark - 
-
-// 注册推送
-- (void)registerRemoteNotification{
-    UIApplication *application = [UIApplication sharedApplication];
-    application.applicationIconBadgeNumber = 0;
-    
-    if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
-    {
-        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
-        [application registerUserNotificationSettings:settings];
-    }
-    
-#if !TARGET_IPHONE_SIMULATOR
-    //iOS8 注册APNS
-    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
-        [application registerForRemoteNotifications];
-    }else{
-        UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeBadge |
-        UIRemoteNotificationTypeSound |
-        UIRemoteNotificationTypeAlert;
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
-    }
-#endif
-}
-
 
 
 #pragma mark -----

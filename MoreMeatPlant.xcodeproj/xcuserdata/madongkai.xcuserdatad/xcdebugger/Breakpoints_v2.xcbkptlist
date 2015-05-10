@@ -33,6 +33,36 @@
             endingLineNumber = "433"
             landmarkName = "-commitOrderAction"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[RMShopCarViewController commitOrderAction]"
+                  moduleName = "MoreMeatPlant"
+                  urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E8%B4%AD%E7%89%A9%E8%BD%A6/RMShopCarViewController.m"
+                  timestampString = "452964978.175155"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "433"
+                  endingLineNumber = "433"
+                  offsetFromSymbolStart = "2940">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__44-[RMShopCarViewController commitOrderAction]_block_invoke"
+                  moduleName = "MoreMeatPlant"
+                  urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E8%B4%AD%E7%89%A9%E8%BD%A6/RMShopCarViewController.m"
+                  timestampString = "452964978.175346"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "433"
+                  endingLineNumber = "433"
+                  offsetFromSymbolStart = "112">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -272,6 +302,54 @@
             startingLineNumber = "29"
             endingLineNumber = "29"
             landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x767b;&#x5f55;/RMLoginViewController.m"
+            timestampString = "452965132.590155"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "-loginAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x767b;&#x5f55;/RMLoginViewController.m"
+            timestampString = "452965134.141712"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "-loginAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/AppDelegate.m"
+            timestampString = "452965167.824809"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "-loginEaseMobWithUserName:passWord:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
