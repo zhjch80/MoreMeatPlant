@@ -760,6 +760,8 @@
 		516F47271ADE5EE90017879A /* RMActionPaopaoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */; };
 		5171250C1AFF8B8100E5AFE3 /* baidian.png in Resources */ = {isa = PBXBuildFile; fileRef = 5171250B1AFF8B8100E5AFE3 /* baidian.png */; };
 		5171250E1AFF8BBD00E5AFE3 /* heidian.png in Resources */ = {isa = PBXBuildFile; fileRef = 5171250D1AFF8BBD00E5AFE3 /* heidian.png */; };
+		517125111AFF8D0E00E5AFE3 /* Nav_LeftBack .png in Resources */ = {isa = PBXBuildFile; fileRef = 5171250F1AFF8D0E00E5AFE3 /* Nav_LeftBack .png */; };
+		517125121AFF8D0E00E5AFE3 /* RoundPraise.png in Resources */ = {isa = PBXBuildFile; fileRef = 517125101AFF8D0E00E5AFE3 /* RoundPraise.png */; };
 		51783FCF1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FCE1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib */; };
 		51783FD31AF592D900C6EE18 /* RMDaquanCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FD11AF592D900C6EE18 /* RMDaquanCollectionViewController.m */; };
 		51783FD41AF592D900C6EE18 /* RMDaquanCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51783FD21AF592D900C6EE18 /* RMDaquanCollectionViewController.xib */; };
@@ -2144,6 +2146,8 @@
 		516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMActionPaopaoView.xib; sourceTree = "<group>"; };
 		5171250B1AFF8B8100E5AFE3 /* baidian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baidian.png; sourceTree = "<group>"; };
 		5171250D1AFF8BBD00E5AFE3 /* heidian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heidian.png; sourceTree = "<group>"; };
+		5171250F1AFF8D0E00E5AFE3 /* Nav_LeftBack .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nav_LeftBack .png"; sourceTree = "<group>"; };
+		517125101AFF8D0E00E5AFE3 /* RoundPraise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RoundPraise.png; sourceTree = "<group>"; };
 		51783FCE1AF552DB00C6EE18 /* RMOrderReturnEditView_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderReturnEditView_1.xib; sourceTree = "<group>"; };
 		51783FD01AF592D900C6EE18 /* RMDaquanCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDaquanCollectionViewController.h; sourceTree = "<group>"; };
 		51783FD11AF592D900C6EE18 /* RMDaquanCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDaquanCollectionViewController.m; sourceTree = "<group>"; };
@@ -3061,6 +3065,8 @@
 				1D191AD91ABD54EF00FC8623 /* whiteLeftArrow.png */,
 				5171250B1AFF8B8100E5AFE3 /* baidian.png */,
 				5171250D1AFF8BBD00E5AFE3 /* heidian.png */,
+				5171250F1AFF8D0E00E5AFE3 /* Nav_LeftBack .png */,
+				517125101AFF8D0E00E5AFE3 /* RoundPraise.png */,
 			);
 			path = "大全";
 			sourceTree = "<group>";
@@ -5543,6 +5549,7 @@
 				1DDBBD5F1ABBB17E00E35CD5 /* daquan@2x.png in Resources */,
 				51D883D11ABB1D0C00F7A3BD /* RMAdvertisingSectionTableViewCell.xib in Resources */,
 				1D64F4F51A904E180073EB98 /* Default@2x.png in Resources */,
+				517125121AFF8D0E00E5AFE3 /* RoundPraise.png in Resources */,
 				514612F61AE3653E0040E462 /* 120.png in Resources */,
 				5146133F1AE3653E0040E462 /* chatBar_textBg.png in Resources */,
 				1DEB746F1AB9D66800EA1FA7 /* img_buy.png in Resources */,
@@ -5557,6 +5564,7 @@
 				5146133E1AE3653E0040E462 /* chatBar_more_faceSelected@2x.png in Resources */,
 				1DD3265A1ABBEA1D006CD1A8 /* img_RightArrow@2x.png in Resources */,
 				1DEB75141AB9D67A00EA1FA7 /* member_my_home_btn.png in Resources */,
+				517125111AFF8D0E00E5AFE3 /* Nav_LeftBack .png in Resources */,
 				1DEB75221AB9D67A00EA1FA7 /* wdtz@2x.png in Resources */,
 				1DEB74731AB9D66800EA1FA7 /* img_fdq_line_2.png in Resources */,
 				1D8397611AB3F81600DA190A /* up.png in Resources */,
