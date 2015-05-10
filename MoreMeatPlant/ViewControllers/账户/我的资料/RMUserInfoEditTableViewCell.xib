@@ -44,7 +44,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="mKe-xO-qHx">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="mKe-xO-qHx">
                         <rect key="frame" x="103" y="48" width="174" height="56"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="56" id="ZDN-4E-IUk"/>
@@ -60,7 +60,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入支付宝账号" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Wec-rN-dQn" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入支付宝账号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wec-rN-dQn" customClass="RMBaseTextField">
                         <rect key="frame" x="103" y="145" width="174" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="Hzh-vA-YN2"/>
@@ -145,10 +145,12 @@
                     <constraint firstItem="c04-gj-v8v" firstAttribute="leading" secondItem="2W4-XX-Nm7" secondAttribute="leading" id="Ibd-g6-ybf"/>
                     <constraint firstItem="cLp-hk-jH9" firstAttribute="leading" secondItem="mPE-Oy-Tx6" secondAttribute="leading" id="J74-ao-xaL"/>
                     <constraint firstItem="c04-gj-v8v" firstAttribute="leading" secondItem="ICw-ih-61r" secondAttribute="leading" id="L7O-Re-FqB"/>
+                    <constraint firstItem="mKe-xO-qHx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="40" id="OXq-S4-ZbJ"/>
                     <constraint firstAttribute="centerX" secondItem="Mrb-Eb-YJd" secondAttribute="centerX" id="POs-lL-YSu"/>
                     <constraint firstItem="Wec-rN-dQn" firstAttribute="trailing" secondItem="8ep-pN-Zba" secondAttribute="trailing" id="QVO-wp-cij"/>
                     <constraint firstItem="cLp-hk-jH9" firstAttribute="centerY" secondItem="8ep-pN-Zba" secondAttribute="centerY" id="SDQ-No-fqh"/>
                     <constraint firstItem="S2i-HL-qgF" firstAttribute="top" secondItem="c04-gj-v8v" secondAttribute="top" id="Vcu-Qp-ecw"/>
+                    <constraint firstItem="mKe-xO-qHx" firstAttribute="leading" secondItem="c04-gj-v8v" secondAttribute="trailing" constant="15" id="WKg-Sy-EsI"/>
                     <constraint firstItem="S2i-HL-qgF" firstAttribute="leading" secondItem="c04-gj-v8v" secondAttribute="trailing" constant="15" id="XWT-cM-cmD"/>
                     <constraint firstItem="16U-Ic-ypF" firstAttribute="leading" secondItem="mPE-Oy-Tx6" secondAttribute="trailing" constant="3" id="YOe-Ux-tGb"/>
                     <constraint firstItem="s76-Zp-3Vx" firstAttribute="leading" secondItem="ICw-ih-61r" secondAttribute="trailing" id="cEC-5k-UTw"/>
@@ -156,11 +158,13 @@
                     <constraint firstAttribute="trailingMargin" secondItem="s76-Zp-3Vx" secondAttribute="trailing" constant="35" id="jtZ-mt-P3l"/>
                     <constraint firstItem="mKe-xO-qHx" firstAttribute="leading" secondItem="c04-gj-v8v" secondAttribute="trailing" constant="15" id="kE0-qL-uNZ"/>
                     <constraint firstItem="Mrb-Eb-YJd" firstAttribute="top" secondItem="8ep-pN-Zba" secondAttribute="bottom" constant="25" id="kGX-Nk-tXt"/>
+                    <constraint firstItem="s76-Zp-3Vx" firstAttribute="top" secondItem="mKe-xO-qHx" secondAttribute="bottom" constant="8" id="lb4-w8-2Dt"/>
                     <constraint firstItem="s76-Zp-3Vx" firstAttribute="top" secondItem="S2i-HL-qgF" secondAttribute="bottom" constant="7" id="mKB-Pe-Q3a"/>
                     <constraint firstItem="cLp-hk-jH9" firstAttribute="centerY" secondItem="59w-Wa-dx1" secondAttribute="centerY" id="nO4-sT-2Cd"/>
                     <constraint firstItem="8ep-pN-Zba" firstAttribute="leading" secondItem="59w-Wa-dx1" secondAttribute="trailing" constant="5" id="oJi-LA-ifj"/>
                     <constraint firstItem="Wec-rN-dQn" firstAttribute="leading" secondItem="2W4-XX-Nm7" secondAttribute="trailing" id="p0Y-rB-LZq"/>
                     <constraint firstItem="2W4-XX-Nm7" firstAttribute="top" secondItem="ICw-ih-61r" secondAttribute="bottom" constant="15" id="pMr-yD-dQ1"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="mKe-xO-qHx" secondAttribute="trailing" constant="35" id="tgA-Jh-HZt"/>
                     <constraint firstItem="59w-Wa-dx1" firstAttribute="top" secondItem="16U-Ic-ypF" secondAttribute="bottom" constant="15" id="v2y-ob-nmE"/>
                     <constraint firstItem="59w-Wa-dx1" firstAttribute="leading" secondItem="cLp-hk-jH9" secondAttribute="trailing" id="vKi-v9-td7"/>
                     <constraint firstAttribute="trailingMargin" secondItem="S2i-HL-qgF" secondAttribute="trailing" constant="35" id="xFK-Se-a8N"/>
@@ -180,8 +184,9 @@
                 <outlet property="sendBtn" destination="8ep-pN-Zba" id="0KY-DV-aEB"/>
                 <outlet property="signatureT" destination="S2i-HL-qgF" id="u7C-fQ-b2F"/>
                 <outlet property="sureModifyBtn" destination="Mrb-Eb-YJd" id="2uU-QF-RPE"/>
+                <outlet property="textViewBg" destination="mKe-xO-qHx" id="2vg-hD-QJq"/>
             </connections>
-            <point key="canvasLocation" x="411" y="163"/>
+            <point key="canvasLocation" x="476" y="141"/>
         </tableViewCell>
     </objects>
     <resources>

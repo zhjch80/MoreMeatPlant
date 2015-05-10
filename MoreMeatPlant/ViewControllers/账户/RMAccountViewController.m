@@ -104,6 +104,11 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recevierNotification:) name:RMRequestMemberInfoAgainNotification object:nil];
     
+    [_line_top setImage:nil];
+    _line_top.backgroundColor = [UIColor redColor];
+    
+    _line_top.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dian"]];
+    
     [self setCustomNavTitle:@"账户"];
     _headerImgV.layer.cornerRadius = 5;
     _headerImgV.clipsToBounds = YES;

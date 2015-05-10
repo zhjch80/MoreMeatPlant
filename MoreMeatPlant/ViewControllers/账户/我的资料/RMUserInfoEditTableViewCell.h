@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *apliyT;
 @property (weak, nonatomic) IBOutlet UIButton *sureModifyBtn;
 @property (weak, nonatomic) IBOutlet UIImageView * content_face;
+@property (weak, nonatomic) IBOutlet UIImageView *textViewBg;
 
 @property (weak, nonatomic) IBOutlet RMBaseTextField *codeField;
 @property (weak, nonatomic) IBOutlet JKCountDownButton *sendBtn;

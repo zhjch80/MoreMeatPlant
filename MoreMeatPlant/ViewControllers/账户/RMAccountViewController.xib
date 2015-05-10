@@ -18,6 +18,7 @@
             <connections>
                 <outlet property="headerImgV" destination="Vmx-kb-uIz" id="6xx-Sr-VGk"/>
                 <outlet property="hua_biL" destination="a7e-oX-CtK" id="IFG-Fo-DN8"/>
+                <outlet property="line_top" destination="vWM-Iw-NkZ" id="r4E-2c-LVd"/>
                 <outlet property="member_level" destination="KfZ-Xe-VsO" id="8YQ-Hn-hj5"/>
                 <outlet property="member_right" destination="bHq-2u-d7j" id="6K1-tM-U6g"/>
                 <outlet property="member_right_tag" destination="z0o-UZ-9VZ" id="9qs-Xf-bMj"/>

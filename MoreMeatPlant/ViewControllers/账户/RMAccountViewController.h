@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *member_right_tag;
 @property (retain, nonatomic) RMPublicModel * _model;
 @property (assign, nonatomic) BOOL isCorp;
+@property (weak, nonatomic) IBOutlet UIImageView *line_top;
 
 - (void)initPlat;
 

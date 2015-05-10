@@ -139,7 +139,7 @@
     //    liveBlur.originalImage = [UIImage imageNamed:@"testBG.jpg"];
     liveBlur.scrollView = mTableView;
     liveBlur.isGlassEffectOn = YES;
-    liveBlur.backgroundColor = [UIColor colorWithRed:0.44 green:0.44 blue:0.44 alpha:1];
+    liveBlur.backgroundColor = [UIColor blackColor];
     mTableView.backgroundView = liveBlur;
     mTableView.contentInset = UIEdgeInsetsMake(kDKTableViewDefaultContentInset, 0, 0, 0);
     
@@ -253,6 +253,8 @@
     tableFooterView.planting.frame = CGRectMake(tableFooterView.planting.frame.origin.x, tableFooterView.planting.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.planting.frame.size.height);
     
     tableFooterView.lineThree.frame = CGRectMake(tableFooterView.lineThree.frame.origin.x, tableFooterView.lineThree.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineThree.frame.size.height);
+    tableFooterView.lineTwo.image = nil;
+    tableFooterView.lineTwo.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"baidian"]];
     
     tableFooterView.lineFour.frame = CGRectMake(tableFooterView.lineFour.frame.origin.x, tableFooterView.lineFour.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineFour.frame.size.height);
 
@@ -301,11 +303,11 @@
         }
         
         if (i == 1){
-            image.center = CGPointMake(leftCenterImg.frame.origin.x - 10, image.center.y);
+            image.center = CGPointMake(leftCenterImg.frame.origin.x - 15, image.center.y);
         }
         
         if (i == 3){
-            image.center = CGPointMake(leftCenterImg.frame.origin.x + 30, image.center.y);
+            image.center = CGPointMake(leftCenterImg.frame.origin.x + 35, image.center.y);
         }
         
         if (i == 4){
@@ -322,19 +324,19 @@
     for (NSInteger i=0; i<5; i++) {
         UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:506+i];
         if (i == 0){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x - 30, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x - 40, image.center.y);
         }
         
         if (i == 1){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x - 10, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x - 20, image.center.y);
         }
         
         if (i == 3){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x + 30, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x + 40, image.center.y);
         }
         
         if (i == 4){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x + 50, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x + 60, image.center.y);
         }
         
         if (i >= dataModel.content_plant2.integerValue){
@@ -417,15 +419,14 @@
 }
 
 - (void)footerBtnMethodWithTag:(NSInteger)tag {
+    if (![[RMUserLoginInfoManager loginmanager] state]){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        [alert show];
+        return;
+    }
+    
     switch (tag) {
         case 1:{
-            if (![[RMUserLoginInfoManager loginmanager] state]){
-                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
-                [alert show];
-                return;
-                ;
-            }
-            
             isTakingPictures = YES;
             UIActionSheet *sheet = nil;
             if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -437,12 +438,6 @@
             break;
         }
         case 2:{
-            if (![[RMUserLoginInfoManager loginmanager] state]){
-                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
-                [alert show];
-                return;
-            }
-            
             RMCommentsView * commentsView = [[RMCommentsView alloc] init];
             commentsView.delegate = self;
             commentsView.backgroundColor = [UIColor clearColor];
@@ -581,6 +576,8 @@
         }
     }
     
+    liveBlur.backgroundColor = [UIColor blackColor];
+
     if (!isScrollLoadComplete){
         isScrollLoadComplete = !isScrollLoadComplete;
     }else{

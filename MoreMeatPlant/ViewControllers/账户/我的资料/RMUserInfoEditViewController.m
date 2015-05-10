@@ -130,6 +130,14 @@
             cell.content_face.tag = 1000;
             cell.content_face.userInteractionEnabled = YES;
             [cell.content_face addGestureRecognizer:tap];
+            
+            cell.textViewBg.layer.cornerRadius = 4;
+            cell.textViewBg.clipsToBounds = YES;
+            cell.textViewBg.backgroundColor = [UIColor lightGrayColor];
+            
+            
+            cell.apliyT.layer.cornerRadius = 3;
+            cell.apliyT.backgroundColor = [UIColor lightGrayColor];
         }
         
         cell.signatureT.text = Str_Objc(__model.contentQm, @"什么也没写...");

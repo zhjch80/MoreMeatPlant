@@ -179,7 +179,7 @@
                 
                 [imageView setFrame:CGRectMake(0, offsetY + 20, kScreenWidth, height)];
 
-                offsetY = offsetY + imageView.frame.size.height + 30;
+                offsetY = offsetY + imageView.frame.size.height + 10;
 
                 footerView.frame = CGRectMake(0, 0, kScreenWidth, offsetY);
                 
