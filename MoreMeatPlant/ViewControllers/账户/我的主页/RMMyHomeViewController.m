@@ -15,6 +15,8 @@
 #import "RMPlantWithSaleViewController.h"
 #import "RMFreshPlantMarketViewController.h"
 #import "RMCommentsView.h"
+
+#import "ChatViewController.h"
 @interface RMMyHomeViewController ()<RefreshControlDelegate,CommentsViewDelegate>{
     NSInteger pageCount;
     BOOL isRefresh;
@@ -678,10 +680,13 @@
         [alert show];
         return;
     }
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
-    [dele tabSelectController:3];
-    [dele.talkMoreCtl._chatListVC jumpToChatView:_model.content_user];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+//    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+//    [dele tabSelectController:3];
+//    [dele.talkMoreCtl._chatListVC jumpToChatView:_model.content_user];
+    ChatViewController * chat = [[ChatViewController alloc]initWithChatter:_model.content_user isGroup:NO];
+    chat.title = _model.content_user;
+    [self.navigationController pushViewController:chat animated:YES];
 }
 
 #pragma mark - 帖子详情
