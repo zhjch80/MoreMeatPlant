@@ -9,6 +9,7 @@
 #import "RMRegisterViewController.h"
 #import "FileMangerObject.h"
 #import "AppDelegate.h"
+#import "UIView+Expland.h"
 @interface RMRegisterViewController ()
 
 @end
@@ -41,6 +42,33 @@
     [_send_code_btn addTarget:self action:@selector(sendCodeAction:) forControlEvents:UIControlEventTouchDown];
     
     [_sure_btn addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchDown];
+    
+    
+    _mobileTextField.backgroundColor = [UIColor whiteColor];
+    _mobileTextField.backgroundColor = [_mobileTextField.backgroundColor colorWithAlphaComponent:0.6];
+    [_mobileTextField drawCorner:UIRectCornerTopRight|UIRectCornerBottomRight withFrame:CGRectMake(0, 0, kScreenWidth-_mobileTextField.frame.origin.x-77, _mobileTextField.frame.size.height)];
+    
+    _codeTextField.backgroundColor = [UIColor whiteColor];
+    _codeTextField.backgroundColor = [_codeTextField.backgroundColor colorWithAlphaComponent:0.6];
+    [_codeTextField drawCorner:UIRectCornerTopRight|UIRectCornerBottomRight withFrame:CGRectMake(0, 0, kScreenWidth-_codeTextField.frame.origin.x-77, _codeTextField.frame.size.height)];
+    
+    _nickTextField.backgroundColor = [UIColor whiteColor];
+    _nickTextField.backgroundColor = [_nickTextField.backgroundColor colorWithAlphaComponent:0.6];
+    [_nickTextField drawCorner:UIRectCornerTopRight|UIRectCornerBottomRight withFrame:CGRectMake(0, 0, kScreenWidth-_nickTextField.frame.origin.x-77, _nickTextField.frame.size.height)];
+    
+    _passTextField.backgroundColor = [UIColor whiteColor];
+    _passTextField.backgroundColor = [_passTextField.backgroundColor colorWithAlphaComponent:0.6];
+    [_passTextField drawCorner:UIRectCornerTopRight|UIRectCornerBottomRight withFrame:CGRectMake(0, 0, kScreenWidth-_passTextField.frame.origin.x-77, _passTextField.frame.size.height)];
+    
+    [_sure_btn setBackgroundColor:[UIColor colorWithPatternImage:LOADIMAGE(@"red_btn",@"png")]];
+    _sure_btn.layer.cornerRadius = 5;
+    _sure_btn.clipsToBounds = YES;
+    
+    [_send_code_btn setBackgroundColor:[UIColor colorWithPatternImage:LOADIMAGE(@"red_btn",@"png")]];
+    _send_code_btn.layer.cornerRadius = 5;
+    _send_code_btn.clipsToBounds = YES;
+    
+    
 }
 
 - (void)backLoginAction:(id)sender{

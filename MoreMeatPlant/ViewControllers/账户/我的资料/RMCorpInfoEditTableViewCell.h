@@ -24,4 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView * corp_photo;
 @property (weak, nonatomic) IBOutlet RMBaseTextField *codeField;
 @property (weak, nonatomic) IBOutlet JKCountDownButton *sendBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *textViewBg;
+@property (weak, nonatomic) IBOutlet UIImageView *textViewBg2;
 @end

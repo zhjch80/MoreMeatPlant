@@ -8,6 +8,7 @@
 
 #import "RMForgotWordViewController.h"
 #import "FileMangerObject.h"
+#import "UIView+Expland.h"
 @interface RMForgotWordViewController ()
 
 @end
@@ -35,6 +36,26 @@
     [_back_login_btn addTarget:self action:@selector(backLoginAction:) forControlEvents:UIControlEventTouchDown];
     [_sendCodeBtn addTarget:self action:@selector(sendCodeAction:) forControlEvents:UIControlEventTouchDown];
     [_sure_btn addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchDown];
+    
+    _mobileTextField.backgroundColor = [UIColor whiteColor];
+    _mobileTextField.backgroundColor = [_mobileTextField.backgroundColor colorWithAlphaComponent:0.6];
+    [_mobileTextField drawCorner:UIRectCornerTopRight|UIRectCornerBottomRight withFrame:CGRectMake(0, 0, kScreenWidth-_mobileTextField.frame.origin.x-77, _mobileTextField.frame.size.height)];
+    
+    _codeTextField.backgroundColor = [UIColor whiteColor];
+    _codeTextField.backgroundColor = [_codeTextField.backgroundColor colorWithAlphaComponent:0.6];
+    [_codeTextField drawCorner:UIRectCornerTopRight|UIRectCornerBottomRight withFrame:CGRectMake(0, 0, kScreenWidth-_codeTextField.frame.origin.x-77, _codeTextField.frame.size.height)];
+    
+    _passTextField.backgroundColor = [UIColor whiteColor];
+    _passTextField.backgroundColor = [_passTextField.backgroundColor colorWithAlphaComponent:0.6];
+    [_passTextField drawCorner:UIRectCornerTopRight|UIRectCornerBottomRight withFrame:CGRectMake(0, 0, kScreenWidth-_passTextField.frame.origin.x-77, _passTextField.frame.size.height)];
+    
+    [_sendCodeBtn setBackgroundColor:[UIColor colorWithPatternImage:LOADIMAGE(@"red_btn",@"png")]];
+    _sendCodeBtn.layer.cornerRadius = 5;
+    _sendCodeBtn.clipsToBounds = YES;
+    
+    [_sure_btn setBackgroundColor:[UIColor colorWithPatternImage:LOADIMAGE(@"red_btn",@"png")]];
+    _sure_btn.layer.cornerRadius = 5;
+    _sure_btn.clipsToBounds = YES;
 }
 
 - (void)backLoginAction:(id)sender{

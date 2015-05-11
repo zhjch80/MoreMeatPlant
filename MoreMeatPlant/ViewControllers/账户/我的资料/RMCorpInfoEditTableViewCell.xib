@@ -50,7 +50,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="rx5-NI-vwr">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="rx5-NI-vwr">
                         <rect key="frame" x="103" y="39" width="174" height="56"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="56" id="37c-X1-vIH"/>
@@ -66,7 +66,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入负责人" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="6xg-og-ZEs" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入负责人" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6xg-og-ZEs" customClass="RMBaseTextField">
                         <rect key="frame" x="103" y="172" width="174" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="CBg-D5-BDM"/>
@@ -82,7 +82,7 @@
                             <constraint firstAttribute="width" constant="125" id="Ovx-3Q-AxE"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
-                        <state key="normal" title="确认修改" backgroundImage="fbbb_btn_bg_red.png">
+                        <state key="normal" title="确认修改">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -117,7 +117,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入支付宝账号" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="bid-jH-lnH" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入支付宝账号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bid-jH-lnH" customClass="RMBaseTextField">
                         <rect key="frame" x="103" y="139" width="174" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="aHo-pA-xb9"/>
@@ -131,7 +131,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="QLN-Zv-6Ix">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="QLN-Zv-6Ix">
                         <rect key="frame" x="103" y="238" width="174" height="56"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="56" id="n0u-5c-0Gf"/>
@@ -172,7 +172,7 @@
                             <constraint firstAttribute="height" constant="70" id="cBL-SR-ifa"/>
                         </constraints>
                     </imageView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入电话" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zxh-lO-0Fm" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入电话" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxh-lO-0Fm" customClass="RMBaseTextField">
                         <rect key="frame" x="103" y="205" width="174" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="QgJ-KS-iNx"/>
@@ -186,7 +186,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入验证码" minimumFontSize="17" background="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="SWM-Yg-yz0" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SWM-Yg-yz0" customClass="RMBaseTextField">
                         <rect key="frame" x="103" y="559" width="99" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="JZV-Kq-Ws2"/>
@@ -202,7 +202,7 @@
                             <constraint firstAttribute="width" constant="70" id="XWi-hv-T5t"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="12"/>
-                        <state key="normal" title="发送验证码" backgroundImage="login_btn_bg.png">
+                        <state key="normal" title="发送验证码">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <variation key="default">
@@ -304,6 +304,8 @@
                 <outlet property="sendBtn" destination="sj6-XF-qF7" id="tEg-BO-dyU"/>
                 <outlet property="signatureT" destination="0fb-jn-arm" id="mPg-Ay-qr1"/>
                 <outlet property="sureModifyBtn" destination="LEf-SQ-ZAJ" id="YVp-j3-FLF"/>
+                <outlet property="textViewBg" destination="rx5-NI-vwr" id="Ni4-cm-7ge"/>
+                <outlet property="textViewBg2" destination="QLN-Zv-6Ix" id="evl-0f-zSB"/>
             </connections>
             <point key="canvasLocation" x="351" y="327.5"/>
         </tableViewCell>
@@ -311,9 +313,6 @@
     <resources>
         <image name="222.png" width="1242" height="403"/>
         <image name="444.png" width="1242" height="555"/>
-        <image name="fbbb_btn_bg_red.png" width="678" height="90"/>
-        <image name="fbbb_field_bg2.png" width="1024" height="144"/>
-        <image name="login_btn_bg.png" width="549" height="97"/>
         <image name="photo.png" width="500" height="531"/>
     </resources>
 </document>

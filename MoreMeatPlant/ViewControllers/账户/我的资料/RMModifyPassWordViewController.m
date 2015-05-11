@@ -23,6 +23,18 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     [_sureModifyBtn addTarget:self action:@selector(passwordModify) forControlEvents:UIControlEventTouchDown];
+    
+    
+    _sureModifyBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"red_btn", @"png")];
+    _sureModifyBtn.layer.cornerRadius = 5;
+    _sureModifyBtn.clipsToBounds = YES;
+    
+    _oldTextField.backgroundColor = UIColorFromRGB(0xe5e5e5);
+    _oldTextField.layer.cornerRadius = 5;
+    
+    _twoTextField.backgroundColor = UIColorFromRGB(0xe5e5e5);
+    _twoTextField.layer.cornerRadius = 5;
+    
 }
 
 - (void)passwordModify{

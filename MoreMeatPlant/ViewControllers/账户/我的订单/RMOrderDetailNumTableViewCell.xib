@@ -68,7 +68,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="order_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="2hI-wU-mV0">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2hI-wU-mV0">
                         <rect key="frame" x="15" y="36" width="290" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="Egh-cu-dhp"/>
@@ -105,6 +105,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottom_line" destination="2hI-wU-mV0" id="RLy-yI-H2w"/>
                 <outlet property="content_realpayL" destination="Z9e-8r-hdk" id="CaD-SM-jHM"/>
                 <outlet property="express_price" destination="Fmq-7z-QCO" id="oIr-QO-jes"/>
                 <outlet property="totalMoneyL" destination="5aX-qG-2Vt" id="VUy-LW-9xI"/>
@@ -113,7 +114,4 @@
             <point key="canvasLocation" x="53" y="272"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="order_line.png" width="1134" height="1"/>
-    </resources>
 </document>

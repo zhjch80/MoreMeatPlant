@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *create_time;
 
 @property (weak, nonatomic) IBOutlet UILabel *order_status;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 @end

@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *generalImg;
 @property (weak, nonatomic) IBOutlet UIButton *goodImg;
 @property (weak, nonatomic) IBOutlet UIButton *pefectImg;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 
 @end

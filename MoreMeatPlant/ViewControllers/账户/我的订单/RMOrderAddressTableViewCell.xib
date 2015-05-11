@@ -39,7 +39,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="had_baby_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uib-lW-45y">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uib-lW-45y">
                         <rect key="frame" x="15" y="53" width="290" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="0Tl-hq-dIj"/>
@@ -60,14 +60,12 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottom_line" destination="Uib-lW-45y" id="7M8-2t-aSR"/>
                 <outlet property="content_address" destination="kf1-zg-dEJ" id="QG5-Lq-Pli"/>
                 <outlet property="content_mobile" destination="38G-jC-2AZ" id="xTO-LX-HJp"/>
                 <outlet property="content_name" destination="BBR-CN-Sl0" id="hjE-mX-Qnf"/>
             </connections>
-            <point key="canvasLocation" x="312" y="234.5"/>
+            <point key="canvasLocation" x="182" y="132.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="had_baby_point_line.png" width="1134" height="1"/>
-    </resources>
 </document>

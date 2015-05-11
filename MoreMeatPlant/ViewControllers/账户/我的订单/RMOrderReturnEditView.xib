@@ -147,6 +147,8 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="bottom_line" destination="2Ep-fZ-4RF" id="PNb-An-jjK"/>
+                <outlet property="bottom_line1" destination="r7Q-UZ-1l6" id="H4o-a3-lTx"/>
                 <outlet property="commitBtn" destination="Ngd-QY-J0l" id="20B-E9-kDm"/>
                 <outlet property="content_address" destination="o1V-HU-osO" id="BYy-3S-dh7"/>
                 <outlet property="content_mobile" destination="G2L-Vw-9dP" id="xGH-qP-lvP"/>

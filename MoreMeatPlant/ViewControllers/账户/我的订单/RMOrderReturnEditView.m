@@ -18,10 +18,19 @@
 }
 */
 
+
+
 - (id)initWithFrame:(CGRect)frame{
     if(self == [super initWithFrame:frame]){
         _model = [[RMPublicModel alloc]init];
+        
+        _bottom_line.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"heidian", @"png")];
+
+        _bottom_line1.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"heidian", @"png")];
+
     }
     return self;
 }
+
+
 @end

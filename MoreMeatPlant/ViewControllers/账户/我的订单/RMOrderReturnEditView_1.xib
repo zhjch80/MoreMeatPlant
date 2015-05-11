@@ -41,7 +41,7 @@
                     <color key="textColor" red="0.67843137249999996" green="0.67843137249999996" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="yNk-1B-4VN">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yNk-1B-4VN">
                     <rect key="frame" x="15" y="48" width="290" height="1"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="F5J-vb-BGf"/>
@@ -108,7 +108,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="Iub-9S-omd">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Iub-9S-omd">
                     <rect key="frame" x="15" y="100" width="290" height="1"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="Hp6-jb-J9x"/>
@@ -149,6 +149,8 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="bottom_line" destination="yNk-1B-4VN" id="HdL-lh-s7O"/>
+                <outlet property="bottom_line1" destination="Iub-9S-omd" id="NhK-W7-Nq0"/>
                 <outlet property="commitBtn" destination="yOB-Ol-c6H" id="j2U-6B-KtL"/>
                 <outlet property="content_address" destination="hPK-nR-Gi9" id="Egn-zY-V2B"/>
                 <outlet property="content_mobile" destination="k5U-6R-XX1" id="DE1-rQ-d9Z"/>
@@ -161,6 +163,5 @@
     </objects>
     <resources>
         <image name="fbbb_field_bg2.png" width="1024" height="144"/>
-        <image name="gwc_point_line.png" width="1134" height="1"/>
     </resources>
 </document>

@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalMoneyL;
 @property (weak, nonatomic) IBOutlet UILabel *content_realpayL;
 @property (weak, nonatomic) IBOutlet UILabel *express_price;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 @end

@@ -18,6 +18,7 @@
             <connections>
                 <outlet property="headerImgV" destination="Vmx-kb-uIz" id="6xx-Sr-VGk"/>
                 <outlet property="hua_biL" destination="a7e-oX-CtK" id="IFG-Fo-DN8"/>
+                <outlet property="line_bottom" destination="uUd-B3-lqB" id="5nN-SZ-caP"/>
                 <outlet property="line_top" destination="vWM-Iw-NkZ" id="r4E-2c-LVd"/>
                 <outlet property="member_level" destination="KfZ-Xe-VsO" id="8YQ-Hn-hj5"/>
                 <outlet property="member_right" destination="bHq-2u-d7j" id="6K1-tM-U6g"/>
@@ -35,7 +36,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vnu-Gk-Fhe">
-                    <rect key="frame" x="0.0" y="84" width="320" height="100"/>
+                    <rect key="frame" x="0.0" y="94" width="320" height="100"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="              " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-zE-t5o">
                             <rect key="frame" x="128" y="10" width="73.5" height="20"/>
@@ -189,7 +190,7 @@
                 <constraint firstAttribute="trailing" secondItem="d9f-8o-iM2" secondAttribute="trailing" id="2ZI-fU-Xkj"/>
                 <constraint firstItem="Vnu-Gk-Fhe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Jfm-tL-jFC"/>
                 <constraint firstAttribute="trailing" secondItem="Vnu-Gk-Fhe" secondAttribute="trailing" id="SfS-RA-tQK"/>
-                <constraint firstItem="Vnu-Gk-Fhe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="84" id="V1q-HS-CBb"/>
+                <constraint firstItem="Vnu-Gk-Fhe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="94" id="V1q-HS-CBb"/>
                 <constraint firstItem="d9f-8o-iM2" firstAttribute="top" secondItem="Vnu-Gk-Fhe" secondAttribute="bottom" id="Ylu-te-rzp"/>
                 <constraint firstAttribute="bottom" secondItem="d9f-8o-iM2" secondAttribute="bottom" constant="44" id="eQT-ua-7Jo"/>
                 <constraint firstItem="d9f-8o-iM2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hgR-nT-TgP"/>

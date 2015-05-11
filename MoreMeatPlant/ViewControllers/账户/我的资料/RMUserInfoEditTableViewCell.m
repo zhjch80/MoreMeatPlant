@@ -12,6 +12,25 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    _textViewBg.backgroundColor = UIColorFromRGB(0xe5e5e5);
+    _textViewBg.layer.cornerRadius = 5;
+    
+    
+    _apliyT.backgroundColor = UIColorFromRGB(0xe5e5e5);
+    _apliyT.layer.cornerRadius = 5;
+    
+    
+    _codeField.backgroundColor = UIColorFromRGB(0xe5e5e5);
+    _codeField.layer.cornerRadius = 5;
+    
+    _sendBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"red_btn", @"png")];
+    _sendBtn.layer.cornerRadius = 5;
+    _sendBtn.clipsToBounds = YES;
+    
+    _sureModifyBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"red_btn", @"png")];
+    _sureModifyBtn.layer.cornerRadius = 5;
+    _sureModifyBtn.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

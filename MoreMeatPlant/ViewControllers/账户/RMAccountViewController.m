@@ -42,6 +42,7 @@
 #define GeneralMember @"1"
 @interface RMAccountViewController ()<RMVPImageCropperDelegate>{
     UIImageView * nav_imageView;
+    UIImageView * bottom_imageView;
     RMUserInfoViewController * userinfo;
     
     NSURL * _filePath;
@@ -60,7 +61,7 @@
     
     if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 2){
         if(nav_imageView == nil){
-            nav_imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 84+3)];
+            nav_imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 64)];
             [nav_imageView setImage:[UIImage imageNamed:@"corp_member_nav_bg"]];
             [self.view addSubview:nav_imageView];
             
@@ -79,10 +80,18 @@
             label.textColor = [UIColor whiteColor];
             label.center = CGPointMake(nav_imageView.frame.size.width/2, 20+44/2);
             [nav_imageView addSubview:label];
+            
+            bottom_imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, nav_imageView.frame.origin.y+nav_imageView.frame.size.height+2, kScreenWidth, 20)];
+            [bottom_imageView setImage:LOADIMAGE(@"corp_bottom_bg", @"png")];
+            [self.view addSubview:bottom_imageView];
+            
         }
         nav_imageView.hidden = NO;
+        bottom_imageView.hidden = NO;
+        
     }else{
         nav_imageView.hidden = YES;
+        bottom_imageView.hidden = YES;
     }
     //    corp_member_nav_bg
     
@@ -107,7 +116,10 @@
     [_line_top setImage:nil];
     _line_top.backgroundColor = [UIColor redColor];
     
-    _line_top.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dian"]];
+    _line_top.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"heidian", @"png")];
+    
+    _line_bottom.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"heidian", @"png")];
+    
     
     [self setCustomNavTitle:@"账户"];
     _headerImgV.layer.cornerRadius = 5;
@@ -170,16 +182,16 @@
     }
     
     if([[[RMUserLoginInfoManager loginmanager] isCorp] isEqualToString:GeneralMember]){//普通会员
-        functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n订单",@"我的\n帖子",@"系统\n通知",@"购物\n篮",@"等待\n升级",@"附近\n肉友",@"我的\n资料" ,@"分享",nil];
-        funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wddd",@"wdtz",@"xttz",@"gwl",@"ddsj",@"fjry",@"wdzl",@"wdzl", nil];
+        functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n订单",@"我的\n帖子",@"系统\n通知",@"购物\n篮",@"等待\n升级",@"附近\n肉友",@"我的\n资料" ,nil];
+        funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wddd",@"wdtz",@"xttz",@"gwl",@"ddsj",@"fjry",@"wdzl", nil];
         
         self.member_right_tag.hidden = YES;
         self.member_right.hidden = YES;
         self.member_level.hidden = YES;
     }
     else{//商户会员
-        functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n资料",@"已出\n宝贝",@"我的\n帖子",@"系统\n通知",@"附近\n肉友",@"宝贝\n管理",@"我的\n店铺",@"发布\n广告",@"等待\n升级",@"分享",nil];
-        funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wdzl",@"wddd",@"wdtz",@"xttz",@"fjry",@"fbbb",@"sqkd",@"fbgg",@"ddsj",@"ddsj", nil];
+        functitleArray = [NSMutableArray arrayWithObjects:@"我的\n肉友",@"我的\n钱包",@"我的\n收藏",@"我的\n资料",@"已出\n宝贝",@"我的\n帖子",@"系统\n通知",@"附近\n肉友",@"宝贝\n管理",@"我的\n店铺",@"发布\n广告",@"等待\n升级",nil];
+        funcimgArray = [NSMutableArray arrayWithObjects:@"wdry",@"wdqb",@"wdsc",@"wdzl",@"wddd",@"wdtz",@"xttz",@"fjry",@"fbbb",@"sqkd",@"fbgg",@"ddsj", nil];
         
         self.member_right_tag.hidden = NO;
         self.member_right.hidden = NO;

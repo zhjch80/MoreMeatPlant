@@ -132,6 +132,7 @@
                 }else if(indexPath.row == [model.pros count]+5-2){
                 //地址
                     RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
+                    addresscell.bottom_line.hidden = NO;
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
@@ -168,7 +169,7 @@
                 if(indexPath.row == [model.pros count]+4-1){
                     //地址
                     RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
-
+                    addresscell.bottom_line.hidden = YES;
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
@@ -217,7 +218,7 @@
             }else if(indexPath.row == [model.pros count]+5-2){
                 //地址
                 RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
-
+                addresscell.bottom_line.hidden = YES;
                 addresscell.content_name.text = model.content_linkname;
                 addresscell.content_mobile.text = model.content_mobile;
                 addresscell.content_address.text = model.content_address;
@@ -265,7 +266,7 @@
                 }else if(indexPath.row == [model.pros count]+5-2){
                     //地址
                     RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
-
+                    addresscell.bottom_line.hidden = NO;
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
@@ -303,7 +304,7 @@
                 if(indexPath.row == [model.pros count]+4-1){
                     //地址
                     RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
-
+                    addresscell.bottom_line.hidden = YES;
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
@@ -356,6 +357,7 @@
                     //                    generalImg
                     //                    goodImg
                     //                    pefectImg
+                    evaluatecell.bottom_line.hidden = YES;
                     UIButton * btn = (UIButton *)[evaluatecell.contentView viewWithTag:1000*indexPath.section+n-1];
                     [btn setImage:[UIImage imageNamed:@"order_yellow_sun"] forState:UIControlStateNormal];
                     evaluatecell.userInteractionEnabled = NO;
@@ -363,7 +365,7 @@
                 }else if(indexPath.row == [model.pros count]+5-2){
                     //地址
                     RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
-
+                    addresscell.bottom_line.hidden = NO;
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
@@ -416,6 +418,7 @@
                     //                    generalImg
                     //                    goodImg
                     //                    pefectImg
+                    evaluatecell.bottom_line.hidden = NO;
                     evaluatecell.userInteractionEnabled = YES;
                     UIButton * btn = (UIButton *)[evaluatecell.contentView viewWithTag:1000*indexPath.section+n-1];
                     [btn setImage:[UIImage imageNamed:@"order_yellow_sun"] forState:UIControlStateNormal];
@@ -423,7 +426,7 @@
                 }else if(indexPath.row == [model.pros count]+6-3){
                     //地址
                     RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
-
+                    addresscell.bottom_line.hidden = NO;
                     addresscell.content_name.text = model.content_linkname;
                     addresscell.content_mobile.text = model.content_mobile;
                     addresscell.content_address.text = model.content_address;
@@ -463,7 +466,7 @@
             if(indexPath.row == 1 +2-1){
                 //地址
                 RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
-                
+                addresscell.bottom_line.hidden = YES;
                 addresscell.content_name.text = [model.corp objectForKey:@"content_name"];
                 addresscell.content_mobile.text = [model.corp objectForKey:@"content_mobile"];
                 addresscell.content_address.text = [model.corp objectForKey:@"content_address"];
@@ -566,7 +569,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     RMPublicModel * model = [orderlists objectAtIndex:indexPath.section];
     if(indexPath.row == 0){
-               return 30.0f;
+               return 52.0f;
     }else{
         
         if([_order_type isEqualToString:@"unorder"]){

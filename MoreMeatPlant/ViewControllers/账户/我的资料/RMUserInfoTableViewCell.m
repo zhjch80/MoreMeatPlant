@@ -12,6 +12,13 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    _modifyBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"red_btn", @"png")];
+    _modifyBtn.layer.cornerRadius = 5;
+    _modifyBtn.clipsToBounds = YES;
+    
+    _editBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"red_btn", @"png")];
+    _editBtn.layer.cornerRadius = 5;
+    _editBtn.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -13,7 +13,7 @@
 
 #import "AppDelegate.h"
 
-
+#import "UIView+Expland.h"
 
 @interface RMLoginViewController ()
 
@@ -41,6 +41,20 @@
     [_forgotPassBtn addTarget:self action:@selector(forgotAction:) forControlEvents:UIControlEventTouchDown];
     [_loginBtn addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchDown];
     [_registBtn addTarget:self action:@selector(registerAction:) forControlEvents:UIControlEventTouchDown];
+    
+    _userTextField.backgroundColor = [UIColor whiteColor];
+    _userTextField.backgroundColor = [_userTextField.backgroundColor colorWithAlphaComponent:0.6];
+    [_userTextField drawCorner:UIRectCornerTopRight|
+     UIRectCornerBottomRight withFrame:CGRectMake(0, 0, kScreenWidth-_userTextField.frame.origin.x-50, _userTextField.frame.size.height)];
+    
+    
+    _passTextField.backgroundColor = [UIColor whiteColor];
+    _passTextField.backgroundColor = [_passTextField.backgroundColor colorWithAlphaComponent:0.6];
+    [_passTextField drawCorner:UIRectCornerTopRight|UIRectCornerBottomRight withFrame:CGRectMake(0, 0, kScreenWidth-_passTextField.frame.origin.x-50, _passTextField.frame.size.height)];
+    
+    [_loginBtn setBackgroundColor:[UIColor colorWithPatternImage:LOADIMAGE(@"red_btn",@"png")]];
+    _loginBtn.layer.cornerRadius = 5;
+    _loginBtn.clipsToBounds = YES;
     
 }
 

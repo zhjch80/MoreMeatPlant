@@ -133,6 +133,7 @@
             <connections>
                 <outlet property="bad" destination="Ve4-e8-msb" id="F3V-kv-XOj"/>
                 <outlet property="banImg" destination="eSL-PB-bgd" id="ADl-qW-QYs"/>
+                <outlet property="bottom_line" destination="aqz-E7-jSb" id="gVt-BW-b1n"/>
                 <outlet property="general" destination="FAX-u3-yMz" id="bOl-iJ-mre"/>
                 <outlet property="generalImg" destination="UwZ-Lm-zmN" id="QaW-r8-tiA"/>
                 <outlet property="good" destination="F17-zI-5dy" id="UFp-MI-ekJ"/>

@@ -12,4 +12,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *content_mobile;
 @property (weak, nonatomic) IBOutlet UILabel *content_name;
 @property (weak, nonatomic) IBOutlet UILabel *content_address;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 @end
