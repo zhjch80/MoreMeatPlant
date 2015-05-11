@@ -13,15 +13,15 @@
 - (void)awakeFromNib {
     // Initialization code
     
-    _textViewBg.backgroundColor = UIColorFromRGB(0xe5e5e5);
+    _textViewBg.backgroundColor = UIColorFromRGB(0xd3d3d3);
     _textViewBg.layer.cornerRadius = 5;
     
     
-    _apliyT.backgroundColor = UIColorFromRGB(0xe5e5e5);
+    _apliyT.backgroundColor = UIColorFromRGB(0xd3d3d3);
     _apliyT.layer.cornerRadius = 5;
     
     
-    _codeField.backgroundColor = UIColorFromRGB(0xe5e5e5);
+    _codeField.backgroundColor = UIColorFromRGB(0xd3d3d3);
     _codeField.layer.cornerRadius = 5;
     
     _sendBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"red_btn", @"png")];

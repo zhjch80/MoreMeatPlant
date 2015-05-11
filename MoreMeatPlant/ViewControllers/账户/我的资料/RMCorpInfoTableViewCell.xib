@@ -108,24 +108,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJY-Un-gvK">
-                                <rect key="frame" x="117" y="605" width="86" height="30"/>
+                                <rect key="frame" x="117" y="610" width="86" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="86" id="6tO-CN-yS2"/>
-                                    <constraint firstAttribute="height" constant="30" id="rWO-YM-NDD"/>
+                                    <constraint firstAttribute="height" constant="25" id="rWO-YM-NDD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
-                                <state key="normal" title="编辑" backgroundImage="member_my_home_btn.png">
+                                <state key="normal" title="编辑">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zg0-Rj-Vcs">
-                                <rect key="frame" x="252" y="55" width="60" height="25"/>
+                                <rect key="frame" x="226" y="55" width="86" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="PG3-kG-sMC"/>
+                                    <constraint firstAttribute="width" constant="86" id="PG3-kG-sMC"/>
                                     <constraint firstAttribute="height" constant="25" id="gRG-p5-5HX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                                <state key="normal" title="修改" backgroundImage="member_my_home_btn.png">
+                                <state key="normal" title="修改">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -299,7 +299,6 @@
     <resources>
         <image name="222.png" width="1242" height="403"/>
         <image name="444.png" width="1242" height="555"/>
-        <image name="member_my_home_btn.png" width="242" height="89"/>
         <image name="photo.png" width="500" height="531"/>
     </resources>
 </document>

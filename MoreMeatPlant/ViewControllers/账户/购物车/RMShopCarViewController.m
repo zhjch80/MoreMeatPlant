@@ -199,7 +199,8 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView * v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
-    v.backgroundColor = [UIColor clearColor];
+    v.backgroundColor = [UIColor blackColor];
+    v.backgroundColor = [v.backgroundColor colorWithAlphaComponent:0.8];
     return v;
 }
 

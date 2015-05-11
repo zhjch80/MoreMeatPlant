@@ -27,50 +27,50 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="我的余额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLv-7t-w7I">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的余额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLv-7t-w7I">
                         <rect key="frame" x="23" y="20" width="60" height="18.5"/>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1099米" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jcr-uc-9ny">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1099米" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jcr-uc-9ny">
                         <rect key="frame" x="93" y="20" width="52" height="18.5"/>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sjb-NV-qpc">
-                        <rect key="frame" x="250" y="16" width="46" height="25.5"/>
+                        <rect key="frame" x="239" y="16" width="57" height="25.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="46" id="9ii-R5-Acu"/>
+                            <constraint firstAttribute="width" constant="57" id="9ii-R5-Acu"/>
                             <constraint firstAttribute="height" constant="25.5" id="PHu-g0-IPY"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
-                        <state key="normal" title="充值" backgroundImage="wallet_btn.png">
+                        <state key="normal" title="充值">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="我的花币" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAv-cS-gv1">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的花币" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAv-cS-gv1">
                         <rect key="frame" x="23" y="49" width="60" height="18.5"/>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="200" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdE-PE-ALw">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdE-PE-ALw">
                         <rect key="frame" x="93" y="49" width="29.5" height="18.5"/>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="（用于发布宝贝）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9K-mF-nBM">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="（用于发布宝贝）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9K-mF-nBM">
                         <rect key="frame" x="136" y="49" width="112" height="17.5"/>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入转换数目" minimumFontSize="17" background="wallet_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="fym-63-gYD" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入转换数目" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fym-63-gYD" customClass="RMBaseTextField">
                         <rect key="frame" x="23" y="82" width="147" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="MQh-lI-e3l"/>
@@ -85,7 +85,7 @@
                             <constraint firstAttribute="height" constant="1" id="5cX-Qh-g3O"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZ5-nY-3Ui">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZ5-nY-3Ui">
                         <rect key="frame" x="173" y="82" width="123" height="25.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -93,20 +93,20 @@
                             <constraint firstAttribute="width" constant="123" id="HKQ-Ec-GfM"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
-                        <state key="normal" title="确认余额转为花币" backgroundImage="wallet_btn.png">
+                        <state key="normal" title="确认余额转为花币">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsY-yg-3hL">
-                        <rect key="frame" x="185" y="16" width="57" height="25.5"/>
+                        <rect key="frame" x="179" y="16" width="57" height="25.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25.5" id="Ewn-k5-wtW"/>
                             <constraint firstAttribute="width" constant="57" id="WGa-UM-LvA"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
-                        <state key="normal" title="充值记录" backgroundImage="wallet_btn.png">
+                        <state key="normal" title="充值记录">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -125,7 +125,7 @@
                     <constraint firstItem="fym-63-gYD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="N1s-xe-7eD"/>
                     <constraint firstItem="NAv-cS-gv1" firstAttribute="top" secondItem="xLv-7t-w7I" secondAttribute="bottom" constant="10.5" id="NNL-zh-Rgx"/>
                     <constraint firstAttribute="bottomMargin" secondItem="hC8-Dy-gwk" secondAttribute="bottom" constant="-8" id="Pzz-o8-yju"/>
-                    <constraint firstItem="Sjb-NV-qpc" firstAttribute="leading" secondItem="MsY-yg-3hL" secondAttribute="trailing" constant="8" id="VgN-RM-YJc"/>
+                    <constraint firstItem="Sjb-NV-qpc" firstAttribute="leading" secondItem="MsY-yg-3hL" secondAttribute="trailing" constant="3" id="VgN-RM-YJc"/>
                     <constraint firstItem="fym-63-gYD" firstAttribute="centerY" secondItem="PZ5-nY-3Ui" secondAttribute="centerY" id="dvF-iN-n8L"/>
                     <constraint firstItem="hC8-Dy-gwk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="eQ3-Lf-mau"/>
                     <constraint firstItem="sdE-PE-ALw" firstAttribute="leading" secondItem="NAv-cS-gv1" secondAttribute="trailing" constant="10" id="gD9-Ak-5Oh"/>
@@ -137,6 +137,7 @@
                     <constraint firstItem="fym-63-gYD" firstAttribute="top" secondItem="sdE-PE-ALw" secondAttribute="bottom" constant="14.5" id="zpu-gf-Dv3"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="chargeBtn" destination="Sjb-NV-qpc" id="4hs-qz-GYe"/>
                 <outlet property="chargeRecordBtn" destination="MsY-yg-3hL" id="nAq-FM-XZj"/>
@@ -151,8 +152,4 @@
             <point key="canvasLocation" x="215" y="210.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="wallet_btn.png" width="237" height="80"/>
-        <image name="wallet_input.png" width="530" height="68"/>
-    </resources>
 </document>

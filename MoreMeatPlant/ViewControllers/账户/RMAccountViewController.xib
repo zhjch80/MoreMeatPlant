@@ -44,13 +44,13 @@
                             <color key="textColor" red="0.8784313725490196" green="0.0" blue="0.22352941176470589" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="member_pointline.png" translatesAutoresizingMaskIntoConstraints="NO" id="vWM-Iw-NkZ">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vWM-Iw-NkZ">
                             <rect key="frame" x="127" y="35" width="184" height="1"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="t4p-ek-OgK"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="member_pointline.png" translatesAutoresizingMaskIntoConstraints="NO" id="uUd-B3-lqB">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uUd-B3-lqB">
                             <rect key="frame" x="127" y="55.5" width="184" height="1"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="BTC-jq-A0P"/>
@@ -209,7 +209,6 @@
         <image name="member_level_icon.png" width="65" height="65"/>
         <image name="member_level_left.png" width="125" height="60"/>
         <image name="member_level_right.png" width="125" height="60"/>
-        <image name="member_pointline.png" width="831" height="1"/>
         <image name="member_region_icon.png" width="47" height="47"/>
     </resources>
 </document>

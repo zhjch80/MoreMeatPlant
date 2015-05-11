@@ -1086,14 +1086,13 @@
                 [orderlists addObjectsFromArray:object];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
                 if([object count] == 0){
-                    [MBProgressHUD showSuccess:@"暂无订单" toView:self.view];
-                    
+                    [self showHint:@"暂无订单"];
                 }
             }else{
                 [orderlists addObjectsFromArray:object];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
                 if([object count] == 0){
-                    [MBProgressHUD showSuccess:@"没有更多订单了" toView:self.view];
+                    [self showHint:@"没有更多订单了"];
                     pageCount--;
                 }
             }

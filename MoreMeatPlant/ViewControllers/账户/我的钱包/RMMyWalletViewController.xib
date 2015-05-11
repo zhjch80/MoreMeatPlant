@@ -47,7 +47,7 @@
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Eh7-oz-ndl">
                     <rect key="frame" x="0.0" y="58" width="319" height="360"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="tDM-jl-BJ9"/>
                         <outlet property="delegate" destination="-1" id="jLD-N1-ERU"/>

@@ -38,12 +38,12 @@
                             <constraint firstAttribute="height" constant="25.5" id="QCi-xM-L36"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
-                        <state key="normal" title="确认转出" backgroundImage="wallet_btn.png">
+                        <state key="normal" title="确认转出">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入对方账号" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="P2E-S6-3xG" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入对方账号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2E-S6-3xG" customClass="RMBaseTextField">
                         <rect key="frame" x="122" y="44" width="171" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="3jE-KO-fxB"/>
@@ -69,7 +69,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入提现金额" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="lbn-Ga-fd0" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入提现金额" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lbn-Ga-fd0" customClass="RMBaseTextField">
                         <rect key="frame" x="92" y="130" width="201" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="7Qs-5D-bmq"/>
@@ -89,7 +89,7 @@
                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="W5a-KN-jjY" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W5a-KN-jjY" customClass="RMBaseTextField">
                         <rect key="frame" x="172" y="219" width="121" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="TWg-3G-0Ex"/>
@@ -106,7 +106,7 @@
                             <constraint firstAttribute="height" constant="30" id="i7d-1X-RIb"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
-                        <state key="normal" title="确认提现" backgroundImage="wallet_btn.png">
+                        <state key="normal" title="确认提现">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -134,12 +134,12 @@
                             <constraint firstAttribute="height" constant="25.5" id="pje-Y3-25Z"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="11"/>
-                        <state key="normal" title="发送验证码" backgroundImage="wallet_btn.png">
+                        <state key="normal" title="发送验证码">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入金额" minimumFontSize="17" background="wallet_input2.png" translatesAutoresizingMaskIntoConstraints="NO" id="pAv-El-34F" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入金额" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pAv-El-34F" customClass="RMBaseTextField">
                         <rect key="frame" x="122" y="75" width="106" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="8gK-kF-94r"/>
@@ -194,6 +194,7 @@
                     <constraint firstItem="qxJ-9P-vme" firstAttribute="top" secondItem="OsZ-Xd-UFU" secondAttribute="bottom" constant="3.5" id="zBj-VA-ipz"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="alipayName" destination="OsZ-Xd-UFU" id="1IF-mP-nxD"/>
                 <outlet property="codeField" destination="W5a-KN-jjY" id="kQs-o7-e2y"/>
@@ -208,8 +209,4 @@
             <point key="canvasLocation" x="139" y="280"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="wallet_btn.png" width="237" height="80"/>
-        <image name="wallet_input2.png" width="628" height="68"/>
-    </resources>
 </document>

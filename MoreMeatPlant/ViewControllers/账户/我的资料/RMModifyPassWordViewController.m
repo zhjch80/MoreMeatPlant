@@ -29,11 +29,14 @@
     _sureModifyBtn.layer.cornerRadius = 5;
     _sureModifyBtn.clipsToBounds = YES;
     
-    _oldTextField.backgroundColor = UIColorFromRGB(0xe5e5e5);
+    _oldTextField.backgroundColor = UIColorFromRGB(0xd3d3d3);
     _oldTextField.layer.cornerRadius = 5;
     
-    _twoTextField.backgroundColor = UIColorFromRGB(0xe5e5e5);
+    _twoTextField.backgroundColor = UIColorFromRGB(0xd3d3d3);
     _twoTextField.layer.cornerRadius = 5;
+    
+    _sureTextField.backgroundColor = UIColorFromRGB(0xd3d3d3);
+    _sureTextField.layer.cornerRadius = 5;
     
 }
 

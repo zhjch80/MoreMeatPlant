@@ -12,6 +12,17 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    _yue_Z_huabiTextField.backgroundColor = UIColorFromRGB(0xe5e5e5);
+    _yue_Z_huabiTextField.layer.cornerRadius = 5;
+    
+    _chargeBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"hei_btn", @"png")];
+    _chargeBtn.layer.cornerRadius = 5;
+    _chargeBtn.clipsToBounds = YES;
+    
+    _chargeRecordBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"hei_btn", @"png")];
+    _chargeRecordBtn.layer.cornerRadius = 5;
+    _chargeRecordBtn.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
