@@ -20,7 +20,7 @@
     
     UILabel * sTitle = [[UILabel alloc] init];
     sTitle.frame = CGRectMake(0, 0, width, self.frame.size.height-1);
-    sTitle.font = [UIFont systemFontOfSize:14.0];
+    sTitle.font = FONT_1(14.0);
     sTitle.text = str;
     [self addSubview:sTitle];
     
