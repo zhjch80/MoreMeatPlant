@@ -286,6 +286,7 @@
         [cell.rightUpTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:1] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
         [cell.rightDownTwoImg sd_setImageWithURL:[NSURL URLWithString:[[model.imgs objectAtIndex:2] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
 
+        
         cell.leftTwoImg.identifierString = model.auto_id;
         cell.rightUpTwoImg.identifierString = model.auto_id;
         cell.rightDownTwoImg.identifierString = model.auto_id;
