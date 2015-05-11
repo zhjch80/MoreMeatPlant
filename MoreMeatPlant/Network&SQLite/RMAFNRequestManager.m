@@ -9,6 +9,7 @@
 #import "RMAFNRequestManager.h"
 #import "RMHttpOperationShared.h"
 #import "CONST.h"
+#import "OpenUDID.h"
 
 #define baseUrl             @"http://218.240.30.6/drzw/index.php?com=com_appService"
 
@@ -52,7 +53,8 @@
  *  @method     首页栏目
  */
 + (void)getHomeColumnsNumberCallBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=indexNum&level=2",baseUrl];
+    NSString * openUDID = [OpenUDID value];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=indexNum&app_id=%@&level=2",baseUrl,openUDID];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
@@ -109,7 +111,17 @@
  *      970（放毒区）971（一肉一拍）972（鲜肉市场）973（肉肉交换）977（新手教程）
  */
 + (void)getNewsWithOptionid:(NSInteger)optionid withPageCount:(NSInteger)pageCount callBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNews&data=1&per=1&row=10&optionid=%ld&page=%ld",baseUrl,(long)optionid,(long)pageCount];
+    NSString * openUIID = [OpenUDID value];
+    NSString * url;
+    if (optionid == 977){
+        if (pageCount == 1){
+            url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNews&data=1&per=1&row=10&optionid=%ld&page=%ld&app_id=%@",baseUrl,(long)optionid,(long)pageCount,openUIID];
+        }else{
+            url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNews&data=1&per=1&row=10&optionid=%ld&page=%ld",baseUrl,(long)optionid,(long)pageCount];
+        }
+    }else{
+        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNews&data=1&per=1&row=10&optionid=%ld&page=%ld",baseUrl,(long)optionid,(long)pageCount];
+    }
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
@@ -262,8 +274,14 @@
                             withCount:(NSInteger)pageCount
                              callBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = nil;
+    NSString * openUDID = [OpenUDID value];
+    
     if(corp_id == nil){
-        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%ld&course=%@&per=1&row=12&page=%ld",baseUrl,(long)plantClass,plantCourse,(long)pageCount];
+        if (pageCount == 1){
+            url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%ld&course=%@&per=1&row=12&page=%ld&app_id=%@",baseUrl,(long)plantClass,plantCourse,(long)pageCount,openUDID];
+        }else{
+            url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&class=%ld&course=%@&per=1&row=12&page=%ld",baseUrl,(long)plantClass,plantCourse,(long)pageCount];
+        }
     }else{
         if(![memberClass isEqualToString:[@"全部" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]){
             url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopProduct&per=1&row=12&page=%ld&memberclass=%@&corp_id=%@",baseUrl,(long)pageCount,memberClass,corp_id];
@@ -320,8 +338,14 @@
                      withMemberId:(NSString *)member_id
                          callBack:(RMAFNRequestManagerCallBack)block {
     NSString * url = nil;
+    NSString * openUIID = [OpenUDID value];
+    
     if(member_id == nil){
-        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&type=%@&class=%@&course=%@&per=1&row=10&page=%ld&ID=%@&PWD=%@",baseUrl,postsType,plantType,plantSubjects,(long)pageCount,user_id,user_password];
+        if (pageCount == 1){
+            url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&type=%@&class=%@&course=%@&per=1&row=10&page=%ld&ID=%@&PWD=%@&app_id=%@",baseUrl,postsType,plantType,plantSubjects,(long)pageCount,user_id,user_password,openUIID];
+        }else{
+            url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&type=%@&class=%@&course=%@&per=1&row=10&page=%ld&ID=%@&PWD=%@",baseUrl,postsType,plantType,plantSubjects,(long)pageCount,user_id,user_password];
+        }
     }else{
         url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNote&per=1&row=10&page=%ld&ID=%@&PWD=%@&member_id=%@",baseUrl,(long)pageCount,user_id,user_password,member_id];
     }

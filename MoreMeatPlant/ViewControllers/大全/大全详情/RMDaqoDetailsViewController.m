@@ -225,6 +225,8 @@
     
     offsetY = (offsetY < 0 ? 0 : offsetY);
     
+    offsetY = 0;
+    
     RMDaqoDetailsFooterView * tableFooterView = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoDetailsFooterView" owner:nil options:nil] objectAtIndex:0];
     tableFooterView.delegate = self;
     tableFooterView.backgroundColor = [UIColor clearColor];
@@ -240,9 +242,11 @@
     tableFooterView.intro.frame = CGRectMake(tableFooterView.intro.frame.origin.x, tableFooterView.intro.frame.origin.y, kScreenWidth - 20, tableFooterView.intro.frame.size.height + offsetY);
     
     tableFooterView.lineOne.frame = CGRectMake(tableFooterView.lineOne.frame.origin.x, tableFooterView.lineOne.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineOne.frame.size.height);
+    tableFooterView.lineOne.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"baidian"]];
 
     tableFooterView.lineTwo.frame = CGRectMake(tableFooterView.lineTwo.frame.origin.x, tableFooterView.lineTwo.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineTwo.frame.size.height);
-    
+    tableFooterView.lineTwo.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"baidian"]];
+
     tableFooterView.atlas.frame = CGRectMake(tableFooterView.atlas.frame.origin.x, tableFooterView.atlas.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.atlas.frame.size.height);
     
     for (NSInteger i=0; i<10; i++){
@@ -253,10 +257,10 @@
     tableFooterView.planting.frame = CGRectMake(tableFooterView.planting.frame.origin.x, tableFooterView.planting.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.planting.frame.size.height);
     
     tableFooterView.lineThree.frame = CGRectMake(tableFooterView.lineThree.frame.origin.x, tableFooterView.lineThree.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineThree.frame.size.height);
-    tableFooterView.lineTwo.image = nil;
-    tableFooterView.lineTwo.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"baidian"]];
+    tableFooterView.lineThree.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"baidian"]];
     
     tableFooterView.lineFour.frame = CGRectMake(tableFooterView.lineFour.frame.origin.x, tableFooterView.lineFour.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineFour.frame.size.height);
+    tableFooterView.lineFour.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"baidian"]];
 
     tableFooterView.breeding.frame = CGRectMake(tableFooterView.breeding.frame.origin.x, tableFooterView.breeding.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.breeding.frame.size.height);
     
@@ -303,15 +307,15 @@
         }
         
         if (i == 1){
-            image.center = CGPointMake(leftCenterImg.frame.origin.x - 15, image.center.y);
+            image.center = CGPointMake(leftCenterImg.frame.origin.x - 10, image.center.y);
         }
         
         if (i == 3){
-            image.center = CGPointMake(leftCenterImg.frame.origin.x + 35, image.center.y);
+            image.center = CGPointMake(leftCenterImg.frame.origin.x + 25, image.center.y);
         }
         
         if (i == 4){
-            image.center = CGPointMake(leftCenterImg.frame.origin.x + 50, image.center.y);
+            image.center = CGPointMake(leftCenterImg.frame.origin.x + 42, image.center.y);
         }
         
         if (i >= dataModel.content_plant1.integerValue){
@@ -324,19 +328,19 @@
     for (NSInteger i=0; i<5; i++) {
         UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:506+i];
         if (i == 0){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x - 40, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x - 35, image.center.y);
         }
         
         if (i == 1){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x - 20, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x - 12, image.center.y);
         }
         
         if (i == 3){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x + 40, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x + 32, image.center.y);
         }
         
         if (i == 4){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x + 60, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x + 55, image.center.y);
         }
         
         if (i >= dataModel.content_plant2.integerValue){
