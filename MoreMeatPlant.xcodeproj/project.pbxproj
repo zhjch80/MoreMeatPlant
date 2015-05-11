@@ -457,6 +457,7 @@
 		4B3A2AE01AE9574500E1EC24 /* RMLongPostFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2ADF1AE9574500E1EC24 /* RMLongPostFooterView.xib */; };
 		4B3A2AE21AE9F58A00E1EC24 /* RMStartLongPostingCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2AE11AE9F58A00E1EC24 /* RMStartLongPostingCell_4.xib */; };
 		4BCB3BB31AF5B0F80099DF4D /* transparent_img.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4BCB3BB21AF5B0F80099DF4D /* transparent_img.jpg */; };
+		4BFC2E8A1B00E0A600127C27 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFC2E891B00E0A600127C27 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BFFA7251AE8EB4A00D0D462 /* RefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFA7241AE8EB4A00D0D462 /* RefreshView.m */; };
 		5120FDC81AB5D9E3000E9BE1 /* RMMyHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5120FDC61AB5D9E3000E9BE1 /* RMMyHomeViewController.m */; };
 		5120FDC91AB5D9E3000E9BE1 /* RMMyHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5120FDC71AB5D9E3000E9BE1 /* RMMyHomeViewController.xib */; };
@@ -1701,6 +1702,8 @@
 		4B3A2ADF1AE9574500E1EC24 /* RMLongPostFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMLongPostFooterView.xib; sourceTree = "<group>"; };
 		4B3A2AE11AE9F58A00E1EC24 /* RMStartLongPostingCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMStartLongPostingCell_4.xib; sourceTree = "<group>"; };
 		4BCB3BB21AF5B0F80099DF4D /* transparent_img.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = transparent_img.jpg; sourceTree = "<group>"; };
+		4BFC2E881B00E0A600127C27 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		4BFC2E891B00E0A600127C27 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		4BFFA7231AE8EB4A00D0D462 /* RefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshView.h; sourceTree = "<group>"; };
 		4BFFA7241AE8EB4A00D0D462 /* RefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshView.m; sourceTree = "<group>"; };
 		5120FDC51AB5D9E3000E9BE1 /* RMMyHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMyHomeViewController.h; sourceTree = "<group>"; };
@@ -3484,9 +3487,10 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1D64F50D1A90CD150073EB98 /* CONST.h */,
+				4BFC2E871B00E0A600127C27 /* DeviceInfo */,
 				4B23D6431AFDEFC700254F4F /* STDbKit */,
 				51783FE11AF86AA400C6EE18 /* ActivityIndicator */,
-				1D64F50D1A90CD150073EB98 /* CONST.h */,
 				51B375E71AE6802B00E332CA /* JKCountDownButton */,
 				51DB4E1C1AD1B3F000A6064D /* ShareSDK */,
 				51DB4E181AD1525000A6064D /* UIAlerView+Expland */,
@@ -4132,6 +4136,15 @@
 				4B23D64F1AFDEFC700254F4F /* STDbVersion.h */,
 			);
 			path = Private;
+			sourceTree = "<group>";
+		};
+		4BFC2E871B00E0A600127C27 /* DeviceInfo */ = {
+			isa = PBXGroup;
+			children = (
+				4BFC2E881B00E0A600127C27 /* OpenUDID.h */,
+				4BFC2E891B00E0A600127C27 /* OpenUDID.m */,
+			);
+			path = DeviceInfo;
 			sourceTree = "<group>";
 		};
 		5120FDC41AB5D99C000E9BE1 /* 我的主页 */ = {
@@ -6447,6 +6460,7 @@
 				5146120A1AE2105B0040E462 /* ApplyFriendCell.m in Sources */,
 				0A4105751ABAB3C70060FBD5 /* MKAnnotationView+EMWebCache.m in Sources */,
 				514611E31AE2105B0040E462 /* ChatListCell.m in Sources */,
+				4BFC2E8A1B00E0A600127C27 /* OpenUDID.m in Sources */,
 				0A4105621ABAB3C70060FBD5 /* EmojiEmoticons.m in Sources */,
 				1DD699371AC10F02009A9327 /* UIImage+MultiFormat.m in Sources */,
 				1D8397321AB2DEBA00DA190A /* RMBaseTextField.m in Sources */,
