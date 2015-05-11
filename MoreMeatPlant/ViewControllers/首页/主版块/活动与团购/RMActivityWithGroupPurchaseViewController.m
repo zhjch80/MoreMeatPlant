@@ -127,8 +127,15 @@
     
     UIView * headView = [[UIView alloc] init];
     
+    CGFloat versionValue = 0;
+    if (IS_IPHONE_5_SCREEN | IS_IPHONE_4_SCREEN){
+        versionValue = 45;
+    }else{
+        versionValue = 60;
+    }
+    
     RMImageView * rmImage = [[RMImageView alloc] init];
-    rmImage.frame = CGRectMake(0, 0, kScreenWidth, 45);
+    rmImage.frame = CGRectMake(0, 0, kScreenWidth, versionValue);
     rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
     [rmImage addTarget:self withSelector:@selector(jumpPoisonNearbyMerchant)];
     [headView addSubview:rmImage];

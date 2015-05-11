@@ -853,7 +853,7 @@
             NSLog(@"多聊");
             KxMenuItem * item1 = [KxMenuItem menuItem:@"多聊消息" image:nil target:self action:@selector(menuSelected:) index:100];
             item1.foreColor = UIColorFromRGB(0x585858);
-            KxMenuItem * item2 = [KxMenuItem menuItem:@"一肉一拍" image:nil target:self action:@selector(menuSelected:) index:101];
+            KxMenuItem * item2 = [KxMenuItem menuItem:@"一物一拍" image:nil target:self action:@selector(menuSelected:) index:101];
             item2.foreColor = UIColorFromRGB(0x585858);
             KxMenuItem * item3 = [KxMenuItem menuItem:@"鲜肉市场" image:nil target:self action:@selector(menuSelected:) index:101];
             item3.foreColor = UIColorFromRGB(0x585858);

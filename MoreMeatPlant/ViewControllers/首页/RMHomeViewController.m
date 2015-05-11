@@ -28,6 +28,7 @@
 
 #import "RMReleasePoisonDetailsViewController.h"
 #import "RMMyCorpViewController.h"
+#import "UIImage+LK.h"
 
 typedef enum{
     kRMDefault = 100,
@@ -115,27 +116,51 @@ typedef enum{
 - (void)loadTableHeaderView {
     UIView * headerView = [[UIView alloc] init];
     
+    CGFloat versionValue = 0;
+    if (IS_IPHONE_5_SCREEN | IS_IPHONE_4_SCREEN){
+        versionValue = 45;
+    }else{
+        versionValue = 60;
+    }
+    
     RMImageView * rmImage = [[RMImageView alloc] init];
-    rmImage.frame = CGRectMake(0, 0, kScreenWidth, 45);
+    rmImage.frame = CGRectMake(0, 0, kScreenWidth, versionValue);
     rmImage.backgroundColor = [UIColor greenColor];
     rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
     [rmImage addTarget:self withSelector:@selector(jumpHomeNearbyMerchant)];
     [headerView addSubview:rmImage];
     
-    NSInteger value = 0;
+    NSInteger value = 1;
+    CGFloat chageHeight = 0;
     for (NSInteger i=0; i<[advertisingArr count]; i++) {
         RMImageView * popularizeView = [[RMImageView alloc] init];
         RMPublicModel * model = [advertisingArr objectAtIndex:i];
-        popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + i*45, kScreenWidth, 45);
         popularizeView.identifierString = model.member_id;
         popularizeView.content_type = model.note_id;
         [popularizeView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        
+        CGSize size = [UIImage downloadImageSizeWithURL:[NSURL URLWithString:model.content_img]];
+        CGFloat height = size.height/size.width * kScreenWidth;
+        
+        popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + chageHeight + value * 2, kScreenWidth, height);
+
         [popularizeView addTarget:self withSelector:@selector(jumpPopularize:)];
         [headerView addSubview:popularizeView];
+        chageHeight = chageHeight + height;
+        
+        UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, popularizeView.frame.origin.y + popularizeView.frame.size.height, kScreenWidth, 2)];
+        line.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+        [headerView addSubview:line];
+        
+        if (i==0){
+            UIView * _line = [[UIView alloc] initWithFrame:CGRectMake(0, rmImage.frame.size.height, kScreenWidth, 2)];
+            _line.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+            [headerView addSubview:_line];
+        }
         value ++;
     }
 
-    headerView.frame = CGRectMake(0, 0, kScreenWidth, rmImage.frame.size.height + value * 45);
+    headerView.frame = CGRectMake(0, 0, kScreenWidth, rmImage.frame.size.height + chageHeight + (value-1) * 2);
     
     mTableView.tableHeaderView = headerView;
 }
@@ -275,7 +300,6 @@ typedef enum{
 #pragma mark - 跳转广告位置
 
 - (void)jumpPopularize:(RMImageView *)image {
-    NSLog(@"会员标识:%@",image.identifierString);
     if([image.content_type isEqualToString:@"0"]){
         RMMyCorpViewController * corp = [[RMMyCorpViewController alloc]initWithNibName:@"RMMyCorpViewController" bundle:nil];
         corp.auto_id = image.identifierString;

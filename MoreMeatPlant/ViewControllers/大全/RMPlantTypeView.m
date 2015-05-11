@@ -46,8 +46,8 @@
         kHeightChangeOffset = 0.0;
         kHeightNormalOffset = 0.0;
     }else{
-        kWidthOffset = 0.0;
-        kHeightOffset = 0.0;
+        kWidthOffset = -2.0;
+        kHeightOffset = -2.0;
         kHeightY = 0.0;
         kHeightChangeOffset = 0.0;
         kHeightNormalOffset = 0.0;
@@ -63,11 +63,11 @@
         rmImg.tag = 400+i;
         rmImg.identifierString = [NSString stringWithFormat:@"%ld",(long)i];
         if (i==0){
-            rmImg.frame = CGRectMake(i*(width/counts), 5 + kHeightY, 44+kWidthOffset, 49 + kHeightOffset);
+            rmImg.frame = CGRectMake(i*(width/counts) + 5 - i*1, 5 + kHeightY, 44+kWidthOffset, 49 + kHeightOffset);
             rmImg.image = [UIImage imageNamed:@"img_tzArrowed_1"];
 //            [rmImg sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
         }else{
-            rmImg.frame = CGRectMake(i*(width/counts), 5 + kHeightY, 44+kWidthOffset, 44 + kHeightOffset);
+            rmImg.frame = CGRectMake(i*(width/counts) + 5 - i*1, 5 + kHeightY, 44+kWidthOffset, 44 + kHeightOffset);
             [rmImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         }
         [rmImg addTarget:self withSelector:@selector(selectedPlantType:)];
@@ -90,7 +90,7 @@
             RMImageView * img = (RMImageView *)[self viewWithTag:400 + i];
             RMPublicModel * model = [imagesArr objectAtIndex:i];
 
-            img.frame = CGRectMake(i*(width/counts), 5 + kHeightY, 44+kWidthOffset, 44 + kHeightOffset);
+            img.frame = CGRectMake(i*(width/counts) + 5 - i*1, 5 + kHeightY, 44+kWidthOffset, 44 + kHeightOffset);
             if (img.identifierString.integerValue == currentType){
                 if (i==0){
                     img.image = [UIImage imageNamed:@"img_tzArrowed_1"];
@@ -123,7 +123,7 @@
         RMImageView * img = (RMImageView *)[self viewWithTag:400 + i];
         RMPublicModel * model = [imagesArr objectAtIndex:i];
         
-        img.frame = CGRectMake(i*(width/counts), 5 + kHeightY, 44+kWidthOffset, 44 + kHeightOffset);
+        img.frame = CGRectMake(i*(width/counts) + 5 - i*1, 5 + kHeightY, 44+kWidthOffset, 44 + kHeightOffset);
         
         if (value == i){
             if (i==0){

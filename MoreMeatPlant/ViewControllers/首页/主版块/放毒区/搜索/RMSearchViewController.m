@@ -59,7 +59,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if ([self.searchWhere isEqualToString:@"一肉一拍"] || [self.searchWhere isEqualToString:@"放毒区"]){
+    if ([self.searchWhere isEqualToString:@"一物一拍"] || [self.searchWhere isEqualToString:@"放毒区"]){
         classValue = 1;
     }else if ([self.searchWhere isEqualToString:@"鲜肉市场"] || [self.searchWhere isEqualToString:@"肉肉交换"]){
         classValue = 2;
@@ -775,7 +775,7 @@
 - (void)jumpPlantDetailsWithImage:(RMImageView *)image {
     RMPlantWithSaleDetailsViewController * plantWithSaleDetailsCtl = [[RMPlantWithSaleDetailsViewController alloc] init];
     plantWithSaleDetailsCtl.auto_id = image.identifierString;
-    plantWithSaleDetailsCtl.mTitle = @"一肉一拍";
+    plantWithSaleDetailsCtl.mTitle = @"一物一拍";
     [self.navigationController pushViewController:plantWithSaleDetailsCtl animated:YES];
 }
 

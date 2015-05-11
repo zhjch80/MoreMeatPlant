@@ -714,7 +714,7 @@
         [alert show];
         return;
     }else if([current_Model.content_class isEqualToString:@"1"]&&current_Model.content_num.integerValue > 1){
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"一肉一拍市场的宝贝只能有一件" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"一物一拍市场的宝贝只能有一件" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];
         return;
     }

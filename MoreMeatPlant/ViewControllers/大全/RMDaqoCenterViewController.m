@@ -38,7 +38,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
     plantClassification = @"";
     currentPlantSubjects = @"";
     currentPlantGrow = @"";
@@ -55,7 +54,7 @@
     
     dataArr = [[NSMutableArray alloc] init];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, plantTypeView.frame.size.height + 64 , kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 44) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, plantTypeView.frame.size.height + 64 , kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 38) style:UITableViewStylePlain];
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     mTableView.delegate = self;
     mTableView.dataSource = self;

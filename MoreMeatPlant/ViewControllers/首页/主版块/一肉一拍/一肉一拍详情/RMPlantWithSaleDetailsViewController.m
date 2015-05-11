@@ -545,7 +545,7 @@
                     }
                 }
                 cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];
-                [self showHint:@"一肉一拍区的宝贝只能选择一个哦！"];
+                [self showHint:@"一物一拍区的宝贝只能选择一个哦！"];
             }else{
                 num ++;
                 cell.showNum.text = [NSString stringWithFormat:@"%ld",(long)num];

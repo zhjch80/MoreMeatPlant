@@ -26,6 +26,7 @@
 #import "RMMyCorpViewController.h"
 #import "RMReleasePoisonDetailsViewController.h"
 #import "JSBadgeView.h"
+#import "UIImage+LK.h"
 
 @interface RMFreshPlantMarketViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,BottomDelegate,JumpPlantDetailsDelegate,RefreshControlDelegate>{
     BOOL isFirstViewDidAppear;
@@ -218,26 +219,49 @@
 - (void)loadTableViewHead {
     UIView * headView = [[UIView alloc] init];
 
+    CGFloat versionValue = 0;
+    if (IS_IPHONE_5_SCREEN | IS_IPHONE_4_SCREEN){
+        versionValue = 45;
+    }else{
+        versionValue = 60;
+    }
+    
     RMImageView * rmImage = [[RMImageView alloc] init];
-    rmImage.frame = CGRectMake(0, 0, kScreenWidth, 45);
+    rmImage.frame = CGRectMake(0, 0, kScreenWidth, versionValue);
     rmImage.image = LOADIMAGE(@"img_02", kImageTypePNG);
     [rmImage addTarget:self withSelector:@selector(jumpPlantWithSaleNearbyMerchant)];
     [headView addSubview:rmImage];
     
-    NSInteger value = 0;
+    CGFloat changeHeight = 0;
+    NSInteger value = 1;
     for (NSInteger i=0; i<[advertisingArr count]; i++) {
         RMImageView * popularizeView = [[RMImageView alloc] init];
         RMPublicModel * model = [advertisingArr objectAtIndex:i];
-        popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + i*45, kScreenWidth, 45);
         popularizeView.identifierString = model.member_id;
         popularizeView.content_type = model.note_id;
         [popularizeView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        
+        CGSize size = [UIImage downloadImageSizeWithURL:[NSURL URLWithString:model.content_img]];
+        CGFloat _height = size.height/size.width * kScreenWidth;
+        popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + changeHeight + value * 2, kScreenWidth, _height);
+        
         [popularizeView addTarget:self withSelector:@selector(jumpPopularize:)];
         [headView addSubview:popularizeView];
+        changeHeight = changeHeight + _height;
+        
+        UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, popularizeView.frame.origin.y + popularizeView.frame.size.height, kScreenWidth, 2)];
+        line.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+        [headView addSubview:line];
+        
+        if (i==0){
+            UIView * _line = [[UIView alloc] initWithFrame:CGRectMake(0, rmImage.frame.size.height, kScreenWidth, 2)];
+            _line.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+            [headView addSubview:_line];
+        }
         value ++;
     }
     
-    CGFloat height = rmImage.frame.size.height + value * 45;
+    CGFloat height = rmImage.frame.size.height + changeHeight + value * 2;
     
     for (NSInteger i=0; i<[newsArr count]; i++) {
         RMPublicModel * model = [newsArr objectAtIndex:i];

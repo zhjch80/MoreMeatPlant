@@ -391,9 +391,9 @@
             
             CGRect rect_1 = [cell boundingRectCommentWith:[NSString stringWithFormat:@"%@",[model.returns objectForKey:@"content_body"]]];
             
-            cell.comments_2_1_bgView.frame = CGRectMake(cell.comments_2_1_bgView.frame.origin.x, cell.comments_2_1_bgView.frame.origin.y, kScreenWidth - 95, rect_1.size.height + 20);
+            cell.comments_2_1_bgView.frame = CGRectMake(cell.comments_2_1_bgView.frame.origin.x, cell.comments_2_1_bgView.frame.origin.y, kScreenWidth - 95, rect_1.size.height + 25);
             
-            cell.comments_2_1.frame = CGRectMake(cell.comments_2_1.frame.origin.x, cell.comments_2_1.frame.origin.y, kScreenWidth - 105, rect_1.size.height + 20);
+            cell.comments_2_1.frame = CGRectMake(cell.comments_2_1.frame.origin.x, cell.comments_2_1.frame.origin.y + 5, kScreenWidth - 105, rect_1.size.height + 20);
             
             cell.comments_2_1.text = [NSString stringWithFormat:@"%@\n%@",[[model.returns objectForKey:@"member"] objectForKey:@"member_name"],[NSString stringWithFormat:@"%@",[model.returns objectForKey:@"content_body"]]];
             [cell.comments_2_1 sizeToFit];
@@ -407,14 +407,14 @@
 
             CGRect rect_2 = [cell boundingRectCommentWith:[NSString stringWithFormat:@"%@",model.content_body]];
             
-            cell.comments_2_2.frame = CGRectMake(cell.comments_2_2.frame.origin.x, cell.comments_2_1.frame.origin.y + cell.comments_2_1.frame.size.height + 5, kScreenWidth - 105, rect_2.size.height);
+            cell.comments_2_2.frame = CGRectMake(cell.comments_2_2.frame.origin.x, cell.comments_2_1.frame.origin.y + cell.comments_2_1.frame.size.height + 15, kScreenWidth - 105, rect_2.size.height);
             
             cell.comments_2_2.text = model.content_body;
             [cell.comments_2_2 sizeToFit];
             
             [cell setFrame:CGRectMake(0, 0, kScreenWidth, 45 + cell.comments_2_1.frame.size.height + cell.comments_2_2.frame.size.height + 20)];
             
-            cell.line_2.frame = CGRectMake(0, cell.frame.size.height-1, kScreenWidth, 1);
+            cell.line_2.frame = CGRectMake(0, cell.frame.size.height + 15, kScreenWidth, 1);
             
             return cell;
         }else{
@@ -468,7 +468,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+    return cell.frame.size.height + 15;
 }
 
 #pragma mark - 跳转到广告位置

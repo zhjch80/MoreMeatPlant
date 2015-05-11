@@ -16,6 +16,8 @@
 @interface RMPostMessageView (){
     CGFloat kHeightX;
     CGFloat kHeightY;
+    
+    CGFloat kMarginWidth;
 }
 @property (nonatomic, strong) UIImageView * subView;
 @property (nonatomic, assign) CGFloat subHeight;
@@ -52,11 +54,14 @@
     [self addSubview:subView];
     
     if (IS_IPHONE_6p_SCREEN){
-        kHeightX = 4.0;
+        kHeightX = 2.0;
+        kMarginWidth = 10;
     }else if (IS_IPHONE_6_SCREEN){
-        kHeightX = 3.5;
+        kHeightX = 1.5;
+        kMarginWidth = 5;
     }else{
         kHeightX = 1.5;
+        kMarginWidth = 0;
     }
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -85,7 +90,7 @@
         NSString * aftStr = [model.label substringFromIndex:2];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.backgroundColor = [UIColor colorWithRed:0.58 green:0.58 blue:0.58 alpha:1];
-        button.frame = CGRectMake(16 + i*((width - 32)/[plants count] + kHeightX), 55, 44, 44);
+        button.frame = CGRectMake(16 + i*((width - 32)/[plants count] + kHeightX), 55, 44 + kMarginWidth, 44 + kMarginWidth);
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         button.titleLabel.font = FONT_1(12.0);
         button.titleLabel.numberOfLines = 2;
@@ -101,14 +106,14 @@
         UIImageView * image = [[UIImageView alloc] init];
         image.userInteractionEnabled = YES;
         image.multipleTouchEnabled = YES;
-        image.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count]-1) + kHeightX), 120, 44, 44);
+        image.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count]-1) + kHeightX), 120, 44 + kMarginWidth, 44 + kMarginWidth);
         image.tag = 401 + 6 + i - 1;
         [image sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         image.backgroundColor = [UIColor clearColor];
         [subView addSubview:image];
         
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count]-1) + kHeightX), 120, 44, 44);
+        button.frame = CGRectMake(16 + (i-1)*((width - 32)/([subs count]-1) + kHeightX), 120, 44 + kMarginWidth, 44 + kMarginWidth);
         button.tag = 401 + 6 + i - 1;
         [button addTarget:self action:@selector(selectPostsType:) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor clearColor];
@@ -145,7 +150,7 @@
 
         for (NSInteger i=1; i<[subsPlantArrs count]; i++) {
             UIImageView * imageView = (UIImageView *)[subView viewWithTag:i-1 + 6+401];
-            imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, 44, 44);
+            imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, 44 + kMarginWidth, 44 + kMarginWidth);
         }
         
         RMPublicModel * model = [subsPlantArrs objectAtIndex:sender.tag-6-401 + 1];

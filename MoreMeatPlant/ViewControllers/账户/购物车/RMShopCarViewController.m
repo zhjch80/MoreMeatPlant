@@ -233,7 +233,7 @@
 //    cell.numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
     RMProductModel * model = [[[dataArray objectAtIndex:sender.tag/1000] objectForKey:@"products"] objectAtIndex:sender.tag%1000-1];
     if([model.plante isEqualToString:@"1"]){
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"一肉一拍区的宝贝只能选择一个哦！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"一物一拍区的宝贝只能选择一个哦！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
         [alert show];
         return;
     }

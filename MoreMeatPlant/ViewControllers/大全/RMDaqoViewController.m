@@ -42,8 +42,8 @@
     
     centerCtl = [[RMDaqoCenterViewController alloc] init];
     centerCtl.DaqoDelegate = self;
-    centerCtl.view.backgroundColor = [UIColor whiteColor];
-    
+    centerCtl.view.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.62 alpha:1];
+
     [self.view addSubview:centerCtl.view];
     centerCtl.view.tag = 2;
     centerCtl.view.frame = self.view.bounds;
