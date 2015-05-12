@@ -137,6 +137,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addToCartBtn" destination="RWb-9N-acD" id="nhx-Xm-Utp"/>

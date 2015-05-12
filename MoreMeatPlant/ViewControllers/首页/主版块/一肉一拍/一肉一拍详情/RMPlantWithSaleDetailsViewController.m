@@ -486,7 +486,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return (cell.frame.size.height > 165 ? cell.frame.size.height : 165);
+    return (cell.frame.size.height > 165 ? cell.frame.size.height : 175);
 }
 
 #pragma mark - 
