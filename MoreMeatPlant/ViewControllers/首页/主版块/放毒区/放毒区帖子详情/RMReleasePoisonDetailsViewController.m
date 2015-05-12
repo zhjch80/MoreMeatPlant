@@ -331,6 +331,7 @@
             cell.addPraiseImg.image = LOADIMAGE(@"img_zan", kImageTypePNG);
         }
         cell.praiseCount.text = dataModel.content_top;
+        cell.frame = CGRectMake(0, 0, kScreenWidth, cell.addPraiseImg.frame.size.height + 2);
         cell.addPraiseImg.indexPath = indexPath;
         return cell;
     }else if (indexPath.row > 0 && indexPath.row <= [advertisingArr count]){
@@ -352,10 +353,23 @@
         RMPublicModel * model = [advertisingArr objectAtIndex:indexPath.row - 1];
         
         [cell.toPromoteImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        
+        CGSize size = [UIImage downloadImageSizeWithURL:[NSURL URLWithString:model.content_img]];
+        CGFloat height = size.height/size.width * kScreenWidth;
+        
+        cell.toPromoteImg.frame = CGRectMake(0, 0, kScreenWidth, height);
+        if (IS_IPHONE_6p_SCREEN){
+            cell.frame = CGRectMake(0, 0, kScreenWidth, height - 20);
+        }else if (IS_IPHONE_6_SCREEN){
+            cell.frame = CGRectMake(0, 0, kScreenWidth, height - 15);
+        }else{
+            cell.frame = CGRectMake(0, 0, kScreenWidth, height - 5);
+        }
+        
+        cell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
         cell.toPromoteImg.identifierString = model.member_id;
         cell.toPromoteImg.content_type = model.note_id;
         [cell.toPromoteImg addTarget:self withSelector:@selector(jumpPromoteMethod:)];
-        
         return cell;
     }else{
         

@@ -220,15 +220,20 @@ typedef enum{
                 }else{
                     numStr = [NSString stringWithFormat:@"(%@新帖)",(model.content_num.integerValue > 0 ? model.content_num : @"0")];
                 }
-                cell.titleName.text = [NSString stringWithFormat:@"%@ %@",model.modules_name,numStr];
-                
-                NSInteger length = [NSString stringWithFormat:@"%@",model.modules_name].length;
-                NSInteger totalLength = [[NSString stringWithFormat:@"%@ %@",model.modules_name,numStr] length];
-                
-                NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@ %@",model.modules_name,numStr]];
-                [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.04 green:0.04 blue:0.04 alpha:1] range:NSMakeRange(length, totalLength - length)];
-                [oneAttributeStr addAttribute:NSFontAttributeName value:FONT_0(19.0f) range:NSMakeRange(length, totalLength - length)];
-                cell.titleName.attributedText = oneAttributeStr;
+           
+                if (model.content_num.integerValue == 0){
+                    cell.titleName.text = [NSString stringWithFormat:@"%@",model.modules_name];
+                }else{
+                    cell.titleName.text = [NSString stringWithFormat:@"%@ %@",model.modules_name,numStr];
+                    
+                    NSInteger length = [NSString stringWithFormat:@"%@",model.modules_name].length;
+                    NSInteger totalLength = [[NSString stringWithFormat:@"%@ %@",model.modules_name,numStr] length];
+                    
+                    NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@ %@",model.modules_name,numStr]];
+                    [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.04 green:0.04 blue:0.04 alpha:1] range:NSMakeRange(length, totalLength - length)];
+                    [oneAttributeStr addAttribute:NSFontAttributeName value:FONT_0(19.0f) range:NSMakeRange(length, totalLength - length)];
+                    cell.titleName.attributedText = oneAttributeStr;
+                }
             }
         }
     }

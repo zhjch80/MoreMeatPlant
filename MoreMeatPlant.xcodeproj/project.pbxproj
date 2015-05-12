@@ -454,6 +454,7 @@
 		4B3A2ADA1AE94FAD00E1EC24 /* RMLongPostFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A2AD91AE94FAD00E1EC24 /* RMLongPostFooterView.m */; };
 		4B3A2AE01AE9574500E1EC24 /* RMLongPostFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2ADF1AE9574500E1EC24 /* RMLongPostFooterView.xib */; };
 		4B3A2AE21AE9F58A00E1EC24 /* RMStartLongPostingCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3A2AE11AE9F58A00E1EC24 /* RMStartLongPostingCell_4.xib */; };
+		4B3CD2261B023E9A000D85C0 /* Nav_LeftBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B3CD2251B023E9A000D85C0 /* Nav_LeftBack@2x.png */; };
 		4BCB3BB31AF5B0F80099DF4D /* transparent_img.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4BCB3BB21AF5B0F80099DF4D /* transparent_img.jpg */; };
 		4BFC2E8A1B00E0A600127C27 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFC2E891B00E0A600127C27 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BFFA7251AE8EB4A00D0D462 /* RefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFA7241AE8EB4A00D0D462 /* RefreshView.m */; };
@@ -759,7 +760,6 @@
 		516F47271ADE5EE90017879A /* RMActionPaopaoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */; };
 		5171250C1AFF8B8100E5AFE3 /* baidian.png in Resources */ = {isa = PBXBuildFile; fileRef = 5171250B1AFF8B8100E5AFE3 /* baidian.png */; };
 		5171250E1AFF8BBD00E5AFE3 /* heidian.png in Resources */ = {isa = PBXBuildFile; fileRef = 5171250D1AFF8BBD00E5AFE3 /* heidian.png */; };
-		517125111AFF8D0E00E5AFE3 /* Nav_LeftBack .png in Resources */ = {isa = PBXBuildFile; fileRef = 5171250F1AFF8D0E00E5AFE3 /* Nav_LeftBack .png */; };
 		517125121AFF8D0E00E5AFE3 /* img_zaned.png in Resources */ = {isa = PBXBuildFile; fileRef = 517125101AFF8D0E00E5AFE3 /* img_zaned.png */; };
 		517125151AFF9B7900E5AFE3 /* AppDelegate+EaseMob.m in Sources */ = {isa = PBXBuildFile; fileRef = 517125141AFF9B7900E5AFE3 /* AppDelegate+EaseMob.m */; };
 		517125191AFF9BDD00E5AFE3 /* red_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 517125161AFF9BDD00E5AFE3 /* red_btn.png */; };
@@ -1697,6 +1697,7 @@
 		4B3A2AD91AE94FAD00E1EC24 /* RMLongPostFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMLongPostFooterView.m; sourceTree = "<group>"; };
 		4B3A2ADF1AE9574500E1EC24 /* RMLongPostFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMLongPostFooterView.xib; sourceTree = "<group>"; };
 		4B3A2AE11AE9F58A00E1EC24 /* RMStartLongPostingCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMStartLongPostingCell_4.xib; sourceTree = "<group>"; };
+		4B3CD2251B023E9A000D85C0 /* Nav_LeftBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nav_LeftBack@2x.png"; sourceTree = "<group>"; };
 		4BCB3BB21AF5B0F80099DF4D /* transparent_img.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = transparent_img.jpg; sourceTree = "<group>"; };
 		4BFC2E881B00E0A600127C27 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		4BFC2E891B00E0A600127C27 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
@@ -2149,7 +2150,6 @@
 		516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMActionPaopaoView.xib; sourceTree = "<group>"; };
 		5171250B1AFF8B8100E5AFE3 /* baidian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baidian.png; sourceTree = "<group>"; };
 		5171250D1AFF8BBD00E5AFE3 /* heidian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heidian.png; sourceTree = "<group>"; };
-		5171250F1AFF8D0E00E5AFE3 /* Nav_LeftBack .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nav_LeftBack .png"; sourceTree = "<group>"; };
 		517125101AFF8D0E00E5AFE3 /* img_zaned.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_zaned.png; sourceTree = "<group>"; };
 		517125131AFF9B7900E5AFE3 /* AppDelegate+EaseMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+EaseMob.h"; sourceTree = "<group>"; };
 		517125141AFF9B7900E5AFE3 /* AppDelegate+EaseMob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+EaseMob.m"; sourceTree = "<group>"; };
@@ -3073,8 +3073,8 @@
 				1D191AD91ABD54EF00FC8623 /* whiteLeftArrow.png */,
 				5171250B1AFF8B8100E5AFE3 /* baidian.png */,
 				5171250D1AFF8BBD00E5AFE3 /* heidian.png */,
-				5171250F1AFF8D0E00E5AFE3 /* Nav_LeftBack .png */,
 				517125101AFF8D0E00E5AFE3 /* img_zaned.png */,
+				4B3CD2251B023E9A000D85C0 /* Nav_LeftBack@2x.png */,
 			);
 			path = "大全";
 			sourceTree = "<group>";
@@ -5586,7 +5586,6 @@
 				5146133E1AE3653E0040E462 /* chatBar_more_faceSelected@2x.png in Resources */,
 				1DD3265A1ABBEA1D006CD1A8 /* img_RightArrow@2x.png in Resources */,
 				1DEB75141AB9D67A00EA1FA7 /* member_my_home_btn.png in Resources */,
-				517125111AFF8D0E00E5AFE3 /* Nav_LeftBack .png in Resources */,
 				1DEB75221AB9D67A00EA1FA7 /* wdtz@2x.png in Resources */,
 				1DEB74731AB9D66800EA1FA7 /* img_fdq_line_2.png in Resources */,
 				1D8397611AB3F81600DA190A /* up.png in Resources */,
@@ -5733,6 +5732,7 @@
 				514612F51AE3653E0040E462 /* 114.png in Resources */,
 				1D83975E1AB3F81600DA190A /* check.png in Resources */,
 				514613131AE3653E0040E462 /* VoiceSearchFeedback008.png in Resources */,
+				4B3CD2261B023E9A000D85C0 /* Nav_LeftBack@2x.png in Resources */,
 				514613411AE3653E0040E462 /* chat_location_annotation_someone.png in Resources */,
 				5120FDEC1AB71B44000E9BE1 /* RMOrderProTableViewCell.xib in Resources */,
 				5146137B1AE3653E0040E462 /* chat_receiver_audio_playing001@2x.png in Resources */,

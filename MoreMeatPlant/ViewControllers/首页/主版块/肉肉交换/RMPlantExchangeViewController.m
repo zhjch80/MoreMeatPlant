@@ -89,8 +89,11 @@
     [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMPlantExchangeViewController class]];
     
     [self setRightBarButtonNumber:2];
-    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setImage:[UIImage imageNamed:@"Nav_LeftBack"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"分类" forState:UIControlStateNormal];
+    leftBarButton.titleLabel.font = FONT_2(18.0);
+    leftBarButton.titleEdgeInsets = UIEdgeInsetsMake(2, 0, 0, 0);
+    
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     [rightOneBarButton setImage:[UIImage imageNamed:@"img_search"] forState:UIControlStateNormal];
     [rightTwoBarButton setImage:[UIImage imageNamed:@"img_postMessage"] forState:UIControlStateNormal];

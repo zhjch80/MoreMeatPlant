@@ -139,6 +139,7 @@
 
 - (void)setCustomNavTitle:(NSString *)title {
     titleLabel.text = title;
+    titleLabel.font = FONT_3(18.0);
 }
 
 - (void)setRightBarButtonNumber:(NSInteger)number {

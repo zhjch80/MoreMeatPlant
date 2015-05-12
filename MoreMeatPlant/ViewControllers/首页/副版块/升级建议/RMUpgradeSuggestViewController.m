@@ -39,11 +39,16 @@
     [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMUpgradeSuggestViewController class]];
     
     [self setRightBarButtonNumber:1];
-    [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
+    [leftBarButton setImage:[UIImage imageNamed:@"Nav_LeftBack"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
+    leftBarButton.titleLabel.font = FONT_2(18.0);
+    leftBarButton.titleEdgeInsets = UIEdgeInsetsMake(2, 0, 0, 0);
+    
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
 
     [rightOneBarButton setTitle:@"提交" forState:UIControlStateNormal];
+    rightOneBarButton.titleLabel.font = FONT_2(18.0);
+    rightOneBarButton.titleEdgeInsets = UIEdgeInsetsMake(2, 0, 0, 0);
     [rightOneBarButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     [self.mTextView.layer setCornerRadius:8.0f];
