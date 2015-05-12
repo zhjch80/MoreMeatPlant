@@ -717,6 +717,10 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"一物一拍市场的宝贝只能有一件" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];
         return;
+    }else if([newAddPhotoDic count] == 0){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请先通过拍照或者相册上传宝贝图片！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+        [alert show];
+        return;
     }
     
 

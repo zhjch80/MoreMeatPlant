@@ -25,7 +25,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="k1S-uk-IwQ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k1S-uk-IwQ">
                         <rect key="frame" x="10" y="64" width="300" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="Yos-CC-6Xa"/>
@@ -40,10 +40,10 @@
                     <constraint firstItem="ggj-BD-OQv" firstAttribute="top" secondItem="PlY-Yh-Zos" secondAttribute="top" constant="8" id="rAU-Wd-nKu"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="bottom_line" destination="k1S-uk-IwQ" id="fzW-rY-ZDt"/>
+            </connections>
             <point key="canvasLocation" x="274" y="161"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="gwc_point_line.png" width="1134" height="1"/>
-    </resources>
 </document>

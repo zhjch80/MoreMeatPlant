@@ -21,4 +21,5 @@ typedef void (^PublishClassAdded) (void);
 @property (assign, nonatomic) NSInteger index;
 @property (assign, nonatomic) id<RMPublishClassTableViewCellDelegate> delegate;
 - (void)createItem:(NSArray *)array andCallBack:(PublishClassAdded) block;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 @end

@@ -26,6 +26,7 @@
     RMCorpHeadTableViewCell * headView;
     NSURL * _filePath;
     NSURL * _headPath;
+    CGFloat oneCellHeight;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
@@ -46,6 +47,9 @@
     
     [self setCustomNavTitle:self.titleName];
 
+    
+    oneCellHeight = kScreenWidth/3.0+19.5+40;
+    
     self.mainTableview.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
     
     dataArr = [[NSMutableArray alloc]init];
@@ -77,6 +81,7 @@
     headView.corp_headImgV.clipsToBounds = YES;
     if(self.auto_id == nil){
         headView.collection.hidden = YES;
+        headView.collectWidth.constant = 0;
         self.auto_id = [[RMUserLoginInfoManager loginmanager] s_id];
         rightOneBarButton.hidden = NO;
         self.titleName = @"我的店铺";
@@ -152,7 +157,7 @@
         if(i == 3){
             return;
         }else{
-            UIImageView * img_line = [[UIImageView alloc]initWithFrame:CGRectMake(btn.frame.origin.x+btn.frame.size.width,btn.frame.origin.y+1 , 1, btn.frame.size.height-2)];
+            UIImageView * img_line = [[UIImageView alloc]initWithFrame:CGRectMake(btn.frame.origin.x+btn.frame.size.width,btn.frame.origin.y+5 , 1, btn.frame.size.height-15)];
             img_line.backgroundColor = UIColorFromRGB(0xadadad);
             img_line.alpha = 0.8;
             [img_line setImage:[UIImage imageNamed:@""]];
@@ -381,7 +386,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0){
-        return 226;
+        return oneCellHeight;
     }else{
         UITableViewCell * cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.frame.size.height;

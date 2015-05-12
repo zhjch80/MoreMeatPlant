@@ -41,7 +41,7 @@
                             <constraint firstAttribute="width" secondItem="njr-e7-Chu" secondAttribute="height" multiplier="7:1" id="YTB-JC-Sew"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="9jQ-tO-xeQ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9jQ-tO-xeQ">
                         <rect key="frame" x="10" y="83" width="300" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="9jj-7f-7L3"/>
@@ -73,6 +73,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottom_line" destination="9jQ-tO-xeQ" id="XCy-jQ-J5A"/>
                 <outlet property="placeImgV" destination="njr-e7-Chu" id="ESZ-FM-FLo"/>
                 <outlet property="publishBtn" destination="I7Y-2I-Yod" id="8Mt-8e-d8y"/>
             </connections>
@@ -81,7 +82,6 @@
     </objects>
     <resources>
         <image name="fbbb_btn_bg.png" width="220" height="90"/>
-        <image name="gwc_point_line.png" width="1134" height="1"/>
         <image name="img_03.png" width="1080" height="150"/>
     </resources>
 </document>

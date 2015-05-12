@@ -18,6 +18,7 @@
                 <outlet property="content_mobile" destination="B7k-Tf-Imk" id="bZS-FF-UKk"/>
                 <outlet property="content_name" destination="tQX-9w-W0E" id="C9a-T2-pJh"/>
                 <outlet property="sureBtn" destination="esS-nn-UDo" id="JQ4-i7-dqn"/>
+                <outlet property="textViewBg" destination="UBb-nR-Nrt" id="fAC-6t-6HL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,55 +30,93 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apd-ri-R1g">
                     <rect key="frame" x="30" y="64" width="260" height="504"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="收件人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rB3-t1-mdB">
-                            <rect key="frame" x="0.0" y="33" width="56" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收件人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rB3-t1-mdB">
+                            <rect key="frame" x="0.0" y="33" width="56" height="18"/>
                             <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="手机号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8O-xP-YnK">
-                            <rect key="frame" x="0.0" y="86" width="56" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8O-xP-YnK">
+                            <rect key="frame" x="0.0" y="84" width="42" height="18"/>
                             <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="B7k-Tf-Imk" customClass="RMBaseTextField">
-                            <rect key="frame" x="64" y="80" width="184" height="30"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B7k-Tf-Imk" customClass="RMBaseTextField">
+                            <rect key="frame" x="64" y="77" width="184" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="ucg-gJ-wOe"/>
+                            </constraints>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="收货地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80I-di-ue1">
-                            <rect key="frame" x="0.0" y="143" width="56" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80I-di-ue1">
+                            <rect key="frame" x="0.0" y="127" width="56" height="18"/>
                             <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fbbb_field_bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="UBb-nR-Nrt">
-                            <rect key="frame" x="64" y="136" width="184" height="78"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UBb-nR-Nrt">
+                            <rect key="frame" x="64" y="127" width="184" height="78"/>
                         </imageView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iws-Vn-H9E" customClass="RMBaseTextView">
-                            <rect key="frame" x="64" y="136" width="184" height="78"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iws-Vn-H9E" customClass="RMBaseTextView">
+                            <rect key="frame" x="64" y="127" width="184" height="78"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="78" id="Fzr-EW-DB8"/>
+                            </constraints>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esS-nn-UDo">
-                            <rect key="frame" x="80" y="302" width="100" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esS-nn-UDo">
+                            <rect key="frame" x="80" y="293" width="100" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="X21-9R-KjX"/>
+                                <constraint firstAttribute="width" constant="100" id="Ytb-Ca-N7g"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="保存" backgroundImage="fbbb_btn_bg_red.png">
+                            <state key="normal" title="保存">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="fbbb_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="tQX-9w-W0E" customClass="RMBaseTextField">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tQX-9w-W0E" customClass="RMBaseTextField">
                             <rect key="frame" x="64" y="27" width="184" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="jUn-dw-bCE"/>
+                            </constraints>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="esS-nn-UDo" firstAttribute="top" secondItem="Iws-Vn-H9E" secondAttribute="bottom" constant="88" id="098-nb-km4"/>
+                        <constraint firstItem="tQX-9w-W0E" firstAttribute="leading" secondItem="rB3-t1-mdB" secondAttribute="trailing" constant="8" id="1s1-c2-3M6"/>
+                        <constraint firstItem="rB3-t1-mdB" firstAttribute="top" secondItem="apd-ri-R1g" secondAttribute="top" constant="33" id="4y3-UL-Liv"/>
+                        <constraint firstItem="Iws-Vn-H9E" firstAttribute="leading" secondItem="tQX-9w-W0E" secondAttribute="leading" id="5Wr-To-F4x"/>
+                        <constraint firstAttribute="trailing" secondItem="Iws-Vn-H9E" secondAttribute="trailing" constant="12" id="5we-rU-QZk"/>
+                        <constraint firstItem="Iws-Vn-H9E" firstAttribute="leading" secondItem="UBb-nR-Nrt" secondAttribute="leading" id="CUV-Xd-OyN"/>
+                        <constraint firstItem="rB3-t1-mdB" firstAttribute="leading" secondItem="apd-ri-R1g" secondAttribute="leading" id="ENx-Jy-L2T"/>
+                        <constraint firstItem="Iws-Vn-H9E" firstAttribute="leading" secondItem="80I-di-ue1" secondAttribute="trailing" constant="8" symbolic="YES" id="FeU-V3-0T4"/>
+                        <constraint firstItem="B7k-Tf-Imk" firstAttribute="top" secondItem="tQX-9w-W0E" secondAttribute="bottom" constant="20" id="IEf-6W-blK"/>
+                        <constraint firstItem="B7k-Tf-Imk" firstAttribute="centerY" secondItem="E8O-xP-YnK" secondAttribute="centerY" id="JlA-Lv-He0"/>
+                        <constraint firstItem="Iws-Vn-H9E" firstAttribute="top" secondItem="B7k-Tf-Imk" secondAttribute="bottom" constant="20" id="KJi-95-Wp2"/>
+                        <constraint firstItem="esS-nn-UDo" firstAttribute="centerX" secondItem="apd-ri-R1g" secondAttribute="centerX" id="LtX-9u-gSb"/>
+                        <constraint firstAttribute="trailing" secondItem="tQX-9w-W0E" secondAttribute="trailing" constant="12" id="OfX-oj-I41"/>
+                        <constraint firstItem="tQX-9w-W0E" firstAttribute="top" secondItem="apd-ri-R1g" secondAttribute="top" constant="27" id="YpQ-eO-Lhj"/>
+                        <constraint firstItem="80I-di-ue1" firstAttribute="leading" secondItem="rB3-t1-mdB" secondAttribute="leading" id="Zwe-v0-1gC"/>
+                        <constraint firstItem="Iws-Vn-H9E" firstAttribute="top" secondItem="UBb-nR-Nrt" secondAttribute="top" id="cGK-Ca-04J"/>
+                        <constraint firstItem="80I-di-ue1" firstAttribute="top" secondItem="Iws-Vn-H9E" secondAttribute="top" id="e7L-6S-Fb4"/>
+                        <constraint firstItem="Iws-Vn-H9E" firstAttribute="trailing" secondItem="UBb-nR-Nrt" secondAttribute="trailing" id="hbK-fe-iAc"/>
+                        <constraint firstAttribute="trailing" secondItem="B7k-Tf-Imk" secondAttribute="trailing" constant="12" id="ijk-vK-YO8"/>
+                        <constraint firstItem="Iws-Vn-H9E" firstAttribute="leading" secondItem="B7k-Tf-Imk" secondAttribute="leading" id="jpg-ov-oMp"/>
+                        <constraint firstItem="80I-di-ue1" firstAttribute="leading" secondItem="E8O-xP-YnK" secondAttribute="leading" id="nAs-kA-gZq"/>
+                        <constraint firstItem="rB3-t1-mdB" firstAttribute="centerY" secondItem="tQX-9w-W0E" secondAttribute="centerY" id="pao-C1-wZq"/>
+                        <constraint firstItem="Iws-Vn-H9E" firstAttribute="bottom" secondItem="UBb-nR-Nrt" secondAttribute="bottom" id="uec-xk-qas"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -91,9 +130,4 @@
             <point key="canvasLocation" x="-22" y="57"/>
         </view>
     </objects>
-    <resources>
-        <image name="fbbb_btn_bg_red.png" width="678" height="90"/>
-        <image name="fbbb_field_bg.png" width="450" height="90"/>
-        <image name="fbbb_field_bg2.png" width="1024" height="144"/>
-    </resources>
 </document>

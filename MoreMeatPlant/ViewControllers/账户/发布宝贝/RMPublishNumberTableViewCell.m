@@ -12,6 +12,10 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    _bottom_line.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"heidian", @"png")];
+    
+    _numTextfield.backgroundColor = UIColorFromRGB(0xd3d3d3);
+    _numTextfield.layer.cornerRadius = 5;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

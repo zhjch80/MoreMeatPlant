@@ -25,4 +25,5 @@ typedef void (^RMAddressEditViewCompleted)(void);
 @property (retain, nonatomic) RMPublicModel * _model;
 @property (copy, nonatomic) RMAddressEditViewCompleted completedCallback;
 @property (assign, nonatomic) id <RMAddressEditViewCompletedDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIImageView *textViewBg;
 @end

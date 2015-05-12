@@ -25,7 +25,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" background="fbbb_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="J3X-lc-bdK" customClass="RMBaseTextField">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J3X-lc-bdK" customClass="RMBaseTextField">
                         <rect key="frame" x="74" y="11" width="58" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="58" id="3d2-QN-dkw"/>
@@ -34,7 +34,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="U75-ss-vSl">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U75-ss-vSl">
                         <rect key="frame" x="10" y="43" width="300" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="4fj-SK-lSI"/>
@@ -52,13 +52,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottom_line" destination="U75-ss-vSl" id="vpA-UJ-1TF"/>
                 <outlet property="numTextfield" destination="J3X-lc-bdK" id="QEY-u8-8OP"/>
             </connections>
             <point key="canvasLocation" x="217" y="204"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="fbbb_field_bg.png" width="450" height="90"/>
-        <image name="gwc_point_line.png" width="1134" height="1"/>
-    </resources>
 </document>

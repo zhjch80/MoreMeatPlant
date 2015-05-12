@@ -32,11 +32,11 @@
                             <constraint firstAttribute="width" constant="96" id="bDO-op-gvq"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="确认发布" backgroundImage="fbbb_btn_bg_red.png">
+                        <state key="normal" title="确认发布">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ukg-Ba-tJd">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ukg-Ba-tJd">
                         <rect key="frame" x="10" y="41" width="300" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="5ox-Kt-j5b"/>
@@ -63,14 +63,11 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="balanceL" destination="6nn-ha-Sif" id="EoB-2w-AoY"/>
+                <outlet property="bottom_line" destination="Ukg-Ba-tJd" id="GPv-bh-3N1"/>
                 <outlet property="surePublish" destination="WVU-W5-wJP" id="qaT-F4-uX2"/>
                 <outlet property="totalL" destination="U1l-By-vMf" id="Mwq-sr-tzU"/>
             </connections>
             <point key="canvasLocation" x="401" y="211.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="fbbb_btn_bg_red.png" width="678" height="90"/>
-        <image name="gwc_point_line.png" width="1134" height="1"/>
-    </resources>
 </document>

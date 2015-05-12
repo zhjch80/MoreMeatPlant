@@ -17,5 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *selectQt;
 @property (weak, nonatomic) IBOutlet RMBaseTextField *qt_nameField;
 @property (weak, nonatomic) IBOutlet RMBaseTextField *qt_priceField;
+@property (weak, nonatomic) IBOutlet UIImageView *textViewBg;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 
 @end

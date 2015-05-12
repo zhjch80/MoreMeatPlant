@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalL;
 @property (weak, nonatomic) IBOutlet UIButton *surePublish;
 @property (weak, nonatomic) IBOutlet UILabel *balanceL;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 
 @end

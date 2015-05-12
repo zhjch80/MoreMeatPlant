@@ -59,7 +59,7 @@
                             <constraint firstAttribute="width" constant="78" id="oZe-bw-hl0"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
+                        <state key="normal" title="相册选择">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -77,7 +77,7 @@
                             <constraint firstAttribute="height" constant="21" id="Lan-kS-5YC"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
+                        <state key="normal" title="相册选择">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -94,7 +94,7 @@
                             <constraint firstAttribute="width" constant="78" id="WlD-Ji-m4f"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
+                        <state key="normal" title="相册选择">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -111,7 +111,7 @@
                             <constraint firstAttribute="width" constant="78" id="fVA-a8-MZe"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
+                        <state key="normal" title="相册选择">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -128,7 +128,7 @@
                             <constraint firstAttribute="height" constant="21" id="TiA-ci-fFL"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="拍照" backgroundImage="fbbb_btn_bg.png">
+                        <state key="normal" title="拍照">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -145,7 +145,7 @@
                             <constraint firstAttribute="width" constant="78" id="tee-pM-NCa"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="拍照" backgroundImage="fbbb_btn_bg.png">
+                        <state key="normal" title="拍照">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -162,7 +162,7 @@
                             <constraint firstAttribute="height" constant="21" id="EuG-ha-X9s"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="拍照" backgroundImage="fbbb_btn_bg.png">
+                        <state key="normal" title="拍照">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -179,7 +179,7 @@
                             <constraint firstAttribute="height" constant="21" id="ecd-A0-JVL"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="拍照" backgroundImage="fbbb_btn_bg.png">
+                        <state key="normal" title="拍照">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -197,7 +197,7 @@
                             <constraint firstAttribute="height" constant="21" id="qHi-jD-cIV"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="拍照" backgroundImage="fbbb_btn_bg.png">
+                        <state key="normal" title="拍照">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -215,7 +215,7 @@
                             <constraint firstAttribute="height" constant="21" id="r6h-fX-Yae"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="相册选择" backgroundImage="fbbb_btn_bg.png">
+                        <state key="normal" title="相册选择">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -321,7 +321,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="fbbb_btn_bg.png" width="220" height="90"/>
         <image name="fbbb_nophoto.png" width="220" height="220"/>
     </resources>
 </document>

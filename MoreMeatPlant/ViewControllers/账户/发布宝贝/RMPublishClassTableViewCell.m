@@ -19,6 +19,12 @@
      y = 31;
     index = 100;
     _titles = [[NSMutableArray alloc]init];
+    
+    _bottom_line.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"heidian", @"png")];
+    
+    _addClassBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"hei_btn", @"png")];
+    _addClassBtn.layer.cornerRadius = 5;
+    _addClassBtn.clipsToBounds = YES;
 }
 
 - (void)createItem:(NSArray *)array andCallBack:(PublishClassAdded) block{

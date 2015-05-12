@@ -19,6 +19,8 @@
     index = 100;
     _titles = [[NSMutableArray alloc]init];
     
+    _bottom_line.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"heidian", @"png")];
+    
 }
 
 

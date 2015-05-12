@@ -19,4 +19,5 @@
 @property (assign, nonatomic) NSInteger index;
 @property (assign, nonatomic) id <RMPublishCourseTableViewCellDelegate>delegate;
 - (void)createItem:(NSArray *)array;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 @end

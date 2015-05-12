@@ -33,12 +33,12 @@
                             <constraint firstAttribute="height" constant="21" id="LYj-hW-DwR"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
-                        <state key="normal" title="添加分类" backgroundImage="fbbb_btn_bg.png">
+                        <state key="normal" title="添加分类">
                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="hEF-1L-Lo9">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hEF-1L-Lo9">
                         <rect key="frame" x="10" y="64.5" width="300" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="eX5-d2-AoO"/>
@@ -57,13 +57,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="addClassBtn" destination="bII-r1-cx7" id="r8S-XD-osB"/>
+                <outlet property="bottom_line" destination="hEF-1L-Lo9" id="f2x-7i-5H1"/>
                 <outlet property="classtitleL" destination="iQ6-Jq-6r2" id="5Tb-9r-vYC"/>
             </connections>
             <point key="canvasLocation" x="318" y="155"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="fbbb_btn_bg.png" width="220" height="90"/>
-        <image name="gwc_point_line.png" width="1134" height="1"/>
-    </resources>
 </document>

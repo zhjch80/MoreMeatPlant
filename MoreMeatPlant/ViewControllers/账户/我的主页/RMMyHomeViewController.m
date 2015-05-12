@@ -24,6 +24,7 @@
     RMPublicModel * _model;
     RMHomeHeadView * headView;
     JSBadgeView * chat_badge;
+    CGFloat OneCellHeight;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
 
@@ -46,6 +47,8 @@
     [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMMyHomeViewController class]];
     self.mainTableView.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
     
+    
+    OneCellHeight = kScreenWidth/11.0*5.0;
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
@@ -354,8 +357,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+    if(indexPath.row == 0){
+        return OneCellHeight;
+    }else{
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.frame.size.height;
+    }
 }
 #pragma mark - 添加收藏 赞 评论
 

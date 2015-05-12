@@ -12,6 +12,12 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    _bottom_line.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"heidian", @"png")];
+    
+    _publishBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"hei_btn", @"png")];
+    _publishBtn.layer.cornerRadius = 5;
+    _publishBtn.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

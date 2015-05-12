@@ -22,6 +22,24 @@
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
     
+    
+    _textViewBg.backgroundColor = UIColorFromRGB(0xd3d3d3);
+    _textViewBg.layer.cornerRadius = 5;
+    
+    
+    _content_name.backgroundColor = UIColorFromRGB(0xd3d3d3);
+    _content_name.layer.cornerRadius = 5;
+    
+    
+    _content_mobile.backgroundColor = UIColorFromRGB(0xd3d3d3);
+    _content_mobile.layer.cornerRadius = 5;
+    
+    _sureBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"red_btn", @"png")];
+    _sureBtn.layer.cornerRadius = 5;
+    _sureBtn.clipsToBounds = YES;
+
+    
+    
     if(__model){
         _content_name.text = __model.contentName;
         _content_mobile.text = __model.contentMobile;

@@ -11,5 +11,6 @@
 @interface RMAdvertisingHeadTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *publishBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *placeImgV;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 
 @end

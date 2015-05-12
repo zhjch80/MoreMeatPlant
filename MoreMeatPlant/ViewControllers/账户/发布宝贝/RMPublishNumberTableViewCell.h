@@ -10,5 +10,6 @@
 #import "RMBaseTextField.h"
 @interface RMPublishNumberTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet RMBaseTextField *numTextfield;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 
 @end
