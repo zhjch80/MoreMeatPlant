@@ -403,6 +403,9 @@
 //        cell.productIntro.text = [NSString stringWithFormat:@"快递：%@元 库存:%@件",dataModel.express_price,dataModel.content_num];
 //    }
     
+    cell.lineOne.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"heidian"]];
+    
+    cell.lineTwo.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"heidian"]];
     
     UILabel * kucun = (UILabel *)[cell.contentView viewWithTag:101311];
     kucun.text = [NSString stringWithFormat:@"库存:%@件",dataModel.content_num];
@@ -561,12 +564,13 @@
                 [alert show];
                 return;
             }
-            NSLog(@"立即购买auto_id:%@",self.auto_id);
+
             if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 2){
                 UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"商家会员不可以进行购买服务" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
                 [alert show];
                 return;
             }
+            
             [self valliateNums];
             isAddShopCar = NO;
             break;
@@ -577,12 +581,13 @@
                 [alert show];
                 return;
             }
-            NSLog(@"加入购物车auto_id:%@",self.auto_id);
+            
             if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 2){
                 UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"商家会员不可以进行购买服务" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
                 [alert show];
                 return;
             }
+            
             [self valliateNums];
             isAddShopCar = YES;
             break;
@@ -593,7 +598,7 @@
                 [alert show];
                 return;
             }
-            NSLog(@"联系掌柜auto_id:%@",self.auto_id);
+            
             [self.navigationController popToRootViewControllerAnimated:YES];
             AppDelegate * dele = [[UIApplication sharedApplication] delegate];
             [dele tabSelectController:3];
@@ -631,8 +636,6 @@
     }else{
         n = baby_num;
     }
-    
-    NSLog(@"+++++++++++++++++++++%ld",(long)n);
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager valliateGoodsNumWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] auto_id:self.auto_id Nums:n andCallBack:^(NSError *error, BOOL success, id object) {
@@ -676,10 +679,8 @@
     }
     product.corp_id = dataModel.member_id;
     product.content_num = num;
-    product.plante = dataModel.content_class;//一肉一拍 还是 鲜肉市场?
+    product.plante = dataModel.content_class;
     product.corp_user = [dataModel.members objectForKey:@"content_user"];
-    
-    NSLog(@"%@",product);
     
     RMCorpModel * shop = [[RMCorpModel alloc]init];
     shop.corp_id = dataModel.member_id;

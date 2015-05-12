@@ -50,6 +50,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="img_fdqdetl_zan.png" width="1080" height="150"/>
+        <image name="img_fdqdetl_zan.png" width="33" height="33"/>
     </resources>
 </document>

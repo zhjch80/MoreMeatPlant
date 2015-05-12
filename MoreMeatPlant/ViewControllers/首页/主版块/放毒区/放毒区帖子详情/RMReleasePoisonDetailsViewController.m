@@ -182,6 +182,8 @@
     [tableHeadView.detailsUserHead addTarget:self withSelector:@selector(userHeaderClick:)];
     tableHeadView.delegate = self;
     
+    tableHeadView.detailsPointLine.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"heidian"]];
+    
     tableHeadView.detailsTitle.text = dataModel.content_name;
     tableHeadView.detailsTime.text = dataModel.create_time;
     tableHeadView.detailsUserNameTime.text = [NSString stringWithFormat:@"%@ %@",[dataModel.members objectForKey:@"member_name"],[[NSString stringWithFormat:@"%@:00",dataModel.create_time] intervalSinceNow]];
@@ -402,7 +404,8 @@
             cell.userPostTime_2.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - cell.userPostTime_2.frame.size.width - 5, cell.userPostTime_2.frame.origin.y, cell.userPostTime_2.frame.size.width, cell.userPostTime_2.frame.size.height);
             
             cell.pointLine_2.frame = CGRectMake(cell.pointLine_2.frame.origin.x, cell.pointLine_2.frame.origin.y, [UIScreen mainScreen].bounds.size.width - cell.pointLine_2.frame.origin.y, cell.pointLine_2.frame.size.height);
-            
+            cell.pointLine_2.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"heidian"]];
+
             CGRect rect_1 = [cell boundingRectCommentWith:[NSString stringWithFormat:@"%@",[model.returns objectForKey:@"content_body"]]];
             
             cell.comments_2_1_bgView.frame = CGRectMake(cell.comments_2_1_bgView.frame.origin.x, cell.comments_2_1_bgView.frame.origin.y, kScreenWidth - 95, rect_1.size.height + 25);
@@ -455,6 +458,8 @@
             cell.userPostTime_1.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - cell.userPostTime_1.frame.size.width - 5, cell.userPostTime_1.frame.origin.y, cell.userPostTime_1.frame.size.width, cell.userPostTime_1.frame.size.height);
             
             cell.pointLine_1.frame = CGRectMake(cell.pointLine_1.frame.origin.x, cell.pointLine_1.frame.origin.y, [UIScreen mainScreen].bounds.size.width - cell.pointLine_1.frame.origin.y, cell.pointLine_1.frame.size.height);
+            
+            cell.pointLine_1.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"heidian"]];
 
             cell.comments_1.text = model.content_body;
             
