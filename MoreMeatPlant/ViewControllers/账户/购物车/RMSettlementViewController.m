@@ -22,6 +22,10 @@
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
     self.view.backgroundColor = [UIColor clearColor];
     
+    
+//    _bottom_line.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"heidian", @"png")];
+
+    
     _mainTableView.backgroundColor = [UIColor clearColor];
     _mainTableView.opaque = NO;
     
@@ -37,6 +41,7 @@
 }
 
 - (void)loadInfo{
+    
     [RMAFNRequestManager myInfoRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
         RMPublicModel * model = object;
         _model = model;
@@ -56,6 +61,7 @@
     [RMAFNRequestManager addressRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] andCallBack:^(NSError *error, BOOL success, id object) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(success){
+            [addressArray removeAllObjects];
             [addressArray addObjectsFromArray:object];
         }else{
             [MBProgressHUD showError:object toView:self.view];
@@ -74,6 +80,7 @@
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMAddressTableViewCell" owner:self options:nil] lastObject];
             [cell.editBtn addTarget:self action:@selector(editAction:) forControlEvents:UIControlEventTouchDown];
+            [cell.deleteBtn addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchDown];
         }
         RMPublicModel * model = [addressArray objectAtIndex:indexPath.row];
         if([model.auto_id isEqual:_model.auto_id]){
@@ -86,6 +93,7 @@
         cell.mobile.text = model.contentMobile;
         cell.detailAddress.text = model.contentAddress;
         cell.editBtn.tag = 100+indexPath.row;
+        cell.deleteBtn.tag = 101+indexPath.row;
         return cell;
     }else if(indexPath.row == [addressArray count]){
         RMAddAddressTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMAddAddressTableViewCell"];
@@ -98,12 +106,23 @@
         RMPayTypeTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMPayTypeTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMPayTypeTableViewCell" owner:self options:nil] lastObject];
+            
+            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapselectPaymentType:)];
+            [cell.yu_eL addGestureRecognizer:tap];
+            
+            UITapGestureRecognizer * tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapselectPaymentType:)];
+            [cell.alipayL addGestureRecognizer:tap2];
+            
             [cell.yu_e_payBtn addTarget:self action:@selector(selectPaymentType:) forControlEvents:UIControlEventTouchDown];
             [cell.alipayBtn addTarget:self action:@selector(selectPaymentType:) forControlEvents:UIControlEventTouchDown];
         }
         cell.yu_e_payBtn.tag = 100;
         cell.alipayBtn.tag = 101;
-        cell.yu_eL.text = balance;
+        
+        cell.yu_eL.tag = 102;
+        cell.alipayL.tag = 103;
+        
+        cell.yu_eL.text = [NSString stringWithFormat:@"余额:%@",balance];
         if([self.paymentType isEqualToString: @"1"]){
             [cell.yu_e_payBtn setBackgroundImage:[UIImage imageNamed:@"gwc_select"] forState:UIControlStateNormal];
             [cell.alipayBtn setBackgroundImage:[UIImage imageNamed:@"gwc_no_select"] forState:UIControlStateNormal];
@@ -154,15 +173,45 @@
 }
 
 - (void)editAction:(UIButton *)sender{
-    RMPublicModel * model = [addressArray objectAtIndex:sender.tag%100];
+    RMPublicModel * model = [addressArray objectAtIndex:sender.tag-100];
     if(_editAddress_callback){
         _editAddress_callback(model);
     }
 }
 
+#pragma mark - 删除
+- (void)deleteAction:(UIButton *)sender{
+    RMPublicModel * model = [addressArray objectAtIndex:sender.tag-101];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [RMAFNRequestManager addressDeleteRequestWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Auto_id:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(success){
+            RMPublicModel * model = object;
+            [self showHint:model.msg];
+            [self requestAddresslist];
+        }else{
+            [self showHint:object];
+        }
+        
+    }];
+}
+
 - (void)addAction:(UIButton *)sender{
     if(_addAddress_callback){
         _addAddress_callback ();
+    }
+}
+
+
+- (void)tapselectPaymentType:(UITapGestureRecognizer *)tap{
+    if(tap.view.tag == 102){
+        self.paymentType = @"1";
+    }else{
+        self.paymentType = @"2";
+    }
+    [_mainTableView reloadData];
+    if(self.payment_callback){
+        self.payment_callback (self.paymentType);
     }
 }
 

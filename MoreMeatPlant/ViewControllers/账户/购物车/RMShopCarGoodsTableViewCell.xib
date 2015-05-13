@@ -21,7 +21,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="hJK-lH-mDx">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hJK-lH-mDx">
                         <rect key="frame" x="10" y="0.0" width="300" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="0Fx-mO-SmL"/>
@@ -127,6 +127,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="addBtn" destination="ynZ-kD-WWB" id="K6b-Y2-3V8"/>
+                <outlet property="bottom_line" destination="hJK-lH-mDx" id="qpy-BH-Rc3"/>
                 <outlet property="content_imgV" destination="Wb5-Zs-vyp" id="Snw-vc-JmB"/>
                 <outlet property="content_priceL" destination="e0Z-LB-5sD" id="gxe-EE-LF6"/>
                 <outlet property="content_titleL" destination="a4f-jZ-iiB" id="nhh-LF-Puc"/>
@@ -140,7 +141,6 @@
     <resources>
         <image name="gwc_add_btn.png" width="86" height="86"/>
         <image name="gwc_num_input_bg.png" width="122" height="86"/>
-        <image name="gwc_point_line.png" width="1134" height="1"/>
         <image name="gwc_sub_btn.png" width="86" height="86"/>
         <image name="photo" width="750" height="562"/>
     </resources>

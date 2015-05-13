@@ -43,7 +43,7 @@
                             <constraint firstAttribute="width" constant="15" id="mct-Z0-bhI"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_pointLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="sJe-uV-W8o">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_pointLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="sJe-uV-W8o">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="NXA-CU-daL"/>

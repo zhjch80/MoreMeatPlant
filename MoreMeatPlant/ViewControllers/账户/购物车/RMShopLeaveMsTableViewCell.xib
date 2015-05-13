@@ -36,12 +36,12 @@
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="13"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KD-dd-YAB">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KD-dd-YAB">
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AmN-IH-wzJ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AmN-IH-wzJ">
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwc_point_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="G5d-vG-AGx">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G5d-vG-AGx">
                         <rect key="frame" x="10" y="65" width="304" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="AhL-ju-dFU"/>
@@ -93,7 +93,7 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_pointLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="T6a-l6-iOT">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T6a-l6-iOT">
                         <rect key="frame" x="0.0" y="105" width="320" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="xAN-pu-MtA"/>
@@ -138,6 +138,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottom_line" destination="G5d-vG-AGx" id="aei-MW-iJb"/>
+                <outlet property="bottom_line2" destination="T6a-l6-iOT" id="hl1-dG-hyu"/>
                 <outlet property="contactCorpBtn" destination="Zs7-iu-14O" id="NR2-Cx-B9h"/>
                 <outlet property="express_price" destination="cyo-5Q-RzK" id="8GM-sL-mBl"/>
                 <outlet property="leaveMessageT" destination="Leg-Kk-fl1" id="Ies-LD-wCn"/>
@@ -150,8 +152,6 @@
     </objects>
     <resources>
         <image name="gwc_btn_bg.png" width="295" height="79"/>
-        <image name="gwc_point_line.png" width="1134" height="1"/>
         <image name="gwc_tip_input_bg.png" width="1134" height="68"/>
-        <image name="img_pointLine.png" width="877" height="1"/>
     </resources>
 </document>

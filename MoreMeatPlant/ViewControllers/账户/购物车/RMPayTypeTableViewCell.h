@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *yu_e_payBtn;
 @property (weak, nonatomic) IBOutlet UIButton *alipayBtn;
 @property (weak, nonatomic) IBOutlet UILabel *yu_eL;
+@property (weak, nonatomic) IBOutlet UILabel *alipayL;
 
 @end

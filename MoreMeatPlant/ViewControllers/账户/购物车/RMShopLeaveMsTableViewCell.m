@@ -12,6 +12,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    _bottom_line.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"heidian", @"png")];
+    _bottom_line2.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"deidian", @"png")];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

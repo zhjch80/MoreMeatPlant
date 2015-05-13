@@ -16,5 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *shelves_btn;
 @property (weak, nonatomic) IBOutlet UIButton *delete_btn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *deleteWidth;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *shelfWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *shelfHeight;
 
 @end

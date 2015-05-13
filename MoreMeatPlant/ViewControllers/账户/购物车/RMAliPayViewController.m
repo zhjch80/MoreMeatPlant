@@ -99,20 +99,20 @@
         if(_fromMember){
             
         }else{
-            NSMutableArray * arr = [[NSMutableArray alloc] init];
-            for(UIViewController * vc in self.navigationController.viewControllers)
-            {
-                if([vc isKindOfClass:[RMShopCarViewController class]])
-                {
-                    continue;
-                }
-                [arr addObject:vc];
-                
-            }
-            RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
-            order.from_memCenter = NO;
-            [arr addObject:order];
-            self.navigationController.viewControllers = arr;
+//            NSMutableArray * arr = [[NSMutableArray alloc] init];
+//            for(UIViewController * vc in self.navigationController.viewControllers)
+//            {
+//                if([vc isKindOfClass:[RMShopCarViewController class]])
+//                {
+//                    continue;
+//                }
+//                [arr addObject:vc];
+//                
+//            }
+//            RMMyOrderViewController * order = [[RMMyOrderViewController alloc]initWithNibName:@"RMMyOrderViewController" bundle:nil];
+//            order.from_memCenter = NO;
+//            [arr addObject:order];
+//            self.navigationController.viewControllers = arr;
         }
 
     }

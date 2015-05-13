@@ -1104,6 +1104,26 @@
     }];
 }
 
++ (void)addressDeleteRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Auto_id:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block{
+    //localhost/drzw/index.php?com=com_appService&method=save&app_com=com_pcenter&task=delAddress&auto_id=3&ID=test&PWD=202CB962AC59075B964B07152D234B70
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@",baseUrl,@"&method=save&app_com=com_pcenter&task=delAddress",user,pwd,auto_id];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+    
+}
+
+
 /**
  *  @method     会员信息获取
  */
@@ -1148,6 +1168,33 @@
         }
     }];
 }
+
+
+/**
+ *  转帐之前的验证
+ */
++ (void)memberTransforValicateWithUser:(NSString *)user Pwd:(NSString *)pwd ToOtherMember:(NSString *)other  andCallBack:(RMAFNRequestManagerCallBack)block{
+    //localhost/drzw/index.php?com=com_appService&method=save&app_com=com_center&task=memTomemnick&frm[content_mobile]=18513217781&ID=test&PWD=202CB962AC59075B964B07152D234B70
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&frm[content_mobile]=%@",baseUrl,@"&method=save&app_com=com_center&task=memTomemnick",user,pwd,other];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+
+}
+
+
+
 
 /**
  *  @method     会员之间转账

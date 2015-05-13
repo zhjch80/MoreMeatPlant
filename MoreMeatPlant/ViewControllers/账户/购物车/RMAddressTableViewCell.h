@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *mobile;
 @property (weak, nonatomic) IBOutlet UILabel *detailAddress;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
+@property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 
 @end

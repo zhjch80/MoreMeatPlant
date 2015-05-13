@@ -51,6 +51,13 @@
         [cell.shelves_btn addTarget:self action:@selector(shelves_btnAction:) forControlEvents:UIControlEventTouchDown];
     }
 
+    if(self.is_shelf == nil){
+        cell.shelfWidth.constant = 70;
+        cell.shelfHeight.constant = 30;
+    }else{
+        cell.shelfWidth.constant = 35;
+    }
+    
     if([babyArray count]>0){
         RMPublicModel * model = [babyArray objectAtIndex:indexPath.row];
         [cell.content_img sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"nophote"]];

@@ -15,5 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalL;
 @property (weak, nonatomic) IBOutlet UIButton *contactCorpBtn;
 @property (weak, nonatomic) IBOutlet UILabel *express_price;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line2;
 
 @end

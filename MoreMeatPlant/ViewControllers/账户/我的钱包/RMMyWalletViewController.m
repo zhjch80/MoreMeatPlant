@@ -11,6 +11,7 @@
 #import "RMMyWalletYueTableViewCell.h"
 #import "UIView+Expland.h"
 #import "RMAliPayViewController.h"
+#import "UIAlertView+Expland.h"
 @interface RMMyWalletViewController (){
     BOOL isShow;
     NSString * yu_e;
@@ -166,16 +167,36 @@
     RMMyWalletTransferTableViewCell * cell =  (RMMyWalletTransferTableViewCell *)[_mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     if([cell.otherAccountField.text length]>0 && [cell.moneyField.text length]>0){
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [RMAFNRequestManager memberTransforWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] ToOtherMember:cell.otherAccountField.text Number:cell.moneyField.text andCallBack:^(NSError *error, BOOL success, id object) {
-            RMPublicModel * model = object;
-            if(success && model.status){
-                [self requestAccountInfo];
+        [RMAFNRequestManager memberTransforValicateWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] ToOtherMember:cell.otherAccountField.text andCallBack:^(NSError *error, BOOL success, id object) {
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if(success){
+                RMPublicModel * model = object;
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:[NSString stringWithFormat:@"您转帐的帐号昵称为%@,请先确认！",model.msg] delegate:self cancelButtonTitle:nil otherButtonTitles:@"取消",@"确定", nil];
+                [alert show];
+                
+                [alert handlerClickedButton:^(UIAlertView *alertView, NSInteger btnIndex) {
+                    if(btnIndex == 0){
+                        
+                    }else{
+                        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                        [RMAFNRequestManager memberTransforWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] ToOtherMember:cell.otherAccountField.text Number:cell.moneyField.text andCallBack:^(NSError *error, BOOL success, id object) {
+                            RMPublicModel * model = object;
+                            if(success && model.status){
+                                [self requestAccountInfo];
+                            }else{
+                                
+                            }
+                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                            [self showHint:model.msg];
+                        }];
+                    }
+                }];
             }else{
                 
             }
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [self showHint:model.msg];
         }];
+
     }else if ([cell.otherAccountField.text length]==0){
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入对方账号！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];

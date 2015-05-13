@@ -36,7 +36,7 @@
                             <constraint firstAttribute="height" constant="35" id="FG5-es-6Wc"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
-                        <state key="normal" title="修改" backgroundImage="bbgl_btn.png">
+                        <state key="normal" title="修改">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -47,7 +47,7 @@
                             <constraint firstAttribute="width" constant="35" id="Dtl-QD-mPB"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
-                        <state key="normal" title="下架" backgroundImage="bbgl_btn.png">
+                        <state key="normal" title="下架">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -57,7 +57,7 @@
                         <color key="textColor" red="0.3411764706" green="0.3411764706" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="member_pointline.png" translatesAutoresizingMaskIntoConstraints="NO" id="IyO-qY-jFy">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IyO-qY-jFy">
                         <rect key="frame" x="0.0" y="68" width="320" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="GCq-4V-aHk"/>
@@ -70,7 +70,7 @@
                             <constraint firstAttribute="width" constant="35" id="9iu-lG-HGI"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
-                        <state key="normal" title="删除" backgroundImage="bbgl_btn.png">
+                        <state key="normal" title="删除">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -103,20 +103,21 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottom_line" destination="IyO-qY-jFy" id="524-Ki-lkH"/>
                 <outlet property="content_img" destination="LkG-PX-0GL" id="oix-vh-2tX"/>
                 <outlet property="content_name" destination="7BZ-Gh-v5D" id="Ity-H1-PQY"/>
                 <outlet property="content_price" destination="wav-c9-3Zk" id="VCh-rY-96P"/>
                 <outlet property="deleteWidth" destination="9iu-lG-HGI" id="MA0-Qt-JpY"/>
                 <outlet property="delete_btn" destination="xcN-qF-BHh" id="fwE-7u-WJe"/>
                 <outlet property="modify_btn" destination="BIu-ge-Aqo" id="WLH-zV-ae1"/>
+                <outlet property="shelfHeight" destination="B3J-s9-nE0" id="SfU-Io-Ab5"/>
+                <outlet property="shelfWidth" destination="Dtl-QD-mPB" id="Eqm-RI-1L9"/>
                 <outlet property="shelves_btn" destination="hKm-NP-rFI" id="PQE-Vp-fNr"/>
             </connections>
-            <point key="canvasLocation" x="87" y="176"/>
+            <point key="canvasLocation" x="-81" y="176"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bbgl_btn.png" width="147" height="147"/>
-        <image name="member_pointline.png" width="831" height="1"/>
         <image name="photo.png" width="500" height="531"/>
     </resources>
 </document>

@@ -457,6 +457,16 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
 + (void)addressEditOrNewPostWithUser:(NSString *)user Pwd:(NSString *)pwd Autoid:(NSString *)auto_id ContactName:(NSString *)name Mobile:(NSString *)mobile Address:(NSString *)address andCallBack:(RMAFNRequestManagerCallBack)block;
 
 /**
+ *  地址删除
+ *
+ *  @param user    用户名
+ *  @param pwd     密码
+ *  @param auto_id 地址表示
+ *  @param block   回调
+ */
++ (void)addressDeleteRequestWithUser:(NSString *)user Pwd:(NSString *)pwd Auto_id:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block;
+
+/**
  *  我的钱包信息
  *
  *  @param user 用户
@@ -473,6 +483,16 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  */
 + (void)yu_eTurnHuabiWithUser:(NSString *)user Pwd:(NSString *)pwd Number:(NSString *)num andCallBack:(RMAFNRequestManagerCallBack)block;;
 
+
+/**
+ *  验证账号（转账）
+ *
+ *  @param user  用户名
+ *  @param pwd   密码
+ *  @param other 其他人账号
+ *  @param block 回调
+ */
++ (void)memberTransforValicateWithUser:(NSString *)user Pwd:(NSString *)pwd ToOtherMember:(NSString *)other  andCallBack:(RMAFNRequestManagerCallBack)block;
 /**
  *  会员之间转账
  *

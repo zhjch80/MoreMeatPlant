@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RMSettlementViewController">
             <connections>
+                <outlet property="bottom_line" destination="rPg-V8-hHf" id="txT-u7-BT0"/>
                 <outlet property="close_btn" destination="S7V-tx-0XY" id="Mgm-Ch-UFC"/>
                 <outlet property="headerView" destination="YJY-FO-hlH" id="nFr-QP-q9p"/>
                 <outlet property="mainTableView" destination="zVc-bS-bgV" id="Zh6-Qa-F6C"/>
@@ -34,7 +35,7 @@
                                 <constraint firstAttribute="height" constant="1" id="CHN-gi-ZTU"/>
                             </constraints>
                         </imageView>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zVc-bS-bgV">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zVc-bS-bgV">
                             <rect key="frame" x="0.0" y="48.5" width="320" height="504.5"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>

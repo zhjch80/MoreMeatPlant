@@ -36,6 +36,7 @@ typedef void (^RMSettlementViewSettle) (RMPublicModel * model_);
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (retain, nonatomic) NSString * paymentType;
 @property (retain, nonatomic) NSMutableArray * addressArray;
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_line;
 
 - (void)requestAddresslist;
 @end

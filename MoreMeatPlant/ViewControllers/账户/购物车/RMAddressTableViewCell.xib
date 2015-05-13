@@ -14,6 +14,7 @@
             <string>FZZHJW--GB1-0</string>
             <string>FZZHJW--GB1-0</string>
             <string>FZZHJW--GB1-0</string>
+            <string>FZZHJW--GB1-0</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -78,6 +79,18 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jzJ-ZW-2uR">
+                        <rect key="frame" x="190" y="72" width="46" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="9jc-UN-UaL"/>
+                            <constraint firstAttribute="width" constant="46" id="vJL-ny-hOy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZZHJW--GB1-0" family="FZZhengHeiS-R-GB" pointSize="14"/>
+                        <state key="normal" title="删除">
+                            <color key="titleColor" red="0.87843137250000003" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="dFk-JX-6k3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="W9X-A1-IrS" secondAttribute="trailing" constant="10" id="3iX-2W-u4R"/>
@@ -92,16 +105,20 @@
                     <constraint firstItem="1wA-Wb-AjI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jE4-72-jeo" secondAttribute="bottom" constant="5" id="aw4-Mv-jeF"/>
                     <constraint firstItem="Xzk-Cr-ILS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="dJX-T6-ZEV"/>
                     <constraint firstAttribute="bottomMargin" secondItem="1wA-Wb-AjI" secondAttribute="bottom" constant="-1.5" id="e2L-eH-ENj"/>
+                    <constraint firstItem="Xzk-Cr-ILS" firstAttribute="top" secondItem="jzJ-ZW-2uR" secondAttribute="bottom" constant="6" id="g7x-tI-5YN"/>
                     <constraint firstAttribute="trailingMargin" secondItem="1wA-Wb-AjI" secondAttribute="trailing" constant="10" id="hdR-GZ-BNW"/>
                     <constraint firstAttribute="trailingMargin" secondItem="jE4-72-jeo" secondAttribute="trailing" constant="10" id="irF-gj-ugr"/>
                     <constraint firstItem="jE4-72-jeo" firstAttribute="top" secondItem="dFk-JX-6k3" secondAttribute="bottom" constant="8" id="orh-3r-ZZ3"/>
                     <constraint firstItem="FtJ-X9-Q7W" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="rYS-4F-UKd"/>
                     <constraint firstItem="W9X-A1-IrS" firstAttribute="leading" secondItem="AUH-ik-EgX" secondAttribute="trailing" constant="1" id="wvl-38-nIS"/>
+                    <constraint firstItem="1wA-Wb-AjI" firstAttribute="leading" secondItem="jzJ-ZW-2uR" secondAttribute="trailing" constant="20" id="yUV-pL-4tb"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Xzk-Cr-ILS" secondAttribute="bottom" constant="-8" id="yeY-e1-sQ5"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="bottom_line" destination="Xzk-Cr-ILS" id="NSf-kk-emt"/>
+                <outlet property="deleteBtn" destination="jzJ-ZW-2uR" id="2BB-nV-NDd"/>
                 <outlet property="detailAddress" destination="jE4-72-jeo" id="Z99-Yx-VCN"/>
                 <outlet property="editBtn" destination="1wA-Wb-AjI" id="0Uk-WG-y3l"/>
                 <outlet property="linkName" destination="W9X-A1-IrS" id="tDm-cs-V5s"/>
