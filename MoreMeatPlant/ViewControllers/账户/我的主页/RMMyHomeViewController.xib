@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RMMyHomeViewController">
@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3ww-Tf-wla">
-                    <rect key="frame" x="0.0" y="64" width="320" height="464"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="467"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="htH-rZ-qeT"/>
@@ -29,7 +29,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="3ww-Tf-wla" secondAttribute="trailing" id="0RL-e6-xgO"/>
                 <constraint firstItem="3ww-Tf-wla" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="X8s-4c-POk"/>
-                <constraint firstAttribute="bottom" secondItem="3ww-Tf-wla" secondAttribute="bottom" constant="40" id="ikt-h2-Ju6"/>
+                <constraint firstAttribute="bottom" secondItem="3ww-Tf-wla" secondAttribute="bottom" constant="37" id="ikt-h2-Ju6"/>
                 <constraint firstItem="3ww-Tf-wla" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="zVR-PZ-dp9"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

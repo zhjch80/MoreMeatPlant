@@ -47,7 +47,6 @@
     [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMMyHomeViewController class]];
     self.mainTableView.backgroundColor = [UIColor colorWithRed:0.63 green:0.63 blue:0.63 alpha:1];
     
-    
     OneCellHeight = kScreenWidth/11.0*5.0;
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];

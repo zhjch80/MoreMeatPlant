@@ -41,7 +41,7 @@
     __weak RMHadBabyViewController * Self = self;
     
     
-    CGFloat height = kScreenHeight - 64 - 40 - 49;
+    CGFloat height = kScreenHeight - 64 - 37 - 49;
     
     waitDeliveryCtl = [[RMHadBabyListViewController alloc]initWithNibName:@"RMHadBabyListViewController" bundle:nil];
     waitDeliveryCtl.view.frame = CGRectMake(0, 64 + 40, kScreenWidth, kScreenHeight);

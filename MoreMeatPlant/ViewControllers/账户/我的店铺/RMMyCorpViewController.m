@@ -46,7 +46,6 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setCustomNavTitle:self.titleName];
-
     
     oneCellHeight = kScreenWidth/3.0+19.5+40;
     
