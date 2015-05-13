@@ -18,7 +18,6 @@
 #import "FileUtil.h"
 #import "UIView+Effects.h"
 #import "RMShopCarViewController.h"
-#import "JSBadgeView.h"
 
 #define kDKTableViewMainBackgroundImageFileName @"DaQuanBackground.jpg"
 #define kDKTableViewDefaultCellHeight 50.0f
@@ -31,7 +30,7 @@
     BOOL isTakingPictures;          //是否在选取图片
     
     BOOL isBlur;                    //是否已经添加毛玻璃
-    JSBadgeView * car_badge;
+    RKNotificationHub * car_badge;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) DKLiveBlurView *liveBlur;
@@ -96,7 +95,7 @@
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     
-    car_badge.badgeText = [self queryShopCarNumber];
+    [car_badge setCount:[[self queryShopCarNumber] intValue]];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -160,10 +159,10 @@
     
     
     UIButton * car_btn = (UIButton *)[bottomView viewWithTag:2];
-    car_badge = [[JSBadgeView alloc]initWithParentView:car_btn alignment:JSBadgeViewAlignmentTopRight];
-    car_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-    car_badge.badgeTextFont = FONT(12.0);
-    car_badge.badgeText = [self queryShopCarNumber];
+    car_badge = [[RKNotificationHub alloc]initWithView:car_btn];
+    [car_badge scaleCircleSizeBy:0.5];
+    [car_badge setCount:[[self queryShopCarNumber] intValue]];
+    
 }
 
 - (void)bottomMethodWithTag:(NSInteger)tag {
@@ -615,7 +614,7 @@
         
         if (success){
             
-            if ([[[object objectForKey:@"data"] objectForKey:@"data"] count] == 0){
+            if ([(NSArray *)[[object objectForKey:@"data"] objectForKey:@"data"] count] == 0){
                 [self showHint:@"数据返回异常"];
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 return;

@@ -8,14 +8,13 @@
 
 #import "RMBaseViewController.h"
 #import "RMPlantWithSaleCell.h"
-#import "JSBadgeView.h"
 #import "KxMenu.h"
 #import "RMBottomView.h"
 @interface RMMyCorpViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource,BottomDelegate,JumpPlantDetailsDelegate>{
     RMBottomView * bottomView;
-    JSBadgeView * badge;
-    JSBadgeView * car_badge;
-    JSBadgeView * chat_badge;
+    RKNotificationHub * badge;
+    RKNotificationHub * car_badge;
+    RKNotificationHub * chat_badge;
     RMPublicModel * classsModel;
 }
 

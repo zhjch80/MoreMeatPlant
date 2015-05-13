@@ -1903,7 +1903,7 @@
     
     NSString * url = nil;
     if(isreturn){//申请退货
-        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@&frm[express_name]=%@&frm[express_no]=%@",baseUrl,@"&method=save&app_com=com_pcenter&task=saveReturnPro",user,pwd,orderid,expressname,expressid];
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&orderid=%@&frm[express_name]=%@&frm[express_no]=%@",baseUrl,@"&method=save&app_com=com_pcenter&task=saveReturnexpress",user,pwd,orderid,expressname,expressid];
     }else{//商家确认发货
         url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@&frm[express_name]=%@&frm[express_no]=%@",baseUrl,@"&method=save&app_com=com_ccenter&task=orderDelivery",user,pwd,orderid,expressname,expressid];
     }
@@ -1922,6 +1922,52 @@
         }
     }];
 
+}
+
++ (void)memberReturnApplyWithUser:(NSString *)user Pwd:(NSString *)pwd Auto_id:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_pcenter&task=saveReturnPro&auto_id=6&ID=test&PWD=e10adc3949ba59abbe56e057f20f883e
+    NSString * url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&auto_id=%@",baseUrl,@"&method=save&app_com=com_pcenter&task=saveReturnPro",user,pwd,auto_id];
+    
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+}
+
+
+
++ (void)corpAgreeReturnApplyWithUser:(NSString *)user Pwd:(NSString *)pwd Auto_id:(NSString *)order_id isAgree:(BOOL)agree andCallBack:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=save&app_com=com_ccenter&task=noReturnorder&orderid=6&ID=18513217782&PWD=e10adc3949ba59abbe56e057f20f883e
+    NSString * url = nil;
+    
+    if(agree){
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&orderid=%@",baseUrl,@"&method=save&app_com=com_ccenter&task=yesReturnorder",user,pwd,order_id];
+    }else{
+        url = [NSString stringWithFormat:@"%@%@&ID=%@&PWD=%@&orderid=%@",baseUrl,@"&method=save&app_com=com_ccenter&task=noReturnorder",user,pwd,order_id];
+    }
+    
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        if(block){
+            block(nil,YES,model);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
 }
 
 /**

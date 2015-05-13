@@ -127,7 +127,7 @@
         if (success){
             if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
                 [dataArr removeAllObjects];
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
@@ -138,13 +138,13 @@
                 [mTableView reloadData];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
             }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
-                if ([[object objectForKey:@"data"] count] == 0){
+                if ([(NSArray *)[object objectForKey:@"data"] count] == 0){
                     [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     isLoadComplete = YES;
                     return;
                 }
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
@@ -157,7 +157,7 @@
             
             if (isRefresh){
                 [dataArr removeAllObjects];
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);

@@ -36,16 +36,15 @@
 @synthesize refreshControl;
 
 - (void)viewWillAppear:(BOOL)animated{
-    badge.badgeText = [self queryInfoNumber];
-    car_badge.badgeText = [self queryShopCarNumber];
-    chat_badge.badgeText = [self queryInfoNumber];
+    [badge setCount:[[self queryInfoNumber] intValue]];
+    [car_badge setCount:[[self queryShopCarNumber] intValue]];
+    [chat_badge setCount:[[self queryInfoNumber] intValue]];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setCustomNavTitle:self.titleName];
     
     oneCellHeight = kScreenWidth/3.0+19.5+40;
     
@@ -94,6 +93,9 @@
         headView.corp_headImgV.userInteractionEnabled = NO;
 
     }
+    
+    [self setCustomNavTitle:self.titleName];
+
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(replaceBannerImg:)];
     [headView.bannerImgV addGestureRecognizer:tap];
     
@@ -106,16 +108,14 @@
     [self.view addSubview:bottomView];
     
     UIButton * btn = (UIButton *)[bottomView viewWithTag:3];
-    badge = [[JSBadgeView alloc]initWithParentView:btn alignment:JSBadgeViewAlignmentTopRight];
-    badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-    badge.badgeTextFont = FONT(12.0);
-    badge.badgeText = [self queryInfoNumber];
+    badge = [[RKNotificationHub alloc]initWithView:btn];
+    [badge scaleCircleSizeBy:0.5];
+    [badge setCount:[[self queryInfoNumber] intValue]];
     
     UIButton * car_btn = (UIButton *)[bottomView viewWithTag:2];
-    car_badge = [[JSBadgeView alloc]initWithParentView:car_btn alignment:JSBadgeViewAlignmentTopRight];
-    car_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-    car_badge.badgeTextFont = FONT(12.0);
-    car_badge.badgeText = [self queryShopCarNumber];
+    car_badge = [[RKNotificationHub alloc]initWithView:car_btn];
+    [car_badge scaleCircleSizeBy:0.5];
+    [car_badge setCount:[[self queryShopCarNumber] intValue]];
     
     
     
@@ -229,10 +229,9 @@
                     UIView * targetView = [menuView viewWithTag:100];
                     
                     UILabel * targetlabel = (UILabel *)[targetView viewWithTag:1];
-                    chat_badge = [[JSBadgeView alloc]initWithParentView:targetlabel alignment:JSBadgeViewAlignmentCenterRight];
-                    chat_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-                    chat_badge.badgeTextFont = FONT(12.0);
-                    chat_badge.badgeText = [self queryInfoNumber];
+                    chat_badge = [[RKNotificationHub alloc]initWithView:targetlabel];
+                    [chat_badge scaleCircleSizeBy:0.5];
+                    [chat_badge setCount:[[self queryInfoNumber] intValue]];
                     break;
                 }
             }
@@ -410,7 +409,7 @@
         if (success){
             if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
                 [dataArr removeAllObjects];
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
@@ -421,13 +420,13 @@
                 [_mainTableview reloadData];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
             }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
-                if ([[object objectForKey:@"data"] count] == 0){
+                if ([(NSArray *)[object objectForKey:@"data"] count] == 0){
                     [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     isLoadComplete = YES;
                     return;
                 }
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
@@ -441,7 +440,7 @@
             
             if (isRefresh){
                 [dataArr removeAllObjects];
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);

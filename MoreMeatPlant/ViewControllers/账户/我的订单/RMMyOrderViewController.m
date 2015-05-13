@@ -216,6 +216,20 @@
         }
     };
     
+    orderReturnCtl.seeLogistics_callback = ^ (RMPublicModel * model){
+        //查看物流
+        if(Self.seeLogistics_callback){
+            Self.seeLogistics_callback (model);
+        }else{
+            //查看物流信息
+            RMSeeLogisticsViewController * see = [[RMSeeLogisticsViewController alloc]initWithNibName:@"RMSeeLogisticsViewController" bundle:nil];
+            see.express_name = model.express_name;
+            see.express_no = model.express_no;
+            [Self.navigationController pushViewController:see animated:YES];
+        }
+    };
+
+    
     [orderReturnCtl requestData];
     orderReturnCtl.view.hidden = YES;
     [self.view addSubview:orderReturnCtl.view];

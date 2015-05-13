@@ -605,14 +605,14 @@
                 [dataArr removeAllObjects];
                 [dataArr addObjectsFromArray:object];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
-                if([object count] == 0){
+                if([(NSArray *)object count] == 0){
                     [self showHint:@"暂无收藏"];                    
                     
                 }
             }else{
                 [dataArr addObjectsFromArray:object];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-                if([object count] == 0){
+                if([(NSArray *)object count] == 0){
                     [self showHint:@"没有更多收藏了"];
                     pageCount--;
                 }

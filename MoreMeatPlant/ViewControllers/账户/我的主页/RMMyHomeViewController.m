@@ -23,7 +23,7 @@
     BOOL isLoadComplete;
     RMPublicModel * _model;
     RMHomeHeadView * headView;
-    JSBadgeView * chat_badge;
+    RKNotificationHub * chat_badge;
     CGFloat OneCellHeight;
 }
 @property (nonatomic, strong) RefreshControl * refreshControl;
@@ -36,8 +36,8 @@
 @synthesize refreshControl;
 
 - (void)viewWillAppear:(BOOL)animated{
-    badge.badgeText = [self queryInfoNumber];
-    chat_badge.badgeText = [self queryInfoNumber];
+    [badge setCount:[[self queryInfoNumber] intValue]];
+    [chat_badge setCount:[[self queryInfoNumber] intValue]];
 }
 
 - (void)viewDidLoad {
@@ -93,10 +93,9 @@
     
     
     UIButton * btn = (UIButton *)[bottomView viewWithTag:2];
-    badge = [[JSBadgeView alloc]initWithParentView:btn alignment:JSBadgeViewAlignmentTopRight];
-    badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-    badge.badgeTextFont = FONT(12.0);
-    badge.badgeText = [self queryInfoNumber];
+    badge = [[RKNotificationHub alloc]initWithView:btn];
+    [badge scaleCircleSizeBy:0.5];
+    [badge setCount:[[self queryInfoNumber] intValue]];
     [self requestMemberInfo];
 }
 
@@ -778,7 +777,7 @@
         if (success){
             if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
                 [dataArr removeAllObjects];
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
@@ -805,13 +804,13 @@
                 
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
             }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
-                if ([[object objectForKey:@"data"] count] == 0){
+                if ([(NSArray *)[object objectForKey:@"data"] count] == 0){
                     [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     isLoadComplete = YES;
                     return;
                 }
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
@@ -840,7 +839,7 @@
             
             if (isRefresh){
                 [dataArr removeAllObjects];
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
@@ -946,10 +945,9 @@
                     UIView * targetView = [menuView viewWithTag:100];
                     
                     UILabel * targetlabel = (UILabel *)[targetView viewWithTag:1];
-                    chat_badge = [[JSBadgeView alloc]initWithParentView:targetlabel alignment:JSBadgeViewAlignmentCenterRight];
-                    chat_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-                    chat_badge.badgeTextFont = FONT(12.0);
-                    chat_badge.badgeText = [self queryInfoNumber];
+                    chat_badge = [[RKNotificationHub alloc]initWithView:targetlabel];
+                    [chat_badge scaleCircleSizeBy:0.5];
+                    [chat_badge setCount:[[self queryInfoNumber] intValue]];
                     break;
                 }
             }            break;

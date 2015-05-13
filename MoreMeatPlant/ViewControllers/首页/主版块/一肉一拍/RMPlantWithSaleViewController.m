@@ -25,15 +25,18 @@
 #import "RMMyCollectionViewController.h"
 #import "RMMyCorpViewController.h"
 #import "RMReleasePoisonDetailsViewController.h"
-#import "JSBadgeView.h"
 #import "UIImage+LK.h"
+#import "RKNotificationHub.h"
 
 @interface RMPlantWithSaleViewController ()<UITableViewDataSource,UITableViewDelegate,StickDelegate,SelectedPlantTypeMethodDelegate,JumpPlantDetailsDelegate,BottomDelegate,RefreshControlDelegate>{
     BOOL isFirstViewDidAppear;
     BOOL isRefresh;
     NSInteger pageCount;
     BOOL isLoadComplete;
-    JSBadgeView * car_badge;
+//    JSBadgeView * car_badge;
+    RKNotificationHub * car_badge;
+    RKNotificationHub * badge;
+    RKNotificationHub * chat_badge;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;         //list数据
@@ -63,7 +66,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    car_badge.badgeText = [self queryShopCarNumber];
+    [car_badge setCount:[[self queryShopCarNumber] intValue]];
+    [badge setCount:[[self queryInfoNumber] intValue]];
 }
 
 - (void)viewDidLoad {
@@ -100,10 +104,14 @@
     [self loadBottomView];
     
     UIButton * car_btn = (UIButton *)[bottomView viewWithTag:2];
-    car_badge = [[JSBadgeView alloc]initWithParentView:car_btn alignment:JSBadgeViewAlignmentTopRight];
-    car_badge.badgeBackgroundColor = UIColorFromRGB(0xe21a54);
-    car_badge.badgeTextFont = FONT(12.0);
-    car_badge.badgeText = [self queryShopCarNumber];
+    car_badge = [[RKNotificationHub alloc]initWithView:car_btn];
+    [car_badge setCount:[[self queryShopCarNumber] intValue]];
+    [car_badge scaleCircleSizeBy:0.5];
+    
+    UIButton * btn = (UIButton *)[bottomView viewWithTag:3];
+    badge = [[RKNotificationHub alloc]initWithView:btn];
+    [badge scaleCircleSizeBy:0.5];
+    [badge setCount:[[self queryInfoNumber] intValue]];
 }
 
 #pragma mark - 加载底部View
@@ -114,6 +122,8 @@
     [bottomView loadBottomWithImageArr:[NSArray arrayWithObjects:@"img_backup", @"img_up", @"img_buy", @"img_moreChat", nil]];
     bottomView.delegate = self;
     [self.view addSubview:bottomView];
+    
+    
 }
 
 #pragma mark - 加载tableViewHead
@@ -390,6 +400,22 @@
             [KxMenu setTintColor:[UIColor whiteColor]];
             
             [KxMenu showMenuInView:self.view fromRect:CGRectMake(kScreenWidth - 100, bottomView.frame.origin.y, 100, 100) menuItems:arr];
+            
+            for(UIView * v in self.view.subviews){
+                if([v isKindOfClass:[KxMenuOverlay class]]){
+                    KxMenuView * menuView = (KxMenuView *)[v.subviews lastObject];
+                    UIView * targetView = [menuView viewWithTag:201];
+                    
+                    UILabel * targetlabel = (UILabel *)[targetView viewWithTag:1];
+                    chat_badge = [[RKNotificationHub alloc]initWithView:targetlabel];
+                    [chat_badge scaleCircleSizeBy:0.5];
+                    [chat_badge setCount:[[self queryInfoNumber] intValue]];
+                    break;
+                }
+            }
+
+            
+            
             break;
         }
         default:
@@ -459,7 +485,7 @@
         
         if (success){
             [newsArr removeAllObjects];
-            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+            for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                 model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
@@ -488,7 +514,7 @@
         }
         
         if (success){
-            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+            for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                 model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
@@ -530,7 +556,7 @@
             RMPublicModel * model = [[RMPublicModel alloc] init];
             [subsPlantArr addObject:model];
             
-            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+            for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
                 model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
@@ -576,7 +602,7 @@
         if (success){
             if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
                 [dataArr removeAllObjects];
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
@@ -587,13 +613,13 @@
                 [mTableView reloadData];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
             }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
-                if ([[object objectForKey:@"data"] count] == 0){
+                if ([(NSArray *)[object objectForKey:@"data"] count] == 0){
                     [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     isLoadComplete = YES;
                     return;
                 }
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
@@ -607,7 +633,7 @@
             
             if (isRefresh){
                 [dataArr removeAllObjects];
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);

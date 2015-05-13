@@ -123,7 +123,7 @@
     return [dataArray count];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [[[dataArray objectAtIndex:section] objectForKey:@"products"] count]+2;
+    return [(NSArray *)[[dataArray objectAtIndex:section] objectForKey:@"products"] count]+2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -137,7 +137,7 @@
         NSDictionary * dic = [dataArray objectAtIndex:indexPath.section];
         [cell.corpNameL setTitle:[dic objectForKey:@"corp_name"] forState:UIControlStateNormal];
         return cell;
-    }else if(indexPath.row == [[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] count]+1){
+    }else if(indexPath.row == [(NSArray *)[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] count]+1){
         RMShopLeaveMsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMShopLeaveMsTableViewCell"];
         if(cell == nil){
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMShopLeaveMsTableViewCell" owner:self options:nil] lastObject];
@@ -187,7 +187,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
         return 30;
-    }else if (indexPath.row == [[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] count]+1){
+    }else if (indexPath.row == [(NSArray *)[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] count]+1){
         return 106;
     }else{
         return 77;

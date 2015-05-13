@@ -51,14 +51,14 @@
                 [dataarray removeAllObjects];
                 [dataarray addObjectsFromArray:object];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
-                if([object count] == 0){
+                if([(NSArray *)object count] == 0){
                     [MBProgressHUD showSuccess:@"暂无消息" toView:self.view];
                     
                 }
             }else{
                 [dataarray addObjectsFromArray:object];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-                if([object count] == 0){
+                if([(NSArray *)object count] == 0){
                     [MBProgressHUD showSuccess:@"没有更多消息了" toView:self.view];
                     more--;
                 }

@@ -66,6 +66,7 @@ _Pragma("clang diagnostic pop") \
 #import "RMProductModel.h"
 #import "RMCorpModel.h"
 
+#import "RKNotificationHub.h"
 
 #import "ActivityIndicator.h"
 

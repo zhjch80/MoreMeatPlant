@@ -9,13 +9,12 @@
 #import "RMBaseViewController.h"
 #import "RMReleasePoisonCell.h"
 #import "RMBottomView.h"
-#import "JSBadgeView.h"
 #import "KxMenu.h"
 
 typedef void (^RMMyHomeViewCtlDetailCallBack) (NSString * auto_id);
 @interface RMMyHomeViewController : RMBaseViewController<UITableViewDelegate,UITableViewDataSource,PostDetatilsDelegate,BottomDelegate>{
     RMBottomView * bottomView;
-    JSBadgeView * badge;
+    RKNotificationHub * badge;
 }
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;

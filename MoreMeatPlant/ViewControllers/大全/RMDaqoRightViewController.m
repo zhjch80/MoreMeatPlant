@@ -192,7 +192,7 @@
             model_1.modules_name = @"植物科目";
             [dataArr addObject:model_1];
             
-            for (NSInteger i=0; i<[[[object objectForKey:@"data"] objectForKey:@"course"] count]; i++) {
+            for (NSInteger i=0; i<[(NSArray *)[[object objectForKey:@"data"] objectForKey:@"course"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_id"]);
                 model.modules_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"modules_name"]);
@@ -207,7 +207,7 @@
             model_2.modules_name = @"生长季";
             [dataArr addObject:model_2];
             
-            for (NSInteger i=0; i<[[[object objectForKey:@"data"] objectForKey:@"grow"] count]; i++) {
+            for (NSInteger i=0; i<[(NSArray *)[[object objectForKey:@"data"] objectForKey:@"grow"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.modules_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"label"]);
                 model.auto_code = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"value"]);

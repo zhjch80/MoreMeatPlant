@@ -604,6 +604,29 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  */
 + (void)memberReturnGoodsOrSureDeliveryWithUser:(NSString *)user Pwd:(NSString *)pwd isReturn:(BOOL)isreturn orderId:(NSString *)orderid expressName:(NSString *)expressname expressId:(NSString *)expressid andCallBack:(RMAFNRequestManagerCallBack)block;
 
+
+/**
+ *  申请退货
+ *
+ *  @param user    用户名
+ *  @param pwd     密码
+ *  @param auto_id 订单产品表示
+ *  @param block   回调
+ */
++ (void)memberReturnApplyWithUser:(NSString *)user Pwd:(NSString *)pwd Auto_id:(NSString *)auto_id andCallBack:(RMAFNRequestManagerCallBack)block;
+
+
+/**
+ *  商家同意或者拒绝
+ *
+ *  @param user     用户名
+ *  @param pwd      密码
+ *  @param order_id 退货清单标示
+ *  @param agree    同意或者不同意
+ *  @param block    回调
+ */
++ (void)corpAgreeReturnApplyWithUser:(NSString *)user Pwd:(NSString *)pwd Auto_id:(NSString *)order_id isAgree:(BOOL)agree andCallBack:(RMAFNRequestManagerCallBack)block;
+
 /****************************商家*************************/
 
 /**

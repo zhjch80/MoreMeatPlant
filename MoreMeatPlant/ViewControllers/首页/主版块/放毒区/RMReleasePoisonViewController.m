@@ -25,7 +25,6 @@
 #import "NSString+TimeInterval.h"
 #import "RMCommentsView.h"
 #import "KxMenu.h"
-#import "JSBadgeView.h"
 #import "RMPlantWithSaleViewController.h"
 #import "RMFreshPlantMarketViewController.h"
 #import "AppDelegate.h"
@@ -44,7 +43,7 @@
     BOOL isLoadAdver;       //是否已经加载广告
     BOOL isLoadNews;        //是否已经加载置顶
     BOOL isSubsPlant;       //是否已经加载科目
-    JSBadgeView * chat_badge;
+    RKNotificationHub * chat_badge;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;         //列表数据
@@ -1042,7 +1041,7 @@
         }
         
         if (success){
-            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+            for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                 model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);
@@ -1070,7 +1069,7 @@
         
         if (success){
             [newsArr removeAllObjects];
-            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+            for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                 model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
@@ -1099,7 +1098,7 @@
         
         if (success){
             [plantTypeArr removeAllObjects];
-            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++) {
+            for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++) {
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.label = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"label"]);
                 model.value = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"value"]);
@@ -1137,7 +1136,7 @@
             RMPublicModel * m = [[RMPublicModel alloc] init];
             [subsPlantArr addObject:m];
             
-            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+            for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
                 model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
@@ -1195,7 +1194,7 @@
         if (success){
             if (self.refreshControl.refreshingDirection == RefreshingDirectionTop) {
                 [dataArr removeAllObjects];
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
@@ -1222,13 +1221,13 @@
 
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
             }else if(self.refreshControl.refreshingDirection==RefreshingDirectionBottom) {
-                if ([[object objectForKey:@"data"] count] == 0){
+                if ([(NSArray *)[object objectForKey:@"data"] count] == 0){
                     [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     isLoadComplete = YES;
                     return;
                 }
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);
@@ -1257,7 +1256,7 @@
             
             if (isRefresh){
                 [dataArr removeAllObjects];
-                for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
                     model.content_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_name"]);

@@ -171,7 +171,7 @@
 
 - (NSString *)queryShopCarNumber{
     
-    NSInteger  num;
+    NSInteger  num = 0;
     
     for(RMProductModel * product in [RMProductModel allDbObjects]){
         num += product.content_num;

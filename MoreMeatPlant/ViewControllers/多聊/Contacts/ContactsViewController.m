@@ -220,7 +220,7 @@
 ////        return 1;
 //    }
     
-    return [[self.dataSource objectAtIndex:section] count];
+    return [(NSArray *)[self.dataSource objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -291,7 +291,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0 || [[self.dataSource objectAtIndex:(section - 1)] count] == 0)
+    if (section == 0 || [(NSArray *)[self.dataSource objectAtIndex:(section - 1)] count] == 0)
     {
         return 0;
     }
@@ -302,7 +302,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (section == 0 || [[self.dataSource objectAtIndex:(section - 1)] count] == 0)
+    if (section == 0 || [(NSArray *)[self.dataSource objectAtIndex:(section - 1)] count] == 0)
     {
         return nil;
     }
@@ -321,7 +321,7 @@
     NSMutableArray * existTitles = [NSMutableArray array];
     //section数组为空的title过滤掉，不显示
     for (int i = 0; i < [self.sectionTitles count]; i++) {
-        if ([[self.dataSource objectAtIndex:i] count] > 0) {
+        if ([(NSArray *)[self.dataSource objectAtIndex:i] count] > 0) {
             [existTitles addObject:[self.sectionTitles objectAtIndex:i]];
         }
     }

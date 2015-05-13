@@ -334,7 +334,7 @@ typedef enum{
         if (success){
             [advertisingArr removeAllObjects];
             
-            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+            for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
                 model.member_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member_id"]);

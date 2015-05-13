@@ -86,10 +86,10 @@
             return [model.pros count] + 5;
         }
     }else{//退货
-        if([model.is_status boolValue]){
-            return 1+2;
+        if([model.is_status isEqualToString:@"0"] || [model.is_status isEqualToString:@"4"]){
+            return 1+2+1;
         }else{
-           return 1+3;
+           return 1+2;
         }
         
     }
@@ -454,33 +454,20 @@
                 }
             }
         }else{//退货
-            if([model.is_status boolValue]){
-                if(indexPath.row == 1+2-1){
-                    //地址
-                    RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
-                    addresscell.bottom_line.hidden = YES;
-                    addresscell.content_name.text = [model.corp objectForKey:@"content_name"];
-                    addresscell.content_mobile.text = [model.corp objectForKey:@"content_mobile"];
-                    addresscell.content_address.text = [model.corp objectForKey:@"content_address"];
-                    return addresscell;
-                }else{
-                    RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
-                    [procell.content_img sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"nophote"]];
-                    procell.content_name.text  = model.content_name;
-                    procell.content_price.text = model.content_price;
-                    procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil(model.content_num)];
-                    procell.fieldHeght.constant = 0;
-                    
-                    return procell;
-                }
-            }else{
+            if([model.is_status isEqualToString:@"0"] || [model.is_status isEqualToString:@"4"]){
+                
                 if(indexPath.row == 1+3-1){
                     RMOederDetailOperationTableViewCell * operationcell = [self getRMOederDetailOperationTableViewCell:indexPath];
-                    
                     operationcell.leftBtn.hidden = NO;
                     operationcell.rightBtn.hidden = NO;
-                    [operationcell.leftBtn setTitle:@"查看物流" forState:UIControlStateNormal];
-                    [operationcell.rightBtn setTitle:@"确认签收" forState:UIControlStateNormal];
+                    if([model.is_status isEqualToString:@"0"]){
+                        [operationcell.leftBtn setTitle:@"查看物流" forState:UIControlStateNormal];
+                        [operationcell.rightBtn setTitle:@"确认签收" forState:UIControlStateNormal];
+                    }else{
+                        [operationcell.leftBtn setTitle:@"不同意" forState:UIControlStateNormal];
+                        [operationcell.rightBtn setTitle:@"同意" forState:UIControlStateNormal];
+                    }
+                    
                     return operationcell;
                 }else if(indexPath.row == 1+3-2){
                     //地址
@@ -500,7 +487,26 @@
                     
                     return procell;
                 }
-
+            }else{
+                if(indexPath.row == 1+2-1){
+                    //地址
+                    RMOrderAddressTableViewCell * addresscell = [self getRMOrderAddressTableViewCell:indexPath];
+                    addresscell.bottom_line.hidden = YES;
+                    addresscell.content_name.text = [model.corp objectForKey:@"content_name"];
+                    addresscell.content_mobile.text = [model.corp objectForKey:@"content_mobile"];
+                    addresscell.content_address.text = [model.corp objectForKey:@"content_address"];
+                    return addresscell;
+                }else{
+                    RMOrderDetailProTableViewCell * procell = [self getRMOrderDetailProTableViewCell:indexPath];
+                    [procell.content_img sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"nophote"]];
+                    procell.content_name.text  = model.content_name;
+                    procell.content_price.text = model.content_price;
+                    procell.content_num.text = [NSString stringWithFormat:@"x%@",OBJC_Nil(model.content_num)];
+                    procell.fieldHeght.constant = 0;
+                    
+                    return procell;
+                }
+                
             }
             
         }
@@ -725,16 +731,17 @@
                 }
             }
         }else{//退货
-            if(model.is_status){
-                if(indexPath.row == 1 + 2 -1){
+            if([model.is_status isEqualToString:@"0"] || [model.is_status isEqualToString:@"4"]){
+                if(indexPath.row == 1 + 3 -1){
+                    return 40.f;
+                }else if(indexPath.row == 1 + 3 -2){
                     return 55.f;
                 }else{
                     return 80.f;
                 }
+                
             }else{
-                if(indexPath.row == 1 + 3 -1){
-                    return 40.f;
-                }else if(indexPath.row == 1 + 3 -2){
+                if(indexPath.row == 1 + 2 -1){
                     return 55.f;
                 }else{
                     return 80.f;
@@ -784,7 +791,13 @@
         
     }else if([_order_type isEqualToString:@"returnorder"]){
         //确认签收
-        [self sureReceiver:model];
+        
+        if([model.is_status isEqualToString:@"0"]){
+            [self sureReceiver:model];
+        }else if ([model.is_status isEqualToString:@"4"]){
+            [self agreeApply:YES withModel:model];
+        }
+        
     }
 }
 
@@ -799,9 +812,33 @@
     }else if ([_order_type isEqualToString:@"okorder"]){
         
     }else if ([_order_type isEqualToString:@"returnorder"]){
-        [self seeLogistics:model];
+        if([model.is_status isEqualToString:@"0"]){
+            [self seeLogistics:model];
+        }else if([model.is_status isEqualToString:@"4"]){
+            [self agreeApply:NO withModel:model];
+        }
     }
 }
+
+- (void)agreeApply:(BOOL)agree withModel:(RMPublicModel *)model{
+    if(self.startRequest){
+        self.startRequest();
+    }
+    [RMAFNRequestManager corpAgreeReturnApplyWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] Auto_id:model.auto_id isAgree:agree andCallBack:^(NSError *error, BOOL success, id object) {
+        if(self.finishedRequest){
+            self.finishedRequest();
+        }
+        if(success){
+            RMPublicModel * _model = object;
+            [self showHint:_model.msg];
+            pageCount = 1;
+            [self requestData];
+        }else{
+            [self showHint:object];
+        }
+    }];
+}
+
 
 #pragma mark - 联系买家
 - (void)contactUser:(RMPublicModel *)model{
@@ -848,7 +885,7 @@
             if(self.startRequest){
                 self.startRequest();
             }
-            [RMAFNRequestManager corpReturnSureWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] orderId:model.order_id andCallBack:^(NSError *error, BOOL success, id object) {
+            [RMAFNRequestManager corpReturnSureWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] orderId:model.auto_id andCallBack:^(NSError *error, BOOL success, id object) {
                 //        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 if(self.finishedRequest){
                     self.finishedRequest();
@@ -1004,13 +1041,13 @@
                 [dataarray removeAllObjects];
                 [dataarray addObjectsFromArray:object];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
-                if([object count] == 0){
+                if([(NSArray *)object count] == 0){
                     [self showHint:@"暂无订单"];
                 }
             }else{
                 [dataarray addObjectsFromArray:object];
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
-                if([object count] == 0){
+                if([(NSArray *)object count] == 0){
                     [self showHint:@"没有更多订单了"];
                     pageCount--;
                 }

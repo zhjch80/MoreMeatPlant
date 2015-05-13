@@ -107,7 +107,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [RMAFNRequestManager getPlantSubjectsListWithLevel:1 callBack:^(NSError *error, BOOL success, id object) {
         if(success){
-            for (NSInteger i=0; i<[[object objectForKey:@"data"] count]; i++){
+            for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                 RMPublicModel * model = [[RMPublicModel alloc] init];
                 model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
                 model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
