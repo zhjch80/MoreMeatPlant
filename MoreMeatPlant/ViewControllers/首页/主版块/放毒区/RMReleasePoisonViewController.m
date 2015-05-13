@@ -871,12 +871,14 @@
         subsPlantRequestValue = 10000;
         isRefresh = YES;
         [fenleiAction updataPlantClassificationSelectStateWith:-100];
+        plantRequestValue = -9999;
         [self requestListWithPageCount:1];
     }else{
         //分类
         subsPlantRequestValue = type.integerValue;
         [fenleiAction updataPlantClassificationSelectStateWith:type.integerValue];
         isRefresh = YES;
+        plantRequestValue = -9999;
         [self requestListWithPageCount:1];
     }
 }

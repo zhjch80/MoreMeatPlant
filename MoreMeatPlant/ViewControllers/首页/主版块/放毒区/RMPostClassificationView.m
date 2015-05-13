@@ -224,6 +224,17 @@
  *  更新食物科目选择状态
  */
 - (void)updataPlantClassificationSelectStateWith:(NSInteger)value {
+    
+    for (NSInteger i=0; i<[globPlantArr count]; i++) {
+        if (i==0){
+            UIButton * button = (UIButton *)[subView viewWithTag:601];
+            button.backgroundColor = [UIColor colorWithRed:0.58 green:0.58 blue:0.58 alpha:1];
+        }else{
+            UIButton * button = (UIButton *)[subView viewWithTag:i];
+            button.backgroundColor = [UIColor colorWithRed:0.58 green:0.58 blue:0.58 alpha:1];
+        }
+    }
+    
     if (value == -100){
         for (NSInteger i=1; i<[globSubsPlantArr count]; i++) {
             RMPublicModel * model = [globSubsPlantArr objectAtIndex:i];
@@ -241,12 +252,13 @@
             UIImageView * imageView = (UIImageView *)[subView viewWithTag:i + 6];
             imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, 44 + kMarginWidth, 44 + kMarginWidth);
         }
-        
-        UIImageView * imageView = (UIImageView *)[subView viewWithTag:value+6];
-        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height + 5);
-        RMPublicModel * model = [globSubsPlantArr objectAtIndex:value];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
+//        UIImageView * imageView = (UIImageView *)[subView viewWithTag:value+6];
+//        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height + 5);
+//        RMPublicModel * model = [globSubsPlantArr objectAtIndex:value];
+//        [imageView sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
     }
+    isPlantclassification = NO;
+    isPlantSubjects = NO;
 }
 
 @end

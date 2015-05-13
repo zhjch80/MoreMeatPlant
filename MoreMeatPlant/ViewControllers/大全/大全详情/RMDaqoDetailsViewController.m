@@ -225,8 +225,6 @@
     
     offsetY = (offsetY < 0 ? 0 : offsetY);
     
-    offsetY = 0;
-    
     RMDaqoDetailsFooterView * tableFooterView = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoDetailsFooterView" owner:nil options:nil] objectAtIndex:0];
     tableFooterView.delegate = self;
     tableFooterView.backgroundColor = [UIColor clearColor];
@@ -241,7 +239,7 @@
 
     tableFooterView.intro.frame = CGRectMake(tableFooterView.intro.frame.origin.x, tableFooterView.intro.frame.origin.y, kScreenWidth - 20, tableFooterView.intro.frame.size.height + offsetY);
     
-    tableFooterView.lineOne.frame = CGRectMake(tableFooterView.lineOne.frame.origin.x, tableFooterView.lineOne.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineOne.frame.size.height);
+    tableFooterView.lineOne.frame = CGRectMake(tableFooterView.lineOne.frame.origin.x, tableFooterView.lineOne.frame.origin.y, kScreenWidth - 20, tableFooterView.lineOne.frame.size.height);
     tableFooterView.lineOne.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"baidian"]];
 
     tableFooterView.lineTwo.frame = CGRectMake(tableFooterView.lineTwo.frame.origin.x, tableFooterView.lineTwo.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineTwo.frame.size.height);

@@ -861,10 +861,12 @@
         //全部
         subsPlantRequestValue = 10000;
         isRefresh = YES;
+        plantRequestValue = -9999;
         [self requestListWithPageCount:1];
     }else{
         //分类
         subsPlantRequestValue = type.integerValue;
+        plantRequestValue = -9999;
         [fenleiAction updataPlantClassificationSelectStateWith:type.integerValue];
         isRefresh = YES;
         [self requestListWithPageCount:1];
