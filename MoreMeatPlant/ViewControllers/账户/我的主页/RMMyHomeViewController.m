@@ -169,9 +169,23 @@
                 cell.delegate = self;
             }
             
-            cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
-            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
-            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.59 green:0.59 blue:0.59 alpha:1] range:NSMakeRange(0, 2)];
+            NSString * readStr;
+            
+            if ([model.isRead isEqualToString:@"已读"]){
+                readStr = @"已读";
+            }else{
+                readStr = @"未读";
+            }
+            
+            cell.plantTitle.text = [NSString  stringWithFormat:@"%@ %@ %@",readStr,model.content_class,model.content_name];
+            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"%@ %@ %@",readStr,model.content_class,model.content_name]];
+            
+            if ([readStr isEqualToString:@"已读"]){
+                [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
+            }else{
+                [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.59 green:0.59 blue:0.59 alpha:1] range:NSMakeRange(0, 2)];
+            }
+            
             [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
             cell.plantTitle.attributedText = oneAttributeStr;
             [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
@@ -237,9 +251,23 @@
                 cell.delegate = self;
             }
             
-            cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
-            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
-            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
+            NSString * readStr;
+            
+            if ([model.isRead isEqualToString:@"已读"]){
+                readStr = @"已读";
+            }else{
+                readStr = @"未读";
+            }
+            
+            cell.plantTitle.text = [NSString  stringWithFormat:@"%@ %@ %@",readStr,model.content_class,model.content_name];
+            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"%@ %@ %@",readStr,model.content_class,model.content_name]];
+            
+            if ([readStr isEqualToString:@"已读"]){
+                [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
+            }else{
+                [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.59 green:0.59 blue:0.59 alpha:1] range:NSMakeRange(0, 2)];
+            }
+            
             [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
             cell.plantTitle.attributedText = oneAttributeStr;
             [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
@@ -301,9 +329,23 @@
                 cell.delegate = self;
             }
             
-            cell.plantTitle.text = [NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name];
-            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"已读 %@ %@",model.content_class,model.content_name]];
-            [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
+            NSString * readStr;
+            
+            if ([model.isRead isEqualToString:@"已读"]){
+                readStr = @"已读";
+            }else{
+                readStr = @"未读";
+            }
+            
+            cell.plantTitle.text = [NSString  stringWithFormat:@"%@ %@ %@",readStr,model.content_class,model.content_name];
+            NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString  stringWithFormat:@"%@ %@ %@",readStr,model.content_class,model.content_name]];
+            
+            if ([readStr isEqualToString:@"已读"]){
+                [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.95 green:0.31 blue:0.4 alpha:1] range:NSMakeRange(0, 2)];
+            }else{
+                [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.59 green:0.59 blue:0.59 alpha:1] range:NSMakeRange(0, 2)];
+            }
+            
             [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 green:0.62 blue:0.59 alpha:1] range:NSMakeRange(3, 4)];
             cell.plantTitle.attributedText = oneAttributeStr;
             [cell.userHeadImg sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
@@ -698,9 +740,24 @@
 #pragma mark - 帖子详情
 
 - (void)jumpPostDetailsWithImage:(RMImageView *)image {
-//    if(self.detailcall_back){
-//        _detailcall_back (image.identifierString);
-//    }
+    for (NSInteger i=0; i<[dataArr count]; i++) {
+        RMPublicModel * __model = [dataArr objectAtIndex:i];
+        if (__model.auto_id == image.identifierString){
+            __model.isRead = @"已读";
+            if([RMPublicModel existDbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",__model.auto_id]]){
+                [__model updatetoDb];
+            }else{
+                [__model insertToDb];
+            }
+            [dataArr removeObjectAtIndex:i];
+            [dataArr insertObject:__model atIndex:i];
+            [self.mainTableView reloadData];
+            break;
+        }else{
+            continue;
+        }
+    }
+    
     RMReleasePoisonDetailsViewController * releasePoisonDetailsCtl = [[RMReleasePoisonDetailsViewController alloc] init];
     releasePoisonDetailsCtl.auto_id = image.identifierString;
     [self.navigationController pushViewController:releasePoisonDetailsCtl animated:YES];
@@ -737,6 +794,11 @@
                     model.is_review =  OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_review"]);
                     model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
                     model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    
+                    //已读 未读
+                    RMPublicModel * __model = [[RMPublicModel dbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",model.auto_id] orderby:nil] lastObject];
+                    model.isRead = __model.isRead;
+                    
                     [dataArr addObject:model];
                 }
                 [_mainTableView reloadData];
@@ -765,6 +827,11 @@
                     model.is_review =  OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_review"]);
                     model.imgs = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"imgs"];
                     model.members = [[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"member"];
+                    
+                    //已读 未读
+                    RMPublicModel * __model = [[RMPublicModel dbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",model.auto_id] orderby:nil] lastObject];
+                    model.isRead = __model.isRead;
+                    
                     [dataArr addObject:model];
                 }
                 [_mainTableView reloadData];
@@ -789,6 +856,11 @@
                     model.is_top = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_top"]);
                     model.is_collect = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_collect"]);
                     model.is_review =  OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"is_review"]);
+                    
+                    //已读 未读
+                    RMPublicModel * __model = [[RMPublicModel dbObjectsWhere:[NSString stringWithFormat:@"auto_id=%@",model.auto_id] orderby:nil] lastObject];
+                    model.isRead = __model.isRead;
+                    
                     [dataArr addObject:model];
                 }
                 
@@ -798,7 +870,6 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }];
-
 }
 
 #pragma mark 刷新代理
