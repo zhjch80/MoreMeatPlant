@@ -63,7 +63,7 @@
                             <constraint firstItem="2fO-KP-1ug" firstAttribute="top" secondItem="ONa-0A-Yn2" secondAttribute="top" constant="8" id="t9O-sQ-S8J"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" translatesAutoresizingMaskIntoConstraints="NO" id="X1U-zL-M1a">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="X1U-zL-M1a">
                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="44" id="bMY-O1-pFF"/>
@@ -95,7 +95,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Icon.png" width="180" height="180"/>
         <image name="messageSendFail.png" width="15" height="15"/>
-        <image name="photo" width="750" height="562"/>
     </resources>
 </document>

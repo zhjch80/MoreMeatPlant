@@ -1696,7 +1696,7 @@
                 }else{
                     NSDictionary * diction = OBJC_Nil([dataDic objectForKey:@"product"]);
                     model.auto_id = OBJC_Nil([diction objectForKey:@"auto_id"]);
-                    model.content_name = OBJC_Nil([diction objectForKey:@"member_id"]);
+                    model.content_name = OBJC_Nil([diction objectForKey:@"content_name"]);
                     model.content_price = OBJC_Nil([diction objectForKey:@"content_price"]) ;
                     model.content_img = OBJC_Nil([diction objectForKey:@"content_img"]) ;
                 }

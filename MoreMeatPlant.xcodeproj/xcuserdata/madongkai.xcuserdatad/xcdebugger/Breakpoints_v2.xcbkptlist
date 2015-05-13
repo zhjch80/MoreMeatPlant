@@ -57,22 +57,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x8ba2;&#x5355;/RMOrderListViewController.m"
-            timestampString = "453225068.136377"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "985"
-            endingLineNumber = "985"
-            landmarkName = "-commit"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x5b9d;&#x8d1d;&#x7ba1;&#x7406;/RMBabyListViewController.m"
             timestampString = "453221075.46968"
             startingColumnNumber = "9223372036854775807"
@@ -111,22 +95,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1080"
             endingLineNumber = "1080"
-            landmarkName = "-publishEvaluate:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x8ba2;&#x5355;/RMOrderListViewController.m"
-            timestampString = "453225068.136377"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1066"
-            endingLineNumber = "1066"
             landmarkName = "-publishEvaluate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -201,12 +169,12 @@
                   symbolName = "-[RMMyCorpViewController modifyPhoto]"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E5%BA%97%E9%93%BA/RMMyCorpViewController.m"
-                  timestampString = "453233202.605838"
+                  timestampString = "453236367.322584"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "614"
                   endingLineNumber = "614"
-                  offsetFromSymbolStart = "332">
+                  offsetFromSymbolStart = "342">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -215,12 +183,12 @@
                   symbolName = "__37-[RMMyCorpViewController modifyPhoto]_block_invoke"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E5%BA%97%E9%93%BA/RMMyCorpViewController.m"
-                  timestampString = "453233202.605969"
+                  timestampString = "453236367.322744"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "614"
                   endingLineNumber = "614"
-                  offsetFromSymbolStart = "92">
+                  offsetFromSymbolStart = "90">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -270,22 +238,6 @@
             startingLineNumber = "184"
             endingLineNumber = "184"
             landmarkName = "-deleteAction:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/&#x6211;&#x7684;&#x8ba2;&#x5355;/RMOrderListViewController.m"
-            timestampString = "453225948.855463"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1056"
-            endingLineNumber = "1056"
-            landmarkName = "-seeLogistics:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
