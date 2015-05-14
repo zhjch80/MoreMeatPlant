@@ -408,12 +408,12 @@
 
             CGRect rect_1 = [cell boundingRectCommentWith:[NSString stringWithFormat:@"%@",[model.returns objectForKey:@"content_body"]]];
             
-            cell.comments_2_1_bgView.frame = CGRectMake(cell.comments_2_1_bgView.frame.origin.x, cell.comments_2_1_bgView.frame.origin.y, kScreenWidth - 95, rect_1.size.height + 25);
-            
             cell.comments_2_1.frame = CGRectMake(cell.comments_2_1.frame.origin.x, cell.comments_2_1.frame.origin.y + 5, kScreenWidth - 105, rect_1.size.height + 20);
             
             cell.comments_2_1.text = [NSString stringWithFormat:@"%@\n%@",[[model.returns objectForKey:@"member"] objectForKey:@"member_name"],[NSString stringWithFormat:@"%@",[model.returns objectForKey:@"content_body"]]];
             [cell.comments_2_1 sizeToFit];
+            
+            cell.comments_2_1_bgView.frame = CGRectMake(cell.comments_2_1_bgView.frame.origin.x, cell.comments_2_1_bgView.frame.origin.y, kScreenWidth - 95, cell.comments_2_1.frame.size.height + 10);
             
             NSMutableAttributedString *oneAttributeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@\n%@",[[model.returns objectForKey:@"member"] objectForKey:@"member_name"],[NSString stringWithFormat:@"%@",[model.returns objectForKey:@"content_body"]]]];
             [oneAttributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:1 green:0.18 blue:0.45 alpha:1] range:NSMakeRange(0, [NSString stringWithFormat:@"%@",[[model.returns objectForKey:@"member"] objectForKey:@"member_name"]].length)];

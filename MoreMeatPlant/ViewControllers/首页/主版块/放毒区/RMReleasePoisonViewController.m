@@ -1188,6 +1188,7 @@
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self showHint:@"网络不稳定"];
             return ;
         }
         

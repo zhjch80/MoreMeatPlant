@@ -326,7 +326,8 @@ typedef enum{
     [RMAFNRequestManager getAdvertisingQueryWithType:1 callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error::%@",error);
-            [self requestColumns];
+            [self showHint:@"网络不稳定"];
+//            [self requestColumns];
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             return ;
         }
