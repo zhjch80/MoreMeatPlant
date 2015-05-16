@@ -19,6 +19,7 @@
             <connections>
                 <outlet property="back_login_btn" destination="CTV-qX-JH4" id="hc5-5G-dGf"/>
                 <outlet property="codeTextField" destination="YPq-Z4-pyO" id="rfD-iD-RCF"/>
+                <outlet property="login_bg" destination="YrO-lw-3wJ" id="Myt-2X-uE0"/>
                 <outlet property="mobileTextField" destination="KUU-2K-lNI" id="vDn-oN-h7m"/>
                 <outlet property="passTextField" destination="W31-nS-w0M" id="5Xu-Nb-n9x"/>
                 <outlet property="sendCodeBtn" destination="RPy-5D-hFH" id="2Ku-bA-kcf"/>
@@ -50,7 +51,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="l35-Qj-j4S"/>
                     </constraints>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
@@ -103,7 +104,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="BDz-2u-eLy"/>
                     </constraints>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -134,7 +135,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Tgp-j1-bnI"/>
                     </constraints>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>

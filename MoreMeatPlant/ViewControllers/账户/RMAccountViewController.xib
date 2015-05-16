@@ -185,7 +185,6 @@
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="d9f-8o-iM2" secondAttribute="trailing" id="2ZI-fU-Xkj"/>
                 <constraint firstItem="Vnu-Gk-Fhe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Jfm-tL-jFC"/>

@@ -564,11 +564,12 @@ typedef enum {
 }
 
 + (UIImage *) selectedImage: (CGSize) size
-{
+{//db165a
     const CGFloat locations[] = {0,1};
     const CGFloat components[] = {
-        0.216, 0.471, 0.871, 1,
-        0.059, 0.353, 0.839, 1,
+//        0.216, 0.471, 0.871, 1,
+//        0.059, 0.353, 0.839, 1,
+        0.94, 0.2, 0.45, 1,0.94, 0.2, 0.45, 1
     };
     
     return [self gradientImageWithSize:size locations:locations components:components count:2];

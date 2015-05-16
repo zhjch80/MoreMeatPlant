@@ -274,11 +274,12 @@
             break;
         }
         case 3:{
+            NSArray * arr = nil;
+            
             KxMenuItem * item1 = [KxMenuItem menuItem:@"多聊消息" image:nil target:self action:@selector(menuSelected:) index:201];
             item1.foreColor = UIColorFromRGB(0x585858);
             
-            KxMenuItem * item2 = [KxMenuItem menuItem:@"我的订单" image:nil target:self action:@selector(menuSelected:) index:202];
-            item2.foreColor = UIColorFromRGB(0x585858);
+            
 
             KxMenuItem * item3 = [KxMenuItem menuItem:@"我的收藏" image:nil target:self action:@selector(menuSelected:) index:203];
             item3.foreColor = UIColorFromRGB(0x585858);
@@ -286,7 +287,15 @@
             KxMenuItem * item4 = [KxMenuItem menuItem:@"我的账户" image:nil target:self action:@selector(menuSelected:) index:204];
             item4.foreColor = UIColorFromRGB(0x585858);
             
-            NSArray * arr = [[NSArray alloc]initWithObjects:item1,item2,item3,item4, nil];
+            if([[[RMUserLoginInfoManager loginmanager] isCorp] integerValue] == 2){
+                arr = [[NSArray alloc]initWithObjects:item1,item3,item4, nil];
+
+            }else{
+                KxMenuItem * item2 = [KxMenuItem menuItem:@"我的订单" image:nil target:self action:@selector(menuSelected:) index:202];
+                item2.foreColor = UIColorFromRGB(0x585858);
+                arr = [[NSArray alloc]initWithObjects:item1,item2,item3,item4, nil];
+
+            }
             
             [KxMenu setTintColor:[UIColor whiteColor]];
             

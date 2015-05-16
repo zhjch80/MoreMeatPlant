@@ -29,6 +29,9 @@
     NSString * url = [RMAFNRequestManager getWuliuUrlWithExpressName:[self.express_name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] no:self.express_no];
     NSLog(@"物流:%@",url);
     
+    
+    _mainWebView.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight-64);
+    
     [_mainWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
 

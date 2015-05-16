@@ -18,6 +18,7 @@
             <connections>
                 <outlet property="forgotPassBtn" destination="zgH-9p-daH" id="Ml6-zJ-St9"/>
                 <outlet property="loginBtn" destination="Tpz-E9-Dsj" id="pNo-64-4Rj"/>
+                <outlet property="login_bg" destination="U56-S3-hhp" id="7v4-hE-slL"/>
                 <outlet property="passTextField" destination="JTx-gA-WxJ" id="zxg-Fb-PzA"/>
                 <outlet property="registBtn" destination="ssX-Ix-0jA" id="eZB-d8-v6x"/>
                 <outlet property="userTextField" destination="XEJ-Ar-IDv" id="lBk-DD-Uv9"/>
@@ -86,7 +87,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="O9Y-Os-ANr"/>
                     </constraints>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
@@ -113,7 +114,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="HMK-65-6w8"/>
                     </constraints>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>

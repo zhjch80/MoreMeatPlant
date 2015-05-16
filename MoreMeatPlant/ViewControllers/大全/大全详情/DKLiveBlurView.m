@@ -172,8 +172,12 @@
 }
 
 - (void)removeScrollViewObserver {
-    [_scrollView removeObserver: self forKeyPath: @"contentOffset"];
+//    [_scrollView removeObserver: self forKeyPath: @"contentOffset"];
 
+}
+
+- (void)dealloc{
+    [_scrollView removeObserver: self forKeyPath: @"contentOffset"];
 }
 
 @end

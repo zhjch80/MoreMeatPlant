@@ -23,6 +23,7 @@
                 <outlet property="back_login_btn" destination="dB6-py-vvg" id="nJ8-zs-Tke"/>
                 <outlet property="codeTextField" destination="1gA-Ci-d1k" id="whu-b5-sUx"/>
                 <outlet property="corp_btn" destination="rPJ-Qf-8Jw" id="0cO-zh-27S"/>
+                <outlet property="login_bg" destination="03p-0g-RaT" id="6pr-co-Bz2"/>
                 <outlet property="mobileTextField" destination="hti-vr-hUs" id="0id-1p-zdz"/>
                 <outlet property="nickTextField" destination="l2q-6I-Oc2" id="jgW-uR-oT5"/>
                 <outlet property="passTextField" destination="bZo-vc-XU2" id="BCk-Pu-wc5"/>
@@ -87,7 +88,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="EH7-2I-kMo"/>
                     </constraints>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -123,7 +124,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="pAH-Ed-0hX"/>
                     </constraints>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -132,7 +133,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="YiU-4s-uOf"/>
                     </constraints>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -163,7 +164,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="ZkJ-kt-Tzb"/>
                     </constraints>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>

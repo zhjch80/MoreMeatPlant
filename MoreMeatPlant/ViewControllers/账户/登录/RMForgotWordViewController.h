@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *sure_btn;
 @property (weak, nonatomic) IBOutlet JKCountDownButton *sendCodeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *back_login_btn;
+@property (weak, nonatomic) IBOutlet UIImageView *login_bg;
 
 @end

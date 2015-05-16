@@ -29,6 +29,8 @@
 
 #import "AppDelegate+EaseMob.h"
 
+#import "BBRGuideViewController.h"
+
 
 @interface AppDelegate ()<EMChatManagerDelegate>{
     RMHomeViewController * homeCtl;
@@ -131,50 +133,64 @@
  *  @param      type        0没有登录 1已经登录
  */
 - (void)loadMainViewControllersWithType:(NSInteger)type {
-    UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:talkMoreCtl];
-    NSArray * controllers;
-    switch (type) {
-        case 0:{
-            //没有登录
-            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, loginCtl, talkMoreCtl, nil];
-            break;
-        }
-        case 1:{
-            //已经登录
-            controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, talkMoreCtl, nil];
-            [accountCtl initPlat];
-            break;
-        }
-            
-        default:
-            break;
+    
+    
+    //增加标识，用于判断是否是第一次启动应用...
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
     }
     
-    if (!customTabBarCtl){
-        customTabBarCtl = [[RMCustomTabBarController alloc] init];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        //程序第一次启动，进入引导页面
+        BBRGuideViewController *appStartController = [[BBRGuideViewController alloc] init];
+        self.window.rootViewController = appStartController;
+    }else {
+        //程序不是第一次启动，进入主页面
+        UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:talkMoreCtl];
+        NSArray * controllers;
+        switch (type) {
+            case 0:{
+                //没有登录
+                controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, loginCtl, talkMoreCtl, nil];
+                break;
+            }
+            case 1:{
+                //已经登录
+                controllers = [NSArray arrayWithObjects:homeCtl, daqoCtl, accountCtl, talkMoreCtl, nil];
+                [accountCtl initPlat];
+                break;
+            }
+                
+            default:
+                break;
+        }
+        
+        if (!customTabBarCtl){
+            customTabBarCtl = [[RMCustomTabBarController alloc] init];
+        }
+        
+        ((RMCustomTabBarController *)customTabBarCtl).tabbarHeight = 49;
+        ((RMCustomTabBarController *)customTabBarCtl).TabarItemWidth = kScreenWidth/4.0f;
+        ((RMCustomTabBarController *)customTabBarCtl).isInDeck = YES;
+        ((UITabBarController *)customTabBarCtl).viewControllers = controllers;
+        UIButton *button0 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:0];
+        UIButton *button1 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:1];
+        UIButton *button2 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:2];
+        UIButton *button3 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:3];
+        
+        NSArray * imageName = [NSArray arrayWithObjects:@"home", @"daquan", @"zhanghu", @"duoliao", nil];
+        
+        [button0 setImage:LOADIMAGE([imageName objectAtIndex:0], kImageTypePNG) forState:UIControlStateNormal];
+        [button1 setImage:LOADIMAGE([imageName objectAtIndex:1], kImageTypePNG) forState:UIControlStateNormal];
+        [button2 setImage:LOADIMAGE([imageName objectAtIndex:2], kImageTypePNG)  forState:UIControlStateNormal];
+        [button3 setImage:LOADIMAGE([imageName objectAtIndex:3], kImageTypePNG) forState:UIControlStateNormal];
+        
+        [((RMCustomTabBarController *)customTabBarCtl) clickButtonWithIndex:0];
+        self.cusNav = [[RMCustomNavController alloc] initWithRootViewController:customTabBarCtl];
+        self.cusNav.navigationBar.hidden = YES;
+        [self.window setRootViewController:self.cusNav];
     }
-    
-    ((RMCustomTabBarController *)customTabBarCtl).tabbarHeight = 49;
-    ((RMCustomTabBarController *)customTabBarCtl).TabarItemWidth = kScreenWidth/4.0f;
-    ((RMCustomTabBarController *)customTabBarCtl).isInDeck = YES;
-    ((UITabBarController *)customTabBarCtl).viewControllers = controllers;
-    UIButton *button0 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:0];
-    UIButton *button1 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:1];
-    UIButton *button2 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:2];
-    UIButton *button3 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:3];
-    
-    NSArray * imageName = [NSArray arrayWithObjects:@"home", @"daquan", @"zhanghu", @"duoliao", nil];
-
-    [button0 setImage:LOADIMAGE([imageName objectAtIndex:0], kImageTypePNG) forState:UIControlStateNormal];
-    [button1 setImage:LOADIMAGE([imageName objectAtIndex:1], kImageTypePNG) forState:UIControlStateNormal];
-    [button2 setImage:LOADIMAGE([imageName objectAtIndex:2], kImageTypePNG)  forState:UIControlStateNormal];
-    [button3 setImage:LOADIMAGE([imageName objectAtIndex:3], kImageTypePNG) forState:UIControlStateNormal];
-    
-    [((RMCustomTabBarController *)customTabBarCtl) clickButtonWithIndex:0];
-    self.cusNav = [[RMCustomNavController alloc] initWithRootViewController:customTabBarCtl];
-    self.cusNav.navigationBar.hidden = YES;
-    [self.window setRootViewController:self.cusNav];
-    
 }
 
 

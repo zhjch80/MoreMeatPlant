@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *forgotPassBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *registBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *login_bg;
 
 @end
