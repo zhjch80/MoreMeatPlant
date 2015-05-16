@@ -53,8 +53,6 @@
 		<string>方正正中黑简体.TTF</string>
 		<string>方正正准黑简体.TTF</string>
 	</array>
-	<key>UILaunchStoryboardName</key>
-	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
