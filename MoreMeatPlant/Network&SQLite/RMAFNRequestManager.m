@@ -2246,4 +2246,25 @@
     }];
 }
 
+#pragma mark - 登录背景切换接口
++ (void)loginBackgroundImageRequestWithBlock:(RMAFNRequestManagerCallBack)block{
+    //218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_shop&task=loginImg
+    NSString * url = [NSString stringWithFormat:@"%@%@",baseUrl,@"&method=appSev&app_com=com_shop&task=loginImg"];
+    [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dic = (NSDictionary *)([responseObject isEqual:[NSNull null]]?nil:responseObject);
+        RMPublicModel * model = [[RMPublicModel alloc]init];
+        model.status = [[dic objectForKey:@"status"] boolValue];
+        model.msg = [dic objectForKey:@"msg"];
+        model.content_img = [dic objectForKey:@"data"];
+        if(block){
+            block(nil,YES,model);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(block){
+            block(error,NO,RequestFailed);
+        }
+    }];
+}
+
 @end

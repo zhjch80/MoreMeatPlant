@@ -34,7 +34,24 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self backgroundRequest];
 }
+
+- (void)backgroundRequest{
+    [RMAFNRequestManager loginBackgroundImageRequestWithBlock:^(NSError *error, BOOL success, id object) {
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                [_login_bg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:LOADIMAGE(@"login_bg", @"jpg")];
+            }else{
+            
+            }
+        }else{
+            
+        }
+    }];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

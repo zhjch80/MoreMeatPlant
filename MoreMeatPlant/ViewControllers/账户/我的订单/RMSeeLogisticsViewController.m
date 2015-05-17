@@ -17,22 +17,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    self.view.backgroundColor = [UIColor redColor];
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavTitle:@"物流查询"];
-    self.mainWebView.scalesPageToFit = NO;
-    self.mainWebView.opaque = NO;
-    self.mainWebView.backgroundColor = [UIColor clearColor];
+//    self.mainWebView.scalesPageToFit = NO;
+//    self.mainWebView.opaque = NO;
+    
     [leftBarButton setImage:[UIImage imageNamed:@"img_leftArrow"] forState:UIControlStateNormal];
     [leftBarButton setTitle:@"返回" forState:UIControlStateNormal];
     [leftBarButton setTitleColor:[UIColor colorWithRed:0.94 green:0.01 blue:0.33 alpha:1] forState:UIControlStateNormal];
+    
+    
+    _mainWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64)];
+    _mainWebView.delegate = self;
+    
+    [self.view addSubview:_mainWebView];
 
     NSString * url = [RMAFNRequestManager getWuliuUrlWithExpressName:[self.express_name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] no:self.express_no];
     NSLog(@"物流:%@",url);
     
-    
-    _mainWebView.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight-64);
-    
     [_mainWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+
 }
 
 #pragma mark - UIWebViewDelegate

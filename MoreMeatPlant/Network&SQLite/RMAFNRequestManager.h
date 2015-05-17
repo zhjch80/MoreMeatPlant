@@ -830,5 +830,11 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @param block        block description
  */
 + (void)iwantEvaulateOrderWithUser:(NSString *)user Pwd:(NSString *)pwd Orderid:(NSString *)orderid Comment_num:(NSString *)comment_num auto_idStr:(NSString *)autoidStr Comment_desc:(NSDictionary *)comment_desc andCallBack:(RMAFNRequestManagerCallBack)block;
+/**
+ *  登录背景切换接口
+ *
+ *  @param block 回调
+ */
++ (void)loginBackgroundImageRequestWithBlock:(RMAFNRequestManagerCallBack)block;
 
 @end

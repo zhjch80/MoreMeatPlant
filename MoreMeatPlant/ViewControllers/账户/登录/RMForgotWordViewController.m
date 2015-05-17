@@ -23,15 +23,30 @@
     [super viewDidAppear:animated];
 }
 
-- (void)dealloc{
-//    [DaiDodgeKeyboard removeRegisterTheViewNeedDodgeKeyboard];
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self backgroundRequest];
+}
+
+- (void)backgroundRequest{
+    [RMAFNRequestManager loginBackgroundImageRequestWithBlock:^(NSError *error, BOOL success, id object) {
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                [_login_bg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:LOADIMAGE(@"login_bg", @"jpg")];
+            }else{
+                
+            }
+        }else{
+            
+        }
+    }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setHideCustomNavigationBar:YES withHideCustomStatusBar:YES];
-//    [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
 
     [_back_login_btn addTarget:self action:@selector(backLoginAction:) forControlEvents:UIControlEventTouchDown];
     [_sendCodeBtn addTarget:self action:@selector(sendCodeAction:) forControlEvents:UIControlEventTouchDown];

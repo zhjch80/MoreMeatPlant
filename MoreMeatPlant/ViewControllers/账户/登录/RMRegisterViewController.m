@@ -24,7 +24,24 @@
     [super viewDidAppear:animated];
 }
 
-- (void)dealloc{
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self backgroundRequest];
+}
+
+- (void)backgroundRequest{
+    [RMAFNRequestManager loginBackgroundImageRequestWithBlock:^(NSError *error, BOOL success, id object) {
+        if(success){
+            RMPublicModel * model = object;
+            if(model.status){
+                [_login_bg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:LOADIMAGE(@"login_bg", @"jpg")];
+            }else{
+                
+            }
+        }else{
+            
+        }
+    }];
 }
 
 - (void)viewDidLoad {
@@ -99,7 +116,7 @@
         type = @"personal";
     }
     
-    [RMAFNRequestManager registerRequestWithUser:_mobileTextField.text Pwd:[FileMangerObject md5:_passTextField.text] Code:_codeTextField.text Nick:_nickTextField.text Type:type Gps:[[RMUserLoginInfoManager loginmanager] coorStr] YPWD:_passTextField.text andCallBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager registerRequestWithUser:_mobileTextField.text Pwd:[FileMangerObject md5:_passTextField.text] Code:_codeTextField.text Nick:[_nickTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Type:type Gps:[[RMUserLoginInfoManager loginmanager] coorStr] YPWD:_passTextField.text andCallBack:^(NSError *error, BOOL success, id object) {
         RMPublicModel * model = (RMPublicModel *)object;
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(error){
