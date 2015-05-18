@@ -63,7 +63,7 @@
         rmImg.tag = 400+i;
         rmImg.identifierString = [NSString stringWithFormat:@"%ld",(long)i];
         if (i==0){
-            rmImg.frame = CGRectMake(i*(width/counts) + 5 - i*1, 5 + kHeightY, 44+kWidthOffset, 49 + kHeightOffset);
+            rmImg.frame = CGRectMake(i*(width/counts) + 5 - i*1, 5 + kHeightY, 44+kWidthOffset, 49 + kHeightOffset + 3);
             rmImg.image = [UIImage imageNamed:@"img_tzArrowed_1"];
 //            [rmImg sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
         }else{
@@ -101,7 +101,7 @@
                 CGFloat y = img.frame.origin.y;
                 CGFloat width = img.frame.size.width;
                 CGFloat height = img.frame.size.height;
-                image.frame = CGRectMake(x, y, width, height + 5);
+                image.frame = CGRectMake(x, y, width, height + 8);
             }else{
                 if (i==0){
                     img.image = [UIImage imageNamed:@"img_tzArrow_1"];
@@ -135,7 +135,7 @@
             CGFloat y = img.frame.origin.y;
             CGFloat width = img.frame.size.width;
             CGFloat height = img.frame.size.height;
-            img.frame = CGRectMake(x, y, width, height + 5);
+            img.frame = CGRectMake(x, y, width, height + 8);
         }else{
             if (i==0){
                 img.image = [UIImage imageNamed:@"img_tzArrow_1"];

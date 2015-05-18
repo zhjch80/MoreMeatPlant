@@ -211,7 +211,7 @@
             }
             
             UIImageView * imageView = (UIImageView *)[subView viewWithTag:sender.tag];
-            imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height + 5);
+            imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height + 8);
             RMPublicModel * model = [globSubsPlantArr objectAtIndex:sender.tag-6];
             [imageView sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
             isPlantSubjects = YES;

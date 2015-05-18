@@ -155,7 +155,7 @@
         
         RMPublicModel * model = [subsPlantArrs objectAtIndex:sender.tag-6-401 + 1];
         UIImageView * image = (UIImageView *)[subView viewWithTag:sender.tag];
-        image.frame = CGRectMake(image.frame.origin.x, image.frame.origin.y, image.frame.size.width, image.frame.size.height + 5);
+        image.frame = CGRectMake(image.frame.origin.x, image.frame.origin.y, image.frame.size.width, image.frame.size.height + 8);
         [image sd_setImageWithURL:[NSURL URLWithString:model.change_img] placeholderImage:nil];
         postType_2 = sender.tag;/*407--412*/
         isSelectedType_2 = YES;

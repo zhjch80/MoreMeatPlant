@@ -26,8 +26,8 @@
 //    self.leftImg.contentMode = UIViewContentModeCenter;
 //    self.rightImg.contentMode = UIViewContentModeCenter;
     self.leftTwoImg.contentMode = UIViewContentModeCenter;
-//    self.rightUpTwoImg.contentMode = UIViewContentModeCenter;
-//    self.rightDownTwoImg.contentMode = UIViewContentModeCenter;
+    self.rightUpTwoImg.contentMode = UIViewContentModeCenter;
+    self.rightDownTwoImg.contentMode = UIViewContentModeCenter;
     self.threeImg.contentMode = UIViewContentModeCenter;
     
     [self.leftImg addTarget:self withSelector:@selector(selectedPostDetatils:)];

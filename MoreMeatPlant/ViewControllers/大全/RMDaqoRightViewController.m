@@ -43,15 +43,15 @@
 
 - (void)loadTableViewheader {
     RMImageView * header = [[RMImageView alloc] init];
-    header.frame = CGRectMake(kScreenWidth - kSlideWidth, 0, kSlideWidth, 30);
+    header.frame = CGRectMake(kScreenWidth - kSlideWidth, 0, kSlideWidth, 45);
     [header addTarget:self withSelector:@selector(allOfTheMeatMethod)];
     header.backgroundColor = [UIColor clearColor];
     
     UILabel * allMeat = [[UILabel alloc] init];
-    allMeat.frame = CGRectMake(0, 0, kSlideWidth, 30);
+    allMeat.frame = CGRectMake(0, 0, kSlideWidth, 45);
     allMeat.text = @"  全部肉肉";
-    allMeat.backgroundColor = [UIColor clearColor];
-    allMeat.textColor = [UIColor colorWithRed:0.1 green:0.38 blue:0.11 alpha:1];
+    allMeat.backgroundColor = [UIColor colorWithRed:0.93 green:0.22 blue:0.45 alpha:1];
+    allMeat.textColor = [UIColor whiteColor];
     allMeat.font = FONT_1(15.0);
     allMeat.userInteractionEnabled = YES;
     allMeat.multipleTouchEnabled = YES;
@@ -104,7 +104,8 @@
     title.backgroundColor = [UIColor clearColor];
     title.frame = CGRectMake(0, 0, kSlideWidth, 44);
     if ([model.modules_name isEqualToString:@"植物科目"] || [model.modules_name isEqualToString:@"生长季"]){
-        title.textColor = [UIColor colorWithRed:0.1 green:0.38 blue:0.11 alpha:1];
+        title.textColor = [UIColor whiteColor];
+        title.backgroundColor = [UIColor colorWithRed:0.93 green:0.22 blue:0.45 alpha:1];
         title.text = [NSString stringWithFormat:@"  %@",model.modules_name];
         title.font = FONT_1(15.0);
     }else{

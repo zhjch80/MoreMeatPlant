@@ -46,6 +46,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
+    self.line_1.frame = CGRectMake(0, 0, kScreenWidth, 1);
+    self.line_2.frame = CGRectMake(0, 34, kScreenWidth, 1);
+    self.mTextView.frame = CGRectMake(0, 100, kScreenWidth, kScreenHeight - 100 - 35 - 216);
+    self.mView.frame = CGRectMake(0, 100 + self.mTextView.frame.size.height, kScreenWidth, 35);
+    self.mScrollView.frame = CGRectMake(0, self.mView.frame.size.height + self.mView.frame.origin.y, kScreenWidth, kScreenHeight - self.mView.frame.size.height - self.mView.frame.origin.y);
+    
 }
 
 - (void)viewDidLoad {
@@ -53,6 +60,9 @@
     // Do any additional setup after loading the view from its nib.
 
     self.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[RMStartPostingViewController class]];
+    
+    [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[RMStartPostingViewController class]];
     
     uploadImageArr = [[NSMutableArray alloc] init];
     uploadImageCount = 0;

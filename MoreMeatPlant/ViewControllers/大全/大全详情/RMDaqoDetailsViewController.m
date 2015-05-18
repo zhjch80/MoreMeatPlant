@@ -613,6 +613,7 @@
         }
         
         if (success){
+            NSLog(@"object:%@",object);
             
             if ([(NSArray *)[[object objectForKey:@"data"] objectForKey:@"data"] count] == 0){
                 [self showHint:@"数据返回异常"];
