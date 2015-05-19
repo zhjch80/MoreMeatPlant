@@ -89,7 +89,7 @@ typedef void (^RMAFNRequestManagerCallBack) (NSError * error, BOOL success, id o
  *  @method     植物大全详情页面
  *  @param      auto_id     植物标识
  */
-+ (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id
++ (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id withUser:(NSString *)user Pwd:(NSString *)pwd
                               callBack:(RMAFNRequestManagerCallBack)block;
 
 /**

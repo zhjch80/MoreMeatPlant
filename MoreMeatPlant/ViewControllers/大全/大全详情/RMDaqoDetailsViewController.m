@@ -605,7 +605,17 @@
  */
 - (void)requestDetails {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager getPlantDaqoDetailsWithAuto_id:self.auto_id callBack:^(NSError *error, BOOL success, id object) {
+    
+    NSString * user = nil;
+    NSString * pwd = nil;
+    if([[RMUserLoginInfoManager loginmanager] state]){
+        user = [[RMUserLoginInfoManager loginmanager] user];
+        pwd = [[RMUserLoginInfoManager loginmanager] pwd];
+    }else{
+    
+    }
+    
+    [RMAFNRequestManager getPlantDaqoDetailsWithAuto_id:self.auto_id withUser:user Pwd:pwd callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

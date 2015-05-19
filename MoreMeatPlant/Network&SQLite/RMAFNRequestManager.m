@@ -154,9 +154,14 @@
  *  @method     植物大全详情页面
  *  @param      auto_id     植物标识
  */
-+ (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id
++ (void)getPlantDaqoDetailsWithAuto_id:(NSString *)auto_id withUser:(NSString *)user Pwd:(NSString *)pwd
                               callBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAllview&auto_id=%@",baseUrl,auto_id];
+    NSString * url = nil;
+    if(user == nil){
+        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAllview&auto_id=%@",baseUrl,auto_id];
+    }else{
+        url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopAllview&auto_id=%@&ID=%@&PWD=%@",baseUrl,auto_id,user,pwd];
+    }
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block){
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);

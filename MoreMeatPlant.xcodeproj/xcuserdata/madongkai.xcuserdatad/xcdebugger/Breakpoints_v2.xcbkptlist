@@ -169,12 +169,12 @@
                   symbolName = "-[RMMyCorpViewController modifyPhoto]"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E5%BA%97%E9%93%BA/RMMyCorpViewController.m"
-                  timestampString = "453568589.933042"
+                  timestampString = "453655985.867085"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "614"
                   endingLineNumber = "614"
-                  offsetFromSymbolStart = "210">
+                  offsetFromSymbolStart = "332">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -183,12 +183,12 @@
                   symbolName = "__37-[RMMyCorpViewController modifyPhoto]_block_invoke"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E5%BA%97%E9%93%BA/RMMyCorpViewController.m"
-                  timestampString = "453568589.933189"
+                  timestampString = "453655985.867222"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "614"
                   endingLineNumber = "614"
-                  offsetFromSymbolStart = "77">
+                  offsetFromSymbolStart = "92">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -200,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/Network&amp;SQLite/RMAFNRequestManager.m"
-            timestampString = "452716159.44448"
+            timestampString = "453655985.70019"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "909"
-            endingLineNumber = "909"
+            startingLineNumber = "914"
+            endingLineNumber = "914"
             landmarkName = "+modifyInfoSendCodeWith:WithUser:Pwd:andCallBack:"
             landmarkType = "5">
          </BreakpointContent>
@@ -238,22 +238,6 @@
             startingLineNumber = "184"
             endingLineNumber = "184"
             landmarkName = "-deleteAction:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x5927;&#x5168;/&#x5927;&#x5168;&#x8be6;&#x60c5;/DKLiveBlurView.m"
-            timestampString = "453482587.057435"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "-setScrollView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
