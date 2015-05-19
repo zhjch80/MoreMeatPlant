@@ -25,10 +25,10 @@
 
 //    self.leftImg.contentMode = UIViewContentModeCenter;
 //    self.rightImg.contentMode = UIViewContentModeCenter;
-    self.leftTwoImg.contentMode = UIViewContentModeCenter;
-    self.rightUpTwoImg.contentMode = UIViewContentModeCenter;
-    self.rightDownTwoImg.contentMode = UIViewContentModeCenter;
-    self.threeImg.contentMode = UIViewContentModeCenter;
+    self.leftTwoImg.contentMode = UIViewContentModeScaleAspectFill;
+    self.rightUpTwoImg.contentMode = UIViewContentModeScaleAspectFill;
+    self.rightDownTwoImg.contentMode = UIViewContentModeScaleAspectFill;
+    self.threeImg.contentMode = UIViewContentModeScaleAspectFill;
     
     [self.leftImg addTarget:self withSelector:@selector(selectedPostDetatils:)];
     [self.rightImg addTarget:self withSelector:@selector(selectedPostDetatils:)];
