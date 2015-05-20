@@ -53,8 +53,15 @@
 @implementation RMAccountViewController
 @synthesize isCorp;
 
+
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    
+    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+    [dele queryInfoNumber];
+    
     if(__model == nil){
         __model = [[RMPublicModel alloc]init];
     }

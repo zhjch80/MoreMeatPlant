@@ -10,7 +10,7 @@
 #import "RMDaqoCenterViewController.h"
 #import "RMDaqoRightViewController.h"
 #import "RMSlideParameter.h"
-
+#import "AppDelegate.h"
 @interface RMDaqoViewController (){
     BOOL isLeftOpen;
     BOOL isFirstViewDidAppear;
@@ -22,6 +22,14 @@
 
 @implementation RMDaqoViewController
 @synthesize centerCtl, rightCtl;
+
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+    [dele queryInfoNumber];
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

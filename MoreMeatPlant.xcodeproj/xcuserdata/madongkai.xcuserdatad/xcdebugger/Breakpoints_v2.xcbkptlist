@@ -169,7 +169,7 @@
                   symbolName = "-[RMMyCorpViewController modifyPhoto]"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E5%BA%97%E9%93%BA/RMMyCorpViewController.m"
-                  timestampString = "453747513.211685"
+                  timestampString = "453833845.503077"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "614"
@@ -183,7 +183,7 @@
                   symbolName = "__37-[RMMyCorpViewController modifyPhoto]_block_invoke"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E5%BA%97%E9%93%BA/RMMyCorpViewController.m"
-                  timestampString = "453747513.211856"
+                  timestampString = "453833845.503198"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "614"
@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoreMeatPlant/ViewControllers/&#x8d26;&#x6237;/RMAccountViewController.m"
-            timestampString = "453051160.426603"
+            timestampString = "453833845.29682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "606"
-            endingLineNumber = "606"
+            startingLineNumber = "613"
+            endingLineNumber = "613"
             landmarkName = "-loadMyOrderCtl"
             landmarkType = "5">
          </BreakpointContent>
@@ -254,6 +254,86 @@
             startingLineNumber = "85"
             endingLineNumber = "85"
             landmarkName = "-ReverseGeoAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x9996;&#x9875;/RMHomeViewController.m"
+            timestampString = "453833845.29682"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/AppDelegate+EaseMob.m"
+            timestampString = "453834325.678925"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
+            landmarkName = "-didReiveceRemoteNotificatison:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x591a;&#x804a;/Chat/ChatList/ChatListViewController.m"
+            timestampString = "453834469.930613"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "473"
+            endingLineNumber = "473"
+            landmarkName = "-didUnreadMessagesCountChanged"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x591a;&#x804a;/RMMoreChatViewController.m"
+            timestampString = "453834804.118943"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "-UnreadMessageCount"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/AppDelegate.m"
+            timestampString = "453834893.03411"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
+            landmarkName = "-application:didReceiveRemoteNotification:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

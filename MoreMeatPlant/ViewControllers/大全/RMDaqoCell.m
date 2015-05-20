@@ -22,7 +22,6 @@
     self.leftImg.contentMode = UIViewContentModeScaleAspectFill;
     self.centerImg.contentMode = UIViewContentModeScaleAspectFill;
     self.rightImg.contentMode = UIViewContentModeScaleAspectFill;
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

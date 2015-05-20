@@ -370,10 +370,10 @@
     NSError *parseError = nil;
     NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:userInfo
                                                         options:NSJSONWritingPrettyPrinted error:&parseError];
-    NSString *str =  [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    NSString *str =  [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"推送内容"
-                                                    message:str
+                                                    message:@"您有一条新消息！"
                                                    delegate:nil
                                           cancelButtonTitle:NSLocalizedString(@"ok", @"OK")
                                           otherButtonTitles:nil];

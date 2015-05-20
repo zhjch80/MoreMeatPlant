@@ -29,7 +29,7 @@
 #import "RMReleasePoisonDetailsViewController.h"
 #import "RMMyCorpViewController.h"
 #import "UIImage+LK.h"
-
+#import "AppDelegate.h"
 typedef enum{
     kRMDefault = 100,
     kRMReleasePoison = 1,
@@ -56,6 +56,13 @@ typedef enum{
 
 @implementation RMHomeViewController
 @synthesize mTableView, advertisingArr, columnsArr, dataImgArr, overloadingView,refreshControl;
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+    [dele queryInfoNumber];
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

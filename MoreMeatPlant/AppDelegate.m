@@ -40,6 +40,8 @@
     RMCustomTabBarController * customTabBarCtl;
     BMKMapManager* _mapManager;
     EMConnectionState _connectionState;
+    
+    RKNotificationHub * chat_badge;
 }
 
 @end
@@ -179,6 +181,14 @@
         UIButton *button2 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:2];
         UIButton *button3 = [((RMCustomTabBarController *)customTabBarCtl) customTabbarItemWithIndex:3];
         
+        
+        
+        
+        chat_badge = [[RKNotificationHub alloc]initWithView:button3];
+        [chat_badge scaleCircleSizeBy:0.5];
+        [chat_badge setCount:[[talkMoreCtl queryInfoNumber] intValue]];
+
+        
         NSArray * imageName = [NSArray arrayWithObjects:@"home", @"daquan", @"zhanghu", @"duoliao", nil];
         
         [button0 setImage:LOADIMAGE([imageName objectAtIndex:0], kImageTypePNG) forState:UIControlStateNormal];
@@ -193,6 +203,11 @@
     }
 }
 
+
+
+- (void)queryInfoNumber{
+    [chat_badge setCount:[[talkMoreCtl queryInfoNumber] intValue]];
+}
 
 #pragma mark - 外面调用select tab的控制器
 

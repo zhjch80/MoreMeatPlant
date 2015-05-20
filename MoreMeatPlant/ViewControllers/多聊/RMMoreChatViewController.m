@@ -59,6 +59,9 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
             AppDelegate * dele = [[UIApplication sharedApplication] delegate];
             [dele tabSelectController:2];
         }];
+    }else{
+            AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+            [dele queryInfoNumber];
     }
     
 }

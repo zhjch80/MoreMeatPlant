@@ -32,10 +32,16 @@
 - (void)dealloc{
 }
 
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    AppDelegate * dele = [[UIApplication sharedApplication] delegate];
+    [dele queryInfoNumber];
+    
     [self backgroundRequest];
+
 }
+
 
 - (void)backgroundRequest{
     [RMAFNRequestManager loginBackgroundImageRequestWithBlock:^(NSError *error, BOOL success, id object) {

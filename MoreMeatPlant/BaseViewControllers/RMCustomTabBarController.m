@@ -86,7 +86,8 @@
     
     for (int i = 0; i != viewControllerCount; ++i) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(self.TabarItemWidth * i, 0, self.TabarItemWidth, tabbarHeight);
+        button.frame = CGRectMake(self.TabarItemWidth * i, 0, self.TabarItemWidth-5, 35);
+        button.center = CGPointMake(button.center.x, tabbarHeight/2);
         button.tag = i;
         button.adjustsImageWhenHighlighted = NO;
         [button addTarget:self action:@selector(tabbarButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
