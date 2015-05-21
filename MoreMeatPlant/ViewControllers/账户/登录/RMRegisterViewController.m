@@ -10,6 +10,7 @@
 #import "FileMangerObject.h"
 #import "AppDelegate.h"
 #import "UIView+Expland.h"
+#import "RegularManager.h"
 @interface RMRegisterViewController ()
 
 @end
@@ -94,7 +95,7 @@
 }
 - (void)sureAction:(id)sender{
     //personal  corp
-    if(_mobileTextField.text.length==0){
+    if(_mobileTextField.text.length==0 && [RegularManager validateMobile:_mobileTextField.text]){
         [MBProgressHUD showError:@"请输入手机号" toView:self.view];
         return;
     }else if(_codeTextField.text.length == 0){

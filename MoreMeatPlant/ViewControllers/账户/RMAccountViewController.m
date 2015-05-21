@@ -39,6 +39,7 @@
 #import "RMTransactionRecordsViewController.h"
 #import "RMSeeLogisticsViewController.h"
 #import "RMShareClient.h"
+#import "NSString+Addtion.h"
 #define GeneralMember @"1"
 @interface RMAccountViewController ()<RMVPImageCropperDelegate>{
     UIImageView * nav_imageView;
@@ -162,8 +163,10 @@
             self.userNameL.text = model.contentName;
             self.userDescL.text = Str_Objc(model.contentQm, @"签名:什么也没写...");
             self.regionL.text = model.contentGps;
-            self.yu_eL.text = [NSString stringWithFormat:@"余额:%.0f",model.balance];
-            self.hua_biL.text = [NSString stringWithFormat:@"花币:%.0f",model.spendmoney];
+            NSString * yu_e = [NSString changeFloat:[NSString stringWithFormat:@"%.2f",model.balance]];
+            NSString * huabi = [NSString changeFloat:[NSString stringWithFormat:@"%.2f",model.spendmoney]];
+            self.yu_eL.text = [NSString stringWithFormat:@"余额:%@",yu_e];
+            self.hua_biL.text = [NSString stringWithFormat:@"花币:%@",huabi];
             [self.member_right setTitle:model.levelId forState:UIControlStateNormal];
             [self.member_level setTitle:model.levelId forState:UIControlStateNormal];
 //            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

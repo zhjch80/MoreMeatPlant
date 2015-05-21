@@ -763,6 +763,8 @@
 		515B96901B07A25400A57B7C /* 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 515B96881B07A25400A57B7C /* 3@2x.png */; };
 		515B96911B07A25400A57B7C /* 4-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 515B96891B07A25400A57B7C /* 4-568h.png */; };
 		515B96921B07A25400A57B7C /* 4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 515B968A1B07A25400A57B7C /* 4@2x.png */; };
+		515B96941B0E212100A57B7C /* content_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 515B96931B0E212100A57B7C /* content_card.png */; };
+		515B96971B0E22DE00A57B7C /* RegularManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 515B96961B0E22DE00A57B7C /* RegularManager.m */; };
 		516F47181ADE38D00017879A /* RMHomeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47171ADE38D00017879A /* RMHomeHeadView.m */; };
 		516F471A1ADE38DC0017879A /* RMHomeHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F47191ADE38DC0017879A /* RMHomeHeadView.xib */; };
 		516F47221ADE5E2E0017879A /* RMPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47211ADE5E2E0017879A /* RMPointAnnotation.m */; };
@@ -2162,6 +2164,9 @@
 		515B96881B07A25400A57B7C /* 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3@2x.png"; sourceTree = "<group>"; };
 		515B96891B07A25400A57B7C /* 4-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4-568h.png"; sourceTree = "<group>"; };
 		515B968A1B07A25400A57B7C /* 4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4@2x.png"; sourceTree = "<group>"; };
+		515B96931B0E212100A57B7C /* content_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = content_card.png; sourceTree = "<group>"; };
+		515B96951B0E22DE00A57B7C /* RegularManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegularManager.h; sourceTree = "<group>"; };
+		515B96961B0E22DE00A57B7C /* RegularManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegularManager.m; sourceTree = "<group>"; };
 		516F47161ADE38D00017879A /* RMHomeHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMHomeHeadView.h; sourceTree = "<group>"; };
 		516F47171ADE38D00017879A /* RMHomeHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMHomeHeadView.m; sourceTree = "<group>"; };
 		516F47191ADE38DC0017879A /* RMHomeHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMHomeHeadView.xib; sourceTree = "<group>"; };
@@ -3506,6 +3511,8 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				515B96951B0E22DE00A57B7C /* RegularManager.h */,
+				515B96961B0E22DE00A57B7C /* RegularManager.m */,
 				515B967F1B079F4C00A57B7C /* BBRGuideViewController.h */,
 				515B96801B079F4C00A57B7C /* BBRGuideViewController.m */,
 				515B966A1B03B75B00A57B7C /* RKNotificationHub.h */,
@@ -4025,6 +4032,7 @@
 		1DEB740E1AB9D5DE00EA1FA7 /* member */ = {
 			isa = PBXGroup;
 			children = (
+				515B96931B0E212100A57B7C /* content_card.png */,
 				517125161AFF9BDD00E5AFE3 /* red_btn.png */,
 				517125171AFF9BDD00E5AFE3 /* corp_bottom_bg.png */,
 				517125181AFF9BDD00E5AFE3 /* hei_btn.png */,
@@ -6128,6 +6136,7 @@
 				514613901AE3653E0040E462 /* account.png in Resources */,
 				1DAE81CB1AD3AE2A003BDB85 /* RMPlantWithSaleHeaderView_6p.xib in Resources */,
 				51DB4E4C1AD1B3F000A6064D /* Resource.bundle in Resources */,
+				515B96941B0E212100A57B7C /* content_card.png in Resources */,
 				1DEB74F21AB9D67A00EA1FA7 /* fbbb_img_32.png in Resources */,
 				514613361AE3653E0040E462 /* chat_video_play.png in Resources */,
 				1D93AB891AB13A290034574C /* RMReleasePoisonDetailsCell_4.xib in Resources */,
@@ -6473,6 +6482,7 @@
 				0A4105781ABAB3C70060FBD5 /* UIImage+EMGIF.m in Sources */,
 				519927461AB572AA00B0F83F /* RMCorpClassesButton.m in Sources */,
 				51D883EC1ABB318D00F7A3BD /* RMHadbabyTableViewCell.m in Sources */,
+				515B96971B0E22DE00A57B7C /* RegularManager.m in Sources */,
 				5191D4C01AD55B7A0011AFCC /* RMRecordsTableViewCell.m in Sources */,
 				95AA6F4A1ABF8CD2007F4C9E /* UIImageView+XHURLDownload.m in Sources */,
 				957A38F61AB4519E00A335F7 /* RMPlantWithSaleHeaderView.m in Sources */,

@@ -23,6 +23,10 @@
     _chargeRecordBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"hei_btn", @"png")];
     _chargeRecordBtn.layer.cornerRadius = 5;
     _chargeRecordBtn.clipsToBounds = YES;
+    
+    _turnBtn.backgroundColor = [UIColor colorWithPatternImage:LOADIMAGE(@"hei_btn", @"png")];
+    _turnBtn.layer.cornerRadius = 5;
+    _turnBtn.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

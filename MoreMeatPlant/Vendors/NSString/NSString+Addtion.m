@@ -72,37 +72,37 @@
 
 +(NSString *)changeFloat:(NSString *)stringFloat
 {
-    return stringFloat;
-//    const char *floatChars = [stringFloat UTF8String];
-//    NSUInteger length = [stringFloat length];
-//    NSUInteger zeroLength = 0;
-//    if([stringFloat rangeOfString:@"."].location == NSNotFound)
-//    {
-//        return stringFloat;
-//    }
-//    int i = (int)length-1;
-//    NSLog(@"%c",floatChars[length]);
-//    if(floatChars[length] != '0')
-//    {
-//        return stringFloat;
-//    }
-//    for(; i>=0; i--)
-//    {
-//        if(floatChars[i] == '0'/*0x30*/) {
-//            zeroLength++;
-//        } else {
-//            if(floatChars[i] == '.')
-//                i--;
-//            break;
-//        }
-//    }
-//    NSString *returnString;
-//    if(i == -1) {
-//        returnString = @"0";
-//    } else {
-//        returnString = [stringFloat substringToIndex:i];
-//    }
-//    return returnString;
+//    return stringFloat;
+    const char *floatChars = [stringFloat UTF8String];
+    NSUInteger length = [stringFloat length];
+    NSUInteger zeroLength = 0;
+    if([stringFloat rangeOfString:@"."].location == NSNotFound)
+    {
+        return stringFloat;
+    }
+    int i = (int)length-1;
+    NSLog(@"%c",floatChars[length]);
+    if(floatChars[length] != '0')
+    {
+        return stringFloat;
+    }
+    for(; i>=0; i--)
+    {
+        if(floatChars[i] == '0'/*0x30*/) {
+            zeroLength++;
+        } else {
+            if(floatChars[i] == '.')
+                i--;
+            break;
+        }
+    }
+    NSString *returnString;
+    if(i == -1) {
+        returnString = @"0";
+    } else {
+        returnString = [stringFloat substringToIndex:i];
+    }
+    return returnString;
 }
 
 @end

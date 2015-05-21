@@ -22,7 +22,7 @@
 @property (retain, nonatomic) RMLocationManager * locationManager;
 @property (nonatomic, strong) RMAccountViewController * accountCtl;
 @property (nonatomic, retain) RMMoreChatViewController * talkMoreCtl;
-
+@property (strong, nonatomic) NSDate *lastPlaySoundDate;
 /**
  *  @method
  *  @param      type        0没有登录       1已经登录

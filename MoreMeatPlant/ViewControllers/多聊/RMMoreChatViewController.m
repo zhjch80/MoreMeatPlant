@@ -18,7 +18,7 @@
 #import "IQKeyboardManager.h"
 #import "UIAlertView+Expland.h"
 //两次提示的默认间隔
-static const CGFloat kDefaultPlaySoundInterval = 3.0;
+
 
 @interface RMMoreChatViewController () <UIAlertViewDelegate, IChatManagerDelegate, ICallManagerDelegate>
 {
@@ -32,6 +32,8 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     
     UINavigationController * nav1;
     UINavigationController * nav2;
+    
+    CGFloat kDefaultPlaySoundInterval;
     
 }
 
@@ -71,6 +73,9 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     [super viewDidLoad];
     
     [self setCustomNavTitle:@""];
+    
+    kDefaultPlaySoundInterval = 3.0;
+    
     //if 使tabBarController中管理的viewControllers都符合 UIRectEdgeNone
 //    if ([UIDevice currentDevice].systemVersion.floatValue >= 7) {
 //        self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -295,37 +300,37 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     
 }
 
-- (BOOL)needShowNotification:(NSString *)fromChatter
-{
-    BOOL ret = YES;
-    NSArray *igGroupIds = [[EaseMob sharedInstance].chatManager ignoredGroupIds];
-    for (NSString *str in igGroupIds) {
-        if ([str isEqualToString:fromChatter]) {
-            ret = NO;
-            break;
-        }
-    }
-    
-    return ret;
-}
+//- (BOOL)needShowNotification:(NSString *)fromChatter
+//{
+//    BOOL ret = YES;
+//    NSArray *igGroupIds = [[EaseMob sharedInstance].chatManager ignoredGroupIds];
+//    for (NSString *str in igGroupIds) {
+//        if ([str isEqualToString:fromChatter]) {
+//            ret = NO;
+//            break;
+//        }
+//    }
+//    
+//    return ret;
+//}
 
-// 收到消息回调
--(void)didReceiveMessage:(EMMessage *)message
-{
-    BOOL needShowNotification = message.isGroup ? [self needShowNotification:message.conversationChatter] : YES;
-    if (needShowNotification) {
-#if !TARGET_IPHONE_SIMULATOR
-        
-        BOOL isAppActivity = [[UIApplication sharedApplication] applicationState] == UIApplicationStateActive;
-        if (!isAppActivity) {
-            [self showNotificationWithMessage:message];
-        }else {
-            [self playSoundAndVibration];
-        }
-#endif
-    }
-}
-
+//// 收到消息回调
+//-(void)didReceiveMessage:(EMMessage *)message
+//{
+//    BOOL needShowNotification = message.isGroup ? [self needShowNotification:message.conversationChatter] : YES;
+//    if (needShowNotification) {
+//#if !TARGET_IPHONE_SIMULATOR
+//        
+//        BOOL isAppActivity = [[UIApplication sharedApplication] applicationState] == UIApplicationStateActive;
+//        if (!isAppActivity) {
+//            [self showNotificationWithMessage:message];
+//        }else {
+//            [self playSoundAndVibration];
+//        }
+//#endif
+//    }
+//}
+//
 -(void)didReceiveCmdMessage:(EMMessage *)message
 {
     [self showHint:NSLocalizedString(@"receiveCmd", @"收到一条的cmd消息")];
@@ -348,74 +353,74 @@ static const CGFloat kDefaultPlaySoundInterval = 3.0;
     // 收到消息时，震动
     [[EaseMob sharedInstance].deviceManager asyncPlayVibration];
 }
-
-- (void)showNotificationWithMessage:(EMMessage *)message
-{
-    EMPushNotificationOptions *options = [[EaseMob sharedInstance].chatManager pushNotificationOptions];
-    //发送本地推送
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.fireDate = [NSDate date]; //触发通知的时间
-    
-    if (options.displayStyle == ePushNotificationDisplayStyle_messageSummary) {
-        id<IEMMessageBody> messageBody = [message.messageBodies firstObject];
-        NSString *messageStr = nil;
-        switch (messageBody.messageBodyType) {
-            case eMessageBodyType_Text:
-            {
-                messageStr = ((EMTextMessageBody *)messageBody).text;
-            }
-                break;
-            case eMessageBodyType_Image:
-            {
-                messageStr = NSLocalizedString(@"message.image", @"图片");
-            }
-                break;
-            case eMessageBodyType_Location:
-            {
-                messageStr = NSLocalizedString(@"message.location", @"位置");
-            }
-                break;
-            case eMessageBodyType_Voice:
-            {
-                messageStr = NSLocalizedString(@"message.voice", @"语音");
-            }
-                break;
-            case eMessageBodyType_Video:{
-                messageStr = NSLocalizedString(@"message.vidio", @"视频");
-            }
-                break;
-            default:
-                break;
-        }
-        
-        NSString *title = message.from;
-        if (message.isGroup) {
-            NSArray *groupArray = [[EaseMob sharedInstance].chatManager groupList];
-            for (EMGroup *group in groupArray) {
-                if ([group.groupId isEqualToString:message.conversationChatter]) {
-                    title = [NSString stringWithFormat:@"%@(%@)", message.groupSenderName, group.groupSubject];
-                    break;
-                }
-            }
-        }
-        
-        notification.alertBody = [NSString stringWithFormat:@"%@:%@", title, messageStr];
-    }
-    else{
-        notification.alertBody = NSLocalizedString(@"receiveMessage", @"你有一条新消息");
-    }
-    
-#warning 去掉注释会显示[本地]开头, 方便在开发中区分是否为本地推送
-    //notification.alertBody = [[NSString alloc] initWithFormat:@"[本地]%@", notification.alertBody];
-    
-    notification.alertAction = NSLocalizedString(@"open", @"打开");
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    notification.soundName = UILocalNotificationDefaultSoundName;
-    //发送通知
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-    //    UIApplication *application = [UIApplication sharedApplication];
-    //    application.applicationIconBadgeNumber += 1;
-}
+//
+//- (void)showNotificationWithMessage:(EMMessage *)message
+//{
+//    EMPushNotificationOptions *options = [[EaseMob sharedInstance].chatManager pushNotificationOptions];
+//    //发送本地推送
+//    UILocalNotification *notification = [[UILocalNotification alloc] init];
+//    notification.fireDate = [NSDate date]; //触发通知的时间
+//    
+//    if (options.displayStyle == ePushNotificationDisplayStyle_messageSummary) {
+//        id<IEMMessageBody> messageBody = [message.messageBodies firstObject];
+//        NSString *messageStr = nil;
+//        switch (messageBody.messageBodyType) {
+//            case eMessageBodyType_Text:
+//            {
+//                messageStr = ((EMTextMessageBody *)messageBody).text;
+//            }
+//                break;
+//            case eMessageBodyType_Image:
+//            {
+//                messageStr = NSLocalizedString(@"message.image", @"图片");
+//            }
+//                break;
+//            case eMessageBodyType_Location:
+//            {
+//                messageStr = NSLocalizedString(@"message.location", @"位置");
+//            }
+//                break;
+//            case eMessageBodyType_Voice:
+//            {
+//                messageStr = NSLocalizedString(@"message.voice", @"语音");
+//            }
+//                break;
+//            case eMessageBodyType_Video:{
+//                messageStr = NSLocalizedString(@"message.vidio", @"视频");
+//            }
+//                break;
+//            default:
+//                break;
+//        }
+//        
+//        NSString *title = message.from;
+//        if (message.isGroup) {
+//            NSArray *groupArray = [[EaseMob sharedInstance].chatManager groupList];
+//            for (EMGroup *group in groupArray) {
+//                if ([group.groupId isEqualToString:message.conversationChatter]) {
+//                    title = [NSString stringWithFormat:@"%@(%@)", message.groupSenderName, group.groupSubject];
+//                    break;
+//                }
+//            }
+//        }
+//        
+//        notification.alertBody = [NSString stringWithFormat:@"%@:%@", title, messageStr];
+//    }
+//    else{
+//        notification.alertBody = NSLocalizedString(@"receiveMessage", @"你有一条新消息");
+//    }
+//    
+//#warning 去掉注释会显示[本地]开头, 方便在开发中区分是否为本地推送
+//    //notification.alertBody = [[NSString alloc] initWithFormat:@"[本地]%@", notification.alertBody];
+//    
+//    notification.alertAction = NSLocalizedString(@"open", @"打开");
+//    notification.timeZone = [NSTimeZone defaultTimeZone];
+//    notification.soundName = UILocalNotificationDefaultSoundName;
+//    //发送通知
+//    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+//    //    UIApplication *application = [UIApplication sharedApplication];
+//    //    application.applicationIconBadgeNumber += 1;
+//}
 
 #pragma mark - IChatManagerDelegate 登陆回调（主要用于监听自动登录是否成功）
 

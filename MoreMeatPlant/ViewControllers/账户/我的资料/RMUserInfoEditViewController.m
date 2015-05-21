@@ -178,7 +178,7 @@
         cell.content_mobile.text = __model.contentContact;
         cell.content_address.text = __model.contentAddress;
         if(cardImg == nil){
-            [cell.card_photo setImage:[UIImage imageNamed:@"444"]];
+            [cell.card_photo setImage:[UIImage imageNamed:@"content_card"]];
         }else{
             [cell.card_photo setImage:cardImg];
         }

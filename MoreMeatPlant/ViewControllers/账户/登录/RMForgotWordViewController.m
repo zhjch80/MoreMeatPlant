@@ -9,6 +9,7 @@
 #import "RMForgotWordViewController.h"
 #import "FileMangerObject.h"
 #import "UIView+Expland.h"
+#import "RegularManager.h"
 @interface RMForgotWordViewController ()
 
 @end
@@ -83,7 +84,7 @@
 }
 
 - (void)sureAction:(id)sender{
-    if(_mobileTextField.text.length==0){
+    if(_mobileTextField.text.length==0 && [RegularManager validateMobile:_mobileTextField.text]){
         [MBProgressHUD showError:@"请输入手机号" toView:self.view];
         return;
     }else if(_codeTextField.text.length == 0){

@@ -44,8 +44,8 @@
         RMPublicModel * model = object;
         if(success){
             if(model.status){
-                yu_e = [NSString stringWithFormat:@"%.0f米",model.balance];
-                hua_b = [NSString stringWithFormat:@"%.0f",model.spendmoney];
+                yu_e = [NSString stringWithFormat:@"%.2f米",model.balance];
+                hua_b = [NSString stringWithFormat:@"%.2f",model.spendmoney];
                 [_mTableView reloadData];
             }else{
                 

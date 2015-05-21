@@ -7,7 +7,7 @@
 //
 
 #import "RMAddressEditViewController.h"
-
+#import "RegularManager.h"
 @interface RMAddressEditViewController ()
 
 @end
@@ -54,7 +54,7 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入联系人姓名" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];
         return;
-    }else if(_content_mobile.text.length == 0){
+    }else if(_content_mobile.text.length == 0 && [RegularManager validateMobile:_content_mobile.text]){
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入联系人手机号" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
         [alert show];
         return;

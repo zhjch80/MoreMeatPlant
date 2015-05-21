@@ -110,7 +110,7 @@
             headView.content_signature.text = Str_Objc(model.contentQm, @"什么也没写...");
             headView.city.text = model.content_gps;
 //            self.yu_e.text = [NSString stringWithFormat:@"余额:%.0f",model.spendmoney];
-            headView.hua_bi.text = [NSString stringWithFormat:@"花币:%.0f",model.spendmoney];
+            headView.hua_bi.text = [NSString stringWithFormat:@"花币:%.2f",model.spendmoney];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
             [self requestListWithPageCount];

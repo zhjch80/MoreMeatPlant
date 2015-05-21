@@ -46,7 +46,7 @@
         RMPublicModel * model = object;
         _model = model;
         if(success && model.status){
-            balance = [NSString stringWithFormat:@"%.0f",model.balance];
+            balance = [NSString stringWithFormat:@"%.2f",model.balance];
             [_mainTableView reloadData];
         }else{
             

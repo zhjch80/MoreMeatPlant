@@ -83,8 +83,8 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMSectionFooterTableViewCell" owner:self options:nil] lastObject];
             [cell.surePublish addTarget:self action:@selector(surePublishAction:) forControlEvents:UIControlEventTouchDown];
         }
-        cell.balanceL.text = [NSString stringWithFormat:@"余额:%.0f米",[(RMPublicModel *)[planteArray lastObject] balance]];
-        cell.totalL.text = [NSString stringWithFormat:@"共计: %ld天 (%.0f米)",(long)num_total,money_total];
+        cell.balanceL.text = [NSString stringWithFormat:@"余额:%.2f米",[(RMPublicModel *)[planteArray lastObject] balance]];
+        cell.totalL.text = [NSString stringWithFormat:@"共计: %ld天 (%.2f米)",(long)num_total,money_total];
         return cell;
     }
     else {

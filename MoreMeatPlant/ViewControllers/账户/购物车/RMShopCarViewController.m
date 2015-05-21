@@ -154,7 +154,7 @@
         
 //        cell.totalMoneyL.text = [NSString stringWithFormat:@"%.0f",[self caculateSection:indexPath]];
         cell.express_price.text = [NSString stringWithFormat:@"(含运费%@)",[(RMProductModel *)[[[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"] objectAtIndex:0] express_price]];
-        cell.totalL.text = [NSString stringWithFormat:@"%.0f",[self caculateSection:indexPath]];
+        cell.totalL.text = [NSString stringWithFormat:@"%.2f",[self caculateSection:indexPath]];
         int n = 0;
         for(RMProductModel * model in [[dataArray objectAtIndex:indexPath.section] objectForKey:@"products"]){
             n+=model.content_num;
