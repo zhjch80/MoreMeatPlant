@@ -37,7 +37,8 @@
     
     UIView *overlay = [[UIView alloc] initWithFrame:self.bounds];
     overlay.tag = -2;
-    overlay.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
+    overlay.backgroundColor = [UIColor clearColor];
+//    overlay.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
     
     [self addSubview:imageView];
     [self addSubview:overlay];

@@ -369,6 +369,7 @@
             }
             UIImagePickerController *picker = [[UIImagePickerController alloc] init];
             picker.delegate = self;
+            picker.allowsEditing = YES;
             picker.sourceType = sourceType;
             [self presentViewController:picker animated:YES completion:^{
             }];
@@ -411,6 +412,7 @@
                 }else{
                     imageView.image = image;
                     imageView.identifierString = @"full";
+                    imageView.hidden = NO;
                     
                     deletetImg.identifierString = @"full";
                     deletetImg.hidden = NO;

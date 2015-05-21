@@ -101,7 +101,7 @@
             UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth)];
             image.userInteractionEnabled = YES;
             image.backgroundColor = [UIColor clearColor];
-            image.contentMode = UIViewContentModeCenter;
+//            image.contentMode = UIViewContentModeCenter;
             image.clipsToBounds = YES;
             [image sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:0] objectForKey:@"content_img"]] placeholderImage:nil];
             
@@ -127,7 +127,7 @@
                 UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth)];
                 image.userInteractionEnabled = YES;
                 image.backgroundColor = [UIColor clearColor];
-                image.contentMode = UIViewContentModeCenter;
+//                image.contentMode = UIViewContentModeCenter;
                 image.clipsToBounds = YES;
                 [image sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil];
                 
