@@ -70,6 +70,11 @@
     [badge setCount:[[self queryInfoNumber] intValue]];
 }
 
+- (void)receviverNoti:(NSNotification *)noti{
+    [car_badge setCount:[[self queryShopCarNumber] intValue]];
+    [badge setCount:[[self queryInfoNumber] intValue]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

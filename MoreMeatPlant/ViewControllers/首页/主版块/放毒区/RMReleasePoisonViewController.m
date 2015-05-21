@@ -44,6 +44,7 @@
     BOOL isLoadNews;        //是否已经加载置顶
     BOOL isSubsPlant;       //是否已经加载科目
     RKNotificationHub * chat_badge;
+    RKNotificationHub * badge;
 }
 @property (nonatomic, strong) UITableView * mTableView;
 @property (nonatomic, strong) NSMutableArray * dataArr;         //列表数据
@@ -78,6 +79,17 @@
         [self reqestPlantClassification];
         isFirstViewDidAppear = YES;
     }
+}
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    [chat_badge setCount:[[self queryInfoNumber] intValue]];
+    [badge setCount:[[self queryInfoNumber] intValue]];
+}
+
+- (void)receviverNoti:(NSNotification *)noti{
+    [chat_badge setCount:[[self queryInfoNumber] intValue]];
+    [badge setCount:[[self queryInfoNumber] intValue]];
 }
 
 - (void)viewDidLoad {
@@ -126,6 +138,12 @@
     isFirstViewDidAppear = NO;
     
     [self loadBottomView];
+    
+    UIButton * chat_btn = (UIButton *)[bottomView viewWithTag:2];
+    chat_badge = [[RKNotificationHub alloc]initWithView:chat_btn];
+    [chat_badge setCount:[[self queryShopCarNumber] intValue]];
+    [chat_badge scaleCircleSizeBy:0.5];
+
 }
 
 #pragma mark - 加载底部View
@@ -986,6 +1004,21 @@
             [KxMenu setTintColor:[UIColor whiteColor]];
             
             [KxMenu showMenuInView:self.view fromRect:CGRectMake(kScreenWidth - 100, bottomView.frame.origin.y, 100, 100) menuItems:arr];
+            
+            
+            for(UIView * v in self.view.subviews){
+                if([v isKindOfClass:[KxMenuOverlay class]]){
+                    KxMenuView * menuView = (KxMenuView *)[v.subviews lastObject];
+                    UIView * targetView = [menuView viewWithTag:201];
+                    
+                    UILabel * targetlabel = (UILabel *)[targetView viewWithTag:1];
+                    badge = [[RKNotificationHub alloc]initWithView:targetlabel];
+                    [badge scaleCircleSizeBy:0.5];
+                    [badge setCount:[[self queryInfoNumber] intValue]];
+                    break;
+                }
+            }
+
             
             break;
         }

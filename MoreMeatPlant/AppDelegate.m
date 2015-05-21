@@ -207,6 +207,7 @@
 
 - (void)queryInfoNumber{
     [chat_badge setCount:[[talkMoreCtl queryInfoNumber] intValue]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NEWMESSAGE" object:nil];
 }
 
 #pragma mark - 外面调用select tab的控制器

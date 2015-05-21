@@ -25,6 +25,7 @@
 
 -(void)dealloc {
     returnKeyHandler = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"NEWMESSAGE" object:nil];
 }
 
 - (void)viewDidLoad {
@@ -103,8 +104,14 @@
     [returnKeyHandler setLastTextFieldReturnKeyType:UIReturnKeyDone];
     returnKeyHandler.toolbarManageBehaviour = IQAutoToolbarByPosition;
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receviverNoti:) name:@"NEWMESSAGE" object:nil];
+}
+
+
+- (void)receviverNoti:(NSNotification *)noti{
     
 }
+
 
 - (void)navgationBarButtonClick:(UIBarButtonItem *)sender {
     //Ignore this super method

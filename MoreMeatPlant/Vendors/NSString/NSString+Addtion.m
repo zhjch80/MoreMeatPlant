@@ -76,19 +76,10 @@
     const char *floatChars = [stringFloat UTF8String];
     NSUInteger length = [stringFloat length];
     NSUInteger zeroLength = 0;
-    if([stringFloat rangeOfString:@"."].location == NSNotFound)
-    {
-        return stringFloat;
-    }
-    int i = (int)length-1;
-    NSLog(@"%c",floatChars[length]);
-    if(floatChars[length] != '0')
-    {
-        return stringFloat;
-    }
+    int i = length-1;
     for(; i>=0; i--)
     {
-        if(floatChars[i] == '0'/*0x30*/) {
+        if(floatChars[i] == '0') {
             zeroLength++;
         } else {
             if(floatChars[i] == '.')
@@ -100,7 +91,7 @@
     if(i == -1) {
         returnString = @"0";
     } else {
-        returnString = [stringFloat substringToIndex:i];
+        returnString = [stringFloat substringToIndex:i+1];
     }
     return returnString;
 }

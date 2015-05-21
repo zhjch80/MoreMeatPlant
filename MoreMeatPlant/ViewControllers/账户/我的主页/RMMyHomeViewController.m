@@ -40,6 +40,11 @@
     [chat_badge setCount:[[self queryInfoNumber] intValue]];
 }
 
+- (void)receviverNoti:(NSNotification *)noti{
+    [badge setCount:[[self queryInfoNumber] intValue]];
+    [chat_badge setCount:[[self queryInfoNumber] intValue]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
