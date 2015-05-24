@@ -15,7 +15,7 @@
 #import "RMPlantWithSaleViewController.h"
 #import "RMFreshPlantMarketViewController.h"
 #import "RMCommentsView.h"
-
+#import "NSString+Addtion.h"
 #import "ChatViewController.h"
 @interface RMMyHomeViewController ()<RefreshControlDelegate,CommentsViewDelegate>{
     NSInteger pageCount;
@@ -115,7 +115,8 @@
             headView.content_signature.text = Str_Objc(model.contentQm, @"什么也没写...");
             headView.city.text = model.content_gps;
 //            self.yu_e.text = [NSString stringWithFormat:@"余额:%.0f",model.spendmoney];
-            headView.hua_bi.text = [NSString stringWithFormat:@"花币:%.2f",model.spendmoney];
+            NSString * huabi = [NSString changeFloat:[NSString stringWithFormat:@"%.2f",model.spendmoney]];
+            headView.hua_bi.text = [NSString stringWithFormat:@"花币: %@",huabi];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
             [self requestListWithPageCount];

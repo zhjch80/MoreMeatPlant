@@ -771,7 +771,6 @@
 		516F47251ADE5ED90017879A /* RMActionPaopaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 516F47241ADE5ED90017879A /* RMActionPaopaoView.m */; };
 		516F47271ADE5EE90017879A /* RMActionPaopaoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */; };
 		5171250C1AFF8B8100E5AFE3 /* baidian.png in Resources */ = {isa = PBXBuildFile; fileRef = 5171250B1AFF8B8100E5AFE3 /* baidian.png */; };
-		5171250E1AFF8BBD00E5AFE3 /* heidian.png in Resources */ = {isa = PBXBuildFile; fileRef = 5171250D1AFF8BBD00E5AFE3 /* heidian.png */; };
 		517125121AFF8D0E00E5AFE3 /* img_zaned.png in Resources */ = {isa = PBXBuildFile; fileRef = 517125101AFF8D0E00E5AFE3 /* img_zaned.png */; };
 		517125151AFF9B7900E5AFE3 /* AppDelegate+EaseMob.m in Sources */ = {isa = PBXBuildFile; fileRef = 517125141AFF9B7900E5AFE3 /* AppDelegate+EaseMob.m */; };
 		517125191AFF9BDD00E5AFE3 /* red_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 517125161AFF9BDD00E5AFE3 /* red_btn.png */; };
@@ -791,6 +790,7 @@
 		51783FF41AFB432100C6EE18 /* RMFoundationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FF31AFB432100C6EE18 /* RMFoundationViewController.m */; };
 		517840331AFBFB4700C6EE18 /* RMAdvantageTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 517840321AFBFB4700C6EE18 /* RMAdvantageTipView.m */; };
 		517840351AFBFB5500C6EE18 /* RMAdvantageTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 517840341AFBFB5500C6EE18 /* RMAdvantageTipView.xib */; };
+		518ACC221B0F80C7003A881E /* heidian.png in Resources */ = {isa = PBXBuildFile; fileRef = 518ACC211B0F80C7003A881E /* heidian.png */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
@@ -2176,7 +2176,6 @@
 		516F47241ADE5ED90017879A /* RMActionPaopaoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMActionPaopaoView.m; sourceTree = "<group>"; };
 		516F47261ADE5EE90017879A /* RMActionPaopaoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMActionPaopaoView.xib; sourceTree = "<group>"; };
 		5171250B1AFF8B8100E5AFE3 /* baidian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baidian.png; sourceTree = "<group>"; };
-		5171250D1AFF8BBD00E5AFE3 /* heidian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heidian.png; sourceTree = "<group>"; };
 		517125101AFF8D0E00E5AFE3 /* img_zaned.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_zaned.png; sourceTree = "<group>"; };
 		517125131AFF9B7900E5AFE3 /* AppDelegate+EaseMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+EaseMob.h"; sourceTree = "<group>"; };
 		517125141AFF9B7900E5AFE3 /* AppDelegate+EaseMob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+EaseMob.m"; sourceTree = "<group>"; };
@@ -2205,6 +2204,7 @@
 		517840311AFBFB4700C6EE18 /* RMAdvantageTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAdvantageTipView.h; sourceTree = "<group>"; };
 		517840321AFBFB4700C6EE18 /* RMAdvantageTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAdvantageTipView.m; sourceTree = "<group>"; };
 		517840341AFBFB5500C6EE18 /* RMAdvantageTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMAdvantageTipView.xib; sourceTree = "<group>"; };
+		518ACC211B0F80C7003A881E /* heidian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heidian.png; sourceTree = "<group>"; };
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
@@ -3092,6 +3092,7 @@
 		1D191AD61ABD4ECF00FC8623 /* 大全 */ = {
 			isa = PBXGroup;
 			children = (
+				518ACC211B0F80C7003A881E /* heidian.png */,
 				1DD5C0CF1ACD1EF6003CA930 /* img_default.jpg */,
 				1D1DAE281ACBDCD100FC4C4C /* img_yushui_full.png */,
 				1D1DAE291ACBDCD100FC4C4C /* img_yushui_empty.png */,
@@ -3099,7 +3100,6 @@
 				1D1DAE2E1ACBDCD900FC4C4C /* img_sun_empty.png */,
 				1D191AD91ABD54EF00FC8623 /* whiteLeftArrow.png */,
 				5171250B1AFF8B8100E5AFE3 /* baidian.png */,
-				5171250D1AFF8BBD00E5AFE3 /* heidian.png */,
 				517125101AFF8D0E00E5AFE3 /* img_zaned.png */,
 				4B3CD2251B023E9A000D85C0 /* Nav_LeftBack@2x.png */,
 			);
@@ -5878,7 +5878,6 @@
 				1DCC84E01AD662D100B04040 /* user_test.jpg in Resources */,
 				1DEB74581AB9D66800EA1FA7 /* btn_add_photo_s.png in Resources */,
 				1DDBBD661ABBB19F00E35CD5 /* zhanghu.png in Resources */,
-				5171250E1AFF8BBD00E5AFE3 /* heidian.png in Resources */,
 				1DEB74651AB9D66800EA1FA7 /* img_home_7.png in Resources */,
 				1DDBBD721ABBB39800E35CD5 /* home_z@3x.png in Resources */,
 				51D884531ABE66B000F7A3BD /* RMOrderDetailEvaluateTableViewCell.xib in Resources */,
@@ -6002,6 +6001,7 @@
 				514613A51AE3653E0040E462 /* tabbar_contacts.png in Resources */,
 				1DEB74041AB9CF4100EA1FA7 /* RMSearchViewController.xib in Resources */,
 				1DEB74911AB9D66800EA1FA7 /* img_tzed_10.png in Resources */,
+				518ACC221B0F80C7003A881E /* heidian.png in Resources */,
 				1DEB747F1AB9D66800EA1FA7 /* img_tz_4.png in Resources */,
 				1D93AB7A1AB029ED0034574C /* RMReleasePoisonDetailsCell_1.xib in Resources */,
 				5144E7921AC3168D00190C50 /* bbgl_btn.png in Resources */,

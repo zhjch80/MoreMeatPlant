@@ -12,6 +12,7 @@
 #import "UIView+Expland.h"
 #import "RMAliPayViewController.h"
 #import "UIAlertView+Expland.h"
+#import "NSString+Addtion.h"
 @interface RMMyWalletViewController (){
     BOOL isShow;
     NSString * yu_e;
@@ -44,8 +45,11 @@
         RMPublicModel * model = object;
         if(success){
             if(model.status){
-                yu_e = [NSString stringWithFormat:@"%.2f米",model.balance];
-                hua_b = [NSString stringWithFormat:@"%.2f",model.spendmoney];
+                NSString * huabi = [NSString changeFloat:[NSString stringWithFormat:@"%.2f",model.spendmoney]];
+                hua_b = [NSString stringWithFormat:@"%@",huabi];
+                
+                NSString * yue = [NSString changeFloat:[NSString stringWithFormat:@"%.2f",model.balance]];
+                yu_e = [NSString stringWithFormat:@"%@米",yue];
                 [_mTableView reloadData];
             }else{
                 

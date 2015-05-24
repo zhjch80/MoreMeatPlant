@@ -2122,7 +2122,7 @@
         model.content_face = OBJC_Nil([dataDic objectForKey:@"content_face"]);
         model.content_name = OBJC_Nil([dataDic objectForKey:@"content_name"]);
         model.contentQm = OBJC_Nil([dataDic objectForKey:@"content_qm"]);
-        model.spendmoney = [OBJC_Nil([dataDic objectForKey:@"spendmoney"]) integerValue];
+        model.spendmoney = [OBJC_Nil([dataDic objectForKey:@"spendmoney"]) doubleValue];
         model.content_user = OBJC_Nil([dataDic objectForKey:@"content_user"]);
         if(block){
             block(nil,YES,model);

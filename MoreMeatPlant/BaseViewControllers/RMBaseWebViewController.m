@@ -200,7 +200,7 @@
             self.mWebView.backgroundColor = [UIColor redColor];
             [footerView addSubview:self.mWebView];
             
-            [mWebView loadHTMLString:[[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_body"] baseURL:nil];
+            [mWebView loadHTMLString:OBJC_Nil([[[object objectForKey:@"data"] objectAtIndex:0] objectForKey:@"content_body"]) baseURL:nil];
             
             mTableView.tableFooterView = footerView;
 
