@@ -11,9 +11,9 @@
 #import "CONST.h"
 #import "OpenUDID.h"
 
-#define baseUrl             @"http://218.240.30.6/drzw/index.php?com=com_appService"
+#define baseUrl             @"http://112.126.81.2/index.php?com=com_appService"
 
-#define PayHttp @"http://218.240.30.6/drzw/pay/app_js/alipayapi.php?"
+#define PayHttp @"http://112.126.81.2/pay/app_js/alipayapi.php?"
 
 
 #define kMSGSuccess         @"1"
@@ -194,7 +194,7 @@
  *  @method     植物科目 大全侧滑分类list
  */
 + (void)getClassificationOfSideslipCallBack:(RMAFNRequestManagerCallBack)block {
-    NSString * url = @"http://218.240.30.6/drzw/index.php?com=com_appService&method=appSev&app_com=com_shop&task=shopALLright";
+    NSString * url = @"http://112.126.81.2/index.php?com=com_appService&method=appSev&app_com=com_shop&task=shopALLright";
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block){
             block(nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
@@ -218,7 +218,7 @@
                                  withID:(NSString *)user_id
                                 withPWD:(NSString *)user_password
                                callBack:(RMAFNRequestManagerCallBack)block {
-    NSString *url = @"http://218.240.30.6/drzw/index.php";
+    NSString *url = @"http://112.126.81.2/index.php";
     NSDictionary * parameter = @{
                                  @"com": @"com_appService",
                                  @"method": @"save",
@@ -466,7 +466,7 @@
                                    withID:(NSString *)user_id
                                   withPWD:(NSString *)user_password
                                  callBack:(RMAFNRequestManagerCallBack)block {
-    NSString *url = @"http://218.240.30.6/drzw/index.php";
+    NSString *url = @"http://112.126.81.2/index.php";
     NSDictionary * parameter = @{
                                  @"com": @"com_appService",
                                  @"method": @"save",
@@ -502,7 +502,7 @@
                                       withPWD:(NSString *)user_password
                                 withReview_id:(NSString *)review_id
                                      callBack:(RMAFNRequestManagerCallBack)block {
-    NSString *url = @"http://218.240.30.6/drzw/index.php";
+    NSString *url = @"http://112.126.81.2/index.php";
     NSDictionary * parameter = @{
                                  @"com": @"com_appService",
                                  @"method": @"save",
@@ -533,7 +533,7 @@
 + (void)postAnonymousSubmissionsUpgradeSuggestionsWithContent_title:(NSString *)title
                                                    withContent_body:(NSString *)content
                                                            callBack:(RMAFNRequestManagerCallBack)block {
-    NSString *url = @"http://218.240.30.6/drzw/index.php";
+    NSString *url = @"http://112.126.81.2/index.php";
     NSDictionary * parameter = @{
                                  @"com": @"com_appService",
                                  @"method": @"save",
@@ -646,7 +646,7 @@
                          withPWD:(NSString *)user_password
                         callBack:(RMAFNRequestManagerCallBack)block {
     
-    NSString *url = @"http://218.240.30.6/drzw/index.php";
+    NSString *url = @"http://112.126.81.2/index.php";
 
     NSInteger i = 0;
     NSMutableDictionary * parameter = [[NSMutableDictionary alloc] init];

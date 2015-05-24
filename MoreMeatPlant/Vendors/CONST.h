@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 runmobile. All rights reserved.
 //
 
-#define baseHeaderUrl       @"http://218.240.30.6/drzw/file/upload/"
-#define Login_bgImgUrl      @"http://218.240.30.6/drzw/file/upload/login.jpg"
+#define baseHeaderUrl       @" http://112.126.81.2/file/upload/"
+#define Login_bgImgUrl      @" http://112.126.81.2/file/upload/login.jpg"
 
 #define kScreenHeight       [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth        [UIScreen mainScreen].bounds.size.width

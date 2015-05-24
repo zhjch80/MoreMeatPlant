@@ -193,27 +193,31 @@
             model_1.modules_name = @"植物科目";
             [dataArr addObject:model_1];
             
-            for (NSInteger i=0; i<[(NSArray *)[[object objectForKey:@"data"] objectForKey:@"course"] count]; i++) {
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_id"]);
-                model.modules_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"modules_name"]);
-                model.auto_code = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_code"]);
-                model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_id"]);
-                model.sub = [[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"sub"];
-                model.isGrow = @"NO";
-                [dataArr addObject:model];
+            if([[object objectForKey:@"data"]isKindOfClass:[NSArray class]]){
+                for (NSInteger i=0; i<[(NSArray *)[[object objectForKey:@"data"] objectForKey:@"course"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.modules_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"modules_name"]);
+                    model.auto_code = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_code"]);
+                    model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.sub = [[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"sub"];
+                    model.isGrow = @"NO";
+                    [dataArr addObject:model];
+                }
             }
             
             RMPublicModel * model_2 = [[RMPublicModel alloc] init];
             model_2.modules_name = @"生长季";
             [dataArr addObject:model_2];
             
-            for (NSInteger i=0; i<[(NSArray *)[[object objectForKey:@"data"] objectForKey:@"grow"] count]; i++) {
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                model.modules_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"label"]);
-                model.auto_code = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"value"]);
-                model.isGrow = @"YES";
-                [dataArr addObject:model];
+            if([[object objectForKey:@"data"] isKindOfClass:[NSArray class]]){
+                for (NSInteger i=0; i<[(NSArray *)[[object objectForKey:@"data"] objectForKey:@"grow"] count]; i++) {
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.modules_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"label"]);
+                    model.auto_code = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"value"]);
+                    model.isGrow = @"YES";
+                    [dataArr addObject:model];
+                }
             }
             
             [mTableView reloadData];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -19,9 +19,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pqr-X5-Yay">
+                    <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqr-X5-Yay">
                         <rect key="frame" x="8" y="15" width="30" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="AMf-iZ-uyN"/>
+                            <constraint firstAttribute="height" constant="30" id="SCq-5L-5E5"/>
+                        </constraints>
                         <state key="normal" image="whiteLeftArrow.png">
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -30,20 +33,28 @@
                             <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="tmd-2q-7Si"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="s77-ne-2iU">
-                        <rect key="frame" x="84" y="3" width="220" height="60"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s77-ne-2iU">
+                        <rect key="frame" x="84" y="3" width="220" height="53"/>
                         <fontDescription key="fontDescription" name="FZZZHUNHJW--GB1-0" family="FZZhengHeiS-M-GB" pointSize="27"/>
                         <color key="textColor" red="0.96549479166666663" green="0.96549479166666663" blue="0.96549479166666663" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="s77-ne-2iU" firstAttribute="leading" secondItem="Pqr-X5-Yay" secondAttribute="trailing" constant="46" id="2vH-My-pd8"/>
+                    <constraint firstAttribute="bottom" secondItem="Pqr-X5-Yay" secondAttribute="bottom" constant="14.5" id="HuN-YJ-2gs"/>
+                    <constraint firstAttribute="trailing" secondItem="s77-ne-2iU" secondAttribute="trailing" constant="16" id="Inc-8L-gvW"/>
+                    <constraint firstItem="s77-ne-2iU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="MXr-Lw-Jhv"/>
+                    <constraint firstItem="Pqr-X5-Yay" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Wmc-fc-CVL"/>
+                    <constraint firstItem="Pqr-X5-Yay" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="d50-yw-ibv"/>
+                    <constraint firstAttribute="bottom" secondItem="s77-ne-2iU" secondAttribute="bottom" constant="3.5" id="p29-TC-1Ak"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="backupBtn" destination="Pqr-X5-Yay" id="QdJ-X5-QeP"/>
                 <outlet property="plantName" destination="s77-ne-2iU" id="ymZ-3I-K9G"/>
             </connections>
-            <point key="canvasLocation" x="229" y="262"/>
+            <point key="canvasLocation" x="223" y="271"/>
         </tableViewCell>
     </objects>
     <resources>

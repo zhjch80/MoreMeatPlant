@@ -265,16 +265,18 @@
             
             RMPublicModel * _model = [[RMPublicModel alloc] init];
             [subsPlantArr addObject:_model];
-            
-            for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
-                RMPublicModel * model = [[RMPublicModel alloc] init];
-                model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
-                model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
-                model.change_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"change_img"]);
-                model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
-                model.modules_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"modules_name"]);
-                [subsPlantArr addObject:model];
+            if([[object objectForKey:@"data"] isKindOfClass:[NSArray class]]){
+                for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
+                    RMPublicModel * model = [[RMPublicModel alloc] init];
+                    model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
+                    model.auto_id = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_id"]);
+                    model.change_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"change_img"]);
+                    model.content_img = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"content_img"]);
+                    model.modules_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"modules_name"]);
+                    [subsPlantArr addObject:model];
+                }
             }
+            
             
             CGFloat offsetY = 0;
             if (IS_IPHONE_6p_SCREEN) {
