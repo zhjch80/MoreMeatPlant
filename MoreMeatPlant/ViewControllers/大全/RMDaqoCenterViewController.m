@@ -265,7 +265,7 @@
             
             RMPublicModel * _model = [[RMPublicModel alloc] init];
             [subsPlantArr addObject:_model];
-            if([[object objectForKey:@"data"] isKindOfClass:[NSArray class]]){
+//            if([[object objectForKey:@"data"] isKindOfClass:[NSArray class]]){
                 for (NSInteger i=0; i<[(NSArray *)[object objectForKey:@"data"] count]; i++){
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_code = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"auto_code"]);
@@ -275,7 +275,7 @@
                     model.modules_name = OBJC([[[object objectForKey:@"data"] objectAtIndex:i] objectForKey:@"modules_name"]);
                     [subsPlantArr addObject:model];
                 }
-            }
+//            }
             
             
             CGFloat offsetY = 0;

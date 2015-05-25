@@ -163,7 +163,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     RMDaqoViewController * daqoCtl = self.DaqoDelegate;
 
-    RMPublicModel * model = [dataArr objectAtIndex:indexPath.row + 1];
+    RMPublicModel * model = [dataArr objectAtIndex:indexPath.section + 1];
     //modules_name   auto_code
 
     RMPublicModel * _model = [[RMPublicModel alloc] init];
@@ -193,7 +193,6 @@
             model_1.modules_name = @"植物科目";
             [dataArr addObject:model_1];
             
-            if([[object objectForKey:@"data"]isKindOfClass:[NSArray class]]){
                 for (NSInteger i=0; i<[(NSArray *)[[object objectForKey:@"data"] objectForKey:@"course"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.auto_id = OBJC([[[[object objectForKey:@"data"] objectForKey:@"course"] objectAtIndex:i] objectForKey:@"auto_id"]);
@@ -204,13 +203,11 @@
                     model.isGrow = @"NO";
                     [dataArr addObject:model];
                 }
-            }
             
             RMPublicModel * model_2 = [[RMPublicModel alloc] init];
             model_2.modules_name = @"生长季";
             [dataArr addObject:model_2];
             
-            if([[object objectForKey:@"data"] isKindOfClass:[NSArray class]]){
                 for (NSInteger i=0; i<[(NSArray *)[[object objectForKey:@"data"] objectForKey:@"grow"] count]; i++) {
                     RMPublicModel * model = [[RMPublicModel alloc] init];
                     model.modules_name = OBJC([[[[object objectForKey:@"data"] objectForKey:@"grow"] objectAtIndex:i] objectForKey:@"label"]);
@@ -218,7 +215,6 @@
                     model.isGrow = @"YES";
                     [dataArr addObject:model];
                 }
-            }
             
             [mTableView reloadData];
             [MBProgressHUD hideHUDForView:self.view animated:YES];

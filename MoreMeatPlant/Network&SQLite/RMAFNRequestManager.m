@@ -11,8 +11,12 @@
 #import "CONST.h"
 #import "OpenUDID.h"
 
+
+//http://218.240.30.6/drzw/
+
 #define baseUrl             @"http://112.126.81.2/index.php?com=com_appService"
 
+//#define baseUrl             @"http://218.240.30.6/drzw/index.php?com=com_appService"
 #define PayHttp @"http://112.126.81.2/pay/app_js/alipayapi.php?"
 
 
