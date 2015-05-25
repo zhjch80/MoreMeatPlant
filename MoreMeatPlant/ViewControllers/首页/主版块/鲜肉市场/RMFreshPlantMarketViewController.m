@@ -335,8 +335,12 @@
 - (void)stickJumpDetailsWithOrder:(NSInteger)order {
     RMPublicModel * model = [newsArr objectAtIndex:order];
     RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
-    [baseWebCtl loadRequestWithUrl:model.view_link withTitle:[NSString stringWithFormat:@"置顶 %@",model.content_name] withisloadRequest:YES];
+    [baseWebCtl loadHtmlWithAuto_id:model.auto_id withTitle:@"详情" withisloadRequest:NO];
     [self.navigationController pushViewController:baseWebCtl animated:YES];
+    
+//    RMBaseWebViewController * baseWebCtl = [[RMBaseWebViewController alloc] init];
+//    [baseWebCtl loadRequestWithUrl:model.view_link withTitle:[NSString stringWithFormat:@"置顶 %@",model.content_name] withisloadRequest:YES];
+//    [self.navigationController pushViewController:baseWebCtl animated:YES];
 }
 
 #pragma mark - 底部栏回调方法
