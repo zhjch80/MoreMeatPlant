@@ -153,7 +153,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
     }
-    NSLog(@"%ld",(long)indexPath.row);
+
     RMPublicModel * model = [dataArr objectAtIndex:indexPath.section];
     cell.mTitle.text = [NSString stringWithFormat:@"    %@",[[model.sub objectAtIndex:indexPath.row] objectForKey:@"modules_name"]];
     cell.mTitle.font = FONT_1(13.0);
