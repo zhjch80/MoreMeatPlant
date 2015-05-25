@@ -140,6 +140,7 @@
     liveBlur.isGlassEffectOn = YES;
     liveBlur.backgroundColor = [UIColor blackColor];
     mTableView.backgroundView = liveBlur;
+    liveBlur.contentMode = UIViewContentModeScaleAspectFill;
     mTableView.contentInset = UIEdgeInsetsMake(kDKTableViewDefaultContentInset, 0, 0, 0);
     
     [self.view addSubview:mTableView];
