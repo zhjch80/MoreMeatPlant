@@ -84,7 +84,7 @@
     dataCommentArr = [[NSMutableArray alloc] init];
     advertisingArr = [[NSMutableArray alloc] init];
 
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 40) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 38) style:UITableViewStylePlain];
     mTableView.delegate = self;
     mTableView.dataSource = self;
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -208,19 +208,19 @@
                 if (substr.location != NSNotFound) {
                     
                 }else{
-                    CGSize size = [UIImage downloadImageSizeWithURL:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]];
-                    CGFloat height = size.height/size.width * kScreenWidth;
-                    
-                    [imageView sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]] placeholderImage:nil];
-                    
-                    [imageView setFrame:CGRectMake(0, 10 + offsetY, kScreenWidth, height)];
-                    
-                    [tableHeadView addSubview:imageView];
-                    
-                    offsetY = offsetY + imageView.frame.size.height + 10;
-                }
+                    [imageView sd_setImageWithURL:[NSURL URLWithString:[[dataModel.body objectAtIndex:i] objectForKey:@"content_img"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        
+                        CGSize size = image.size;
+                        
+                        CGFloat height = size.height/size.width * kScreenWidth;
 
-                
+                        [imageView setFrame:CGRectMake(0, 10 + offsetY, kScreenWidth, height)];
+                        
+                        [tableHeadView addSubview:imageView];
+                        
+                        offsetY = offsetY + imageView.frame.size.height + 10;
+                    }];
+                }
             }else{
                 UILabel * bodyStr = [[UILabel alloc] init];
 
