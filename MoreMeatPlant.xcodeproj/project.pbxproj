@@ -788,9 +788,6 @@
 		51783FF41AFB432100C6EE18 /* RMFoundationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51783FF31AFB432100C6EE18 /* RMFoundationViewController.m */; };
 		517840331AFBFB4700C6EE18 /* RMAdvantageTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 517840321AFBFB4700C6EE18 /* RMAdvantageTipView.m */; };
 		517840351AFBFB5500C6EE18 /* RMAdvantageTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 517840341AFBFB5500C6EE18 /* RMAdvantageTipView.xib */; };
-		519131EE1B136F5600A2E526 /* Icon120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 519131ED1B136F5600A2E526 /* Icon120x120.png */; };
-		519131F11B136F8700A2E526 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 519131EF1B136F8700A2E526 /* Icon.png */; };
-		519131F21B136F8700A2E526 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 519131F01B136F8700A2E526 /* Icon@2x.png */; };
 		5191D4B61AD292690011AFCC /* RMSeeLogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */; };
 		5191D4B71AD292690011AFCC /* RMSeeLogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */; };
 		5191D4BB1AD551980011AFCC /* RMTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4B91AD551980011AFCC /* RMTransactionRecordsViewController.m */; };
@@ -964,7 +961,6 @@
 		51E4B18F1AC64E8D00714F3E /* RMModifyPassWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E4B18D1AC64E8D00714F3E /* RMModifyPassWordViewController.xib */; };
 		51E4B1921AC6534600714F3E /* login_select_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 51E4B1901AC6534600714F3E /* login_select_bg.png */; };
 		51E4B1931AC6534600714F3E /* login_no_select_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 51E4B1911AC6534600714F3E /* login_no_select_bg.png */; };
-		51FCDAAB1AFF556F0052C433 /* Icon180x180.png in Resources */ = {isa = PBXBuildFile; fileRef = 51FCDAAA1AFF556F0052C433 /* Icon180x180.png */; };
 		9538F3D21AB0A5BF00608FAD /* RMTableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538F3D11AB0A5BF00608FAD /* RMTableHeadView.m */; };
 		9538F3D41AB0A5DF00608FAD /* RMTableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9538F3D31AB0A5DF00608FAD /* RMTableHeadView.xib */; };
 		9538F3DC1AB1C83F00608FAD /* RMCommentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538F3DB1AB1C83F00608FAD /* RMCommentsView.m */; };
@@ -2202,9 +2198,6 @@
 		517840311AFBFB4700C6EE18 /* RMAdvantageTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAdvantageTipView.h; sourceTree = "<group>"; };
 		517840321AFBFB4700C6EE18 /* RMAdvantageTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAdvantageTipView.m; sourceTree = "<group>"; };
 		517840341AFBFB5500C6EE18 /* RMAdvantageTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMAdvantageTipView.xib; sourceTree = "<group>"; };
-		519131ED1B136F5600A2E526 /* Icon120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon120x120.png; sourceTree = "<group>"; };
-		519131EF1B136F8700A2E526 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		519131F01B136F8700A2E526 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		5191D4B31AD292690011AFCC /* RMSeeLogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSeeLogisticsViewController.h; sourceTree = "<group>"; };
 		5191D4B41AD292690011AFCC /* RMSeeLogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSeeLogisticsViewController.m; sourceTree = "<group>"; };
 		5191D4B51AD292690011AFCC /* RMSeeLogisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSeeLogisticsViewController.xib; sourceTree = "<group>"; };
@@ -2463,7 +2456,6 @@
 		51E4B18D1AC64E8D00714F3E /* RMModifyPassWordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMModifyPassWordViewController.xib; sourceTree = "<group>"; };
 		51E4B1901AC6534600714F3E /* login_select_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_select_bg.png; sourceTree = "<group>"; };
 		51E4B1911AC6534600714F3E /* login_no_select_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_no_select_bg.png; sourceTree = "<group>"; };
-		51FCDAAA1AFF556F0052C433 /* Icon180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon180x180.png; sourceTree = "<group>"; };
 		9538F3CE1AB09BAA00608FAD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9538F3D01AB0A5BF00608FAD /* RMTableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMTableHeadView.h; sourceTree = "<group>"; };
 		9538F3D11AB0A5BF00608FAD /* RMTableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMTableHeadView.m; sourceTree = "<group>"; };
@@ -3701,10 +3693,6 @@
 				517125141AFF9B7900E5AFE3 /* AppDelegate+EaseMob.m */,
 				51319DE01AC47497002320B8 /* RMLocationManager.h */,
 				51319DE11AC47497002320B8 /* RMLocationManager.m */,
-				519131EF1B136F8700A2E526 /* Icon.png */,
-				519131F01B136F8700A2E526 /* Icon@2x.png */,
-				51FCDAAA1AFF556F0052C433 /* Icon180x180.png */,
-				519131ED1B136F5600A2E526 /* Icon120x120.png */,
 				1D9336FE1A8E3DFA00BA4FA7 /* Images.xcassets */,
 				1D9336EE1A8E3DFA00BA4FA7 /* Supporting Files */,
 			);
@@ -5666,7 +5654,6 @@
 				5146130A1AE3653E0040E462 /* VoiceSearchFeedback003@2x.png in Resources */,
 				1DEB75051AB9D67A00EA1FA7 /* login_btn_bg.png in Resources */,
 				514612FA1AE3653E0040E462 /* 80.png in Resources */,
-				51FCDAAB1AFF556F0052C433 /* Icon180x180.png in Resources */,
 				1D4DA3211A9216BA006A9EBA /* RMReleasePoisonViewController.xib in Resources */,
 				1DDBBD7E1ABBB3D300E35CD5 /* duoliao_z@3x.png in Resources */,
 				515B96911B07A25400A57B7C /* 4-568h.png in Resources */,
@@ -5739,7 +5726,6 @@
 				519927351AB5682700B0F83F /* RMMyCorpViewController.xib in Resources */,
 				0A4104851ABA9C100060FBD5 /* EaseMob.bundle in Resources */,
 				1DEB74F61AB9D67A00EA1FA7 /* fbgg@2x.png in Resources */,
-				519131F21B136F8700A2E526 /* Icon@2x.png in Resources */,
 				1DEB745A1AB9D66800EA1FA7 /* deletecircular.png in Resources */,
 				51D8842F1ABE620A00F7A3BD /* RMOrderDetailProTableViewCell.xib in Resources */,
 				51D884451ABE63BB00F7A3BD /* order_gray_sun.png in Resources */,
@@ -5753,7 +5739,6 @@
 				514613761AE3653E0040E462 /* chatBar_more_photoSelected@2x.png in Resources */,
 				5120FDC91AB5D9E3000E9BE1 /* RMMyHomeViewController.xib in Resources */,
 				514613041AE3653E0040E462 /* chatFire_audioPlaying3@2x.png in Resources */,
-				519131F11B136F8700A2E526 /* Icon.png in Resources */,
 				514613331AE3653E0040E462 /* call_silence_h.png in Resources */,
 				1DEB74611AB9D66800EA1FA7 /* img_home_3.png in Resources */,
 				1DAE81B71AD39F28003BDB85 /* RMReleasePoisonCell_2_6p.xib in Resources */,
@@ -5921,7 +5906,6 @@
 				514612FF1AE3653E0040E462 /* chatFire_audioPlaying1.png in Resources */,
 				1D83975B1AB3F81600DA190A /* line@2x.png in Resources */,
 				1DDBBD521ABBB14700E35CD5 /* home_z.png in Resources */,
-				519131EE1B136F5600A2E526 /* Icon120x120.png in Resources */,
 				515B96901B07A25400A57B7C /* 3@2x.png in Resources */,
 				1D386C811AC1690B000B9686 /* RMNearFriendTableViewCell.xib in Resources */,
 				1D9336FF1A8E3DFA00BA4FA7 /* Images.xcassets in Resources */,
@@ -6598,8 +6582,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -6619,7 +6603,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
+				PROVISIONING_PROFILE = "df91fa2c-3863-4af5-838d-878cddeb6d4d";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -6641,8 +6625,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6655,7 +6639,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
+				PROVISIONING_PROFILE = "df91fa2c-3863-4af5-838d-878cddeb6d4d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -6666,8 +6650,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MoreMeatPlant/Vendors/ShareSDK/Connection",
@@ -6692,7 +6676,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
+				PROVISIONING_PROFILE = "df91fa2c-3863-4af5-838d-878cddeb6d4d";
 			};
 			name = Debug;
 		};
@@ -6701,8 +6685,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MoreMeatPlant/Vendors/ShareSDK/Connection",
@@ -6726,7 +6710,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
+				PROVISIONING_PROFILE = "df91fa2c-3863-4af5-838d-878cddeb6d4d";
 			};
 			name = Release;
 		};
