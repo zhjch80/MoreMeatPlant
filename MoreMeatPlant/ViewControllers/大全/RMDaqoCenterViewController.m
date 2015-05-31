@@ -137,7 +137,12 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell" owner:self options:nil] lastObject];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor clearColor];
+        if(indexPath.row%2 == 0){
+            cell.backgroundColor = [UIColor clearColor];
+        }else{
+            cell.backgroundColor = [UIColor redColor];
+
+        }
         cell.delegate = self;
     }
     

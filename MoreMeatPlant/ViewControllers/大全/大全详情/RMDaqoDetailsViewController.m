@@ -287,7 +287,7 @@
                 [atlasImg sd_setImageWithURL:[NSURL URLWithString:[[dataModel.imgs objectAtIndex:count] objectForKey:@"content_img"]] placeholderImage:nil];
                 [atlasImg addTarget:self withSelector:@selector(imageZoomMethodWithImage:)];
 //                atlasImg.frame = CGRectMake(15 + j*60, 220 + i*60 + offsetY, 50, 50);
-                atlasImg.frame = CGRectMake(15 + (j%5)*(50+10), 220 + (i/2)*(50+10) + offsetY, 50, 50);
+                atlasImg.frame = CGRectMake(15 + (j%5)*(50+10), 220 + (i%2)*(50+10) + offsetY, 50, 50);
                 [tableFooterView addSubview:atlasImg];
                 [imageViewArr addObject:atlasImg];
                 count ++;
