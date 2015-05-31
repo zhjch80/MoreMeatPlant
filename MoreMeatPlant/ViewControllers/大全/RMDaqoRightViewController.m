@@ -163,7 +163,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     RMDaqoViewController * daqoCtl = self.DaqoDelegate;
 
-    RMPublicModel * model = [dataArr objectAtIndex:indexPath.section + 1];
+    RMPublicModel * model = [dataArr objectAtIndex:indexPath.section];
     //modules_name   auto_code
 
     RMPublicModel * _model = [[RMPublicModel alloc] init];
