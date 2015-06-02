@@ -48,26 +48,27 @@
     self.backgroundColor = [UIColor clearColor];
 
     _activityIndicatorView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    _activityIndicatorView.frame = CGRectZero;
+    _activityIndicatorView.frame = CGRectMake(0, 15, 30, 30);
+    _activityIndicatorView.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2 - 30, _activityIndicatorView.center.y);
     _activityIndicatorView.hidesWhenStopped=YES;
     _activityIndicatorView.color=[UIColor orangeColor];
-    _activityIndicatorView.translatesAutoresizingMaskIntoConstraints=NO;
+//    _activityIndicatorView.translatesAutoresizingMaskIntoConstraints=NO;
     [self addSubview:_activityIndicatorView];
     
-    _loadingLabel=[[UILabel alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2, 15, 100, 30)];
+    _loadingLabel=[[UILabel alloc] initWithFrame:CGRectMake(0, 15, 100, 30)];
+    _loadingLabel.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.loadingLabel.center.y);
     _loadingLabel.backgroundColor=[UIColor clearColor];
     _loadingLabel.font=[UIFont systemFontOfSize:13];
 //    _loadingLabel.translatesAutoresizingMaskIntoConstraints=NO;
     [self addSubview:_loadingLabel];
     
-    _promptLabel=[[UILabel alloc] initWithFrame:CGRectZero];
+    _promptLabel=[[UILabel alloc] initWithFrame:CGRectMake(0, 15, 100, 30)];
+    _promptLabel.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, _promptLabel.center.y);
     _promptLabel.backgroundColor=[UIColor clearColor];
     _promptLabel.font=[UIFont systemFontOfSize:13];
     _promptLabel.textAlignment=NSTextAlignmentCenter;
-    _promptLabel.translatesAutoresizingMaskIntoConstraints=NO;
+//    _promptLabel.translatesAutoresizingMaskIntoConstraints=NO;
     [self addSubview:_promptLabel];
-    
-
     
     [self resetViews];
     
@@ -81,13 +82,13 @@
     _promptLabel.text=@"上拉加载更多";
     
     _loadingLabel.hidden=YES;
+    _loadingLabel.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2 + 40, _loadingLabel.center.y);
     _loadingLabel.text=@"正在加载...";
     
     if ([self.activityIndicatorView isAnimating])
     {
         [self.activityIndicatorView stopAnimating];
     }
-
 }
 
 
@@ -102,39 +103,38 @@
     [UIView animateWithDuration:0.25 animations:^{
         
     /////
-    NSLayoutConstraint * aTop=[NSLayoutConstraint constraintWithItem:self.activityIndicatorView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:13];
-    NSLayoutConstraint * aRight=[NSLayoutConstraint constraintWithItem:self.activityIndicatorView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:-5];
-    NSLayoutConstraint * aWith=[NSLayoutConstraint constraintWithItem:self.activityIndicatorView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0 constant:35];
-    NSLayoutConstraint * aHeight=[NSLayoutConstraint constraintWithItem:self.activityIndicatorView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0 constant:35];
-    
-    NSArray * aList=@[aTop,aRight,aWith,aHeight];
-    
-    [self addConstraints:aList];
-    /////////////
-    NSLayoutConstraint * tLeft=[NSLayoutConstraint constraintWithItem:self.loadingLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-    NSLayoutConstraint * tTop=[NSLayoutConstraint constraintWithItem:self.loadingLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    NSLayoutConstraint * tRight=[NSLayoutConstraint constraintWithItem:self.loadingLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0];
-    NSLayoutConstraint * tHeight=[NSLayoutConstraint constraintWithItem:self.loadingLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0 constant:32];
-    
-    NSArray * tList=@[tLeft,tTop,tRight,tHeight];
-    
-    [self addConstraints:tList];
-    ///////
-    NSDictionary * viewsDictionary=@{@"promptLabel":self.promptLabel};
-    NSArray *pHList=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[promptLabel]-0-|" options:0 metrics:nil views:viewsDictionary];
-    NSArray *pVList=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[promptLabel(==45)]" options:0 metrics:nil views:viewsDictionary];
-    
-    [self addConstraints:pHList];
-    [self addConstraints:pVList];
+//    NSLayoutConstraint * aTop=[NSLayoutConstraint constraintWithItem:self.activityIndicatorView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:13];
+//    NSLayoutConstraint * aRight=[NSLayoutConstraint constraintWithItem:self.activityIndicatorView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:-5];
+//    NSLayoutConstraint * aWith=[NSLayoutConstraint constraintWithItem:self.activityIndicatorView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0 constant:35];
+//    NSLayoutConstraint * aHeight=[NSLayoutConstraint constraintWithItem:self.activityIndicatorView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0 constant:35];
+//    
+//    NSArray * aList=@[aTop,aRight,aWith,aHeight];
+//    
+//    [self addConstraints:aList];
+//    /////////////
+//    NSLayoutConstraint * tLeft=[NSLayoutConstraint constraintWithItem:self.loadingLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+//    NSLayoutConstraint * tTop=[NSLayoutConstraint constraintWithItem:self.loadingLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+//    NSLayoutConstraint * tRight=[NSLayoutConstraint constraintWithItem:self.loadingLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0];
+//    NSLayoutConstraint * tHeight=[NSLayoutConstraint constraintWithItem:self.loadingLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0 constant:32];
+//    
+//    NSArray * tList=@[tLeft,tTop,tRight,tHeight];
+//    
+//    [self addConstraints:tList];
+//    ///////
+//    NSDictionary * viewsDictionary=@{@"promptLabel":self.promptLabel};
+//    NSArray *pHList=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[promptLabel]-0-|" options:0 metrics:nil views:viewsDictionary];
+//    NSArray *pVList=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[promptLabel(==45)]" options:0 metrics:nil views:viewsDictionary];
+//    
+//    [self addConstraints:pHList];
+//    [self addConstraints:pVList];
     
     }];
-
-    
-    
 }
+
 ///松开可刷新
 - (void)canEngageRefresh
 {
+    _promptLabel.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, _promptLabel.center.y);
     _promptLabel.text=@"松开即可加载";
     
 }

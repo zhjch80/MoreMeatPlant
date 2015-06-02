@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+
 typedef void (^RMFoundationViewCtlRequestStart)(void);
 typedef void (^RMFoundationViewCtlRequestFinished)(void);
+
 @interface RMFoundationViewController : UIViewController
 @property (copy, nonatomic) RMFoundationViewCtlRequestStart startRequest;
 @property (copy, nonatomic) RMFoundationViewCtlRequestFinished finishedRequest;

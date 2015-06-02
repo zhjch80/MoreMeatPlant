@@ -54,7 +54,7 @@
     
     dataArr = [[NSMutableArray alloc] init];
     
-    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, plantTypeView.frame.size.height + 64 , kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 38) style:UITableViewStylePlain];
+    mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, plantTypeView.frame.size.height + 64 , kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 42) style:UITableViewStylePlain];
     mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     mTableView.delegate = self;
     mTableView.dataSource = self;
@@ -137,37 +137,38 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"RMDaqoCell" owner:self options:nil] lastObject];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if(indexPath.row%2 == 0){
-            cell.backgroundColor = [UIColor clearColor];
-        }else{
-            cell.backgroundColor = [UIColor redColor];
-
-        }
+        cell.backgroundColor = [UIColor clearColor];
         cell.delegate = self;
     }
     
     if(indexPath.row*3 < dataArr.count){
+        cell.leftTitle.hidden = NO;
+        cell.leftImg.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
         cell.leftTitle.text = model.content_name;
-        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
         cell.leftImg.identifierString = model.auto_id;
     }else{
         cell.leftTitle.hidden = YES;
         cell.leftImg.hidden = YES;
     }
     if(indexPath.row*3+1 < dataArr.count){
+        cell.centerTitle.hidden = NO;
+        cell.centerImg.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
         cell.centerTitle.text = model.content_name;
-        [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
         cell.centerImg.identifierString = model.auto_id;
     }else{
         cell.centerTitle.hidden = YES;
         cell.centerImg.hidden = YES;
     }
     if(indexPath.row*3+2 < dataArr.count){
+        cell.rightTitle.hidden = NO;
+        cell.rightImg.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
         cell.rightTitle.text = model.content_name;
-        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
+        [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
         cell.rightImg.identifierString = model.auto_id;
     }else{
         cell.rightTitle.hidden = YES;
@@ -285,9 +286,9 @@
             
             CGFloat offsetY = 0;
             if (IS_IPHONE_6p_SCREEN) {
-                offsetY = 65;
+                offsetY = 70;
             }else if (IS_IPHONE_6_SCREEN){
-                offsetY = 60;
+                offsetY = 65;
             }else{
                 offsetY = 55;
             }
@@ -300,7 +301,7 @@
             [self.view insertSubview:plantTypeView belowSubview:self.recognizerView];
             
             [UIView animateWithDuration:0.3 animations:^{
-                mTableView.frame = CGRectMake(0, plantTypeView.frame.size.height + 60, kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 44);
+                mTableView.frame = CGRectMake(0, plantTypeView.frame.size.height + 60, kScreenWidth, kScreenHeight - plantTypeView.frame.size.height - 64 - 42);
             } completion:^(BOOL finished) {
             }];
             

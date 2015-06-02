@@ -113,53 +113,33 @@
     
 }
 
-- (void)_drogForChange:(NSDictionary *)change
-{
-    
-    if ( self.topEnabled && self.scrollView.contentOffset.y<0)
-    {
-        if(self.scrollView.contentOffset.y<-self.enableInsetTop)
-        {
+- (void)_drogForChange:(NSDictionary *)change {
+    if ( self.topEnabled && self.scrollView.contentOffset.y < 0) {
+        if(self.scrollView.contentOffset.y < -self.enableInsetTop + 40) {
             if (self.autoRefreshTop || ( self.scrollView.decelerating && self.scrollView.dragging==NO)) {
                 [self _engageRefreshDirection:RefreshDirectionTop];
-            }
-            else {
+            } else {
                 [self _canEngageRefreshDirection:RefreshDirectionTop];
             }
-        }
-        else
-        {
+        } else {
             [self _didDisengageRefreshDirection:RefreshDirectionTop];
         }
     }
     
-    if ( self.bottomEnabled && self.scrollView.contentOffset.y>0 )
-    {
-        
-        if(self.scrollView.contentOffset.y>(self.scrollView.contentSize.height+self.enableInsetBottom-self.scrollView.bounds.size.height) )
-        {
-            if(self.autoRefreshBottom || (self.scrollView.decelerating && self.scrollView.dragging==NO)){
+    if ( self.bottomEnabled && self.scrollView.contentOffset.y > 0) {
+        if(self.scrollView.contentOffset.y > (self.scrollView.contentSize.height + self.enableInsetBottom - self.scrollView.bounds.size.height - 80) ) {
+            if(self.autoRefreshBottom || (self.scrollView.decelerating && self.scrollView.dragging == NO)){
                 [self _engageRefreshDirection:RefreshDirectionBottom];
-            }
-            else{
+            } else{
                 [self _canEngageRefreshDirection:RefreshDirectionBottom];
             }
-        }
-        else {
+        } else {
             [self _didDisengageRefreshDirection:RefreshDirectionBottom];
         }
-        
     }
-    
-    
-    
 }
 
-
-- (void)_canEngageRefreshDirection:(RefreshDirection) direction
-{
-    
-    
+- (void)_canEngageRefreshDirection:(RefreshDirection) direction {
     if (direction==RefreshDirectionTop)
     {
         [self.topView performSelector:@selector(canEngageRefresh)];

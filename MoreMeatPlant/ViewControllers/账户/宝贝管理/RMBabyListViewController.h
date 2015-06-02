@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "RMPublicModel.h"
 #import "RMFoundationViewController.h"
+
 typedef void (^RMBabyListViewModifyCallback) (RMPublicModel * _model);
+
 @interface RMBabyListViewController : RMFoundationViewController<UITableViewDataSource,UITableViewDelegate>{
     NSMutableArray * babyArray;
 }
@@ -19,5 +21,7 @@ typedef void (^RMBabyListViewModifyCallback) (RMPublicModel * _model);
 @property (retain, nonatomic) NSString * is_shelf;
 @property (assign, nonatomic) NSInteger pageCount;
 @property (assign, nonatomic) BOOL isLoadComplete;
+
 - (void)requestDataWithPageCount:(NSInteger)page;
+
 @end

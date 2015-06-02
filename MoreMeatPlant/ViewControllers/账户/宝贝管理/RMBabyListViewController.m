@@ -15,6 +15,7 @@
 #import "RMUserLoginInfoManager.h"
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD.h"
+
 @interface RMBabyListViewController ()<RefreshControlDelegate>{
 
 }
@@ -25,14 +26,16 @@
 @implementation RMBabyListViewController
 @synthesize pageCount,isLoadComplete;
 @synthesize refreshControl;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    refreshControl=[[RefreshControl alloc] initWithScrollView:_mTableView delegate:self];
+    refreshControl = [[RefreshControl alloc] initWithScrollView:_mTableView delegate:self];
     refreshControl.topEnabled = YES;
     refreshControl.bottomEnabled = YES;
     [refreshControl registerClassForTopView:[RefreshView class]];
+    
     pageCount = 1;
     isLoadComplete = NO;
     babyArray = [[NSMutableArray alloc]init];
@@ -42,6 +45,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [babyArray count];
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     RMBabyListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"RMBabyListTableViewCell"];
     if(cell == nil){
@@ -89,10 +93,10 @@
     cell.delete_btn.tag  =100*indexPath.row+2;
     return cell;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 70;
 }
-
 
 #pragma mark 刷新代理
 
@@ -102,24 +106,28 @@
         [babyArray removeAllObjects];
         [self requestDataWithPageCount:1];
     }else if(direction == RefreshDirectionBottom) { //上拉加载
+        NSLog(@"＝＝＝＝＝＝＝＝＝进刷新代理＝＝＝＝＝＝＝＝");
         pageCount ++;
         [self requestDataWithPageCount:pageCount];
     }
 }
 
 - (void)requestDataWithPageCount:(NSInteger)page{
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSLog(@"－－－－－－开始请求－－－－－－ page:%ld",(long)page);
     if(self.startRequest){
         self.startRequest();
     }
+    
     [RMAFNRequestManager corpBabyListWithUser:[[RMUserLoginInfoManager loginmanager] user] Pwd:[[RMUserLoginInfoManager loginmanager] pwd] memberclass:self.member_class is_shelf:self.is_shelf Page:page  andCallBack:^(NSError *error, BOOL success, id object) {
+        
         if(page == 1){
             [babyArray removeAllObjects];
         }
-//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
         if(self.finishedRequest){
             self.finishedRequest();
         }
+        
         if(success){
             if([object isKindOfClass:[RMPublicModel class]]){//模型类
                 RMPublicModel * model = object;
@@ -139,18 +147,21 @@
                 if(page == 1){
                     [refreshControl finishRefreshingDirection:RefreshDirectionTop];
                     isLoadComplete = YES;
-
                 }else{
                     [refreshControl finishRefreshingDirection:RefreshDirectionBottom];
                 }
             }
+            
+            [_mTableView reloadData];
+            
         }else{
             [self showHint:object];
         }
-        [_mTableView reloadData];
     }];
 }
+
 #pragma mark - 修改宝贝发布信息
+
 - (void)modify_btnAction:(UIButton *)sender{
     RMPublicModel * model = [babyArray objectAtIndex:sender.tag
                              /100];
@@ -158,7 +169,9 @@
         _modifycallback (model);
     }
 }
+
 #pragma mark - 删除宝贝
+
 - (void)delete_btnAction:(UIButton *)sender{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     RMPublicModel * model = [babyArray objectAtIndex:sender.tag
@@ -179,11 +192,13 @@
         }
     }];
 }
+
 #pragma mark - 上下架宝贝
+
 - (void)shelves_btnAction:(UIButton *)sender{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    RMPublicModel * model = [babyArray objectAtIndex:sender.tag
-                             /100];
+    RMPublicModel * model = [babyArray objectAtIndex:sender.tag/100];
+    
     BOOL isup ;
     if([model.is_shelf boolValue]){
         isup = NO;
@@ -208,20 +223,5 @@
         }
     }];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

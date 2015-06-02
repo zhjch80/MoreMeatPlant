@@ -123,7 +123,6 @@
     [self addConstraints:vList];
     
     
-    
     _promptLabel=[[UILabel alloc] initWithFrame:CGRectZero];
     _promptLabel.backgroundColor=[UIColor clearColor];
     _promptLabel.font=[UIFont systemFontOfSize:13];
