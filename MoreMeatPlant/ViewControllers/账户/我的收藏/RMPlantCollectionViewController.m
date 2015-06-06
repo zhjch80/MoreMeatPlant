@@ -156,7 +156,6 @@
             isRefresh = NO;
         [self requestDataWithPageCount];
         }
-        
     }
 }
 
@@ -177,7 +176,6 @@
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionTop];
                 if([(NSArray *)object count] == 0){
                     [self showHint:@"暂无收藏"];                    
-                    
                 }
             }else{
                 [dataArr addObjectsFromArray:object];
@@ -190,7 +188,7 @@
             
             
         }else{
-                    [self showHint:object];
+                [self showHint:object];
         }
         
         [_mainTableView reloadData];

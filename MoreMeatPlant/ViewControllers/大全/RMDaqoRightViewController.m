@@ -162,16 +162,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     RMDaqoViewController * daqoCtl = self.DaqoDelegate;
-
+    
     RMPublicModel * model = [dataArr objectAtIndex:indexPath.section];
     //modules_name   auto_code
-
+    
     RMPublicModel * _model = [[RMPublicModel alloc] init];
     _model.modules_name = [[model.sub objectAtIndex:indexPath.row] objectForKey:@"modules_name"];
     _model.auto_code = [[model.sub objectAtIndex:indexPath.row] objectForKey:@"auto_code"];
 
     [daqoCtl updateCenterListWithModel:_model withRow:indexPath.row];
-
+    
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [daqoCtl updateSlideSwitchState];
