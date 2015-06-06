@@ -29,7 +29,7 @@ BOOL EMImageDataHasPNGPreffix(NSData *data) {
     return NO;
 }
 
-@interface EMSDImageCache ()
+@interface EMSDImageCache ()<NSCacheDelegate>
 
 @property (strong, nonatomic) NSCache *memCache;
 @property (strong, nonatomic) NSString *diskCachePath;
@@ -70,6 +70,7 @@ BOOL EMImageDataHasPNGPreffix(NSData *data) {
         // Init the memory cache
         _memCache = [[NSCache alloc] init];
         _memCache.name = fullNamespace;
+        _memCache.delegate = self;
 
         // Init the disk cache
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
@@ -100,7 +101,9 @@ BOOL EMImageDataHasPNGPreffix(NSData *data) {
 
     return self;
 }
-
+- (void)cache:(NSCache *)cache willEvictObject:(id)obj{
+    NSLog(@"NSCache清除-----------------");
+}
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     SDDispatchQueueRelease(_ioQueue);

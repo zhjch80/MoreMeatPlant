@@ -146,8 +146,8 @@ typedef enum{
         popularizeView.content_type = model.note_id;
         [popularizeView sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:nil];
         
-        CGSize size = [UIImage downloadImageSizeWithURL:[NSURL URLWithString:model.content_img]];
-        CGFloat height = size.height/size.width * kScreenWidth;
+//        CGSize size = [UIImage downloadImageSizeWithURL:[NSURL URLWithString:model.content_img]];
+        CGFloat height = 150.0/1080.0 * kScreenWidth;
         
         popularizeView.frame = CGRectMake(0, rmImage.frame.size.height + chageHeight + value * 2, kScreenWidth, height);
 
