@@ -77,7 +77,7 @@
 
 - (void)requestUpgradeSuggestionsWithTitle:(NSString *)title withContent:(NSString *)content {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [RMAFNRequestManager postAnonymousSubmissionsUpgradeSuggestionsWithContent_title:[title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] withContent_body:[content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] callBack:^(NSError *error, BOOL success, id object) {
+    [RMAFNRequestManager postAnonymousSubmissionsUpgradeSuggestionsWithContent_title:title withContent_body:content callBack:^(NSError *error, BOOL success, id object) {
         if (error){
             NSLog(@"error:%@",error);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

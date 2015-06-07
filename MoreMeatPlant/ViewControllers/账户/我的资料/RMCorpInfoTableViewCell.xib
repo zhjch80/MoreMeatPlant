@@ -184,7 +184,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="444.png" translatesAutoresizingMaskIntoConstraints="NO" id="HoX-yQ-fy5">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="content_card" translatesAutoresizingMaskIntoConstraints="NO" id="HoX-yQ-fy5">
                                 <rect key="frame" x="99" y="367" width="96" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="eYr-Oz-CB4"/>
@@ -298,7 +298,7 @@
     </objects>
     <resources>
         <image name="222.png" width="1242" height="403"/>
-        <image name="444.png" width="1242" height="555"/>
+        <image name="content_card" width="483" height="196"/>
         <image name="photo.png" width="500" height="531"/>
     </resources>
 </document>

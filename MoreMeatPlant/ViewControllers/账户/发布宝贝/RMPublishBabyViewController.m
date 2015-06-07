@@ -753,7 +753,7 @@
     }
     
     tipView.hidden = YES;
-    tipView.kouL.text = [NSString stringWithFormat:@"扣除花币: %.1f米",0.5];
+    tipView.kouL.text = [NSString stringWithFormat:@"扣除花币: %f米",1.0];
 //    tipView.yuL.text = [NSString stringWithFormat:@"剩余花币 %.0f米",[(RMPublicModel *)[planteArray lastObject] balance]];
     
     [UIView animateWithDuration:0.3 animations:^{
