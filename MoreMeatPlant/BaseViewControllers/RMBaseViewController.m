@@ -184,7 +184,7 @@
         num += product.content_num;
     }
     
-    if(num == 0){
+    if((num == 0)|![[RMUserLoginInfoManager loginmanager] state]|[[[RMUserLoginInfoManager loginmanager]isCorp] boolValue]){
         return nil;
     }else if (num > 99){
         return @"99";

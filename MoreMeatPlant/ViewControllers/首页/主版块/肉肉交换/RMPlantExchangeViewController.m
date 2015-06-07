@@ -960,6 +960,13 @@
             break;
         }
         case 3:{
+            
+            if(![[RMUserLoginInfoManager loginmanager] state]){
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                return;
+            }
+            
             action = [[RMPostMessageView alloc] init];
             action.delegate = self;
             action.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
