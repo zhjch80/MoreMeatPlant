@@ -823,6 +823,7 @@
 		51C9BF2F1B24A31700123A51 /* baidian.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C9BF2E1B24A31700123A51 /* baidian.png */; };
 		51C9BF311B24A32100123A51 /* heidian.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C9BF301B24A32100123A51 /* heidian.png */; };
 		51C9BF341B24A44600123A51 /* libEaseMobClientSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51C9BF331B24A44600123A51 /* libEaseMobClientSDK.a */; };
+		51C9BF391B24A6D700123A51 /* Harpy.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C9BF371B24A6D700123A51 /* Harpy.m */; };
 		51CE2B791AD6ADB900E9E43F /* RMOrderReturnEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51CE2B781AD6ADB900E9E43F /* RMOrderReturnEditView.m */; };
 		51CE2B7B1AD6ADC700E9E43F /* RMOrderReturnEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51CE2B7A1AD6ADC700E9E43F /* RMOrderReturnEditView.xib */; };
 		51D883C61ABB179400F7A3BD /* RMAdvertisingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D883C41ABB179400F7A3BD /* RMAdvertisingViewController.m */; };
@@ -2252,6 +2253,9 @@
 		51C9BF2E1B24A31700123A51 /* baidian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baidian.png; sourceTree = "<group>"; };
 		51C9BF301B24A32100123A51 /* heidian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heidian.png; sourceTree = "<group>"; };
 		51C9BF331B24A44600123A51 /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
+		51C9BF361B24A6D700123A51 /* Harpy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Harpy.h; sourceTree = "<group>"; };
+		51C9BF371B24A6D700123A51 /* Harpy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Harpy.m; sourceTree = "<group>"; };
+		51C9BF381B24A6D700123A51 /* HarpyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HarpyConstants.h; sourceTree = "<group>"; };
 		51CE2B771AD6ADB900E9E43F /* RMOrderReturnEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMOrderReturnEditView.h; sourceTree = "<group>"; };
 		51CE2B781AD6ADB900E9E43F /* RMOrderReturnEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMOrderReturnEditView.m; sourceTree = "<group>"; };
 		51CE2B7A1AD6ADC700E9E43F /* RMOrderReturnEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMOrderReturnEditView.xib; sourceTree = "<group>"; };
@@ -3505,6 +3509,7 @@
 		1D64F5091A904E5B0073EB98 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				51C9BF351B24A6D700123A51 /* Harpy */,
 				515B96951B0E22DE00A57B7C /* RegularManager.h */,
 				515B96961B0E22DE00A57B7C /* RegularManager.m */,
 				515B967F1B079F4C00A57B7C /* BBRGuideViewController.h */,
@@ -5074,6 +5079,16 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		51C9BF351B24A6D700123A51 /* Harpy */ = {
+			isa = PBXGroup;
+			children = (
+				51C9BF361B24A6D700123A51 /* Harpy.h */,
+				51C9BF371B24A6D700123A51 /* Harpy.m */,
+				51C9BF381B24A6D700123A51 /* HarpyConstants.h */,
+			);
+			path = Harpy;
+			sourceTree = "<group>";
+		};
 		51D883C11ABB174E00F7A3BD /* 发布广告 */ = {
 			isa = PBXGroup;
 			children = (
@@ -6401,6 +6416,7 @@
 				515B966C1B03B75B00A57B7C /* RKNotificationHub.m in Sources */,
 				0A4105881ABAB3C70060FBD5 /* PSTGridLayoutItem.m in Sources */,
 				4B3A2ACD1AE92C9200E1EC24 /* RMStartLongPostingCell.m in Sources */,
+				51C9BF391B24A6D700123A51 /* Harpy.m in Sources */,
 				51E267E01A9F5A3500252DEF /* RMAccountView.m in Sources */,
 				51D8841F1ABDCFD400F7A3BD /* RMRegisterViewController.m in Sources */,
 				95AA6F4F1ABF8CD2007F4C9E /* XHZoomingImageView.m in Sources */,
@@ -6590,8 +6606,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -6611,7 +6627,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "ec4d977d-dcad-4b0f-9e29-96075c81b421";
+				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -6633,8 +6649,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6647,7 +6663,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "ec4d977d-dcad-4b0f-9e29-96075c81b421";
+				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -6658,8 +6674,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MoreMeatPlant/Vendors/ShareSDK/Connection",
@@ -6684,7 +6700,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ec4d977d-dcad-4b0f-9e29-96075c81b421";
+				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
 			};
 			name = Debug;
 		};
@@ -6693,8 +6709,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MoreMeatPlant/Vendors/ShareSDK/Connection",
@@ -6718,7 +6734,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ec4d977d-dcad-4b0f-9e29-96075c81b421";
+				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
 			};
 			name = Release;
 		};

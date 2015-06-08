@@ -31,7 +31,7 @@
 
 #import "BBRGuideViewController.h"
 
-
+#import "Harpy.h"
 @interface AppDelegate ()<EMChatManagerDelegate>{
     RMHomeViewController * homeCtl;
     RMDaqoViewController * daqoCtl;
@@ -67,6 +67,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
+    
+    [Harpy home_checkVersion];
     
     // 初始化环信SDK，详细内容在AppDelegate+EaseMob.m 文件中
     [self easemobApplication:application didFinishLaunchingWithOptions:launchOptions];
