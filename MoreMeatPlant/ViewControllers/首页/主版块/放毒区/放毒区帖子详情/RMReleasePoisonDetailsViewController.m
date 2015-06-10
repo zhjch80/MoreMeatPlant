@@ -219,6 +219,11 @@
                         [tableHeadView addSubview:imageView];
                         
                         offsetY = offsetY + imageView.frame.size.height + 10;
+                        
+                        if(i == 5){
+                            tableHeadView.frame = CGRectMake(0, 0, kScreenWidth, offsetY);
+                            mTableView.tableHeaderView = tableHeadView;
+                        }
                     }];
                 }
             }else{
@@ -398,7 +403,7 @@
             [cell.userHead_2 sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
             cell.userName_2.text = model.content_name;
             
-            cell.userLocatiom_2.text = [[model.returns objectForKey:@"member"] objectForKey:@"content_gps"];
+            cell.userLocatiom_2.text = [model.members objectForKey:@"content_gps"];
             
             cell.userPostTime_2.text = model.create_time;
             cell.userPostTime_2.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - cell.userPostTime_2.frame.size.width - 5, cell.userPostTime_2.frame.origin.y, cell.userPostTime_2.frame.size.width, cell.userPostTime_2.frame.size.height);
@@ -445,8 +450,8 @@
                 cell.delegate = self;
             }
             
-            [cell.userHead_1 sd_setImageWithURL:[NSURL URLWithString:[dataModel.members objectForKey:@"content_face"]] placeholderImage:nil];
-            
+            [cell.userHead_1 sd_setImageWithURL:[NSURL URLWithString:[model.members objectForKey:@"content_face"]] placeholderImage:nil];
+            NSLog(@"--------????%@",[dataModel.members objectForKey:@"content_face"]);
             cell.replyBtn_1.tag = indexPath.row;
             cell.replyBtn_1.parameter_1 = @"回复";
             cell.replyBtn_1.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - cell.replyBtn_1.frame.size.width - 2, cell.replyBtn_1.frame.origin.y, cell.replyBtn_1.frame.size.width, cell.replyBtn_1.frame.size.height);
@@ -778,9 +783,14 @@
                 [self.refreshControl finishRefreshingDirection:RefreshDirectionBottom];
             });
         }else{
-            pageCount ++;
-            isRefresh = NO;
-            [self requestCommentListsWithPageCount:pageCount];
+            if([dataCommentArr count]<10){
+            
+            }else{
+                pageCount ++;
+                isRefresh = NO;
+                [self requestCommentListsWithPageCount:pageCount];
+            }
+            
         }
     }
 }

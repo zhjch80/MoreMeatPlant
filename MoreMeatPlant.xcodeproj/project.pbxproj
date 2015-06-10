@@ -6606,8 +6606,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -6627,7 +6627,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
+				PROVISIONING_PROFILE = "df91fa2c-3863-4af5-838d-878cddeb6d4d";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -6649,8 +6649,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6663,7 +6663,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
+				PROVISIONING_PROFILE = "df91fa2c-3863-4af5-838d-878cddeb6d4d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -6674,8 +6674,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MoreMeatPlant/Vendors/ShareSDK/Connection",
@@ -6700,7 +6700,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
+				PROVISIONING_PROFILE = "df91fa2c-3863-4af5-838d-878cddeb6d4d";
 			};
 			name = Debug;
 		};
@@ -6709,8 +6709,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guanlan Su (6ZMBZR9HMT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guanlan Su (33C6YT38AR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guanlan Su (33C6YT38AR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MoreMeatPlant/Vendors/ShareSDK/Connection",
@@ -6734,7 +6734,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6865177e-28b7-427b-ba04-fb074dc4d50f";
+				PROVISIONING_PROFILE = "df91fa2c-3863-4af5-838d-878cddeb6d4d";
 			};
 			name = Release;
 		};

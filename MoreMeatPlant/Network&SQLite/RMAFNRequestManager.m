@@ -399,7 +399,7 @@
 + (void)getPostsCommentsListWithReview_id:(NSString *)review_id
                             withPageCount:(NSInteger)pageCount
                                  callBack:(RMAFNRequestManagerCallBack)block{
-    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNotereview&review_id=%@&per=1&row=100&page=%ld",baseUrl,review_id,(long)pageCount];
+    NSString * url = [NSString stringWithFormat:@"%@&method=appSev&app_com=com_shop&task=shopNotereview&review_id=%@&per=1&row=10&page=%ld",baseUrl,review_id,(long)pageCount];
     [[RMHttpOperationShared sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         if (block) {
             block (nil, [[responseObject objectForKey:@"status"] boolValue], responseObject);
@@ -930,7 +930,7 @@
     
     url = alipayno? [url stringByAppendingString:[NSString stringWithFormat:@"&frm[zfb_no]=%@",alipayno]]:url;
     url = signature? [url stringByAppendingString:[NSString stringWithFormat:@"&frm[content_qm]=%@",signature]]:url;
-    url = code? [url stringByAppendingString:[NSString stringWithFormat:@"&content_code=%@",signature]]:url;
+    url = code? [url stringByAppendingString:[NSString stringWithFormat:@"&content_code=%@",code]]:url;
     
     NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
     for(NSString * key in [dic allKeys]){
