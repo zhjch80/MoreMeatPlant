@@ -169,12 +169,12 @@
                   symbolName = "-[RMMyCorpViewController modifyPhoto]"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E5%BA%97%E9%93%BA/RMMyCorpViewController.m"
-                  timestampString = "455650202.500869"
+                  timestampString = "455974277.438086"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "620"
                   endingLineNumber = "620"
-                  offsetFromSymbolStart = "332">
+                  offsetFromSymbolStart = "210">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -183,12 +183,12 @@
                   symbolName = "__37-[RMMyCorpViewController modifyPhoto]_block_invoke"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E6%88%91%E7%9A%84%E5%BA%97%E9%93%BA/RMMyCorpViewController.m"
-                  timestampString = "455650202.501132"
+                  timestampString = "455974277.438268"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "620"
                   endingLineNumber = "620"
-                  offsetFromSymbolStart = "92">
+                  offsetFromSymbolStart = "77">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -295,12 +295,12 @@
                   symbolName = "-[RMAddressEditViewController sureCommit]"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E8%B4%AD%E7%89%A9%E8%BD%A6/RMAddressEditViewController.m"
-                  timestampString = "455650202.505149"
+                  timestampString = "455974277.442203"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "324">
+                  offsetFromSymbolStart = "340">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -309,12 +309,12 @@
                   symbolName = "-[RMAddressEditViewController sureCommit]"
                   moduleName = "MoreMeatPlant"
                   urlString = "file:///Users/madongkai/Desktop/out_project/MoreMeatPlant/MoreMeatPlant/ViewControllers/%E8%B4%A6%E6%88%B7/%E8%B4%AD%E7%89%A9%E8%BD%A6/RMAddressEditViewController.m"
-                  timestampString = "455650202.505262"
+                  timestampString = "455974277.442349"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "352">
+                  offsetFromSymbolStart = "367">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -380,38 +380,6 @@
             startingLineNumber = "336"
             endingLineNumber = "336"
             landmarkName = "+downloadImageSizeWithURL:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x5927;&#x5168;/&#x5927;&#x5168;&#x8be6;&#x60c5;/RMDaqoDetailsViewController.m"
-            timestampString = "454773076.565687"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "-loadTableFooterView"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoreMeatPlant/ViewControllers/&#x5927;&#x5168;/RMDaqoCenterViewController.m"
-            timestampString = "454841317.806898"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
-            landmarkName = "-requestDataWithPageCount:withPlantType:withGrow:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -572,6 +540,22 @@
             startingLineNumber = "933"
             endingLineNumber = "933"
             landmarkName = "+myInfoModifyRequestWithUser:Pwd:Type:AlipayNo:Signature:Dic:contentCode:andCallBack:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoreMeatPlant/ViewControllers/&#x5927;&#x5168;/&#x5927;&#x5168;&#x8be6;&#x60c5;/RMDaqoDetailsViewController.m"
+            timestampString = "455973879.197089"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "655"
+            endingLineNumber = "655"
+            landmarkName = "-requestDetails"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

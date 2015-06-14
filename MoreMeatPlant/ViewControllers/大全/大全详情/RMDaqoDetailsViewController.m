@@ -247,7 +247,7 @@
 
     tableFooterView.atlas.frame = CGRectMake(tableFooterView.atlas.frame.origin.x, tableFooterView.atlas.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.atlas.frame.size.height);
     
-    for (NSInteger i=0; i<10; i++){
+    for (NSInteger i=0; i<dataModel.imgs.count; i++){
         UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:501+i];
         image.frame = CGRectMake(image.frame.origin.x, image.frame.origin.y + offsetY, image.frame.size.width, image.frame.size.height);
     }
@@ -276,6 +276,7 @@
     tableFooterView.intro.text = dataModel.content_desc;
     
     NSInteger count = 0;
+    CGFloat width = (kScreenWidth-15*2-10*4)/5.0;
     for (NSInteger i=0; i<2; i++) {
         for (NSInteger j=0; j<5; j++) {
             if (count >= dataModel.imgs.count){
@@ -287,7 +288,7 @@
                 [atlasImg sd_setImageWithURL:[NSURL URLWithString:[[dataModel.imgs objectAtIndex:count] objectForKey:@"content_img"]] placeholderImage:nil];
                 [atlasImg addTarget:self withSelector:@selector(imageZoomMethodWithImage:)];
 //                atlasImg.frame = CGRectMake(15 + j*60, 220 + i*60 + offsetY, 50, 50);
-                atlasImg.frame = CGRectMake(15 + (j%5)*(50+10), 220 + (i%2)*(50+10) + offsetY, 50, 50);
+                atlasImg.frame = CGRectMake(15 + (j%5)*(width+10), 220 + (i%2)*(width+10) + offsetY, width, width);
                 [tableFooterView addSubview:atlasImg];
                 [imageViewArr addObject:atlasImg];
                 count ++;
