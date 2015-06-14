@@ -247,37 +247,12 @@
 
     tableFooterView.atlas.frame = CGRectMake(tableFooterView.atlas.frame.origin.x, tableFooterView.atlas.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.atlas.frame.size.height);
     
-    for (NSInteger i=0; i<dataModel.imgs.count; i++){
-        UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:501+i];
-        image.frame = CGRectMake(image.frame.origin.x, image.frame.origin.y + offsetY, image.frame.size.width, image.frame.size.height);
-    }
-    
-    tableFooterView.planting.frame = CGRectMake(tableFooterView.planting.frame.origin.x, tableFooterView.planting.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.planting.frame.size.height);
-    
-    tableFooterView.lineThree.frame = CGRectMake(tableFooterView.lineThree.frame.origin.x, tableFooterView.lineThree.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineThree.frame.size.height);
-    tableFooterView.lineThree.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"baidian"]];
-    
-    tableFooterView.lineFour.frame = CGRectMake(tableFooterView.lineFour.frame.origin.x, tableFooterView.lineFour.frame.origin.y + offsetY, kScreenWidth - 20, tableFooterView.lineFour.frame.size.height);
-    tableFooterView.lineFour.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"baidian"]];
-
-    tableFooterView.breeding.frame = CGRectMake(tableFooterView.breeding.frame.origin.x, tableFooterView.breeding.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.breeding.frame.size.height);
-    
-    tableFooterView.breedingContent.frame = CGRectMake(tableFooterView.breedingContent.frame.origin.x, tableFooterView.breedingContent.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.breedingContent.frame.size.height);
-    
-    tableFooterView.addImageBtn.frame = CGRectMake(tableFooterView.addImageBtn.frame.origin.x, tableFooterView.addImageBtn.frame.origin.y + offsetY, tableFooterView.addImageBtn.frame.size.width, tableFooterView.addImageBtn.frame.size.height);
-    tableFooterView.addImageBtn.center = CGPointMake(kScreenWidth/4, tableFooterView.addImageBtn.center.y);
-
-    tableFooterView.addedAndCorrectedBtn.frame = CGRectMake(tableFooterView.addedAndCorrectedBtn.frame.origin.x, tableFooterView.addedAndCorrectedBtn.frame.origin.y + offsetY, tableFooterView.addedAndCorrectedBtn.frame.size.width, tableFooterView.addedAndCorrectedBtn.frame.size.height);
-    tableFooterView.addedAndCorrectedBtn.center = CGPointMake(kScreenWidth/4 * 3, tableFooterView.addedAndCorrectedBtn.center.y);
-    
-    tableFooterView.chineseName.text = dataModel.family_name;
-    tableFooterView.englishName.text = [NSString stringWithFormat:@"拉丁文: %@",dataModel.latin_name];
-    
-    tableFooterView.intro.text = dataModel.content_desc;
+    NSInteger maxVerticalCount = 0;
+    maxVerticalCount = [dataModel.imgs count]/5 + ([dataModel.imgs count]%5 == 0 ? 0 : 1);
     
     NSInteger count = 0;
-    CGFloat width = (kScreenWidth-15*2-10*4)/5.0;
-    for (NSInteger i=0; i<2; i++) {
+    CGFloat atlasWidth = (kScreenWidth-15*2-10*4)/5.0;
+    for (NSInteger i=0; i<maxVerticalCount; i++) {
         for (NSInteger j=0; j<5; j++) {
             if (count >= dataModel.imgs.count){
                 break;
@@ -285,15 +260,31 @@
                 RMImageView * atlasImg = [[RMImageView alloc] init];
                 atlasImg.contentMode = UIViewContentModeScaleAspectFill;
                 atlasImg.clipsToBounds = YES;
-                [atlasImg sd_setImageWithURL:[NSURL URLWithString:[[dataModel.imgs objectAtIndex:count] objectForKey:@"content_img"]] placeholderImage:nil];
+                [atlasImg sd_setImageWithURL:[NSURL URLWithString:[[dataModel.imgs objectAtIndex:count] objectForKey:@"content_img"]] placeholderImage:[UIImage imageNamed:@"img_default"]];
                 [atlasImg addTarget:self withSelector:@selector(imageZoomMethodWithImage:)];
-//                atlasImg.frame = CGRectMake(15 + j*60, 220 + i*60 + offsetY, 50, 50);
-                atlasImg.frame = CGRectMake(15 + (j%5)*(width+10), 220 + (i%2)*(width+10) + offsetY, width, width);
+                atlasImg.frame = CGRectMake(15 + (j%5)*(atlasWidth+10),
+                                            220 + (i%maxVerticalCount)*(atlasWidth+10) + offsetY,
+                                            atlasWidth,
+                                            atlasWidth);
                 [tableFooterView addSubview:atlasImg];
                 [imageViewArr addObject:atlasImg];
                 count ++;
             }
         }
+    }
+    
+    //种植 的十个图片
+    tableFooterView.planting.frame = CGRectMake(tableFooterView.planting.frame.origin.x, 220 + maxVerticalCount * (atlasWidth + 10), kScreenWidth - 10, tableFooterView.planting.frame.size.height);
+
+    tableFooterView.lineThree.frame = CGRectMake(tableFooterView.lineThree.frame.origin.x, tableFooterView.planting.frame.origin.y + tableFooterView.planting.frame.size.height + offsetY, kScreenWidth - 20, tableFooterView.lineThree.frame.size.height);
+    tableFooterView.lineThree.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"baidian"]];
+    
+    for (NSInteger i=0; i<10; i++){
+        UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:501+i];
+        image.frame = CGRectMake(image.frame.origin.x,
+                                 tableFooterView.planting.frame.origin.y + tableFooterView.planting.frame.size.height + 10 + offsetY,
+                                 image.frame.size.width,
+                                 image.frame.size.height);
     }
     
     UIImageView * leftCenterImg = (UIImageView *)[tableFooterView viewWithTag:503];
@@ -305,19 +296,19 @@
     for (NSInteger i=0; i<5; i++) {
         UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:501+i];
         if (i == 0){
-            image.center = CGPointMake(leftCenterImg.frame.origin.x - 30, image.center.y);
+            image.center = CGPointMake(leftCenterImg.frame.origin.x - 30, leftCenterImg.center.y);
         }
         
         if (i == 1){
-            image.center = CGPointMake(leftCenterImg.frame.origin.x - 10, image.center.y);
+            image.center = CGPointMake(leftCenterImg.frame.origin.x - 10, leftCenterImg.center.y);
         }
         
         if (i == 3){
-            image.center = CGPointMake(leftCenterImg.frame.origin.x + 25, image.center.y);
+            image.center = CGPointMake(leftCenterImg.frame.origin.x + 25, leftCenterImg.center.y);
         }
         
         if (i == 4){
-            image.center = CGPointMake(leftCenterImg.frame.origin.x + 42, image.center.y);
+            image.center = CGPointMake(leftCenterImg.frame.origin.x + 42, leftCenterImg.center.y);
         }
         
         if (i >= dataModel.content_plant1.integerValue){
@@ -330,19 +321,19 @@
     for (NSInteger i=0; i<5; i++) {
         UIImageView * image = (UIImageView *)[tableFooterView viewWithTag:506+i];
         if (i == 0){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x - 35, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x - 35, rightCenterImg.center.y);
         }
         
         if (i == 1){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x - 12, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x - 12, rightCenterImg.center.y);
         }
         
         if (i == 3){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x + 32, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x + 32, rightCenterImg.center.y);
         }
         
         if (i == 4){
-            image.center = CGPointMake(rightCenterImg.frame.origin.x + 55, image.center.y);
+            image.center = CGPointMake(rightCenterImg.frame.origin.x + 55, rightCenterImg.center.y);
         }
         
         if (i >= dataModel.content_plant2.integerValue){
@@ -351,8 +342,27 @@
             image.image = [UIImage imageNamed:@"img_sun_full"];
         }
     }
+ 
+    tableFooterView.lineFour.frame = CGRectMake(tableFooterView.lineFour.frame.origin.x, leftCenterImg.frame.origin.y + leftCenterImg.frame.size.height + 5 + offsetY, kScreenWidth - 20, tableFooterView.lineFour.frame.size.height);
+    tableFooterView.lineFour.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"baidian"]];
+
+    tableFooterView.breeding.frame = CGRectMake(tableFooterView.breeding.frame.origin.x, tableFooterView.lineFour.frame.origin.y + offsetY, kScreenWidth - 10, tableFooterView.breeding.frame.size.height);
     
+    tableFooterView.breedingContent.frame = CGRectMake(tableFooterView.breedingContent.frame.origin.x, tableFooterView.breeding.frame.origin.y + tableFooterView.breeding.frame.size.height + offsetY, kScreenWidth - 10, tableFooterView.breedingContent.frame.size.height);
     tableFooterView.breedingContent.text = dataModel.content_breed;
+
+    tableFooterView.addImageBtn.frame = CGRectMake(tableFooterView.addImageBtn.frame.origin.x, tableFooterView.breedingContent.frame.origin.y + tableFooterView.breedingContent.frame.size.height + offsetY + 25, tableFooterView.addImageBtn.frame.size.width, tableFooterView.addImageBtn.frame.size.height);
+    tableFooterView.addImageBtn.center = CGPointMake(kScreenWidth/4, tableFooterView.addImageBtn.center.y);
+
+    tableFooterView.addedAndCorrectedBtn.frame = CGRectMake(tableFooterView.addedAndCorrectedBtn.frame.origin.x, tableFooterView.breedingContent.frame.origin.y + tableFooterView.breedingContent.frame.size.height + offsetY + 25 + offsetY, tableFooterView.addedAndCorrectedBtn.frame.size.width, tableFooterView.addedAndCorrectedBtn.frame.size.height);
+    tableFooterView.addedAndCorrectedBtn.center = CGPointMake(kScreenWidth/4 * 3, tableFooterView.addedAndCorrectedBtn.center.y);
+    
+    //赋值
+    tableFooterView.chineseName.text = dataModel.family_name;
+    tableFooterView.englishName.text = [NSString stringWithFormat:@"拉丁文: %@",dataModel.latin_name];
+    tableFooterView.intro.text = dataModel.content_desc;
+    
+    tableFooterView.frame = CGRectMake(tableFooterView.frame.origin.x, tableFooterView.frame.origin.y, tableFooterView.frame.size.width, tableFooterView.frame.size.height + (maxVerticalCount - 1) * atlasWidth);
     
     mTableView.tableFooterView = tableFooterView;
 }

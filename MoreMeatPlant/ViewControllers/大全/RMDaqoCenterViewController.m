@@ -145,7 +145,9 @@
         cell.leftTitle.hidden = NO;
         cell.leftImg.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3];
+        cell.leftTitle.text = @"";
         cell.leftTitle.text = model.content_name;
+        cell.leftImg.image = NULL;
         [cell.leftImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
         cell.leftImg.identifierString = model.auto_id;
     }else{
@@ -156,7 +158,9 @@
         cell.centerTitle.hidden = NO;
         cell.centerImg.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+1];
+        cell.centerTitle.text = @"";
         cell.centerTitle.text = model.content_name;
+        cell.centerImg.image = NULL;
         [cell.centerImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
         cell.centerImg.identifierString = model.auto_id;
     }else{
@@ -167,7 +171,9 @@
         cell.rightTitle.hidden = NO;
         cell.rightImg.hidden = NO;
         RMPublicModel *model = [dataArr objectAtIndex:indexPath.row*3+2];
+        cell.rightTitle.text = @"";
         cell.rightTitle.text = model.content_name;
+        cell.rightImg.image = NULL;
         [cell.rightImg sd_setImageWithURL:[NSURL URLWithString:model.content_img] placeholderImage:[UIImage imageNamed:@"img_default.jpg"]];
         cell.rightImg.identifierString = model.auto_id;
     }else{
